@@ -42,3 +42,6 @@ benchmark/data/annotated/old/
 
 # litellm disk response cache
 .litellm_cache/
+
+# Mac cache
+.DS_Store
