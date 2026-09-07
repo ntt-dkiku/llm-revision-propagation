@@ -1,0 +1,499 @@
+{
+  "id": "shopping_cart_L100_02",
+  "domain": "shopping_cart",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Please start a shopping cart labeled CART-48291."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart\", \"value\": {\"cartId\": \"CART-48291\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the starter kit bundle in the cart, with four kits selected."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle\", \"value\": {\"bundleId\": \"BNDL-STARTER-01\", \"name\": \"Home Office Starter Kit\", \"quantity\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Each kit should include two notebooks at $6.50 apiece."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components\", \"value\": [{\"sku\": \"NOTE-A5-GRAY\", \"name\": \"A5 Gray Notebook\", \"perBundleCount\": 2}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Price those notebooks at $6.50 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/0/unitPrice\", \"value\": 6.5}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and show the total notebooks for the four kits and what they cost together."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/0/quantity\", \"value\": 8}, {\"op\": \"add\", \"path\": \"/cart/bundle/components/0/amount\", \"value\": 52}]"
+    },
+    {
+      "role": "user",
+      "content": "Each kit should also come with three black gel pens."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/-\", \"value\": {\"sku\": \"PEN-GEL-BLK\", \"name\": \"Black Gel Pen\", \"perBundleCount\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Price the pens at $1.25 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/1/unitPrice\", \"value\": 1.25}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the pen count for the four kits and the combined pen charge."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/1/quantity\", \"value\": 12}, {\"op\": \"add\", \"path\": \"/cart/bundle/components/1/amount\", \"value\": 15}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one desk organizer tray to every kit as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/-\", \"value\": {\"sku\": \"TRAY-DESK-BMB\", \"name\": \"Bamboo Desk Organizer Tray\", \"perBundleCount\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make each organizer tray $14.75."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/2/unitPrice\", \"value\": 14.75}]"
+    },
+    {
+      "role": "user",
+      "content": "Now show the organizer tray total for the four kits and its extended charge."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/2/quantity\", \"value\": 4}, {\"op\": \"add\", \"path\": \"/cart/bundle/components/2/amount\", \"value\": 59}]"
+    },
+    {
+      "role": "user",
+      "content": "Include one adjustable monitor stand in each kit too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/-\", \"value\": {\"sku\": \"STAND-MON-ADJ\", \"name\": \"Adjustable Monitor Stand\", \"perBundleCount\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the monitor stand price at $32.00 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/3/unitPrice\", \"value\": 32}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the total monitor stands for the four kits and their combined charge."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/3/quantity\", \"value\": 4}, {\"op\": \"add\", \"path\": \"/cart/bundle/components/3/amount\", \"value\": 128}]"
+    },
+    {
+      "role": "user",
+      "content": "Add two cable clips to each kit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/-\", \"value\": {\"sku\": \"CLIP-CABLE-SIL\", \"name\": \"Silicone Cable Clip\", \"perBundleCount\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the cable clips $3.00 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/4/unitPrice\", \"value\": 3}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the cable clip total for the four kits and what they add up to."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/4/quantity\", \"value\": 8}, {\"op\": \"add\", \"path\": \"/cart/bundle/components/4/amount\", \"value\": 24}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one LED desk lamp to each kit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/-\", \"value\": {\"sku\": \"LAMP-LED-WHT\", \"name\": \"White LED Desk Lamp\", \"perBundleCount\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the desk lamp price at $28.50 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/5/unitPrice\", \"value\": 28.5}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the lamp count for the four kits and the total lamp charge."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/5/quantity\", \"value\": 4}, {\"op\": \"add\", \"path\": \"/cart/bundle/components/5/amount\", \"value\": 114}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one compact wireless mouse to every kit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/-\", \"value\": {\"sku\": \"MOUSE-WLS-CMP\", \"name\": \"Compact Wireless Mouse\", \"perBundleCount\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Price the compact mouse at $18.75 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/6/unitPrice\", \"value\": 18.75}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the total number of compact mice for the four kits and their combined cost."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/6/quantity\", \"value\": 4}, {\"op\": \"add\", \"path\": \"/cart/bundle/components/6/amount\", \"value\": 75}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one pack of sticky notes to each kit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/-\", \"value\": {\"sku\": \"NOTE-STICKY-YLW\", \"name\": \"Yellow Sticky Note Pack\", \"perBundleCount\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the sticky note packs $4.00 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/7/unitPrice\", \"value\": 4}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the sticky note pack count for the four kits and the combined sticky note charge."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/7/quantity\", \"value\": 4}, {\"op\": \"add\", \"path\": \"/cart/bundle/components/7/amount\", \"value\": 16}]"
+    },
+    {
+      "role": "user",
+      "content": "Now summarize the kit contents across the four kits: total pieces, price per kit, and the bundle charge."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/componentUnitsTotal\", \"value\": 48}, {\"op\": \"add\", \"path\": \"/cart/bundle/unitPrice\", \"value\": 120.75}, {\"op\": \"add\", \"path\": \"/cart/bundle/amount\", \"value\": 483}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the shopper for this cart as Jordan Lee with the email jordan.lee@example.com."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/customer\", \"value\": {\"customerId\": \"CUST-77218\", \"name\": \"Jordan Lee\", \"email\": \"jordan.lee@example.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Ship this order to Jordan at 118 Maple Avenue in Portland."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shippingAddress\", \"value\": {\"recipient\": \"Jordan Lee\", \"street\": \"118 Maple Avenue\", \"city\": \"Portland\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Oregon, ZIP 97205, in the United States for that delivery address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shippingAddress/state\", \"value\": \"OR\"}, {\"op\": \"add\", \"path\": \"/cart/shippingAddress/postalCode\", \"value\": \"97205\"}, {\"op\": \"add\", \"path\": \"/cart/shippingAddress/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use UPS ground shipping, and make the delivery charge $12.00."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shippingMethod\", \"value\": {\"carrier\": \"UPS\", \"service\": \"Ground\", \"fee\": 12}}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply the office launch promo that takes $25 off the cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/promotion\", \"value\": {\"code\": \"OFFICE-LAUNCH\", \"description\": \"Office launch bundle discount\", \"discountAmount\": 25}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a Visa card ending in 4421 for payment, with Jordan Lee as the cardholder."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/paymentMethod\", \"value\": {\"type\": \"Visa\", \"last4\": \"4421\", \"cardholder\": \"Jordan Lee\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Portland, calculate tax at 8% on the merchandise after the promo is taken off."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/taxPolicy\", \"value\": {\"jurisdiction\": \"Portland, OR\", \"rate\": 0.08, \"basis\": \"merchandise after promotion\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Before the final total, show the merchandise charge, the promo savings, and the taxable merchandise amount."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/merchandiseSubtotal\", \"value\": 483}, {\"op\": \"add\", \"path\": \"/cart/discountTotal\", \"value\": 25}, {\"op\": \"add\", \"path\": \"/cart/taxableAmount\", \"value\": 458}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the sales tax, include the delivery charge, and show the amount Jordan would pay today."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/taxTotal\", \"value\": 36.64}, {\"op\": \"add\", \"path\": \"/cart/shippingTotal\", \"value\": 12}, {\"op\": \"add\", \"path\": \"/cart/grandTotal\", \"value\": 506.64}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that this cart came from Jordan’s online store session and is ready for review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/context\", \"value\": {\"channel\": \"online_store\", \"sessionId\": \"SESS-90214\", \"status\": \"ready_for_review\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short delivery note asking the driver to leave the package at the front desk during business hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/deliveryInstructions\", \"value\": {\"location\": \"front desk\", \"timeWindow\": \"business hours\", \"note\": \"Leave package with front desk staff\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tag the cart for small-business onboarding and office setup reporting."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/tags\", \"value\": [\"small-business\", \"onboarding\", \"office-setup\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a customer service contact in case Jordan needs help with the cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/supportContact\", \"value\": {\"name\": \"Maya Patel\", \"email\": \"support@example.com\", \"phone\": \"1-800-555-0198\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this as a business purchase for Acme Creative Studio, under Jordan’s operations department."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/businessInfo\", \"value\": {\"company\": \"Acme Creative Studio\", \"department\": \"Operations\", \"purchaseType\": \"business\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark that Priya Shah approved this cart on February 10, 2026, with low risk."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/review\", \"value\": {\"reviewer\": \"Priya Shah\", \"approvedDate\": \"2026-02-10\", \"riskLevel\": \"low\"}}]"
+    }
+  ],
+  "edit_instruction": "Change the Home Office Starter Kit bundle quantity to 6.",
+  "theme": "Scaling a product bundle's components",
+  "master_data": null,
+  "current_json": {
+    "cart": {
+      "cartId": "CART-48291",
+      "bundle": {
+        "bundleId": "BNDL-STARTER-01",
+        "name": "Home Office Starter Kit",
+        "quantity": 4,
+        "components": [
+          {
+            "sku": "NOTE-A5-GRAY",
+            "name": "A5 Gray Notebook",
+            "perBundleCount": 2,
+            "unitPrice": 6.5,
+            "quantity": 8,
+            "amount": 52
+          },
+          {
+            "sku": "PEN-GEL-BLK",
+            "name": "Black Gel Pen",
+            "perBundleCount": 3,
+            "unitPrice": 1.25,
+            "quantity": 12,
+            "amount": 15
+          },
+          {
+            "sku": "TRAY-DESK-BMB",
+            "name": "Bamboo Desk Organizer Tray",
+            "perBundleCount": 1,
+            "unitPrice": 14.75,
+            "quantity": 4,
+            "amount": 59
+          },
+          {
+            "sku": "STAND-MON-ADJ",
+            "name": "Adjustable Monitor Stand",
+            "perBundleCount": 1,
+            "unitPrice": 32,
+            "quantity": 4,
+            "amount": 128
+          },
+          {
+            "sku": "CLIP-CABLE-SIL",
+            "name": "Silicone Cable Clip",
+            "perBundleCount": 2,
+            "unitPrice": 3,
+            "quantity": 8,
+            "amount": 24
+          },
+          {
+            "sku": "LAMP-LED-WHT",
+            "name": "White LED Desk Lamp",
+            "perBundleCount": 1,
+            "unitPrice": 28.5,
+            "quantity": 4,
+            "amount": 114
+          },
+          {
+            "sku": "MOUSE-WLS-CMP",
+            "name": "Compact Wireless Mouse",
+            "perBundleCount": 1,
+            "unitPrice": 18.75,
+            "quantity": 4,
+            "amount": 75
+          },
+          {
+            "sku": "NOTE-STICKY-YLW",
+            "name": "Yellow Sticky Note Pack",
+            "perBundleCount": 1,
+            "unitPrice": 4,
+            "quantity": 4,
+            "amount": 16
+          }
+        ],
+        "componentUnitsTotal": 48,
+        "unitPrice": 120.75,
+        "amount": 483
+      },
+      "customer": {
+        "customerId": "CUST-77218",
+        "name": "Jordan Lee",
+        "email": "jordan.lee@example.com"
+      },
+      "shippingAddress": {
+        "recipient": "Jordan Lee",
+        "street": "118 Maple Avenue",
+        "city": "Portland",
+        "state": "OR",
+        "postalCode": "97205",
+        "country": "US"
+      },
+      "shippingMethod": {
+        "carrier": "UPS",
+        "service": "Ground",
+        "fee": 12
+      },
+      "promotion": {
+        "code": "OFFICE-LAUNCH",
+        "description": "Office launch bundle discount",
+        "discountAmount": 25
+      },
+      "paymentMethod": {
+        "type": "Visa",
+        "last4": "4421",
+        "cardholder": "Jordan Lee"
+      },
+      "taxPolicy": {
+        "jurisdiction": "Portland, OR",
+        "rate": 0.08,
+        "basis": "merchandise after promotion"
+      },
+      "merchandiseSubtotal": 483,
+      "discountTotal": 25,
+      "taxableAmount": 458,
+      "taxTotal": 36.64,
+      "shippingTotal": 12,
+      "grandTotal": 506.64,
+      "context": {
+        "channel": "online_store",
+        "sessionId": "SESS-90214",
+        "status": "ready_for_review"
+      },
+      "deliveryInstructions": {
+        "location": "front desk",
+        "timeWindow": "business hours",
+        "note": "Leave package with front desk staff"
+      },
+      "tags": [
+        "small-business",
+        "onboarding",
+        "office-setup"
+      ],
+      "supportContact": {
+        "name": "Maya Patel",
+        "email": "support@example.com",
+        "phone": "1-800-555-0198"
+      },
+      "businessInfo": {
+        "company": "Acme Creative Studio",
+        "department": "Operations",
+        "purchaseType": "business"
+      },
+      "review": {
+        "reviewer": "Priya Shah",
+        "approvedDate": "2026-02-10",
+        "riskLevel": "low"
+      }
+    }
+  },
+  "conversation_pattern": "Center the artifact on a cart with a bundle carrying a quantity and its component lines, where each component's quantity and amount derive from the bundle quantity by stated arithmetic (a per-bundle count times the bundle quantity, times a unit price), rolling up to cart totals. Around this core, add the realistic, independent details a cart would carry that do not depend on the bundle quantity, and vary their number from sample to sample.",
+  "edit_pattern": "Change the bundle quantity to a specific new number.",
+  "cascade_pattern": "Editing the bundle quantity re-derives every component's quantity and amount from the stated per-bundle counts and prices, and the cart totals follow. The per-bundle counts and unit prices stay. This is determined because each component's per-bundle count and price are stated in the conversation.",
+  "requires_master_data": false
+}

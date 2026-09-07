@@ -1,0 +1,111 @@
+{
+  "id": "invoice_L10_01",
+  "domain": "invoice",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Please start a billing record for the cancellation with invoice number INV-2048."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice\", \"value\": {\"invoice_number\": \"INV-2048\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the subscription price for this canceled plan at $90.00."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/subscription_charge\", \"value\": {\"fee\": 90.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Treat the billing cycle for this subscription as a 30-day period."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/subscription_charge/billing_period_days\", \"value\": 30}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the customer had already used 18 days before the cancellation took effect."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/subscription_charge/used_days\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the remaining portion as 12 unused days after the cancellation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/subscription_charge/unused_days\", \"value\": 12}]"
+    },
+    {
+      "role": "user",
+      "content": "Please work out the refund amount for the unused portion of the subscription."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/subscription_charge/prorated_credit\", \"value\": 36.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Now show what the customer actually owes after applying that unused-time credit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/subscription_charge/net_charge\", \"value\": 54.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Use that amount as the invoice total due for this cancellation bill."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/total_due\", \"value\": 54.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer's name as Jordan Lee."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/customer_name\", \"value\": \"Jordan Lee\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the bill as payable in U.S. dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/currency\", \"value\": \"USD\"}]"
+    }
+  ],
+  "edit_instruction": "Change the subscription price for this canceled plan to $120.00.",
+  "theme": "Prorating an unused subscription period",
+  "master_data": null,
+  "current_json": {
+    "invoice": {
+      "invoice_number": "INV-2048",
+      "subscription_charge": {
+        "fee": 90.0,
+        "billing_period_days": 30,
+        "used_days": 18,
+        "unused_days": 12,
+        "prorated_credit": 36.0,
+        "net_charge": 54.0
+      },
+      "total_due": 54.0,
+      "customer_name": "Jordan Lee",
+      "currency": "USD"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a subscription charge with a fee, an explicitly stated billing-period length in days, and used and unused day spans, where a prorated credit and the net charge follow from the fee and the unused span by standard daily proration, so the fee and the spans determine them. Choose the fee and the period length so the daily rate divides evenly, keeping the credit exact. Around this core, add the realistic, independent details a billing record would carry that do not depend on the fee or the unused span, and vary their number from sample to sample.",
+  "edit_pattern": "Change the monthly fee (or the cancellation date that sets the unused days) to a specific new value.",
+  "cascade_pattern": "Editing the fee (or the span that sets the unused days) re-derives the prorated credit and the net charge by standard daily proration, and any totals built on them follow. The period length and the spans stay. Each new value is fixed because daily proration on the stated period has one unambiguous result.",
+  "requires_master_data": false
+}

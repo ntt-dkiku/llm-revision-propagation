@@ -1,0 +1,728 @@
+{
+  "id": "manufacturing_bom_L100_02",
+  "domain": "manufacturing_bom",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start with the product: this will be the Orion pump controller assembly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/assembly_name\", \"value\": \"Orion pump controller assembly\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the main control board for this assembly, and have it sourced from Apex Circuits."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom_components\", \"value\": [{\"component_id\": \"PCB-CTRL-001\", \"component_name\": \"Main control board\", \"supplier_name\": \"Apex Circuits\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the Apex quote for the board as 48.75 dollars each, with an 18-business-day wait."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom_components/0/unit_cost_usd\", \"value\": 48.75}, {\"op\": \"add\", \"path\": \"/bom_components/0/lead_time_business_days\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that Apex ships these boards from Malaysia, the sourcing risk is medium, and the buyer should work with Priya Nair there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom_components/0/country_of_origin\", \"value\": \"Malaysia\"}, {\"op\": \"add\", \"path\": \"/bom_components/0/supplier_risk_flag\", \"value\": \"Medium\"}, {\"op\": \"add\", \"path\": \"/bom_components/0/procurement_contact\", \"value\": \"Priya Nair\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For each finished controller, plan on using two of those control boards."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom_components/0/quantity_per_assembly\", \"value\": 2}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and calculate what that board contributes to the cost of one finished controller."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom_components/0/extended_cost_usd\", \"value\": 97.5}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the first production run at 250 finished controllers so we can size the purchasing plan around it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/production_run_quantity\", \"value\": 250}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out how many of those boards we need to buy for the 250-controller run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom_components/0/required_order_quantity\", \"value\": 500}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the board spend for the whole 250-controller run using the Apex pricing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom_components/0/extended_run_cost_usd\", \"value\": 24375}]"
+    },
+    {
+      "role": "user",
+      "content": "Roll the board numbers up into the overall purchasing summary for this build."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/material_cost_per_assembly_usd\", \"value\": 97.5}, {\"op\": \"add\", \"path\": \"/material_cost_for_run_usd\", \"value\": 24375}, {\"op\": \"add\", \"path\": \"/procurement_lead_time_business_days\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the factory details too: this build will run at the Dayton final assembly cell on the day shift, with Lena Ortiz supervising."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturing_site\", \"value\": {\"facility\": \"Dayton final assembly cell\", \"shift\": \"Day shift\", \"supervisor\": \"Lena Ortiz\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the receiving inspection setup for the incoming boards: use procedure QI-427, sample at normal level II, and apply IPC-A-610 Class 2 acceptance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/receiving_inspection\", \"value\": {\"procedure\": \"QI-427\", \"sampling_level\": \"Normal level II\", \"acceptance_standard\": \"IPC-A-610 Class 2\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the packaging plan for shipment to the line: use returnable ESD totes, pack 20 controllers per tote, and label them with the Orion build number."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packaging_plan\", \"value\": {\"container\": \"Returnable ESD tote\", \"units_per_container\": 20, \"label_requirement\": \"Orion build number\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the build schedule: release the order on January 8, 2026, have material at the cell by January 26, and start assembly on January 29."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_schedule\", \"value\": {\"order_release_date\": \"2026-01-08\", \"material_due_date\": \"2026-01-26\", \"assembly_start_date\": \"2026-01-29\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the line setup assumptions as well: use fixture FX-19, run the standard torque program, and keep the ESD bench mats in place."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/line_setup\", \"value\": {\"fixture\": \"FX-19\", \"torque_program\": \"Standard torque program\", \"esd_control\": \"ESD bench mats\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the compliance documents the line should keep with this build: RoHS declaration, UL file reference, and the latest functional test report."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance_documents\", \"value\": [\"RoHS declaration\", \"UL file reference\", \"Latest functional test report\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the in-process quality checks: verify programming, confirm torque marks, and run the power-on test before the unit leaves the cell."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/in_process_quality_checks\", \"value\": [\"Programming verification\", \"Torque mark confirmation\", \"Power-on test\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the operator training requirements: only certified assemblers should build it, the refresher must be current within 12 months, and training record TRN-204 applies."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/operator_training\", \"value\": {\"assembler_certification\": \"Certified assemblers only\", \"refresher_interval_months\": 12, \"training_record\": \"TRN-204\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the traceability expectations for this run: scan each board lot, retain serial history, and keep the records for seven years."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/traceability\", \"value\": {\"board_lot_scan\": \"Required\", \"serial_history\": \"Retained per unit\", \"record_retention_years\": 7}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the rework rules for this build: rework is allowed only with engineering approval, use station RW-03, and log any action on form NCR-18."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rework_controls\", \"value\": {\"approval_requirement\": \"Engineering approval required\", \"station\": \"RW-03\", \"documentation_form\": \"NCR-18\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add how the incoming boards should be stored before they reach the assembly cell: keep them in the dry cabinet, stay below 30 percent humidity, and use first-in-first-out rotation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/storage_requirements\", \"value\": {\"location\": \"Dry cabinet\", \"max_relative_humidity_percent\": 30, \"rotation_method\": \"FIFO\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the safety notes for the operators: wear wrist straps, keep guards closed during torque operations, and report any damaged tote before use."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/operator_safety_notes\", \"value\": [\"Wear wrist straps\", \"Keep guards closed during torque operations\", \"Report damaged totes before use\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the maintenance support plan for the cell: check the fixture every morning, calibrate the torque driver weekly, and have maintenance respond within two hours if the line stops."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/maintenance_support\", \"value\": {\"fixture_check_frequency\": \"Daily before shift\", \"torque_driver_calibration\": \"Weekly\", \"line_down_response_hours\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the paperwork packet the supervisor should have at the cell: traveler sheet, assembly drawing, and the approved work instruction."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/production_documentation\", \"value\": {\"traveler\": \"Traveler sheet\", \"drawing\": \"Assembly drawing\", \"work_instruction\": \"Approved work instruction\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staffing plan for the assembly cell: two assemblers, one tester, and one material handler for the run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/staffing_plan\", \"value\": {\"assemblers\": 2, \"testers\": 1, \"material_handlers\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer delivery context: the finished controllers go to NorthStar Pumps in Tulsa, their reference for this build is NSP-OR-250, and shipment terms are FOB Dayton."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer_delivery\", \"value\": {\"customer\": \"NorthStar Pumps\", \"destination\": \"Tulsa, OK\", \"shipping_terms\": \"FOB Dayton\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "I also want the customer’s build reference included for this delivery: NSP-OR-250."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer_delivery/customer_build_reference\", \"value\": \"NSP-OR-250\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the warranty handling notes for the shipment: cover defects for 18 months, route claims through service desk SD-12, and require photo evidence for board damage."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/warranty_handling\", \"value\": {\"coverage_months\": 18, \"claim_route\": \"Service desk SD-12\", \"damage_evidence_required\": \"Photo evidence\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the environmental limits for the assembly area: keep it between 18 and 26 degrees Celsius, and stay below 60 percent relative humidity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/assembly_environment\", \"value\": {\"min_temperature_c\": 18, \"max_temperature_c\": 26, \"max_relative_humidity_percent\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the test equipment assignments: use tester TST-88, load software profile ORION-PUMP-v3, and keep golden unit GU-17 at the station."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/test_equipment\", \"value\": {\"functional_tester\": \"TST-88\", \"software_profile\": \"ORION-PUMP-v3\", \"golden_unit\": \"GU-17\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the production reporting expectations: record hourly output, track first-pass yield, and escalate any missed takt target to the supervisor."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/production_reporting\", \"value\": {\"output_tracking\": \"Hourly output recorded\", \"yield_metric\": \"First-pass yield\", \"takt_escalation\": \"Escalate missed target to supervisor\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the material movement plan inside the plant: stage boards in supermarket aisle 4, replenish the cell twice per shift, and use cart route MR-2."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/internal_material_flow\", \"value\": {\"staging_location\": \"Supermarket aisle 4\", \"replenishment_frequency\": \"Twice per shift\", \"cart_route\": \"MR-2\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the change-control expectations for this build: freeze the assembly process after release, require engineering sign-off for deviations, and review any substitution with purchasing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/change_control\", \"value\": {\"process_freeze\": \"After order release\", \"deviation_approval\": \"Engineering sign-off required\", \"substitution_review\": \"Purchasing review required\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the final audit plan: inspect five finished controllers from the run, have QA lead Marcus Reed perform it, and complete it before shipment release."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/final_audit\", \"value\": {\"sample_size_units\": 5, \"auditor\": \"Marcus Reed\", \"timing\": \"Before shipment release\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the contingency plan for production interruptions: hold two hours of buffer stock at the cell, notify planning if the tester goes down, and move approved work to the backup bench if needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/production_contingency\", \"value\": {\"cell_buffer_hours\": 2, \"tester_downtime_notification\": \"Notify planning\", \"backup_work_area\": \"Approved backup bench\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the shipment readiness checks: confirm pallet count, verify labels against the customer reference, and photograph the packed totes before pickup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipment_readiness\", \"value\": {\"pallet_count_confirmation\": \"Required\", \"label_verification\": \"Match customer reference\", \"packed_tote_photos\": \"Required before pickup\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the approval contacts for closing out the run: quality goes through Dana Wu, production through Victor Hale, and purchasing through Elena Brooks."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approval_contacts\", \"value\": {\"quality\": \"Dana Wu\", \"production\": \"Victor Hale\", \"purchasing\": \"Elena Brooks\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the closeout notes for the run: archive the completed traveler, send the summary to planning, and keep the purchasing file with the order packet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/run_closeout\", \"value\": {\"traveler_archive\": \"Completed traveler archived\", \"planning_summary\": \"Sent to planning\", \"purchasing_file\": \"Kept with order packet\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, mark this manufacturing plan as ready for purchasing review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan_status\", \"value\": \"Ready for purchasing review\"}]"
+    }
+  ],
+  "edit_instruction": "Use Nexus PCB Works instead of Apex Circuits for the main control board.",
+  "theme": "Substituting a component supplier",
+  "conversation_pattern": "Center the artifact on a BOM component sourced from one supplier, where supplier attributes determine unit cost, lead time, country-of-origin, risk flag, and procurement contact. Around this core, add the realistic, independent details a manufacturing plan would carry that do not depend on the supplier, and vary their number from sample to sample. Do not embed a lookup or reference card for any supplier inside the artifact; the artifact holds only the current supplier's own fields.",
+  "edit_pattern": "Switch one component to a different specific supplier.",
+  "cascade_pattern": "Every supplier-governed field takes the replacement supplier's supplied attributes, and derived totals such as cost and lead time recompute from them. Component quantity and unrelated components stay unchanged. This is determined because the replacement supplier's attributes are provided with the edit.",
+  "requires_master_data": true,
+  "master_data": {
+    "Nexus PCB Works": {
+      "unit_cost_usd": 44.2,
+      "lead_time_business_days": 12,
+      "country_of_origin": "Mexico",
+      "supplier_risk_flag": "Low",
+      "procurement_contact": "Diego Morales"
+    }
+  },
+  "current_json": {
+    "assembly_name": "Orion pump controller assembly",
+    "bom_components": [
+      {
+        "component_id": "PCB-CTRL-001",
+        "component_name": "Main control board",
+        "supplier_name": "Apex Circuits",
+        "unit_cost_usd": 48.75,
+        "lead_time_business_days": 18,
+        "country_of_origin": "Malaysia",
+        "supplier_risk_flag": "Medium",
+        "procurement_contact": "Priya Nair",
+        "quantity_per_assembly": 2,
+        "extended_cost_usd": 97.5,
+        "required_order_quantity": 500,
+        "extended_run_cost_usd": 24375
+      }
+    ],
+    "production_run_quantity": 250,
+    "material_cost_per_assembly_usd": 97.5,
+    "material_cost_for_run_usd": 24375,
+    "procurement_lead_time_business_days": 18,
+    "manufacturing_site": {
+      "facility": "Dayton final assembly cell",
+      "shift": "Day shift",
+      "supervisor": "Lena Ortiz"
+    },
+    "receiving_inspection": {
+      "procedure": "QI-427",
+      "sampling_level": "Normal level II",
+      "acceptance_standard": "IPC-A-610 Class 2"
+    },
+    "packaging_plan": {
+      "container": "Returnable ESD tote",
+      "units_per_container": 20,
+      "label_requirement": "Orion build number"
+    },
+    "build_schedule": {
+      "order_release_date": "2026-01-08",
+      "material_due_date": "2026-01-26",
+      "assembly_start_date": "2026-01-29"
+    },
+    "line_setup": {
+      "fixture": "FX-19",
+      "torque_program": "Standard torque program",
+      "esd_control": "ESD bench mats"
+    },
+    "compliance_documents": [
+      "RoHS declaration",
+      "UL file reference",
+      "Latest functional test report"
+    ],
+    "in_process_quality_checks": [
+      "Programming verification",
+      "Torque mark confirmation",
+      "Power-on test"
+    ],
+    "operator_training": {
+      "assembler_certification": "Certified assemblers only",
+      "refresher_interval_months": 12,
+      "training_record": "TRN-204"
+    },
+    "traceability": {
+      "board_lot_scan": "Required",
+      "serial_history": "Retained per unit",
+      "record_retention_years": 7
+    },
+    "rework_controls": {
+      "approval_requirement": "Engineering approval required",
+      "station": "RW-03",
+      "documentation_form": "NCR-18"
+    },
+    "storage_requirements": {
+      "location": "Dry cabinet",
+      "max_relative_humidity_percent": 30,
+      "rotation_method": "FIFO"
+    },
+    "operator_safety_notes": [
+      "Wear wrist straps",
+      "Keep guards closed during torque operations",
+      "Report damaged totes before use"
+    ],
+    "maintenance_support": {
+      "fixture_check_frequency": "Daily before shift",
+      "torque_driver_calibration": "Weekly",
+      "line_down_response_hours": 2
+    },
+    "production_documentation": {
+      "traveler": "Traveler sheet",
+      "drawing": "Assembly drawing",
+      "work_instruction": "Approved work instruction"
+    },
+    "staffing_plan": {
+      "assemblers": 2,
+      "testers": 1,
+      "material_handlers": 1
+    },
+    "customer_delivery": {
+      "customer": "NorthStar Pumps",
+      "destination": "Tulsa, OK",
+      "shipping_terms": "FOB Dayton",
+      "customer_build_reference": "NSP-OR-250"
+    },
+    "warranty_handling": {
+      "coverage_months": 18,
+      "claim_route": "Service desk SD-12",
+      "damage_evidence_required": "Photo evidence"
+    },
+    "assembly_environment": {
+      "min_temperature_c": 18,
+      "max_temperature_c": 26,
+      "max_relative_humidity_percent": 60
+    },
+    "test_equipment": {
+      "functional_tester": "TST-88",
+      "software_profile": "ORION-PUMP-v3",
+      "golden_unit": "GU-17"
+    },
+    "production_reporting": {
+      "output_tracking": "Hourly output recorded",
+      "yield_metric": "First-pass yield",
+      "takt_escalation": "Escalate missed target to supervisor"
+    },
+    "internal_material_flow": {
+      "staging_location": "Supermarket aisle 4",
+      "replenishment_frequency": "Twice per shift",
+      "cart_route": "MR-2"
+    },
+    "change_control": {
+      "process_freeze": "After order release",
+      "deviation_approval": "Engineering sign-off required",
+      "substitution_review": "Purchasing review required"
+    },
+    "final_audit": {
+      "sample_size_units": 5,
+      "auditor": "Marcus Reed",
+      "timing": "Before shipment release"
+    },
+    "production_contingency": {
+      "cell_buffer_hours": 2,
+      "tester_downtime_notification": "Notify planning",
+      "backup_work_area": "Approved backup bench"
+    },
+    "shipment_readiness": {
+      "pallet_count_confirmation": "Required",
+      "label_verification": "Match customer reference",
+      "packed_tote_photos": "Required before pickup"
+    },
+    "approval_contacts": {
+      "quality": "Dana Wu",
+      "production": "Victor Hale",
+      "purchasing": "Elena Brooks"
+    },
+    "run_closeout": {
+      "traveler_archive": "Completed traveler archived",
+      "planning_summary": "Sent to planning",
+      "purchasing_file": "Kept with order packet"
+    },
+    "plan_status": "Ready for purchasing review"
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/bom_components/0/supplier_name",
+      "kind": "direct",
+      "value": "Nexus PCB Works"
+    },
+    {
+      "op": "replace",
+      "path": "/bom_components/0/unit_cost_usd",
+      "kind": "cascade",
+      "value": 44.2
+    },
+    {
+      "op": "replace",
+      "path": "/bom_components/0/lead_time_business_days",
+      "kind": "cascade",
+      "value": 12
+    },
+    {
+      "op": "replace",
+      "path": "/bom_components/0/country_of_origin",
+      "kind": "cascade",
+      "value": "Mexico"
+    },
+    {
+      "op": "replace",
+      "path": "/bom_components/0/supplier_risk_flag",
+      "kind": "cascade",
+      "value": "Low"
+    },
+    {
+      "op": "replace",
+      "path": "/bom_components/0/procurement_contact",
+      "kind": "cascade",
+      "value": "Diego Morales"
+    },
+    {
+      "op": "replace",
+      "path": "/bom_components/0/extended_cost_usd",
+      "kind": "cascade",
+      "value": 88.4
+    },
+    {
+      "op": "replace",
+      "path": "/bom_components/0/extended_run_cost_usd",
+      "kind": "cascade",
+      "value": 22100.0
+    },
+    {
+      "op": "replace",
+      "path": "/material_cost_per_assembly_usd",
+      "kind": "cascade",
+      "value": 88.4
+    },
+    {
+      "op": "replace",
+      "path": "/material_cost_for_run_usd",
+      "kind": "cascade",
+      "value": 22100.0
+    },
+    {
+      "op": "replace",
+      "path": "/procurement_lead_time_business_days",
+      "kind": "cascade",
+      "value": 12
+    }
+  ],
+  "expected_json": {
+    "assembly_name": "Orion pump controller assembly",
+    "bom_components": [
+      {
+        "component_id": "PCB-CTRL-001",
+        "component_name": "Main control board",
+        "supplier_name": "Nexus PCB Works",
+        "unit_cost_usd": 44.2,
+        "lead_time_business_days": 12,
+        "country_of_origin": "Mexico",
+        "supplier_risk_flag": "Low",
+        "procurement_contact": "Diego Morales",
+        "quantity_per_assembly": 2,
+        "extended_cost_usd": 88.4,
+        "required_order_quantity": 500,
+        "extended_run_cost_usd": 22100.0
+      }
+    ],
+    "production_run_quantity": 250,
+    "material_cost_per_assembly_usd": 88.4,
+    "material_cost_for_run_usd": 22100.0,
+    "procurement_lead_time_business_days": 12,
+    "manufacturing_site": {
+      "facility": "Dayton final assembly cell",
+      "shift": "Day shift",
+      "supervisor": "Lena Ortiz"
+    },
+    "receiving_inspection": {
+      "procedure": "QI-427",
+      "sampling_level": "Normal level II",
+      "acceptance_standard": "IPC-A-610 Class 2"
+    },
+    "packaging_plan": {
+      "container": "Returnable ESD tote",
+      "units_per_container": 20,
+      "label_requirement": "Orion build number"
+    },
+    "build_schedule": {
+      "order_release_date": "2026-01-08",
+      "material_due_date": "2026-01-26",
+      "assembly_start_date": "2026-01-29"
+    },
+    "line_setup": {
+      "fixture": "FX-19",
+      "torque_program": "Standard torque program",
+      "esd_control": "ESD bench mats"
+    },
+    "compliance_documents": [
+      "RoHS declaration",
+      "UL file reference",
+      "Latest functional test report"
+    ],
+    "in_process_quality_checks": [
+      "Programming verification",
+      "Torque mark confirmation",
+      "Power-on test"
+    ],
+    "operator_training": {
+      "assembler_certification": "Certified assemblers only",
+      "refresher_interval_months": 12,
+      "training_record": "TRN-204"
+    },
+    "traceability": {
+      "board_lot_scan": "Required",
+      "serial_history": "Retained per unit",
+      "record_retention_years": 7
+    },
+    "rework_controls": {
+      "approval_requirement": "Engineering approval required",
+      "station": "RW-03",
+      "documentation_form": "NCR-18"
+    },
+    "storage_requirements": {
+      "location": "Dry cabinet",
+      "max_relative_humidity_percent": 30,
+      "rotation_method": "FIFO"
+    },
+    "operator_safety_notes": [
+      "Wear wrist straps",
+      "Keep guards closed during torque operations",
+      "Report damaged totes before use"
+    ],
+    "maintenance_support": {
+      "fixture_check_frequency": "Daily before shift",
+      "torque_driver_calibration": "Weekly",
+      "line_down_response_hours": 2
+    },
+    "production_documentation": {
+      "traveler": "Traveler sheet",
+      "drawing": "Assembly drawing",
+      "work_instruction": "Approved work instruction"
+    },
+    "staffing_plan": {
+      "assemblers": 2,
+      "testers": 1,
+      "material_handlers": 1
+    },
+    "customer_delivery": {
+      "customer": "NorthStar Pumps",
+      "destination": "Tulsa, OK",
+      "shipping_terms": "FOB Dayton",
+      "customer_build_reference": "NSP-OR-250"
+    },
+    "warranty_handling": {
+      "coverage_months": 18,
+      "claim_route": "Service desk SD-12",
+      "damage_evidence_required": "Photo evidence"
+    },
+    "assembly_environment": {
+      "min_temperature_c": 18,
+      "max_temperature_c": 26,
+      "max_relative_humidity_percent": 60
+    },
+    "test_equipment": {
+      "functional_tester": "TST-88",
+      "software_profile": "ORION-PUMP-v3",
+      "golden_unit": "GU-17"
+    },
+    "production_reporting": {
+      "output_tracking": "Hourly output recorded",
+      "yield_metric": "First-pass yield",
+      "takt_escalation": "Escalate missed target to supervisor"
+    },
+    "internal_material_flow": {
+      "staging_location": "Supermarket aisle 4",
+      "replenishment_frequency": "Twice per shift",
+      "cart_route": "MR-2"
+    },
+    "change_control": {
+      "process_freeze": "After order release",
+      "deviation_approval": "Engineering sign-off required",
+      "substitution_review": "Purchasing review required"
+    },
+    "final_audit": {
+      "sample_size_units": 5,
+      "auditor": "Marcus Reed",
+      "timing": "Before shipment release"
+    },
+    "production_contingency": {
+      "cell_buffer_hours": 2,
+      "tester_downtime_notification": "Notify planning",
+      "backup_work_area": "Approved backup bench"
+    },
+    "shipment_readiness": {
+      "pallet_count_confirmation": "Required",
+      "label_verification": "Match customer reference",
+      "packed_tote_photos": "Required before pickup"
+    },
+    "approval_contacts": {
+      "quality": "Dana Wu",
+      "production": "Victor Hale",
+      "purchasing": "Elena Brooks"
+    },
+    "run_closeout": {
+      "traveler_archive": "Completed traveler archived",
+      "planning_summary": "Sent to planning",
+      "purchasing_file": "Kept with order packet"
+    },
+    "plan_status": "Ready for purchasing review"
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "supplier Apex->Nexus PCB: attrs from md; extended=2*44.2=88.4, extended_run=500*44.2=22100; top-level material_cost_per_assembly/for_run/lead_time mirror.",
+  "annotated": true,
+  "excluded": false
+}

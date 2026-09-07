@@ -1,0 +1,425 @@
+{
+  "id": "invoice_L50_00",
+  "domain": "invoice",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start the invoice with the number INV-2026-0417."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoiceNumber\", \"value\": \"INV-2026-0417\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first charge for discovery workshops: 6 hours at 150 dollars per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems\", \"value\": [{\"label\": \"Discovery workshops\", \"quantity\": 6, \"unitPrice\": 150}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate the charge for the discovery workshops based on those hours and rate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/0/amount\", \"value\": 900}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another charge for wireframe design: 12 hours at 95 dollars per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"label\": \"Wireframe design\", \"quantity\": 12, \"unitPrice\": 95}}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out the charge for the wireframe design from those hours and rate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/1/amount\", \"value\": 1140}]"
+    },
+    {
+      "role": "user",
+      "content": "Include prototype testing as another charge: 8 hours at 120 dollars per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"label\": \"Prototype testing\", \"quantity\": 8, \"unitPrice\": 120}}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the charge for prototype testing from the hours and hourly rate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/2/amount\", \"value\": 960}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a final service charge for implementation support: 10 hours at 110 dollars per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"label\": \"Implementation support\", \"quantity\": 10, \"unitPrice\": 110}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate the charge for implementation support from those hours and rate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/3/amount\", \"value\": 1100}]"
+    },
+    {
+      "role": "user",
+      "content": "Now add up all the service charges before any extra fees or tax."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subtotal\", \"value\": 4100}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply a 2 percent project administration fee on top of that service total."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/administrationFeeRate\", \"value\": 0.02}]"
+    },
+    {
+      "role": "user",
+      "content": "Please work out what that administration fee comes to."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/administrationFeeAmount\", \"value\": 82}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the service total and administration fee together before tax."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/preTaxTotal\", \"value\": 4182}]"
+    },
+    {
+      "role": "user",
+      "content": "Use an 8 percent sales tax on that pre-tax total."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/taxRate\", \"value\": 0.08}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate the sales tax from the pre-tax amount and that rate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/taxAmount\", \"value\": 334.56}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the pre-tax amount and sales tax together for the invoice total."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoiceTotal\", \"value\": 4516.56}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that the client has already paid a 1,000 dollar deposit toward this invoice."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/amountPaid\", \"value\": 1000}]"
+    },
+    {
+      "role": "user",
+      "content": "Subtract that deposit from the invoice total so we know what remains due."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/balanceDue\", \"value\": 3516.56}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the sender’s business name and main contact details for the invoice."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller\", \"value\": {\"name\": \"Northstar UX Studio\", \"email\": \"billing@northstarux.com\", \"phone\": \"555-0148\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the client’s company name and main contact details."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/buyer\", \"value\": {\"name\": \"Harborview Coffee Roasters\", \"email\": \"accounts@harborviewcoffee.com\", \"phone\": \"555-0196\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set it as issued on May 1, 2026, due on May 31, with net 30 payment terms."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/issueDate\", \"value\": \"2026-05-01\"}, {\"op\": \"add\", \"path\": \"/dueDate\", \"value\": \"2026-05-31\"}, {\"op\": \"add\", \"path\": \"/paymentTerms\", \"value\": \"Net 30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the sender’s mailing address in Portland, Oregon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller/address\", \"value\": {\"street\": \"214 NW Everett Street\", \"city\": \"Portland\", \"state\": \"OR\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the client’s mailing details in Seattle, Washington."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/buyer/address\", \"value\": {\"street\": \"88 Pike Street\", \"city\": \"Seattle\", \"state\": \"WA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the bank transfer details for payment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentInstructions\", \"value\": {\"bankName\": \"Cascade Business Bank\", \"routingNumber\": \"123456789\", \"accountLast4\": \"4421\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short note thanking the client, and mark the currency as U.S. dollars with amounts shown to two decimals."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/note\", \"value\": \"Thank you for your business.\"}, {\"op\": \"add\", \"path\": \"/currency\", \"value\": \"USD\"}, {\"op\": \"add\", \"path\": \"/decimalPlaces\", \"value\": 2}]"
+    },
+    {
+      "role": "user",
+      "content": "Mention that this work covered the café website refresh from April 6 through April 24, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projectSummary\", \"value\": {\"name\": \"Café website refresh\", \"servicePeriodStart\": \"2026-04-06\", \"servicePeriodEnd\": \"2026-04-24\"}}]"
+    }
+  ],
+  "edit_instruction": "Change the discovery workshops to 5 hours.",
+  "theme": "Recomputing the invoice total chain",
+  "master_data": null,
+  "current_json": {
+    "invoiceNumber": "INV-2026-0417",
+    "lineItems": [
+      {
+        "label": "Discovery workshops",
+        "quantity": 6,
+        "unitPrice": 150,
+        "amount": 900
+      },
+      {
+        "label": "Wireframe design",
+        "quantity": 12,
+        "unitPrice": 95,
+        "amount": 1140
+      },
+      {
+        "label": "Prototype testing",
+        "quantity": 8,
+        "unitPrice": 120,
+        "amount": 960
+      },
+      {
+        "label": "Implementation support",
+        "quantity": 10,
+        "unitPrice": 110,
+        "amount": 1100
+      }
+    ],
+    "subtotal": 4100,
+    "administrationFeeRate": 0.02,
+    "administrationFeeAmount": 82,
+    "preTaxTotal": 4182,
+    "taxRate": 0.08,
+    "taxAmount": 334.56,
+    "invoiceTotal": 4516.56,
+    "amountPaid": 1000,
+    "balanceDue": 3516.56,
+    "seller": {
+      "name": "Northstar UX Studio",
+      "email": "billing@northstarux.com",
+      "phone": "555-0148",
+      "address": {
+        "street": "214 NW Everett Street",
+        "city": "Portland",
+        "state": "OR"
+      }
+    },
+    "buyer": {
+      "name": "Harborview Coffee Roasters",
+      "email": "accounts@harborviewcoffee.com",
+      "phone": "555-0196",
+      "address": {
+        "street": "88 Pike Street",
+        "city": "Seattle",
+        "state": "WA"
+      }
+    },
+    "issueDate": "2026-05-01",
+    "dueDate": "2026-05-31",
+    "paymentTerms": "Net 30",
+    "paymentInstructions": {
+      "bankName": "Cascade Business Bank",
+      "routingNumber": "123456789",
+      "accountLast4": "4421"
+    },
+    "note": "Thank you for your business.",
+    "currency": "USD",
+    "decimalPlaces": 2,
+    "projectSummary": {
+      "name": "Café website refresh",
+      "servicePeriodStart": "2026-04-06",
+      "servicePeriodEnd": "2026-04-24"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/lineItems/0/quantity",
+      "kind": "direct",
+      "value": 5
+    },
+    {
+      "op": "replace",
+      "path": "/lineItems/0/amount",
+      "kind": "cascade",
+      "value": 750
+    },
+    {
+      "op": "replace",
+      "path": "/subtotal",
+      "kind": "cascade",
+      "value": 3950
+    },
+    {
+      "op": "replace",
+      "path": "/administrationFeeAmount",
+      "kind": "cascade",
+      "value": 79
+    },
+    {
+      "op": "replace",
+      "path": "/preTaxTotal",
+      "kind": "cascade",
+      "value": 4029
+    },
+    {
+      "op": "replace",
+      "path": "/taxAmount",
+      "kind": "cascade",
+      "value": 322.32
+    },
+    {
+      "op": "replace",
+      "path": "/invoiceTotal",
+      "kind": "cascade",
+      "value": 4351.32
+    },
+    {
+      "op": "replace",
+      "path": "/balanceDue",
+      "kind": "cascade",
+      "value": 3351.32
+    }
+  ],
+  "expected_json": {
+    "invoiceNumber": "INV-2026-0417",
+    "lineItems": [
+      {
+        "label": "Discovery workshops",
+        "quantity": 5,
+        "unitPrice": 150,
+        "amount": 750
+      },
+      {
+        "label": "Wireframe design",
+        "quantity": 12,
+        "unitPrice": 95,
+        "amount": 1140
+      },
+      {
+        "label": "Prototype testing",
+        "quantity": 8,
+        "unitPrice": 120,
+        "amount": 960
+      },
+      {
+        "label": "Implementation support",
+        "quantity": 10,
+        "unitPrice": 110,
+        "amount": 1100
+      }
+    ],
+    "subtotal": 3950,
+    "administrationFeeRate": 0.02,
+    "administrationFeeAmount": 79,
+    "preTaxTotal": 4029,
+    "taxRate": 0.08,
+    "taxAmount": 322.32,
+    "invoiceTotal": 4351.32,
+    "amountPaid": 1000,
+    "balanceDue": 3351.32,
+    "seller": {
+      "name": "Northstar UX Studio",
+      "email": "billing@northstarux.com",
+      "phone": "555-0148",
+      "address": {
+        "street": "214 NW Everett Street",
+        "city": "Portland",
+        "state": "OR"
+      }
+    },
+    "buyer": {
+      "name": "Harborview Coffee Roasters",
+      "email": "accounts@harborviewcoffee.com",
+      "phone": "555-0196",
+      "address": {
+        "street": "88 Pike Street",
+        "city": "Seattle",
+        "state": "WA"
+      }
+    },
+    "issueDate": "2026-05-01",
+    "dueDate": "2026-05-31",
+    "paymentTerms": "Net 30",
+    "paymentInstructions": {
+      "bankName": "Cascade Business Bank",
+      "routingNumber": "123456789",
+      "accountLast4": "4421"
+    },
+    "note": "Thank you for your business.",
+    "currency": "USD",
+    "decimalPlaces": 2,
+    "projectSummary": {
+      "name": "Café website refresh",
+      "servicePeriodStart": "2026-04-06",
+      "servicePeriodEnd": "2026-04-24"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Discovery workshops quantity 6->5. amount 5*150=750; subtotal 750+1140+960+1100=3950; administrationFeeAmount 3950*0.02=79; preTaxTotal 4029; taxAmount 4029*0.08=322.32; invoiceTotal 4351.32; balanceDue 4351.32-1000(deposit)=3351.32. Rates, unit prices, other line items, and amountPaid stay.",
+  "conversation_pattern": "Center the artifact on an invoice whose totals form a chain, where each line item is labeled with what it is for and its amount derives from a quantity and a unit price, a subtotal sums the line amounts, and charges and a final balance build on the subtotal, so the inputs determine the whole chain. Each line item must be distinguishable from the others by its label, so a single line can be named unambiguously. Around this core, add the realistic, independent details an invoice would carry that do not depend on the line amounts, and vary their number from sample to sample.",
+  "edit_pattern": "Change one line item's unit price or quantity to a specific new value.",
+  "cascade_pattern": "Editing one input re-derives its line amount, then the chain recomputes level by level: the subtotal re-sums and every total built on it follows in order. Other lines and the stated rates stay unchanged.",
+  "requires_master_data": false
+}

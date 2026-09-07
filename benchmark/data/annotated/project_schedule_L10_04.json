@@ -1,0 +1,135 @@
+{
+  "id": "project_schedule_L10_04",
+  "domain": "project_schedule",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm putting together a schedule for the customer portal launch, so start the plan around that initiative."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project\", \"value\": {\"name\": \"Customer Portal Launch\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the launch readiness deadline for August 29, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestone\", \"value\": {\"date\": \"2025-08-29\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the security review as one of the workstreams that has to be done before that deadline, running from August 4 through August 15."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestone_feeding_tasks\", \"value\": {\"security_review\": {\"start\": \"2025-08-04\", \"finish\": \"2025-08-15\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include performance testing as another item that must wrap up before launch readiness, scheduled from August 11 through August 22."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestone_feeding_tasks/performance_testing\", \"value\": {\"start\": \"2025-08-11\", \"finish\": \"2025-08-22\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate the calendar-day room each of those two workstreams has before the readiness deadline, and show the last day each could start while keeping the same run length."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestone_feeding_tasks/security_review/slack_days\", \"value\": 14}, {\"op\": \"add\", \"path\": \"/milestone_feeding_tasks/security_review/latest_allowable_start\", \"value\": \"2025-08-18\"}, {\"op\": \"add\", \"path\": \"/milestone_feeding_tasks/performance_testing/slack_days\", \"value\": 7}, {\"op\": \"add\", \"path\": \"/milestone_feeding_tasks/performance_testing/latest_allowable_start\", \"value\": \"2025-08-18\"}]"
+    }
+  ],
+  "edit_instruction": "Move the launch readiness deadline to September 5, 2025.",
+  "theme": "Moving a milestone date",
+  "master_data": null,
+  "current_json": {
+    "project": {
+      "name": "Customer Portal Launch"
+    },
+    "milestone": {
+      "date": "2025-08-29"
+    },
+    "milestone_feeding_tasks": {
+      "security_review": {
+        "start": "2025-08-04",
+        "finish": "2025-08-15",
+        "slack_days": 14,
+        "latest_allowable_start": "2025-08-18"
+      },
+      "performance_testing": {
+        "start": "2025-08-11",
+        "finish": "2025-08-22",
+        "slack_days": 7,
+        "latest_allowable_start": "2025-08-18"
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/milestone/date",
+      "kind": "direct",
+      "value": "2025-09-05"
+    },
+    {
+      "op": "replace",
+      "path": "/milestone_feeding_tasks/security_review/slack_days",
+      "kind": "cascade",
+      "value": 21
+    },
+    {
+      "op": "replace",
+      "path": "/milestone_feeding_tasks/security_review/latest_allowable_start",
+      "kind": "cascade",
+      "value": "2025-08-25"
+    },
+    {
+      "op": "replace",
+      "path": "/milestone_feeding_tasks/performance_testing/slack_days",
+      "kind": "cascade",
+      "value": 14
+    },
+    {
+      "op": "replace",
+      "path": "/milestone_feeding_tasks/performance_testing/latest_allowable_start",
+      "kind": "cascade",
+      "value": "2025-08-25"
+    }
+  ],
+  "expected_json": {
+    "project": {
+      "name": "Customer Portal Launch"
+    },
+    "milestone": {
+      "date": "2025-09-05"
+    },
+    "milestone_feeding_tasks": {
+      "security_review": {
+        "start": "2025-08-04",
+        "finish": "2025-08-15",
+        "slack_days": 21,
+        "latest_allowable_start": "2025-08-25"
+      },
+      "performance_testing": {
+        "start": "2025-08-11",
+        "finish": "2025-08-22",
+        "slack_days": 14,
+        "latest_allowable_start": "2025-08-25"
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "Milestone 08-29->09-05 (+7 cal). slack=milestone-finish; latest_start=milestone-duration(11d). security slack 21 / start 08-25; performance slack 14 / start 08-25.",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a schedule with a milestone several tasks must finish before, where each feeding task's slack derives from the milestone and that task's finish. Around this core, add the realistic, independent details a project plan would carry that do not depend on the milestone date, and vary their number from sample to sample.",
+  "edit_pattern": "Move the milestone (or deadline) to a specific new date.",
+  "cascade_pattern": "Moving the milestone re-derives each feeding task's slack, and its latest allowable start, from the new milestone date. Tasks that do not feed the milestone stay. This is determined because the feeding links and finishes are stated.",
+  "requires_master_data": false
+}

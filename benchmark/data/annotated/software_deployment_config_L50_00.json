@@ -1,0 +1,476 @@
+{
+  "id": "software_deployment_config_L50_00",
+  "domain": "software_deployment_config",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Please start a deployment setup for the checkout service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload\", \"value\": {\"name\": \"checkout-service\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set it up to run three instances for normal traffic."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/replicas\", \"value\": 3}]"
+    },
+    {
+      "role": "user",
+      "content": "Give each running instance a modest CPU reservation of half a core."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/resources/requests/perPodCpuCores\", \"value\": 0.5}]"
+    },
+    {
+      "role": "user",
+      "content": "Also reserve 768 MiB of memory for each instance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/resources/requests/perPodMemoryMiB\", \"value\": 768}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the overall CPU reservation for the service and show the calculation behind it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/resources/requests/totalCpu\", \"value\": {\"cores\": 1.5, \"formula\": \"replicas * perPodCpuCores = 3 * 0.5\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the overall memory reservation for the service and include the calculation used."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/resources/requests/totalMemory\", \"value\": {\"MiB\": 2304, \"formula\": \"replicas * perPodMemoryMiB = 3 * 768\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short capacity note that reflects how many instances are expected to serve traffic, and include how it was determined."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/capacitySummary\", \"value\": {\"servingReplicas\": 3, \"formula\": \"servingReplicas = replicas = 3\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make sure routine maintenance still leaves all but one instance available, and show the calculation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/availability/disruptionBudget/minAvailable\", \"value\": {\"pods\": 2, \"formula\": \"replicas - 1 = 3 - 1\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also allow only one instance to be taken down at a time, with the reasoning included."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/availability/disruptionBudget/maxUnavailable\", \"value\": {\"pods\": 1, \"formula\": \"replicas - minAvailable = 3 - 2\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the stable checkout container image from our registry and have it pulled only when needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/image\", \"value\": {\"repository\": \"registry.example.com/apps/checkout-service\", \"tag\": \"1.8.2\", \"pullPolicy\": \"IfNotPresent\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run it in the production namespace and label it for the storefront app."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/metadata\", \"value\": {\"namespace\": \"production\", \"labels\": {\"app\": \"storefront\", \"tier\": \"backend\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the container listen for HTTP traffic on port 8080 over TCP."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/ports\", \"value\": [{\"name\": \"http\", \"containerPort\": 8080, \"protocol\": \"TCP\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a basic health check that hits the service over HTTP every ten seconds."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/healthChecks/liveness\", \"value\": {\"path\": \"/healthz\", \"port\": 8080, \"periodSeconds\": 10}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a readiness check for the main checkout endpoint with a short initial wait."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/healthChecks/readiness\", \"value\": {\"path\": \"/ready\", \"port\": 8080, \"initialDelaySeconds\": 15}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the runtime logging to use the info level."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/env\", \"value\": [{\"name\": \"LOG_LEVEL\", \"value\": \"info\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Lock down the container so it runs without root privileges and cannot escalate permissions."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/security\", \"value\": {\"runAsNonRoot\": true, \"readOnlyRootFilesystem\": true, \"allowPrivilegeEscalation\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use rolling updates and keep a modest rollback history with a ten-minute rollout deadline."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/rollout\", \"value\": {\"strategy\": \"RollingUpdate\", \"revisionHistoryLimit\": 5, \"progressDeadlineSeconds\": 600}}]"
+    },
+    {
+      "role": "user",
+      "content": "Expose the service inside the cluster on the standard web port and route it to the container port already in use."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/service\", \"value\": {\"type\": \"ClusterIP\", \"port\": 80, \"targetPort\": 8080}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make it reachable through the public checkout host using TLS."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/ingress\", \"value\": {\"host\": \"checkout.example.com\", \"tlsSecret\": \"checkout-tls\", \"path\": \"/\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have Prometheus scrape this service for metrics on its usual endpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/monitoring\", \"value\": {\"prometheusScrape\": true, \"metricsPath\": \"/metrics\", \"metricsPort\": 8080}}]"
+    },
+    {
+      "role": "user",
+      "content": "Place it on the general-purpose worker pool with the standard priority class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/scheduling\", \"value\": {\"nodePool\": \"general-purpose\", \"priorityClass\": \"standard\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the owning team and their on-call contact so people know who to reach."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload/ownership\", \"value\": {\"team\": \"payments-platform\", \"onCall\": \"payments-platform-primary\"}}]"
+    }
+  ],
+  "edit_instruction": "Please update the deployment to run 5 instances.",
+  "theme": "Changing the replica count",
+  "conversation_pattern": "Center the artifact on a deployment with a replica count, per-pod CPU and memory requests, and availability settings, where EVERY derived field carries its own explicit formula written in the artifact: total CPU = replicas * perPodCpu, total memory = replicas * perPodMem, capacity summary = replicas, and each disruption-budget value has a stated formula (e.g. minAvailable = replicas - 1, maxUnavailable = 1). Do not include any availability field whose dependence on the replica count is not given by a stated formula. Around this core, add the realistic, independent details a deployment config would carry that do not depend on the replica count, and vary their number from sample to sample.",
+  "edit_pattern": "Change the replica count to a specific new number.",
+  "cascade_pattern": "Editing the replica count re-derives total CPU, total memory, capacity summary, and each disruption-budget value strictly from its stated per-pod value and formula. Per-pod requests and unrelated deployment fields stay unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "workload": {
+      "name": "checkout-service",
+      "replicas": 3,
+      "resources": {
+        "requests": {
+          "perPodCpuCores": 0.5,
+          "perPodMemoryMiB": 768,
+          "totalCpu": {
+            "cores": 1.5,
+            "formula": "replicas * perPodCpuCores = 3 * 0.5"
+          },
+          "totalMemory": {
+            "MiB": 2304,
+            "formula": "replicas * perPodMemoryMiB = 3 * 768"
+          }
+        }
+      },
+      "capacitySummary": {
+        "servingReplicas": 3,
+        "formula": "servingReplicas = replicas = 3"
+      },
+      "availability": {
+        "disruptionBudget": {
+          "minAvailable": {
+            "pods": 2,
+            "formula": "replicas - 1 = 3 - 1"
+          },
+          "maxUnavailable": {
+            "pods": 1,
+            "formula": "replicas - minAvailable = 3 - 2"
+          }
+        }
+      },
+      "image": {
+        "repository": "registry.example.com/apps/checkout-service",
+        "tag": "1.8.2",
+        "pullPolicy": "IfNotPresent"
+      },
+      "metadata": {
+        "namespace": "production",
+        "labels": {
+          "app": "storefront",
+          "tier": "backend"
+        }
+      },
+      "ports": [
+        {
+          "name": "http",
+          "containerPort": 8080,
+          "protocol": "TCP"
+        }
+      ],
+      "healthChecks": {
+        "liveness": {
+          "path": "/healthz",
+          "port": 8080,
+          "periodSeconds": 10
+        },
+        "readiness": {
+          "path": "/ready",
+          "port": 8080,
+          "initialDelaySeconds": 15
+        }
+      },
+      "env": [
+        {
+          "name": "LOG_LEVEL",
+          "value": "info"
+        }
+      ],
+      "security": {
+        "runAsNonRoot": true,
+        "readOnlyRootFilesystem": true,
+        "allowPrivilegeEscalation": false
+      },
+      "rollout": {
+        "strategy": "RollingUpdate",
+        "revisionHistoryLimit": 5,
+        "progressDeadlineSeconds": 600
+      },
+      "service": {
+        "type": "ClusterIP",
+        "port": 80,
+        "targetPort": 8080
+      },
+      "ingress": {
+        "host": "checkout.example.com",
+        "tlsSecret": "checkout-tls",
+        "path": "/"
+      },
+      "monitoring": {
+        "prometheusScrape": true,
+        "metricsPath": "/metrics",
+        "metricsPort": 8080
+      },
+      "scheduling": {
+        "nodePool": "general-purpose",
+        "priorityClass": "standard"
+      },
+      "ownership": {
+        "team": "payments-platform",
+        "onCall": "payments-platform-primary"
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/workload/replicas",
+      "kind": "direct",
+      "value": 5
+    },
+    {
+      "op": "replace",
+      "path": "/workload/resources/requests/totalCpu/cores",
+      "kind": "cascade",
+      "value": 2.5
+    },
+    {
+      "op": "replace",
+      "path": "/workload/resources/requests/totalMemory/MiB",
+      "kind": "cascade",
+      "value": 3840
+    },
+    {
+      "op": "replace",
+      "path": "/workload/capacitySummary/servingReplicas",
+      "kind": "cascade",
+      "value": 5
+    },
+    {
+      "op": "replace",
+      "path": "/workload/availability/disruptionBudget/minAvailable/pods",
+      "kind": "cascade",
+      "value": 4
+    },
+    {
+      "op": "replace",
+      "path": "/workload/resources/requests/totalCpu/formula",
+      "kind": "cascade",
+      "value": "replicas * perPodCpuCores = 5 * 0.5",
+      "optional": true
+    },
+    {
+      "op": "replace",
+      "path": "/workload/resources/requests/totalMemory/formula",
+      "kind": "cascade",
+      "value": "replicas * perPodMemoryMiB = 5 * 768",
+      "optional": true
+    },
+    {
+      "op": "replace",
+      "path": "/workload/capacitySummary/formula",
+      "kind": "cascade",
+      "value": "servingReplicas = replicas = 5",
+      "optional": true
+    },
+    {
+      "op": "replace",
+      "path": "/workload/availability/disruptionBudget/minAvailable/formula",
+      "kind": "cascade",
+      "value": "replicas - 1 = 5 - 1",
+      "optional": true
+    },
+    {
+      "op": "replace",
+      "path": "/workload/availability/disruptionBudget/maxUnavailable/formula",
+      "kind": "cascade",
+      "value": "replicas - minAvailable = 5 - 4",
+      "optional": true
+    }
+  ],
+  "expected_json": {
+    "workload": {
+      "name": "checkout-service",
+      "replicas": 5,
+      "resources": {
+        "requests": {
+          "perPodCpuCores": 0.5,
+          "perPodMemoryMiB": 768,
+          "totalCpu": {
+            "cores": 2.5,
+            "formula": "replicas * perPodCpuCores = 5 * 0.5"
+          },
+          "totalMemory": {
+            "MiB": 3840,
+            "formula": "replicas * perPodMemoryMiB = 5 * 768"
+          }
+        }
+      },
+      "capacitySummary": {
+        "servingReplicas": 5,
+        "formula": "servingReplicas = replicas = 5"
+      },
+      "availability": {
+        "disruptionBudget": {
+          "minAvailable": {
+            "pods": 4,
+            "formula": "replicas - 1 = 5 - 1"
+          },
+          "maxUnavailable": {
+            "pods": 1,
+            "formula": "replicas - minAvailable = 5 - 4"
+          }
+        }
+      },
+      "image": {
+        "repository": "registry.example.com/apps/checkout-service",
+        "tag": "1.8.2",
+        "pullPolicy": "IfNotPresent"
+      },
+      "metadata": {
+        "namespace": "production",
+        "labels": {
+          "app": "storefront",
+          "tier": "backend"
+        }
+      },
+      "ports": [
+        {
+          "name": "http",
+          "containerPort": 8080,
+          "protocol": "TCP"
+        }
+      ],
+      "healthChecks": {
+        "liveness": {
+          "path": "/healthz",
+          "port": 8080,
+          "periodSeconds": 10
+        },
+        "readiness": {
+          "path": "/ready",
+          "port": 8080,
+          "initialDelaySeconds": 15
+        }
+      },
+      "env": [
+        {
+          "name": "LOG_LEVEL",
+          "value": "info"
+        }
+      ],
+      "security": {
+        "runAsNonRoot": true,
+        "readOnlyRootFilesystem": true,
+        "allowPrivilegeEscalation": false
+      },
+      "rollout": {
+        "strategy": "RollingUpdate",
+        "revisionHistoryLimit": 5,
+        "progressDeadlineSeconds": 600
+      },
+      "service": {
+        "type": "ClusterIP",
+        "port": 80,
+        "targetPort": 8080
+      },
+      "ingress": {
+        "host": "checkout.example.com",
+        "tlsSecret": "checkout-tls",
+        "path": "/"
+      },
+      "monitoring": {
+        "prometheusScrape": true,
+        "metricsPath": "/metrics",
+        "metricsPort": 8080
+      },
+      "scheduling": {
+        "nodePool": "general-purpose",
+        "priorityClass": "standard"
+      },
+      "ownership": {
+        "team": "payments-platform",
+        "onCall": "payments-platform-primary"
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "replicas 3->5; totalCpu=5*0.5=2.5, totalMem=5*768=3840, capacity=5, minAvailable=5-1=4, maxUnavailable=replicas-minAvailable=5-4=1. formula-text optional. | REVIEW EDIT (with author): removed no-op /workload/availability/disruptionBudget/maxUnavailable/pods (1->1: maxUnavailable=replicas-minAvailable=5-4=1 equals the current value, so the pods value does not change). It produced a phantom miss for a perfect model. The maxUnavailable formula text op (optional) stays.",
+  "annotated": true,
+  "excluded": false,
+  "review_edited": true
+}

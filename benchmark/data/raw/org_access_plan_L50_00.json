@@ -1,0 +1,347 @@
+{
+  "id": "org_access_plan_L50_00",
+  "domain": "org_access_plan",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start an access plan for employee Avery Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/name\", \"value\": \"Avery Chen\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make Avery's position Procurement Analyst for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/role\", \"value\": \"Procurement Analyst\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For that position, include the standard purchasing workspace access group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/permission_groups\", \"value\": [\"purchasing_workspace\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also give that position the vendor records access group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/permission_groups/-\", \"value\": \"vendor_records_read\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the spending approval ceiling for this position at twelve thousand dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/approval_limit_usd\", \"value\": 12000}]"
+    },
+    {
+      "role": "user",
+      "content": "For that position, require the purchasing policy course before access is activated."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/required_trainings\", \"value\": [\"Purchasing Policy Basics\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add vendor privacy training as another requirement for the role."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/required_trainings/-\", \"value\": \"Vendor Data Privacy\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a quarterly check-in schedule for this position's access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/review_interval\", \"value\": \"quarterly\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Route help requests for this position to the procurement support team."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/support_queue\", \"value\": \"procurement_support\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Avery's company ID as E-48217."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/id\", \"value\": \"E-48217\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Avery in the Supply Chain Operations group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/department\", \"value\": \"Supply Chain Operations\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Avery reports to Maya Patel, and her work email is maya.patel@example.com."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/manager\", \"value\": {\"name\": \"Maya Patel\", \"email\": \"maya.patel@example.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set Avery's office location to the Chicago hub on the 12th floor."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/location\", \"value\": {\"site\": \"Chicago Hub\", \"floor\": \"12\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a start date of March 3, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/start_date\", \"value\": \"2025-03-03\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Avery's company email as avery.chen@example.com."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/email\", \"value\": \"avery.chen@example.com\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this as a permanent full-time assignment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/employment\", \"value\": {\"type\": \"full_time\", \"status\": \"permanent\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Assign Avery a standard laptop, asset tag LAP-7742, running Windows 11."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/assets/devices\", \"value\": [{\"asset_tag\": \"LAP-7742\", \"category\": \"laptop\", \"os\": \"Windows 11\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a company phone too: tag MOB-2389, iPhone 15, on the corporate mobile plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/assets/devices/-\", \"value\": {\"asset_tag\": \"MOB-2389\", \"category\": \"phone\", \"model\": \"iPhone 15\", \"plan\": \"corporate_mobile\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tie this request to ticket IAM-90344, submitted by Jordan Lee on February 14, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/request\", \"value\": {\"ticket_id\": \"IAM-90344\", \"submitted_by\": \"Jordan Lee\", \"submitted_date\": \"2025-02-14\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record Maya's sign-off as approved on February 18, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approvals/manager\", \"value\": {\"approver\": \"Maya Patel\", \"status\": \"approved\", \"date\": \"2025-02-18\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the security review from Priya Nair as approved on February 19, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approvals/security\", \"value\": {\"approver\": \"Priya Nair\", \"status\": \"approved\", \"date\": \"2025-02-19\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the access activate on Avery's first day and expire only if HR closes the employment record."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/lifecycle\", \"value\": {\"activation_date\": \"2025-03-03\", \"termination_trigger\": \"HR employment closure\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give Avery the standard employee VPN setup and require multifactor sign-in for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/network\", \"value\": {\"vpn_profile\": \"standard_employee_vpn\", \"mfa_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Charge Avery's access costs to Supply Chain cost center SC-410 in the Midwest region."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing/cost_center\", \"value\": {\"code\": \"SC-410\", \"owner_group\": \"Supply Chain\", \"region\": \"Midwest\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "List Sam Chen as Avery's emergency contact, with the mobile number 312-555-0184 and sibling relationship."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/emergency_contact\", \"value\": {\"name\": \"Sam Chen\", \"phone\": \"312-555-0184\", \"relationship\": \"sibling\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that this access setup is for U.S. data handling, with records retained for seven years under the corporate standard."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance/record_handling\", \"value\": {\"data_region\": \"US\", \"retention_period\": \"7 years\", \"policy\": \"corporate_standard\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send onboarding access notices to Avery and copy Maya on them."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/notifications/onboarding_access\", \"value\": {\"primary_recipient\": \"avery.chen@example.com\", \"copy_recipient\": \"maya.patel@example.com\"}}]"
+    }
+  ],
+  "edit_instruction": "Change Avery's position to Finance Operations Manager.",
+  "theme": "Changing an employee role",
+  "conversation_pattern": "Center the artifact on an employee access plan where the employee's role determines permission groups, approval limit, required trainings, review interval, and support queue by role attributes. Around this core, add the realistic, independent details an access record would carry that do not depend on the role, and vary their number from sample to sample. Do not embed a lookup or reference card for any role inside the artifact; the artifact holds only the current role's own fields.",
+  "edit_pattern": "Change the employee's role to a different specific role, and supply the replacement role's attributes in master_data.",
+  "cascade_pattern": "Every role-governed field takes the replacement role's supplied attributes, including permission groups, approval limit, required trainings, review interval, and support queue. Identity fields and unrelated assignments stay unchanged. This is determined because the replacement role's attributes are provided with the edit.",
+  "requires_master_data": true,
+  "master_data": {
+    "Finance Operations Manager": {
+      "permission_groups": [
+        "finance_operations_workspace",
+        "invoice_approval_admin",
+        "vendor_payment_release"
+      ],
+      "approval_limit_usd": 50000,
+      "required_trainings": [
+        "Finance Controls Certification",
+        "Payment Authorization Compliance",
+        "SOX for Managers"
+      ],
+      "review_interval": "monthly",
+      "support_queue": "finance_operations_support"
+    }
+  },
+  "current_json": {
+    "employee": {
+      "name": "Avery Chen",
+      "role": "Procurement Analyst",
+      "id": "E-48217",
+      "department": "Supply Chain Operations",
+      "manager": {
+        "name": "Maya Patel",
+        "email": "maya.patel@example.com"
+      },
+      "location": {
+        "site": "Chicago Hub",
+        "floor": "12"
+      },
+      "start_date": "2025-03-03",
+      "email": "avery.chen@example.com",
+      "employment": {
+        "type": "full_time",
+        "status": "permanent"
+      },
+      "emergency_contact": {
+        "name": "Sam Chen",
+        "phone": "312-555-0184",
+        "relationship": "sibling"
+      }
+    },
+    "access": {
+      "permission_groups": [
+        "purchasing_workspace",
+        "vendor_records_read"
+      ],
+      "approval_limit_usd": 12000,
+      "required_trainings": [
+        "Purchasing Policy Basics",
+        "Vendor Data Privacy"
+      ],
+      "review_interval": "quarterly",
+      "support_queue": "procurement_support",
+      "lifecycle": {
+        "activation_date": "2025-03-03",
+        "termination_trigger": "HR employment closure"
+      },
+      "network": {
+        "vpn_profile": "standard_employee_vpn",
+        "mfa_required": true
+      }
+    },
+    "assets": {
+      "devices": [
+        {
+          "asset_tag": "LAP-7742",
+          "category": "laptop",
+          "os": "Windows 11"
+        },
+        {
+          "asset_tag": "MOB-2389",
+          "category": "phone",
+          "model": "iPhone 15",
+          "plan": "corporate_mobile"
+        }
+      ]
+    },
+    "request": {
+      "ticket_id": "IAM-90344",
+      "submitted_by": "Jordan Lee",
+      "submitted_date": "2025-02-14"
+    },
+    "approvals": {
+      "manager": {
+        "approver": "Maya Patel",
+        "status": "approved",
+        "date": "2025-02-18"
+      },
+      "security": {
+        "approver": "Priya Nair",
+        "status": "approved",
+        "date": "2025-02-19"
+      }
+    },
+    "billing": {
+      "cost_center": {
+        "code": "SC-410",
+        "owner_group": "Supply Chain",
+        "region": "Midwest"
+      }
+    },
+    "compliance": {
+      "record_handling": {
+        "data_region": "US",
+        "retention_period": "7 years",
+        "policy": "corporate_standard"
+      }
+    },
+    "notifications": {
+      "onboarding_access": {
+        "primary_recipient": "avery.chen@example.com",
+        "copy_recipient": "maya.patel@example.com"
+      }
+    }
+  }
+}

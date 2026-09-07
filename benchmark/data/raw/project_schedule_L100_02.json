@@ -1,0 +1,487 @@
+{
+  "id": "project_schedule_L100_02",
+  "domain": "project_schedule",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a plan for the Phoenix CRM rollout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project\", \"value\": {\"name\": \"Phoenix CRM Rollout\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's have the rollout begin on March 3, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/start_date\", \"value\": \"2025-03-03\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the first scheduled item a kickoff workshop that takes 2 business days and begins right when the rollout starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"name\": \"Kickoff workshop\", \"duration_business_days\": 2, \"starts_after\": \"project start\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "After that workshop, add a requirements review that should take 3 business days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Requirements review\", \"duration_business_days\": 3, \"starts_after\": \"Kickoff workshop\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Once the requirements review is done, include a data audit lasting 4 business days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Data audit\", \"duration_business_days\": 4, \"starts_after\": \"Requirements review\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "After the data audit, add CRM configuration as the next activity, and make it 5 business days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"CRM configuration\", \"duration_business_days\": 5, \"starts_after\": \"Data audit\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Follow CRM configuration with data migration mapping, planned for 3 business days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Data migration mapping\", \"duration_business_days\": 3, \"starts_after\": \"CRM configuration\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "After the mapping work, put in integration setup for 4 business days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Integration setup\", \"duration_business_days\": 4, \"starts_after\": \"Data migration mapping\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Once integration setup is complete, add security validation for 3 business days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Security validation\", \"duration_business_days\": 3, \"starts_after\": \"Integration setup\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "After security validation, add user acceptance testing and give it 5 business days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"User acceptance testing\", \"duration_business_days\": 5, \"starts_after\": \"Security validation\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a normal Monday-through-Friday workweek, with each activity counting its first day and the next one starting on the following business day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/scheduling_rules\", \"value\": {\"workweek\": \"Monday-Friday\", \"duration_counting\": \"start day included\", \"successor_start\": \"next business day after predecessor finish\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate the calendar timing for the kickoff workshop based on those rules."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/0/start_date\", \"value\": \"2025-03-03\"}, {\"op\": \"add\", \"path\": \"/tasks/0/finish_date\", \"value\": \"2025-03-04\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now work out the timing for the requirements review right after the workshop."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/1/start_date\", \"value\": \"2025-03-05\"}, {\"op\": \"add\", \"path\": \"/tasks/1/finish_date\", \"value\": \"2025-03-07\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate the dates for the data audit that follows the requirements review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/2/start_date\", \"value\": \"2025-03-10\"}, {\"op\": \"add\", \"path\": \"/tasks/2/finish_date\", \"value\": \"2025-03-13\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, figure out the dates for CRM configuration after the data audit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/3/start_date\", \"value\": \"2025-03-14\"}, {\"op\": \"add\", \"path\": \"/tasks/3/finish_date\", \"value\": \"2025-03-20\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Then calculate the dates for data migration mapping after CRM configuration wraps up."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/4/start_date\", \"value\": \"2025-03-21\"}, {\"op\": \"add\", \"path\": \"/tasks/4/finish_date\", \"value\": \"2025-03-25\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please work out the timing for integration setup after the mapping is done."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/5/start_date\", \"value\": \"2025-03-26\"}, {\"op\": \"add\", \"path\": \"/tasks/5/finish_date\", \"value\": \"2025-03-31\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the dates for security validation once integration setup is finished."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/6/start_date\", \"value\": \"2025-04-01\"}, {\"op\": \"add\", \"path\": \"/tasks/6/finish_date\", \"value\": \"2025-04-03\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the schedule timing by calculating user acceptance testing after security validation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/7/start_date\", \"value\": \"2025-04-04\"}, {\"op\": \"add\", \"path\": \"/tasks/7/finish_date\", \"value\": \"2025-04-10\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add a simple rollup showing how many scheduled activities there are and when the rollout finishes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary\", \"value\": {\"task_count\": 8, \"project_end_date\": \"2025-04-10\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the main leadership contacts: Alex Morgan sponsors it, Priya Shah manages it day to day, and the steering group is the Sales Operations Council."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/governance\", \"value\": {\"sponsor\": \"Alex Morgan\", \"project_manager\": \"Priya Shah\", \"steering_group\": \"Sales Operations Council\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the first business group involved: enterprise sales, represented by Jordan Lee, with high engagement expected."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders\", \"value\": [{\"group\": \"Enterprise Sales\", \"representative\": \"Jordan Lee\", \"engagement_level\": \"high\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add customer success as another group, represented by Mina Patel, with medium engagement."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"group\": \"Customer Success\", \"representative\": \"Mina Patel\", \"engagement_level\": \"medium\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include the finance operations team, with Owen Brooks as the representative and low engagement expected."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"group\": \"Finance Operations\", \"representative\": \"Owen Brooks\", \"engagement_level\": \"low\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a risk about data quality issues, mark it as high likelihood, and note that the migration analyst owns it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks\", \"value\": [{\"description\": \"Data quality issues may require extra cleansing\", \"likelihood\": \"high\", \"owner\": \"Migration analyst\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture another risk: sales reps might be slow to adopt it, make that medium likelihood, owned by the change lead."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks/-\", \"value\": {\"description\": \"Sales representatives may be slow to adopt the new CRM\", \"likelihood\": \"medium\", \"owner\": \"Change lead\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one more risk for integration API limits, set it to medium likelihood, and assign the platform architect as owner."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks/-\", \"value\": {\"description\": \"Integration API limits could constrain synchronization volume\", \"likelihood\": \"medium\", \"owner\": \"Platform architect\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the planning budget details: the approved amount is 185000 dollars, the currency is USD, and the finance code is CRM-2025-PHX."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget\", \"value\": {\"approved_amount\": 185000, \"currency\": \"USD\", \"finance_code\": \"CRM-2025-PHX\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a weekly status update for executives, sent every Friday by email."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications\", \"value\": [{\"audience\": \"Executives\", \"cadence\": \"weekly Friday\", \"channel\": \"email\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a monthly town hall for all affected users, held over video conference."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications/-\", \"value\": {\"audience\": \"Affected users\", \"cadence\": \"monthly\", \"channel\": \"video conference\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a release note update for system administrators, sent at each milestone through the admin portal."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications/-\", \"value\": {\"audience\": \"System administrators\", \"cadence\": \"each milestone\", \"channel\": \"admin portal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the main delivery location as the North America sales hub, with remote participation allowed and English as the working language."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/delivery_context\", \"value\": {\"primary_location\": \"North America sales hub\", \"participation_mode\": \"hybrid remote\", \"working_language\": \"English\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first expected output: a signed process design, owned by the business analyst, with formal approval required."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deliverables\", \"value\": [{\"name\": \"Signed process design\", \"owner\": \"Business analyst\", \"approval_required\": true}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another expected output: a configured sandbox, owned by the CRM administrator, and make it require approval too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deliverables/-\", \"value\": {\"name\": \"Configured sandbox\", \"owner\": \"CRM administrator\", \"approval_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a final expected output: a cutover checklist, owned by the release manager, and make sure it needs approval."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deliverables/-\", \"value\": {\"name\": \"Cutover checklist\", \"owner\": \"Release manager\", \"approval_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the testing environment details: use the UAT sandbox, with masked customer data, and single sign-on enabled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/test_environment\", \"value\": {\"environment_name\": \"UAT sandbox\", \"data_policy\": \"masked customer data\", \"access_method\": \"single sign-on\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the support approach after rollout: the help desk will provide first-line support, with CRM specialists handling escalations and a two-business-day response target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/support_model\", \"value\": {\"first_line\": \"Help desk\", \"escalation_team\": \"CRM specialists\", \"response_target\": \"2 business days\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, note that the overall priority is high and the planning status is approved."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/priority\", \"value\": \"high\"}, {\"op\": \"add\", \"path\": \"/project/status\", \"value\": \"approved\"}]"
+    }
+  ],
+  "edit_instruction": "Please remove CRM configuration from the schedule.",
+  "theme": "Removing a task from the schedule",
+  "master_data": null,
+  "current_json": {
+    "project": {
+      "name": "Phoenix CRM Rollout",
+      "start_date": "2025-03-03",
+      "priority": "high",
+      "status": "approved"
+    },
+    "tasks": [
+      {
+        "name": "Kickoff workshop",
+        "duration_business_days": 2,
+        "starts_after": "project start",
+        "start_date": "2025-03-03",
+        "finish_date": "2025-03-04"
+      },
+      {
+        "name": "Requirements review",
+        "duration_business_days": 3,
+        "starts_after": "Kickoff workshop",
+        "start_date": "2025-03-05",
+        "finish_date": "2025-03-07"
+      },
+      {
+        "name": "Data audit",
+        "duration_business_days": 4,
+        "starts_after": "Requirements review",
+        "start_date": "2025-03-10",
+        "finish_date": "2025-03-13"
+      },
+      {
+        "name": "CRM configuration",
+        "duration_business_days": 5,
+        "starts_after": "Data audit",
+        "start_date": "2025-03-14",
+        "finish_date": "2025-03-20"
+      },
+      {
+        "name": "Data migration mapping",
+        "duration_business_days": 3,
+        "starts_after": "CRM configuration",
+        "start_date": "2025-03-21",
+        "finish_date": "2025-03-25"
+      },
+      {
+        "name": "Integration setup",
+        "duration_business_days": 4,
+        "starts_after": "Data migration mapping",
+        "start_date": "2025-03-26",
+        "finish_date": "2025-03-31"
+      },
+      {
+        "name": "Security validation",
+        "duration_business_days": 3,
+        "starts_after": "Integration setup",
+        "start_date": "2025-04-01",
+        "finish_date": "2025-04-03"
+      },
+      {
+        "name": "User acceptance testing",
+        "duration_business_days": 5,
+        "starts_after": "Security validation",
+        "start_date": "2025-04-04",
+        "finish_date": "2025-04-10"
+      }
+    ],
+    "scheduling_rules": {
+      "workweek": "Monday-Friday",
+      "duration_counting": "start day included",
+      "successor_start": "next business day after predecessor finish"
+    },
+    "summary": {
+      "task_count": 8,
+      "project_end_date": "2025-04-10"
+    },
+    "governance": {
+      "sponsor": "Alex Morgan",
+      "project_manager": "Priya Shah",
+      "steering_group": "Sales Operations Council"
+    },
+    "stakeholders": [
+      {
+        "group": "Enterprise Sales",
+        "representative": "Jordan Lee",
+        "engagement_level": "high"
+      },
+      {
+        "group": "Customer Success",
+        "representative": "Mina Patel",
+        "engagement_level": "medium"
+      },
+      {
+        "group": "Finance Operations",
+        "representative": "Owen Brooks",
+        "engagement_level": "low"
+      }
+    ],
+    "risks": [
+      {
+        "description": "Data quality issues may require extra cleansing",
+        "likelihood": "high",
+        "owner": "Migration analyst"
+      },
+      {
+        "description": "Sales representatives may be slow to adopt the new CRM",
+        "likelihood": "medium",
+        "owner": "Change lead"
+      },
+      {
+        "description": "Integration API limits could constrain synchronization volume",
+        "likelihood": "medium",
+        "owner": "Platform architect"
+      }
+    ],
+    "budget": {
+      "approved_amount": 185000,
+      "currency": "USD",
+      "finance_code": "CRM-2025-PHX"
+    },
+    "communications": [
+      {
+        "audience": "Executives",
+        "cadence": "weekly Friday",
+        "channel": "email"
+      },
+      {
+        "audience": "Affected users",
+        "cadence": "monthly",
+        "channel": "video conference"
+      },
+      {
+        "audience": "System administrators",
+        "cadence": "each milestone",
+        "channel": "admin portal"
+      }
+    ],
+    "delivery_context": {
+      "primary_location": "North America sales hub",
+      "participation_mode": "hybrid remote",
+      "working_language": "English"
+    },
+    "deliverables": [
+      {
+        "name": "Signed process design",
+        "owner": "Business analyst",
+        "approval_required": true
+      },
+      {
+        "name": "Configured sandbox",
+        "owner": "CRM administrator",
+        "approval_required": true
+      },
+      {
+        "name": "Cutover checklist",
+        "owner": "Release manager",
+        "approval_required": true
+      }
+    ],
+    "test_environment": {
+      "environment_name": "UAT sandbox",
+      "data_policy": "masked customer data",
+      "access_method": "single sign-on"
+    },
+    "support_model": {
+      "first_line": "Help desk",
+      "escalation_team": "CRM specialists",
+      "response_target": "2 business days"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a task list where each task has a stated duration and names the predecessor it starts after, so finishes derive along the precedence chain and a removed task's successors can relink, rolling up to a task count and a project end. Around this core, add the realistic, independent details a project plan would carry that do not depend on the schedule dates, and vary their number and the number of tasks from sample to sample.",
+  "edit_pattern": "Remove one task from the middle of the precedence chain.",
+  "cascade_pattern": "Removing a task relinks its successors to its predecessor, pulls downstream dates earlier, lowers the task count by one, and moves the project end. Tasks upstream of the removal stay. This is determined because durations and links are stated.",
+  "requires_master_data": false
+}

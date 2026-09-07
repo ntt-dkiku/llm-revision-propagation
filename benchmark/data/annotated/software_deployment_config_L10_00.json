@@ -1,0 +1,151 @@
+{
+  "id": "software_deployment_config_L10_00",
+  "domain": "software_deployment_config",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a deployment plan for the checkout service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment\", \"value\": {\"name\": \"checkout-service\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan for three running copies of the checkout service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/replicas\", \"value\": 3}]"
+    },
+    {
+      "role": "user",
+      "content": "Give each copy a modest CPU reservation of half a core."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources/perPodCpu\", \"value\": \"500m\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the memory reservation for each copy to 512 MiB."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources/perPodMemory\", \"value\": \"512Mi\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the combined reservations across all the planned copies."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources/totals\", \"value\": {\"cpu\": \"1500m (formula: replicas * perPodCpu)\", \"memory\": \"1536Mi (formula: replicas * perPodMemory)\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the rollout safety numbers based on those three copies."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/availability\", \"value\": {\"capacitySummary\": \"3 pods (formula: replicas)\", \"minAvailable\": \"2 pods (formula: replicas - 1)\", \"maxUnavailable\": \"1 pod (formula: 1)\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Pin it to the production namespace."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/namespace\", \"value\": \"production\"}]"
+    }
+  ],
+  "edit_instruction": "Change the planned running copies to 5.",
+  "current_json": {
+    "deployment": {
+      "name": "checkout-service",
+      "replicas": 3,
+      "resources": {
+        "perPodCpu": "500m",
+        "perPodMemory": "512Mi",
+        "totals": {
+          "cpu": "1500m (formula: replicas * perPodCpu)",
+          "memory": "1536Mi (formula: replicas * perPodMemory)"
+        }
+      },
+      "availability": {
+        "capacitySummary": "3 pods (formula: replicas)",
+        "minAvailable": "2 pods (formula: replicas - 1)",
+        "maxUnavailable": "1 pod (formula: 1)"
+      },
+      "namespace": "production"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/deployment/replicas",
+      "kind": "direct",
+      "value": 5
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/resources/totals/cpu",
+      "kind": "cascade",
+      "matcher": "regex_match",
+      "pattern": "2500m"
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/resources/totals/memory",
+      "kind": "cascade",
+      "matcher": "regex_match",
+      "pattern": "2560Mi"
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/availability/capacitySummary",
+      "kind": "cascade",
+      "matcher": "regex_match",
+      "pattern": "5 pods"
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/availability/minAvailable",
+      "kind": "cascade",
+      "matcher": "regex_match",
+      "pattern": "4 pods"
+    }
+  ],
+  "expected_json": {
+    "deployment": {
+      "name": "checkout-service",
+      "replicas": 5,
+      "resources": {
+        "perPodCpu": "500m",
+        "perPodMemory": "512Mi",
+        "totals": {
+          "cpu": "<matches /2500m/>",
+          "memory": "<matches /2560Mi/>"
+        }
+      },
+      "availability": {
+        "capacitySummary": "<matches /5 pods/>",
+        "minAvailable": "<matches /4 pods/>",
+        "maxUnavailable": "1 pod (formula: 1)"
+      },
+      "namespace": "production"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "replicas 3->5; cpu=500m*5=2500m, mem=512*5=2560Mi, capacity=5, minAvailable=5-1=4. maxUnavailable formula=1 stays. Values carry formula text in-string -> regex_match on the recomputed number.",
+  "annotated": true,
+  "excluded": false,
+  "theme": "Changing the replica count",
+  "conversation_pattern": "Center the artifact on a deployment with a replica count, per-pod CPU and memory requests, and availability settings, where EVERY derived field carries its own explicit formula written in the artifact: total CPU = replicas * perPodCpu, total memory = replicas * perPodMem, capacity summary = replicas, and each disruption-budget value has a stated formula (e.g. minAvailable = replicas - 1, maxUnavailable = 1). Do not include any availability field whose dependence on the replica count is not given by a stated formula. Around this core, add the realistic, independent details a deployment config would carry that do not depend on the replica count, and vary their number from sample to sample.",
+  "edit_pattern": "Change the replica count to a specific new number.",
+  "cascade_pattern": "Editing the replica count re-derives total CPU, total memory, capacity summary, and each disruption-budget value strictly from its stated per-pod value and formula. Per-pod requests and unrelated deployment fields stay unchanged.",
+  "requires_master_data": false
+}

@@ -1,0 +1,395 @@
+{
+  "id": "invoice_L50_03",
+  "domain": "invoice",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start an invoice using the reference INV-2026-014."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoiceId\", \"value\": \"INV-2026-014\"}]"
+    },
+    {
+      "role": "user",
+      "content": "The invoice comes to $1,250.00 overall."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/totalAmount\", \"value\": 1250.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that the customer has paid $500.00 toward it so far."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/amountPaid\", \"value\": 500.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Show that this leaves $750.00 still due."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/outstandingBalance\", \"value\": 750.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark it as only partly settled for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/status\", \"value\": \"partially settled\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that the cumulative payments on this invoice are $500.00."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidToDate\", \"value\": 500.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the invoice date as March 1, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/issueDate\", \"value\": \"2026-03-01\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make it due at the end of March 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dueDate\", \"value\": \"2026-03-31\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use U.S. dollars throughout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/currency\", \"value\": \"USD\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Bill this to Northstar Design Co., attention Maya Patel, at maya.patel@northstardesign.example."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billTo\", \"value\": {\"company\": \"Northstar Design Co.\", \"attention\": \"Maya Patel\", \"email\": \"maya.patel@northstardesign.example\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Their mailing location is 88 Harbor Avenue, Portland, Oregon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billTo/address\", \"value\": {\"street\": \"88 Harbor Avenue\", \"city\": \"Portland\", \"state\": \"OR\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the rest of that mailing location as 97214 in the United States."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billTo/address/postalCode\", \"value\": \"97214\"}, {\"op\": \"add\", \"path\": \"/billTo/address/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the sender as Blue Finch Studio, handled by Jordan Lee, reachable at billing@bluefinchstudio.example."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller\", \"value\": {\"company\": \"Blue Finch Studio\", \"contact\": \"Jordan Lee\", \"email\": \"billing@bluefinchstudio.example\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "The studio’s office address is 415 Alder Street, Seattle, Washington."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller/address\", \"value\": {\"street\": \"415 Alder Street\", \"city\": \"Seattle\", \"state\": \"WA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the studio’s contact details with ZIP 98101, United States, and the main line 206-555-0188."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller/address/postalCode\", \"value\": \"98101\"}, {\"op\": \"add\", \"path\": \"/seller/address/country\", \"value\": \"US\"}, {\"op\": \"add\", \"path\": \"/seller/phone\", \"value\": \"206-555-0188\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Tie it to the Spring Refresh project, code NSD-SR-26, with Lena Ortiz as the project lead."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project\", \"value\": {\"name\": \"Spring Refresh\", \"code\": \"NSD-SR-26\", \"lead\": \"Lena Ortiz\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include purchase order PO-8842, requested by Caleb Nguyen, approved on February 25, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/purchaseOrder\", \"value\": {\"number\": \"PO-8842\", \"requestedBy\": \"Caleb Nguyen\", \"approvalDate\": \"2026-02-25\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the payment arrangement as Net 30, with invoices sent by email and a 1.5% monthly late charge after the deadline."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentTerms\", \"value\": {\"schedule\": \"Net 30\", \"deliveryPreference\": \"email\", \"lateFeePolicy\": \"1.5% monthly after due date\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the partial payment already recorded, note that it came by bank transfer with reference ACH-77819."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentRecord\", \"value\": {\"method\": \"bank transfer\", \"reference\": \"ACH-77819\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For that transfer, add that it arrived on March 10, 2026, was posted the next day, and was processed through First Cascade Bank."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentRecord/receivedDate\", \"value\": \"2026-03-10\"}, {\"op\": \"add\", \"path\": \"/paymentRecord/postedDate\", \"value\": \"2026-03-11\"}, {\"op\": \"add\", \"path\": \"/paymentRecord/processor\", \"value\": \"First Cascade Bank\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add where the customer should send electronic payments: Evergreen Business Bank, routing ending 0441, account ending 8820."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/remittance\", \"value\": {\"bankName\": \"Evergreen Business Bank\", \"routingLast4\": \"0441\", \"accountLast4\": \"8820\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a note for the customer saying the remaining payment should reference INV-2026-014, and thank them for the first installment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customerNote\", \"value\": \"Please reference INV-2026-014 with the remaining payment. Thank you for the first installment.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For internal tracking, note that Priya Shah reviewed it, assigned it to batch AR-2026-09, and marked the review complete."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/internalReview\", \"value\": {\"reviewedBy\": \"Priya Shah\", \"batchId\": \"AR-2026-09\", \"reviewStatus\": \"complete\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, note that it was emailed to Maya on March 2, 2026, and that no delivery bounce was reported."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/delivery\", \"value\": {\"method\": \"email\", \"sentDate\": \"2026-03-02\", \"bounceReported\": false}}]"
+    }
+  ],
+  "edit_instruction": "Update the amount already paid to $1,250.00.",
+  "theme": "Recording a partial payment",
+  "master_data": null,
+  "current_json": {
+    "invoiceId": "INV-2026-014",
+    "totalAmount": 1250.0,
+    "amountPaid": 500.0,
+    "outstandingBalance": 750.0,
+    "status": "partially settled",
+    "paidToDate": 500.0,
+    "issueDate": "2026-03-01",
+    "dueDate": "2026-03-31",
+    "currency": "USD",
+    "billTo": {
+      "company": "Northstar Design Co.",
+      "attention": "Maya Patel",
+      "email": "maya.patel@northstardesign.example",
+      "address": {
+        "street": "88 Harbor Avenue",
+        "city": "Portland",
+        "state": "OR",
+        "postalCode": "97214",
+        "country": "US"
+      }
+    },
+    "seller": {
+      "company": "Blue Finch Studio",
+      "contact": "Jordan Lee",
+      "email": "billing@bluefinchstudio.example",
+      "address": {
+        "street": "415 Alder Street",
+        "city": "Seattle",
+        "state": "WA",
+        "postalCode": "98101",
+        "country": "US"
+      },
+      "phone": "206-555-0188"
+    },
+    "project": {
+      "name": "Spring Refresh",
+      "code": "NSD-SR-26",
+      "lead": "Lena Ortiz"
+    },
+    "purchaseOrder": {
+      "number": "PO-8842",
+      "requestedBy": "Caleb Nguyen",
+      "approvalDate": "2026-02-25"
+    },
+    "paymentTerms": {
+      "schedule": "Net 30",
+      "deliveryPreference": "email",
+      "lateFeePolicy": "1.5% monthly after due date"
+    },
+    "paymentRecord": {
+      "method": "bank transfer",
+      "reference": "ACH-77819",
+      "receivedDate": "2026-03-10",
+      "postedDate": "2026-03-11",
+      "processor": "First Cascade Bank"
+    },
+    "remittance": {
+      "bankName": "Evergreen Business Bank",
+      "routingLast4": "0441",
+      "accountLast4": "8820"
+    },
+    "customerNote": "Please reference INV-2026-014 with the remaining payment. Thank you for the first installment.",
+    "internalReview": {
+      "reviewedBy": "Priya Shah",
+      "batchId": "AR-2026-09",
+      "reviewStatus": "complete"
+    },
+    "delivery": {
+      "method": "email",
+      "sentDate": "2026-03-02",
+      "bounceReported": false
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/amountPaid",
+      "kind": "direct",
+      "value": 1250.0
+    },
+    {
+      "op": "replace",
+      "path": "/outstandingBalance",
+      "kind": "cascade",
+      "value": 0.0
+    },
+    {
+      "op": "replace",
+      "path": "/paidToDate",
+      "kind": "cascade",
+      "value": 1250.0
+    },
+    {
+      "op": "replace",
+      "path": "/status",
+      "kind": "cascade",
+      "value": "paid",
+      "matcher": "regex_match",
+      "pattern": "(?i)^(paid|settled|paid in full|paid_in_full|fully settled|fully_settled|fully paid|complete|completed|closed)$"
+    },
+    {
+      "op": "replace",
+      "path": "/customerNote",
+      "kind": "cascade",
+      "value": "Please reference INV-2026-014 with the remaining payment. Thank you for the first installment.",
+      "matcher": "any",
+      "optional": true
+    }
+  ],
+  "expected_json": {
+    "invoiceId": "INV-2026-014",
+    "totalAmount": 1250.0,
+    "amountPaid": 1250.0,
+    "outstandingBalance": 0.0,
+    "status": "paid",
+    "paidToDate": 1250.0,
+    "issueDate": "2026-03-01",
+    "dueDate": "2026-03-31",
+    "currency": "USD",
+    "billTo": {
+      "company": "Northstar Design Co.",
+      "attention": "Maya Patel",
+      "email": "maya.patel@northstardesign.example",
+      "address": {
+        "street": "88 Harbor Avenue",
+        "city": "Portland",
+        "state": "OR",
+        "postalCode": "97214",
+        "country": "US"
+      }
+    },
+    "seller": {
+      "company": "Blue Finch Studio",
+      "contact": "Jordan Lee",
+      "email": "billing@bluefinchstudio.example",
+      "address": {
+        "street": "415 Alder Street",
+        "city": "Seattle",
+        "state": "WA",
+        "postalCode": "98101",
+        "country": "US"
+      },
+      "phone": "206-555-0188"
+    },
+    "project": {
+      "name": "Spring Refresh",
+      "code": "NSD-SR-26",
+      "lead": "Lena Ortiz"
+    },
+    "purchaseOrder": {
+      "number": "PO-8842",
+      "requestedBy": "Caleb Nguyen",
+      "approvalDate": "2026-02-25"
+    },
+    "paymentTerms": {
+      "schedule": "Net 30",
+      "deliveryPreference": "email",
+      "lateFeePolicy": "1.5% monthly after due date"
+    },
+    "paymentRecord": {
+      "method": "bank transfer",
+      "reference": "ACH-77819",
+      "receivedDate": "2026-03-10",
+      "postedDate": "2026-03-11",
+      "processor": "First Cascade Bank"
+    },
+    "remittance": {
+      "bankName": "Evergreen Business Bank",
+      "routingLast4": "0441",
+      "accountLast4": "8820"
+    },
+    "customerNote": "Please reference INV-2026-014 with the remaining payment. Thank you for the first installment.",
+    "internalReview": {
+      "reviewedBy": "Priya Shah",
+      "batchId": "AR-2026-09",
+      "reviewStatus": "complete"
+    },
+    "delivery": {
+      "method": "email",
+      "sentDate": "2026-03-02",
+      "bounceReported": false
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "amountPaid 500->1250 (now full). outstandingBalance = total - paid = 1250-1250 = 0; paidToDate (running cumulative) -> 1250; status moves from \"partially settled\" to a fully-paid label (exact token not stated, so regex matcher: paid/settled/paid in full/...). totalAmount, the paymentRecord transfer metadata, and all descriptive fields stay. | REVIEW EDIT (with author): added customerNote as an optional cascade (matcher any). The note is phrased around the partial payment (\"remaining payment\", \"first installment\"); once fully paid it is reasonable to rewrite it as a paid-in-full thank-you, but the exact wording is free, so updating OR leaving it is accepted (not counted as over_edit).",
+  "conversation_pattern": "Center the artifact on an invoice carrying a total, an amount paid, an outstanding balance that is the total minus the amount paid, a status that follows from whether the balance has reached zero, and a running paid-to-date that totals the payments, so the amount paid determines them. Around this core, add the realistic, independent details an invoice would carry that do not depend on the amount paid, and vary their number from sample to sample.",
+  "edit_pattern": "Change the amount paid to a specific new value.",
+  "cascade_pattern": "Editing the amount paid re-derives the outstanding balance, moves the status to its value for the new balance (settled once the balance reaches zero, otherwise still partially settled), and re-totals the paid-to-date. The total stays. Each new value is fixed because the effect of the amount paid on the balance and status is unambiguous.",
+  "requires_master_data": false
+}

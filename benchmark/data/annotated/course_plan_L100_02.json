@@ -1,0 +1,665 @@
+{
+  "id": "course_plan_L100_02",
+  "domain": "course_plan",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a course plan for Maya Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student\", \"value\": {\"name\": \"Maya Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya’s Calculus I class with 4 credits and grade points of 3.7."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses\", \"value\": [{\"title\": \"Calculus I\", \"credits\": 4, \"gradePoints\": 3.7}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include her General Chemistry course for 4 credits with 3.3 grade points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"General Chemistry\", \"credits\": 4, \"gradePoints\": 3.3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add English Composition too; it’s 3 credits and her grade points are 4.0."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"English Composition\", \"credits\": 3, \"gradePoints\": 4.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Introduction to Psychology as another course, with 3 credits and 3.0 grade points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"Introduction to Psychology\", \"credits\": 3, \"gradePoints\": 3.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add World History as well, worth 3 credits with 3.5 grade points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"World History\", \"credits\": 3, \"gradePoints\": 3.5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Biology Lab on the plan too, with 2 credits and grade points of 3.8."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"Biology Lab\", \"credits\": 2, \"gradePoints\": 3.8}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Computer Science Fundamentals, with 3 credits and 3.6 grade points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"Computer Science Fundamentals\", \"credits\": 3, \"gradePoints\": 3.6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Public Speaking too, worth 2 credits with 3.9 grade points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"Public Speaking\", \"credits\": 2, \"gradePoints\": 3.9}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Art Appreciation to the plan, 3 credits with 3.4 grade points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"Art Appreciation\", \"credits\": 3, \"gradePoints\": 3.4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Environmental Science as another class, with 4 credits and 3.2 grade points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"Environmental Science\", \"credits\": 4, \"gradePoints\": 3.2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Statistics for Social Sciences too, worth 3 credits with 3.7 grade points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"Statistics for Social Sciences\", \"credits\": 3, \"gradePoints\": 3.7}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one more class: Health and Wellness, for 2 credits with 4.0 grade points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"Health and Wellness\", \"credits\": 2, \"gradePoints\": 4.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now total up the credits and calculate her GPA from those classes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary\", \"value\": {\"totalCredits\": 36, \"creditWeightedGPA\": 3.55}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that Maya is planning this for Fall 2026 at North Campus, mostly in person."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/termDetails\", \"value\": {\"term\": \"Fall 2026\", \"campus\": \"North Campus\", \"format\": \"Mostly in person\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Her academic contact is Dr. Priya Raman in HSS 214, reachable at praman@north.edu."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisor\", \"value\": {\"name\": \"Dr. Priya Raman\", \"office\": \"HSS 214\", \"email\": \"praman@north.edu\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that her main goal is to stay on pace for sophomore standing, with a focus on prerequisites and keeping Fridays lighter."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planningGoal\", \"value\": {\"standingTarget\": \"Sophomore standing\", \"focus\": \"Prerequisites\", \"schedulePreference\": \"Keep Fridays lighter\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short registration checklist item reminding her to confirm tuition payment by August 10."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/registrationChecklist\", \"value\": [{\"task\": \"Confirm tuition payment\", \"dueDate\": \"2026-08-10\", \"status\": \"Not started\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another reminder to upload her immunization record by August 15, and mark it as in progress."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/registrationChecklist/-\", \"value\": {\"task\": \"Upload immunization record\", \"dueDate\": \"2026-08-15\", \"status\": \"In progress\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to pick up her parking permit by August 20, with that still not started."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/registrationChecklist/-\", \"value\": {\"task\": \"Pick up parking permit\", \"dueDate\": \"2026-08-20\", \"status\": \"Not started\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her emergency contact as Lena Chen, her mother, with the phone number 555-0148."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emergencyContact\", \"value\": {\"name\": \"Lena Chen\", \"relationship\": \"Mother\", \"phone\": \"555-0148\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include her commuting plan: she’ll drive from home, use Lot C, and arrive by 8:30 a.m. most days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/commutePlan\", \"value\": {\"mode\": \"Drive from home\", \"parkingArea\": \"Lot C\", \"usualArrival\": \"08:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a note for her supplies: buy a scientific calculator by August 25, and leave it not started for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supplies\", \"value\": [{\"item\": \"Scientific calculator\", \"neededBy\": \"2026-08-25\", \"status\": \"Not started\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add lab goggles to the supply list, needed by August 28, and mark them as ordered."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supplies/-\", \"value\": {\"item\": \"Lab goggles\", \"neededBy\": \"2026-08-28\", \"status\": \"Ordered\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a textbook note for Calculus I: Stewart Early Transcendentals, seventh edition, as a rental."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/textbooks\", \"value\": [{\"course\": \"Calculus I\", \"title\": \"Stewart Early Transcendentals\", \"purchasePlan\": \"Rent\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the book plan for General Chemistry: Chemistry: The Central Science, and she plans to buy it used."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/textbooks/-\", \"value\": {\"course\": \"General Chemistry\", \"title\": \"Chemistry: The Central Science\", \"purchasePlan\": \"Buy used\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the book plan for English Composition: The Norton Field Guide to Writing, and make it a digital rental."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/textbooks/-\", \"value\": {\"course\": \"English Composition\", \"title\": \"The Norton Field Guide to Writing\", \"purchasePlan\": \"Digital rental\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the book plan for Psychology: Psychology in Your Life, and note that she’ll use the campus bookstore."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/textbooks/-\", \"value\": {\"course\": \"Introduction to Psychology\", \"title\": \"Psychology in Your Life\", \"purchasePlan\": \"Campus bookstore\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that Maya’s scholarship is the North Star Grant, covering $3,000, and it requires full-time enrollment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/scholarship\", \"value\": {\"name\": \"North Star Grant\", \"amount\": 3000, \"condition\": \"Full-time enrollment\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the enrollment rule she’s watching: at least 12 credits, a 2.0 GPA minimum, for full-time aid eligibility."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/enrollmentRequirement\", \"value\": {\"minimumCredits\": 12, \"minimumGPA\": 2.0, \"purpose\": \"Full-time aid eligibility\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a tutoring appointment for Calculus I on September 8 at the Math Center."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supportAppointments\", \"value\": [{\"course\": \"Calculus I\", \"date\": \"2026-09-08\", \"location\": \"Math Center\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a study group meeting for General Chemistry on September 12 in Science Hall."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supportAppointments/-\", \"value\": {\"course\": \"General Chemistry\", \"date\": \"2026-09-12\", \"location\": \"Science Hall\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a writing center appointment for English Composition on September 14 in the Library Commons."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supportAppointments/-\", \"value\": {\"course\": \"English Composition\", \"date\": \"2026-09-14\", \"location\": \"Library Commons\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, note how she wants campus offices to contact her: email first, text as backup, no messages overnight, and English is preferred."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communicationPreferences\", \"value\": {\"preferredChannel\": \"Email\", \"backupChannel\": \"Text\", \"quietHours\": \"21:00-07:00\", \"preferredLanguage\": \"English\"}}]"
+    }
+  ],
+  "edit_instruction": "Please drop Art Appreciation from Maya’s fall plan.",
+  "theme": "Dropping a course",
+  "master_data": null,
+  "current_json": {
+    "student": {
+      "name": "Maya Chen"
+    },
+    "courses": [
+      {
+        "title": "Calculus I",
+        "credits": 4,
+        "gradePoints": 3.7
+      },
+      {
+        "title": "General Chemistry",
+        "credits": 4,
+        "gradePoints": 3.3
+      },
+      {
+        "title": "English Composition",
+        "credits": 3,
+        "gradePoints": 4.0
+      },
+      {
+        "title": "Introduction to Psychology",
+        "credits": 3,
+        "gradePoints": 3.0
+      },
+      {
+        "title": "World History",
+        "credits": 3,
+        "gradePoints": 3.5
+      },
+      {
+        "title": "Biology Lab",
+        "credits": 2,
+        "gradePoints": 3.8
+      },
+      {
+        "title": "Computer Science Fundamentals",
+        "credits": 3,
+        "gradePoints": 3.6
+      },
+      {
+        "title": "Public Speaking",
+        "credits": 2,
+        "gradePoints": 3.9
+      },
+      {
+        "title": "Art Appreciation",
+        "credits": 3,
+        "gradePoints": 3.4
+      },
+      {
+        "title": "Environmental Science",
+        "credits": 4,
+        "gradePoints": 3.2
+      },
+      {
+        "title": "Statistics for Social Sciences",
+        "credits": 3,
+        "gradePoints": 3.7
+      },
+      {
+        "title": "Health and Wellness",
+        "credits": 2,
+        "gradePoints": 4.0
+      }
+    ],
+    "summary": {
+      "totalCredits": 36,
+      "creditWeightedGPA": 3.55
+    },
+    "termDetails": {
+      "term": "Fall 2026",
+      "campus": "North Campus",
+      "format": "Mostly in person"
+    },
+    "advisor": {
+      "name": "Dr. Priya Raman",
+      "office": "HSS 214",
+      "email": "praman@north.edu"
+    },
+    "planningGoal": {
+      "standingTarget": "Sophomore standing",
+      "focus": "Prerequisites",
+      "schedulePreference": "Keep Fridays lighter"
+    },
+    "registrationChecklist": [
+      {
+        "task": "Confirm tuition payment",
+        "dueDate": "2026-08-10",
+        "status": "Not started"
+      },
+      {
+        "task": "Upload immunization record",
+        "dueDate": "2026-08-15",
+        "status": "In progress"
+      },
+      {
+        "task": "Pick up parking permit",
+        "dueDate": "2026-08-20",
+        "status": "Not started"
+      }
+    ],
+    "emergencyContact": {
+      "name": "Lena Chen",
+      "relationship": "Mother",
+      "phone": "555-0148"
+    },
+    "commutePlan": {
+      "mode": "Drive from home",
+      "parkingArea": "Lot C",
+      "usualArrival": "08:30"
+    },
+    "supplies": [
+      {
+        "item": "Scientific calculator",
+        "neededBy": "2026-08-25",
+        "status": "Not started"
+      },
+      {
+        "item": "Lab goggles",
+        "neededBy": "2026-08-28",
+        "status": "Ordered"
+      }
+    ],
+    "textbooks": [
+      {
+        "course": "Calculus I",
+        "title": "Stewart Early Transcendentals",
+        "purchasePlan": "Rent"
+      },
+      {
+        "course": "General Chemistry",
+        "title": "Chemistry: The Central Science",
+        "purchasePlan": "Buy used"
+      },
+      {
+        "course": "English Composition",
+        "title": "The Norton Field Guide to Writing",
+        "purchasePlan": "Digital rental"
+      },
+      {
+        "course": "Introduction to Psychology",
+        "title": "Psychology in Your Life",
+        "purchasePlan": "Campus bookstore"
+      }
+    ],
+    "scholarship": {
+      "name": "North Star Grant",
+      "amount": 3000,
+      "condition": "Full-time enrollment"
+    },
+    "enrollmentRequirement": {
+      "minimumCredits": 12,
+      "minimumGPA": 2.0,
+      "purpose": "Full-time aid eligibility"
+    },
+    "supportAppointments": [
+      {
+        "course": "Calculus I",
+        "date": "2026-09-08",
+        "location": "Math Center"
+      },
+      {
+        "course": "General Chemistry",
+        "date": "2026-09-12",
+        "location": "Science Hall"
+      },
+      {
+        "course": "English Composition",
+        "date": "2026-09-14",
+        "location": "Library Commons"
+      }
+    ],
+    "communicationPreferences": {
+      "preferredChannel": "Email",
+      "backupChannel": "Text",
+      "quietHours": "21:00-07:00",
+      "preferredLanguage": "English"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "remove",
+      "path": "/courses/8",
+      "kind": "direct"
+    },
+    {
+      "op": "replace",
+      "path": "/summary/totalCredits",
+      "kind": "cascade",
+      "value": 33
+    },
+    {
+      "op": "replace",
+      "path": "/summary/creditWeightedGPA",
+      "kind": "cascade",
+      "value": 3.56
+    }
+  ],
+  "expected_json": {
+    "student": {
+      "name": "Maya Chen"
+    },
+    "courses": [
+      {
+        "title": "Calculus I",
+        "credits": 4,
+        "gradePoints": 3.7
+      },
+      {
+        "title": "General Chemistry",
+        "credits": 4,
+        "gradePoints": 3.3
+      },
+      {
+        "title": "English Composition",
+        "credits": 3,
+        "gradePoints": 4.0
+      },
+      {
+        "title": "Introduction to Psychology",
+        "credits": 3,
+        "gradePoints": 3.0
+      },
+      {
+        "title": "World History",
+        "credits": 3,
+        "gradePoints": 3.5
+      },
+      {
+        "title": "Biology Lab",
+        "credits": 2,
+        "gradePoints": 3.8
+      },
+      {
+        "title": "Computer Science Fundamentals",
+        "credits": 3,
+        "gradePoints": 3.6
+      },
+      {
+        "title": "Public Speaking",
+        "credits": 2,
+        "gradePoints": 3.9
+      },
+      {
+        "title": "Environmental Science",
+        "credits": 4,
+        "gradePoints": 3.2
+      },
+      {
+        "title": "Statistics for Social Sciences",
+        "credits": 3,
+        "gradePoints": 3.7
+      },
+      {
+        "title": "Health and Wellness",
+        "credits": 2,
+        "gradePoints": 4.0
+      }
+    ],
+    "summary": {
+      "totalCredits": 33,
+      "creditWeightedGPA": 3.56
+    },
+    "termDetails": {
+      "term": "Fall 2026",
+      "campus": "North Campus",
+      "format": "Mostly in person"
+    },
+    "advisor": {
+      "name": "Dr. Priya Raman",
+      "office": "HSS 214",
+      "email": "praman@north.edu"
+    },
+    "planningGoal": {
+      "standingTarget": "Sophomore standing",
+      "focus": "Prerequisites",
+      "schedulePreference": "Keep Fridays lighter"
+    },
+    "registrationChecklist": [
+      {
+        "task": "Confirm tuition payment",
+        "dueDate": "2026-08-10",
+        "status": "Not started"
+      },
+      {
+        "task": "Upload immunization record",
+        "dueDate": "2026-08-15",
+        "status": "In progress"
+      },
+      {
+        "task": "Pick up parking permit",
+        "dueDate": "2026-08-20",
+        "status": "Not started"
+      }
+    ],
+    "emergencyContact": {
+      "name": "Lena Chen",
+      "relationship": "Mother",
+      "phone": "555-0148"
+    },
+    "commutePlan": {
+      "mode": "Drive from home",
+      "parkingArea": "Lot C",
+      "usualArrival": "08:30"
+    },
+    "supplies": [
+      {
+        "item": "Scientific calculator",
+        "neededBy": "2026-08-25",
+        "status": "Not started"
+      },
+      {
+        "item": "Lab goggles",
+        "neededBy": "2026-08-28",
+        "status": "Ordered"
+      }
+    ],
+    "textbooks": [
+      {
+        "course": "Calculus I",
+        "title": "Stewart Early Transcendentals",
+        "purchasePlan": "Rent"
+      },
+      {
+        "course": "General Chemistry",
+        "title": "Chemistry: The Central Science",
+        "purchasePlan": "Buy used"
+      },
+      {
+        "course": "English Composition",
+        "title": "The Norton Field Guide to Writing",
+        "purchasePlan": "Digital rental"
+      },
+      {
+        "course": "Introduction to Psychology",
+        "title": "Psychology in Your Life",
+        "purchasePlan": "Campus bookstore"
+      }
+    ],
+    "scholarship": {
+      "name": "North Star Grant",
+      "amount": 3000,
+      "condition": "Full-time enrollment"
+    },
+    "enrollmentRequirement": {
+      "minimumCredits": 12,
+      "minimumGPA": 2.0,
+      "purpose": "Full-time aid eligibility"
+    },
+    "supportAppointments": [
+      {
+        "course": "Calculus I",
+        "date": "2026-09-08",
+        "location": "Math Center"
+      },
+      {
+        "course": "General Chemistry",
+        "date": "2026-09-12",
+        "location": "Science Hall"
+      },
+      {
+        "course": "English Composition",
+        "date": "2026-09-14",
+        "location": "Library Commons"
+      }
+    ],
+    "communicationPreferences": {
+      "preferredChannel": "Email",
+      "backupChannel": "Text",
+      "quietHours": "21:00-07:00",
+      "preferredLanguage": "English"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Drop Art Appreciation (3 credits, gradePoints 3.4 -> quality 10.2). totalCredits 36 -> 33; creditWeightedGPA = remaining sum(credits*gradePoints)/credits = 117.6/33 = 3.56. The 12-credit full-time minimum is still met (no flag), Art has no textbook/support entries, so nothing else changes; other courses and all descriptive fields stay.",
+  "conversation_pattern": "Center the artifact on a course list where each course carries credit hours and grade points, a credit-weighted GPA derives from them, and a running credit total derives from the credits, so the courses together determine both. Around this core, add the realistic, independent details a course plan would carry that do not depend on which courses are in the list, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Drop one specific course from the plan.",
+  "cascade_pattern": "Dropping a course removes its credit hours and grade points from the list, so the credit total drops by its credits and the GPA re-derives as the credit-weighted average of the remaining courses. Other courses and the requirement stay. This is determined because every remaining course's credits and grade points are stated.",
+  "requires_master_data": false
+}

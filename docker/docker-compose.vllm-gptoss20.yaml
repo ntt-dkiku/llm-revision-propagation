@@ -1,0 +1,36 @@
+name: llm-revision-propagation
+
+services:
+  vllm-gptoss20:
+    image: ${VLLM_IMAGE:-vllm/vllm-openai:latest}
+    container_name: revpropbench-vllm-gptoss20
+    restart: unless-stopped
+    runtime: nvidia
+    ipc: host
+    shm_size: "16gb"
+    ports:
+      - "8001:8000"
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HUGGINGFACE_HUB_TOKEN}
+      - HF_HOME=/root/.cache/huggingface
+      - NVIDIA_VISIBLE_DEVICES=${VLLM_GPUS:-0}
+      - VLLM_LOGGING_LEVEL=INFO
+    volumes:
+      - ${HF_HOME}:/root/.cache/huggingface
+    command: >
+      --model openai/gpt-oss-20b
+      --served-model-name local-llm
+      --tensor-parallel-size 1
+      --gpu-memory-utilization 0.90
+      --max-model-len 65536
+      --dtype auto
+      --enable-auto-tool-choice
+      --tool-call-parser openai
+      --reasoning-parser openai_gptoss
+      --trust-remote-code
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8000/v1/models >/dev/null || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 360
+      start_period: 3600s

@@ -1,0 +1,67 @@
+{
+  "id": "course_plan_L10_02",
+  "domain": "course_plan",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm putting together a course plan for Fall 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/term\", \"value\": \"Fall 2025\"}]"
+    },
+    {
+      "role": "user",
+      "content": "I’m also planning to take Intro Psychology, which is 3 credits, and I’m expecting 12 grade points from it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses\", \"value\": [{\"title\": \"Intro Psychology\", \"credits\": 3, \"grade_points\": 12}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Data Structures too; it's 4 credits, and I expect 14.8 grade points for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"title\": \"Data Structures\", \"credits\": 4, \"grade_points\": 14.8}}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you calculate the overall credit load, the total grade points, and the expected GPA for the courses listed so far?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary\", \"value\": {\"total_credits\": 7, \"total_grade_points\": 26.8, \"gpa\": 3.828571428571429}}]"
+    }
+  ],
+  "edit_instruction": "Please drop Data Structures from the plan.",
+  "theme": "Dropping a course",
+  "master_data": null,
+  "current_json": {
+    "term": "Fall 2025",
+    "courses": [
+      {
+        "title": "Intro Psychology",
+        "credits": 3,
+        "grade_points": 12
+      },
+      {
+        "title": "Data Structures",
+        "credits": 4,
+        "grade_points": 14.8
+      }
+    ],
+    "summary": {
+      "total_credits": 7,
+      "total_grade_points": 26.8,
+      "gpa": 3.828571428571429
+    }
+  },
+  "conversation_pattern": "Center the artifact on a course list where each course carries credit hours and grade points, a credit-weighted GPA derives from them, and a running credit total derives from the credits, so the courses together determine both. Around this core, add the realistic, independent details a course plan would carry that do not depend on which courses are in the list, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Drop one specific course from the plan.",
+  "cascade_pattern": "Dropping a course removes its credit hours and grade points from the list, so the credit total drops by its credits and the GPA re-derives as the credit-weighted average of the remaining courses. Other courses and the requirement stay. This is determined because every remaining course's credits and grade points are stated.",
+  "requires_master_data": false
+}

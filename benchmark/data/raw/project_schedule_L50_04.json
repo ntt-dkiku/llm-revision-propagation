@@ -1,0 +1,253 @@
+{
+  "id": "project_schedule_L50_04",
+  "domain": "project_schedule",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm planning the Customer Portal Launch; start the schedule around that."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project\", \"value\": {\"name\": \"Customer Portal Launch\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's anchor the plan on a launch readiness checkpoint scheduled for May 30, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/milestone\", \"value\": {\"name\": \"Launch Readiness Checkpoint\", \"date\": \"2025-05-30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the analytics validation workstream as something that has to be wrapped by May 22 so the checkpoint can happen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/tasks\", \"value\": [{\"name\": \"Analytics validation\", \"finish\": \"2025-05-22\", \"feedsMilestone\": true}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include content freeze as another item that must be done by May 20 before that readiness checkpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/tasks/-\", \"value\": {\"name\": \"Content freeze\", \"finish\": \"2025-05-20\", \"feedsMilestone\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make security sign-off another prerequisite, finishing on May 27 before the readiness checkpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/tasks/-\", \"value\": {\"name\": \"Security sign-off\", \"finish\": \"2025-05-27\", \"feedsMilestone\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give those three prerequisite workstreams their planned durations: analytics takes 6 workdays, content freeze takes 4, and security sign-off takes 5."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/tasks/0/durationWorkdays\", \"value\": 6}, {\"op\": \"add\", \"path\": \"/project/tasks/1/durationWorkdays\", \"value\": 4}, {\"op\": \"add\", \"path\": \"/project/tasks/2/durationWorkdays\", \"value\": 5}]"
+    },
+    {
+      "role": "user",
+      "content": "For the date math, use calendar-day buffers, and treat the latest possible start as the first Monday-through-Friday workday that still lets the task finish the workday before the checkpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/schedulingRules\", \"value\": {\"bufferBasis\": \"calendar days between task finish and milestone\", \"latestStartBasis\": \"Monday-Friday workdays ending the workday before milestone\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and calculate the buffer and latest start for the analytics validation workstream from those rules."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/tasks/0/slackCalendarDays\", \"value\": 8}, {\"op\": \"add\", \"path\": \"/project/tasks/0/latestAllowableStart\", \"value\": \"2025-05-22\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Do the same calculation for content freeze."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/tasks/1/slackCalendarDays\", \"value\": 10}, {\"op\": \"add\", \"path\": \"/project/tasks/1/latestAllowableStart\", \"value\": \"2025-05-26\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate those timing details for security sign-off too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/tasks/2/slackCalendarDays\", \"value\": 3}, {\"op\": \"add\", \"path\": \"/project/tasks/2/latestAllowableStart\", \"value\": \"2025-05-23\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a few basic ownership details: Priya Raman is sponsoring it, Marcus Lee is managing it, and the rollout is for North America."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/ownership\", \"value\": {\"sponsor\": \"Priya Raman\", \"projectManager\": \"Marcus Lee\", \"region\": \"North America\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the customer communications draft as a parallel item that does not gate the readiness checkpoint and is due May 16."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/tasks/-\", \"value\": {\"name\": \"Customer communications draft\", \"finish\": \"2025-05-16\", \"feedsMilestone\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add internal training prep as another parallel item outside the readiness checkpoint path, with a May 19 finish."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/tasks/-\", \"value\": {\"name\": \"Internal training prep\", \"finish\": \"2025-05-19\", \"feedsMilestone\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the weekly status routine: every Tuesday at 10:00 AM, it goes to the steering committee."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/statusReporting\", \"value\": {\"cadence\": \"weekly on Tuesday\", \"time\": \"10:00 AM\", \"audience\": \"Steering committee\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the budget guardrails too: the approved cap is $180,000, with $24,000 set aside as contingency, and Finance Ops is tracking it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/budget\", \"value\": {\"approvedCapUsd\": 180000, \"contingencyUsd\": 24000, \"owner\": \"Finance Ops\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the main delivery risk: the vendor test data could arrive late, the impact would be high, and Elena Cruz owns the mitigation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/risks\", \"value\": [{\"description\": \"Vendor test data may arrive late\", \"impact\": \"high\", \"owner\": \"Elena Cruz\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Note the release setup: production is on AWS us-east-1, staging is on AWS us-west-2, and the support desk will use Zendesk."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/releaseSetup\", \"value\": {\"productionEnvironment\": \"AWS us-east-1\", \"stagingEnvironment\": \"AWS us-west-2\", \"supportTool\": \"Zendesk\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the go-live communications contacts: Maya Singh for email, Jordan Patel for intranet, and Olivia Chen for sales enablement."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/communicationsContacts\", \"value\": {\"email\": \"Maya Singh\", \"intranet\": \"Jordan Patel\", \"salesEnablement\": \"Olivia Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture one last admin note: we're currently in execution, the plan is on track, and it was reviewed on April 18, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/adminNote\", \"value\": {\"phase\": \"Execution\", \"status\": \"On track\", \"lastReviewed\": \"2025-04-18\"}}]"
+    }
+  ],
+  "edit_instruction": "Move the launch readiness checkpoint to June 6, 2025.",
+  "theme": "Moving a milestone date",
+  "master_data": null,
+  "current_json": {
+    "project": {
+      "name": "Customer Portal Launch",
+      "milestone": {
+        "name": "Launch Readiness Checkpoint",
+        "date": "2025-05-30"
+      },
+      "tasks": [
+        {
+          "name": "Analytics validation",
+          "finish": "2025-05-22",
+          "feedsMilestone": true,
+          "durationWorkdays": 6,
+          "slackCalendarDays": 8,
+          "latestAllowableStart": "2025-05-22"
+        },
+        {
+          "name": "Content freeze",
+          "finish": "2025-05-20",
+          "feedsMilestone": true,
+          "durationWorkdays": 4,
+          "slackCalendarDays": 10,
+          "latestAllowableStart": "2025-05-26"
+        },
+        {
+          "name": "Security sign-off",
+          "finish": "2025-05-27",
+          "feedsMilestone": true,
+          "durationWorkdays": 5,
+          "slackCalendarDays": 3,
+          "latestAllowableStart": "2025-05-23"
+        },
+        {
+          "name": "Customer communications draft",
+          "finish": "2025-05-16",
+          "feedsMilestone": false
+        },
+        {
+          "name": "Internal training prep",
+          "finish": "2025-05-19",
+          "feedsMilestone": false
+        }
+      ],
+      "schedulingRules": {
+        "bufferBasis": "calendar days between task finish and milestone",
+        "latestStartBasis": "Monday-Friday workdays ending the workday before milestone"
+      },
+      "ownership": {
+        "sponsor": "Priya Raman",
+        "projectManager": "Marcus Lee",
+        "region": "North America"
+      },
+      "statusReporting": {
+        "cadence": "weekly on Tuesday",
+        "time": "10:00 AM",
+        "audience": "Steering committee"
+      },
+      "budget": {
+        "approvedCapUsd": 180000,
+        "contingencyUsd": 24000,
+        "owner": "Finance Ops"
+      },
+      "risks": [
+        {
+          "description": "Vendor test data may arrive late",
+          "impact": "high",
+          "owner": "Elena Cruz"
+        }
+      ],
+      "releaseSetup": {
+        "productionEnvironment": "AWS us-east-1",
+        "stagingEnvironment": "AWS us-west-2",
+        "supportTool": "Zendesk"
+      },
+      "communicationsContacts": {
+        "email": "Maya Singh",
+        "intranet": "Jordan Patel",
+        "salesEnablement": "Olivia Chen"
+      },
+      "adminNote": {
+        "phase": "Execution",
+        "status": "On track",
+        "lastReviewed": "2025-04-18"
+      }
+    }
+  },
+  "conversation_pattern": "Center the artifact on a schedule with a milestone several tasks must finish before, where each feeding task's slack derives from the milestone and that task's finish. Around this core, add the realistic, independent details a project plan would carry that do not depend on the milestone date, and vary their number from sample to sample.",
+  "edit_pattern": "Move the milestone (or deadline) to a specific new date.",
+  "cascade_pattern": "Moving the milestone re-derives each feeding task's slack, and its latest allowable start, from the new milestone date. Tasks that do not feed the milestone stay. This is determined because the feeding links and finishes are stated.",
+  "requires_master_data": false
+}

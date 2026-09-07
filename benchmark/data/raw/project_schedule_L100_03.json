@@ -1,0 +1,461 @@
+{
+  "id": "project_schedule_L100_03",
+  "domain": "project_schedule",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a schedule for the Riverside Clinic renovation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project\", \"value\": {\"title\": \"Riverside Clinic Renovation\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the work kick off on March 3, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule\", \"value\": {\"project_start\": \"2025-03-03\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first activity as a 2-day site handover called Mobilize Site."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"id\": \"T01\", \"name\": \"Mobilize Site\", \"duration_days\": 2}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Show that this first activity has no earlier activity and runs from March 3 to March 5."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/0/predecessor_id\", \"value\": null}, {\"op\": \"add\", \"path\": \"/tasks/0/start\", \"value\": \"2025-03-03\"}, {\"op\": \"add\", \"path\": \"/tasks/0/finish\", \"value\": \"2025-03-05\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, include a 4-day demolition activity called Remove Old Partitions."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T02\", \"name\": \"Remove Old Partitions\", \"duration_days\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make that demolition follow Mobilize Site, starting on March 5 and ending March 9."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/1/predecessor_id\", \"value\": \"T01\"}, {\"op\": \"add\", \"path\": \"/tasks/1/start\", \"value\": \"2025-03-05\"}, {\"op\": \"add\", \"path\": \"/tasks/1/finish\", \"value\": \"2025-03-09\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a 3-day rough plumbing activity named Install Plumbing Rough-In after that."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T03\", \"name\": \"Install Plumbing Rough-In\", \"duration_days\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the plumbing rough-in follow the demolition, running March 9 through March 12."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/2/predecessor_id\", \"value\": \"T02\"}, {\"op\": \"add\", \"path\": \"/tasks/2/start\", \"value\": \"2025-03-09\"}, {\"op\": \"add\", \"path\": \"/tasks/2/finish\", \"value\": \"2025-03-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put in a 5-day electrical rough-in activity called Install Electrical Rough-In."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T04\", \"name\": \"Install Electrical Rough-In\", \"duration_days\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the electrical rough-in follow the plumbing rough-in, starting March 12 and finishing March 17."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/3/predecessor_id\", \"value\": \"T03\"}, {\"op\": \"add\", \"path\": \"/tasks/3/start\", \"value\": \"2025-03-12\"}, {\"op\": \"add\", \"path\": \"/tasks/3/finish\", \"value\": \"2025-03-17\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a 2-day inspection called Rough-In Inspection after the rough-in work."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T05\", \"name\": \"Rough-In Inspection\", \"duration_days\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the inspection follow the electrical rough-in, running from March 17 to March 19."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/4/predecessor_id\", \"value\": \"T04\"}, {\"op\": \"add\", \"path\": \"/tasks/4/start\", \"value\": \"2025-03-17\"}, {\"op\": \"add\", \"path\": \"/tasks/4/finish\", \"value\": \"2025-03-19\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, add a 4-day drywall activity called Hang Drywall."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T06\", \"name\": \"Hang Drywall\", \"duration_days\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the drywall to follow the inspection, from March 19 through March 23."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/5/predecessor_id\", \"value\": \"T05\"}, {\"op\": \"add\", \"path\": \"/tasks/5/start\", \"value\": \"2025-03-19\"}, {\"op\": \"add\", \"path\": \"/tasks/5/finish\", \"value\": \"2025-03-23\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a 3-day painting activity called Paint Walls."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T07\", \"name\": \"Paint Walls\", \"duration_days\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the painting follow the drywall, running March 23 through March 26."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/6/predecessor_id\", \"value\": \"T06\"}, {\"op\": \"add\", \"path\": \"/tasks/6/start\", \"value\": \"2025-03-23\"}, {\"op\": \"add\", \"path\": \"/tasks/6/finish\", \"value\": \"2025-03-26\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a 2-day flooring activity called Install Flooring."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T08\", \"name\": \"Install Flooring\", \"duration_days\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the flooring follow the painting, from March 26 to March 28."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/7/predecessor_id\", \"value\": \"T07\"}, {\"op\": \"add\", \"path\": \"/tasks/7/start\", \"value\": \"2025-03-26\"}, {\"op\": \"add\", \"path\": \"/tasks/7/finish\", \"value\": \"2025-03-28\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now note that the overall work wraps up when the flooring finishes, on March 28, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/project_finish\", \"value\": \"2025-03-28\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the clinic’s owner contact so the plan shows who we report to."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/client\", \"value\": {\"organization\": \"Riverside Health Partners\", \"contact_name\": \"Nina Patel\", \"contact_email\": \"nina.patel@riversidehealth.example\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the job site address for the clinic."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/site\", \"value\": {\"street\": \"214 Harbor Avenue\", \"city\": \"Milford\", \"state\": \"CT\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add our project manager’s contact details so everyone knows who is coordinating the renovation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/manager\", \"value\": {\"name\": \"Marcus Lee\", \"phone\": \"203-555-0148\", \"email\": \"marcus.lee@buildnorth.example\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note the renovation is being handled under a fixed-price agreement."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/contract\", \"value\": {\"type\": \"Fixed Price\", \"number\": \"RC-2025-041\", \"billing_cycle\": \"Monthly\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the access rules the crew needs to follow while working at the clinic."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/site_requirements\", \"value\": {\"daily_access_start\": \"07:00\", \"daily_access_end\": \"17:00\", \"badges_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the basic safety expectations for crews on this renovation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/safety_plan\", \"value\": {\"ppe_required\": true, \"hot_work_permit_required\": true, \"daily_tailgate_meeting\": \"07:15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the main subcontractor for the plumbing work so the team roster is clear."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subcontractors\", \"value\": [{\"trade\": \"Plumbing\", \"company\": \"Harbor Pipeworks\", \"lead\": \"Elena Ruiz\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the electrical subcontractor too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subcontractors/-\", \"value\": {\"trade\": \"Electrical\", \"company\": \"Shoreline Electric\", \"lead\": \"Owen Brooks\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the drywall subcontractor as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subcontractors/-\", \"value\": {\"trade\": \"Drywall\", \"company\": \"Northstar Interiors\", \"lead\": \"Priya Shah\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a flooring subcontractor to round out the trade list."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subcontractors/-\", \"value\": {\"trade\": \"Flooring\", \"company\": \"Coastal Floors\", \"lead\": \"Mateo Grant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a regular coordination meeting so the team has a standing check-in."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications\", \"value\": {\"meeting_day\": \"Tuesday\", \"meeting_time\": \"09:00\", \"meeting_location\": \"Site trailer\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the permit information the superintendent should keep handy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/permits\", \"value\": {\"building_permit\": \"BP-25-1187\", \"issuing_authority\": \"Milford Building Department\", \"inspection_phone\": \"203-555-0199\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the insurance details for the contractor’s file."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/insurance\", \"value\": {\"carrier\": \"Atlantic Mutual\", \"policy_number\": \"GL-778240\", \"coverage_limit_usd\": 2000000}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the material delivery contact for the items coming to the clinic."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/logistics\", \"value\": {\"delivery_contact\": \"Jamal Reed\", \"delivery_phone\": \"203-555-0126\", \"receiving_area\": \"Rear service entrance\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the quality control contacts and inspection standard for the renovation file."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quality_control\", \"value\": {\"qc_lead\": \"Tara Nguyen\", \"punchlist_tool\": \"FieldCheck Pro\", \"acceptance_standard\": \"Clinic turnover checklist\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the waste handling plan for debris from the renovation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/waste_management\", \"value\": {\"hauler\": \"GreenWay Disposal\", \"dumpster_location\": \"North parking lot\", \"recycling_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this renovation plan as a draft for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/status\", \"value\": \"Draft\"}]"
+    }
+  ],
+  "edit_instruction": "Have Hang Drywall follow Install Electrical Rough-In instead of Rough-In Inspection.",
+  "theme": "Repointing a task's predecessor",
+  "master_data": null,
+  "current_json": {
+    "project": {
+      "title": "Riverside Clinic Renovation",
+      "client": {
+        "organization": "Riverside Health Partners",
+        "contact_name": "Nina Patel",
+        "contact_email": "nina.patel@riversidehealth.example"
+      },
+      "site": {
+        "street": "214 Harbor Avenue",
+        "city": "Milford",
+        "state": "CT"
+      },
+      "manager": {
+        "name": "Marcus Lee",
+        "phone": "203-555-0148",
+        "email": "marcus.lee@buildnorth.example"
+      },
+      "status": "Draft"
+    },
+    "schedule": {
+      "project_start": "2025-03-03",
+      "project_finish": "2025-03-28"
+    },
+    "tasks": [
+      {
+        "id": "T01",
+        "name": "Mobilize Site",
+        "duration_days": 2,
+        "predecessor_id": null,
+        "start": "2025-03-03",
+        "finish": "2025-03-05"
+      },
+      {
+        "id": "T02",
+        "name": "Remove Old Partitions",
+        "duration_days": 4,
+        "predecessor_id": "T01",
+        "start": "2025-03-05",
+        "finish": "2025-03-09"
+      },
+      {
+        "id": "T03",
+        "name": "Install Plumbing Rough-In",
+        "duration_days": 3,
+        "predecessor_id": "T02",
+        "start": "2025-03-09",
+        "finish": "2025-03-12"
+      },
+      {
+        "id": "T04",
+        "name": "Install Electrical Rough-In",
+        "duration_days": 5,
+        "predecessor_id": "T03",
+        "start": "2025-03-12",
+        "finish": "2025-03-17"
+      },
+      {
+        "id": "T05",
+        "name": "Rough-In Inspection",
+        "duration_days": 2,
+        "predecessor_id": "T04",
+        "start": "2025-03-17",
+        "finish": "2025-03-19"
+      },
+      {
+        "id": "T06",
+        "name": "Hang Drywall",
+        "duration_days": 4,
+        "predecessor_id": "T05",
+        "start": "2025-03-19",
+        "finish": "2025-03-23"
+      },
+      {
+        "id": "T07",
+        "name": "Paint Walls",
+        "duration_days": 3,
+        "predecessor_id": "T06",
+        "start": "2025-03-23",
+        "finish": "2025-03-26"
+      },
+      {
+        "id": "T08",
+        "name": "Install Flooring",
+        "duration_days": 2,
+        "predecessor_id": "T07",
+        "start": "2025-03-26",
+        "finish": "2025-03-28"
+      }
+    ],
+    "contract": {
+      "type": "Fixed Price",
+      "number": "RC-2025-041",
+      "billing_cycle": "Monthly"
+    },
+    "site_requirements": {
+      "daily_access_start": "07:00",
+      "daily_access_end": "17:00",
+      "badges_required": true
+    },
+    "safety_plan": {
+      "ppe_required": true,
+      "hot_work_permit_required": true,
+      "daily_tailgate_meeting": "07:15"
+    },
+    "subcontractors": [
+      {
+        "trade": "Plumbing",
+        "company": "Harbor Pipeworks",
+        "lead": "Elena Ruiz"
+      },
+      {
+        "trade": "Electrical",
+        "company": "Shoreline Electric",
+        "lead": "Owen Brooks"
+      },
+      {
+        "trade": "Drywall",
+        "company": "Northstar Interiors",
+        "lead": "Priya Shah"
+      },
+      {
+        "trade": "Flooring",
+        "company": "Coastal Floors",
+        "lead": "Mateo Grant"
+      }
+    ],
+    "communications": {
+      "meeting_day": "Tuesday",
+      "meeting_time": "09:00",
+      "meeting_location": "Site trailer"
+    },
+    "permits": {
+      "building_permit": "BP-25-1187",
+      "issuing_authority": "Milford Building Department",
+      "inspection_phone": "203-555-0199"
+    },
+    "insurance": {
+      "carrier": "Atlantic Mutual",
+      "policy_number": "GL-778240",
+      "coverage_limit_usd": 2000000
+    },
+    "logistics": {
+      "delivery_contact": "Jamal Reed",
+      "delivery_phone": "203-555-0126",
+      "receiving_area": "Rear service entrance"
+    },
+    "quality_control": {
+      "qc_lead": "Tara Nguyen",
+      "punchlist_tool": "FieldCheck Pro",
+      "acceptance_standard": "Clinic turnover checklist"
+    },
+    "waste_management": {
+      "hauler": "GreenWay Disposal",
+      "dumpster_location": "North parking lot",
+      "recycling_required": true
+    }
+  },
+  "conversation_pattern": "Center the artifact on a task list where each task has a stated duration and starts when its predecessor finishes, so finishes and the project end derive from the precedence links. Around this core, add the realistic, independent details a project plan would carry that do not depend on the dependency links, and vary their number and the number of tasks from sample to sample.",
+  "edit_pattern": "Change one task's predecessor to a different specific task.",
+  "cascade_pattern": "Repointing a task to a new predecessor re-derives its start from that predecessor's finish, then its finish and all downstream dates recompute, and the project end follows. Tasks not affected by the relink stay. This is determined because finishes and the new link are stated.",
+  "requires_master_data": false
+}

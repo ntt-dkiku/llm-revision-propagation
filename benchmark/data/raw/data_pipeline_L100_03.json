@@ -1,0 +1,483 @@
+{
+  "id": "data_pipeline_L100_03",
+  "domain": "data_pipeline",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a runbook for the daily customer revenue pipeline and call it revenue_attribution_daily."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline\", \"value\": {\"name\": \"revenue_attribution_daily\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "The raw order feed this pipeline starts from is warehouse.raw_orders_v1."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/upstream_tables\", \"value\": [\"warehouse.raw_orders_v1\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first staging step that reads from warehouse.raw_orders_v1 and keeps only completed orders."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/steps\", \"value\": [{\"id\": \"stage_completed_orders\", \"sql\": \"select order_id, customer_id, order_total, completed_at from warehouse.raw_orders_v1 where status = 'completed'\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Track that the completed-orders staging step is fed directly by warehouse.raw_orders_v1."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage\", \"value\": [{\"source\": \"warehouse.raw_orders_v1\", \"target\": \"stage_completed_orders\", \"type\": \"direct_read\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "The Daily Revenue Overview dashboard should also show that it can drill back to warehouse.raw_orders_v1 for order-level checks."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/dashboard_sources\", \"value\": [{\"dashboard\": \"Daily Revenue Overview\", \"source\": \"warehouse.raw_orders_v1\", \"purpose\": \"order-level drillback\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a freshness check that alerts if warehouse.raw_orders_v1 has no completed orders in the last hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerts\", \"value\": [{\"name\": \"raw_orders_completed_freshness\", \"query\": \"select count(*) as recent_completed_orders from warehouse.raw_orders_v1 where status = 'completed' and completed_at >= current_timestamp - interval '1 hour'\", \"severity\": \"critical\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reconciliation step that compares yesterday’s staged completed orders against warehouse.raw_orders_v1 totals."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/steps/-\", \"value\": {\"id\": \"reconcile_raw_order_totals\", \"sql\": \"select date(completed_at) as order_date, count(*) as raw_completed_count from warehouse.raw_orders_v1 where status = 'completed' and completed_at >= current_date - interval '1 day' group by date(completed_at)\", \"depends_on\": \"stage_completed_orders\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also watch for unusually high refund flags coming out of warehouse.raw_orders_v1 before the staging step runs."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerts/-\", \"value\": {\"name\": \"raw_orders_refund_flag_spike\", \"query\": \"select count(*) as flagged_refunds from warehouse.raw_orders_v1 where refund_flag = true and completed_at >= current_date\", \"severity\": \"warning\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the reconciliation step’s upstream dependency explicit as another direct read from warehouse.raw_orders_v1."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage/-\", \"value\": {\"source\": \"warehouse.raw_orders_v1\", \"target\": \"reconcile_raw_order_totals\", \"type\": \"direct_read\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the Finance Exceptions dashboard as another place analysts can open warehouse.raw_orders_v1 when investigating mismatched order totals."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/dashboard_sources/-\", \"value\": {\"dashboard\": \"Finance Exceptions\", \"source\": \"warehouse.raw_orders_v1\", \"purpose\": \"mismatched order investigation\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a data quality check that catches orders in warehouse.raw_orders_v1 with missing customer identifiers."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerts/-\", \"value\": {\"name\": \"raw_orders_missing_customer_id\", \"query\": \"select count(*) as missing_customer_ids from warehouse.raw_orders_v1 where customer_id is null and completed_at >= current_date - interval '1 day'\", \"severity\": \"warning\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a duplicate-order guard that looks directly at warehouse.raw_orders_v1 before any revenue is attributed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerts/-\", \"value\": {\"name\": \"raw_orders_duplicate_order_id\", \"query\": \"select order_id, count(*) as duplicate_count from warehouse.raw_orders_v1 where completed_at >= current_date - interval '1 day' group by order_id having count(*) > 1\", \"severity\": \"critical\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the duplicate-order guard as another direct read from warehouse.raw_orders_v1 in the dependency notes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage/-\", \"value\": {\"source\": \"warehouse.raw_orders_v1\", \"target\": \"raw_orders_duplicate_order_id\", \"type\": \"quality_check_read\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one more staging step that samples today’s records from warehouse.raw_orders_v1 for quick troubleshooting during the morning run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/steps/-\", \"value\": {\"id\": \"sample_raw_orders_today\", \"sql\": \"select order_id, customer_id, status, completed_at from warehouse.raw_orders_v1 where completed_at >= current_date limit 100\", \"depends_on\": \"stage_completed_orders\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark that troubleshooting sample as another direct dependency on warehouse.raw_orders_v1."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage/-\", \"value\": {\"source\": \"warehouse.raw_orders_v1\", \"target\": \"sample_raw_orders_today\", \"type\": \"diagnostic_read\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the Operations Revenue Monitor as a third analyst view that opens warehouse.raw_orders_v1 when someone needs raw order evidence."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/dashboard_sources/-\", \"value\": {\"dashboard\": \"Operations Revenue Monitor\", \"source\": \"warehouse.raw_orders_v1\", \"purpose\": \"raw order evidence review\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a source-level volume check that compares today’s completed order count in warehouse.raw_orders_v1 with the same weekday last week."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerts/-\", \"value\": {\"name\": \"raw_orders_weekday_volume_shift\", \"query\": \"select count(*) as completed_orders_today from warehouse.raw_orders_v1 where status = 'completed' and completed_at >= current_date\", \"severity\": \"warning\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Show that weekday volume check as reading warehouse.raw_orders_v1 directly for its source count."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage/-\", \"value\": {\"source\": \"warehouse.raw_orders_v1\", \"target\": \"raw_orders_weekday_volume_shift\", \"type\": \"quality_check_read\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a customer enrichment task that joins the staged completed orders to warehouse.customer_dim so analysts get the account tier."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/steps/-\", \"value\": {\"id\": \"enrich_customer_tier\", \"sql\": \"select s.order_id, s.customer_id, s.order_total, c.account_tier from stage_completed_orders s left join warehouse.customer_dim c on s.customer_id = c.customer_id\", \"depends_on\": \"stage_completed_orders\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer dimension as a separate upstream source too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/upstream_tables/-\", \"value\": \"warehouse.customer_dim\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the customer enrichment step as reading from warehouse.customer_dim, and keep that source distinct from the raw order feed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage/-\", \"value\": {\"source\": \"warehouse.customer_dim\", \"target\": \"enrich_customer_tier\", \"type\": \"dimension_lookup\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a task that applies tax-region mapping from warehouse.tax_region_map after the customer tier is attached."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/steps/-\", \"value\": {\"id\": \"apply_tax_region\", \"sql\": \"select e.order_id, e.customer_id, e.order_total, e.account_tier, t.tax_region from enrich_customer_tier e left join warehouse.tax_region_map t on e.customer_id = t.customer_id\", \"depends_on\": \"enrich_customer_tier\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "List warehouse.tax_region_map as another input source for the run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/upstream_tables/-\", \"value\": \"warehouse.tax_region_map\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the dependency from the tax-region mapping table into the tax application task."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage/-\", \"value\": {\"source\": \"warehouse.tax_region_map\", \"target\": \"apply_tax_region\", \"type\": \"dimension_lookup\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the daily run to start at 6:15 AM UTC on weekdays."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schedule\", \"value\": {\"cron\": \"15 6 * * 1-5\", \"timezone\": \"UTC\", \"catchup\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the analytics platform team as the owner, with the shared channel for urgent run issues."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/owner\", \"value\": {\"team\": \"analytics_platform\", \"slack_channel\": \"#data-pipeline-alerts\", \"pager\": \"ap-oncall\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give the run a simple retry policy so transient warehouse issues don’t page the team immediately."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/retry_policy\", \"value\": {\"max_retries\": 2, \"delay_minutes\": 10, \"backoff\": \"linear\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the intended warehouse output for the finished daily revenue attribution table."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/outputs\", \"value\": [{\"table\": \"mart.daily_revenue_attribution\", \"write_mode\": \"replace_partition\", \"partition_column\": \"order_date\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the final attribution table as being materialized from the tax-region application task."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage/-\", \"value\": {\"source\": \"apply_tax_region\", \"target\": \"mart.daily_revenue_attribution\", \"type\": \"materialization\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a service target for when the daily revenue table should be ready for analysts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/slo\", \"value\": {\"ready_by_utc\": \"07:30\", \"max_runtime_minutes\": 45, \"breach_action\": \"notify_owner\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the expected compute settings for the production run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/compute\", \"value\": {\"warehouse_size\": \"medium\", \"max_concurrency\": 4, \"priority\": \"standard\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the standard production labels so this run is easy to find in orchestration and cost reports."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/tags\", \"value\": [\"revenue\", \"daily\", \"production\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the production deployment context, including the orchestrator project and the service account that runs it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/deployment\", \"value\": {\"environment\": \"prod\", \"orchestrator_project\": \"revenue-dags\", \"service_account\": \"svc-revenue-attribution\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one more analyst-facing source note for the Executive Revenue Summary, pointing back to warehouse.raw_orders_v1 when leadership asks for raw order backup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/dashboard_sources/-\", \"value\": {\"dashboard\": \"Executive Revenue Summary\", \"source\": \"warehouse.raw_orders_v1\", \"purpose\": \"leadership raw order backup\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a source audit that flags negative order totals in warehouse.raw_orders_v1 before the daily attribution logic runs."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerts/-\", \"value\": {\"name\": \"raw_orders_negative_order_total\", \"query\": \"select count(*) as negative_order_totals from warehouse.raw_orders_v1 where order_total < 0 and completed_at >= current_date - interval '1 day'\", \"severity\": \"critical\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one last source audit for completed orders in warehouse.raw_orders_v1 that arrived without a payment method, and make it non-paging."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerts/-\", \"value\": {\"name\": \"raw_orders_missing_payment_method\", \"query\": \"select count(*) as missing_payment_methods from warehouse.raw_orders_v1 where status = 'completed' and payment_method is null and completed_at >= current_date - interval '1 day'\", \"severity\": \"info\", \"window\": \"daily\"}}]"
+    }
+  ],
+  "edit_instruction": "Please rename the upstream source warehouse.raw_orders_v1 to warehouse.raw_orders_current.",
+  "theme": "Renaming an upstream table",
+  "conversation_pattern": "Center the artifact on a data pipeline DAG where one upstream table name is referenced by downstream SQL, lineage entries, dashboard source references, and alert queries as a visible token. Around this core, add the realistic, independent details a data engineering runbook would carry that do not reference that table name, including other table names that must NOT be touched, and vary their number from sample to sample.",
+  "edit_pattern": "Rename the upstream table to a different specific table identifier.",
+  "cascade_pattern": "Changing the table identifier substitutes the new token in every SQL statement, lineage reference, dashboard source, and alert query that references the old name, while preserving surrounding text and leaving every other table reference unchanged. This is determined because each reference embeds the old table name visibly.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "pipeline": {
+      "name": "revenue_attribution_daily",
+      "upstream_tables": [
+        "warehouse.raw_orders_v1",
+        "warehouse.customer_dim",
+        "warehouse.tax_region_map"
+      ],
+      "steps": [
+        {
+          "id": "stage_completed_orders",
+          "sql": "select order_id, customer_id, order_total, completed_at from warehouse.raw_orders_v1 where status = 'completed'"
+        },
+        {
+          "id": "reconcile_raw_order_totals",
+          "sql": "select date(completed_at) as order_date, count(*) as raw_completed_count from warehouse.raw_orders_v1 where status = 'completed' and completed_at >= current_date - interval '1 day' group by date(completed_at)",
+          "depends_on": "stage_completed_orders"
+        },
+        {
+          "id": "sample_raw_orders_today",
+          "sql": "select order_id, customer_id, status, completed_at from warehouse.raw_orders_v1 where completed_at >= current_date limit 100",
+          "depends_on": "stage_completed_orders"
+        },
+        {
+          "id": "enrich_customer_tier",
+          "sql": "select s.order_id, s.customer_id, s.order_total, c.account_tier from stage_completed_orders s left join warehouse.customer_dim c on s.customer_id = c.customer_id",
+          "depends_on": "stage_completed_orders"
+        },
+        {
+          "id": "apply_tax_region",
+          "sql": "select e.order_id, e.customer_id, e.order_total, e.account_tier, t.tax_region from enrich_customer_tier e left join warehouse.tax_region_map t on e.customer_id = t.customer_id",
+          "depends_on": "enrich_customer_tier"
+        }
+      ],
+      "lineage": [
+        {
+          "source": "warehouse.raw_orders_v1",
+          "target": "stage_completed_orders",
+          "type": "direct_read"
+        },
+        {
+          "source": "warehouse.raw_orders_v1",
+          "target": "reconcile_raw_order_totals",
+          "type": "direct_read"
+        },
+        {
+          "source": "warehouse.raw_orders_v1",
+          "target": "raw_orders_duplicate_order_id",
+          "type": "quality_check_read"
+        },
+        {
+          "source": "warehouse.raw_orders_v1",
+          "target": "sample_raw_orders_today",
+          "type": "diagnostic_read"
+        },
+        {
+          "source": "warehouse.raw_orders_v1",
+          "target": "raw_orders_weekday_volume_shift",
+          "type": "quality_check_read"
+        },
+        {
+          "source": "warehouse.customer_dim",
+          "target": "enrich_customer_tier",
+          "type": "dimension_lookup"
+        },
+        {
+          "source": "warehouse.tax_region_map",
+          "target": "apply_tax_region",
+          "type": "dimension_lookup"
+        },
+        {
+          "source": "apply_tax_region",
+          "target": "mart.daily_revenue_attribution",
+          "type": "materialization"
+        }
+      ],
+      "dashboard_sources": [
+        {
+          "dashboard": "Daily Revenue Overview",
+          "source": "warehouse.raw_orders_v1",
+          "purpose": "order-level drillback"
+        },
+        {
+          "dashboard": "Finance Exceptions",
+          "source": "warehouse.raw_orders_v1",
+          "purpose": "mismatched order investigation"
+        },
+        {
+          "dashboard": "Operations Revenue Monitor",
+          "source": "warehouse.raw_orders_v1",
+          "purpose": "raw order evidence review"
+        },
+        {
+          "dashboard": "Executive Revenue Summary",
+          "source": "warehouse.raw_orders_v1",
+          "purpose": "leadership raw order backup"
+        }
+      ],
+      "alerts": [
+        {
+          "name": "raw_orders_completed_freshness",
+          "query": "select count(*) as recent_completed_orders from warehouse.raw_orders_v1 where status = 'completed' and completed_at >= current_timestamp - interval '1 hour'",
+          "severity": "critical"
+        },
+        {
+          "name": "raw_orders_refund_flag_spike",
+          "query": "select count(*) as flagged_refunds from warehouse.raw_orders_v1 where refund_flag = true and completed_at >= current_date",
+          "severity": "warning"
+        },
+        {
+          "name": "raw_orders_missing_customer_id",
+          "query": "select count(*) as missing_customer_ids from warehouse.raw_orders_v1 where customer_id is null and completed_at >= current_date - interval '1 day'",
+          "severity": "warning"
+        },
+        {
+          "name": "raw_orders_duplicate_order_id",
+          "query": "select order_id, count(*) as duplicate_count from warehouse.raw_orders_v1 where completed_at >= current_date - interval '1 day' group by order_id having count(*) > 1",
+          "severity": "critical"
+        },
+        {
+          "name": "raw_orders_weekday_volume_shift",
+          "query": "select count(*) as completed_orders_today from warehouse.raw_orders_v1 where status = 'completed' and completed_at >= current_date",
+          "severity": "warning"
+        },
+        {
+          "name": "raw_orders_negative_order_total",
+          "query": "select count(*) as negative_order_totals from warehouse.raw_orders_v1 where order_total < 0 and completed_at >= current_date - interval '1 day'",
+          "severity": "critical"
+        },
+        {
+          "name": "raw_orders_missing_payment_method",
+          "query": "select count(*) as missing_payment_methods from warehouse.raw_orders_v1 where status = 'completed' and payment_method is null and completed_at >= current_date - interval '1 day'",
+          "severity": "info",
+          "window": "daily"
+        }
+      ],
+      "schedule": {
+        "cron": "15 6 * * 1-5",
+        "timezone": "UTC",
+        "catchup": false
+      },
+      "owner": {
+        "team": "analytics_platform",
+        "slack_channel": "#data-pipeline-alerts",
+        "pager": "ap-oncall"
+      },
+      "retry_policy": {
+        "max_retries": 2,
+        "delay_minutes": 10,
+        "backoff": "linear"
+      },
+      "outputs": [
+        {
+          "table": "mart.daily_revenue_attribution",
+          "write_mode": "replace_partition",
+          "partition_column": "order_date"
+        }
+      ],
+      "slo": {
+        "ready_by_utc": "07:30",
+        "max_runtime_minutes": 45,
+        "breach_action": "notify_owner"
+      },
+      "compute": {
+        "warehouse_size": "medium",
+        "max_concurrency": 4,
+        "priority": "standard"
+      },
+      "tags": [
+        "revenue",
+        "daily",
+        "production"
+      ],
+      "deployment": {
+        "environment": "prod",
+        "orchestrator_project": "revenue-dags",
+        "service_account": "svc-revenue-attribution"
+      }
+    }
+  }
+}

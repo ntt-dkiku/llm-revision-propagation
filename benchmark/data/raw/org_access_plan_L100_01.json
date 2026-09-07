@@ -1,0 +1,508 @@
+{
+  "id": "org_access_plan_L100_01",
+  "domain": "org_access_plan",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's begin an org access plan for Maya Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee\", \"value\": {\"name\": \"Maya Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have her report to Jordan Patel for this plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/manager\", \"value\": {\"name\": \"Jordan Patel\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Jordan's current leadership line as Jordan Patel, then Ava Morales, then Priya Nair."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/manager/reporting_chain\", \"value\": [\"Jordan Patel\", \"Ava Morales\", \"Priya Nair\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "For Jordan’s sign-off route, use Jordan Patel, Ava Morales, then Omar Haddad."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/manager/approval_path\", \"value\": [\"Jordan Patel\", \"Ava Morales\", \"Omar Haddad\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "If something gets stuck under Jordan, the backup person should be Lena Ortiz."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/manager/escalation_contact\", \"value\": \"Lena Ortiz\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Jordan's team roll-up for access planning should be 18 people."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/manager/team_rollup_count\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "Now start Maya’s own leadership line with Maya herself before Jordan’s line continues."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/reporting_chain\", \"value\": [\"Maya Chen\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Carry the rest of that line through Jordan, Ava, and Priya."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/reporting_chain/-\", \"value\": \"Jordan Patel\"}, {\"op\": \"add\", \"path\": \"/employee/reporting_chain/-\", \"value\": \"Ava Morales\"}, {\"op\": \"add\", \"path\": \"/employee/reporting_chain/-\", \"value\": \"Priya Nair\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set Maya’s own sign-off route to start with her and then follow Jordan, Ava, and Omar."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/approval_path\", \"value\": [\"Maya Chen\", \"Jordan Patel\", \"Ava Morales\", \"Omar Haddad\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "For Maya’s stuck approvals, use the same backup person that applies under Jordan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/escalation_contact\", \"value\": \"Lena Ortiz\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For the roll-up number on Maya’s plan, use Jordan’s access-planning roll-up."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/team_rollup_count\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya’s job assignment as a senior data platform engineer in the analytics engineering group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/position\", \"value\": {\"title\": \"Senior Data Platform Engineer\", \"job_family\": \"Analytics Engineering\", \"level\": \"Senior\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give her standard production data access for a senior engineer, with no privileged admin rights."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile\", \"value\": {\"tier\": \"production_standard\", \"role\": \"senior_engineer\", \"privileged_admin\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tie the access to the warehouse, the transformation platform, and the catalog tools."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/systems\", \"value\": [\"Snowflake\", \"dbt Cloud\", \"DataHub\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that she works out of the Toronto hub for cost center AE-410 starting January 15, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/work_context\", \"value\": {\"office\": \"Toronto\", \"cost_center\": \"AE-410\", \"start_date\": \"2026-01-15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the review cadence as quarterly, with the next check on April 15, 2026, owned by access governance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/review\", \"value\": {\"cadence\": \"quarterly\", \"next_review_date\": \"2026-04-15\", \"owner\": \"Access Governance\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the basic guardrails: masking should stay on, exports need approval, and outside sharing is not allowed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/controls\", \"value\": {\"masking_enabled\": true, \"export_approval_required\": true, \"external_sharing_allowed\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include her primary project as the customer 360 refresh, with build access, due at the end of March."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projects\", \"value\": [{\"name\": \"Customer 360 Refresh\", \"access_mode\": \"build\", \"target_date\": \"2026-03-31\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another project for the revenue quality dashboard, read-only access, due February 28, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projects/-\", \"value\": {\"name\": \"Revenue Quality Dashboard\", \"access_mode\": \"read_only\", \"target_date\": \"2026-02-28\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the people dataset with masked customer identifiers available for read and transform work."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/data_scopes\", \"value\": [{\"domain\": \"customer\", \"classification\": \"confidential\", \"permission\": \"read_transform\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include billing metrics, treated as internal data, with read-only use."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/data_scopes/-\", \"value\": {\"domain\": \"billing_metrics\", \"classification\": \"internal\", \"permission\": \"read_only\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Require single sign-on, multifactor checks, and device compliance before Maya can use the approved tools."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/authentication\", \"value\": {\"sso_required\": true, \"mfa_required\": true, \"device_compliance_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Turn on audit logging, keep the records for a year, and send alerts to the security operations queue."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/monitoring\", \"value\": {\"audit_logging\": true, \"retention_days\": 365, \"alert_queue\": \"Security Operations\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the request tracking details: submitted through ServiceNow, ticket AC-78291, with normal priority."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/request_tracking\", \"value\": {\"source\": \"ServiceNow\", \"ticket_id\": \"AC-78291\", \"priority\": \"normal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Grant her use of the production analyst warehouse in Snowflake."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/entitlements\", \"value\": [{\"system\": \"Snowflake\", \"resource\": \"ANALYST_WH_PROD\", \"permission\": \"USAGE\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also allow read access to the curated analytics database."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/entitlements/-\", \"value\": {\"system\": \"Snowflake\", \"resource\": \"CURATED_ANALYTICS_DB\", \"permission\": \"READ\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give her developer access to the customer marts project in dbt Cloud."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/entitlements/-\", \"value\": {\"system\": \"dbt Cloud\", \"resource\": \"customer_marts\", \"permission\": \"developer\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Let her edit documentation for certified analytics assets in DataHub."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/entitlements/-\", \"value\": {\"system\": \"DataHub\", \"resource\": \"certified_analytics_assets\", \"permission\": \"doc_edit\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add emergency access as disabled for now, limited to security incidents only, and capped at four hours if it’s ever invoked."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/break_glass\", \"value\": {\"enabled\": false, \"allowed_reason\": \"security_incident\", \"max_duration_hours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that no temporary exception is approved, the reason is not applicable, and there’s no expiry date for one."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/exception\", \"value\": {\"approved\": false, \"reason\": \"not_applicable\", \"expires_on\": null}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include onboarding status as pending security training, with policy acknowledgement still needed, and target completion by January 22."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/onboarding\", \"value\": {\"security_training\": \"pending\", \"policy_acknowledgement\": \"required\", \"target_completion\": \"2026-01-22\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the requester notes saying this is for a planned team transfer, with least-privilege access, and no customer exports expected."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/request_notes\", \"value\": {\"business_reason\": \"planned_team_transfer\", \"access_principle\": \"least_privilege\", \"customer_exports_expected\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a data handling reminder: avoid direct identifiers, use approved shared folders, and keep local downloads off."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/data_handling\", \"value\": {\"direct_identifiers_allowed\": false, \"approved_storage\": \"shared_folders\", \"local_downloads_allowed\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add vendor access notes: no third-party contractors, no offshore processing, and no vendor-managed credentials."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/vendor_access\", \"value\": {\"third_party_contractors\": false, \"offshore_processing\": false, \"vendor_managed_credentials\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add regional compliance coverage for Canada, with privacy review required and financial reporting data in scope."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance\", \"value\": {\"region\": \"Canada\", \"privacy_review_required\": true, \"financial_reporting_scope\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add deprovisioning guidance: disable access at transfer end, revoke unused grants, and archive the request evidence."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deprovisioning\", \"value\": {\"disable_on_transfer_end\": true, \"revoke_unused_grants\": true, \"archive_request_evidence\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "For updates on this access plan, use Slack for day-to-day notices, email for formal messages, and PagerDuty for anything urgent."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communication_plan\", \"value\": {\"routine_channel\": \"Slack\", \"formal_channel\": \"Email\", \"urgent_channel\": \"PagerDuty\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish it by marking the plan active for the first quarter of 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan_status\", \"value\": {\"state\": \"active\", \"period\": \"2026-Q1\"}}]"
+    }
+  ],
+  "edit_instruction": "Please switch Maya’s manager from Jordan Patel to Sofia Reyes.",
+  "theme": "Reassigning a manager",
+  "conversation_pattern": "Center the artifact on an employee record where the manager determines a transitive approval path, reporting chain, escalation contact, and team roll-up count. Provide the replacement manager's own reporting attributes (chain, approval path, escalation contact, and team roll-up count) so each dependent value is uniquely determined: the new reporting chain is the employee prepended to the manager's supplied chain, the new approval path is the employee prepended to the manager's supplied approval path, the escalation contact is the manager's supplied escalation contact, and the team roll-up count is set to the manager's supplied team roll-up count. Around this core, add the realistic, independent details an org access plan would carry that do not depend on the manager, and vary their number from sample to sample. Do not embed a lookup or reference card for any manager inside the artifact; the artifact holds only the current manager's own reporting fields.",
+  "edit_pattern": "Change the employee's manager to a different specific manager, and supply that manager's reporting attributes in master_data.",
+  "cascade_pattern": "Changing the manager re-derives the approval path and reporting chain as the employee prepended to the replacement manager's supplied path and chain, sets the escalation contact to the replacement manager's supplied escalation contact, and sets the team roll-up count to the replacement manager's supplied team roll-up count. Role, access tier, and unrelated fields stay unchanged.",
+  "requires_master_data": true,
+  "master_data": {
+    "Sofia Reyes": {
+      "reporting_chain": [
+        "Sofia Reyes",
+        "Nikhil Banerjee",
+        "Priya Nair"
+      ],
+      "approval_path": [
+        "Sofia Reyes",
+        "Nikhil Banerjee",
+        "Omar Haddad"
+      ],
+      "escalation_contact": "Marisol Vega",
+      "team_rollup_count": 27
+    }
+  },
+  "current_json": {
+    "employee": {
+      "name": "Maya Chen",
+      "manager": {
+        "name": "Jordan Patel",
+        "reporting_chain": [
+          "Jordan Patel",
+          "Ava Morales",
+          "Priya Nair"
+        ],
+        "approval_path": [
+          "Jordan Patel",
+          "Ava Morales",
+          "Omar Haddad"
+        ],
+        "escalation_contact": "Lena Ortiz",
+        "team_rollup_count": 18
+      },
+      "reporting_chain": [
+        "Maya Chen",
+        "Jordan Patel",
+        "Ava Morales",
+        "Priya Nair"
+      ],
+      "approval_path": [
+        "Maya Chen",
+        "Jordan Patel",
+        "Ava Morales",
+        "Omar Haddad"
+      ],
+      "escalation_contact": "Lena Ortiz",
+      "team_rollup_count": 18,
+      "position": {
+        "title": "Senior Data Platform Engineer",
+        "job_family": "Analytics Engineering",
+        "level": "Senior"
+      },
+      "work_context": {
+        "office": "Toronto",
+        "cost_center": "AE-410",
+        "start_date": "2026-01-15"
+      }
+    },
+    "access_profile": {
+      "tier": "production_standard",
+      "role": "senior_engineer",
+      "privileged_admin": false,
+      "systems": [
+        "Snowflake",
+        "dbt Cloud",
+        "DataHub"
+      ],
+      "entitlements": [
+        {
+          "system": "Snowflake",
+          "resource": "ANALYST_WH_PROD",
+          "permission": "USAGE"
+        },
+        {
+          "system": "Snowflake",
+          "resource": "CURATED_ANALYTICS_DB",
+          "permission": "READ"
+        },
+        {
+          "system": "dbt Cloud",
+          "resource": "customer_marts",
+          "permission": "developer"
+        },
+        {
+          "system": "DataHub",
+          "resource": "certified_analytics_assets",
+          "permission": "doc_edit"
+        }
+      ]
+    },
+    "review": {
+      "cadence": "quarterly",
+      "next_review_date": "2026-04-15",
+      "owner": "Access Governance"
+    },
+    "controls": {
+      "masking_enabled": true,
+      "export_approval_required": true,
+      "external_sharing_allowed": false
+    },
+    "projects": [
+      {
+        "name": "Customer 360 Refresh",
+        "access_mode": "build",
+        "target_date": "2026-03-31"
+      },
+      {
+        "name": "Revenue Quality Dashboard",
+        "access_mode": "read_only",
+        "target_date": "2026-02-28"
+      }
+    ],
+    "data_scopes": [
+      {
+        "domain": "customer",
+        "classification": "confidential",
+        "permission": "read_transform"
+      },
+      {
+        "domain": "billing_metrics",
+        "classification": "internal",
+        "permission": "read_only"
+      }
+    ],
+    "authentication": {
+      "sso_required": true,
+      "mfa_required": true,
+      "device_compliance_required": true
+    },
+    "monitoring": {
+      "audit_logging": true,
+      "retention_days": 365,
+      "alert_queue": "Security Operations"
+    },
+    "request_tracking": {
+      "source": "ServiceNow",
+      "ticket_id": "AC-78291",
+      "priority": "normal"
+    },
+    "break_glass": {
+      "enabled": false,
+      "allowed_reason": "security_incident",
+      "max_duration_hours": 4
+    },
+    "exception": {
+      "approved": false,
+      "reason": "not_applicable",
+      "expires_on": null
+    },
+    "onboarding": {
+      "security_training": "pending",
+      "policy_acknowledgement": "required",
+      "target_completion": "2026-01-22"
+    },
+    "request_notes": {
+      "business_reason": "planned_team_transfer",
+      "access_principle": "least_privilege",
+      "customer_exports_expected": false
+    },
+    "data_handling": {
+      "direct_identifiers_allowed": false,
+      "approved_storage": "shared_folders",
+      "local_downloads_allowed": false
+    },
+    "vendor_access": {
+      "third_party_contractors": false,
+      "offshore_processing": false,
+      "vendor_managed_credentials": false
+    },
+    "compliance": {
+      "region": "Canada",
+      "privacy_review_required": true,
+      "financial_reporting_scope": true
+    },
+    "deprovisioning": {
+      "disable_on_transfer_end": true,
+      "revoke_unused_grants": true,
+      "archive_request_evidence": true
+    },
+    "communication_plan": {
+      "routine_channel": "Slack",
+      "formal_channel": "Email",
+      "urgent_channel": "PagerDuty"
+    },
+    "plan_status": {
+      "state": "active",
+      "period": "2026-Q1"
+    }
+  }
+}

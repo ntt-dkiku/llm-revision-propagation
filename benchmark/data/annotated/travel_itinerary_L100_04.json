@@ -1,0 +1,795 @@
+{
+  "id": "travel_itinerary_L100_04",
+  "domain": "travel_itinerary",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'd like to plan a one-day visit in Kyoto."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/destination\", \"value\": \"Kyoto\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's have the day begin at 8:30 in the morning."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/day_start_time\", \"value\": \"08:30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make Fushimi Inari the first stop, with about an hour and fifteen minutes there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops\", \"value\": [{\"position\": 1, \"name\": \"Fushimi Inari Taisha\", \"duration_minutes\": 75}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and set the actual timing for that first visit from the morning start."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/0/start_time\", \"value\": \"08:30\"}, {\"op\": \"add\", \"path\": \"/stops/0/end_time\", \"value\": \"09:45\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After leaving there, allow 30 minutes to get to the next place."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/0/gap_after_minutes\", \"value\": 30}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, add Kiyomizu-dera as the second visit and plan on spending an hour there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"position\": 2, \"name\": \"Kiyomizu-dera\", \"duration_minutes\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please place that second visit on the clock using the travel time from the first stop."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/1/start_time\", \"value\": \"10:15\"}, {\"op\": \"add\", \"path\": \"/stops/1/end_time\", \"value\": \"11:15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Build in a 20-minute transfer after Kiyomizu-dera before the following stop."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/1/gap_after_minutes\", \"value\": 20}]"
+    },
+    {
+      "role": "user",
+      "content": "For the third stop, I'd like to visit Nishiki Market and spend 50 minutes wandering and snacking."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"position\": 3, \"name\": \"Nishiki Market\", \"duration_minutes\": 50}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Nishiki Market into the schedule right after that transfer."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/2/start_time\", \"value\": \"11:35\"}, {\"op\": \"add\", \"path\": \"/stops/2/end_time\", \"value\": \"12:25\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After the market, leave 25 minutes to get across town before the next activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/2/gap_after_minutes\", \"value\": 25}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the fourth stop Nijo Castle, with 70 minutes set aside for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"position\": 4, \"name\": \"Nijo Castle\", \"duration_minutes\": 70}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule Nijo Castle right after the 25-minute ride from the market."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/3/start_time\", \"value\": \"12:50\"}, {\"op\": \"add\", \"path\": \"/stops/3/end_time\", \"value\": \"14:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After Nijo Castle, set aside 35 minutes to reach the next stop."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/3/gap_after_minutes\", \"value\": 35}]"
+    },
+    {
+      "role": "user",
+      "content": "For the fifth stop, add Arashiyama Bamboo Grove and give it 65 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"position\": 5, \"name\": \"Arashiyama Bamboo Grove\", \"duration_minutes\": 65}}]"
+    },
+    {
+      "role": "user",
+      "content": "Place the bamboo grove visit on the clock after that ride from Nijo Castle."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/4/start_time\", \"value\": \"14:35\"}, {\"op\": \"add\", \"path\": \"/stops/4/end_time\", \"value\": \"15:40\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After the bamboo grove, leave half an hour to get to the evening area."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/4/gap_after_minutes\", \"value\": 30}]"
+    },
+    {
+      "role": "user",
+      "content": "End with Gion as the sixth stop, and plan for an hour and twenty minutes there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"position\": 6, \"name\": \"Gion\", \"duration_minutes\": 80}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Gion on the schedule after the transfer from the bamboo grove."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/5/start_time\", \"value\": \"16:10\"}, {\"op\": \"add\", \"path\": \"/stops/5/end_time\", \"value\": \"17:30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now that all the visits are set, summarize how many stops are in the day and when it wraps up."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary/stop_count\", \"value\": 6}, {\"op\": \"add\", \"path\": \"/summary/day_end_time\", \"value\": \"17:30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For Fushimi Inari, note that it's a high-priority stop, free to enter, and closest to Inari Station."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/0/practical_notes\", \"value\": {\"priority\": \"high\", \"entry_cost\": \"free\", \"nearest_station\": \"Inari Station\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Kiyomizu-dera, mark it as a must-see, budget 500 yen for admission, and use Kiyomizu-Gojo Station as the closest rail stop."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/1/practical_notes\", \"value\": {\"priority\": \"must-see\", \"entry_cost\": \"500 JPY\", \"nearest_station\": \"Kiyomizu-Gojo Station\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Nishiki Market, treat it as a food-focused stop, assume no admission charge, and use Kyoto-Kawaramachi Station nearby."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/2/practical_notes\", \"value\": {\"priority\": \"food-focused\", \"entry_cost\": \"free\", \"nearest_station\": \"Kyoto-Kawaramachi Station\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Nijo Castle, flag it as a history stop, allow 1,300 yen for entry, and note Nijojo-mae Station as the closest station."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/3/practical_notes\", \"value\": {\"priority\": \"history stop\", \"entry_cost\": \"1300 JPY\", \"nearest_station\": \"Nijojo-mae Station\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the bamboo grove, mark it as a scenery stop, keep it free, and note Saga-Arashiyama Station as the closest rail option."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/4/practical_notes\", \"value\": {\"priority\": \"scenery stop\", \"entry_cost\": \"free\", \"nearest_station\": \"Saga-Arashiyama Station\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Gion, label it as an evening atmosphere stop, assume it's free to stroll, and use Gion-Shijo Station as the closest station."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/5/practical_notes\", \"value\": {\"priority\": \"evening atmosphere\", \"entry_cost\": \"free\", \"nearest_station\": \"Gion-Shijo Station\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "I'll be based at Hotel Granvia Kyoto, and it would be helpful to keep its address and phone number handy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging\", \"value\": {\"hotel_name\": \"Hotel Granvia Kyoto\", \"address\": \"JR Kyoto Station, Karasuma Chuo-guchi, Shimogyo-ku\", \"phone\": \"+81-75-344-8888\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Since this is mostly outdoors, add a quick reminder to bring comfortable shoes, a compact umbrella, and a refillable water bottle."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packing_reminders\", \"value\": [\"comfortable walking shoes\", \"compact umbrella\", \"refillable water bottle\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a simple food plan: grab a market lunch, try matcha sweets, and have yakitori in the evening."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/food_plan\", \"value\": [\"market lunch\", \"matcha sweets\", \"yakitori dinner\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "For getting around, prefer trains first, buses second, and taxis only if we're running late."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport_preferences\", \"value\": {\"first_choice\": \"train\", \"second_choice\": \"bus\", \"taxi_use\": \"only if running late\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a quick weather note for the day: mild in the morning, warmer after lunch, and cooler along the river in the evening."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/weather_notes\", \"value\": {\"morning\": \"mild\", \"afternoon\": \"warmer after lunch\", \"evening\": \"cooler along the river\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please keep a few emergency details handy too: the general emergency number, the tourist help line, and the nearest major hospital."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emergency_info\", \"value\": {\"emergency_number\": \"119\", \"tourist_help_line\": \"+81-75-343-0548\", \"nearest_major_hospital\": \"Kyoto City Hospital\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note my comfort preferences: avoid steep shortcuts when possible, keep restroom breaks easy, and choose shaded walking routes where they make sense."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/comfort_preferences\", \"value\": {\"avoid\": \"steep shortcuts\", \"restroom_access\": \"easy breaks\", \"walking_routes\": \"prefer shaded paths\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a few money reminders too: carry some cash, keep an IC card topped up, and expect most snacks to be small purchases."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget_notes\", \"value\": {\"cash\": \"carry some yen\", \"ic_card\": \"keep topped up\", \"snacks\": \"small purchases\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Fushimi Inari, add a few extra visit notes: focus on the torii gates, expect some uphill walking, and look for photos near the lower shrine paths."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/0/visit_details\", \"value\": {\"main_focus\": \"torii gates\", \"access_note\": \"some uphill walking\", \"photo_tip\": \"lower shrine paths\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Kiyomizu-dera, add extra notes to focus on the wooden stage, expect a busy approach street, and take photos from the temple veranda."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/1/visit_details\", \"value\": {\"main_focus\": \"wooden stage\", \"access_note\": \"busy approach street\", \"photo_tip\": \"temple veranda\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Nishiki Market, add extra notes to focus on street snacks, expect narrow covered lanes, and take photos near the colorful storefronts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/2/visit_details\", \"value\": {\"main_focus\": \"street snacks\", \"access_note\": \"narrow covered lanes\", \"photo_tip\": \"colorful storefronts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Nijo Castle, add extra notes to focus on the painted palace rooms, expect wide gravel paths, and take photos by the garden pond."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/3/visit_details\", \"value\": {\"main_focus\": \"painted palace rooms\", \"access_note\": \"wide gravel paths\", \"photo_tip\": \"garden pond\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the bamboo grove, add extra notes to focus on the tall bamboo lanes, expect flat but crowded paths, and take photos near the quieter side lanes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/4/visit_details\", \"value\": {\"main_focus\": \"tall bamboo lanes\", \"access_note\": \"flat but crowded paths\", \"photo_tip\": \"quieter side lanes\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Gion, add extra notes to focus on the lantern-lit streets, expect narrow evening lanes, take photos near Hanamikoji, and browse for small local souvenirs."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/5/visit_details\", \"value\": {\"main_focus\": \"lantern-lit streets\", \"access_note\": \"narrow evening lanes\", \"photo_tip\": \"Hanamikoji\", \"souvenir_note\": \"small local souvenirs\"}}]"
+    }
+  ],
+  "edit_instruction": "Please make Nijo Castle the second stop, swapping it with Kiyomizu-dera.",
+  "theme": "Swapping the order of two stops",
+  "master_data": null,
+  "current_json": {
+    "destination": "Kyoto",
+    "day_start_time": "08:30",
+    "stops": [
+      {
+        "position": 1,
+        "name": "Fushimi Inari Taisha",
+        "duration_minutes": 75,
+        "start_time": "08:30",
+        "end_time": "09:45",
+        "gap_after_minutes": 30,
+        "practical_notes": {
+          "priority": "high",
+          "entry_cost": "free",
+          "nearest_station": "Inari Station"
+        },
+        "visit_details": {
+          "main_focus": "torii gates",
+          "access_note": "some uphill walking",
+          "photo_tip": "lower shrine paths"
+        }
+      },
+      {
+        "position": 2,
+        "name": "Kiyomizu-dera",
+        "duration_minutes": 60,
+        "start_time": "10:15",
+        "end_time": "11:15",
+        "gap_after_minutes": 20,
+        "practical_notes": {
+          "priority": "must-see",
+          "entry_cost": "500 JPY",
+          "nearest_station": "Kiyomizu-Gojo Station"
+        },
+        "visit_details": {
+          "main_focus": "wooden stage",
+          "access_note": "busy approach street",
+          "photo_tip": "temple veranda"
+        }
+      },
+      {
+        "position": 3,
+        "name": "Nishiki Market",
+        "duration_minutes": 50,
+        "start_time": "11:35",
+        "end_time": "12:25",
+        "gap_after_minutes": 25,
+        "practical_notes": {
+          "priority": "food-focused",
+          "entry_cost": "free",
+          "nearest_station": "Kyoto-Kawaramachi Station"
+        },
+        "visit_details": {
+          "main_focus": "street snacks",
+          "access_note": "narrow covered lanes",
+          "photo_tip": "colorful storefronts"
+        }
+      },
+      {
+        "position": 4,
+        "name": "Nijo Castle",
+        "duration_minutes": 70,
+        "start_time": "12:50",
+        "end_time": "14:00",
+        "gap_after_minutes": 35,
+        "practical_notes": {
+          "priority": "history stop",
+          "entry_cost": "1300 JPY",
+          "nearest_station": "Nijojo-mae Station"
+        },
+        "visit_details": {
+          "main_focus": "painted palace rooms",
+          "access_note": "wide gravel paths",
+          "photo_tip": "garden pond"
+        }
+      },
+      {
+        "position": 5,
+        "name": "Arashiyama Bamboo Grove",
+        "duration_minutes": 65,
+        "start_time": "14:35",
+        "end_time": "15:40",
+        "gap_after_minutes": 30,
+        "practical_notes": {
+          "priority": "scenery stop",
+          "entry_cost": "free",
+          "nearest_station": "Saga-Arashiyama Station"
+        },
+        "visit_details": {
+          "main_focus": "tall bamboo lanes",
+          "access_note": "flat but crowded paths",
+          "photo_tip": "quieter side lanes"
+        }
+      },
+      {
+        "position": 6,
+        "name": "Gion",
+        "duration_minutes": 80,
+        "start_time": "16:10",
+        "end_time": "17:30",
+        "practical_notes": {
+          "priority": "evening atmosphere",
+          "entry_cost": "free",
+          "nearest_station": "Gion-Shijo Station"
+        },
+        "visit_details": {
+          "main_focus": "lantern-lit streets",
+          "access_note": "narrow evening lanes",
+          "photo_tip": "Hanamikoji",
+          "souvenir_note": "small local souvenirs"
+        }
+      }
+    ],
+    "summary": {
+      "stop_count": 6,
+      "day_end_time": "17:30"
+    },
+    "lodging": {
+      "hotel_name": "Hotel Granvia Kyoto",
+      "address": "JR Kyoto Station, Karasuma Chuo-guchi, Shimogyo-ku",
+      "phone": "+81-75-344-8888"
+    },
+    "packing_reminders": [
+      "comfortable walking shoes",
+      "compact umbrella",
+      "refillable water bottle"
+    ],
+    "food_plan": [
+      "market lunch",
+      "matcha sweets",
+      "yakitori dinner"
+    ],
+    "transport_preferences": {
+      "first_choice": "train",
+      "second_choice": "bus",
+      "taxi_use": "only if running late"
+    },
+    "weather_notes": {
+      "morning": "mild",
+      "afternoon": "warmer after lunch",
+      "evening": "cooler along the river"
+    },
+    "emergency_info": {
+      "emergency_number": "119",
+      "tourist_help_line": "+81-75-343-0548",
+      "nearest_major_hospital": "Kyoto City Hospital"
+    },
+    "comfort_preferences": {
+      "avoid": "steep shortcuts",
+      "restroom_access": "easy breaks",
+      "walking_routes": "prefer shaded paths"
+    },
+    "budget_notes": {
+      "cash": "carry some yen",
+      "ic_card": "keep topped up",
+      "snacks": "small purchases"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/stops/1/name",
+      "kind": "direct",
+      "value": "Nijo Castle"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/1/duration_minutes",
+      "kind": "cascade",
+      "value": 70
+    },
+    {
+      "op": "replace",
+      "path": "/stops/1/end_time",
+      "kind": "cascade",
+      "value": "11:25"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/1/gap_after_minutes",
+      "kind": "cascade",
+      "value": 35
+    },
+    {
+      "op": "replace",
+      "path": "/stops/1/practical_notes/priority",
+      "kind": "cascade",
+      "value": "history stop"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/1/practical_notes/entry_cost",
+      "kind": "cascade",
+      "value": "1300 JPY"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/1/practical_notes/nearest_station",
+      "kind": "cascade",
+      "value": "Nijojo-mae Station"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/1/visit_details/main_focus",
+      "kind": "cascade",
+      "value": "painted palace rooms"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/1/visit_details/access_note",
+      "kind": "cascade",
+      "value": "wide gravel paths"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/1/visit_details/photo_tip",
+      "kind": "cascade",
+      "value": "garden pond"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/2/start_time",
+      "kind": "cascade",
+      "value": "12:00"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/2/end_time",
+      "kind": "cascade",
+      "value": "12:50"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/name",
+      "kind": "cascade",
+      "value": "Kiyomizu-dera"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/duration_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/start_time",
+      "kind": "cascade",
+      "value": "13:15"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/end_time",
+      "kind": "cascade",
+      "value": "14:15"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/gap_after_minutes",
+      "kind": "cascade",
+      "value": 20
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/practical_notes/priority",
+      "kind": "cascade",
+      "value": "must-see"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/practical_notes/entry_cost",
+      "kind": "cascade",
+      "value": "500 JPY"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/practical_notes/nearest_station",
+      "kind": "cascade",
+      "value": "Kiyomizu-Gojo Station"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/visit_details/main_focus",
+      "kind": "cascade",
+      "value": "wooden stage"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/visit_details/access_note",
+      "kind": "cascade",
+      "value": "busy approach street"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/visit_details/photo_tip",
+      "kind": "cascade",
+      "value": "temple veranda"
+    }
+  ],
+  "expected_json": {
+    "destination": "Kyoto",
+    "day_start_time": "08:30",
+    "stops": [
+      {
+        "position": 1,
+        "name": "Fushimi Inari Taisha",
+        "duration_minutes": 75,
+        "start_time": "08:30",
+        "end_time": "09:45",
+        "gap_after_minutes": 30,
+        "practical_notes": {
+          "priority": "high",
+          "entry_cost": "free",
+          "nearest_station": "Inari Station"
+        },
+        "visit_details": {
+          "main_focus": "torii gates",
+          "access_note": "some uphill walking",
+          "photo_tip": "lower shrine paths"
+        }
+      },
+      {
+        "position": 2,
+        "name": "Nijo Castle",
+        "duration_minutes": 70,
+        "start_time": "10:15",
+        "end_time": "11:25",
+        "gap_after_minutes": 35,
+        "practical_notes": {
+          "priority": "history stop",
+          "entry_cost": "1300 JPY",
+          "nearest_station": "Nijojo-mae Station"
+        },
+        "visit_details": {
+          "main_focus": "painted palace rooms",
+          "access_note": "wide gravel paths",
+          "photo_tip": "garden pond"
+        }
+      },
+      {
+        "position": 3,
+        "name": "Nishiki Market",
+        "duration_minutes": 50,
+        "start_time": "12:00",
+        "end_time": "12:50",
+        "gap_after_minutes": 25,
+        "practical_notes": {
+          "priority": "food-focused",
+          "entry_cost": "free",
+          "nearest_station": "Kyoto-Kawaramachi Station"
+        },
+        "visit_details": {
+          "main_focus": "street snacks",
+          "access_note": "narrow covered lanes",
+          "photo_tip": "colorful storefronts"
+        }
+      },
+      {
+        "position": 4,
+        "name": "Kiyomizu-dera",
+        "duration_minutes": 60,
+        "start_time": "13:15",
+        "end_time": "14:15",
+        "gap_after_minutes": 20,
+        "practical_notes": {
+          "priority": "must-see",
+          "entry_cost": "500 JPY",
+          "nearest_station": "Kiyomizu-Gojo Station"
+        },
+        "visit_details": {
+          "main_focus": "wooden stage",
+          "access_note": "busy approach street",
+          "photo_tip": "temple veranda"
+        }
+      },
+      {
+        "position": 5,
+        "name": "Arashiyama Bamboo Grove",
+        "duration_minutes": 65,
+        "start_time": "14:35",
+        "end_time": "15:40",
+        "gap_after_minutes": 30,
+        "practical_notes": {
+          "priority": "scenery stop",
+          "entry_cost": "free",
+          "nearest_station": "Saga-Arashiyama Station"
+        },
+        "visit_details": {
+          "main_focus": "tall bamboo lanes",
+          "access_note": "flat but crowded paths",
+          "photo_tip": "quieter side lanes"
+        }
+      },
+      {
+        "position": 6,
+        "name": "Gion",
+        "duration_minutes": 80,
+        "start_time": "16:10",
+        "end_time": "17:30",
+        "practical_notes": {
+          "priority": "evening atmosphere",
+          "entry_cost": "free",
+          "nearest_station": "Gion-Shijo Station"
+        },
+        "visit_details": {
+          "main_focus": "lantern-lit streets",
+          "access_note": "narrow evening lanes",
+          "photo_tip": "Hanamikoji",
+          "souvenir_note": "small local souvenirs"
+        }
+      }
+    ],
+    "summary": {
+      "stop_count": 6,
+      "day_end_time": "17:30"
+    },
+    "lodging": {
+      "hotel_name": "Hotel Granvia Kyoto",
+      "address": "JR Kyoto Station, Karasuma Chuo-guchi, Shimogyo-ku",
+      "phone": "+81-75-344-8888"
+    },
+    "packing_reminders": [
+      "comfortable walking shoes",
+      "compact umbrella",
+      "refillable water bottle"
+    ],
+    "food_plan": [
+      "market lunch",
+      "matcha sweets",
+      "yakitori dinner"
+    ],
+    "transport_preferences": {
+      "first_choice": "train",
+      "second_choice": "bus",
+      "taxi_use": "only if running late"
+    },
+    "weather_notes": {
+      "morning": "mild",
+      "afternoon": "warmer after lunch",
+      "evening": "cooler along the river"
+    },
+    "emergency_info": {
+      "emergency_number": "119",
+      "tourist_help_line": "+81-75-343-0548",
+      "nearest_major_hospital": "Kyoto City Hospital"
+    },
+    "comfort_preferences": {
+      "avoid": "steep shortcuts",
+      "restroom_access": "easy breaks",
+      "walking_routes": "prefer shaded paths"
+    },
+    "budget_notes": {
+      "cash": "carry some yen",
+      "ic_card": "keep topped up",
+      "snacks": "small purchases"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Swap Nijo Castle (was position 4) into position 2, exchanging it with Kiyomizu-dera. Position numbers stay; the two stops exchange their full identity (name, duration_minutes, gap_after_minutes, practical_notes, visit_details). Start/end times recompute sequentially (start = previous end + previous gap_after_minutes, from day_start 08:30): stops[1] becomes Nijo (10:15-11:25), Nishiki shifts to 12:00-12:50, stops[3] becomes Kiyomizu (13:15-14:15); stops 1/5/6 and the summary are unchanged (total duration+gap is invariant to the swap). /stops/1/name is the direct edit; the rest are cascade.",
+  "conversation_pattern": "Center the artifact on a one-day itinerary built as an ordered list of timed stops, where each stop's time follows from the previous stop's end plus a stated gap and its own stated duration, rolling up to overall counts and a day-end time. Around this core, add the realistic, independent details a planner would record that do not depend on a stop's position in the day, and vary their number and the number of stops from sample to sample.",
+  "edit_pattern": "Swap the positions of two specific stops in the day.",
+  "cascade_pattern": "When two stops exchange positions, the times from the earlier of the two positions onward recompute along the chain and any order-derived fields update; the counts and the day-end stay because the same stops and gaps are kept. Stops before the earlier position keep their times. This is determined because the durations, the gap, and the two positions are stated.",
+  "requires_master_data": false
+}

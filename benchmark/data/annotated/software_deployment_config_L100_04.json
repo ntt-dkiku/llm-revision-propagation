@@ -1,0 +1,730 @@
+{
+  "id": "software_deployment_config_L100_04",
+  "domain": "software_deployment_config",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start this deployment profile for the checkout API service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment\", \"value\": {\"name\": \"checkout-api\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a 768 MiB cap for each container so the service has a clear memory limit to enforce."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/policy\", \"value\": {\"per_container_memory_quota_mib\": 768}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also spell out that any container asking for more than the cap should be reduced to the cap and marked as over the limit, while anything at or below it is fine."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/policy/rule\", \"value\": \"A container is compliant iff its memory request is at most the per-container quota; a container exceeding the quota must have its request clamped down to the quota and its over-quota indicator set true.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the main application container, with a 512 MiB memory request, and show that it is not over the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers\", \"value\": [{\"name\": \"app\", \"memory_request_mib\": 512, \"over_quota\": false}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a Redis sidecar that asks for 896 MiB, so it should be capped and marked as over the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"redis-sidecar\", \"memory_request_mib\": 768, \"over_quota\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a background worker that needs 640 MiB and is still within the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"worker\", \"memory_request_mib\": 640, \"over_quota\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an nginx proxy container that only needs 256 MiB, so it should stay comfortably under the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"nginx-proxy\", \"memory_request_mib\": 256, \"over_quota\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include an observability agent that originally wants 1024 MiB, so it should be reduced to the current cap and marked as over the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"otel-agent\", \"memory_request_mib\": 768, \"over_quota\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a migration helper that requests exactly 768 MiB, which should still count as within the current cap."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"migration-helper\", \"memory_request_mib\": 768, \"over_quota\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a small log shipper that requests 384 MiB and remains within the cap."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"log-shipper\", \"memory_request_mib\": 384, \"over_quota\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a billing reconciler that needs 704 MiB and is still acceptable under the current cap."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"billing-reconciler\", \"memory_request_mib\": 704, \"over_quota\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a fraud scorer that asks for 832 MiB, so it should be brought down to the cap and flagged."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"fraud-scorer\", \"memory_request_mib\": 768, \"over_quota\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a tax calculator that needs 576 MiB and should remain within the cap."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"tax-calculator\", \"memory_request_mib\": 576, \"over_quota\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a cache warmer that needs 448 MiB and should not be considered over the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"cache-warmer\", \"memory_request_mib\": 448, \"over_quota\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a payments exporter that wants 960 MiB, so it should be capped and marked as over the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"payments-exporter\", \"memory_request_mib\": 768, \"over_quota\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a session cleanup container that requests 320 MiB and stays within the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"session-cleaner\", \"memory_request_mib\": 320, \"over_quota\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an inventory sync helper that needs 736 MiB and is still under the current limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"inventory-sync\", \"memory_request_mib\": 736, \"over_quota\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a recommendation engine that wants 1152 MiB, so it should be reduced to the cap and marked as over the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/containers/-\", \"value\": {\"name\": \"recommendation-engine\", \"memory_request_mib\": 768, \"over_quota\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run this in production for the payments namespace in us-east-1."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/environment\", \"value\": {\"tier\": \"production\", \"namespace\": \"payments\", \"region\": \"us-east-1\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run three copies by default, allow it to grow to six, and aim autoscaling around seventy percent CPU."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/scaling\", \"value\": {\"min_replicas\": 3, \"max_replicas\": 6, \"target_cpu_utilization_percent\": 70}}]"
+    },
+    {
+      "role": "user",
+      "content": "Expose it on port 8080 over HTTP, with a private load balancer."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/service\", \"value\": {\"port\": 8080, \"protocol\": \"HTTP\", \"load_balancer\": \"internal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the standard rolling rollout with at most one unavailable copy and two extra copies during updates."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/strategy\", \"value\": {\"type\": \"RollingUpdate\", \"max_unavailable\": 1, \"max_surge\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add readiness checking on the health endpoint with a short initial delay and a ten-second interval."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/probes/readiness\", \"value\": {\"path\": \"/healthz\", \"initial_delay_seconds\": 10, \"period_seconds\": 10}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add liveness checking on the same health endpoint, starting after thirty seconds and repeating every twenty seconds."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/probes/liveness\", \"value\": {\"path\": \"/healthz\", \"initial_delay_seconds\": 30, \"period_seconds\": 20}}]"
+    },
+    {
+      "role": "user",
+      "content": "Pin the main application image to the current stable build from our registry."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/image\", \"value\": {\"registry\": \"registry.internal.example.com\", \"repository\": \"checkout/api\", \"tag\": \"2026.02.14\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run it under the checkout runtime identity and keep token mounting on, with the usual cloud role attached."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/service_account\", \"value\": {\"name\": \"checkout-runtime\", \"automount_token\": true, \"iam_role\": \"arn:aws:iam::123456789012:role/checkout-api-prod\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the database connection details to the checkout cluster, with eight pooled connections and encryption required."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/config/database\", \"value\": {\"host\": \"checkout-db.prod.svc\", \"max_connections\": 8, \"ssl\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Point the app at the shared Redis cache, use database zero there, and give cache calls a two-second timeout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/config/cache\", \"value\": {\"host\": \"redis.prod.svc\", \"database\": 0, \"timeout_seconds\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send metrics to the in-cluster collector, use the payments tenant, and sample traces at a quarter rate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/telemetry\", \"value\": {\"collector_endpoint\": \"http://otel-collector:4317\", \"tenant\": \"payments\", \"sample_rate\": 0.25}}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply a locked-down runtime posture: don't allow privilege escalation, run without root, and keep the root filesystem read-only."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/security_context\", \"value\": {\"allow_privilege_escalation\": false, \"run_as_non_root\": true, \"read_only_root_filesystem\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give it a fast node disk for temporary work, capped at two gibibytes and wiped when the pod exits."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/volumes\", \"value\": [{\"name\": \"tmp-work\", \"medium\": \"SSD\", \"size_limit_gib\": 2, \"ephemeral\": true}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Tag it for the payments team, the checkout product area, and the PCI workload class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/labels\", \"value\": {\"team\": \"payments-platform\", \"app\": \"checkout\", \"compliance\": \"pci\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the rollout annotations for the last change ticket, the operator who approved it, and the date it was approved."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/annotations\", \"value\": {\"change_ticket\": \"CHG-48219\", \"approved_by\": \"sre-lead\", \"approved_date\": \"2026-02-20\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Route production alerts to the checkout on-call channel, page at critical severity, and keep the thirty-minute response target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/alerting\", \"value\": {\"channel\": \"#checkout-oncall\", \"severity\": \"critical\", \"response_sla_minutes\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the regular maintenance for Sunday at 04:00 UTC, lasting one hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/maintenance\", \"value\": {\"window_day\": \"Sunday\", \"start_utc\": \"04:00\", \"duration_minutes\": 60}}]"
+    }
+  ],
+  "edit_instruction": "Please tighten the per-container memory cap to 640 MiB.",
+  "theme": "Tightening the per-container memory quota",
+  "conversation_pattern": "Center the artifact on a deployment with several containers, each carrying a memory_request_mib value and an over_quota flag, governed by a stated policy field 'per_container_memory_quota_mib' with an explicit rule: a container is compliant iff its request is at most the quota; a container exceeding the quota must have its request clamped down to the quota and its over_quota flag set true. Make some containers compliant and some not under the current quota, and ensure every container's initial over_quota flag already matches the stated rule under the current quota (a container within the current quota is not over quota). Around this core, add realistic independent details that do not depend on the quota, and vary the number of containers from sample to sample.",
+  "edit_pattern": "Tighten the per_container_memory_quota_mib to a specific stricter (smaller) value.",
+  "cascade_pattern": "Tightening the quota clamps the memory request of only those containers whose request now exceeds the new quota down to that quota and sets their over_quota flag true; containers already within the new quota and all unrelated fields stay unchanged. The affected set is determined by comparing each container's stated request to the new quota.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "deployment": {
+      "name": "checkout-api",
+      "policy": {
+        "per_container_memory_quota_mib": 768,
+        "rule": "A container is compliant iff its memory request is at most the per-container quota; a container exceeding the quota must have its request clamped down to the quota and its over-quota indicator set true."
+      },
+      "containers": [
+        {
+          "name": "app",
+          "memory_request_mib": 512,
+          "over_quota": false
+        },
+        {
+          "name": "redis-sidecar",
+          "memory_request_mib": 768,
+          "over_quota": true
+        },
+        {
+          "name": "worker",
+          "memory_request_mib": 640,
+          "over_quota": false
+        },
+        {
+          "name": "nginx-proxy",
+          "memory_request_mib": 256,
+          "over_quota": false
+        },
+        {
+          "name": "otel-agent",
+          "memory_request_mib": 768,
+          "over_quota": true
+        },
+        {
+          "name": "migration-helper",
+          "memory_request_mib": 768,
+          "over_quota": false
+        },
+        {
+          "name": "log-shipper",
+          "memory_request_mib": 384,
+          "over_quota": false
+        },
+        {
+          "name": "billing-reconciler",
+          "memory_request_mib": 704,
+          "over_quota": false
+        },
+        {
+          "name": "fraud-scorer",
+          "memory_request_mib": 768,
+          "over_quota": true
+        },
+        {
+          "name": "tax-calculator",
+          "memory_request_mib": 576,
+          "over_quota": false
+        },
+        {
+          "name": "cache-warmer",
+          "memory_request_mib": 448,
+          "over_quota": false
+        },
+        {
+          "name": "payments-exporter",
+          "memory_request_mib": 768,
+          "over_quota": true
+        },
+        {
+          "name": "session-cleaner",
+          "memory_request_mib": 320,
+          "over_quota": false
+        },
+        {
+          "name": "inventory-sync",
+          "memory_request_mib": 736,
+          "over_quota": false
+        },
+        {
+          "name": "recommendation-engine",
+          "memory_request_mib": 768,
+          "over_quota": true
+        }
+      ],
+      "environment": {
+        "tier": "production",
+        "namespace": "payments",
+        "region": "us-east-1"
+      },
+      "scaling": {
+        "min_replicas": 3,
+        "max_replicas": 6,
+        "target_cpu_utilization_percent": 70
+      },
+      "service": {
+        "port": 8080,
+        "protocol": "HTTP",
+        "load_balancer": "internal"
+      },
+      "strategy": {
+        "type": "RollingUpdate",
+        "max_unavailable": 1,
+        "max_surge": 2
+      },
+      "probes": {
+        "readiness": {
+          "path": "/healthz",
+          "initial_delay_seconds": 10,
+          "period_seconds": 10
+        },
+        "liveness": {
+          "path": "/healthz",
+          "initial_delay_seconds": 30,
+          "period_seconds": 20
+        }
+      },
+      "image": {
+        "registry": "registry.internal.example.com",
+        "repository": "checkout/api",
+        "tag": "2026.02.14"
+      },
+      "service_account": {
+        "name": "checkout-runtime",
+        "automount_token": true,
+        "iam_role": "arn:aws:iam::123456789012:role/checkout-api-prod"
+      },
+      "config": {
+        "database": {
+          "host": "checkout-db.prod.svc",
+          "max_connections": 8,
+          "ssl": true
+        },
+        "cache": {
+          "host": "redis.prod.svc",
+          "database": 0,
+          "timeout_seconds": 2
+        }
+      },
+      "telemetry": {
+        "collector_endpoint": "http://otel-collector:4317",
+        "tenant": "payments",
+        "sample_rate": 0.25
+      },
+      "security_context": {
+        "allow_privilege_escalation": false,
+        "run_as_non_root": true,
+        "read_only_root_filesystem": true
+      },
+      "volumes": [
+        {
+          "name": "tmp-work",
+          "medium": "SSD",
+          "size_limit_gib": 2,
+          "ephemeral": true
+        }
+      ],
+      "labels": {
+        "team": "payments-platform",
+        "app": "checkout",
+        "compliance": "pci"
+      },
+      "annotations": {
+        "change_ticket": "CHG-48219",
+        "approved_by": "sre-lead",
+        "approved_date": "2026-02-20"
+      },
+      "alerting": {
+        "channel": "#checkout-oncall",
+        "severity": "critical",
+        "response_sla_minutes": 30
+      },
+      "maintenance": {
+        "window_day": "Sunday",
+        "start_utc": "04:00",
+        "duration_minutes": 60
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/deployment/policy/per_container_memory_quota_mib",
+      "kind": "direct",
+      "value": 640
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/containers/1/memory_request_mib",
+      "kind": "cascade",
+      "value": 640
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/containers/4/memory_request_mib",
+      "kind": "cascade",
+      "value": 640
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/containers/5/memory_request_mib",
+      "kind": "cascade",
+      "value": 640
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/containers/5/over_quota",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/containers/7/memory_request_mib",
+      "kind": "cascade",
+      "value": 640
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/containers/7/over_quota",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/containers/8/memory_request_mib",
+      "kind": "cascade",
+      "value": 640
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/containers/11/memory_request_mib",
+      "kind": "cascade",
+      "value": 640
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/containers/13/memory_request_mib",
+      "kind": "cascade",
+      "value": 640
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/containers/13/over_quota",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/containers/14/memory_request_mib",
+      "kind": "cascade",
+      "value": 640
+    }
+  ],
+  "expected_json": {
+    "deployment": {
+      "name": "checkout-api",
+      "policy": {
+        "per_container_memory_quota_mib": 640,
+        "rule": "A container is compliant iff its memory request is at most the per-container quota; a container exceeding the quota must have its request clamped down to the quota and its over-quota indicator set true."
+      },
+      "containers": [
+        {
+          "name": "app",
+          "memory_request_mib": 512,
+          "over_quota": false
+        },
+        {
+          "name": "redis-sidecar",
+          "memory_request_mib": 640,
+          "over_quota": true
+        },
+        {
+          "name": "worker",
+          "memory_request_mib": 640,
+          "over_quota": false
+        },
+        {
+          "name": "nginx-proxy",
+          "memory_request_mib": 256,
+          "over_quota": false
+        },
+        {
+          "name": "otel-agent",
+          "memory_request_mib": 640,
+          "over_quota": true
+        },
+        {
+          "name": "migration-helper",
+          "memory_request_mib": 640,
+          "over_quota": true
+        },
+        {
+          "name": "log-shipper",
+          "memory_request_mib": 384,
+          "over_quota": false
+        },
+        {
+          "name": "billing-reconciler",
+          "memory_request_mib": 640,
+          "over_quota": true
+        },
+        {
+          "name": "fraud-scorer",
+          "memory_request_mib": 640,
+          "over_quota": true
+        },
+        {
+          "name": "tax-calculator",
+          "memory_request_mib": 576,
+          "over_quota": false
+        },
+        {
+          "name": "cache-warmer",
+          "memory_request_mib": 448,
+          "over_quota": false
+        },
+        {
+          "name": "payments-exporter",
+          "memory_request_mib": 640,
+          "over_quota": true
+        },
+        {
+          "name": "session-cleaner",
+          "memory_request_mib": 320,
+          "over_quota": false
+        },
+        {
+          "name": "inventory-sync",
+          "memory_request_mib": 640,
+          "over_quota": true
+        },
+        {
+          "name": "recommendation-engine",
+          "memory_request_mib": 640,
+          "over_quota": true
+        }
+      ],
+      "environment": {
+        "tier": "production",
+        "namespace": "payments",
+        "region": "us-east-1"
+      },
+      "scaling": {
+        "min_replicas": 3,
+        "max_replicas": 6,
+        "target_cpu_utilization_percent": 70
+      },
+      "service": {
+        "port": 8080,
+        "protocol": "HTTP",
+        "load_balancer": "internal"
+      },
+      "strategy": {
+        "type": "RollingUpdate",
+        "max_unavailable": 1,
+        "max_surge": 2
+      },
+      "probes": {
+        "readiness": {
+          "path": "/healthz",
+          "initial_delay_seconds": 10,
+          "period_seconds": 10
+        },
+        "liveness": {
+          "path": "/healthz",
+          "initial_delay_seconds": 30,
+          "period_seconds": 20
+        }
+      },
+      "image": {
+        "registry": "registry.internal.example.com",
+        "repository": "checkout/api",
+        "tag": "2026.02.14"
+      },
+      "service_account": {
+        "name": "checkout-runtime",
+        "automount_token": true,
+        "iam_role": "arn:aws:iam::123456789012:role/checkout-api-prod"
+      },
+      "config": {
+        "database": {
+          "host": "checkout-db.prod.svc",
+          "max_connections": 8,
+          "ssl": true
+        },
+        "cache": {
+          "host": "redis.prod.svc",
+          "database": 0,
+          "timeout_seconds": 2
+        }
+      },
+      "telemetry": {
+        "collector_endpoint": "http://otel-collector:4317",
+        "tenant": "payments",
+        "sample_rate": 0.25
+      },
+      "security_context": {
+        "allow_privilege_escalation": false,
+        "run_as_non_root": true,
+        "read_only_root_filesystem": true
+      },
+      "volumes": [
+        {
+          "name": "tmp-work",
+          "medium": "SSD",
+          "size_limit_gib": 2,
+          "ephemeral": true
+        }
+      ],
+      "labels": {
+        "team": "payments-platform",
+        "app": "checkout",
+        "compliance": "pci"
+      },
+      "annotations": {
+        "change_ticket": "CHG-48219",
+        "approved_by": "sre-lead",
+        "approved_date": "2026-02-20"
+      },
+      "alerting": {
+        "channel": "#checkout-oncall",
+        "severity": "critical",
+        "response_sla_minutes": 30
+      },
+      "maintenance": {
+        "window_day": "Sunday",
+        "start_utc": "04:00",
+        "duration_minutes": 60
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "quota 768->640; every container with memory_request>640 clamped to 640 and over_quota set true (only actual changes recorded). NOTE: containers already at the old quota (768) are clamped to 640.",
+  "annotated": true,
+  "excluded": false
+}

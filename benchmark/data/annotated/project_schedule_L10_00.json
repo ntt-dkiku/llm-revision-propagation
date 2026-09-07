@@ -1,0 +1,133 @@
+{
+  "id": "project_schedule_L10_00",
+  "domain": "project_schedule",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's plan the vendor onboarding work starting on April 1, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projectStart\", \"value\": \"2026-04-01\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please make the first activity contract review, taking four days from the kickoff."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": {\"contractReview\": {\"durationDays\": 4, \"start\": \"2026-04-01\", \"finish\": \"2026-04-05\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "After that, add the system access setup work and make it last three days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/systemAccessSetup\", \"value\": {\"durationDays\": 3, \"predecessor\": \"contractReview\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have that setup begin right when the review wraps up, and mark its planned dates."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/systemAccessSetup/start\", \"value\": \"2026-04-05\"}, {\"op\": \"add\", \"path\": \"/tasks/systemAccessSetup/finish\", \"value\": \"2026-04-08\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please summarize the overall timeline now: it spans seven days and wraps on April 8, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/totalDurationDays\", \"value\": 7}, {\"op\": \"add\", \"path\": \"/projectEnd\", \"value\": \"2026-04-08\"}]"
+    }
+  ],
+  "edit_instruction": "Make contract review take 5 days instead.",
+  "theme": "Changing a task's duration",
+  "master_data": null,
+  "current_json": {
+    "projectStart": "2026-04-01",
+    "tasks": {
+      "contractReview": {
+        "durationDays": 4,
+        "start": "2026-04-01",
+        "finish": "2026-04-05"
+      },
+      "systemAccessSetup": {
+        "durationDays": 3,
+        "predecessor": "contractReview",
+        "start": "2026-04-05",
+        "finish": "2026-04-08"
+      }
+    },
+    "totalDurationDays": 7,
+    "projectEnd": "2026-04-08"
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/tasks/contractReview/durationDays",
+      "kind": "direct",
+      "value": 5
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/contractReview/finish",
+      "kind": "cascade",
+      "value": "2026-04-06"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/systemAccessSetup/start",
+      "kind": "cascade",
+      "value": "2026-04-06"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/systemAccessSetup/finish",
+      "kind": "cascade",
+      "value": "2026-04-09"
+    },
+    {
+      "op": "replace",
+      "path": "/totalDurationDays",
+      "kind": "cascade",
+      "value": 8
+    },
+    {
+      "op": "replace",
+      "path": "/projectEnd",
+      "kind": "cascade",
+      "value": "2026-04-09"
+    }
+  ],
+  "expected_json": {
+    "projectStart": "2026-04-01",
+    "tasks": {
+      "contractReview": {
+        "durationDays": 5,
+        "start": "2026-04-01",
+        "finish": "2026-04-06"
+      },
+      "systemAccessSetup": {
+        "durationDays": 3,
+        "predecessor": "contractReview",
+        "start": "2026-04-06",
+        "finish": "2026-04-09"
+      }
+    },
+    "totalDurationDays": 8,
+    "projectEnd": "2026-04-09"
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "contractReview 4->5 (calendar). finish 04-05->04-06. systemAccessSetup 04-06..04-09. totalDurationDays 7->8, projectEnd 04-08->04-09.",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a task list where each task has a stated duration and starts when its predecessor finishes, so finishes and start dates derive along the precedence chain, rolling up to a project end. Around this core, add the realistic, independent details a project plan would carry that do not depend on the task durations or dates, and vary their number and the number of tasks from sample to sample.",
+  "edit_pattern": "Change one task's duration to a specific new number of days.",
+  "cascade_pattern": "Editing a task's duration re-derives its finish, then each downstream task's start and finish recompute along the chain to the project end. Tasks not downstream of the edit stay. This is determined because durations and links are stated.",
+  "requires_master_data": false
+}

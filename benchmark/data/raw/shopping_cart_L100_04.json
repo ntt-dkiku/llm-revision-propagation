@@ -1,0 +1,533 @@
+{
+  "id": "shopping_cart_L100_04",
+  "domain": "shopping_cart",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a checkout record for order SC-48291."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart\", \"value\": {\"orderId\": \"SC-48291\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "This is a regular purchase for the buyer, not something being sent as a present."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/giftMode\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Since it’s for the buyer, keep the item prices visible in the package."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/showPricesInPackage\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Also, don’t include a gift receipt with the shipment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/giftReceiptIncluded\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the normal packaging since it isn’t meant to look like a present."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/packagingStyle\", \"value\": \"standard\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Skip any greeting card or note inside the box."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/messageCardIncluded\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Leave the retail tags and original price stickers on the items."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/retailTagsKept\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the regular return paperwork, not the version meant for presents."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/returnSlipType\", \"value\": \"standard\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Since the buyer is ordering for themself, let the packing slip show the full billing details."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/billingDetailsOnPackingSlip\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the normal checkout presentation where the shopper is shown as the purchaser on the package paperwork."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/purchaserShownOnPaperwork\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a first item: a charcoal travel mug, quantity two, priced at $18.50 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items\", \"value\": [{\"name\": \"Charcoal Travel Mug\", \"quantity\": 2, \"unitPrice\": 18.5}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another item: one navy desk lamp at $42.00."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Navy Desk Lamp\", \"quantity\": 1, \"unitPrice\": 42}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a pack of linen drawer organizers, three packs at $12.75 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Linen Drawer Organizers\", \"quantity\": 3, \"unitPrice\": 12.75}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one stainless lunch container at $24.95."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Stainless Lunch Container\", \"quantity\": 1, \"unitPrice\": 24.95}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add two eucalyptus hand towels at $9.80 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Eucalyptus Hand Towels\", \"quantity\": 2, \"unitPrice\": 9.8}}]"
+    },
+    {
+      "role": "user",
+      "content": "For a regular order like this, it’s okay to include store promo flyers in the box."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/promotionalInsertsIncluded\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Don’t add any gift wrap or decorative wrapping touches for this regular shipment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/giftWrapApplied\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep the box sealed the usual way, with no decorative gift seal."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/decorativeSealApplied\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Because this isn’t a present, there’s no need to hide the contents from the person receiving it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/contentsConcealedFromRecipient\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Let the recipient see the order total on the included paperwork, since it’s just the buyer getting their own package."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/presentation/orderTotalShownToRecipient\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the shopper as Maya Chen, using maya.chen@example.com and phone 415-555-0186."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/customer\", \"value\": {\"name\": \"Maya Chen\", \"email\": \"maya.chen@example.com\", \"phone\": \"415-555-0186\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Ship it to 728 Valencia Street in San Francisco, ZIP 94110."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shippingAddress\", \"value\": {\"street\": \"728 Valencia Street\", \"city\": \"San Francisco\", \"postalCode\": \"94110\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "That destination is in California, United States."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shippingAddress/state\", \"value\": \"CA\"}, {\"op\": \"add\", \"path\": \"/cart/shippingAddress/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use standard ground delivery with Pacific Parcel as the carrier, and no signature required."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shippingMethod\", \"value\": {\"service\": \"standard_ground\", \"carrier\": \"Pacific Parcel\", \"signatureRequired\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Pay with a Visa card ending in 4421, expiring in November 2027."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/payment\", \"value\": {\"brand\": \"Visa\", \"last4\": \"4421\", \"expiry\": \"2027-11\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the same San Francisco address for billing: 728 Valencia Street, ZIP 94110."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/billingAddress\", \"value\": {\"street\": \"728 Valencia Street\", \"city\": \"San Francisco\", \"postalCode\": \"94110\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "The billing address is also California, United States."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/billingAddress/state\", \"value\": \"CA\"}, {\"op\": \"add\", \"path\": \"/cart/billingAddress/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "This was placed through the web store on March 14, 2026, with prices in US dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/orderDate\", \"value\": \"2026-03-14\"}, {\"op\": \"add\", \"path\": \"/cart/salesChannel\", \"value\": \"web\"}, {\"op\": \"add\", \"path\": \"/cart/currency\", \"value\": \"USD\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply the SAVE10 promo to take ten percent off eligible merchandise."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/promotion\", \"value\": {\"code\": \"SAVE10\", \"discountPercent\": 10, \"applied\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a $7.99 delivery charge and calculate California sales tax at 8.625%."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/pricing/shippingFee\", \"value\": 7.99}, {\"op\": \"add\", \"path\": \"/cart/pricing/taxRate\", \"value\": 0.08625}]"
+    },
+    {
+      "role": "user",
+      "content": "Now total the merchandise, apply the promo discount, and note the discounted merchandise amount before delivery and tax."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/pricing/merchandiseSubtotal\", \"value\": 161.8}, {\"op\": \"add\", \"path\": \"/cart/pricing/discountAmount\", \"value\": 16.18}, {\"op\": \"add\", \"path\": \"/cart/pricing/discountedMerchandiseSubtotal\", \"value\": 145.62}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and calculate the sales tax and final amount due for the order."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/pricing/taxAmount\", \"value\": 12.56}, {\"op\": \"add\", \"path\": \"/cart/pricing/orderTotal\", \"value\": 166.17}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the order packed from the Oakland warehouse with normal handling, and keep everything together in one shipment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/fulfillment\", \"value\": {\"warehouse\": \"OAK-3\", \"processingPriority\": \"normal\", \"splitShipmentAllowed\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send normal order updates by email and text, including delivery progress notices."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/notifications\", \"value\": {\"emailOptIn\": true, \"smsOptIn\": true, \"deliveryUpdates\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the payment as authorized, fulfillment as not started yet, and keep the cancellation window open."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/status\", \"value\": {\"paymentAuthorized\": true, \"fulfillmentStage\": \"not_started\", \"cancellationWindowOpen\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "For delivery timing, show an expected window from March 19 to March 22 in Pacific time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/deliveryWindow\", \"value\": {\"startDate\": \"2026-03-19\", \"endDate\": \"2026-03-22\", \"timezone\": \"America/Los_Angeles\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Attach Maya’s loyalty membership for tracking: member MCHEN2048, silver level, with 1,240 points on the account."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/loyalty\", \"value\": {\"memberId\": \"MCHEN2048\", \"tier\": \"silver\", \"pointsBalance\": 1240}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the fraud screening result as approved, low risk, with no manual review needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/riskReview\", \"value\": {\"decision\": \"approved\", \"riskLevel\": \"low\", \"manualReviewRequired\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the order source details as checkout version 5.8.1, desktop browser, English locale."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/sourceContext\", \"value\": {\"checkoutVersion\": \"5.8.1\", \"deviceType\": \"desktop_browser\", \"locale\": \"en-US\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan for a medium shipping carton measuring 18 by 12 by 10 inches."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/package/dimensions\", \"value\": {\"lengthInches\": 18, \"widthInches\": 12, \"heightInches\": 10}}]"
+    },
+    {
+      "role": "user",
+      "content": "Estimate the package at 6.4 pounds, using recycled paper cushioning, and make it recyclable."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/package/weightPounds\", \"value\": 6.4}, {\"op\": \"add\", \"path\": \"/cart/package/cushioning\", \"value\": \"recycled_paper\"}, {\"op\": \"add\", \"path\": \"/cart/package/recyclable\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Add internal packing checks: verify the item count, confirm the address label, and photograph the sealed box before handoff."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/qualityChecks\", \"value\": {\"itemCountVerified\": true, \"addressLabelVerified\": true, \"sealedBoxPhotoRequired\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the warehouse contact for this shipment as Dana Ruiz at oak-ops@example.com, extension 317."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/fulfillment/contact\", \"value\": {\"name\": \"Dana Ruiz\", \"email\": \"oak-ops@example.com\", \"extension\": \"317\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Reserve the stock under batch B-771, allow substitutions if an item is unavailable, and hold the reservation for 45 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/inventoryReservation\", \"value\": {\"batchId\": \"B-771\", \"substitutionsAllowed\": true, \"holdMinutes\": 45}}]"
+    },
+    {
+      "role": "user",
+      "content": "For compliance, note that no age check is needed and nothing requires hazardous-material handling."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/compliance\", \"value\": {\"ageCheckRequired\": false, \"hazmatHandlingRequired\": false}}]"
+    }
+  ],
+  "edit_instruction": "Set gift mode to on for this order.",
+  "theme": "Switching the order to gift mode",
+  "master_data": null,
+  "current_json": {
+    "cart": {
+      "orderId": "SC-48291",
+      "giftMode": false,
+      "presentation": {
+        "showPricesInPackage": true,
+        "giftReceiptIncluded": false,
+        "packagingStyle": "standard",
+        "messageCardIncluded": false,
+        "retailTagsKept": true,
+        "returnSlipType": "standard",
+        "billingDetailsOnPackingSlip": true,
+        "purchaserShownOnPaperwork": true,
+        "promotionalInsertsIncluded": true,
+        "giftWrapApplied": false,
+        "decorativeSealApplied": false,
+        "contentsConcealedFromRecipient": false,
+        "orderTotalShownToRecipient": true
+      },
+      "items": [
+        {
+          "name": "Charcoal Travel Mug",
+          "quantity": 2,
+          "unitPrice": 18.5
+        },
+        {
+          "name": "Navy Desk Lamp",
+          "quantity": 1,
+          "unitPrice": 42
+        },
+        {
+          "name": "Linen Drawer Organizers",
+          "quantity": 3,
+          "unitPrice": 12.75
+        },
+        {
+          "name": "Stainless Lunch Container",
+          "quantity": 1,
+          "unitPrice": 24.95
+        },
+        {
+          "name": "Eucalyptus Hand Towels",
+          "quantity": 2,
+          "unitPrice": 9.8
+        }
+      ],
+      "customer": {
+        "name": "Maya Chen",
+        "email": "maya.chen@example.com",
+        "phone": "415-555-0186"
+      },
+      "shippingAddress": {
+        "street": "728 Valencia Street",
+        "city": "San Francisco",
+        "postalCode": "94110",
+        "state": "CA",
+        "country": "US"
+      },
+      "shippingMethod": {
+        "service": "standard_ground",
+        "carrier": "Pacific Parcel",
+        "signatureRequired": false
+      },
+      "payment": {
+        "brand": "Visa",
+        "last4": "4421",
+        "expiry": "2027-11"
+      },
+      "billingAddress": {
+        "street": "728 Valencia Street",
+        "city": "San Francisco",
+        "postalCode": "94110",
+        "state": "CA",
+        "country": "US"
+      },
+      "orderDate": "2026-03-14",
+      "salesChannel": "web",
+      "currency": "USD",
+      "promotion": {
+        "code": "SAVE10",
+        "discountPercent": 10,
+        "applied": true
+      },
+      "pricing": {
+        "shippingFee": 7.99,
+        "taxRate": 0.08625,
+        "merchandiseSubtotal": 161.8,
+        "discountAmount": 16.18,
+        "discountedMerchandiseSubtotal": 145.62,
+        "taxAmount": 12.56,
+        "orderTotal": 166.17
+      },
+      "fulfillment": {
+        "warehouse": "OAK-3",
+        "processingPriority": "normal",
+        "splitShipmentAllowed": false,
+        "contact": {
+          "name": "Dana Ruiz",
+          "email": "oak-ops@example.com",
+          "extension": "317"
+        }
+      },
+      "notifications": {
+        "emailOptIn": true,
+        "smsOptIn": true,
+        "deliveryUpdates": true
+      },
+      "status": {
+        "paymentAuthorized": true,
+        "fulfillmentStage": "not_started",
+        "cancellationWindowOpen": true
+      },
+      "deliveryWindow": {
+        "startDate": "2026-03-19",
+        "endDate": "2026-03-22",
+        "timezone": "America/Los_Angeles"
+      },
+      "loyalty": {
+        "memberId": "MCHEN2048",
+        "tier": "silver",
+        "pointsBalance": 1240
+      },
+      "riskReview": {
+        "decision": "approved",
+        "riskLevel": "low",
+        "manualReviewRequired": false
+      },
+      "sourceContext": {
+        "checkoutVersion": "5.8.1",
+        "deviceType": "desktop_browser",
+        "locale": "en-US"
+      },
+      "package": {
+        "dimensions": {
+          "lengthInches": 18,
+          "widthInches": 12,
+          "heightInches": 10
+        },
+        "weightPounds": 6.4,
+        "cushioning": "recycled_paper",
+        "recyclable": true
+      },
+      "qualityChecks": {
+        "itemCountVerified": true,
+        "addressLabelVerified": true,
+        "sealedBoxPhotoRequired": true
+      },
+      "inventoryReservation": {
+        "batchId": "B-771",
+        "substitutionsAllowed": true,
+        "holdMinutes": 45
+      },
+      "compliance": {
+        "ageCheckRequired": false,
+        "hazmatHandlingRequired": false
+      }
+    }
+  },
+  "conversation_pattern": "Center the artifact on a cart that is currently a non-gift order, carrying a set of presentation fields whose present values follow from it not being a gift, where switching it to a gift order flips each to a single, unambiguous gift-state value — booleans or fixed states only, never free-form text or an open-ended choice. Around this core, add the realistic, independent details a cart would carry that do not depend on whether the order is a gift, and vary their number from sample to sample.",
+  "edit_pattern": "Turn gift mode on for the order.",
+  "cascade_pattern": "Switching to a gift order moves every gift-governed presentation field to its gift-state value, while fields the gift setting does not govern stay. Each new value is fixed because the effect of the gift setting on each field is unambiguous.",
+  "requires_master_data": false
+}

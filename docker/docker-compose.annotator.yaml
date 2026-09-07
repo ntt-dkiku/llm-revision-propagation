@@ -1,0 +1,29 @@
+# Separate project name so this stack is isolated from the runner/vLLM
+# services (avoids "orphan containers" warnings and decouples `down`).
+name: llm-revision-propagation-annotator
+
+# Annotation GUI. The server is stdlib-only (no pip deps), so we run it on a
+# bare python:3.11-slim with the repo bind-mounted — no image build needed.
+services:
+  annotator:
+    image: python:3.11-slim
+    container_name: revpropbench-annotator
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ..:/work
+    working_dir: /work
+    ports:
+      - "${ANNOTATOR_PORT:-5001}:5001"
+    command:
+      - python
+      - -m
+      - benchmark.annotator_app
+      - --host
+      - "0.0.0.0"
+      - --port
+      - "5001"
+      - --samples
+      - benchmark/data/raw
+      - --annotated
+      - benchmark/data/annotated

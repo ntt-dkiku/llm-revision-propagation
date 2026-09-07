@@ -1,0 +1,755 @@
+{
+  "id": "project_schedule_L100_04",
+  "domain": "project_schedule",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a plan for the Customer Portal Relaunch."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project\", \"value\": {\"name\": \"Customer Portal Relaunch\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the launch readiness checkpoint for September 30, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/milestone\", \"value\": {\"name\": \"Launch Readiness\", \"date\": \"2026-09-30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first prerequisite for that checkpoint: the data migration rehearsal needs to be wrapped up by September 18, and it directly feeds the checkpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"name\": \"Data Migration Rehearsal\", \"finish\": \"2026-09-18\", \"feedsMilestone\": true}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include the accessibility audit as another item that must be done before the checkpoint, finishing on September 22."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Accessibility Audit\", \"finish\": \"2026-09-22\", \"feedsMilestone\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add vendor security sign-off too; it needs to be complete by September 25 and should count as feeding the checkpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Vendor Security Sign-off\", \"finish\": \"2026-09-25\", \"feedsMilestone\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the production cutover runbook as one more prerequisite; it finishes on September 27 and has to be ready before that checkpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Production Cutover Runbook\", \"finish\": \"2026-09-27\", \"feedsMilestone\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use calendar days for the buffer math, and treat each task’s first day of work as counting toward its length."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/scheduleRules\", \"value\": {\"bufferUnit\": \"calendarDays\", \"durationCounting\": \"inclusiveStartDate\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give the data migration rehearsal five calendar days of work."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/0/durationDays\", \"value\": 5}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the accessibility audit a four-day effort."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/1/durationDays\", \"value\": 4}]"
+    },
+    {
+      "role": "user",
+      "content": "Set vendor security sign-off to take three days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/2/durationDays\", \"value\": 3}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the production cutover runbook a two-day task."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/3/durationDays\", \"value\": 2}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the buffer and latest possible start for the data migration rehearsal against the checkpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/0/slackDays\", \"value\": 12}, {\"op\": \"add\", \"path\": \"/tasks/0/latestAllowableStart\", \"value\": \"2026-09-26\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Do the same buffer and last-start calculation for the accessibility audit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/1/slackDays\", \"value\": 8}, {\"op\": \"add\", \"path\": \"/tasks/1/latestAllowableStart\", \"value\": \"2026-09-27\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate the buffer and latest start for vendor security sign-off as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/2/slackDays\", \"value\": 5}, {\"op\": \"add\", \"path\": \"/tasks/2/latestAllowableStart\", \"value\": \"2026-09-28\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish that same buffer and latest-start calculation for the production cutover runbook."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/3/slackDays\", \"value\": 3}, {\"op\": \"add\", \"path\": \"/tasks/3/latestAllowableStart\", \"value\": \"2026-09-29\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a post-launch help-center refresh to the plan, finishing on October 9, but don’t treat it as a prerequisite for the checkpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Help Center Refresh\", \"finish\": \"2026-10-09\", \"feedsMilestone\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Maya Chen from the PMO down as the overall coordinator for this relaunch."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/coordinator\", \"value\": {\"name\": \"Maya Chen\", \"group\": \"PMO\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Jordan Patel from Customer Experience as the business sponsor."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/sponsor\", \"value\": {\"name\": \"Jordan Patel\", \"group\": \"Customer Experience\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the plan is being run out of Toronto on Eastern time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/operatingRegion\", \"value\": {\"city\": \"Toronto\", \"timeZone\": \"America/Toronto\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the main collaboration room for this effort, with the channel name and where it lives."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/collaboration\", \"value\": {\"channel\": \"#customer-portal-relaunch\", \"platform\": \"Slack\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the weekly status meeting cadence, including when it happens and who facilitates it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/meetings\", \"value\": [{\"name\": \"Weekly Relaunch Status\", \"cadence\": \"weekly\", \"facilitator\": \"Maya Chen\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule that weekly check-in for Tuesdays at 10 AM, and keep it to 30 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/meetings/0/dayOfWeek\", \"value\": \"Tuesday\"}, {\"op\": \"add\", \"path\": \"/meetings/0/startTime\", \"value\": \"10:00\"}, {\"op\": \"add\", \"path\": \"/meetings/0/durationMinutes\", \"value\": 30}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a risk about late content approvals, with its severity and who owns keeping an eye on it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks\", \"value\": [{\"description\": \"Late content approvals could delay final portal updates\", \"severity\": \"medium\", \"owner\": \"Jordan Patel\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "For that approval concern, note that content leads will send weekly reminders and route stuck decisions to Jordan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks/0/response\", \"value\": {\"action\": \"Content leads send approval reminders\", \"frequency\": \"weekly\", \"escalationContact\": \"Jordan Patel\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another risk around unexpected downtime in the staging environment, with the seriousness level and the person responsible for tracking it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks/-\", \"value\": {\"description\": \"Unexpected staging environment downtime could slow validation cycles\", \"severity\": \"high\", \"owner\": \"Maya Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the staging downtime risk, note that the infrastructure team will run daily health checks and alert Maya if anything slips."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks/1/response\", \"value\": {\"action\": \"Infrastructure team runs staging health checks\", \"frequency\": \"daily\", \"escalationContact\": \"Maya Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the approved working budget for the relaunch, including the amount, currency, and who approved it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget\", \"value\": {\"amount\": 185000, \"currency\": \"CAD\", \"approvedBy\": \"Jordan Patel\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the shared documentation space for the team, including where it is, who maintains it, and the access level."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/documentation\", \"value\": {\"location\": \"Confluence Customer Portal Relaunch space\", \"maintainer\": \"Maya Chen\", \"access\": \"projectTeam\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer support lead as a stakeholder, with their team and how often they should be updated."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders\", \"value\": [{\"name\": \"Priya Nair\", \"team\": \"Customer Support\", \"updateFrequency\": \"weekly\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the engineering manager as another stakeholder, with the group they represent and their update rhythm."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"name\": \"Owen Brooks\", \"team\": \"Platform Engineering\", \"updateFrequency\": \"twiceWeekly\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the production hosting setup for the relaunch, including the cloud provider, environment name, and region."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environments\", \"value\": [{\"name\": \"Production\", \"provider\": \"AWS\", \"region\": \"ca-central-1\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging setup too, with the provider, environment name, and region."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environments/-\", \"value\": {\"name\": \"Staging\", \"provider\": \"AWS\", \"region\": \"ca-central-1\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the main go-live approval requirement, including what must be shown, who signs off, and the status it needs before launch."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approvalCriteria\", \"value\": [{\"criterion\": \"Executive demo completed\", \"approver\": \"Jordan Patel\", \"requiredStatus\": \"approved\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the privacy review requirement as another go-live approval item, with the reviewer and the status needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approvalCriteria/-\", \"value\": {\"criterion\": \"Privacy review completed\", \"approver\": \"Privacy Office\", \"requiredStatus\": \"approved\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first communication for launch week: an internal support briefing, with its audience and delivery channel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications\", \"value\": [{\"title\": \"Internal Support Briefing\", \"audience\": \"Customer Support\", \"channel\": \"Teams webinar\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a customer-facing launch email as another communication, with who it goes to and how it will be sent."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications/-\", \"value\": {\"title\": \"Customer Launch Email\", \"audience\": \"Active portal users\", \"channel\": \"Marketing automation\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a success measure for portal adoption, with the target and the person accountable for reporting it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/successMeasures\", \"value\": [{\"measure\": \"Monthly active portal users\", \"target\": \"15% increase within 60 days\", \"owner\": \"Jordan Patel\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a second success measure for support ticket reduction, with the goal and who owns tracking it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/successMeasures/-\", \"value\": {\"measure\": \"Portal-related support tickets\", \"target\": \"10% reduction within 45 days\", \"owner\": \"Priya Nair\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the rollback owner information, including the lead, backup person, and the system area they cover."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rollbackPlan\", \"value\": {\"lead\": \"Owen Brooks\", \"backup\": \"Maya Chen\", \"scope\": \"Portal application release\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, note where release records will be archived, how long they should be kept, and who is responsible for that archive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/archive\", \"value\": {\"location\": \"Confluence release archive\", \"retention\": \"7 years\", \"owner\": \"Maya Chen\"}}]"
+    }
+  ],
+  "edit_instruction": "Move the Launch Readiness checkpoint to October 3, 2026.",
+  "theme": "Moving a milestone date",
+  "master_data": null,
+  "current_json": {
+    "project": {
+      "name": "Customer Portal Relaunch",
+      "milestone": {
+        "name": "Launch Readiness",
+        "date": "2026-09-30"
+      },
+      "coordinator": {
+        "name": "Maya Chen",
+        "group": "PMO"
+      },
+      "sponsor": {
+        "name": "Jordan Patel",
+        "group": "Customer Experience"
+      },
+      "operatingRegion": {
+        "city": "Toronto",
+        "timeZone": "America/Toronto"
+      }
+    },
+    "tasks": [
+      {
+        "name": "Data Migration Rehearsal",
+        "finish": "2026-09-18",
+        "feedsMilestone": true,
+        "durationDays": 5,
+        "slackDays": 12,
+        "latestAllowableStart": "2026-09-26"
+      },
+      {
+        "name": "Accessibility Audit",
+        "finish": "2026-09-22",
+        "feedsMilestone": true,
+        "durationDays": 4,
+        "slackDays": 8,
+        "latestAllowableStart": "2026-09-27"
+      },
+      {
+        "name": "Vendor Security Sign-off",
+        "finish": "2026-09-25",
+        "feedsMilestone": true,
+        "durationDays": 3,
+        "slackDays": 5,
+        "latestAllowableStart": "2026-09-28"
+      },
+      {
+        "name": "Production Cutover Runbook",
+        "finish": "2026-09-27",
+        "feedsMilestone": true,
+        "durationDays": 2,
+        "slackDays": 3,
+        "latestAllowableStart": "2026-09-29"
+      },
+      {
+        "name": "Help Center Refresh",
+        "finish": "2026-10-09",
+        "feedsMilestone": false
+      }
+    ],
+    "scheduleRules": {
+      "bufferUnit": "calendarDays",
+      "durationCounting": "inclusiveStartDate"
+    },
+    "collaboration": {
+      "channel": "#customer-portal-relaunch",
+      "platform": "Slack"
+    },
+    "meetings": [
+      {
+        "name": "Weekly Relaunch Status",
+        "cadence": "weekly",
+        "facilitator": "Maya Chen",
+        "dayOfWeek": "Tuesday",
+        "startTime": "10:00",
+        "durationMinutes": 30
+      }
+    ],
+    "risks": [
+      {
+        "description": "Late content approvals could delay final portal updates",
+        "severity": "medium",
+        "owner": "Jordan Patel",
+        "response": {
+          "action": "Content leads send approval reminders",
+          "frequency": "weekly",
+          "escalationContact": "Jordan Patel"
+        }
+      },
+      {
+        "description": "Unexpected staging environment downtime could slow validation cycles",
+        "severity": "high",
+        "owner": "Maya Chen",
+        "response": {
+          "action": "Infrastructure team runs staging health checks",
+          "frequency": "daily",
+          "escalationContact": "Maya Chen"
+        }
+      }
+    ],
+    "budget": {
+      "amount": 185000,
+      "currency": "CAD",
+      "approvedBy": "Jordan Patel"
+    },
+    "documentation": {
+      "location": "Confluence Customer Portal Relaunch space",
+      "maintainer": "Maya Chen",
+      "access": "projectTeam"
+    },
+    "stakeholders": [
+      {
+        "name": "Priya Nair",
+        "team": "Customer Support",
+        "updateFrequency": "weekly"
+      },
+      {
+        "name": "Owen Brooks",
+        "team": "Platform Engineering",
+        "updateFrequency": "twiceWeekly"
+      }
+    ],
+    "environments": [
+      {
+        "name": "Production",
+        "provider": "AWS",
+        "region": "ca-central-1"
+      },
+      {
+        "name": "Staging",
+        "provider": "AWS",
+        "region": "ca-central-1"
+      }
+    ],
+    "approvalCriteria": [
+      {
+        "criterion": "Executive demo completed",
+        "approver": "Jordan Patel",
+        "requiredStatus": "approved"
+      },
+      {
+        "criterion": "Privacy review completed",
+        "approver": "Privacy Office",
+        "requiredStatus": "approved"
+      }
+    ],
+    "communications": [
+      {
+        "title": "Internal Support Briefing",
+        "audience": "Customer Support",
+        "channel": "Teams webinar"
+      },
+      {
+        "title": "Customer Launch Email",
+        "audience": "Active portal users",
+        "channel": "Marketing automation"
+      }
+    ],
+    "successMeasures": [
+      {
+        "measure": "Monthly active portal users",
+        "target": "15% increase within 60 days",
+        "owner": "Jordan Patel"
+      },
+      {
+        "measure": "Portal-related support tickets",
+        "target": "10% reduction within 45 days",
+        "owner": "Priya Nair"
+      }
+    ],
+    "rollbackPlan": {
+      "lead": "Owen Brooks",
+      "backup": "Maya Chen",
+      "scope": "Portal application release"
+    },
+    "archive": {
+      "location": "Confluence release archive",
+      "retention": "7 years",
+      "owner": "Maya Chen"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/project/milestone/date",
+      "kind": "direct",
+      "value": "2026-10-03"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/0/slackDays",
+      "kind": "cascade",
+      "value": 15
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/0/latestAllowableStart",
+      "kind": "cascade",
+      "value": "2026-09-29"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/1/slackDays",
+      "kind": "cascade",
+      "value": 11
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/1/latestAllowableStart",
+      "kind": "cascade",
+      "value": "2026-09-30"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/2/slackDays",
+      "kind": "cascade",
+      "value": 8
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/2/latestAllowableStart",
+      "kind": "cascade",
+      "value": "2026-10-01"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/3/slackDays",
+      "kind": "cascade",
+      "value": 6
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/3/latestAllowableStart",
+      "kind": "cascade",
+      "value": "2026-10-02"
+    }
+  ],
+  "expected_json": {
+    "project": {
+      "name": "Customer Portal Relaunch",
+      "milestone": {
+        "name": "Launch Readiness",
+        "date": "2026-10-03"
+      },
+      "coordinator": {
+        "name": "Maya Chen",
+        "group": "PMO"
+      },
+      "sponsor": {
+        "name": "Jordan Patel",
+        "group": "Customer Experience"
+      },
+      "operatingRegion": {
+        "city": "Toronto",
+        "timeZone": "America/Toronto"
+      }
+    },
+    "tasks": [
+      {
+        "name": "Data Migration Rehearsal",
+        "finish": "2026-09-18",
+        "feedsMilestone": true,
+        "durationDays": 5,
+        "slackDays": 15,
+        "latestAllowableStart": "2026-09-29"
+      },
+      {
+        "name": "Accessibility Audit",
+        "finish": "2026-09-22",
+        "feedsMilestone": true,
+        "durationDays": 4,
+        "slackDays": 11,
+        "latestAllowableStart": "2026-09-30"
+      },
+      {
+        "name": "Vendor Security Sign-off",
+        "finish": "2026-09-25",
+        "feedsMilestone": true,
+        "durationDays": 3,
+        "slackDays": 8,
+        "latestAllowableStart": "2026-10-01"
+      },
+      {
+        "name": "Production Cutover Runbook",
+        "finish": "2026-09-27",
+        "feedsMilestone": true,
+        "durationDays": 2,
+        "slackDays": 6,
+        "latestAllowableStart": "2026-10-02"
+      },
+      {
+        "name": "Help Center Refresh",
+        "finish": "2026-10-09",
+        "feedsMilestone": false
+      }
+    ],
+    "scheduleRules": {
+      "bufferUnit": "calendarDays",
+      "durationCounting": "inclusiveStartDate"
+    },
+    "collaboration": {
+      "channel": "#customer-portal-relaunch",
+      "platform": "Slack"
+    },
+    "meetings": [
+      {
+        "name": "Weekly Relaunch Status",
+        "cadence": "weekly",
+        "facilitator": "Maya Chen",
+        "dayOfWeek": "Tuesday",
+        "startTime": "10:00",
+        "durationMinutes": 30
+      }
+    ],
+    "risks": [
+      {
+        "description": "Late content approvals could delay final portal updates",
+        "severity": "medium",
+        "owner": "Jordan Patel",
+        "response": {
+          "action": "Content leads send approval reminders",
+          "frequency": "weekly",
+          "escalationContact": "Jordan Patel"
+        }
+      },
+      {
+        "description": "Unexpected staging environment downtime could slow validation cycles",
+        "severity": "high",
+        "owner": "Maya Chen",
+        "response": {
+          "action": "Infrastructure team runs staging health checks",
+          "frequency": "daily",
+          "escalationContact": "Maya Chen"
+        }
+      }
+    ],
+    "budget": {
+      "amount": 185000,
+      "currency": "CAD",
+      "approvedBy": "Jordan Patel"
+    },
+    "documentation": {
+      "location": "Confluence Customer Portal Relaunch space",
+      "maintainer": "Maya Chen",
+      "access": "projectTeam"
+    },
+    "stakeholders": [
+      {
+        "name": "Priya Nair",
+        "team": "Customer Support",
+        "updateFrequency": "weekly"
+      },
+      {
+        "name": "Owen Brooks",
+        "team": "Platform Engineering",
+        "updateFrequency": "twiceWeekly"
+      }
+    ],
+    "environments": [
+      {
+        "name": "Production",
+        "provider": "AWS",
+        "region": "ca-central-1"
+      },
+      {
+        "name": "Staging",
+        "provider": "AWS",
+        "region": "ca-central-1"
+      }
+    ],
+    "approvalCriteria": [
+      {
+        "criterion": "Executive demo completed",
+        "approver": "Jordan Patel",
+        "requiredStatus": "approved"
+      },
+      {
+        "criterion": "Privacy review completed",
+        "approver": "Privacy Office",
+        "requiredStatus": "approved"
+      }
+    ],
+    "communications": [
+      {
+        "title": "Internal Support Briefing",
+        "audience": "Customer Support",
+        "channel": "Teams webinar"
+      },
+      {
+        "title": "Customer Launch Email",
+        "audience": "Active portal users",
+        "channel": "Marketing automation"
+      }
+    ],
+    "successMeasures": [
+      {
+        "measure": "Monthly active portal users",
+        "target": "15% increase within 60 days",
+        "owner": "Jordan Patel"
+      },
+      {
+        "measure": "Portal-related support tickets",
+        "target": "10% reduction within 45 days",
+        "owner": "Priya Nair"
+      }
+    ],
+    "rollbackPlan": {
+      "lead": "Owen Brooks",
+      "backup": "Maya Chen",
+      "scope": "Portal application release"
+    },
+    "archive": {
+      "location": "Confluence release archive",
+      "retention": "7 years",
+      "owner": "Maya Chen"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Move milestone 2026-09-30 -> 2026-10-03 (+3 calendar days). For each of the 4 feeding tasks, slackDays = (milestone - finish) and latestAllowableStart = milestone - (durationDays-1) (inclusive-start calendar counting, task finishing on the milestone date). Data Migration Rehearsal slack 12->15, latestStart 09-26->09-29; Accessibility Audit 8->11, 09-27->09-30; Vendor Security Sign-off 5->8, 09-28->10-01; Production Cutover Runbook 3->6, 09-29->10-02. Task finishes, durations, and the non-feeding Help Center Refresh stay.",
+  "conversation_pattern": "Center the artifact on a schedule with a milestone several tasks must finish before, where each feeding task's slack derives from the milestone and that task's finish. Around this core, add the realistic, independent details a project plan would carry that do not depend on the milestone date, and vary their number from sample to sample.",
+  "edit_pattern": "Move the milestone (or deadline) to a specific new date.",
+  "cascade_pattern": "Moving the milestone re-derives each feeding task's slack, and its latest allowable start, from the new milestone date. Tasks that do not feed the milestone stay. This is determined because the feeding links and finishes are stated.",
+  "requires_master_data": false
+}

@@ -1,0 +1,267 @@
+{
+  "id": "project_schedule_L50_00",
+  "domain": "project_schedule",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a plan for the Riverside Clinic Wi-Fi Refresh."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projectName\", \"value\": \"Riverside Clinic Wi-Fi Refresh\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For timing, use calendar days, and have each follow-on activity begin right when the previous one finishes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedulingBasis\", \"value\": {\"unit\": \"calendar days\", \"finishCalculation\": \"finish date is start date plus duration in days\", \"dependencyTiming\": \"successor starts on predecessor finish date\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the first activity a two-day site readiness review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"id\": \"T1\", \"name\": \"Site readiness review\", \"durationDays\": 2}]}]"
+    },
+    {
+      "role": "user",
+      "content": "After that, add a three-day hardware staging activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Hardware staging\", \"durationDays\": 3, \"predecessor\": \"Site readiness review\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Follow that with a four-day access point installation effort."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Access point installation\", \"durationDays\": 4, \"predecessor\": \"Hardware staging\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Then schedule a two-day wireless controller configuration step."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Wireless controller configuration\", \"durationDays\": 2, \"predecessor\": \"Access point installation\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "After configuration, include a three-day coverage validation effort."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Coverage validation\", \"durationDays\": 3, \"predecessor\": \"Wireless controller configuration\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Wrap the sequence with a one-day handover and closeout after validation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Handover and closeout\", \"durationDays\": 1, \"predecessor\": \"Coverage validation\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Anchor the work so it begins on March 10, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projectStart\", \"value\": \"2025-03-10\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Show when the readiness review runs based on that start date."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/0/startDate\", \"value\": \"2025-03-10\"}, {\"op\": \"add\", \"path\": \"/tasks/0/finishDate\", \"value\": \"2025-03-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now carry the dates forward for the hardware staging work."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/1/startDate\", \"value\": \"2025-03-12\"}, {\"op\": \"add\", \"path\": \"/tasks/1/finishDate\", \"value\": \"2025-03-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Carry the schedule through the access point installation as the next step."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/2/startDate\", \"value\": \"2025-03-15\"}, {\"op\": \"add\", \"path\": \"/tasks/2/finishDate\", \"value\": \"2025-03-19\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, fill in the timing for the controller configuration work."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/3/startDate\", \"value\": \"2025-03-19\"}, {\"op\": \"add\", \"path\": \"/tasks/3/finishDate\", \"value\": \"2025-03-21\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Carry the dates forward for the coverage validation effort."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/4/startDate\", \"value\": \"2025-03-21\"}, {\"op\": \"add\", \"path\": \"/tasks/4/finishDate\", \"value\": \"2025-03-24\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the timeline by showing the timing for handover and closeout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/5/startDate\", \"value\": \"2025-03-24\"}, {\"op\": \"add\", \"path\": \"/tasks/5/finishDate\", \"value\": \"2025-03-25\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the overall completion point and total calendar span for the plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/scheduleSummary\", \"value\": {\"endDate\": \"2025-03-25\", \"totalDurationDays\": 15}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include who owns the effort on the clinic side."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders\", \"value\": [{\"role\": \"Clinic sponsor\", \"name\": \"Maya Patel\", \"department\": \"Operations\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note the technical lead from IT."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"role\": \"IT technical lead\", \"name\": \"Jon Bell\", \"department\": \"Information Technology\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture a main delivery risk around clinic operations during the refresh."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks\", \"value\": [{\"description\": \"Patient care areas may have limited access during installation windows\", \"likelihood\": \"medium\", \"mitigation\": \"Coordinate room-by-room timing with the clinic charge nurse\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add how the team will stay coordinated during the refresh."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communicationPlan\", \"value\": {\"updateRhythm\": \"weekly\", \"coordinationChannel\": \"Microsoft Teams\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, note the signoff arrangement for moving ahead."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approval\", \"value\": {\"approver\": \"Maya Patel\", \"status\": \"approved\"}}]"
+    }
+  ],
+  "edit_instruction": "Change the access point installation duration to 6 days.",
+  "theme": "Changing a task's duration",
+  "master_data": null,
+  "current_json": {
+    "projectName": "Riverside Clinic Wi-Fi Refresh",
+    "schedulingBasis": {
+      "unit": "calendar days",
+      "finishCalculation": "finish date is start date plus duration in days",
+      "dependencyTiming": "successor starts on predecessor finish date"
+    },
+    "tasks": [
+      {
+        "id": "T1",
+        "name": "Site readiness review",
+        "durationDays": 2,
+        "startDate": "2025-03-10",
+        "finishDate": "2025-03-12"
+      },
+      {
+        "name": "Hardware staging",
+        "durationDays": 3,
+        "predecessor": "Site readiness review",
+        "startDate": "2025-03-12",
+        "finishDate": "2025-03-15"
+      },
+      {
+        "name": "Access point installation",
+        "durationDays": 4,
+        "predecessor": "Hardware staging",
+        "startDate": "2025-03-15",
+        "finishDate": "2025-03-19"
+      },
+      {
+        "name": "Wireless controller configuration",
+        "durationDays": 2,
+        "predecessor": "Access point installation",
+        "startDate": "2025-03-19",
+        "finishDate": "2025-03-21"
+      },
+      {
+        "name": "Coverage validation",
+        "durationDays": 3,
+        "predecessor": "Wireless controller configuration",
+        "startDate": "2025-03-21",
+        "finishDate": "2025-03-24"
+      },
+      {
+        "name": "Handover and closeout",
+        "durationDays": 1,
+        "predecessor": "Coverage validation",
+        "startDate": "2025-03-24",
+        "finishDate": "2025-03-25"
+      }
+    ],
+    "projectStart": "2025-03-10",
+    "scheduleSummary": {
+      "endDate": "2025-03-25",
+      "totalDurationDays": 15
+    },
+    "stakeholders": [
+      {
+        "role": "Clinic sponsor",
+        "name": "Maya Patel",
+        "department": "Operations"
+      },
+      {
+        "role": "IT technical lead",
+        "name": "Jon Bell",
+        "department": "Information Technology"
+      }
+    ],
+    "risks": [
+      {
+        "description": "Patient care areas may have limited access during installation windows",
+        "likelihood": "medium",
+        "mitigation": "Coordinate room-by-room timing with the clinic charge nurse"
+      }
+    ],
+    "communicationPlan": {
+      "updateRhythm": "weekly",
+      "coordinationChannel": "Microsoft Teams"
+    },
+    "approval": {
+      "approver": "Maya Patel",
+      "status": "approved"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a task list where each task has a stated duration and starts when its predecessor finishes, so finishes and start dates derive along the precedence chain, rolling up to a project end. Around this core, add the realistic, independent details a project plan would carry that do not depend on the task durations or dates, and vary their number and the number of tasks from sample to sample.",
+  "edit_pattern": "Change one task's duration to a specific new number of days.",
+  "cascade_pattern": "Editing a task's duration re-derives its finish, then each downstream task's start and finish recompute along the chain to the project end. Tasks not downstream of the edit stay. This is determined because durations and links are stated.",
+  "requires_master_data": false
+}

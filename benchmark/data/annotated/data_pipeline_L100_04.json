@@ -1,0 +1,758 @@
+{
+  "id": "data_pipeline_L100_04",
+  "domain": "data_pipeline",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a record for the daily customer metrics pipeline."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline\", \"value\": {\"name\": \"daily_customer_metrics\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the freshness limit so downstream users count as on time only when they refresh within 90 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/freshness_sla\", \"value\": {\"max_allowed_staleness_minutes\": 90, \"compliance_rule\": \"consumer is compliant iff refresh_interval_minutes <= max_allowed_staleness_minutes; otherwise clamp refresh_interval_minutes to the max and set compliance_flag to non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the dashboard team as one downstream user, refreshing every hour and currently meeting that freshness limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers\", \"value\": [{\"consumer_name\": \"executive_dashboard\", \"refresh_interval_minutes\": 60, \"compliance_flag\": \"compliant\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the lifecycle marketing export too; it runs every two hours, so mark it as outside the current freshness limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"lifecycle_marketing_export\", \"refresh_interval_minutes\": 120, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the fraud scoring service as another downstream user; it refreshes every 45 minutes and is within the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"fraud_scoring_service\", \"refresh_interval_minutes\": 45, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the finance reconciliation feed, which updates every 90 minutes and should still count as meeting the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"finance_reconciliation_feed\", \"refresh_interval_minutes\": 90, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the churn prediction batch as well; it refreshes every 150 minutes, so it should be marked outside the freshness limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"churn_prediction_batch\", \"refresh_interval_minutes\": 150, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the support operations queue too; it refreshes every 75 minutes and should be considered on time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"support_operations_queue\", \"refresh_interval_minutes\": 75, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the product analytics mart; it refreshes every 30 minutes and is safely within the freshness target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"product_analytics_mart\", \"refresh_interval_minutes\": 30, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the data science feature store as another downstream user; it updates every 105 minutes, so it should be outside the current freshness target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"data_science_feature_store\", \"refresh_interval_minutes\": 105, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the real-time experimentation monitor; it refreshes every 15 minutes and is well within the freshness limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"realtime_experimentation_monitor\", \"refresh_interval_minutes\": 15, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the billing anomaly detector too; it refreshes every 80 minutes and is still inside the current freshness target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"billing_anomaly_detector\", \"refresh_interval_minutes\": 80, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the regional sales scorecard as another downstream user; it refreshes every 65 minutes and should count as on time right now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"regional_sales_scorecard\", \"refresh_interval_minutes\": 65, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the warehouse inventory planner too; it refreshes every 95 minutes, so it should be outside the current freshness target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"warehouse_inventory_planner\", \"refresh_interval_minutes\": 95, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the retention health snapshot; it updates every 55 minutes and is meeting the current target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"retention_health_snapshot\", \"refresh_interval_minutes\": 55, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the partner attribution export as well; it refreshes every 110 minutes, so mark it outside the current freshness target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"partner_attribution_export\", \"refresh_interval_minutes\": 110, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer success renewal tracker too; it refreshes every 70 minutes and should be counted as on time under the current target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"customer_success_renewal_tracker\", \"refresh_interval_minutes\": 70, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the mobile engagement summary too; it refreshes every 85 minutes and is still on time under the current target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"mobile_engagement_summary\", \"refresh_interval_minutes\": 85, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the ad spend optimization feed; it refreshes every 40 minutes and is comfortably on time under the current target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"ad_spend_optimization_feed\", \"refresh_interval_minutes\": 40, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the subscription revenue rollup too; it refreshes every 100 minutes, so it should be outside the current freshness target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"subscription_revenue_rollup\", \"refresh_interval_minutes\": 100, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the pricing sensitivity model as another downstream user; it refreshes every 125 minutes, so mark it outside the current freshness target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"pricing_sensitivity_model\", \"refresh_interval_minutes\": 125, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that the Data Platform team owns this pipeline, with Mara Iqbal as the main contact and a Slack room for day-to-day support."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/ownership\", \"value\": {\"team\": \"Data Platform\", \"primary_contact\": \"Mara Iqbal\", \"support_channel\": \"#data-pipeline-support\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that the job runs once per hour on Pacific time, starting five minutes after the hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schedule\", \"value\": {\"cadence\": \"hourly\", \"timezone\": \"America/Los_Angeles\", \"start_minute\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture where the pipeline reads its customer event data from, including the warehouse, schema, and table name."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source_dataset\", \"value\": {\"warehouse\": \"snowflake_prod\", \"schema\": \"customer_events\", \"table\": \"daily_customer_activity\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add where the finished metrics land, including the warehouse, schema, and table used by analysts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/destination_dataset\", \"value\": {\"warehouse\": \"snowflake_prod\", \"schema\": \"analytics_marts\", \"table\": \"customer_metrics_daily\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note the orchestration setup too: it runs in Airflow, has a dedicated job name, and uses the standard customer metrics pool."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/orchestration\", \"value\": {\"system\": \"Airflow\", \"job_name\": \"build_daily_customer_metrics\", \"resource_pool\": \"customer_metrics_standard\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the alerting setup: page the team after two missed runs, send warnings to the support room, and keep the paging severity high."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerting\", \"value\": {\"missed_run_threshold\": 2, \"warning_channel\": \"#data-pipeline-support\", \"severity\": \"high\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the basic quality checks: require a customer identifier, reject duplicate customer-day rows, and tolerate up to one percent late-arriving records."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/data_quality\", \"value\": {\"requires_customer_id\": true, \"reject_duplicate_customer_day_rows\": true, \"late_arrival_tolerance_percent\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add how retries should work: try three times, wait ten minutes between attempts, and stop retrying after half an hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/retry_policy\", \"value\": {\"max_attempts\": 3, \"delay_minutes\": 10, \"timeout_minutes\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note the retention settings too: keep detailed outputs for 400 days, archive older snapshots, and store archives in the governed analytics bucket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/retention\", \"value\": {\"detail_days\": 400, \"archive_enabled\": true, \"archive_location\": \"s3://governed-analytics/customer-metrics\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the access controls: classify the data as internal, restrict write access to platform engineers, and allow analysts to read the published table."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/access_control\", \"value\": {\"classification\": \"internal\", \"write_group\": \"data_platform_engineers\", \"read_group\": \"analytics_readers\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the release details: this is production, the current version is 2.4.1, and deployments should be approved by change management."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/release\", \"value\": {\"environment\": \"production\", \"version\": \"2.4.1\", \"approval_group\": \"change_management\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer health alert feed too; it refreshes every 50 minutes and should count as on time under the current freshness target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"customer_health_alert_feed\", \"refresh_interval_minutes\": 50, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish by adding the onboarding conversion feed; it refreshes every 35 minutes, is on time, and routes any alerts to the growth analytics room."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers/-\", \"value\": {\"consumer_name\": \"onboarding_conversion_feed\", \"refresh_interval_minutes\": 35, \"compliance_flag\": \"compliant\", \"alert_channel\": \"#growth-analytics\"}}]"
+    }
+  ],
+  "edit_instruction": "Tighten the freshness limit to 60 minutes.",
+  "theme": "Tightening the freshness-SLA policy",
+  "conversation_pattern": "Center the artifact on a pipeline with several downstream consumers, each carrying a refresh-interval-minutes value and a compliance flag, governed by a stated policy field 'max_allowed_staleness_minutes' with an explicit rule: a consumer is compliant iff its refresh interval is at most the policy max; a non-compliant consumer must have its refresh interval clamped down to the policy max and its flag set to 'non_compliant'. Make some consumers compliant and some not under the current policy, and ensure every consumer's initial compliance flag already matches the stated rule under the current policy (a consumer within the current max is compliant). Around this core, add realistic independent details that do not depend on the policy, and vary the number of consumers from sample to sample.",
+  "edit_pattern": "Tighten the policy's max_allowed_staleness_minutes to a specific stricter (smaller) value.",
+  "cascade_pattern": "Tightening the policy clamps the refresh interval of only those consumers whose interval now exceeds the new max down to that max and flips their flag to 'non_compliant'; consumers already within the new max and all unrelated fields stay unchanged. The affected set is determined by comparing each consumer's stated interval to the new policy max.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "pipeline": {
+      "name": "daily_customer_metrics",
+      "freshness_sla": {
+        "max_allowed_staleness_minutes": 90,
+        "compliance_rule": "consumer is compliant iff refresh_interval_minutes <= max_allowed_staleness_minutes; otherwise clamp refresh_interval_minutes to the max and set compliance_flag to non_compliant"
+      },
+      "consumers": [
+        {
+          "consumer_name": "executive_dashboard",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "lifecycle_marketing_export",
+          "refresh_interval_minutes": 120,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "fraud_scoring_service",
+          "refresh_interval_minutes": 45,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "finance_reconciliation_feed",
+          "refresh_interval_minutes": 90,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "churn_prediction_batch",
+          "refresh_interval_minutes": 150,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "support_operations_queue",
+          "refresh_interval_minutes": 75,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "product_analytics_mart",
+          "refresh_interval_minutes": 30,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "data_science_feature_store",
+          "refresh_interval_minutes": 105,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "realtime_experimentation_monitor",
+          "refresh_interval_minutes": 15,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "billing_anomaly_detector",
+          "refresh_interval_minutes": 80,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "regional_sales_scorecard",
+          "refresh_interval_minutes": 65,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "warehouse_inventory_planner",
+          "refresh_interval_minutes": 95,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "retention_health_snapshot",
+          "refresh_interval_minutes": 55,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "partner_attribution_export",
+          "refresh_interval_minutes": 110,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "customer_success_renewal_tracker",
+          "refresh_interval_minutes": 70,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "mobile_engagement_summary",
+          "refresh_interval_minutes": 85,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "ad_spend_optimization_feed",
+          "refresh_interval_minutes": 40,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "subscription_revenue_rollup",
+          "refresh_interval_minutes": 100,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "pricing_sensitivity_model",
+          "refresh_interval_minutes": 125,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "customer_health_alert_feed",
+          "refresh_interval_minutes": 50,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "onboarding_conversion_feed",
+          "refresh_interval_minutes": 35,
+          "compliance_flag": "compliant",
+          "alert_channel": "#growth-analytics"
+        }
+      ],
+      "ownership": {
+        "team": "Data Platform",
+        "primary_contact": "Mara Iqbal",
+        "support_channel": "#data-pipeline-support"
+      },
+      "schedule": {
+        "cadence": "hourly",
+        "timezone": "America/Los_Angeles",
+        "start_minute": 5
+      },
+      "source_dataset": {
+        "warehouse": "snowflake_prod",
+        "schema": "customer_events",
+        "table": "daily_customer_activity"
+      },
+      "destination_dataset": {
+        "warehouse": "snowflake_prod",
+        "schema": "analytics_marts",
+        "table": "customer_metrics_daily"
+      },
+      "orchestration": {
+        "system": "Airflow",
+        "job_name": "build_daily_customer_metrics",
+        "resource_pool": "customer_metrics_standard"
+      },
+      "alerting": {
+        "missed_run_threshold": 2,
+        "warning_channel": "#data-pipeline-support",
+        "severity": "high"
+      },
+      "data_quality": {
+        "requires_customer_id": true,
+        "reject_duplicate_customer_day_rows": true,
+        "late_arrival_tolerance_percent": 1
+      },
+      "retry_policy": {
+        "max_attempts": 3,
+        "delay_minutes": 10,
+        "timeout_minutes": 30
+      },
+      "retention": {
+        "detail_days": 400,
+        "archive_enabled": true,
+        "archive_location": "s3://governed-analytics/customer-metrics"
+      },
+      "access_control": {
+        "classification": "internal",
+        "write_group": "data_platform_engineers",
+        "read_group": "analytics_readers"
+      },
+      "release": {
+        "environment": "production",
+        "version": "2.4.1",
+        "approval_group": "change_management"
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/pipeline/freshness_sla/max_allowed_staleness_minutes",
+      "kind": "direct",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/1/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/3/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/3/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/4/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/5/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/5/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/7/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/9/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/9/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/10/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/10/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/11/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/13/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/14/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/14/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/15/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/15/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/17/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/consumers/18/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 60
+    }
+  ],
+  "expected_json": {
+    "pipeline": {
+      "name": "daily_customer_metrics",
+      "freshness_sla": {
+        "max_allowed_staleness_minutes": 60,
+        "compliance_rule": "consumer is compliant iff refresh_interval_minutes <= max_allowed_staleness_minutes; otherwise clamp refresh_interval_minutes to the max and set compliance_flag to non_compliant"
+      },
+      "consumers": [
+        {
+          "consumer_name": "executive_dashboard",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "lifecycle_marketing_export",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "fraud_scoring_service",
+          "refresh_interval_minutes": 45,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "finance_reconciliation_feed",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "churn_prediction_batch",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "support_operations_queue",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "product_analytics_mart",
+          "refresh_interval_minutes": 30,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "data_science_feature_store",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "realtime_experimentation_monitor",
+          "refresh_interval_minutes": 15,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "billing_anomaly_detector",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "regional_sales_scorecard",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "warehouse_inventory_planner",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "retention_health_snapshot",
+          "refresh_interval_minutes": 55,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "partner_attribution_export",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "customer_success_renewal_tracker",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "mobile_engagement_summary",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "ad_spend_optimization_feed",
+          "refresh_interval_minutes": 40,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "subscription_revenue_rollup",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "pricing_sensitivity_model",
+          "refresh_interval_minutes": 60,
+          "compliance_flag": "non_compliant"
+        },
+        {
+          "consumer_name": "customer_health_alert_feed",
+          "refresh_interval_minutes": 50,
+          "compliance_flag": "compliant"
+        },
+        {
+          "consumer_name": "onboarding_conversion_feed",
+          "refresh_interval_minutes": 35,
+          "compliance_flag": "compliant",
+          "alert_channel": "#growth-analytics"
+        }
+      ],
+      "ownership": {
+        "team": "Data Platform",
+        "primary_contact": "Mara Iqbal",
+        "support_channel": "#data-pipeline-support"
+      },
+      "schedule": {
+        "cadence": "hourly",
+        "timezone": "America/Los_Angeles",
+        "start_minute": 5
+      },
+      "source_dataset": {
+        "warehouse": "snowflake_prod",
+        "schema": "customer_events",
+        "table": "daily_customer_activity"
+      },
+      "destination_dataset": {
+        "warehouse": "snowflake_prod",
+        "schema": "analytics_marts",
+        "table": "customer_metrics_daily"
+      },
+      "orchestration": {
+        "system": "Airflow",
+        "job_name": "build_daily_customer_metrics",
+        "resource_pool": "customer_metrics_standard"
+      },
+      "alerting": {
+        "missed_run_threshold": 2,
+        "warning_channel": "#data-pipeline-support",
+        "severity": "high"
+      },
+      "data_quality": {
+        "requires_customer_id": true,
+        "reject_duplicate_customer_day_rows": true,
+        "late_arrival_tolerance_percent": 1
+      },
+      "retry_policy": {
+        "max_attempts": 3,
+        "delay_minutes": 10,
+        "timeout_minutes": 30
+      },
+      "retention": {
+        "detail_days": 400,
+        "archive_enabled": true,
+        "archive_location": "s3://governed-analytics/customer-metrics"
+      },
+      "access_control": {
+        "classification": "internal",
+        "write_group": "data_platform_engineers",
+        "read_group": "analytics_readers"
+      },
+      "release": {
+        "environment": "production",
+        "version": "2.4.1",
+        "approval_group": "change_management"
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "max 90->60; per rule, every consumer with refresh>60 clamped to 60 and flagged non_compliant (only actual changes recorded).",
+  "annotated": true,
+  "excluded": false
+}

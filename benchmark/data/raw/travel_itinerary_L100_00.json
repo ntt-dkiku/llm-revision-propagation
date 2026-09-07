@@ -1,0 +1,637 @@
+{
+  "id": "travel_itinerary_L100_00",
+  "domain": "travel_itinerary",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm planning a trip to Lisbon that begins on May 12, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip\", \"value\": {\"start_date\": \"2026-05-12\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's make it a nine-day getaway, with the last day falling eight days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/end_date\", \"value\": \"2026-05-20\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the hotel stay begin the same day I get there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging\", \"value\": {\"check_in_date\": \"2026-05-12\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the hotel departure for the final day of the trip, eight days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging/check_out_date\", \"value\": \"2026-05-20\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the welcome dinner for the evening I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities\", \"value\": [{\"name\": \"Welcome dinner\", \"date\": \"2026-05-12\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Put a guided Alfama walk on the day after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Guided Alfama walk\", \"date\": \"2026-05-13\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a Sintra day trip two days after arrival."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Sintra day trip\", \"date\": \"2026-05-14\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan the Belém museum morning for three days after I land."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Belém museum morning\", \"date\": \"2026-05-15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule a Douro Valley wine excursion four days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Douro Valley wine excursion\", \"date\": \"2026-05-16\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Leave the fifth day after arrival open for the beach at Cascais."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Cascais beach day\", \"date\": \"2026-05-17\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put a tile-painting workshop six days after arrival."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Tile-painting workshop\", \"date\": \"2026-05-18\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Save the seventh day after arrival for shopping and a fado show."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Shopping and fado show\", \"date\": \"2026-05-19\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an airport transfer for the final morning, eight days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport\", \"value\": [{\"type\": \"Airport transfer\", \"date\": \"2026-05-20\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the overnight flight from home for the evening before I get to Lisbon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/flights\", \"value\": [{\"direction\": \"Outbound\", \"departure_date\": \"2026-05-11\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that the overnight flight lands the morning I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/flights/0/arrival_date\", \"value\": \"2026-05-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the flight home for the final day of the trip, eight days after arrival."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/flights/-\", \"value\": {\"direction\": \"Return\", \"departure_date\": \"2026-05-20\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the flight home land back the same day it leaves Lisbon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/flights/1/arrival_date\", \"value\": \"2026-05-20\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to book the Lisbon card two weeks before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders\", \"value\": [{\"task\": \"Book Lisbon card\", \"due_date\": \"2026-04-28\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to confirm the hotel one week before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Confirm hotel reservation\", \"due_date\": \"2026-05-05\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to check in for the outbound flight the day before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Check in for outbound flight\", \"due_date\": \"2026-05-11\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to start packing three days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Start packing\", \"due_date\": \"2026-05-09\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to download offline maps two days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Download offline maps\", \"due_date\": \"2026-05-10\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to pay the tour balance thirty days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Pay tour balance\", \"due_date\": \"2026-04-12\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to check my passport ninety days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Check passport validity\", \"due_date\": \"2026-02-11\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to buy travel insurance sixty days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Buy travel insurance\", \"due_date\": \"2026-03-13\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to reserve restaurants forty-five days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Reserve restaurants\", \"due_date\": \"2026-03-28\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to arrange airport pickup ten days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Arrange airport pickup\", \"due_date\": \"2026-05-02\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to notify my bank twenty-one days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Notify bank of travel\", \"due_date\": \"2026-04-21\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to check the forecast five days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Check Lisbon weather forecast\", \"due_date\": \"2026-05-07\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to print any tour tickets six days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Print tour tickets\", \"due_date\": \"2026-05-06\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to refill my prescriptions twelve days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Refill prescriptions\", \"due_date\": \"2026-04-30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to charge my camera batteries four days before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Charge camera batteries\", \"due_date\": \"2026-05-08\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to set my out-of-office message the day before I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminders/-\", \"value\": {\"task\": \"Set out-of-office message\", \"due_date\": \"2026-05-11\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a timed visit to Jerónimos Monastery for three days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Jerónimos Monastery timed visit\", \"date\": \"2026-05-15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put a sunset sail on the Tagus for four days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Tagus sunset sail\", \"date\": \"2026-05-16\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a seafood lunch in Cascais for five days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Seafood lunch in Cascais\", \"date\": \"2026-05-17\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Book a final pastel de nata tasting for seven days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Pastel de nata tasting\", \"date\": \"2026-05-19\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a dinner reservation in Príncipe Real for six days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Dinner in Príncipe Real\", \"date\": \"2026-05-18\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a farewell coffee stop for the morning eight days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Farewell coffee stop\", \"date\": \"2026-05-20\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a train ride to Sintra for two days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/-\", \"value\": {\"type\": \"Train to Sintra\", \"date\": \"2026-05-14\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the return train from Sintra for that same day, two days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/-\", \"value\": {\"type\": \"Train from Sintra\", \"date\": \"2026-05-14\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a tram ride through the old neighborhoods for the day after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/-\", \"value\": {\"type\": \"Historic tram ride\", \"date\": \"2026-05-13\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a ferry ride to Cacilhas for four days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/-\", \"value\": {\"type\": \"Ferry to Cacilhas\", \"date\": \"2026-05-16\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a taxi to the Douro excursion meetup for four days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/-\", \"value\": {\"type\": \"Taxi to Douro excursion meetup\", \"date\": \"2026-05-16\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a bike rental along the waterfront for five days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/-\", \"value\": {\"type\": \"Waterfront bike rental\", \"date\": \"2026-05-17\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a metro pass activation for the day I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/-\", \"value\": {\"type\": \"Metro pass activation\", \"date\": \"2026-05-12\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a rideshare to the fado show for seven days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/-\", \"value\": {\"type\": \"Rideshare to fado show\", \"date\": \"2026-05-19\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a taxi to the tile workshop for six days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/-\", \"value\": {\"type\": \"Taxi to tile workshop\", \"date\": \"2026-05-18\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a bus ride back from Belém for three days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/-\", \"value\": {\"type\": \"Bus back from Belém\", \"date\": \"2026-05-15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a morning taxi to the airport for the final day, eight days after I arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/-\", \"value\": {\"type\": \"Morning taxi to airport\", \"date\": \"2026-05-20\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a dinner at Time Out Market for the evening three days after I arrive, around 7:30."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Dinner at Time Out Market\", \"date\": \"2026-05-15\", \"time\": \"19:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an early bakery stop two days after I arrive, at 8:00 in the morning."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/-\", \"value\": {\"name\": \"Early bakery stop\", \"date\": \"2026-05-14\", \"time\": \"08:00\"}}]"
+    }
+  ],
+  "edit_instruction": "Change the trip’s start date to May 15, 2026.",
+  "theme": "Shifting the trip's anchor date",
+  "master_data": null,
+  "current_json": {
+    "trip": {
+      "start_date": "2026-05-12",
+      "end_date": "2026-05-20"
+    },
+    "lodging": {
+      "check_in_date": "2026-05-12",
+      "check_out_date": "2026-05-20"
+    },
+    "activities": [
+      {
+        "name": "Welcome dinner",
+        "date": "2026-05-12"
+      },
+      {
+        "name": "Guided Alfama walk",
+        "date": "2026-05-13"
+      },
+      {
+        "name": "Sintra day trip",
+        "date": "2026-05-14"
+      },
+      {
+        "name": "Belém museum morning",
+        "date": "2026-05-15"
+      },
+      {
+        "name": "Douro Valley wine excursion",
+        "date": "2026-05-16"
+      },
+      {
+        "name": "Cascais beach day",
+        "date": "2026-05-17"
+      },
+      {
+        "name": "Tile-painting workshop",
+        "date": "2026-05-18"
+      },
+      {
+        "name": "Shopping and fado show",
+        "date": "2026-05-19"
+      },
+      {
+        "name": "Jerónimos Monastery timed visit",
+        "date": "2026-05-15"
+      },
+      {
+        "name": "Tagus sunset sail",
+        "date": "2026-05-16"
+      },
+      {
+        "name": "Seafood lunch in Cascais",
+        "date": "2026-05-17"
+      },
+      {
+        "name": "Pastel de nata tasting",
+        "date": "2026-05-19"
+      },
+      {
+        "name": "Dinner in Príncipe Real",
+        "date": "2026-05-18"
+      },
+      {
+        "name": "Farewell coffee stop",
+        "date": "2026-05-20"
+      },
+      {
+        "name": "Dinner at Time Out Market",
+        "date": "2026-05-15",
+        "time": "19:30"
+      },
+      {
+        "name": "Early bakery stop",
+        "date": "2026-05-14",
+        "time": "08:00"
+      }
+    ],
+    "transport": [
+      {
+        "type": "Airport transfer",
+        "date": "2026-05-20"
+      },
+      {
+        "type": "Train to Sintra",
+        "date": "2026-05-14"
+      },
+      {
+        "type": "Train from Sintra",
+        "date": "2026-05-14"
+      },
+      {
+        "type": "Historic tram ride",
+        "date": "2026-05-13"
+      },
+      {
+        "type": "Ferry to Cacilhas",
+        "date": "2026-05-16"
+      },
+      {
+        "type": "Taxi to Douro excursion meetup",
+        "date": "2026-05-16"
+      },
+      {
+        "type": "Waterfront bike rental",
+        "date": "2026-05-17"
+      },
+      {
+        "type": "Metro pass activation",
+        "date": "2026-05-12"
+      },
+      {
+        "type": "Rideshare to fado show",
+        "date": "2026-05-19"
+      },
+      {
+        "type": "Taxi to tile workshop",
+        "date": "2026-05-18"
+      },
+      {
+        "type": "Bus back from Belém",
+        "date": "2026-05-15"
+      },
+      {
+        "type": "Morning taxi to airport",
+        "date": "2026-05-20"
+      }
+    ],
+    "flights": [
+      {
+        "direction": "Outbound",
+        "departure_date": "2026-05-11",
+        "arrival_date": "2026-05-12"
+      },
+      {
+        "direction": "Return",
+        "departure_date": "2026-05-20",
+        "arrival_date": "2026-05-20"
+      }
+    ],
+    "reminders": [
+      {
+        "task": "Book Lisbon card",
+        "due_date": "2026-04-28"
+      },
+      {
+        "task": "Confirm hotel reservation",
+        "due_date": "2026-05-05"
+      },
+      {
+        "task": "Check in for outbound flight",
+        "due_date": "2026-05-11"
+      },
+      {
+        "task": "Start packing",
+        "due_date": "2026-05-09"
+      },
+      {
+        "task": "Download offline maps",
+        "due_date": "2026-05-10"
+      },
+      {
+        "task": "Pay tour balance",
+        "due_date": "2026-04-12"
+      },
+      {
+        "task": "Check passport validity",
+        "due_date": "2026-02-11"
+      },
+      {
+        "task": "Buy travel insurance",
+        "due_date": "2026-03-13"
+      },
+      {
+        "task": "Reserve restaurants",
+        "due_date": "2026-03-28"
+      },
+      {
+        "task": "Arrange airport pickup",
+        "due_date": "2026-05-02"
+      },
+      {
+        "task": "Notify bank of travel",
+        "due_date": "2026-04-21"
+      },
+      {
+        "task": "Check Lisbon weather forecast",
+        "due_date": "2026-05-07"
+      },
+      {
+        "task": "Print tour tickets",
+        "due_date": "2026-05-06"
+      },
+      {
+        "task": "Refill prescriptions",
+        "due_date": "2026-04-30"
+      },
+      {
+        "task": "Charge camera batteries",
+        "due_date": "2026-05-08"
+      },
+      {
+        "task": "Set out-of-office message",
+        "due_date": "2026-05-11"
+      }
+    ]
+  },
+  "conversation_pattern": "Center the artifact on a trip anchored on one date, where several other dates each derive from that anchor by a fixed offset stated in the conversation, so the anchor alone determines them. Around this core, add the realistic, independent details a traveler would record that do not depend on the dates, and vary their number from sample to sample.",
+  "edit_pattern": "Move the anchor start date to a specific new date a few days from the original.",
+  "cascade_pattern": "Every date that derives from the anchor shifts by the same delta, since each is the anchor plus a fixed offset, so the new anchor uniquely fixes them all. Values that do not derive from the anchor date stay unchanged.",
+  "requires_master_data": false
+}

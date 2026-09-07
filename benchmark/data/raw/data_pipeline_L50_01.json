@@ -1,0 +1,286 @@
+{
+  "id": "data_pipeline_L50_01",
+  "domain": "data_pipeline",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let’s start a data pipeline spec for an hourly customer orders sync."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline_name\", \"value\": \"hourly_customer_orders_sync\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Salesforce Bulk API as the upstream system for this sync."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/source_connector\", \"value\": {\"connector_id\": \"salesforce_bulk_api\", \"display_name\": \"Salesforce Bulk API\", \"provider\": \"Salesforce\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the extractor read customer orders from Salesforce’s Order object using the bulk query route."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/source_connector/extraction\", \"value\": {\"resource\": \"Order\", \"path\": \"/services/data/v59.0/jobs/query\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Authenticate to Salesforce with the production OAuth secret managed for the revenue systems team."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/source_connector/security\", \"value\": {\"credential_ref\": \"vault://prod/revenue/salesforce_oauth\", \"auth_method\": \"oauth2_client_credentials\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the RevOps Data Platform team responsible for operating the Salesforce source side during business hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/source_connector/operations\", \"value\": {\"owner_group\": \"revops-data-platform\", \"support_tier\": \"business-hours\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run it incrementally by Salesforce’s system modification timestamp, since the source can provide changed records cleanly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/source_connector/ingest_mode\", \"value\": {\"mode\": \"incremental\", \"watermark_column\": \"SystemModstamp\", \"backfill_supported\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the Salesforce connector’s usual planning assumptions for bulk pulls so we can estimate runtime and spend later."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/source_connector/planning_assumptions\", \"value\": {\"unit_cost_usd_per_1000_records\": 0.18, \"base_extract_latency_minutes\": 12, \"recommended_batch_size\": 10000}}]"
+    },
+    {
+      "role": "user",
+      "content": "Assume each hourly pull will usually handle about 250,000 order records."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/run_profile\", \"value\": {\"expected_records_per_run\": 250000}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a simple planning model where spend scales by record volume and extract runtime starts from the connector’s baseline plus one minute per batch."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/estimation_model\", \"value\": {\"cost_formula\": \"expected_records_per_run / 1000 * unit_cost_usd_per_1000_records\", \"batch_formula\": \"ceil(expected_records_per_run / recommended_batch_size)\", \"latency_formula\": \"base_extract_latency_minutes + estimated_batches_per_run\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and calculate the per-run planning numbers from those assumptions."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/run_profile/estimates\", \"value\": {\"estimated_batches_per_run\": 25, \"estimated_cost_usd_per_run\": 45.0, \"estimated_extract_latency_minutes\": 37}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the job to run at the top of every hour in UTC, with no catch-up runs if one window is missed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule\", \"value\": {\"cron\": \"0 * * * *\", \"timezone\": \"UTC\", \"catchup\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Land the cleaned orders into the analytics warehouse in the finance mart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/destination\", \"value\": {\"warehouse\": \"snowflake_analytics\", \"database\": \"FINANCE_MART\", \"schema\": \"CUSTOMER_ORDERS\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Standardize the order timestamps after extraction so reporting always uses UTC and the original source values are still traceable."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transforms\", \"value\": [{\"name\": \"normalize_order_timestamps\", \"type\": \"timestamp_standardization\", \"timezone\": \"UTC\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a validation step that rejects any order row missing an identifier before it reaches the warehouse."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quality_checks\", \"value\": [{\"name\": \"require_order_id\", \"severity\": \"error\", \"rule\": \"order_id IS NOT NULL\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Mask customer email addresses before publishing so analysts can join safely without seeing raw contact details."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transforms/-\", \"value\": {\"name\": \"mask_customer_email\", \"type\": \"pii_masking\", \"strategy\": \"sha256_salted_hash\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set up operational notifications for failed runs so the data platform on-call can respond quickly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/monitoring\", \"value\": {\"alert_channel\": \"slack://data-platform-alerts\", \"failure_threshold\": 1, \"notify_on_recovery\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep the published order history for seven years, and archive older partitions rather than deleting them immediately."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/retention_policy\", \"value\": {\"published_history_days\": 2555, \"archive_after_days\": 2555, \"archive_location\": \"s3://company-data-archive/customer-orders/\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Limit access so finance analytics can read the published table, while only the data platform service can write to it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_control\", \"value\": {\"reader_group\": \"finance-analytics\", \"writer_principal\": \"svc_data_platform_writer\", \"approval_ticket\": \"GOV-1842\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the runbook link, the business contact, and a one-hour freshness promise for consumers."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumer_documentation\", \"value\": {\"runbook_url\": \"https://wiki.example.com/data/customer-orders-sync\", \"business_contact\": \"finance-data-products\", \"freshness_sla_minutes\": 60}}]"
+    }
+  ],
+  "edit_instruction": "Please switch the source connector to shopify_admin_graphql.",
+  "theme": "Switching the source connector",
+  "conversation_pattern": "Center the artifact on a pipeline source connector whose connector attributes feed extraction path, credential reference, owner group, ingest mode, and stated cost or latency estimates. Around this core, add the realistic, independent details a data pipeline spec would carry that do not depend on the connector, and vary their number from sample to sample. Do not embed a lookup or reference card for any connector inside the artifact; the artifact holds only the current connector's own fields.",
+  "edit_pattern": "Switch the source connector to a different specific connector, and supply the replacement connector's attributes in master_data.",
+  "cascade_pattern": "Every connector-governed field takes the replacement connector's supplied attributes, and derived estimates recompute from those attributes. Downstream transforms that do not read connector attributes stay unchanged. This is determined because the replacement connector's attributes are provided with the edit.",
+  "requires_master_data": true,
+  "master_data": {
+    "shopify_admin_graphql": {
+      "display_name": "Shopify Admin GraphQL",
+      "provider": "Shopify",
+      "extraction": {
+        "resource": "Order",
+        "path": "/admin/api/2024-04/graphql.json"
+      },
+      "security": {
+        "credential_ref": "vault://prod/commerce/shopify_admin_token",
+        "auth_method": "access_token"
+      },
+      "operations": {
+        "owner_group": "commerce-data-platform",
+        "support_tier": "business-hours"
+      },
+      "ingest_mode": {
+        "mode": "incremental",
+        "watermark_column": "updated_at",
+        "backfill_supported": true
+      },
+      "planning_assumptions": {
+        "unit_cost_usd_per_1000_records": 0.24,
+        "base_extract_latency_minutes": 8,
+        "recommended_batch_size": 5000
+      }
+    }
+  },
+  "current_json": {
+    "pipeline_name": "hourly_customer_orders_sync",
+    "source_connector": {
+      "connector_id": "salesforce_bulk_api",
+      "display_name": "Salesforce Bulk API",
+      "provider": "Salesforce",
+      "extraction": {
+        "resource": "Order",
+        "path": "/services/data/v59.0/jobs/query"
+      },
+      "security": {
+        "credential_ref": "vault://prod/revenue/salesforce_oauth",
+        "auth_method": "oauth2_client_credentials"
+      },
+      "operations": {
+        "owner_group": "revops-data-platform",
+        "support_tier": "business-hours"
+      },
+      "ingest_mode": {
+        "mode": "incremental",
+        "watermark_column": "SystemModstamp",
+        "backfill_supported": true
+      },
+      "planning_assumptions": {
+        "unit_cost_usd_per_1000_records": 0.18,
+        "base_extract_latency_minutes": 12,
+        "recommended_batch_size": 10000
+      }
+    },
+    "run_profile": {
+      "expected_records_per_run": 250000,
+      "estimates": {
+        "estimated_batches_per_run": 25,
+        "estimated_cost_usd_per_run": 45.0,
+        "estimated_extract_latency_minutes": 37
+      }
+    },
+    "estimation_model": {
+      "cost_formula": "expected_records_per_run / 1000 * unit_cost_usd_per_1000_records",
+      "batch_formula": "ceil(expected_records_per_run / recommended_batch_size)",
+      "latency_formula": "base_extract_latency_minutes + estimated_batches_per_run"
+    },
+    "schedule": {
+      "cron": "0 * * * *",
+      "timezone": "UTC",
+      "catchup": false
+    },
+    "destination": {
+      "warehouse": "snowflake_analytics",
+      "database": "FINANCE_MART",
+      "schema": "CUSTOMER_ORDERS"
+    },
+    "transforms": [
+      {
+        "name": "normalize_order_timestamps",
+        "type": "timestamp_standardization",
+        "timezone": "UTC"
+      },
+      {
+        "name": "mask_customer_email",
+        "type": "pii_masking",
+        "strategy": "sha256_salted_hash"
+      }
+    ],
+    "quality_checks": [
+      {
+        "name": "require_order_id",
+        "severity": "error",
+        "rule": "order_id IS NOT NULL"
+      }
+    ],
+    "monitoring": {
+      "alert_channel": "slack://data-platform-alerts",
+      "failure_threshold": 1,
+      "notify_on_recovery": true
+    },
+    "retention_policy": {
+      "published_history_days": 2555,
+      "archive_after_days": 2555,
+      "archive_location": "s3://company-data-archive/customer-orders/"
+    },
+    "access_control": {
+      "reader_group": "finance-analytics",
+      "writer_principal": "svc_data_platform_writer",
+      "approval_ticket": "GOV-1842"
+    },
+    "consumer_documentation": {
+      "runbook_url": "https://wiki.example.com/data/customer-orders-sync",
+      "business_contact": "finance-data-products",
+      "freshness_sla_minutes": 60
+    }
+  }
+}

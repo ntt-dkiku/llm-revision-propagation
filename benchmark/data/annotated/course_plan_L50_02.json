@@ -1,0 +1,365 @@
+{
+  "id": "course_plan_L50_02",
+  "domain": "course_plan",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm putting together my Fall 2026 course plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/term\", \"value\": \"Fall 2026\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Start the schedule with Calculus II as a four-hour class, and use 14.8 quality points for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses\", \"value\": [{\"course\": \"Calculus II\", \"credits\": 4, \"grade_points\": 14.8}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add General Chemistry I too; it's a four-hour course with 13.2 quality points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course\": \"General Chemistry I\", \"credits\": 4, \"grade_points\": 13.2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Academic Writing as a three-hour class with 10.5 quality points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course\": \"Academic Writing\", \"credits\": 3, \"grade_points\": 10.5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Intro to Psychology on the plan as well; it's worth three hours and 11.1 quality points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course\": \"Intro to Psychology\", \"credits\": 3, \"grade_points\": 11.1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Data Structures as a three-hour course with 12.0 quality points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course\": \"Data Structures\", \"credits\": 3, \"grade_points\": 12.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Round out the list with Public Speaking, a two-hour class with 7.4 quality points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course\": \"Public Speaking\", \"credits\": 2, \"grade_points\": 7.4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the overall course load and the credit-weighted average for the classes we have so far."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/total_credits\", \"value\": 19}, {\"op\": \"add\", \"path\": \"/credit_weighted_gpa\", \"value\": 3.63}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that this should satisfy the college's 15-hour minimum for the semester."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/requirements\", \"value\": [{\"requirement\": \"College semester minimum\", \"minimum_credits\": 15}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Record my academic advisor as Dr. Maya Chen in the engineering advising office, with her contact as mchen@college.edu."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisor\", \"value\": {\"name\": \"Dr. Maya Chen\", \"office\": \"Engineering Advising Office\", \"email\": \"mchen@college.edu\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put this under Jordan Lee's student profile; the school ID is S104582."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student\", \"value\": {\"name\": \"Jordan Lee\", \"student_id\": \"S104582\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the degree path as computer science in the bachelor's program."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/program\", \"value\": {\"major\": \"Computer Science\", \"degree\": \"B.S.\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder that registration opens on April 14, 2026, at 8:00 AM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/registration\", \"value\": {\"opens_on\": \"2026-04-14\", \"opens_at\": \"08:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that I'll be taking these on the main campus, mostly in the North Quad area, and I plan to commute."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/campus_details\", \"value\": {\"campus\": \"Main Campus\", \"primary_area\": \"North Quad\", \"attendance_mode\": \"Commuter\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that I want an advising check-in on March 25, 2026, preferably in the afternoon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advising_check_in\", \"value\": {\"date\": \"2026-03-25\", \"preferred_time\": \"Afternoon\", \"purpose\": \"Schedule review\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a note that I'm planning to use the Hope Scholarship for this term, with an estimated award of $3,200."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/financial_aid\", \"value\": {\"source\": \"Hope Scholarship\", \"estimated_award\": 3200, \"currency\": \"USD\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add a planning note that I expect to spend about $650 on books and materials, paid out of pocket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/materials_budget\", \"value\": {\"estimated_cost\": 650, \"currency\": \"USD\", \"payment_method\": \"Out of pocket\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add my preferred weekly study blocks: Monday evenings, Wednesday afternoons, and Sunday mornings."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/study_blocks\", \"value\": [\"Monday evening\", \"Wednesday afternoon\", \"Sunday morning\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add my mom as the person to call if there’s an urgent school issue: Elena Lee, 555-0148, parent."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emergency_contact\", \"value\": {\"name\": \"Elena Lee\", \"phone\": \"555-0148\", \"relationship\": \"Parent\"}}]"
+    }
+  ],
+  "edit_instruction": "Please remove General Chemistry I from my planned courses.",
+  "theme": "Dropping a course",
+  "master_data": null,
+  "current_json": {
+    "term": "Fall 2026",
+    "courses": [
+      {
+        "course": "Calculus II",
+        "credits": 4,
+        "grade_points": 14.8
+      },
+      {
+        "course": "General Chemistry I",
+        "credits": 4,
+        "grade_points": 13.2
+      },
+      {
+        "course": "Academic Writing",
+        "credits": 3,
+        "grade_points": 10.5
+      },
+      {
+        "course": "Intro to Psychology",
+        "credits": 3,
+        "grade_points": 11.1
+      },
+      {
+        "course": "Data Structures",
+        "credits": 3,
+        "grade_points": 12.0
+      },
+      {
+        "course": "Public Speaking",
+        "credits": 2,
+        "grade_points": 7.4
+      }
+    ],
+    "total_credits": 19,
+    "credit_weighted_gpa": 3.63,
+    "requirements": [
+      {
+        "requirement": "College semester minimum",
+        "minimum_credits": 15
+      }
+    ],
+    "advisor": {
+      "name": "Dr. Maya Chen",
+      "office": "Engineering Advising Office",
+      "email": "mchen@college.edu"
+    },
+    "student": {
+      "name": "Jordan Lee",
+      "student_id": "S104582"
+    },
+    "program": {
+      "major": "Computer Science",
+      "degree": "B.S."
+    },
+    "registration": {
+      "opens_on": "2026-04-14",
+      "opens_at": "08:00"
+    },
+    "campus_details": {
+      "campus": "Main Campus",
+      "primary_area": "North Quad",
+      "attendance_mode": "Commuter"
+    },
+    "advising_check_in": {
+      "date": "2026-03-25",
+      "preferred_time": "Afternoon",
+      "purpose": "Schedule review"
+    },
+    "financial_aid": {
+      "source": "Hope Scholarship",
+      "estimated_award": 3200,
+      "currency": "USD"
+    },
+    "materials_budget": {
+      "estimated_cost": 650,
+      "currency": "USD",
+      "payment_method": "Out of pocket"
+    },
+    "study_blocks": [
+      "Monday evening",
+      "Wednesday afternoon",
+      "Sunday morning"
+    ],
+    "emergency_contact": {
+      "name": "Elena Lee",
+      "phone": "555-0148",
+      "relationship": "Parent"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "remove",
+      "path": "/courses/1",
+      "kind": "direct"
+    },
+    {
+      "op": "replace",
+      "path": "/total_credits",
+      "kind": "cascade",
+      "value": 15
+    },
+    {
+      "op": "replace",
+      "path": "/credit_weighted_gpa",
+      "kind": "cascade",
+      "value": 3.72
+    }
+  ],
+  "expected_json": {
+    "term": "Fall 2026",
+    "courses": [
+      {
+        "course": "Calculus II",
+        "credits": 4,
+        "grade_points": 14.8
+      },
+      {
+        "course": "Academic Writing",
+        "credits": 3,
+        "grade_points": 10.5
+      },
+      {
+        "course": "Intro to Psychology",
+        "credits": 3,
+        "grade_points": 11.1
+      },
+      {
+        "course": "Data Structures",
+        "credits": 3,
+        "grade_points": 12.0
+      },
+      {
+        "course": "Public Speaking",
+        "credits": 2,
+        "grade_points": 7.4
+      }
+    ],
+    "total_credits": 15,
+    "credit_weighted_gpa": 3.72,
+    "requirements": [
+      {
+        "requirement": "College semester minimum",
+        "minimum_credits": 15
+      }
+    ],
+    "advisor": {
+      "name": "Dr. Maya Chen",
+      "office": "Engineering Advising Office",
+      "email": "mchen@college.edu"
+    },
+    "student": {
+      "name": "Jordan Lee",
+      "student_id": "S104582"
+    },
+    "program": {
+      "major": "Computer Science",
+      "degree": "B.S."
+    },
+    "registration": {
+      "opens_on": "2026-04-14",
+      "opens_at": "08:00"
+    },
+    "campus_details": {
+      "campus": "Main Campus",
+      "primary_area": "North Quad",
+      "attendance_mode": "Commuter"
+    },
+    "advising_check_in": {
+      "date": "2026-03-25",
+      "preferred_time": "Afternoon",
+      "purpose": "Schedule review"
+    },
+    "financial_aid": {
+      "source": "Hope Scholarship",
+      "estimated_award": 3200,
+      "currency": "USD"
+    },
+    "materials_budget": {
+      "estimated_cost": 650,
+      "currency": "USD",
+      "payment_method": "Out of pocket"
+    },
+    "study_blocks": [
+      "Monday evening",
+      "Wednesday afternoon",
+      "Sunday morning"
+    ],
+    "emergency_contact": {
+      "name": "Elena Lee",
+      "phone": "555-0148",
+      "relationship": "Parent"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Drop General Chemistry I (4 credits, 13.2 quality points). total_credits 19 -> 15; credit_weighted_gpa = remaining quality points / remaining credits = 55.8/15 = 3.72. The 15-credit college minimum is a fixed threshold with no derived flag, and total_credits still meets it, so nothing else changes; other courses and all descriptive fields stay.",
+  "conversation_pattern": "Center the artifact on a course list where each course carries credit hours and grade points, a credit-weighted GPA derives from them, and a running credit total derives from the credits, so the courses together determine both. Around this core, add the realistic, independent details a course plan would carry that do not depend on which courses are in the list, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Drop one specific course from the plan.",
+  "cascade_pattern": "Dropping a course removes its credit hours and grade points from the list, so the credit total drops by its credits and the GPA re-derives as the credit-weighted average of the remaining courses. Other courses and the requirement stay. This is determined because every remaining course's credits and grade points are stated.",
+  "requires_master_data": false
+}

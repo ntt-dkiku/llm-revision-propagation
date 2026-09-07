@@ -1,0 +1,846 @@
+{
+  "id": "shopping_cart_L100_01",
+  "domain": "shopping_cart",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a shopping cart for a Nintendo Switch OLED console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart\", \"value\": {\"base_product\": {\"device_type\": \"game_console\", \"brand\": \"Nintendo\", \"model\": \"Switch OLED\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the official screen protector that fits this console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories\", \"value\": [{\"category\": \"screen_protector\", \"product_name\": \"amFilm Tempered Glass Screen Protector for Nintendo Switch OLED\", \"compatible_model\": \"Nintendo Switch OLED\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a protective travel case made for this same console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"carrying_case\", \"product_name\": \"Orzly Carry Case for Nintendo Switch OLED\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add a replacement charging dock that works with the console too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"charging_dock\", \"product_name\": \"Nintendo Switch OLED Model Dock Set\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a controller grip that's specifically compatible with the Joy-Cons for this system."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"controller_grip\", \"product_name\": \"PowerA Joy-Con Comfort Grip for Nintendo Switch\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a fitted thumb grip set that matches the controllers for this console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"thumb_grips\", \"product_name\": \"Skull & Co. Joy-Con Thumb Grip Caps for Nintendo Switch\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a game card storage case that fits with this console setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"game_card_case\", \"product_name\": \"HORI Game Card Case 24 for Nintendo Switch\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a compact wired headset that plugs into this console without any adapter."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"wired_headset\", \"product_name\": \"PDP LVL40 Wired Stereo Headset for Nintendo Switch\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a microSD card that's recommended for this console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"memory_card\", \"product_name\": \"SanDisk 256GB microSDXC Card for Nintendo Switch\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a charging cable that's the right one for powering this console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"charging_cable\", \"product_name\": \"Anker USB-C to USB-C Cable for Nintendo Switch\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set this up for my account under Maya Chen, and use her usual email and phone number for order updates."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/customer\", \"value\": {\"name\": \"Maya Chen\", \"email\": \"maya.chen@example.com\", \"phone\": \"+1-415-555-0184\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Ship it to her apartment in San Francisco."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shipping_address\", \"value\": {\"street\": \"742 Valencia Street Apt 5B\", \"city\": \"San Francisco\", \"postal_code\": \"94110\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make sure the address is marked as her home in California, USA."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shipping_address/state\", \"value\": \"CA\"}, {\"op\": \"add\", \"path\": \"/cart/shipping_address/country\", \"value\": \"US\"}, {\"op\": \"add\", \"path\": \"/cart/shipping_address/address_type\", \"value\": \"residential\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use standard delivery, and I don't want it held for a signature if I'm not home."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/delivery_preferences\", \"value\": {\"shipping_speed\": \"standard\", \"signature_required\": false, \"preferred_carrier\": \"UPS\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please have the carrier leave the package at the building's front desk if no one answers, preferably on a weekday afternoon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/delivery_preferences/leave_at\", \"value\": \"front desk\"}, {\"op\": \"add\", \"path\": \"/cart/delivery_preferences/preferred_delivery_days\", \"value\": \"weekdays\"}, {\"op\": \"add\", \"path\": \"/cart/delivery_preferences/preferred_delivery_window\", \"value\": \"afternoon\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Maya's Visa for payment, ending in 4242, and charge it in U.S. dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/payment\", \"value\": {\"method\": \"Visa\", \"last_four\": \"4242\", \"currency\": \"USD\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the same San Francisco apartment for billing too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/billing_address\", \"value\": {\"street\": \"742 Valencia Street Apt 5B\", \"city\": \"San Francisco\", \"state\": \"CA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the billing location with the ZIP code and country, and mark it as a home address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/billing_address/postal_code\", \"value\": \"94110\"}, {\"op\": \"add\", \"path\": \"/cart/billing_address/country\", \"value\": \"US\"}, {\"op\": \"add\", \"path\": \"/cart/billing_address/address_type\", \"value\": \"residential\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply my spring checkout promo if it still qualifies, and make sure it doesn't combine with anything else."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/promotion\", \"value\": {\"code\": \"SPRING20\", \"discount_type\": \"percentage\", \"stackable\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "The promo should take twenty percent off and expire at the end of April this year."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/promotion/discount_value\", \"value\": 20}, {\"op\": \"add\", \"path\": \"/cart/promotion/expires_on\", \"value\": \"2026-04-30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please save this as a regular online checkout, with pickup turned off and the order language set to English."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/checkout_options\", \"value\": {\"channel\": \"online\", \"pickup_in_store\": false, \"language\": \"en-US\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send order updates by both email and text, but don't use this purchase for marketing messages."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/notifications\", \"value\": {\"email_updates\": true, \"sms_updates\": true, \"marketing_opt_in\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Wrap it as a birthday gift, but don't show prices on the packing slip."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/gift_options\", \"value\": {\"gift_wrap\": true, \"occasion\": \"birthday\", \"hide_prices\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short gift note from Maya to Leo."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/gift_options/message\", \"value\": \"Happy birthday, Leo! Enjoy your new gaming setup.\"}, {\"op\": \"add\", \"path\": \"/cart/gift_options/from\", \"value\": \"Maya\"}, {\"op\": \"add\", \"path\": \"/cart/gift_options/to\", \"value\": \"Leo\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add protection coverage for accidental damage, starting the day it ships."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/protection_plan\", \"value\": {\"coverage\": \"accidental_damage\", \"term_years\": 2, \"starts_on\": \"ship_date\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the protection plan use the standard deductible and send any claim paperwork digitally."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/protection_plan/deductible\", \"value\": 49}, {\"op\": \"add\", \"path\": \"/cart/protection_plan/claim_method\", \"value\": \"digital\"}, {\"op\": \"add\", \"path\": \"/cart/protection_plan/transferable\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya's loyalty membership so she earns points on the order."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/loyalty\", \"value\": {\"member_id\": \"MC-839204\", \"earn_points\": true, \"tier\": \"gold\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make sure this is sold by the main GamesDirect store, not a third-party reseller."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/merchant\", \"value\": {\"seller_name\": \"GamesDirect\", \"seller_id\": \"GD-001\", \"third_party\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the order packed from the West Coast warehouse, and mark it as available to ship now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/fulfillment\", \"value\": {\"warehouse\": \"West Coast DC\", \"availability\": \"in_stock\", \"ship_ready\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a wired internet adapter that's suitable for this console when it's docked."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"ethernet_adapter\", \"product_name\": \"HORI Nintendo Switch LAN Adapter\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a matte protective skin cut precisely for this console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"protective_skin\", \"product_name\": \"dbrand Matte Black Skin for Nintendo Switch OLED\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a compact tabletop stand that's made to fit this console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"play_stand\", \"product_name\": \"HORI Compact PlayStand for Nintendo Switch\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a hard shell cover that's molded for this console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"hard_shell_cover\", \"product_name\": \"Mumba Dockable Case for Nintendo Switch OLED\", \"compatible_model\": \"Nintendo Switch OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one more compatible replacement power adapter for the console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"power_adapter\", \"product_name\": \"Nintendo Switch AC Adapter\"}}]"
+    }
+  ],
+  "edit_instruction": "Actually, make the console model the Switch Lite instead.",
+  "theme": "Swapping the base product and its compatible accessories",
+  "master_data": {
+    "base_product": {
+      "model": "Switch Lite"
+    },
+    "compatible_accessories": {
+      "screen_protector": {
+        "product_name": "amFilm Tempered Glass Screen Protector for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "carrying_case": {
+        "product_name": "Orzly Carry Case for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "charging_dock": {
+        "product_name": "Fastsnail Charging Stand for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "controller_grip": {
+        "product_name": "Satisfye ZenGrip Go for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "thumb_grips": {
+        "product_name": "Skull & Co. Thumb Grip Caps for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "game_card_case": {
+        "product_name": "HORI Game Card Case 24 for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "wired_headset": {
+        "product_name": "PDP LVL40 Wired Stereo Headset for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "memory_card": {
+        "product_name": "SanDisk 256GB microSDXC Card for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "charging_cable": {
+        "product_name": "Anker USB-C to USB-C Cable for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "ethernet_adapter": {
+        "product_name": "UGREEN USB-C Ethernet Adapter for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "protective_skin": {
+        "product_name": "dbrand Matte Black Skin for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "play_stand": {
+        "product_name": "HORI PlayStand for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "hard_shell_cover": {
+        "product_name": "Mumba Blade Case for Nintendo Switch Lite",
+        "compatible_model": "Nintendo Switch Lite"
+      },
+      "power_adapter": {
+        "product_name": "Nintendo Switch AC Adapter for Nintendo Switch Lite"
+      }
+    }
+  },
+  "current_json": {
+    "cart": {
+      "base_product": {
+        "device_type": "game_console",
+        "brand": "Nintendo",
+        "model": "Switch OLED"
+      },
+      "accessories": [
+        {
+          "category": "screen_protector",
+          "product_name": "amFilm Tempered Glass Screen Protector for Nintendo Switch OLED",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "carrying_case",
+          "product_name": "Orzly Carry Case for Nintendo Switch OLED",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "charging_dock",
+          "product_name": "Nintendo Switch OLED Model Dock Set",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "controller_grip",
+          "product_name": "PowerA Joy-Con Comfort Grip for Nintendo Switch",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "thumb_grips",
+          "product_name": "Skull & Co. Joy-Con Thumb Grip Caps for Nintendo Switch",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "game_card_case",
+          "product_name": "HORI Game Card Case 24 for Nintendo Switch",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "wired_headset",
+          "product_name": "PDP LVL40 Wired Stereo Headset for Nintendo Switch",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "memory_card",
+          "product_name": "SanDisk 256GB microSDXC Card for Nintendo Switch",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "charging_cable",
+          "product_name": "Anker USB-C to USB-C Cable for Nintendo Switch",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "ethernet_adapter",
+          "product_name": "HORI Nintendo Switch LAN Adapter",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "protective_skin",
+          "product_name": "dbrand Matte Black Skin for Nintendo Switch OLED",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "play_stand",
+          "product_name": "HORI Compact PlayStand for Nintendo Switch",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "hard_shell_cover",
+          "product_name": "Mumba Dockable Case for Nintendo Switch OLED",
+          "compatible_model": "Nintendo Switch OLED"
+        },
+        {
+          "category": "power_adapter",
+          "product_name": "Nintendo Switch AC Adapter"
+        }
+      ],
+      "customer": {
+        "name": "Maya Chen",
+        "email": "maya.chen@example.com",
+        "phone": "+1-415-555-0184"
+      },
+      "shipping_address": {
+        "street": "742 Valencia Street Apt 5B",
+        "city": "San Francisco",
+        "postal_code": "94110",
+        "state": "CA",
+        "country": "US",
+        "address_type": "residential"
+      },
+      "delivery_preferences": {
+        "shipping_speed": "standard",
+        "signature_required": false,
+        "preferred_carrier": "UPS",
+        "leave_at": "front desk",
+        "preferred_delivery_days": "weekdays",
+        "preferred_delivery_window": "afternoon"
+      },
+      "payment": {
+        "method": "Visa",
+        "last_four": "4242",
+        "currency": "USD"
+      },
+      "billing_address": {
+        "street": "742 Valencia Street Apt 5B",
+        "city": "San Francisco",
+        "state": "CA",
+        "postal_code": "94110",
+        "country": "US",
+        "address_type": "residential"
+      },
+      "promotion": {
+        "code": "SPRING20",
+        "discount_type": "percentage",
+        "stackable": false,
+        "discount_value": 20,
+        "expires_on": "2026-04-30"
+      },
+      "checkout_options": {
+        "channel": "online",
+        "pickup_in_store": false,
+        "language": "en-US"
+      },
+      "notifications": {
+        "email_updates": true,
+        "sms_updates": true,
+        "marketing_opt_in": false
+      },
+      "gift_options": {
+        "gift_wrap": true,
+        "occasion": "birthday",
+        "hide_prices": true,
+        "message": "Happy birthday, Leo! Enjoy your new gaming setup.",
+        "from": "Maya",
+        "to": "Leo"
+      },
+      "protection_plan": {
+        "coverage": "accidental_damage",
+        "term_years": 2,
+        "starts_on": "ship_date",
+        "deductible": 49,
+        "claim_method": "digital",
+        "transferable": true
+      },
+      "loyalty": {
+        "member_id": "MC-839204",
+        "earn_points": true,
+        "tier": "gold"
+      },
+      "merchant": {
+        "seller_name": "GamesDirect",
+        "seller_id": "GD-001",
+        "third_party": false
+      },
+      "fulfillment": {
+        "warehouse": "West Coast DC",
+        "availability": "in_stock",
+        "ship_ready": true
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/cart/base_product/model",
+      "kind": "direct",
+      "value": "Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/0/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/0/product_name",
+      "kind": "cascade",
+      "value": "amFilm Tempered Glass Screen Protector for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/1/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/1/product_name",
+      "kind": "cascade",
+      "value": "Orzly Carry Case for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/10/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/10/product_name",
+      "kind": "cascade",
+      "value": "dbrand Matte Black Skin for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/11/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/11/product_name",
+      "kind": "cascade",
+      "value": "HORI PlayStand for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/12/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/12/product_name",
+      "kind": "cascade",
+      "value": "Mumba Blade Case for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/13/product_name",
+      "kind": "cascade",
+      "value": "Nintendo Switch AC Adapter for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/2/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/2/product_name",
+      "kind": "cascade",
+      "value": "Fastsnail Charging Stand for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/3/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/3/product_name",
+      "kind": "cascade",
+      "value": "Satisfye ZenGrip Go for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/4/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/4/product_name",
+      "kind": "cascade",
+      "value": "Skull & Co. Thumb Grip Caps for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/5/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/5/product_name",
+      "kind": "cascade",
+      "value": "HORI Game Card Case 24 for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/6/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/6/product_name",
+      "kind": "cascade",
+      "value": "PDP LVL40 Wired Stereo Headset for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/7/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/7/product_name",
+      "kind": "cascade",
+      "value": "SanDisk 256GB microSDXC Card for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/8/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/8/product_name",
+      "kind": "cascade",
+      "value": "Anker USB-C to USB-C Cable for Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/9/compatible_model",
+      "kind": "cascade",
+      "value": "Nintendo Switch Lite"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/9/product_name",
+      "kind": "cascade",
+      "value": "UGREEN USB-C Ethernet Adapter for Nintendo Switch Lite"
+    }
+  ],
+  "expected_json": {
+    "cart": {
+      "base_product": {
+        "device_type": "game_console",
+        "brand": "Nintendo",
+        "model": "Switch Lite"
+      },
+      "accessories": [
+        {
+          "category": "screen_protector",
+          "product_name": "amFilm Tempered Glass Screen Protector for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "carrying_case",
+          "product_name": "Orzly Carry Case for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "charging_dock",
+          "product_name": "Fastsnail Charging Stand for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "controller_grip",
+          "product_name": "Satisfye ZenGrip Go for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "thumb_grips",
+          "product_name": "Skull & Co. Thumb Grip Caps for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "game_card_case",
+          "product_name": "HORI Game Card Case 24 for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "wired_headset",
+          "product_name": "PDP LVL40 Wired Stereo Headset for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "memory_card",
+          "product_name": "SanDisk 256GB microSDXC Card for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "charging_cable",
+          "product_name": "Anker USB-C to USB-C Cable for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "ethernet_adapter",
+          "product_name": "UGREEN USB-C Ethernet Adapter for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "protective_skin",
+          "product_name": "dbrand Matte Black Skin for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "play_stand",
+          "product_name": "HORI PlayStand for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "hard_shell_cover",
+          "product_name": "Mumba Blade Case for Nintendo Switch Lite",
+          "compatible_model": "Nintendo Switch Lite"
+        },
+        {
+          "category": "power_adapter",
+          "product_name": "Nintendo Switch AC Adapter for Nintendo Switch Lite"
+        }
+      ],
+      "customer": {
+        "name": "Maya Chen",
+        "email": "maya.chen@example.com",
+        "phone": "+1-415-555-0184"
+      },
+      "shipping_address": {
+        "street": "742 Valencia Street Apt 5B",
+        "city": "San Francisco",
+        "postal_code": "94110",
+        "state": "CA",
+        "country": "US",
+        "address_type": "residential"
+      },
+      "delivery_preferences": {
+        "shipping_speed": "standard",
+        "signature_required": false,
+        "preferred_carrier": "UPS",
+        "leave_at": "front desk",
+        "preferred_delivery_days": "weekdays",
+        "preferred_delivery_window": "afternoon"
+      },
+      "payment": {
+        "method": "Visa",
+        "last_four": "4242",
+        "currency": "USD"
+      },
+      "billing_address": {
+        "street": "742 Valencia Street Apt 5B",
+        "city": "San Francisco",
+        "state": "CA",
+        "postal_code": "94110",
+        "country": "US",
+        "address_type": "residential"
+      },
+      "promotion": {
+        "code": "SPRING20",
+        "discount_type": "percentage",
+        "stackable": false,
+        "discount_value": 20,
+        "expires_on": "2026-04-30"
+      },
+      "checkout_options": {
+        "channel": "online",
+        "pickup_in_store": false,
+        "language": "en-US"
+      },
+      "notifications": {
+        "email_updates": true,
+        "sms_updates": true,
+        "marketing_opt_in": false
+      },
+      "gift_options": {
+        "gift_wrap": true,
+        "occasion": "birthday",
+        "hide_prices": true,
+        "message": "Happy birthday, Leo! Enjoy your new gaming setup.",
+        "from": "Maya",
+        "to": "Leo"
+      },
+      "protection_plan": {
+        "coverage": "accidental_damage",
+        "term_years": 2,
+        "starts_on": "ship_date",
+        "deductible": 49,
+        "claim_method": "digital",
+        "transferable": true
+      },
+      "loyalty": {
+        "member_id": "MC-839204",
+        "earn_points": true,
+        "tier": "gold"
+      },
+      "merchant": {
+        "seller_name": "GamesDirect",
+        "seller_id": "GD-001",
+        "third_party": false
+      },
+      "fulfillment": {
+        "warehouse": "West Coast DC",
+        "availability": "in_stock",
+        "ship_ready": true
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Swap base product Switch OLED -> Switch Lite. base_product.model is the direct edit; each of the 14 accessories switches (matched by category) to the Switch Lite product_name from master_data, and the 13 that carry compatible_model move Nintendo Switch OLED -> Nintendo Switch Lite (power_adapter has no compatible_model). brand (Nintendo), device_type, and all unrelated cart fields stay.",
+  "conversation_pattern": "Center the artifact on a cart with one base product and several accessories whose choice depends on that base, each being the one valid for it. Around this core, add the realistic, independent details a cart would carry that do not depend on the base product, and vary their number from sample to sample.",
+  "edit_pattern": "Change the base product (device, platform, or model) to a different specific one.",
+  "cascade_pattern": "Each base-dependent accessory switches to the one valid for the new base (the valid accessories for the new base are supplied with the edit instruction), while accessories and fields that do not depend on the base stay. This is determined because the valid accessories for the new base are provided with the edit.",
+  "requires_master_data": true
+}

@@ -1,0 +1,523 @@
+{
+  "id": "org_access_plan_L100_03",
+  "domain": "org_access_plan",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start an access plan for Maya Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee_name\", \"value\": \"Maya Chen\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Give her access to Payroll Vault and treat that one as high sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems\", \"value\": [{\"name\": \"Payroll Vault\", \"sensitivity_level\": \"high\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include the analytics workspace for her, with medium sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems/-\", \"value\": {\"name\": \"Analytics Workspace\", \"sensitivity_level\": \"medium\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer support console too, and mark it low sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems/-\", \"value\": {\"name\": \"Customer Support Console\", \"sensitivity_level\": \"low\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the vendor risk portal as well, with medium sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems/-\", \"value\": {\"name\": \"Vendor Risk Portal\", \"sensitivity_level\": \"medium\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the learning management site too, and keep it low sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems/-\", \"value\": {\"name\": \"Learning Management Site\", \"sensitivity_level\": \"low\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give her the HR ticketing tool as well, with medium sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems/-\", \"value\": {\"name\": \"HR Ticketing Tool\", \"sensitivity_level\": \"medium\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the document archive for her too, and rate it low sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems/-\", \"value\": {\"name\": \"Document Archive\", \"sensitivity_level\": \"low\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now note that Maya has seven approved systems in this plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_count\", \"value\": 7}]"
+    },
+    {
+      "role": "user",
+      "content": "Please note that she should be considered able to administer the plan whenever at least one approved system is high sensitivity; with her current access, that applies."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/capability_summary\", \"value\": {\"can_admin\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that exporting data is allowed whenever any approved system is medium or high sensitivity; that condition is met here."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/capability_summary/can_export_data\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that payroll approvals are permitted only when Payroll Vault is among the approved systems, which it is right now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/capability_summary/can_approve_payroll\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Also mark that customer record lookup is permitted only when the customer support console is approved, and it is approved here."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/capability_summary/can_lookup_customer_records\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya’s company identifier so the plan is easy to match to her HR record."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee_id\", \"value\": \"EMP-48291\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her work context: she’s a Finance Operations analyst based in Seattle."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/work_context\", \"value\": {\"unit\": \"Finance Operations\", \"position\": \"Analyst\", \"site\": \"Seattle\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include her supervisor for approvals: Jordan Patel in the Finance Operations group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manager\", \"value\": {\"name\": \"Jordan Patel\", \"department\": \"Finance Operations\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the service request details: ticket ARC-2026-0148, opened on 2026-01-12, owned by Priya Raman."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/request_tracking\", \"value\": {\"ticket_id\": \"ARC-2026-0148\", \"opened_date\": \"2026-01-12\", \"owner\": \"Priya Raman\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this as approved by the security reviewer, with Linh Tran signing off on 2026-01-13."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/security_review\", \"value\": {\"decision\": \"approved\", \"reviewer\": \"Linh Tran\", \"date\": \"2026-01-13\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the access to begin on 2026-01-15, expire on 2027-01-15, and use Pacific time for scheduling."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lifecycle\", \"value\": {\"start_date\": \"2026-01-15\", \"end_date\": \"2027-01-15\", \"timezone\": \"America/Los_Angeles\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the business reason: quarter-end payroll reconciliation for the finance operations team."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/business_justification\", \"value\": \"Quarter-end payroll reconciliation for Finance Operations\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture how this will be provisioned: through Okta, handled automatically, with same-day activation expected."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/provisioning\", \"value\": {\"platform\": \"Okta\", \"method\": \"automated\", \"activation_sla\": \"same day\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note the authentication requirements: multifactor is required, sessions last eight hours, and access is limited to corporate devices."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/authentication\", \"value\": {\"mfa_required\": true, \"session_duration_hours\": 8, \"device_restriction\": \"corporate devices only\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the monitoring expectations: log activity daily, retain evidence for one year, and alert the access team on suspicious use."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/monitoring\", \"value\": {\"log_review_frequency\": \"daily\", \"evidence_retention\": \"1 year\", \"alert_recipient\": \"access team\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include review timing: recertify every quarter, next check on 2026-04-15, with the manager responsible."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/recertification\", \"value\": {\"cadence\": \"quarterly\", \"next_review_date\": \"2026-04-15\", \"owner_role\": \"manager\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the data handling limits: no bulk downloads, masking required for tax identifiers, and screenshots not allowed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/data_handling\", \"value\": {\"bulk_downloads\": \"prohibited\", \"tax_id_masking\": \"required\", \"screenshots\": \"prohibited\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note the emergency process: urgent changes go through the access hotline, need director approval, and should be completed within four hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emergency_process\", \"value\": {\"intake_channel\": \"access hotline\", \"approval_level\": \"director\", \"completion_sla\": \"4 hours\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the compliance mapping: SOX applies, the control reference is AC-7, and the evidence owner is Internal Audit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance_mapping\", \"value\": {\"framework\": \"SOX\", \"control_reference\": \"AC-7\", \"evidence_owner\": \"Internal Audit\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the offboarding instructions: disable access through Okta, notify the manager, and finish within one business day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/offboarding\", \"value\": {\"disable_channel\": \"Okta\", \"notification_recipient\": \"manager\", \"completion_target\": \"1 business day\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add who Maya should contact for help: the Identity Operations team, by email, during business hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/support_contact\", \"value\": {\"team\": \"Identity Operations\", \"channel\": \"email\", \"availability\": \"business hours\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the training status: Maya completed access stewardship training on 2025-12-20, and it’s valid through 2026-12-20."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/training_status\", \"value\": {\"course\": \"Access Stewardship\", \"completed_date\": \"2025-12-20\", \"valid_until\": \"2026-12-20\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the location risk details: access is expected from the United States, VPN is required outside the office, and international use needs preapproval."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/location_risk\", \"value\": {\"expected_country\": \"United States\", \"vpn_requirement\": \"required outside office\", \"international_use\": \"preapproval required\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the risk acceptance note: residual risk is low, accepted by Jordan Patel, with the note dated 2026-01-13."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risk_acceptance\", \"value\": {\"residual_risk\": \"low\", \"accepted_by\": \"Jordan Patel\", \"acceptance_date\": \"2026-01-13\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the audit package details: store it in the GRC repository, label it Q1-2026 access evidence, and keep it restricted."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/audit_package\", \"value\": {\"repository\": \"GRC repository\", \"label\": \"Q1-2026 access evidence\", \"visibility\": \"restricted\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the privacy notes: payroll data is confidential, sharing outside Finance is blocked, and Legal must approve any exception."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/privacy_notes\", \"value\": {\"classification\": \"confidential payroll data\", \"external_sharing\": \"blocked outside Finance\", \"exception_approver\": \"Legal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add separation-of-duties guidance: Maya cannot initiate payroll changes, cannot approve her own requests, and escalation goes to the controller."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/separation_of_duties\", \"value\": {\"payroll_change_initiation\": \"not allowed\", \"self_approval\": \"not allowed\", \"escalation_owner\": \"controller\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the requester details: it came from the finance coordinator, by email, with a normal priority."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/request_origin\", \"value\": {\"submitted_by\": \"finance coordinator\", \"submission_channel\": \"email\", \"priority\": \"normal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note the deployment window: implement it during business hours, avoid payroll close days, and coordinate with Finance IT."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment_window\", \"value\": {\"preferred_time\": \"business hours\", \"blackout_period\": \"payroll close days\", \"coordination_team\": \"Finance IT\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the communications plan: send confirmation to Maya, copy her manager, and use the standard access notice template."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications\", \"value\": {\"confirmation_recipient\": \"Maya Chen\", \"copy_recipient\": \"Jordan Patel\", \"template\": \"standard access notice\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include closure criteria: confirm login works, capture evidence, and have Maya acknowledge completion."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/closure_criteria\", \"value\": {\"login_confirmation\": \"required\", \"evidence_capture\": \"required\", \"employee_acknowledgment\": \"required\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the current handling status: active, last updated on 2026-01-14, and maintained by Identity Governance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/record_status\", \"value\": {\"state\": \"active\", \"last_updated\": \"2026-01-14\", \"maintained_by\": \"Identity Governance\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the post-implementation check: scheduled for 2026-01-16, assigned to Omar Lewis, with evidence kept as a screenshot-free log export."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/post_implementation_check\", \"value\": {\"scheduled_date\": \"2026-01-16\", \"assignee\": \"Omar Lewis\", \"evidence_type\": \"screenshot-free log export\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, mark this as the first approved release for the access plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan_version\", \"value\": \"1.0\"}]"
+    }
+  ],
+  "edit_instruction": "Please revoke Payroll Vault from Maya Chen’s access plan.",
+  "theme": "Revoking a system access",
+  "conversation_pattern": "Center the artifact on an access plan with a list of granted systems (each with a name and a sensitivity level), an access_count, and a capability summary of boolean flags (e.g. can_export_data, can_admin) each derived by a stated rule over the granted systems (e.g. can_admin is true iff any granted system has sensitivity 'high'). Around this core, add the realistic, independent details an access record would carry that do not depend on the grant list, and vary the number of granted systems from sample to sample.",
+  "edit_pattern": "Revoke one specific granted system from the access plan.",
+  "cascade_pattern": "Revoking the system removes it from the grant list, lowers access_count, and re-derives every capability-summary flag from its stated rule over the remaining grants (a flag flips only if the removed system was what satisfied it). Identity and unrelated fields stay unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "employee_name": "Maya Chen",
+    "granted_systems": [
+      {
+        "name": "Payroll Vault",
+        "sensitivity_level": "high"
+      },
+      {
+        "name": "Analytics Workspace",
+        "sensitivity_level": "medium"
+      },
+      {
+        "name": "Customer Support Console",
+        "sensitivity_level": "low"
+      },
+      {
+        "name": "Vendor Risk Portal",
+        "sensitivity_level": "medium"
+      },
+      {
+        "name": "Learning Management Site",
+        "sensitivity_level": "low"
+      },
+      {
+        "name": "HR Ticketing Tool",
+        "sensitivity_level": "medium"
+      },
+      {
+        "name": "Document Archive",
+        "sensitivity_level": "low"
+      }
+    ],
+    "access_count": 7,
+    "capability_summary": {
+      "can_admin": true,
+      "can_export_data": true,
+      "can_approve_payroll": true,
+      "can_lookup_customer_records": true
+    },
+    "employee_id": "EMP-48291",
+    "work_context": {
+      "unit": "Finance Operations",
+      "position": "Analyst",
+      "site": "Seattle"
+    },
+    "manager": {
+      "name": "Jordan Patel",
+      "department": "Finance Operations"
+    },
+    "request_tracking": {
+      "ticket_id": "ARC-2026-0148",
+      "opened_date": "2026-01-12",
+      "owner": "Priya Raman"
+    },
+    "security_review": {
+      "decision": "approved",
+      "reviewer": "Linh Tran",
+      "date": "2026-01-13"
+    },
+    "lifecycle": {
+      "start_date": "2026-01-15",
+      "end_date": "2027-01-15",
+      "timezone": "America/Los_Angeles"
+    },
+    "business_justification": "Quarter-end payroll reconciliation for Finance Operations",
+    "provisioning": {
+      "platform": "Okta",
+      "method": "automated",
+      "activation_sla": "same day"
+    },
+    "authentication": {
+      "mfa_required": true,
+      "session_duration_hours": 8,
+      "device_restriction": "corporate devices only"
+    },
+    "monitoring": {
+      "log_review_frequency": "daily",
+      "evidence_retention": "1 year",
+      "alert_recipient": "access team"
+    },
+    "recertification": {
+      "cadence": "quarterly",
+      "next_review_date": "2026-04-15",
+      "owner_role": "manager"
+    },
+    "data_handling": {
+      "bulk_downloads": "prohibited",
+      "tax_id_masking": "required",
+      "screenshots": "prohibited"
+    },
+    "emergency_process": {
+      "intake_channel": "access hotline",
+      "approval_level": "director",
+      "completion_sla": "4 hours"
+    },
+    "compliance_mapping": {
+      "framework": "SOX",
+      "control_reference": "AC-7",
+      "evidence_owner": "Internal Audit"
+    },
+    "offboarding": {
+      "disable_channel": "Okta",
+      "notification_recipient": "manager",
+      "completion_target": "1 business day"
+    },
+    "support_contact": {
+      "team": "Identity Operations",
+      "channel": "email",
+      "availability": "business hours"
+    },
+    "training_status": {
+      "course": "Access Stewardship",
+      "completed_date": "2025-12-20",
+      "valid_until": "2026-12-20"
+    },
+    "location_risk": {
+      "expected_country": "United States",
+      "vpn_requirement": "required outside office",
+      "international_use": "preapproval required"
+    },
+    "risk_acceptance": {
+      "residual_risk": "low",
+      "accepted_by": "Jordan Patel",
+      "acceptance_date": "2026-01-13"
+    },
+    "audit_package": {
+      "repository": "GRC repository",
+      "label": "Q1-2026 access evidence",
+      "visibility": "restricted"
+    },
+    "privacy_notes": {
+      "classification": "confidential payroll data",
+      "external_sharing": "blocked outside Finance",
+      "exception_approver": "Legal"
+    },
+    "separation_of_duties": {
+      "payroll_change_initiation": "not allowed",
+      "self_approval": "not allowed",
+      "escalation_owner": "controller"
+    },
+    "request_origin": {
+      "submitted_by": "finance coordinator",
+      "submission_channel": "email",
+      "priority": "normal"
+    },
+    "deployment_window": {
+      "preferred_time": "business hours",
+      "blackout_period": "payroll close days",
+      "coordination_team": "Finance IT"
+    },
+    "communications": {
+      "confirmation_recipient": "Maya Chen",
+      "copy_recipient": "Jordan Patel",
+      "template": "standard access notice"
+    },
+    "closure_criteria": {
+      "login_confirmation": "required",
+      "evidence_capture": "required",
+      "employee_acknowledgment": "required"
+    },
+    "record_status": {
+      "state": "active",
+      "last_updated": "2026-01-14",
+      "maintained_by": "Identity Governance"
+    },
+    "post_implementation_check": {
+      "scheduled_date": "2026-01-16",
+      "assignee": "Omar Lewis",
+      "evidence_type": "screenshot-free log export"
+    },
+    "plan_version": "1.0"
+  }
+}

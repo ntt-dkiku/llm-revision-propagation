@@ -1,0 +1,437 @@
+{
+  "id": "shopping_cart_L50_02",
+  "domain": "shopping_cart",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a shopping cart for Maya Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart\", \"value\": {\"customer\": {\"name\": \"Maya Chen\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put three of the snack party packs in Maya's cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundleLine\", \"value\": {\"productName\": \"Snack Party Pack\", \"quantity\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Each party pack should include two jars of salsa at $4.50 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundleLine/components\", \"value\": [{\"productName\": \"Salsa Jar\", \"unitsPerBundle\": 2, \"unitPrice\": 4.5}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and show how many salsa jars that makes for the three packs, along with their cost."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundleLine/components/0/quantity\", \"value\": 6}, {\"op\": \"add\", \"path\": \"/cart/bundleLine/components/0/amount\", \"value\": 27}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include one bag of tortilla chips in every party pack, priced at $3.25 a bag."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundleLine/components/-\", \"value\": {\"productName\": \"Tortilla Chips\", \"unitsPerBundle\": 1, \"unitPrice\": 3.25}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the total number of chip bags for those packs and their cost."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundleLine/components/1/quantity\", \"value\": 3}, {\"op\": \"add\", \"path\": \"/cart/bundleLine/components/1/amount\", \"value\": 9.75}]"
+    },
+    {
+      "role": "user",
+      "content": "Add four sparkling waters to each party pack, and use $1.40 for each can."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundleLine/components/-\", \"value\": {\"productName\": \"Sparkling Water\", \"unitsPerBundle\": 4, \"unitPrice\": 1.4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Figure out the sparkling water count and charge for the three party packs."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundleLine/components/2/quantity\", \"value\": 12}, {\"op\": \"add\", \"path\": \"/cart/bundleLine/components/2/amount\", \"value\": 16.8}]"
+    },
+    {
+      "role": "user",
+      "content": "Include one reusable serving tray in each party pack, priced at $6.00 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundleLine/components/-\", \"value\": {\"productName\": \"Reusable Serving Tray\", \"unitsPerBundle\": 1, \"unitPrice\": 6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the total number of serving trays and their cost for the order."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundleLine/components/3/quantity\", \"value\": 3}, {\"op\": \"add\", \"path\": \"/cart/bundleLine/components/3/amount\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "Add up the party pack line so I can see the total for all its parts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundleLine/amount\", \"value\": 71.55}]"
+    },
+    {
+      "role": "user",
+      "content": "Use local courier delivery for this order, with a $7.95 delivery charge."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/fulfillment\", \"value\": {\"method\": \"Local Courier\", \"fee\": 7.95}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya's contact info so the shop can reach her about the delivery."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/customer/contact\", \"value\": {\"email\": \"maya.chen@example.com\", \"phone\": \"555-0148\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send it to Maya's home in Portland."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/customer/address\", \"value\": {\"street\": \"1286 SE Alder Street\", \"city\": \"Portland\", \"postalCode\": \"97214\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Maya will pay with her Visa ending in 4242, using the same Portland ZIP for billing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/payment\", \"value\": {\"method\": \"Visa\", \"last4\": \"4242\", \"billingPostalCode\": \"97214\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply the SUMMER5 deal for five dollars off the cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/promotion\", \"value\": {\"code\": \"SUMMER5\", \"discountAmount\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the order as being for Maya's movie night on August 16."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/occasion\", \"value\": {\"label\": \"Movie Night\", \"date\": \"2025-08-16\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the courier drop-off for August 15 between 4:00 PM and 6:00 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/fulfillment/window\", \"value\": {\"date\": \"2025-08-15\", \"startTime\": \"16:00\", \"endTime\": \"18:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the courier, ask them to leave it at the front door, use buzzer 18, and skip the signature."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/fulfillment/instructions\", \"value\": {\"dropOffLocation\": \"Front door\", \"buzzerCode\": \"18\", \"signatureRequired\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Since it's going to Portland, apply Oregon's zero sales tax to the order."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/tax\", \"value\": {\"region\": \"OR\", \"rate\": 0, \"amount\": 0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Wrap it up by totaling the items, delivery, and final charge after the discount and tax."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/totals\", \"value\": {\"itemsSubtotal\": 71.55, \"deliveryFee\": 7.95, \"grandTotal\": 74.5}}]"
+    }
+  ],
+  "edit_instruction": "Change the Snack Party Pack quantity to 5.",
+  "theme": "Scaling a product bundle's components",
+  "master_data": null,
+  "current_json": {
+    "cart": {
+      "customer": {
+        "name": "Maya Chen",
+        "contact": {
+          "email": "maya.chen@example.com",
+          "phone": "555-0148"
+        },
+        "address": {
+          "street": "1286 SE Alder Street",
+          "city": "Portland",
+          "postalCode": "97214"
+        }
+      },
+      "bundleLine": {
+        "productName": "Snack Party Pack",
+        "quantity": 3,
+        "components": [
+          {
+            "productName": "Salsa Jar",
+            "unitsPerBundle": 2,
+            "unitPrice": 4.5,
+            "quantity": 6,
+            "amount": 27
+          },
+          {
+            "productName": "Tortilla Chips",
+            "unitsPerBundle": 1,
+            "unitPrice": 3.25,
+            "quantity": 3,
+            "amount": 9.75
+          },
+          {
+            "productName": "Sparkling Water",
+            "unitsPerBundle": 4,
+            "unitPrice": 1.4,
+            "quantity": 12,
+            "amount": 16.8
+          },
+          {
+            "productName": "Reusable Serving Tray",
+            "unitsPerBundle": 1,
+            "unitPrice": 6,
+            "quantity": 3,
+            "amount": 18
+          }
+        ],
+        "amount": 71.55
+      },
+      "fulfillment": {
+        "method": "Local Courier",
+        "fee": 7.95,
+        "window": {
+          "date": "2025-08-15",
+          "startTime": "16:00",
+          "endTime": "18:00"
+        },
+        "instructions": {
+          "dropOffLocation": "Front door",
+          "buzzerCode": "18",
+          "signatureRequired": false
+        }
+      },
+      "payment": {
+        "method": "Visa",
+        "last4": "4242",
+        "billingPostalCode": "97214"
+      },
+      "promotion": {
+        "code": "SUMMER5",
+        "discountAmount": 5
+      },
+      "occasion": {
+        "label": "Movie Night",
+        "date": "2025-08-16"
+      },
+      "tax": {
+        "region": "OR",
+        "rate": 0,
+        "amount": 0
+      },
+      "totals": {
+        "itemsSubtotal": 71.55,
+        "deliveryFee": 7.95,
+        "grandTotal": 74.5
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/cart/bundleLine/quantity",
+      "kind": "direct",
+      "value": 5
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundleLine/components/0/quantity",
+      "kind": "cascade",
+      "value": 10
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundleLine/components/0/amount",
+      "kind": "cascade",
+      "value": 45
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundleLine/components/1/quantity",
+      "kind": "cascade",
+      "value": 5
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundleLine/components/1/amount",
+      "kind": "cascade",
+      "value": 16.25
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundleLine/components/2/quantity",
+      "kind": "cascade",
+      "value": 20
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundleLine/components/2/amount",
+      "kind": "cascade",
+      "value": 28
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundleLine/components/3/quantity",
+      "kind": "cascade",
+      "value": 5
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundleLine/components/3/amount",
+      "kind": "cascade",
+      "value": 30
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundleLine/amount",
+      "kind": "cascade",
+      "value": 119.25
+    },
+    {
+      "op": "replace",
+      "path": "/cart/totals/itemsSubtotal",
+      "kind": "cascade",
+      "value": 119.25
+    },
+    {
+      "op": "replace",
+      "path": "/cart/totals/grandTotal",
+      "kind": "cascade",
+      "value": 122.2
+    }
+  ],
+  "expected_json": {
+    "cart": {
+      "customer": {
+        "name": "Maya Chen",
+        "contact": {
+          "email": "maya.chen@example.com",
+          "phone": "555-0148"
+        },
+        "address": {
+          "street": "1286 SE Alder Street",
+          "city": "Portland",
+          "postalCode": "97214"
+        }
+      },
+      "bundleLine": {
+        "productName": "Snack Party Pack",
+        "quantity": 5,
+        "components": [
+          {
+            "productName": "Salsa Jar",
+            "unitsPerBundle": 2,
+            "unitPrice": 4.5,
+            "quantity": 10,
+            "amount": 45
+          },
+          {
+            "productName": "Tortilla Chips",
+            "unitsPerBundle": 1,
+            "unitPrice": 3.25,
+            "quantity": 5,
+            "amount": 16.25
+          },
+          {
+            "productName": "Sparkling Water",
+            "unitsPerBundle": 4,
+            "unitPrice": 1.4,
+            "quantity": 20,
+            "amount": 28
+          },
+          {
+            "productName": "Reusable Serving Tray",
+            "unitsPerBundle": 1,
+            "unitPrice": 6,
+            "quantity": 5,
+            "amount": 30
+          }
+        ],
+        "amount": 119.25
+      },
+      "fulfillment": {
+        "method": "Local Courier",
+        "fee": 7.95,
+        "window": {
+          "date": "2025-08-15",
+          "startTime": "16:00",
+          "endTime": "18:00"
+        },
+        "instructions": {
+          "dropOffLocation": "Front door",
+          "buzzerCode": "18",
+          "signatureRequired": false
+        }
+      },
+      "payment": {
+        "method": "Visa",
+        "last4": "4242",
+        "billingPostalCode": "97214"
+      },
+      "promotion": {
+        "code": "SUMMER5",
+        "discountAmount": 5
+      },
+      "occasion": {
+        "label": "Movie Night",
+        "date": "2025-08-16"
+      },
+      "tax": {
+        "region": "OR",
+        "rate": 0,
+        "amount": 0
+      },
+      "totals": {
+        "itemsSubtotal": 119.25,
+        "deliveryFee": 7.95,
+        "grandTotal": 122.2
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Bundle quantity 3->5. Each component quantity = unitsPerBundle*5 and amount = quantity*unitPrice (Salsa 10/45, Tortilla 5/16.25, Sparkling 20/28, Tray 5/30); bundleLine.amount = sum = 119.25; totals.itemsSubtotal = 119.25; grandTotal = itemsSubtotal + deliveryFee - discount + tax = 119.25+7.95-5+0 = 122.20. unitsPerBundle, unit prices, deliveryFee, tax (rate 0 -> amount stays 0), and descriptive fields stay.",
+  "conversation_pattern": "Center the artifact on a cart with a bundle carrying a quantity and its component lines, where each component's quantity and amount derive from the bundle quantity by stated arithmetic (a per-bundle count times the bundle quantity, times a unit price), rolling up to cart totals. Around this core, add the realistic, independent details a cart would carry that do not depend on the bundle quantity, and vary their number from sample to sample.",
+  "edit_pattern": "Change the bundle quantity to a specific new number.",
+  "cascade_pattern": "Editing the bundle quantity re-derives every component's quantity and amount from the stated per-bundle counts and prices, and the cart totals follow. The per-bundle counts and unit prices stay. This is determined because each component's per-bundle count and price are stated in the conversation.",
+  "requires_master_data": false
+}

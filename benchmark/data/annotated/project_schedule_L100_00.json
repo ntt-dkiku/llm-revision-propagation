@@ -1,0 +1,727 @@
+{
+  "id": "project_schedule_L100_00",
+  "domain": "project_schedule",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a project plan for the Harbor CRM migration pilot."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project\", \"value\": {\"name\": \"Harbor CRM Migration Pilot\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first activity as stakeholder discovery, and make it take four working days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"id\": \"T1\", \"name\": \"Stakeholder discovery\", \"durationDays\": 4}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the pilot work kick off on Monday, March 3, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/startDate\", \"value\": \"2025-03-03\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and place stakeholder discovery on the calendar from that kickoff."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/0/startDate\", \"value\": \"2025-03-03\"}, {\"op\": \"add\", \"path\": \"/tasks/0/finishDate\", \"value\": \"2025-03-07\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, add requirements mapping as a five-day activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T2\", \"name\": \"Requirements mapping\", \"durationDays\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make requirements mapping follow stakeholder discovery and schedule it right after that first activity wraps."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/1/predecessorId\", \"value\": \"T1\"}, {\"op\": \"add\", \"path\": \"/tasks/1/startDate\", \"value\": \"2025-03-07\"}, {\"op\": \"add\", \"path\": \"/tasks/1/finishDate\", \"value\": \"2025-03-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After that, add data cleansing as a six-day activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T3\", \"name\": \"Data cleansing\", \"durationDays\": 6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make data cleansing come immediately after requirements mapping on the timeline."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/2/predecessorId\", \"value\": \"T2\"}, {\"op\": \"add\", \"path\": \"/tasks/2/startDate\", \"value\": \"2025-03-12\"}, {\"op\": \"add\", \"path\": \"/tasks/2/finishDate\", \"value\": \"2025-03-18\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Then add sandbox configuration as a four-day activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T4\", \"name\": \"Sandbox configuration\", \"durationDays\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put sandbox configuration right after data cleansing finishes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/3/predecessorId\", \"value\": \"T3\"}, {\"op\": \"add\", \"path\": \"/tasks/3/startDate\", \"value\": \"2025-03-18\"}, {\"op\": \"add\", \"path\": \"/tasks/3/finishDate\", \"value\": \"2025-03-22\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Next up is integration build, and that should run for seven days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T5\", \"name\": \"Integration build\", \"durationDays\": 7}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have integration build start as soon as sandbox configuration is done."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/4/predecessorId\", \"value\": \"T4\"}, {\"op\": \"add\", \"path\": \"/tasks/4/startDate\", \"value\": \"2025-03-22\"}, {\"op\": \"add\", \"path\": \"/tasks/4/finishDate\", \"value\": \"2025-03-29\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After the build, add user acceptance testing and set it for five days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T6\", \"name\": \"User acceptance testing\", \"durationDays\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule user acceptance testing to begin immediately when integration build finishes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/5/predecessorId\", \"value\": \"T5\"}, {\"op\": \"add\", \"path\": \"/tasks/5/startDate\", \"value\": \"2025-03-29\"}, {\"op\": \"add\", \"path\": \"/tasks/5/finishDate\", \"value\": \"2025-04-03\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add deployment rehearsal after testing, and make it a three-day activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T7\", \"name\": \"Deployment rehearsal\", \"durationDays\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Place deployment rehearsal immediately after user acceptance testing finishes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/6/predecessorId\", \"value\": \"T6\"}, {\"op\": \"add\", \"path\": \"/tasks/6/startDate\", \"value\": \"2025-04-03\"}, {\"op\": \"add\", \"path\": \"/tasks/6/finishDate\", \"value\": \"2025-04-06\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the chain with a go-live readiness review, planned for two days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T8\", \"name\": \"Go-live readiness review\", \"durationDays\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make that readiness review start right after the deployment rehearsal ends."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/7/predecessorId\", \"value\": \"T7\"}, {\"op\": \"add\", \"path\": \"/tasks/7/startDate\", \"value\": \"2025-04-06\"}, {\"op\": \"add\", \"path\": \"/tasks/7/finishDate\", \"value\": \"2025-04-08\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the pilot as completing when the readiness review wraps up."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/endDate\", \"value\": \"2025-04-08\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya Chen as the executive sponsor, with approval authority for major scope decisions."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders\", \"value\": [{\"name\": \"Maya Chen\", \"role\": \"Executive sponsor\", \"approvalAuthority\": \"Major scope decisions\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include Omar Patel from sales operations as the day-to-day business owner, responsible for adoption decisions."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"name\": \"Omar Patel\", \"role\": \"Business owner\", \"approvalAuthority\": \"Adoption decisions\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Lina Morales from IT as the technical lead, with authority over environment and integration decisions."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"name\": \"Lina Morales\", \"role\": \"Technical lead\", \"approvalAuthority\": \"Environment and integration decisions\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the weekly steering meeting details: Thursdays at 10 a.m., led by the sponsor."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications\", \"value\": [{\"type\": \"Steering meeting\", \"cadence\": \"Weekly on Thursdays at 10:00\", \"owner\": \"Maya Chen\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a daily delivery standup at 9:15 a.m., owned by Lina."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications/-\", \"value\": {\"type\": \"Delivery standup\", \"cadence\": \"Daily at 09:15\", \"owner\": \"Lina Morales\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture a delivery risk that legacy customer records may be inconsistent, with Lina responsible for watching it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks\", \"value\": [{\"description\": \"Legacy customer records may contain inconsistent formats\", \"impact\": \"Migration defects during testing\", \"owner\": \"Lina Morales\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another risk: sales managers might not have enough time for testing, and Omar should own that one."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks/-\", \"value\": {\"description\": \"Sales managers may have limited time for testing\", \"impact\": \"Delayed acceptance feedback\", \"owner\": \"Omar Patel\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note an assumption that the existing CRM export will be available before the work begins, with Lina accountable for confirming it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/assumptions\", \"value\": [{\"statement\": \"Existing CRM export is available before project kickoff\", \"owner\": \"Lina Morales\", \"status\": \"Open\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one more assumption: sales leadership will nominate pilot users early, with Omar accountable and still unresolved for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/assumptions/-\", \"value\": {\"statement\": \"Sales leadership will nominate pilot users early\", \"owner\": \"Omar Patel\", \"status\": \"Open\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the main success measure: at least 95 percent of pilot customer records migrate without critical errors, with Omar tracking it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/successMeasures\", \"value\": [{\"metric\": \"Pilot customer records migrated without critical errors\", \"target\": \"95%\", \"owner\": \"Omar Patel\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another success measure around training: pilot users should average at least 4 out of 5 on readiness confidence, with Maya tracking it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/successMeasures/-\", \"value\": {\"metric\": \"Pilot user readiness confidence score\", \"target\": \"4/5 average\", \"owner\": \"Maya Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the delivery team setup: one project manager, two CRM developers, and one data analyst."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/teamCapacity\", \"value\": {\"projectManagers\": 1, \"crmDevelopers\": 2, \"dataAnalysts\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the main tooling budget line for the sandbox subscription: 18,000 dollars, owned by Lina."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budgetItems\", \"value\": [{\"category\": \"Sandbox subscription\", \"amountUsd\": 18000, \"owner\": \"Lina Morales\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a second budget line for user training materials: 6,500 dollars, owned by Omar."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budgetItems/-\", \"value\": {\"category\": \"User training materials\", \"amountUsd\": 6500, \"owner\": \"Omar Patel\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a change-control rule: any scope request over two business days needs sponsor approval before work starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/governance\", \"value\": {\"scopeChangeThresholdDays\": 2, \"approvalOwner\": \"Maya Chen\", \"approvalTiming\": \"Before work starts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a quality checkpoint for the migration test results, with Lina reviewing it and a pass or fail outcome recorded."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/qualityGates\", \"value\": [{\"checkpoint\": \"Migration test results review\", \"reviewer\": \"Lina Morales\", \"outcomeFormat\": \"Pass/Fail\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, note that the team will coordinate in Microsoft Teams and keep working documents in SharePoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/collaboration\", \"value\": {\"chatTool\": \"Microsoft Teams\", \"documentRepository\": \"SharePoint\"}}]"
+    }
+  ],
+  "edit_instruction": "Change data cleansing to take 8 days.",
+  "theme": "Changing a task's duration",
+  "master_data": null,
+  "current_json": {
+    "project": {
+      "name": "Harbor CRM Migration Pilot",
+      "startDate": "2025-03-03",
+      "endDate": "2025-04-08"
+    },
+    "tasks": [
+      {
+        "id": "T1",
+        "name": "Stakeholder discovery",
+        "durationDays": 4,
+        "startDate": "2025-03-03",
+        "finishDate": "2025-03-07"
+      },
+      {
+        "id": "T2",
+        "name": "Requirements mapping",
+        "durationDays": 5,
+        "predecessorId": "T1",
+        "startDate": "2025-03-07",
+        "finishDate": "2025-03-12"
+      },
+      {
+        "id": "T3",
+        "name": "Data cleansing",
+        "durationDays": 6,
+        "predecessorId": "T2",
+        "startDate": "2025-03-12",
+        "finishDate": "2025-03-18"
+      },
+      {
+        "id": "T4",
+        "name": "Sandbox configuration",
+        "durationDays": 4,
+        "predecessorId": "T3",
+        "startDate": "2025-03-18",
+        "finishDate": "2025-03-22"
+      },
+      {
+        "id": "T5",
+        "name": "Integration build",
+        "durationDays": 7,
+        "predecessorId": "T4",
+        "startDate": "2025-03-22",
+        "finishDate": "2025-03-29"
+      },
+      {
+        "id": "T6",
+        "name": "User acceptance testing",
+        "durationDays": 5,
+        "predecessorId": "T5",
+        "startDate": "2025-03-29",
+        "finishDate": "2025-04-03"
+      },
+      {
+        "id": "T7",
+        "name": "Deployment rehearsal",
+        "durationDays": 3,
+        "predecessorId": "T6",
+        "startDate": "2025-04-03",
+        "finishDate": "2025-04-06"
+      },
+      {
+        "id": "T8",
+        "name": "Go-live readiness review",
+        "durationDays": 2,
+        "predecessorId": "T7",
+        "startDate": "2025-04-06",
+        "finishDate": "2025-04-08"
+      }
+    ],
+    "stakeholders": [
+      {
+        "name": "Maya Chen",
+        "role": "Executive sponsor",
+        "approvalAuthority": "Major scope decisions"
+      },
+      {
+        "name": "Omar Patel",
+        "role": "Business owner",
+        "approvalAuthority": "Adoption decisions"
+      },
+      {
+        "name": "Lina Morales",
+        "role": "Technical lead",
+        "approvalAuthority": "Environment and integration decisions"
+      }
+    ],
+    "communications": [
+      {
+        "type": "Steering meeting",
+        "cadence": "Weekly on Thursdays at 10:00",
+        "owner": "Maya Chen"
+      },
+      {
+        "type": "Delivery standup",
+        "cadence": "Daily at 09:15",
+        "owner": "Lina Morales"
+      }
+    ],
+    "risks": [
+      {
+        "description": "Legacy customer records may contain inconsistent formats",
+        "impact": "Migration defects during testing",
+        "owner": "Lina Morales"
+      },
+      {
+        "description": "Sales managers may have limited time for testing",
+        "impact": "Delayed acceptance feedback",
+        "owner": "Omar Patel"
+      }
+    ],
+    "assumptions": [
+      {
+        "statement": "Existing CRM export is available before project kickoff",
+        "owner": "Lina Morales",
+        "status": "Open"
+      },
+      {
+        "statement": "Sales leadership will nominate pilot users early",
+        "owner": "Omar Patel",
+        "status": "Open"
+      }
+    ],
+    "successMeasures": [
+      {
+        "metric": "Pilot customer records migrated without critical errors",
+        "target": "95%",
+        "owner": "Omar Patel"
+      },
+      {
+        "metric": "Pilot user readiness confidence score",
+        "target": "4/5 average",
+        "owner": "Maya Chen"
+      }
+    ],
+    "teamCapacity": {
+      "projectManagers": 1,
+      "crmDevelopers": 2,
+      "dataAnalysts": 1
+    },
+    "budgetItems": [
+      {
+        "category": "Sandbox subscription",
+        "amountUsd": 18000,
+        "owner": "Lina Morales"
+      },
+      {
+        "category": "User training materials",
+        "amountUsd": 6500,
+        "owner": "Omar Patel"
+      }
+    ],
+    "governance": {
+      "scopeChangeThresholdDays": 2,
+      "approvalOwner": "Maya Chen",
+      "approvalTiming": "Before work starts"
+    },
+    "qualityGates": [
+      {
+        "checkpoint": "Migration test results review",
+        "reviewer": "Lina Morales",
+        "outcomeFormat": "Pass/Fail"
+      }
+    ],
+    "collaboration": {
+      "chatTool": "Microsoft Teams",
+      "documentRepository": "SharePoint"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/tasks/2/durationDays",
+      "kind": "direct",
+      "value": 8
+    },
+    {
+      "op": "replace",
+      "path": "/project/endDate",
+      "kind": "cascade",
+      "value": "2025-04-10"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/2/finishDate",
+      "kind": "cascade",
+      "value": "2025-03-20"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/3/startDate",
+      "kind": "cascade",
+      "value": "2025-03-20"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/3/finishDate",
+      "kind": "cascade",
+      "value": "2025-03-24"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/4/startDate",
+      "kind": "cascade",
+      "value": "2025-03-24"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/4/finishDate",
+      "kind": "cascade",
+      "value": "2025-03-31"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/5/startDate",
+      "kind": "cascade",
+      "value": "2025-03-31"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/5/finishDate",
+      "kind": "cascade",
+      "value": "2025-04-05"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/6/startDate",
+      "kind": "cascade",
+      "value": "2025-04-05"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/6/finishDate",
+      "kind": "cascade",
+      "value": "2025-04-08"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/7/startDate",
+      "kind": "cascade",
+      "value": "2025-04-08"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/7/finishDate",
+      "kind": "cascade",
+      "value": "2025-04-10"
+    }
+  ],
+  "expected_json": {
+    "project": {
+      "name": "Harbor CRM Migration Pilot",
+      "startDate": "2025-03-03",
+      "endDate": "2025-04-10"
+    },
+    "tasks": [
+      {
+        "id": "T1",
+        "name": "Stakeholder discovery",
+        "durationDays": 4,
+        "startDate": "2025-03-03",
+        "finishDate": "2025-03-07"
+      },
+      {
+        "id": "T2",
+        "name": "Requirements mapping",
+        "durationDays": 5,
+        "predecessorId": "T1",
+        "startDate": "2025-03-07",
+        "finishDate": "2025-03-12"
+      },
+      {
+        "id": "T3",
+        "name": "Data cleansing",
+        "durationDays": 8,
+        "predecessorId": "T2",
+        "startDate": "2025-03-12",
+        "finishDate": "2025-03-20"
+      },
+      {
+        "id": "T4",
+        "name": "Sandbox configuration",
+        "durationDays": 4,
+        "predecessorId": "T3",
+        "startDate": "2025-03-20",
+        "finishDate": "2025-03-24"
+      },
+      {
+        "id": "T5",
+        "name": "Integration build",
+        "durationDays": 7,
+        "predecessorId": "T4",
+        "startDate": "2025-03-24",
+        "finishDate": "2025-03-31"
+      },
+      {
+        "id": "T6",
+        "name": "User acceptance testing",
+        "durationDays": 5,
+        "predecessorId": "T5",
+        "startDate": "2025-03-31",
+        "finishDate": "2025-04-05"
+      },
+      {
+        "id": "T7",
+        "name": "Deployment rehearsal",
+        "durationDays": 3,
+        "predecessorId": "T6",
+        "startDate": "2025-04-05",
+        "finishDate": "2025-04-08"
+      },
+      {
+        "id": "T8",
+        "name": "Go-live readiness review",
+        "durationDays": 2,
+        "predecessorId": "T7",
+        "startDate": "2025-04-08",
+        "finishDate": "2025-04-10"
+      }
+    ],
+    "stakeholders": [
+      {
+        "name": "Maya Chen",
+        "role": "Executive sponsor",
+        "approvalAuthority": "Major scope decisions"
+      },
+      {
+        "name": "Omar Patel",
+        "role": "Business owner",
+        "approvalAuthority": "Adoption decisions"
+      },
+      {
+        "name": "Lina Morales",
+        "role": "Technical lead",
+        "approvalAuthority": "Environment and integration decisions"
+      }
+    ],
+    "communications": [
+      {
+        "type": "Steering meeting",
+        "cadence": "Weekly on Thursdays at 10:00",
+        "owner": "Maya Chen"
+      },
+      {
+        "type": "Delivery standup",
+        "cadence": "Daily at 09:15",
+        "owner": "Lina Morales"
+      }
+    ],
+    "risks": [
+      {
+        "description": "Legacy customer records may contain inconsistent formats",
+        "impact": "Migration defects during testing",
+        "owner": "Lina Morales"
+      },
+      {
+        "description": "Sales managers may have limited time for testing",
+        "impact": "Delayed acceptance feedback",
+        "owner": "Omar Patel"
+      }
+    ],
+    "assumptions": [
+      {
+        "statement": "Existing CRM export is available before project kickoff",
+        "owner": "Lina Morales",
+        "status": "Open"
+      },
+      {
+        "statement": "Sales leadership will nominate pilot users early",
+        "owner": "Omar Patel",
+        "status": "Open"
+      }
+    ],
+    "successMeasures": [
+      {
+        "metric": "Pilot customer records migrated without critical errors",
+        "target": "95%",
+        "owner": "Omar Patel"
+      },
+      {
+        "metric": "Pilot user readiness confidence score",
+        "target": "4/5 average",
+        "owner": "Maya Chen"
+      }
+    ],
+    "teamCapacity": {
+      "projectManagers": 1,
+      "crmDevelopers": 2,
+      "dataAnalysts": 1
+    },
+    "budgetItems": [
+      {
+        "category": "Sandbox subscription",
+        "amountUsd": 18000,
+        "owner": "Lina Morales"
+      },
+      {
+        "category": "User training materials",
+        "amountUsd": 6500,
+        "owner": "Omar Patel"
+      }
+    ],
+    "governance": {
+      "scopeChangeThresholdDays": 2,
+      "approvalOwner": "Maya Chen",
+      "approvalTiming": "Before work starts"
+    },
+    "qualityGates": [
+      {
+        "checkpoint": "Migration test results review",
+        "reviewer": "Lina Morales",
+        "outcomeFormat": "Pass/Fail"
+      }
+    ],
+    "collaboration": {
+      "chatTool": "Microsoft Teams",
+      "documentRepository": "SharePoint"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Data cleansing (T3) durationDays 6->8. Its finish moves 03-18->03-20; each successor starts on its predecessor finish, so T4-T8 shift +2 calendar days (T4 03-20->03-24, T5 03-24->03-31, T6 03-31->04-05, T7 04-05->04-08, T8 04-08->04-10). project.endDate 04-08->04-10. T3 startDate (03-12) and earlier tasks stay.",
+  "conversation_pattern": "Center the artifact on a task list where each task has a stated duration and starts when its predecessor finishes, so finishes and start dates derive along the precedence chain, rolling up to a project end. Around this core, add the realistic, independent details a project plan would carry that do not depend on the task durations or dates, and vary their number and the number of tasks from sample to sample.",
+  "edit_pattern": "Change one task's duration to a specific new number of days.",
+  "cascade_pattern": "Editing a task's duration re-derives its finish, then each downstream task's start and finish recompute along the chain to the project end. Tasks not downstream of the edit stay. This is determined because durations and links are stated.",
+  "requires_master_data": false
+}

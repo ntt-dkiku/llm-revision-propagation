@@ -1,0 +1,400 @@
+{
+  "id": "data_pipeline_L50_00",
+  "domain": "data_pipeline",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start an operations record for the hourly orders ingest job."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline_name\", \"value\": \"hourly_orders_ingest\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it run every 60 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule\", \"value\": {\"interval_minutes\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the freshness promise to be fifteen minutes longer than that cadence."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/freshness\", \"value\": {\"formula\": \"freshness_sla_minutes = interval_minutes + 15\", \"freshness_sla_minutes\": 75}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give failed runs a retry window equal to half the cadence plus ten minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/retry_policy\", \"value\": {\"retry_window_formula\": \"retry_window_minutes = (interval_minutes / 2) + 10\", \"retry_window_minutes\": 40}}]"
+    },
+    {
+      "role": "user",
+      "content": "For consumers, say they should expect refreshed data ten minutes after each run cadence completes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/downstream_expectation\", \"value\": {\"expected_refresh_formula\": \"expected_refresh_minutes = interval_minutes + 10\", \"expected_refresh_minutes\": 70}}]"
+    },
+    {
+      "role": "user",
+      "content": "Trigger the stale-data warning at twice the cadence plus five minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/alerts/stale_data\", \"value\": {\"threshold_formula\": \"stale_data_threshold_minutes = (interval_minutes * 2) + 5\", \"threshold_minutes\": 125}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the data platform team responsible, with Maya Chen as the person to ping and #data-platform-ops for escalations."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ownership\", \"value\": {\"team\": \"data_platform\", \"primary_contact\": \"Maya Chen\", \"escalation_channel\": \"#data-platform-ops\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that it pulls order events from Shopify's production API using the orders updated endpoint in UTC."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/source\", \"value\": {\"system\": \"Shopify Production API\", \"endpoint\": \"/admin/api/2024-04/orders/updated.json\", \"timezone\": \"UTC\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send the cleaned results to the analytics warehouse in the mart layer as the orders fact table."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/destination\", \"value\": {\"warehouse\": \"Snowflake Analytics\", \"schema\": \"mart\", \"table\": \"fact_orders\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the managed Airflow cluster in us-east-1, and have the job run under the orders ingestion service account."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/runtime\", \"value\": {\"orchestrator\": \"Managed Airflow\", \"region\": \"us-east-1\", \"service_account\": \"svc-orders-ingest\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a processing step that converts all order money amounts into integer cents before the warehouse load."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transformations\", \"value\": [{\"name\": \"normalize_money_to_cents\", \"description\": \"Convert all order monetary amounts to integer cents before loading.\", \"enabled\": true}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also deduplicate incoming orders by the platform order identifier, keeping the most recently updated version."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transformations/-\", \"value\": {\"name\": \"deduplicate_orders\", \"description\": \"Deduplicate incoming orders by platform order identifier.\", \"dedupe_strategy\": \"keep_latest_updated_at\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a validation that rejects any order missing its platform order identifier."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quality_checks\", \"value\": [{\"name\": \"require_platform_order_id\", \"rule\": \"platform_order_id IS NOT NULL\", \"severity\": \"error\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a second validation to stop the load if total order value ever goes negative."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quality_checks/-\", \"value\": {\"name\": \"non_negative_order_total\", \"rule\": \"order_total_cents >= 0\", \"severity\": \"error\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that run telemetry goes to Datadog, using the orders ingest dashboard and the standard production alert routing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/observability\", \"value\": {\"metrics_sink\": \"Datadog\", \"dashboard\": \"orders_ingest_prod\", \"alert_route\": \"standard_prod_data_alerts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep raw API responses for thirty days in the secure landing bucket before they expire."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/retention\", \"value\": {\"raw_response_days\": 30, \"landing_bucket\": \"s3://secure-data-landing/orders\", \"expiration_policy\": \"delete_after_retention\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Link incidents to the Orders Ingest runbook, the data platform on-call rotation, and the DataOps Jira queue."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/incident_response\", \"value\": {\"runbook\": \"https://runbooks.example.com/orders-ingest\", \"on_call_rotation\": \"data-platform-primary\", \"ticket_queue\": \"DATAOPS\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "List finance analytics as the main consumer, with revenue reporting as the use case and weekday mornings as their critical usage window."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumer\", \"value\": {\"team\": \"finance_analytics\", \"use_case\": \"revenue_reporting\", \"critical_window\": \"weekday_mornings\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the dataset as internal, with customer identifiers treated as sensitive and access limited to approved analysts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/data_governance\", \"value\": {\"classification\": \"internal\", \"sensitive_data\": \"customer_identifiers\", \"access_policy\": \"approved_analysts_only\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short purpose note saying it keeps finance reporting supplied with updated Shopify orders."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/description\", \"value\": \"Keeps finance reporting supplied with updated Shopify orders.\"}]"
+    }
+  ],
+  "edit_instruction": "Change the job to run every 30 minutes.",
+  "theme": "Changing the pipeline schedule interval",
+  "conversation_pattern": "Center the artifact on a scheduled pipeline whose run interval determines freshness SLA, retry window, downstream expected refresh time, and stale-data alert threshold by arithmetic rules written explicitly in the artifact (state each formula, e.g. freshness_sla = interval + 15). Around this core, add the realistic, independent details an operations record would carry that do not depend on the schedule interval, and vary their number from sample to sample.",
+  "edit_pattern": "Change the pipeline schedule interval to a different specific interval.",
+  "cascade_pattern": "Editing the interval re-derives the SLA, retry window, downstream refresh expectation, and stale-data alert threshold from the stated formulas. Owners, descriptions, and fields that do not read the interval stay unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "pipeline_name": "hourly_orders_ingest",
+    "schedule": {
+      "interval_minutes": 60
+    },
+    "freshness": {
+      "formula": "freshness_sla_minutes = interval_minutes + 15",
+      "freshness_sla_minutes": 75
+    },
+    "retry_policy": {
+      "retry_window_formula": "retry_window_minutes = (interval_minutes / 2) + 10",
+      "retry_window_minutes": 40
+    },
+    "downstream_expectation": {
+      "expected_refresh_formula": "expected_refresh_minutes = interval_minutes + 10",
+      "expected_refresh_minutes": 70
+    },
+    "alerts": {
+      "stale_data": {
+        "threshold_formula": "stale_data_threshold_minutes = (interval_minutes * 2) + 5",
+        "threshold_minutes": 125
+      }
+    },
+    "ownership": {
+      "team": "data_platform",
+      "primary_contact": "Maya Chen",
+      "escalation_channel": "#data-platform-ops"
+    },
+    "source": {
+      "system": "Shopify Production API",
+      "endpoint": "/admin/api/2024-04/orders/updated.json",
+      "timezone": "UTC"
+    },
+    "destination": {
+      "warehouse": "Snowflake Analytics",
+      "schema": "mart",
+      "table": "fact_orders"
+    },
+    "runtime": {
+      "orchestrator": "Managed Airflow",
+      "region": "us-east-1",
+      "service_account": "svc-orders-ingest"
+    },
+    "transformations": [
+      {
+        "name": "normalize_money_to_cents",
+        "description": "Convert all order monetary amounts to integer cents before loading.",
+        "enabled": true
+      },
+      {
+        "name": "deduplicate_orders",
+        "description": "Deduplicate incoming orders by platform order identifier.",
+        "dedupe_strategy": "keep_latest_updated_at"
+      }
+    ],
+    "quality_checks": [
+      {
+        "name": "require_platform_order_id",
+        "rule": "platform_order_id IS NOT NULL",
+        "severity": "error"
+      },
+      {
+        "name": "non_negative_order_total",
+        "rule": "order_total_cents >= 0",
+        "severity": "error"
+      }
+    ],
+    "observability": {
+      "metrics_sink": "Datadog",
+      "dashboard": "orders_ingest_prod",
+      "alert_route": "standard_prod_data_alerts"
+    },
+    "retention": {
+      "raw_response_days": 30,
+      "landing_bucket": "s3://secure-data-landing/orders",
+      "expiration_policy": "delete_after_retention"
+    },
+    "incident_response": {
+      "runbook": "https://runbooks.example.com/orders-ingest",
+      "on_call_rotation": "data-platform-primary",
+      "ticket_queue": "DATAOPS"
+    },
+    "consumer": {
+      "team": "finance_analytics",
+      "use_case": "revenue_reporting",
+      "critical_window": "weekday_mornings"
+    },
+    "data_governance": {
+      "classification": "internal",
+      "sensitive_data": "customer_identifiers",
+      "access_policy": "approved_analysts_only"
+    },
+    "description": "Keeps finance reporting supplied with updated Shopify orders."
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/schedule/interval_minutes",
+      "kind": "direct",
+      "value": 30
+    },
+    {
+      "op": "replace",
+      "path": "/freshness/freshness_sla_minutes",
+      "kind": "cascade",
+      "value": 45
+    },
+    {
+      "op": "replace",
+      "path": "/retry_policy/retry_window_minutes",
+      "kind": "cascade",
+      "value": 25
+    },
+    {
+      "op": "replace",
+      "path": "/downstream_expectation/expected_refresh_minutes",
+      "kind": "cascade",
+      "value": 40
+    },
+    {
+      "op": "replace",
+      "path": "/alerts/stale_data/threshold_minutes",
+      "kind": "cascade",
+      "value": 65
+    }
+  ],
+  "expected_json": {
+    "pipeline_name": "hourly_orders_ingest",
+    "schedule": {
+      "interval_minutes": 30
+    },
+    "freshness": {
+      "formula": "freshness_sla_minutes = interval_minutes + 15",
+      "freshness_sla_minutes": 45
+    },
+    "retry_policy": {
+      "retry_window_formula": "retry_window_minutes = (interval_minutes / 2) + 10",
+      "retry_window_minutes": 25
+    },
+    "downstream_expectation": {
+      "expected_refresh_formula": "expected_refresh_minutes = interval_minutes + 10",
+      "expected_refresh_minutes": 40
+    },
+    "alerts": {
+      "stale_data": {
+        "threshold_formula": "stale_data_threshold_minutes = (interval_minutes * 2) + 5",
+        "threshold_minutes": 65
+      }
+    },
+    "ownership": {
+      "team": "data_platform",
+      "primary_contact": "Maya Chen",
+      "escalation_channel": "#data-platform-ops"
+    },
+    "source": {
+      "system": "Shopify Production API",
+      "endpoint": "/admin/api/2024-04/orders/updated.json",
+      "timezone": "UTC"
+    },
+    "destination": {
+      "warehouse": "Snowflake Analytics",
+      "schema": "mart",
+      "table": "fact_orders"
+    },
+    "runtime": {
+      "orchestrator": "Managed Airflow",
+      "region": "us-east-1",
+      "service_account": "svc-orders-ingest"
+    },
+    "transformations": [
+      {
+        "name": "normalize_money_to_cents",
+        "description": "Convert all order monetary amounts to integer cents before loading.",
+        "enabled": true
+      },
+      {
+        "name": "deduplicate_orders",
+        "description": "Deduplicate incoming orders by platform order identifier.",
+        "dedupe_strategy": "keep_latest_updated_at"
+      }
+    ],
+    "quality_checks": [
+      {
+        "name": "require_platform_order_id",
+        "rule": "platform_order_id IS NOT NULL",
+        "severity": "error"
+      },
+      {
+        "name": "non_negative_order_total",
+        "rule": "order_total_cents >= 0",
+        "severity": "error"
+      }
+    ],
+    "observability": {
+      "metrics_sink": "Datadog",
+      "dashboard": "orders_ingest_prod",
+      "alert_route": "standard_prod_data_alerts"
+    },
+    "retention": {
+      "raw_response_days": 30,
+      "landing_bucket": "s3://secure-data-landing/orders",
+      "expiration_policy": "delete_after_retention"
+    },
+    "incident_response": {
+      "runbook": "https://runbooks.example.com/orders-ingest",
+      "on_call_rotation": "data-platform-primary",
+      "ticket_queue": "DATAOPS"
+    },
+    "consumer": {
+      "team": "finance_analytics",
+      "use_case": "revenue_reporting",
+      "critical_window": "weekday_mornings"
+    },
+    "data_governance": {
+      "classification": "internal",
+      "sensitive_data": "customer_identifiers",
+      "access_policy": "approved_analysts_only"
+    },
+    "description": "Keeps finance reporting supplied with updated Shopify orders."
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "interval 60->30; freshness=30+15=45, retry=30/2+10=25, refresh=30+10=40, stale=30*2+5=65 per stated formulas.",
+  "annotated": true,
+  "excluded": false
+}

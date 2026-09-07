@@ -1,0 +1,85 @@
+{
+  "id": "project_schedule_L10_02",
+  "domain": "project_schedule",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I’m putting together a simple plan for our website refresh project."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projectName\", \"value\": \"Website Refresh\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let’s anchor the plan to begin on March 2, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projectStart\", \"value\": \"2026-03-02\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Start the work with a short discovery step that takes three business days from kickoff."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": {\"Discovery\": {\"durationDays\": 3, \"startsAfter\": \"project start\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "After discovery, add a design phase that lasts four business days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/Design\", \"value\": {\"durationDays\": 4, \"startsAfter\": \"Discovery\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Then have the build work follow design and take five business days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/Build\", \"value\": {\"durationDays\": 5, \"startsAfter\": \"Design\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now summarize the plan with how many pieces of work it has and the expected finish date."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/scheduleSummary\", \"value\": {\"taskCount\": 3, \"projectEnd\": \"2026-03-17\"}}]"
+    }
+  ],
+  "edit_instruction": "Please remove Design from the plan.",
+  "theme": "Removing a task from the schedule",
+  "master_data": null,
+  "current_json": {
+    "projectName": "Website Refresh",
+    "projectStart": "2026-03-02",
+    "tasks": {
+      "Discovery": {
+        "durationDays": 3,
+        "startsAfter": "project start"
+      },
+      "Design": {
+        "durationDays": 4,
+        "startsAfter": "Discovery"
+      },
+      "Build": {
+        "durationDays": 5,
+        "startsAfter": "Design"
+      }
+    },
+    "scheduleSummary": {
+      "taskCount": 3,
+      "projectEnd": "2026-03-17"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a task list where each task has a stated duration and names the predecessor it starts after, so finishes derive along the precedence chain and a removed task's successors can relink, rolling up to a task count and a project end. Around this core, add the realistic, independent details a project plan would carry that do not depend on the schedule dates, and vary their number and the number of tasks from sample to sample.",
+  "edit_pattern": "Remove one task from the middle of the precedence chain.",
+  "cascade_pattern": "Removing a task relinks its successors to its predecessor, pulls downstream dates earlier, lowers the task count by one, and moves the project end. Tasks upstream of the removal stay. This is determined because durations and links are stated.",
+  "requires_master_data": false
+}

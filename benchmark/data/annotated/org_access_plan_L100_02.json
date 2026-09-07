@@ -1,0 +1,691 @@
+{
+  "id": "org_access_plan_L100_02",
+  "domain": "org_access_plan",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start an access plan for the Finance Operations team."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/team_name\", \"value\": \"Finance Operations\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the amount this plan can approve on its own at 40,000 dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approval_limit_usd\", \"value\": 40000}]"
+    },
+    {
+      "role": "user",
+      "content": "If the plan ever goes above 50,000 dollars, treat it as needing the elevated approval path."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/elevated_approval_rule\", \"value\": {\"threshold_usd\": 50000, \"trigger_when\": \"limit_exceeds_threshold\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For amounts at or under that cutoff, keep the normal path as manager sign-off, no extra sign-in challenge, and quarterly reviews."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/elevated_approval_rule/baseline_targets\", \"value\": {\"approval_steps\": [\"Manager approval\"], \"mfa_required\": false, \"review_cadence\": \"quarterly\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For anything over that amount, add VP co-approval, require the extra sign-in challenge, and move reviews to monthly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/elevated_approval_rule/elevated_targets\", \"value\": {\"extra_approval_step\": \"VP co-approval\", \"mfa_required\": true, \"review_cadence\": \"monthly\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Since the current amount is under the cutoff, apply the normal manager-only route with quarterly checks and no extra login challenge."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approval_steps\", \"value\": [\"Manager approval\"]}, {\"op\": \"add\", \"path\": \"/mfa_required\", \"value\": false}, {\"op\": \"add\", \"path\": \"/review_cadence\", \"value\": \"quarterly\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make this plan cover Coupa, NetSuite, and Expensify."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/covered_systems\", \"value\": [\"Coupa\", \"NetSuite\", \"Expensify\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Use procurement analyst as the primary role for this access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/primary_role\", \"value\": \"Procurement Analyst\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Limit the access to employees based in the United States and Canada."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/eligible_regions\", \"value\": [\"United States\", \"Canada\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Make Priya Shah from Finance the business owner, and use her company email for follow-ups."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/business_owner\", \"value\": {\"name\": \"Priya Shah\", \"department\": \"Finance\", \"email\": \"priya.shah@example.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the plan start on July 1, 2026, with no scheduled end date."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/validity_period\", \"value\": {\"start_date\": \"2026-07-01\", \"end_date\": null}}]"
+    },
+    {
+      "role": "user",
+      "content": "Route requests through the Finance Access ServiceNow queue, with a two-business-day turnaround and no auto-approval."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/request_intake\", \"value\": {\"channel\": \"ServiceNow\", \"queue\": \"Finance Access\", \"sla_business_days\": 2, \"auto_approval\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Require completion of the procure-to-pay training before someone can use this access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/prerequisite_training\", \"value\": {\"course_name\": \"Procure-to-Pay Essentials\", \"required\": true, \"renewal_months\": 12}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a data handling note that users can see vendor banking details, but they cannot export them in bulk."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/data_handling\", \"value\": {\"vendor_bank_details_visible\": true, \"bulk_export_allowed\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep audit logs for seven years in the central audit vault."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/audit_logging\", \"value\": {\"retention_years\": 7, \"storage_location\": \"Central Audit Vault\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send any access alerts to the finance security mailbox and mark them as high priority."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/alerting\", \"value\": {\"destination\": \"finance-security@example.com\", \"priority\": \"high\", \"enabled\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Allow emergency use for urgent payment outages, but cap it at four hours and require the incident commander to approve it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emergency_access\", \"value\": {\"allowed\": true, \"max_duration_hours\": 4, \"approver\": \"Incident Commander\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also prevent the same person from both creating a supplier and releasing that supplier’s first payment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/segregation_of_duties\", \"value\": {\"supplier_creation_and_first_payment_same_user_allowed\": false, \"exception_owner\": \"SOX Controls Team\", \"exception_ticket_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "For departures, remove this access by the end of the same business day and have HR Operations confirm completion."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/offboarding\", \"value\": {\"removal_timing\": \"same business day\", \"confirmation_owner\": \"HR Operations\", \"ticket_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "For new hires, provision the access within one business day after the manager request and notify the requester once it is ready."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/onboarding\", \"value\": {\"provisioning_sla_business_days\": 1, \"trigger\": \"manager request\", \"notify_requester\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Require people to use a company-managed laptop with disk encryption turned on."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/device_requirements\", \"value\": {\"company_managed\": true, \"disk_encryption_required\": true, \"personal_device_allowed\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Block access from public Wi-Fi unless the corporate VPN is connected, and allow it from office networks."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/network_access\", \"value\": {\"public_wifi_requires_vpn\": true, \"office_network_allowed\": true, \"vpn_profile\": \"Corporate Finance VPN\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Only allow sessions during the Finance Operations support window, from 6 a.m. to 8 p.m. Eastern time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/session_window\", \"value\": {\"start_time\": \"06:00\", \"end_time\": \"20:00\", \"timezone\": \"America/New_York\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set idle sessions to time out after 15 minutes, with an absolute session limit of 8 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/session_timeout\", \"value\": {\"idle_minutes\": 15, \"absolute_hours\": 8}}]"
+    },
+    {
+      "role": "user",
+      "content": "Test the emergency path twice a year, with IT Risk owning the evidence."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/break_glass_testing\", \"value\": {\"frequency\": \"semiannual\", \"owner\": \"IT Risk\", \"evidence_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have quarterly access reviews led by Finance Compliance, with managers responding within five business days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_review_process\", \"value\": {\"review_owner\": \"Finance Compliance\", \"manager_response_sla_business_days\": 5, \"evidence_repository\": \"GRC Portal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Escalate overdue review responses to the finance director after three business days, and copy the control owner."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/review_escalation\", \"value\": {\"after_business_days\": 3, \"escalation_recipient\": \"Finance Director\", \"cc_control_owner\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "For evidence, keep screenshots, ticket history, and approval comments with each completed review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/review_evidence_items\", \"value\": [\"screenshots\", \"ticket history\", \"approval comments\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "List Marco Nguyen as the technical contact from Enterprise Applications, with his work email."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/technical_contact\", \"value\": {\"name\": \"Marco Nguyen\", \"department\": \"Enterprise Applications\", \"email\": \"marco.nguyen@example.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tag the plan as SOX in-scope, high business criticality, and production access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/classification_tags\", \"value\": [\"SOX in-scope\", \"high business criticality\", \"production access\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Map this plan to SOX control AC-14 under the ITGC framework, owned by the SOX Controls Team."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance_mapping\", \"value\": {\"control_id\": \"AC-14\", \"framework\": \"ITGC\", \"owner\": \"SOX Controls Team\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the standard finance change calendar, with updates allowed on Tuesdays and Thursdays only."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/change_window\", \"value\": {\"calendar\": \"Standard Finance Change Calendar\", \"allowed_days\": [\"Tuesday\", \"Thursday\"]}}]"
+    },
+    {
+      "role": "user",
+      "content": "Monitor unusual payment activity daily, and have the fraud operations team investigate anything flagged."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activity_monitoring\", \"value\": {\"frequency\": \"daily\", \"monitored_activity\": \"unusual payment activity\", \"investigation_owner\": \"Fraud Operations\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send monthly usage reports to the finance operations lead, with CSV attached and inactive users highlighted."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/usage_reporting\", \"value\": {\"frequency\": \"monthly\", \"recipient\": \"Finance Operations Lead\", \"include_csv_attachment\": true, \"highlight_inactive_users\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send renewal reminders 30 days before each review deadline to managers, and copy Finance Compliance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/renewal_reminders\", \"value\": {\"days_before_deadline\": 30, \"recipient_group\": \"Managers\", \"cc_finance_compliance\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "For terminated contractors, suspend access immediately, notify vendor management, and require a closure note."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/contractor_termination\", \"value\": {\"suspend_immediately\": true, \"notify_vendor_management\": true, \"closure_note_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that the plan is currently approved for rollout and was last checked on June 15, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan_status\", \"value\": {\"rollout_approved\": true, \"last_checked_date\": \"2026-06-15\"}}]"
+    }
+  ],
+  "edit_instruction": "Raise the plan’s approval limit to 75,000 dollars.",
+  "theme": "Crossing the elevated-approval threshold",
+  "conversation_pattern": "Center the artifact on an access plan with an approval_limit_usd and a STATED threshold rule with two explicit branches: if the approval limit exceeds the threshold, an extra approval step (a specific stated approver, e.g. 'VP co-approval') is appended to the approval steps, mfa_required becomes true, and review_cadence shortens to a specific stated stricter value; if the limit is at or below the threshold, the approval steps, mfa, and cadence stay at their stated baseline. Record the threshold and both branch targets explicitly. Around this core, add realistic independent details that do not depend on the limit, and vary their number from sample to sample.",
+  "edit_pattern": "Change the approval_limit_usd to a specific new amount.",
+  "cascade_pattern": "Editing the approval limit updates it, AND — only if the new amount crosses the stated threshold relative to before — appends the stated extra approval step, sets mfa_required true, and shortens review_cadence to the stated value. If the threshold is not crossed, those fields stay unchanged. The outcome is determined by the stated threshold and branch targets.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "team_name": "Finance Operations",
+    "approval_limit_usd": 40000,
+    "elevated_approval_rule": {
+      "threshold_usd": 50000,
+      "trigger_when": "limit_exceeds_threshold",
+      "baseline_targets": {
+        "approval_steps": [
+          "Manager approval"
+        ],
+        "mfa_required": false,
+        "review_cadence": "quarterly"
+      },
+      "elevated_targets": {
+        "extra_approval_step": "VP co-approval",
+        "mfa_required": true,
+        "review_cadence": "monthly"
+      }
+    },
+    "approval_steps": [
+      "Manager approval"
+    ],
+    "mfa_required": false,
+    "review_cadence": "quarterly",
+    "covered_systems": [
+      "Coupa",
+      "NetSuite",
+      "Expensify"
+    ],
+    "primary_role": "Procurement Analyst",
+    "eligible_regions": [
+      "United States",
+      "Canada"
+    ],
+    "business_owner": {
+      "name": "Priya Shah",
+      "department": "Finance",
+      "email": "priya.shah@example.com"
+    },
+    "validity_period": {
+      "start_date": "2026-07-01",
+      "end_date": null
+    },
+    "request_intake": {
+      "channel": "ServiceNow",
+      "queue": "Finance Access",
+      "sla_business_days": 2,
+      "auto_approval": false
+    },
+    "prerequisite_training": {
+      "course_name": "Procure-to-Pay Essentials",
+      "required": true,
+      "renewal_months": 12
+    },
+    "data_handling": {
+      "vendor_bank_details_visible": true,
+      "bulk_export_allowed": false
+    },
+    "audit_logging": {
+      "retention_years": 7,
+      "storage_location": "Central Audit Vault"
+    },
+    "alerting": {
+      "destination": "finance-security@example.com",
+      "priority": "high",
+      "enabled": true
+    },
+    "emergency_access": {
+      "allowed": true,
+      "max_duration_hours": 4,
+      "approver": "Incident Commander"
+    },
+    "segregation_of_duties": {
+      "supplier_creation_and_first_payment_same_user_allowed": false,
+      "exception_owner": "SOX Controls Team",
+      "exception_ticket_required": true
+    },
+    "offboarding": {
+      "removal_timing": "same business day",
+      "confirmation_owner": "HR Operations",
+      "ticket_required": true
+    },
+    "onboarding": {
+      "provisioning_sla_business_days": 1,
+      "trigger": "manager request",
+      "notify_requester": true
+    },
+    "device_requirements": {
+      "company_managed": true,
+      "disk_encryption_required": true,
+      "personal_device_allowed": false
+    },
+    "network_access": {
+      "public_wifi_requires_vpn": true,
+      "office_network_allowed": true,
+      "vpn_profile": "Corporate Finance VPN"
+    },
+    "session_window": {
+      "start_time": "06:00",
+      "end_time": "20:00",
+      "timezone": "America/New_York"
+    },
+    "session_timeout": {
+      "idle_minutes": 15,
+      "absolute_hours": 8
+    },
+    "break_glass_testing": {
+      "frequency": "semiannual",
+      "owner": "IT Risk",
+      "evidence_required": true
+    },
+    "access_review_process": {
+      "review_owner": "Finance Compliance",
+      "manager_response_sla_business_days": 5,
+      "evidence_repository": "GRC Portal"
+    },
+    "review_escalation": {
+      "after_business_days": 3,
+      "escalation_recipient": "Finance Director",
+      "cc_control_owner": true
+    },
+    "review_evidence_items": [
+      "screenshots",
+      "ticket history",
+      "approval comments"
+    ],
+    "technical_contact": {
+      "name": "Marco Nguyen",
+      "department": "Enterprise Applications",
+      "email": "marco.nguyen@example.com"
+    },
+    "classification_tags": [
+      "SOX in-scope",
+      "high business criticality",
+      "production access"
+    ],
+    "compliance_mapping": {
+      "control_id": "AC-14",
+      "framework": "ITGC",
+      "owner": "SOX Controls Team"
+    },
+    "change_window": {
+      "calendar": "Standard Finance Change Calendar",
+      "allowed_days": [
+        "Tuesday",
+        "Thursday"
+      ]
+    },
+    "activity_monitoring": {
+      "frequency": "daily",
+      "monitored_activity": "unusual payment activity",
+      "investigation_owner": "Fraud Operations"
+    },
+    "usage_reporting": {
+      "frequency": "monthly",
+      "recipient": "Finance Operations Lead",
+      "include_csv_attachment": true,
+      "highlight_inactive_users": true
+    },
+    "renewal_reminders": {
+      "days_before_deadline": 30,
+      "recipient_group": "Managers",
+      "cc_finance_compliance": true
+    },
+    "contractor_termination": {
+      "suspend_immediately": true,
+      "notify_vendor_management": true,
+      "closure_note_required": true
+    },
+    "plan_status": {
+      "rollout_approved": true,
+      "last_checked_date": "2026-06-15"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/approval_limit_usd",
+      "kind": "direct",
+      "value": 75000
+    },
+    {
+      "op": "add",
+      "path": "/approval_steps/-",
+      "kind": "cascade",
+      "value": "VP co-approval"
+    },
+    {
+      "op": "replace",
+      "path": "/mfa_required",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/review_cadence",
+      "kind": "cascade",
+      "value": "monthly"
+    }
+  ],
+  "expected_json": {
+    "team_name": "Finance Operations",
+    "approval_limit_usd": 75000,
+    "elevated_approval_rule": {
+      "threshold_usd": 50000,
+      "trigger_when": "limit_exceeds_threshold",
+      "baseline_targets": {
+        "approval_steps": [
+          "Manager approval"
+        ],
+        "mfa_required": false,
+        "review_cadence": "quarterly"
+      },
+      "elevated_targets": {
+        "extra_approval_step": "VP co-approval",
+        "mfa_required": true,
+        "review_cadence": "monthly"
+      }
+    },
+    "approval_steps": [
+      "Manager approval",
+      "VP co-approval"
+    ],
+    "mfa_required": true,
+    "review_cadence": "monthly",
+    "covered_systems": [
+      "Coupa",
+      "NetSuite",
+      "Expensify"
+    ],
+    "primary_role": "Procurement Analyst",
+    "eligible_regions": [
+      "United States",
+      "Canada"
+    ],
+    "business_owner": {
+      "name": "Priya Shah",
+      "department": "Finance",
+      "email": "priya.shah@example.com"
+    },
+    "validity_period": {
+      "start_date": "2026-07-01",
+      "end_date": null
+    },
+    "request_intake": {
+      "channel": "ServiceNow",
+      "queue": "Finance Access",
+      "sla_business_days": 2,
+      "auto_approval": false
+    },
+    "prerequisite_training": {
+      "course_name": "Procure-to-Pay Essentials",
+      "required": true,
+      "renewal_months": 12
+    },
+    "data_handling": {
+      "vendor_bank_details_visible": true,
+      "bulk_export_allowed": false
+    },
+    "audit_logging": {
+      "retention_years": 7,
+      "storage_location": "Central Audit Vault"
+    },
+    "alerting": {
+      "destination": "finance-security@example.com",
+      "priority": "high",
+      "enabled": true
+    },
+    "emergency_access": {
+      "allowed": true,
+      "max_duration_hours": 4,
+      "approver": "Incident Commander"
+    },
+    "segregation_of_duties": {
+      "supplier_creation_and_first_payment_same_user_allowed": false,
+      "exception_owner": "SOX Controls Team",
+      "exception_ticket_required": true
+    },
+    "offboarding": {
+      "removal_timing": "same business day",
+      "confirmation_owner": "HR Operations",
+      "ticket_required": true
+    },
+    "onboarding": {
+      "provisioning_sla_business_days": 1,
+      "trigger": "manager request",
+      "notify_requester": true
+    },
+    "device_requirements": {
+      "company_managed": true,
+      "disk_encryption_required": true,
+      "personal_device_allowed": false
+    },
+    "network_access": {
+      "public_wifi_requires_vpn": true,
+      "office_network_allowed": true,
+      "vpn_profile": "Corporate Finance VPN"
+    },
+    "session_window": {
+      "start_time": "06:00",
+      "end_time": "20:00",
+      "timezone": "America/New_York"
+    },
+    "session_timeout": {
+      "idle_minutes": 15,
+      "absolute_hours": 8
+    },
+    "break_glass_testing": {
+      "frequency": "semiannual",
+      "owner": "IT Risk",
+      "evidence_required": true
+    },
+    "access_review_process": {
+      "review_owner": "Finance Compliance",
+      "manager_response_sla_business_days": 5,
+      "evidence_repository": "GRC Portal"
+    },
+    "review_escalation": {
+      "after_business_days": 3,
+      "escalation_recipient": "Finance Director",
+      "cc_control_owner": true
+    },
+    "review_evidence_items": [
+      "screenshots",
+      "ticket history",
+      "approval comments"
+    ],
+    "technical_contact": {
+      "name": "Marco Nguyen",
+      "department": "Enterprise Applications",
+      "email": "marco.nguyen@example.com"
+    },
+    "classification_tags": [
+      "SOX in-scope",
+      "high business criticality",
+      "production access"
+    ],
+    "compliance_mapping": {
+      "control_id": "AC-14",
+      "framework": "ITGC",
+      "owner": "SOX Controls Team"
+    },
+    "change_window": {
+      "calendar": "Standard Finance Change Calendar",
+      "allowed_days": [
+        "Tuesday",
+        "Thursday"
+      ]
+    },
+    "activity_monitoring": {
+      "frequency": "daily",
+      "monitored_activity": "unusual payment activity",
+      "investigation_owner": "Fraud Operations"
+    },
+    "usage_reporting": {
+      "frequency": "monthly",
+      "recipient": "Finance Operations Lead",
+      "include_csv_attachment": true,
+      "highlight_inactive_users": true
+    },
+    "renewal_reminders": {
+      "days_before_deadline": 30,
+      "recipient_group": "Managers",
+      "cc_finance_compliance": true
+    },
+    "contractor_termination": {
+      "suspend_immediately": true,
+      "notify_vendor_management": true,
+      "closure_note_required": true
+    },
+    "plan_status": {
+      "rollout_approved": true,
+      "last_checked_date": "2026-06-15"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "limit 40000->75000 > 50000 threshold -> elevated: append VP co-approval, mfa true, monthly. elevated_approval_rule def and distractors unchanged.",
+  "annotated": true,
+  "excluded": false
+}

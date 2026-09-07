@@ -1,0 +1,21 @@
+FROM python:3.11-slim
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONUNBUFFERED=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      bash curl ca-certificates git make jq build-essential gnupg \
+    && rm -rf /var/lib/apt/lists/*
+
+# uv (version-pinned)
+ARG UV_VERSION=0.9.28
+RUN curl -LsSf "https://astral.sh/uv/${UV_VERSION}/install.sh" | sh \
+    && ln -s /root/.local/bin/uv /usr/local/bin/uv \
+    && ln -s /root/.local/bin/uvx /usr/local/bin/uvx
+
+WORKDIR /work
+
+# Python deps installed at runtime (uv sync --frozen) once /work is volume-mounted.
+ENV PATH="/work/.venv/bin:${PATH}"
+CMD ["bash", "-lc", "tail -f /dev/null"]

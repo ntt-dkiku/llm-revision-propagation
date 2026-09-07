@@ -1,0 +1,179 @@
+{
+  "id": "travel_itinerary_L10_00",
+  "domain": "travel_itinerary",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm planning a trip that begins on May 14, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip\", \"value\": {\"start_date\": \"2026-05-14\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan for me to fly out two days after the trip begins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/outbound_flight_date\", \"value\": \"2026-05-16\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have me check into the hotel three days after the trip begins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/hotel_check_in_date\", \"value\": \"2026-05-17\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set my flight home for eight days after the trip begins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/return_flight_date\", \"value\": \"2026-05-22\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the guided food tour five days after the trip begins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/guided_food_tour_date\", \"value\": \"2026-05-19\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the museum visit for six days after the trip begins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/museum_visit_date\", \"value\": \"2026-05-20\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the hotel checkout seven days after the trip begins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/hotel_check_out_date\", \"value\": \"2026-05-21\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a nice dinner reservation four days after the trip begins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/dinner_reservation_date\", \"value\": \"2026-05-18\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to call the hotel one day before I check in."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/hotel_call_reminder\", \"value\": {\"date\": \"2026-05-16\", \"note\": \"Call the hotel to confirm the reservation\"}}]"
+    }
+  ],
+  "edit_instruction": "Please change the trip to begin on May 17, 2026.",
+  "theme": "Shifting the trip's anchor date",
+  "master_data": null,
+  "current_json": {
+    "trip": {
+      "start_date": "2026-05-14",
+      "outbound_flight_date": "2026-05-16",
+      "hotel_check_in_date": "2026-05-17",
+      "return_flight_date": "2026-05-22",
+      "guided_food_tour_date": "2026-05-19",
+      "museum_visit_date": "2026-05-20",
+      "hotel_check_out_date": "2026-05-21",
+      "dinner_reservation_date": "2026-05-18",
+      "hotel_call_reminder": {
+        "date": "2026-05-16",
+        "note": "Call the hotel to confirm the reservation"
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/trip/start_date",
+      "kind": "direct",
+      "value": "2026-05-17"
+    },
+    {
+      "op": "replace",
+      "path": "/trip/outbound_flight_date",
+      "kind": "cascade",
+      "value": "2026-05-19"
+    },
+    {
+      "op": "replace",
+      "path": "/trip/hotel_check_in_date",
+      "kind": "cascade",
+      "value": "2026-05-20"
+    },
+    {
+      "op": "replace",
+      "path": "/trip/return_flight_date",
+      "kind": "cascade",
+      "value": "2026-05-25"
+    },
+    {
+      "op": "replace",
+      "path": "/trip/guided_food_tour_date",
+      "kind": "cascade",
+      "value": "2026-05-22"
+    },
+    {
+      "op": "replace",
+      "path": "/trip/museum_visit_date",
+      "kind": "cascade",
+      "value": "2026-05-23"
+    },
+    {
+      "op": "replace",
+      "path": "/trip/hotel_check_out_date",
+      "kind": "cascade",
+      "value": "2026-05-24"
+    },
+    {
+      "op": "replace",
+      "path": "/trip/dinner_reservation_date",
+      "kind": "cascade",
+      "value": "2026-05-21"
+    },
+    {
+      "op": "replace",
+      "path": "/trip/hotel_call_reminder/date",
+      "kind": "cascade",
+      "value": "2026-05-19"
+    }
+  ],
+  "expected_json": {
+    "trip": {
+      "start_date": "2026-05-17",
+      "outbound_flight_date": "2026-05-19",
+      "hotel_check_in_date": "2026-05-20",
+      "return_flight_date": "2026-05-25",
+      "guided_food_tour_date": "2026-05-22",
+      "museum_visit_date": "2026-05-23",
+      "hotel_check_out_date": "2026-05-24",
+      "dinner_reservation_date": "2026-05-21",
+      "hotel_call_reminder": {
+        "date": "2026-05-19",
+        "note": "Call the hotel to confirm the reservation"
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "Start 05-14->05-17 (+3). Every date shifts +3 by fixed offset. note stays.",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a trip anchored on one date, where several other dates each derive from that anchor by a fixed offset stated in the conversation, so the anchor alone determines them. Around this core, add the realistic, independent details a traveler would record that do not depend on the dates, and vary their number from sample to sample.",
+  "edit_pattern": "Move the anchor start date to a specific new date a few days from the original.",
+  "cascade_pattern": "Every date that derives from the anchor shifts by the same delta, since each is the anchor plus a fixed offset, so the new anchor uniquely fixes them all. Values that do not derive from the anchor date stay unchanged.",
+  "requires_master_data": false
+}

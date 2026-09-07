@@ -1,0 +1,108 @@
+{
+  "id": "data_pipeline_L10_01",
+  "domain": "data_pipeline",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a data pipeline spec for the finance orders ingest."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/name\", \"value\": \"finance_orders_ingest\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it pull from the Shopify Admin API as the upstream system."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/connector\", \"value\": \"shopify_admin_api\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For that Shopify feed, point it at the orders endpoint for the North America shop."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/extraction_path\", \"value\": \"/admin/api/2024-04/orders.json?shop=na-store.myshopify.com\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the production secret we already keep for that Shopify connection."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/credential_reference\", \"value\": \"vault://prod/shopify/admin_api_token\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the commerce platform team responsible for this feed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/owner_group\", \"value\": \"commerce-platform\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Since Shopify changes orders throughout the day, run this as a cursor-based incremental pull."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/ingest_mode\", \"value\": \"incremental_cursor\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Shopify’s planning numbers for this connection: twelve minutes of source freshness and about 18 cents per run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/latency_minutes\", \"value\": 12}, {\"op\": \"add\", \"path\": \"/pipeline/source/cost_usd_per_run\", \"value\": 0.18}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the reviewer-facing planning estimate for freshness and run cost based on the Shopify setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/planning_estimate\", \"value\": {\"expected_freshness_minutes\": 12, \"expected_cost_usd_per_run\": 0.18}}]"
+    }
+  ],
+  "edit_instruction": "Switch the source connector to netsuite_suiteanalytics_connect.",
+  "theme": "Switching the source connector",
+  "master_data": {
+    "source_connectors": {
+      "netsuite_suiteanalytics_connect": {
+        "extraction_path": "SuiteAnalytics: transaction[type=SalesOrd]",
+        "credential_reference": "vault://prod/netsuite/suiteanalytics_odbc",
+        "owner_group": "erp-data-platform",
+        "ingest_mode": "scheduled_full_snapshot",
+        "latency_minutes": 45,
+        "cost_usd_per_run": 0.62
+      }
+    }
+  },
+  "current_json": {
+    "pipeline": {
+      "name": "finance_orders_ingest",
+      "source": {
+        "connector": "shopify_admin_api",
+        "extraction_path": "/admin/api/2024-04/orders.json?shop=na-store.myshopify.com",
+        "credential_reference": "vault://prod/shopify/admin_api_token",
+        "owner_group": "commerce-platform",
+        "ingest_mode": "incremental_cursor",
+        "latency_minutes": 12,
+        "cost_usd_per_run": 0.18
+      },
+      "planning_estimate": {
+        "expected_freshness_minutes": 12,
+        "expected_cost_usd_per_run": 0.18
+      }
+    }
+  },
+  "conversation_pattern": "Center the artifact on a pipeline source connector whose connector attributes feed extraction path, credential reference, owner group, ingest mode, and stated cost or latency estimates. Around this core, add the realistic, independent details a data pipeline spec would carry that do not depend on the connector, and vary their number from sample to sample. Do not embed a lookup or reference card for any connector inside the artifact; the artifact holds only the current connector's own fields.",
+  "edit_pattern": "Switch the source connector to a different specific connector, and supply the replacement connector's attributes in master_data.",
+  "cascade_pattern": "Every connector-governed field takes the replacement connector's supplied attributes, and derived estimates recompute from those attributes. Downstream transforms that do not read connector attributes stay unchanged. This is determined because the replacement connector's attributes are provided with the edit.",
+  "requires_master_data": true
+}

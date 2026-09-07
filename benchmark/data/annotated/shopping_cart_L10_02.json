@@ -1,0 +1,141 @@
+{
+  "id": "shopping_cart_L10_02",
+  "domain": "shopping_cart",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a cart with the breakfast bundle set to 3 packs."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart\", \"value\": {\"bundle\": {\"quantity\": 3}}}]"
+    },
+    {
+      "role": "user",
+      "content": "For that bundle, make the first included item 2 granola bars per pack at $1.50 each, so it comes out to 6 bars in the cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components\", \"value\": [{\"perBundleCount\": 2, \"unitPrice\": 1.5, \"quantity\": 6}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the charge for those granola bars as $9.00."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/0/amount\", \"value\": 9}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the juice cups too: 1 per pack at $2.00 each, giving 3 cups for this cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/-\", \"value\": {\"perBundleCount\": 1, \"unitPrice\": 2, \"quantity\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now finish it out by showing the juice cups add up to $6.00 and the whole cart comes to $15.00."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/bundle/components/1/amount\", \"value\": 6}, {\"op\": \"add\", \"path\": \"/cart/total\", \"value\": 15}]"
+    }
+  ],
+  "edit_instruction": "Change the breakfast bundle to 5 packs.",
+  "theme": "Scaling a product bundle's components",
+  "master_data": null,
+  "current_json": {
+    "cart": {
+      "bundle": {
+        "quantity": 3,
+        "components": [
+          {
+            "perBundleCount": 2,
+            "unitPrice": 1.5,
+            "quantity": 6,
+            "amount": 9
+          },
+          {
+            "perBundleCount": 1,
+            "unitPrice": 2,
+            "quantity": 3,
+            "amount": 6
+          }
+        ]
+      },
+      "total": 15
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/cart/bundle/quantity",
+      "kind": "direct",
+      "value": 5
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundle/components/0/quantity",
+      "kind": "cascade",
+      "value": 10
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundle/components/0/amount",
+      "kind": "cascade",
+      "value": 15.0
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundle/components/1/quantity",
+      "kind": "cascade",
+      "value": 5
+    },
+    {
+      "op": "replace",
+      "path": "/cart/bundle/components/1/amount",
+      "kind": "cascade",
+      "value": 10.0
+    },
+    {
+      "op": "replace",
+      "path": "/cart/total",
+      "kind": "cascade",
+      "value": 25
+    }
+  ],
+  "expected_json": {
+    "cart": {
+      "bundle": {
+        "quantity": 5,
+        "components": [
+          {
+            "perBundleCount": 2,
+            "unitPrice": 1.5,
+            "quantity": 10,
+            "amount": 15.0
+          },
+          {
+            "perBundleCount": 1,
+            "unitPrice": 2,
+            "quantity": 5,
+            "amount": 10.0
+          }
+        ]
+      },
+      "total": 25
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "Bundle qty 3->5. comp0 2*5=10 @1.5=15; comp1 1*5=5 @2=10; total 25.",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a cart with a bundle carrying a quantity and its component lines, where each component's quantity and amount derive from the bundle quantity by stated arithmetic (a per-bundle count times the bundle quantity, times a unit price), rolling up to cart totals. Around this core, add the realistic, independent details a cart would carry that do not depend on the bundle quantity, and vary their number from sample to sample.",
+  "edit_pattern": "Change the bundle quantity to a specific new number.",
+  "cascade_pattern": "Editing the bundle quantity re-derives every component's quantity and amount from the stated per-bundle counts and prices, and the cart totals follow. The per-bundle counts and unit prices stay. This is determined because each component's per-bundle count and price are stated in the conversation.",
+  "requires_master_data": false
+}

@@ -1,0 +1,367 @@
+{
+  "id": "manufacturing_bom_L50_04",
+  "domain": "manufacturing_bom",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a bill of materials for a compact conveyor drive module."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/assemblyName\", \"value\": \"Compact Conveyor Drive Module\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the gearmotor as the first purchased item, one needed for each module."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components\", \"value\": [{\"componentId\": \"C-001\", \"componentName\": \"Right-angle gearmotor\", \"quantity\": 1}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Use MotionWorks Supply as the source for that gearmotor."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/0/supplier\", \"value\": \"MotionWorks Supply\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the gearmotor's purchase cost at 184 dollars per module."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/0/unitCost\", \"value\": 184.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that the gearmotor contributes 3.8 kilograms to the module."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/0/unitWeightKg\", \"value\": 3.8}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the welded base frame as another required part, one per module."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"componentId\": \"C-002\", \"componentName\": \"Welded base frame\", \"quantity\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set MetroFab Works as the supplier for the welded frame."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/1/supplier\", \"value\": \"MetroFab Works\"}]"
+    },
+    {
+      "role": "user",
+      "content": "The welded frame costs 96 dollars for each module."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/1/unitCost\", \"value\": 96.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the welded frame weight as 5.6 kilograms."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/1/unitWeightKg\", \"value\": 5.6}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the drive pulley set, with two going into each module."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"componentId\": \"C-003\", \"componentName\": \"Drive pulley set\", \"quantity\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Source the drive pulley set from BeltLine Components."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/2/supplier\", \"value\": \"BeltLine Components\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Price each drive pulley set at 42 dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/2/unitCost\", \"value\": 42.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Each drive pulley set weighs 0.9 kilograms."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/2/unitWeightKg\", \"value\": 0.9}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a belt tensioner kit too, one kit needed for each module."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"componentId\": \"C-004\", \"componentName\": \"Belt tensioner kit\", \"quantity\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use BeltLine Components for the belt tensioner kit as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/3/supplier\", \"value\": \"BeltLine Components\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the belt tensioner kit cost at 28 dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/3/unitCost\", \"value\": 28.0}]"
+    },
+    {
+      "role": "user",
+      "content": "The belt tensioner kit adds 0.7 kilograms."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/3/unitWeightKg\", \"value\": 0.7}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a protective guard cover, one cover per module."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"componentId\": \"C-005\", \"componentName\": \"Protective guard cover\", \"quantity\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use ShieldPro Plastics as the supplier for the guard cover."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/4/supplier\", \"value\": \"ShieldPro Plastics\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the guard cover cost at 34 dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/4/unitCost\", \"value\": 34.0}]"
+    },
+    {
+      "role": "user",
+      "content": "The guard cover weighs 1.1 kilograms."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/4/unitWeightKg\", \"value\": 1.1}]"
+    },
+    {
+      "role": "user",
+      "content": "Now that the parts are set, show how many distinct items are in the module."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/componentCount\", \"value\": 5}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the total purchased material cost for one complete module."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/totalMaterialCost\", \"value\": 426.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the complete module weight from those listed parts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/totalWeightKg\", \"value\": 13.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Now start a consolidated supplier rollup with MotionWorks Supply."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supplierList\", \"value\": [\"MotionWorks Supply\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add MetroFab Works to that consolidated supplier rollup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supplierList/-\", \"value\": \"MetroFab Works\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add BeltLine Components once to the consolidated supplier rollup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supplierList/-\", \"value\": \"BeltLine Components\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add ShieldPro Plastics to finish the consolidated supplier rollup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supplierList/-\", \"value\": \"ShieldPro Plastics\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a purchasing rollup entry for MotionWorks Supply based on the gearmotor spend."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/procurementSummary\", \"value\": [{\"supplier\": \"MotionWorks Supply\", \"totalCost\": 184.0}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the purchasing rollup for MetroFab Works from the frame spend."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/procurementSummary/-\", \"value\": {\"supplier\": \"MetroFab Works\", \"totalCost\": 96.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the purchasing rollup for BeltLine Components covering the pulley sets and tensioner kit together."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/procurementSummary/-\", \"value\": {\"supplier\": \"BeltLine Components\", \"totalCost\": 112.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the purchasing rollup for ShieldPro Plastics from the guard cover spend."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/procurementSummary/-\", \"value\": {\"supplier\": \"ShieldPro Plastics\", \"totalCost\": 34.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this module as being built at the North Ridge assembly plant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturingSite\", \"value\": {\"siteCode\": \"NR-01\", \"siteName\": \"North Ridge Assembly Plant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the current release information for production: revision A, effective March 15, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/release\", \"value\": {\"revision\": \"A\", \"effectiveDate\": \"2025-03-15\"}}]"
+    }
+  ],
+  "edit_instruction": "Please remove the belt tensioner kit from this assembly.",
+  "theme": "Removing a component from the assembly",
+  "conversation_pattern": "Center the artifact on a BOM assembly with several components, where component count, total material cost, total weight, supplier list, and procurement summary aggregate over the included components. Around this core, add the realistic, independent details a BOM record would carry that do not depend on the component list, and vary their number and the number of components from sample to sample.",
+  "edit_pattern": "Remove one specific component from the assembly.",
+  "cascade_pattern": "Removing the component deletes it from the component list, lowers the component count, and re-aggregates material cost, weight, supplier list, and procurement summary over the remaining components. Unrelated assembly metadata stays unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "assemblyName": "Compact Conveyor Drive Module",
+    "components": [
+      {
+        "componentId": "C-001",
+        "componentName": "Right-angle gearmotor",
+        "quantity": 1,
+        "supplier": "MotionWorks Supply",
+        "unitCost": 184.0,
+        "unitWeightKg": 3.8
+      },
+      {
+        "componentId": "C-002",
+        "componentName": "Welded base frame",
+        "quantity": 1,
+        "supplier": "MetroFab Works",
+        "unitCost": 96.0,
+        "unitWeightKg": 5.6
+      },
+      {
+        "componentId": "C-003",
+        "componentName": "Drive pulley set",
+        "quantity": 2,
+        "supplier": "BeltLine Components",
+        "unitCost": 42.0,
+        "unitWeightKg": 0.9
+      },
+      {
+        "componentId": "C-004",
+        "componentName": "Belt tensioner kit",
+        "quantity": 1,
+        "supplier": "BeltLine Components",
+        "unitCost": 28.0,
+        "unitWeightKg": 0.7
+      },
+      {
+        "componentId": "C-005",
+        "componentName": "Protective guard cover",
+        "quantity": 1,
+        "supplier": "ShieldPro Plastics",
+        "unitCost": 34.0,
+        "unitWeightKg": 1.1
+      }
+    ],
+    "componentCount": 5,
+    "totalMaterialCost": 426.0,
+    "totalWeightKg": 13.0,
+    "supplierList": [
+      "MotionWorks Supply",
+      "MetroFab Works",
+      "BeltLine Components",
+      "ShieldPro Plastics"
+    ],
+    "procurementSummary": [
+      {
+        "supplier": "MotionWorks Supply",
+        "totalCost": 184.0
+      },
+      {
+        "supplier": "MetroFab Works",
+        "totalCost": 96.0
+      },
+      {
+        "supplier": "BeltLine Components",
+        "totalCost": 112.0
+      },
+      {
+        "supplier": "ShieldPro Plastics",
+        "totalCost": 34.0
+      }
+    ],
+    "manufacturingSite": {
+      "siteCode": "NR-01",
+      "siteName": "North Ridge Assembly Plant"
+    },
+    "release": {
+      "revision": "A",
+      "effectiveDate": "2025-03-15"
+    }
+  }
+}

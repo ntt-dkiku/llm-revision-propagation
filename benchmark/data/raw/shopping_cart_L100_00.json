@@ -1,0 +1,505 @@
+{
+  "id": "shopping_cart_L100_00",
+  "domain": "shopping_cart",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a shopping cart for Maya Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer_name\", \"value\": \"Maya Chen\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add two bags of Blue Ridge Breakfast Blend coffee to Maya’s cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items\", \"value\": [{\"product_name\": \"Blue Ridge Breakfast Blend Coffee\", \"sku\": \"COF-BRBB-12OZ\", \"quantity\": 2}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the details that each bag costs $14.50 and weighs 12 ounces."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/0/unit_price\", \"value\": 14.5}, {\"op\": \"add\", \"path\": \"/items/0/unit_weight_oz\", \"value\": 12}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out the coffee line’s total cost and total packed weight from those details."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/0/line_subtotal\", \"value\": 29}, {\"op\": \"add\", \"path\": \"/items/0/line_weight_oz\", \"value\": 24}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a 7% sales tax rate for that coffee."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/0/tax_rate\", \"value\": 0.07}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the tax amount for the coffee and its after-tax total."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/0/line_tax\", \"value\": 2.03}, {\"op\": \"add\", \"path\": \"/items/0/line_total\", \"value\": 31.03}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three cartons of Pacifica Barista Oat Milk to the same cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/-\", \"value\": {\"product_name\": \"Pacifica Barista Oat Milk\", \"sku\": \"MLK-PBO-32OZ\", \"quantity\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include that each carton is $4.20 and weighs 32 ounces."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/1/unit_price\", \"value\": 4.2}, {\"op\": \"add\", \"path\": \"/items/1/unit_weight_oz\", \"value\": 32}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out the oat milk line’s total cost and packed weight."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/1/line_subtotal\", \"value\": 12.6}, {\"op\": \"add\", \"path\": \"/items/1/line_weight_oz\", \"value\": 96}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the same 7% sales tax for the oat milk."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/1/tax_rate\", \"value\": 0.07}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the oat milk tax and its after-tax total too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/1/line_tax\", \"value\": 0.88}, {\"op\": \"add\", \"path\": \"/items/1/line_total\", \"value\": 13.48}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one jar of Sunny Vale Wildflower Honey as another item."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/-\", \"value\": {\"product_name\": \"Sunny Vale Wildflower Honey\", \"sku\": \"HNY-SVWF-16OZ\", \"quantity\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the honey jar is $8.75 and weighs 16 ounces."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/2/unit_price\", \"value\": 8.75}, {\"op\": \"add\", \"path\": \"/items/2/unit_weight_oz\", \"value\": 16}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out the honey line’s total cost and packed weight."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/2/line_subtotal\", \"value\": 8.75}, {\"op\": \"add\", \"path\": \"/items/2/line_weight_oz\", \"value\": 16}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the same 7% sales tax for the honey."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/2/tax_rate\", \"value\": 0.07}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the honey tax and after-tax total."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/2/line_tax\", \"value\": 0.61}, {\"op\": \"add\", \"path\": \"/items/2/line_total\", \"value\": 9.36}]"
+    },
+    {
+      "role": "user",
+      "content": "Now total up the cart’s item prices before tax and the packed weight from the three lines."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart_subtotal\", \"value\": 50.35}, {\"op\": \"add\", \"path\": \"/cart_weight_oz\", \"value\": 136}]"
+    },
+    {
+      "role": "user",
+      "content": "Also add up the tax from all three items and the after-tax merchandise total."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart_tax_total\", \"value\": 3.52}, {\"op\": \"add\", \"path\": \"/merchandise_total_after_tax\", \"value\": 53.87}]"
+    },
+    {
+      "role": "user",
+      "content": "For delivery, use a shipping charge of 4 cents per packed ounce."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping_rate_per_oz\", \"value\": 0.04}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the shipping charge from the packed weight."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping_fee\", \"value\": 5.44}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the final amount Maya would pay after merchandise, tax, and shipping."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/order_total\", \"value\": 59.31}]"
+    },
+    {
+      "role": "user",
+      "content": "Send the order to Maya’s apartment in Seattle."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping_address\", \"value\": {\"street\": \"1842 Pinecrest Ave Apt 5B\", \"city\": \"Seattle\", \"state\": \"WA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the rest of the delivery details for that address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping_address/postal_code\", \"value\": \"98101\"}, {\"op\": \"add\", \"path\": \"/shipping_address/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Maya’s preferred contact details for order updates."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/contact\", \"value\": {\"email\": \"maya.chen@example.com\", \"phone\": \"+1-206-555-0184\", \"sms_opt_in\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Pay with Maya’s Visa card that ends in 4242."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/payment\", \"value\": {\"method\": \"credit_card\", \"brand\": \"Visa\", \"last4\": \"4242\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the card’s expiration date and billing ZIP for the payment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/payment/exp_month\", \"value\": 9}, {\"op\": \"add\", \"path\": \"/payment/exp_year\", \"value\": 2027}, {\"op\": \"add\", \"path\": \"/payment/billing_postal_code\", \"value\": \"98101\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Give this cart a reference number and mark it as ready for checkout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart_id\", \"value\": \"CART-2026-004812\"}, {\"op\": \"add\", \"path\": \"/status\", \"value\": \"ready_for_checkout\"}, {\"op\": \"add\", \"path\": \"/created_at\", \"value\": \"2026-06-03T10:15:00-07:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it fulfilled from the Capitol Hill market location."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/fulfillment_location\", \"value\": {\"store_id\": \"SEA-CAPHILL-014\", \"name\": \"Capitol Hill Market\", \"city\": \"Seattle\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the delivery for Friday afternoon, with a no-contact drop-off."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/delivery_preferences\", \"value\": {\"date\": \"2026-06-05\", \"window\": \"14:00-17:00\", \"contactless\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a note for the driver to leave it at the lobby parcel shelf and ring the buzzer once."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/delivery_note\", \"value\": {\"drop_location\": \"lobby parcel shelf\", \"buzzer\": \"ring once\", \"requires_signature\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Connect Maya’s store membership so she earns points on the purchase."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rewards_account\", \"value\": {\"member_id\": \"RW-884219\", \"tier\": \"Gold\", \"earn_points\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use recyclable packaging, skip cold packs, and include a printed receipt."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packaging_preferences\", \"value\": {\"recyclable\": true, \"cold_packs\": false, \"printed_receipt\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tag the cart for the morning pantry restock project."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tags\", \"value\": [\"pantry-restock\", \"breakfast-supplies\", \"coffee-bar\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that Maya placed it through the mobile app using her usual English settings."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/order_context\", \"value\": {\"sales_channel\": \"mobile_app\", \"device\": \"iPhone 15\", \"locale\": \"en-US\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "If anything isn’t available, have the shopper ask Maya first, and don’t split the delivery into separate trips."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/substitution_policy\", \"value\": {\"approval_required\": true, \"allow_partial_fulfillment\": false, \"split_shipments\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Assign Jordan from the afternoon crew to pick Maya’s order."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shopper\", \"value\": {\"employee_id\": \"EMP-3176\", \"name\": \"Jordan Lee\", \"shift\": \"afternoon\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a freshness reminder for the shopper to choose the furthest dates and check for sealed packaging."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quality_checks\", \"value\": {\"choose_latest_expiry\": true, \"verify_seals\": true, \"report_damaged_items\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add internal tracking for how Maya found the store’s app promotion."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/marketing_attribution\", \"value\": {\"campaign\": \"June Pantry Push\", \"source\": \"in_app_banner\", \"coupon_applied\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a customer service case note in case Maya contacts support about this cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/support_note\", \"value\": {\"priority\": \"normal\", \"assigned_team\": \"online_orders\", \"visible_to_customer\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep a simple audit trail showing that the cart was created automatically and hasn’t been manually reviewed yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/audit\", \"value\": {\"created_by\": \"system\", \"reviewed_by_staff\": false, \"risk_flag\": \"none\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add gift settings showing this is just a regular household order, with no message or wrapping needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/gift_options\", \"value\": {\"is_gift\": false, \"gift_wrap\": false, \"message\": \"\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set Maya’s update preferences so she gets delivery progress messages but no promotional emails or phone calls."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/notification_preferences\", \"value\": {\"delivery_updates\": true, \"promotional_emails\": false, \"phone_calls\": false}}]"
+    }
+  ],
+  "edit_instruction": "Change the coffee line’s product name to Cascadia Organic Espresso Beans.",
+  "theme": "Substituting one product for another",
+  "master_data": {
+    "Cascadia Organic Espresso Beans": {
+      "product_name": "Cascadia Organic Espresso Beans",
+      "sku": "COF-COEB-10OZ",
+      "unit_price": 16,
+      "unit_weight_oz": 10,
+      "tax_rate": 0.07
+    }
+  },
+  "current_json": {
+    "customer_name": "Maya Chen",
+    "items": [
+      {
+        "product_name": "Blue Ridge Breakfast Blend Coffee",
+        "sku": "COF-BRBB-12OZ",
+        "quantity": 2,
+        "unit_price": 14.5,
+        "unit_weight_oz": 12,
+        "line_subtotal": 29,
+        "line_weight_oz": 24,
+        "tax_rate": 0.07,
+        "line_tax": 2.03,
+        "line_total": 31.03
+      },
+      {
+        "product_name": "Pacifica Barista Oat Milk",
+        "sku": "MLK-PBO-32OZ",
+        "quantity": 3,
+        "unit_price": 4.2,
+        "unit_weight_oz": 32,
+        "line_subtotal": 12.6,
+        "line_weight_oz": 96,
+        "tax_rate": 0.07,
+        "line_tax": 0.88,
+        "line_total": 13.48
+      },
+      {
+        "product_name": "Sunny Vale Wildflower Honey",
+        "sku": "HNY-SVWF-16OZ",
+        "quantity": 1,
+        "unit_price": 8.75,
+        "unit_weight_oz": 16,
+        "line_subtotal": 8.75,
+        "line_weight_oz": 16,
+        "tax_rate": 0.07,
+        "line_tax": 0.61,
+        "line_total": 9.36
+      }
+    ],
+    "cart_subtotal": 50.35,
+    "cart_weight_oz": 136,
+    "cart_tax_total": 3.52,
+    "merchandise_total_after_tax": 53.87,
+    "shipping_rate_per_oz": 0.04,
+    "shipping_fee": 5.44,
+    "order_total": 59.31,
+    "shipping_address": {
+      "street": "1842 Pinecrest Ave Apt 5B",
+      "city": "Seattle",
+      "state": "WA",
+      "postal_code": "98101",
+      "country": "US"
+    },
+    "contact": {
+      "email": "maya.chen@example.com",
+      "phone": "+1-206-555-0184",
+      "sms_opt_in": true
+    },
+    "payment": {
+      "method": "credit_card",
+      "brand": "Visa",
+      "last4": "4242",
+      "exp_month": 9,
+      "exp_year": 2027,
+      "billing_postal_code": "98101"
+    },
+    "cart_id": "CART-2026-004812",
+    "status": "ready_for_checkout",
+    "created_at": "2026-06-03T10:15:00-07:00",
+    "fulfillment_location": {
+      "store_id": "SEA-CAPHILL-014",
+      "name": "Capitol Hill Market",
+      "city": "Seattle"
+    },
+    "delivery_preferences": {
+      "date": "2026-06-05",
+      "window": "14:00-17:00",
+      "contactless": true
+    },
+    "delivery_note": {
+      "drop_location": "lobby parcel shelf",
+      "buzzer": "ring once",
+      "requires_signature": false
+    },
+    "rewards_account": {
+      "member_id": "RW-884219",
+      "tier": "Gold",
+      "earn_points": true
+    },
+    "packaging_preferences": {
+      "recyclable": true,
+      "cold_packs": false,
+      "printed_receipt": true
+    },
+    "tags": [
+      "pantry-restock",
+      "breakfast-supplies",
+      "coffee-bar"
+    ],
+    "order_context": {
+      "sales_channel": "mobile_app",
+      "device": "iPhone 15",
+      "locale": "en-US"
+    },
+    "substitution_policy": {
+      "approval_required": true,
+      "allow_partial_fulfillment": false,
+      "split_shipments": false
+    },
+    "shopper": {
+      "employee_id": "EMP-3176",
+      "name": "Jordan Lee",
+      "shift": "afternoon"
+    },
+    "quality_checks": {
+      "choose_latest_expiry": true,
+      "verify_seals": true,
+      "report_damaged_items": true
+    },
+    "marketing_attribution": {
+      "campaign": "June Pantry Push",
+      "source": "in_app_banner",
+      "coupon_applied": false
+    },
+    "support_note": {
+      "priority": "normal",
+      "assigned_team": "online_orders",
+      "visible_to_customer": false
+    },
+    "audit": {
+      "created_by": "system",
+      "reviewed_by_staff": false,
+      "risk_flag": "none"
+    },
+    "gift_options": {
+      "is_gift": false,
+      "gift_wrap": false,
+      "message": ""
+    },
+    "notification_preferences": {
+      "delivery_updates": true,
+      "promotional_emails": false,
+      "phone_calls": false
+    }
+  },
+  "conversation_pattern": "Center the artifact on a cart holding a product line whose attributes are stated on the line — including the numeric ones that drive money or weight totals — with line and cart totals and any fees derived from those attributes by stated arithmetic, so the line's values determine them. Around this core, add the realistic, independent details a cart would carry that do not depend on that product line, and vary their number from sample to sample.",
+  "edit_pattern": "Replace one product in the cart with a different specific product.",
+  "cascade_pattern": "Every attribute of the swapped line takes the replacement product's value (the replacement's attributes are supplied with the edit instruction), and every total or fee derived from those attributes recomputes. Other lines and unrelated fields stay. This is determined because the replacement's attributes are provided with the edit.",
+  "requires_master_data": true
+}

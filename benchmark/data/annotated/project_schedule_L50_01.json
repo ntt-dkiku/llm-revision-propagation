@@ -1,0 +1,450 @@
+{
+  "id": "project_schedule_L50_01",
+  "domain": "project_schedule",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I’m putting together a schedule for a client portal rollout; start with that as the initiative."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project\", \"value\": {\"name\": \"Client Portal Rollout\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Monday, April 7, 2025 as the starting point for the work."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule\", \"value\": {\"start_date\": \"2025-04-07\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the kickoff and requirements review the first activity, lasting 2 workdays from the project start."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"name\": \"Kickoff and Requirements Review\", \"duration_days\": 2, \"start_date\": \"2025-04-07\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Have that first activity wrap up on April 9, 2025, so the next work can begin then."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/0/finish_date\", \"value\": \"2025-04-09\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, add the UX wireframing step right after that kickoff work, and make it a 3-workday effort starting when the kickoff finishes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"UX Wireframes\", \"duration_days\": 3, \"start_date\": \"2025-04-09\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the wireframing work finishing on April 14, 2025, with weekends skipped."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/1/finish_date\", \"value\": \"2025-04-14\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make it clear that the wireframing step follows directly after the kickoff and requirements work."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/1/predecessor\", \"value\": \"Kickoff and Requirements Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After wireframes, add backend API setup as a 4-workday task beginning on April 14, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Backend API Setup\", \"duration_days\": 4, \"start_date\": \"2025-04-14\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the backend API work finish on April 18, 2025, and note that it comes after the wireframes are done."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/2/finish_date\", \"value\": \"2025-04-18\"}, {\"op\": \"add\", \"path\": \"/tasks/2/predecessor\", \"value\": \"UX Wireframes\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Then put frontend integration after the API setup, as a 5-workday effort starting on April 18, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Frontend Integration\", \"duration_days\": 5, \"start_date\": \"2025-04-18\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set frontend integration to finish on April 25, 2025, and tie it to the backend API setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/3/finish_date\", \"value\": \"2025-04-25\"}, {\"op\": \"add\", \"path\": \"/tasks/3/predecessor\", \"value\": \"Backend API Setup\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After that, add QA testing as a 3-workday task starting when frontend integration finishes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"QA Testing\", \"duration_days\": 3, \"start_date\": \"2025-04-25\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have QA testing finish on April 30, 2025, and make it depend on frontend integration."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/4/finish_date\", \"value\": \"2025-04-30\"}, {\"op\": \"add\", \"path\": \"/tasks/4/predecessor\", \"value\": \"Frontend Integration\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the production launch preparation after QA, lasting 2 workdays and starting on April 30, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"name\": \"Production Launch Preparation\", \"duration_days\": 2, \"start_date\": \"2025-04-30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the launch prep finishing on May 2, 2025, and link it after QA testing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/5/finish_date\", \"value\": \"2025-05-02\"}, {\"op\": \"add\", \"path\": \"/tasks/5/predecessor\", \"value\": \"QA Testing\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now summarize the plan with the total number of activities and the final completion date."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/task_count\", \"value\": 6}, {\"op\": \"add\", \"path\": \"/schedule/project_end_date\", \"value\": \"2025-05-02\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya Chen from Customer Success as the business sponsor for this rollout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders\", \"value\": [{\"name\": \"Maya Chen\", \"role\": \"Business Sponsor\", \"team\": \"Customer Success\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Jordan Patel from Engineering as the technical lead."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"name\": \"Jordan Patel\", \"role\": \"Technical Lead\", \"team\": \"Engineering\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture one concern that single sign-on approval could slow the rollout, with a medium likelihood and Priya Nair watching it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks\", \"value\": [{\"description\": \"Single sign-on approval may take longer than expected\", \"likelihood\": \"Medium\", \"owner\": \"Priya Nair\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a weekly project update that goes out on Fridays through Slack."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications\", \"value\": [{\"cadence\": \"Weekly\", \"day\": \"Friday\", \"channel\": \"Slack\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Track portal adoption as the main success measure, aiming for 80 percent of active clients within 30 days after launch."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/success_metrics\", \"value\": [{\"metric\": \"Portal adoption\", \"target\": \"80% of active clients\", \"measurement_window\": \"30 days after launch\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that the approved rollout budget is 125,000 US dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget\", \"value\": {\"amount\": 125000, \"currency\": \"USD\"}}]"
+    }
+  ],
+  "edit_instruction": "Insert a 2-workday Security Review task immediately after Backend API Setup.",
+  "theme": "Inserting a task into the schedule",
+  "master_data": null,
+  "current_json": {
+    "project": {
+      "name": "Client Portal Rollout"
+    },
+    "schedule": {
+      "start_date": "2025-04-07",
+      "task_count": 6,
+      "project_end_date": "2025-05-02"
+    },
+    "tasks": [
+      {
+        "name": "Kickoff and Requirements Review",
+        "duration_days": 2,
+        "start_date": "2025-04-07",
+        "finish_date": "2025-04-09"
+      },
+      {
+        "name": "UX Wireframes",
+        "duration_days": 3,
+        "start_date": "2025-04-09",
+        "finish_date": "2025-04-14",
+        "predecessor": "Kickoff and Requirements Review"
+      },
+      {
+        "name": "Backend API Setup",
+        "duration_days": 4,
+        "start_date": "2025-04-14",
+        "finish_date": "2025-04-18",
+        "predecessor": "UX Wireframes"
+      },
+      {
+        "name": "Frontend Integration",
+        "duration_days": 5,
+        "start_date": "2025-04-18",
+        "finish_date": "2025-04-25",
+        "predecessor": "Backend API Setup"
+      },
+      {
+        "name": "QA Testing",
+        "duration_days": 3,
+        "start_date": "2025-04-25",
+        "finish_date": "2025-04-30",
+        "predecessor": "Frontend Integration"
+      },
+      {
+        "name": "Production Launch Preparation",
+        "duration_days": 2,
+        "start_date": "2025-04-30",
+        "finish_date": "2025-05-02",
+        "predecessor": "QA Testing"
+      }
+    ],
+    "stakeholders": [
+      {
+        "name": "Maya Chen",
+        "role": "Business Sponsor",
+        "team": "Customer Success"
+      },
+      {
+        "name": "Jordan Patel",
+        "role": "Technical Lead",
+        "team": "Engineering"
+      }
+    ],
+    "risks": [
+      {
+        "description": "Single sign-on approval may take longer than expected",
+        "likelihood": "Medium",
+        "owner": "Priya Nair"
+      }
+    ],
+    "communications": [
+      {
+        "cadence": "Weekly",
+        "day": "Friday",
+        "channel": "Slack"
+      }
+    ],
+    "success_metrics": [
+      {
+        "metric": "Portal adoption",
+        "target": "80% of active clients",
+        "measurement_window": "30 days after launch"
+      }
+    ],
+    "budget": {
+      "amount": 125000,
+      "currency": "USD"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "add",
+      "path": "/tasks/3",
+      "kind": "direct",
+      "value": {
+        "name": "Security Review",
+        "duration_days": 2,
+        "start_date": "2025-04-18",
+        "finish_date": "2025-04-22",
+        "predecessor": "Backend API Setup"
+      }
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/4/predecessor",
+      "kind": "cascade",
+      "value": "Security Review"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/4/start_date",
+      "kind": "cascade",
+      "value": "2025-04-22"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/4/finish_date",
+      "kind": "cascade",
+      "value": "2025-04-29"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/5/start_date",
+      "kind": "cascade",
+      "value": "2025-04-29"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/5/finish_date",
+      "kind": "cascade",
+      "value": "2025-05-02"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/6/start_date",
+      "kind": "cascade",
+      "value": "2025-05-02"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/6/finish_date",
+      "kind": "cascade",
+      "value": "2025-05-06"
+    },
+    {
+      "op": "replace",
+      "path": "/schedule/task_count",
+      "kind": "cascade",
+      "value": 7
+    },
+    {
+      "op": "replace",
+      "path": "/schedule/project_end_date",
+      "kind": "cascade",
+      "value": "2025-05-06"
+    }
+  ],
+  "expected_json": {
+    "project": {
+      "name": "Client Portal Rollout"
+    },
+    "schedule": {
+      "start_date": "2025-04-07",
+      "task_count": 7,
+      "project_end_date": "2025-05-06"
+    },
+    "tasks": [
+      {
+        "name": "Kickoff and Requirements Review",
+        "duration_days": 2,
+        "start_date": "2025-04-07",
+        "finish_date": "2025-04-09"
+      },
+      {
+        "name": "UX Wireframes",
+        "duration_days": 3,
+        "start_date": "2025-04-09",
+        "finish_date": "2025-04-14",
+        "predecessor": "Kickoff and Requirements Review"
+      },
+      {
+        "name": "Backend API Setup",
+        "duration_days": 4,
+        "start_date": "2025-04-14",
+        "finish_date": "2025-04-18",
+        "predecessor": "UX Wireframes"
+      },
+      {
+        "name": "Security Review",
+        "duration_days": 2,
+        "start_date": "2025-04-18",
+        "finish_date": "2025-04-22",
+        "predecessor": "Backend API Setup"
+      },
+      {
+        "name": "Frontend Integration",
+        "duration_days": 5,
+        "start_date": "2025-04-22",
+        "finish_date": "2025-04-29",
+        "predecessor": "Security Review"
+      },
+      {
+        "name": "QA Testing",
+        "duration_days": 3,
+        "start_date": "2025-04-29",
+        "finish_date": "2025-05-02",
+        "predecessor": "Frontend Integration"
+      },
+      {
+        "name": "Production Launch Preparation",
+        "duration_days": 2,
+        "start_date": "2025-05-02",
+        "finish_date": "2025-05-06",
+        "predecessor": "QA Testing"
+      }
+    ],
+    "stakeholders": [
+      {
+        "name": "Maya Chen",
+        "role": "Business Sponsor",
+        "team": "Customer Success"
+      },
+      {
+        "name": "Jordan Patel",
+        "role": "Technical Lead",
+        "team": "Engineering"
+      }
+    ],
+    "risks": [
+      {
+        "description": "Single sign-on approval may take longer than expected",
+        "likelihood": "Medium",
+        "owner": "Priya Nair"
+      }
+    ],
+    "communications": [
+      {
+        "cadence": "Weekly",
+        "day": "Friday",
+        "channel": "Slack"
+      }
+    ],
+    "success_metrics": [
+      {
+        "metric": "Portal adoption",
+        "target": "80% of active clients",
+        "measurement_window": "30 days after launch"
+      }
+    ],
+    "budget": {
+      "amount": 125000,
+      "currency": "USD"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Insert a 2-workday Security Review immediately after Backend API Setup (new index 3, predecessor Backend API Setup, start 2025-04-18 = Backend finish, finish 2025-04-22 counting workdays with weekends skipped). Patches apply sequentially, so the previously-following tasks sit at indices 4-6 and shift +2 workdays: Frontend Integration relinks its predecessor to Security Review and runs 04-22->04-29; QA Testing 04-29->05-02; Production Launch Prep 05-02->05-06. schedule.task_count 6->7, project_end_date 05-02->05-06. Tasks before the insertion point, durations, and other predecessor links stay.",
+  "conversation_pattern": "Center the artifact on a task list where each task has a stated duration and starts when its predecessor finishes, so finishes derive along the precedence chain, rolling up to a task count and a project end. Around this core, add the realistic, independent details a project plan would carry that do not depend on the schedule dates, and vary their number and the number of tasks from sample to sample.",
+  "edit_pattern": "Insert one new task with a specific duration at a specific point in the precedence chain.",
+  "cascade_pattern": "Inserting a task shifts every downstream task later by the inserted duration, raises the task count by one, and moves the project end. Tasks before the insertion point stay. This is determined because durations and links are stated.",
+  "requires_master_data": false
+}

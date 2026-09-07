@@ -1,0 +1,75 @@
+{
+  "id": "travel_itinerary_L10_05",
+  "domain": "travel_itinerary",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm planning a one-day outing in Kyoto."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/destination\", \"value\": \"Kyoto\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's plan on a 15-minute buffer between each place we visit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/gap_minutes\", \"value\": 15}]"
+    },
+    {
+      "role": "user",
+      "content": "Start the morning at Kiyomizu-dera at 9:00, and give it an hour and a half."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops\", \"value\": [{\"place\": \"Kiyomizu-dera\", \"start_time\": \"09:00\", \"duration_minutes\": 90}]}]"
+    },
+    {
+      "role": "user",
+      "content": "After that, head to Nishiki Market for an hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"place\": \"Nishiki Market\", \"start_time\": \"10:45\", \"duration_minutes\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you also note that this is two places total and that the outing wraps up at 11:45?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary\", \"value\": {\"stop_count\": 2, \"day_end_time\": \"11:45\"}}]"
+    }
+  ],
+  "edit_instruction": "Please add Fushimi Inari Taisha as a 45-minute visit right after Kiyomizu-dera.",
+  "theme": "Adding a stop to the day's schedule",
+  "master_data": null,
+  "current_json": {
+    "destination": "Kyoto",
+    "gap_minutes": 15,
+    "stops": [
+      {
+        "place": "Kiyomizu-dera",
+        "start_time": "09:00",
+        "duration_minutes": 90
+      },
+      {
+        "place": "Nishiki Market",
+        "start_time": "10:45",
+        "duration_minutes": 60
+      }
+    ],
+    "summary": {
+      "stop_count": 2,
+      "day_end_time": "11:45"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a one-day itinerary built as an ordered list of timed stops, where each stop's time follows from the previous stop's end plus a stated gap and its own stated duration, rolling up to overall counts and a day-end time. Around this core, add the realistic, independent details a planner would record that do not depend on a stop's position in the day, and vary their number and the number of stops from sample to sample.",
+  "edit_pattern": "Add one specific sightseeing stop with a given visit duration at a specific point in the day.",
+  "cascade_pattern": "When a stop is inserted, every later stop's time shifts later by the inserted stop's duration plus one gap, the day-end shifts later, and the stop count rises by one. Stops before the insertion point keep their times. This is determined because the durations and the gap are stated.",
+  "requires_master_data": false
+}

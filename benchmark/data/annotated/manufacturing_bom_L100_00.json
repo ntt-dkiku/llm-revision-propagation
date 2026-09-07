@@ -1,0 +1,870 @@
+{
+  "id": "manufacturing_bom_L100_00",
+  "domain": "manufacturing_bom",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start with a production run size of 240 finished units."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan\", \"value\": {\"finished_unit_quantity\": 240}}]"
+    },
+    {
+      "role": "user",
+      "content": "Each unit needs one aluminum chassis, and those cost $18.75 apiece."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components\", \"value\": [{\"component_name\": \"aluminum chassis\", \"quantity_per_finished_unit\": 1, \"unit_cost_usd\": 18.75}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that each finished unit also uses two servo motors at $42.50 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/-\", \"value\": {\"component_name\": \"servo motor\", \"quantity_per_finished_unit\": 2, \"unit_cost_usd\": 42.5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the control board too: one per unit, priced at $27.20."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/-\", \"value\": {\"component_name\": \"control board\", \"quantity_per_finished_unit\": 1, \"unit_cost_usd\": 27.2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Each unit should also have a wire harness, one apiece at $6.40."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/-\", \"value\": {\"component_name\": \"wire harness\", \"quantity_per_finished_unit\": 1, \"unit_cost_usd\": 6.4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan for final assembly labor at 0.35 hours per unit, with that work billed at $32 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/labor_steps\", \"value\": [{\"step_name\": \"final assembly\", \"hours_per_finished_unit\": 0.35, \"labor_rate_usd_per_hour\": 32}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add testing labor as 0.18 hours per unit at $38 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/labor_steps/-\", \"value\": {\"step_name\": \"functional testing\", \"hours_per_finished_unit\": 0.18, \"labor_rate_usd_per_hour\": 38}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a fastener kit as well, with one kit needed for each unit at $3.15."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/-\", \"value\": {\"component_name\": \"fastener kit\", \"quantity_per_finished_unit\": 1, \"unit_cost_usd\": 3.15}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the chassis, use Metro Metals as the source, order in lots of 20, and assume 15 are already on hand."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/0/supplier\", \"value\": \"Metro Metals\"}, {\"op\": \"add\", \"path\": \"/build_plan/components/0/order_multiple\", \"value\": 20}, {\"op\": \"add\", \"path\": \"/build_plan/components/0/on_hand_quantity\", \"value\": 15}]"
+    },
+    {
+      "role": "user",
+      "content": "For the servo motors, use Apex Motion, buy them in packs of 50, and count 30 already in stock."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/1/supplier\", \"value\": \"Apex Motion\"}, {\"op\": \"add\", \"path\": \"/build_plan/components/1/order_multiple\", \"value\": 50}, {\"op\": \"add\", \"path\": \"/build_plan/components/1/on_hand_quantity\", \"value\": 30}]"
+    },
+    {
+      "role": "user",
+      "content": "For the control boards, source them from CircuitForge, purchase in trays of 25, and show 10 currently available."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/2/supplier\", \"value\": \"CircuitForge\"}, {\"op\": \"add\", \"path\": \"/build_plan/components/2/order_multiple\", \"value\": 25}, {\"op\": \"add\", \"path\": \"/build_plan/components/2/on_hand_quantity\", \"value\": 10}]"
+    },
+    {
+      "role": "user",
+      "content": "For the wire harnesses, use CableWorks Supply, buy in bundles of 40, and show 25 already available."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/3/supplier\", \"value\": \"CableWorks Supply\"}, {\"op\": \"add\", \"path\": \"/build_plan/components/3/order_multiple\", \"value\": 40}, {\"op\": \"add\", \"path\": \"/build_plan/components/3/on_hand_quantity\", \"value\": 25}]"
+    },
+    {
+      "role": "user",
+      "content": "For the fastener kits, use BoltBox Industrial, order in cases of 100, and count 60 on hand."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/4/supplier\", \"value\": \"BoltBox Industrial\"}, {\"op\": \"add\", \"path\": \"/build_plan/components/4/order_multiple\", \"value\": 100}, {\"op\": \"add\", \"path\": \"/build_plan/components/4/on_hand_quantity\", \"value\": 60}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the chassis need for this run, including what has to be bought after using the stock already available."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/0/gross_required_quantity\", \"value\": 240}, {\"op\": \"add\", \"path\": \"/build_plan/components/0/net_required_quantity\", \"value\": 225}, {\"op\": \"add\", \"path\": \"/build_plan/components/0/procurement_quantity\", \"value\": 240}]"
+    },
+    {
+      "role": "user",
+      "content": "Do the same calculation for the servo motors for this run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/1/gross_required_quantity\", \"value\": 480}, {\"op\": \"add\", \"path\": \"/build_plan/components/1/net_required_quantity\", \"value\": 450}, {\"op\": \"add\", \"path\": \"/build_plan/components/1/procurement_quantity\", \"value\": 450}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the control board requirement for the run, including the planned buy quantity after using what's already available."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/2/gross_required_quantity\", \"value\": 240}, {\"op\": \"add\", \"path\": \"/build_plan/components/2/net_required_quantity\", \"value\": 230}, {\"op\": \"add\", \"path\": \"/build_plan/components/2/procurement_quantity\", \"value\": 250}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the wire harness requirement for the run, with the buy quantity adjusted for what is already in stock."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/3/gross_required_quantity\", \"value\": 240}, {\"op\": \"add\", \"path\": \"/build_plan/components/3/net_required_quantity\", \"value\": 215}, {\"op\": \"add\", \"path\": \"/build_plan/components/3/procurement_quantity\", \"value\": 240}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the fastener kit requirement for the run, including how many cases' worth we need to order after using the stock on hand."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/4/gross_required_quantity\", \"value\": 240}, {\"op\": \"add\", \"path\": \"/build_plan/components/4/net_required_quantity\", \"value\": 180}, {\"op\": \"add\", \"path\": \"/build_plan/components/4/procurement_quantity\", \"value\": 200}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the material dollar total for the chassis based on the planned run quantity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/0/extended_material_cost_usd\", \"value\": 4500}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the material dollar total for the servo motors based on this run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/1/extended_material_cost_usd\", \"value\": 20400}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the material dollar total for the control boards for this run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/2/extended_material_cost_usd\", \"value\": 6528}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the material dollar total for the wire harnesses for this run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/3/extended_material_cost_usd\", \"value\": 1536}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the material dollar total for the fastener kits for this run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/4/extended_material_cost_usd\", \"value\": 756}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the total assembly time and labor dollars for the planned run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/labor_steps/0/total_hours\", \"value\": 84}, {\"op\": \"add\", \"path\": \"/build_plan/labor_steps/0/extended_labor_cost_usd\", \"value\": 2688}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the total testing time and labor dollars for the planned run too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/labor_steps/1/total_hours\", \"value\": 43.2}, {\"op\": \"add\", \"path\": \"/build_plan/labor_steps/1/extended_labor_cost_usd\", \"value\": 1641.6}]"
+    },
+    {
+      "role": "user",
+      "content": "Roll up the material side now with the per-unit material cost, total material dollars, and total component pieces needed for the run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/cost_summary\", \"value\": {\"material_cost_per_finished_unit_usd\": 140.5, \"total_material_cost_usd\": 33720, \"total_gross_component_quantity\": 1440}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also show the planned purchase dollars for the chassis order quantity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/0/procurement_cost_usd\", \"value\": 4500}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the planned purchase dollars for the servo motor order quantity as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/1/procurement_cost_usd\", \"value\": 19125}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the planned purchase dollars for the control board order quantity too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/2/procurement_cost_usd\", \"value\": 6800}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the planned purchase dollars for the wire harness order quantity too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/3/procurement_cost_usd\", \"value\": 1536}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the planned purchase dollars for the fastener kit order quantity as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/components/4/procurement_cost_usd\", \"value\": 630}]"
+    },
+    {
+      "role": "user",
+      "content": "Roll up the labor side too, with total hours, total labor dollars, and the labor cost per finished unit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/cost_summary/total_labor_hours\", \"value\": 127.2}, {\"op\": \"add\", \"path\": \"/build_plan/cost_summary/total_labor_cost_usd\", \"value\": 4329.6}, {\"op\": \"add\", \"path\": \"/build_plan/cost_summary/labor_cost_per_finished_unit_usd\", \"value\": 18.04}]"
+    },
+    {
+      "role": "user",
+      "content": "Give me the overall run totals now: combined build cost, cost per finished unit, and total planned purchasing spend."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/cost_summary/total_batch_cost_usd\", \"value\": 38049.6}, {\"op\": \"add\", \"path\": \"/build_plan/cost_summary/total_cost_per_finished_unit_usd\", \"value\": 158.54}, {\"op\": \"add\", \"path\": \"/build_plan/cost_summary/total_procurement_cost_usd\", \"value\": 32591}]"
+    },
+    {
+      "role": "user",
+      "content": "Label this as the Rev B build plan for the Axiom actuator, using job number BP-2407."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/identification\", \"value\": {\"job_number\": \"BP-2407\", \"product_name\": \"Axiom actuator\", \"revision\": \"B\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the production window: planned to start on July 15, 2024, finish on July 26, 2024, and run on line 3."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/schedule\", \"value\": {\"planned_start_date\": \"2024-07-15\", \"planned_finish_date\": \"2024-07-26\", \"production_line\": \"Line 3\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a receiving inspection note for the control boards: sample 10 pieces, check solder joints, and require zero defects."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/quality_checks\", \"value\": [{\"inspection_area\": \"control boards\", \"sample_size\": 10, \"acceptance_criteria\": \"zero solder-joint defects\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the shipping packout details: place 12 units in each carton, use foam inserts, and print the carton label as AXM-REV-B."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/packaging\", \"value\": {\"units_per_carton\": 12, \"packaging_material\": \"foam inserts\", \"carton_label_code\": \"AXM-REV-B\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a safety note for the line: operators should wear ESD wrist straps, use torque-limited drivers, and follow lockout before servicing the fixture."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/safety_requirements\", \"value\": [{\"ppe\": \"ESD wrist straps\", \"tooling_control\": \"torque-limited drivers\", \"service_precaution\": \"lockout before fixture servicing\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one maintenance reminder for the build fixture: inspect it before the run, lubricate the slide rails, and record the check on form MF-17."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/maintenance_tasks\", \"value\": [{\"timing\": \"before run\", \"task\": \"lubricate slide rails\", \"record_form\": \"MF-17\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add storage guidance for incoming motors: keep them in dry storage, hold between 15 and 25 degrees Celsius, and use the main electronics cage."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/storage_requirements\", \"value\": [{\"material_group\": \"servo motors\", \"storage_condition\": \"dry storage at 15-25 C\", \"storage_location\": \"main electronics cage\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the planning contacts: put Nina Patel as the planner, Marco Diaz as the manufacturing engineer, and QA lead as Erin Wu."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/contacts\", \"value\": {\"planner\": \"Nina Patel\", \"manufacturing_engineer\": \"Marco Diaz\", \"quality_lead\": \"Erin Wu\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this plan as released for purchasing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_plan/status\", \"value\": \"released\"}]"
+    }
+  ],
+  "edit_instruction": "Change the planned production run size to 300 finished units.",
+  "theme": "Changing the build quantity",
+  "conversation_pattern": "Center the artifact on a manufacturing build plan with a finished-unit quantity, component requirements per finished unit, labor per unit, and per-unit costs, where total component demand, labor hours, batch cost, and procurement quantities derive from the build quantity by stated arithmetic. Around this core, add the realistic, independent details a build plan would carry that do not depend on build quantity, and vary their number from sample to sample.",
+  "edit_pattern": "Change the build quantity to a specific new number of finished units.",
+  "cascade_pattern": "Editing the build quantity re-derives every component demand, procurement quantity, labor total, and batch cost from the stated per-unit requirements and costs. Per-unit requirements, suppliers, and unrelated fields stay unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "build_plan": {
+      "finished_unit_quantity": 240,
+      "components": [
+        {
+          "component_name": "aluminum chassis",
+          "quantity_per_finished_unit": 1,
+          "unit_cost_usd": 18.75,
+          "supplier": "Metro Metals",
+          "order_multiple": 20,
+          "on_hand_quantity": 15,
+          "gross_required_quantity": 240,
+          "net_required_quantity": 225,
+          "procurement_quantity": 240,
+          "extended_material_cost_usd": 4500,
+          "procurement_cost_usd": 4500
+        },
+        {
+          "component_name": "servo motor",
+          "quantity_per_finished_unit": 2,
+          "unit_cost_usd": 42.5,
+          "supplier": "Apex Motion",
+          "order_multiple": 50,
+          "on_hand_quantity": 30,
+          "gross_required_quantity": 480,
+          "net_required_quantity": 450,
+          "procurement_quantity": 450,
+          "extended_material_cost_usd": 20400,
+          "procurement_cost_usd": 19125
+        },
+        {
+          "component_name": "control board",
+          "quantity_per_finished_unit": 1,
+          "unit_cost_usd": 27.2,
+          "supplier": "CircuitForge",
+          "order_multiple": 25,
+          "on_hand_quantity": 10,
+          "gross_required_quantity": 240,
+          "net_required_quantity": 230,
+          "procurement_quantity": 250,
+          "extended_material_cost_usd": 6528,
+          "procurement_cost_usd": 6800
+        },
+        {
+          "component_name": "wire harness",
+          "quantity_per_finished_unit": 1,
+          "unit_cost_usd": 6.4,
+          "supplier": "CableWorks Supply",
+          "order_multiple": 40,
+          "on_hand_quantity": 25,
+          "gross_required_quantity": 240,
+          "net_required_quantity": 215,
+          "procurement_quantity": 240,
+          "extended_material_cost_usd": 1536,
+          "procurement_cost_usd": 1536
+        },
+        {
+          "component_name": "fastener kit",
+          "quantity_per_finished_unit": 1,
+          "unit_cost_usd": 3.15,
+          "supplier": "BoltBox Industrial",
+          "order_multiple": 100,
+          "on_hand_quantity": 60,
+          "gross_required_quantity": 240,
+          "net_required_quantity": 180,
+          "procurement_quantity": 200,
+          "extended_material_cost_usd": 756,
+          "procurement_cost_usd": 630
+        }
+      ],
+      "labor_steps": [
+        {
+          "step_name": "final assembly",
+          "hours_per_finished_unit": 0.35,
+          "labor_rate_usd_per_hour": 32,
+          "total_hours": 84,
+          "extended_labor_cost_usd": 2688
+        },
+        {
+          "step_name": "functional testing",
+          "hours_per_finished_unit": 0.18,
+          "labor_rate_usd_per_hour": 38,
+          "total_hours": 43.2,
+          "extended_labor_cost_usd": 1641.6
+        }
+      ],
+      "cost_summary": {
+        "material_cost_per_finished_unit_usd": 140.5,
+        "total_material_cost_usd": 33720,
+        "total_gross_component_quantity": 1440,
+        "total_labor_hours": 127.2,
+        "total_labor_cost_usd": 4329.6,
+        "labor_cost_per_finished_unit_usd": 18.04,
+        "total_batch_cost_usd": 38049.6,
+        "total_cost_per_finished_unit_usd": 158.54,
+        "total_procurement_cost_usd": 32591
+      },
+      "identification": {
+        "job_number": "BP-2407",
+        "product_name": "Axiom actuator",
+        "revision": "B"
+      },
+      "schedule": {
+        "planned_start_date": "2024-07-15",
+        "planned_finish_date": "2024-07-26",
+        "production_line": "Line 3"
+      },
+      "quality_checks": [
+        {
+          "inspection_area": "control boards",
+          "sample_size": 10,
+          "acceptance_criteria": "zero solder-joint defects"
+        }
+      ],
+      "packaging": {
+        "units_per_carton": 12,
+        "packaging_material": "foam inserts",
+        "carton_label_code": "AXM-REV-B"
+      },
+      "safety_requirements": [
+        {
+          "ppe": "ESD wrist straps",
+          "tooling_control": "torque-limited drivers",
+          "service_precaution": "lockout before fixture servicing"
+        }
+      ],
+      "maintenance_tasks": [
+        {
+          "timing": "before run",
+          "task": "lubricate slide rails",
+          "record_form": "MF-17"
+        }
+      ],
+      "storage_requirements": [
+        {
+          "material_group": "servo motors",
+          "storage_condition": "dry storage at 15-25 C",
+          "storage_location": "main electronics cage"
+        }
+      ],
+      "contacts": {
+        "planner": "Nina Patel",
+        "manufacturing_engineer": "Marco Diaz",
+        "quality_lead": "Erin Wu"
+      },
+      "status": "released"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/build_plan/finished_unit_quantity",
+      "kind": "direct",
+      "value": 300
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/0/gross_required_quantity",
+      "kind": "cascade",
+      "value": 300
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/0/net_required_quantity",
+      "kind": "cascade",
+      "value": 285
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/0/procurement_quantity",
+      "kind": "cascade",
+      "value": 300
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/0/extended_material_cost_usd",
+      "kind": "cascade",
+      "value": 5625.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/0/procurement_cost_usd",
+      "kind": "cascade",
+      "value": 5625.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/1/gross_required_quantity",
+      "kind": "cascade",
+      "value": 600
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/1/net_required_quantity",
+      "kind": "cascade",
+      "value": 570
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/1/procurement_quantity",
+      "kind": "cascade",
+      "value": 600
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/1/extended_material_cost_usd",
+      "kind": "cascade",
+      "value": 25500.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/1/procurement_cost_usd",
+      "kind": "cascade",
+      "value": 25500.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/2/gross_required_quantity",
+      "kind": "cascade",
+      "value": 300
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/2/net_required_quantity",
+      "kind": "cascade",
+      "value": 290
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/2/procurement_quantity",
+      "kind": "cascade",
+      "value": 300
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/2/extended_material_cost_usd",
+      "kind": "cascade",
+      "value": 8160.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/2/procurement_cost_usd",
+      "kind": "cascade",
+      "value": 8160.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/3/gross_required_quantity",
+      "kind": "cascade",
+      "value": 300
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/3/net_required_quantity",
+      "kind": "cascade",
+      "value": 275
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/3/procurement_quantity",
+      "kind": "cascade",
+      "value": 280
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/3/extended_material_cost_usd",
+      "kind": "cascade",
+      "value": 1920.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/3/procurement_cost_usd",
+      "kind": "cascade",
+      "value": 1792.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/4/gross_required_quantity",
+      "kind": "cascade",
+      "value": 300
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/4/net_required_quantity",
+      "kind": "cascade",
+      "value": 240
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/4/procurement_quantity",
+      "kind": "cascade",
+      "value": 300
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/4/extended_material_cost_usd",
+      "kind": "cascade",
+      "value": 945.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/components/4/procurement_cost_usd",
+      "kind": "cascade",
+      "value": 945.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/labor_steps/0/total_hours",
+      "kind": "cascade",
+      "value": 105.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/labor_steps/0/extended_labor_cost_usd",
+      "kind": "cascade",
+      "value": 3360.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/labor_steps/1/total_hours",
+      "kind": "cascade",
+      "value": 54.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/labor_steps/1/extended_labor_cost_usd",
+      "kind": "cascade",
+      "value": 2052.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/cost_summary/total_material_cost_usd",
+      "kind": "cascade",
+      "value": 42150.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/cost_summary/total_gross_component_quantity",
+      "kind": "cascade",
+      "value": 1800
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/cost_summary/total_labor_hours",
+      "kind": "cascade",
+      "value": 159.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/cost_summary/total_labor_cost_usd",
+      "kind": "cascade",
+      "value": 5412.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/cost_summary/total_batch_cost_usd",
+      "kind": "cascade",
+      "value": 47562.0
+    },
+    {
+      "op": "replace",
+      "path": "/build_plan/cost_summary/total_procurement_cost_usd",
+      "kind": "cascade",
+      "value": 42022.0
+    }
+  ],
+  "expected_json": {
+    "build_plan": {
+      "finished_unit_quantity": 300,
+      "components": [
+        {
+          "component_name": "aluminum chassis",
+          "quantity_per_finished_unit": 1,
+          "unit_cost_usd": 18.75,
+          "supplier": "Metro Metals",
+          "order_multiple": 20,
+          "on_hand_quantity": 15,
+          "gross_required_quantity": 300,
+          "net_required_quantity": 285,
+          "procurement_quantity": 300,
+          "extended_material_cost_usd": 5625.0,
+          "procurement_cost_usd": 5625.0
+        },
+        {
+          "component_name": "servo motor",
+          "quantity_per_finished_unit": 2,
+          "unit_cost_usd": 42.5,
+          "supplier": "Apex Motion",
+          "order_multiple": 50,
+          "on_hand_quantity": 30,
+          "gross_required_quantity": 600,
+          "net_required_quantity": 570,
+          "procurement_quantity": 600,
+          "extended_material_cost_usd": 25500.0,
+          "procurement_cost_usd": 25500.0
+        },
+        {
+          "component_name": "control board",
+          "quantity_per_finished_unit": 1,
+          "unit_cost_usd": 27.2,
+          "supplier": "CircuitForge",
+          "order_multiple": 25,
+          "on_hand_quantity": 10,
+          "gross_required_quantity": 300,
+          "net_required_quantity": 290,
+          "procurement_quantity": 300,
+          "extended_material_cost_usd": 8160.0,
+          "procurement_cost_usd": 8160.0
+        },
+        {
+          "component_name": "wire harness",
+          "quantity_per_finished_unit": 1,
+          "unit_cost_usd": 6.4,
+          "supplier": "CableWorks Supply",
+          "order_multiple": 40,
+          "on_hand_quantity": 25,
+          "gross_required_quantity": 300,
+          "net_required_quantity": 275,
+          "procurement_quantity": 280,
+          "extended_material_cost_usd": 1920.0,
+          "procurement_cost_usd": 1792.0
+        },
+        {
+          "component_name": "fastener kit",
+          "quantity_per_finished_unit": 1,
+          "unit_cost_usd": 3.15,
+          "supplier": "BoltBox Industrial",
+          "order_multiple": 100,
+          "on_hand_quantity": 60,
+          "gross_required_quantity": 300,
+          "net_required_quantity": 240,
+          "procurement_quantity": 300,
+          "extended_material_cost_usd": 945.0,
+          "procurement_cost_usd": 945.0
+        }
+      ],
+      "labor_steps": [
+        {
+          "step_name": "final assembly",
+          "hours_per_finished_unit": 0.35,
+          "labor_rate_usd_per_hour": 32,
+          "total_hours": 105.0,
+          "extended_labor_cost_usd": 3360.0
+        },
+        {
+          "step_name": "functional testing",
+          "hours_per_finished_unit": 0.18,
+          "labor_rate_usd_per_hour": 38,
+          "total_hours": 54.0,
+          "extended_labor_cost_usd": 2052.0
+        }
+      ],
+      "cost_summary": {
+        "material_cost_per_finished_unit_usd": 140.5,
+        "total_material_cost_usd": 42150.0,
+        "total_gross_component_quantity": 1800,
+        "total_labor_hours": 159.0,
+        "total_labor_cost_usd": 5412.0,
+        "labor_cost_per_finished_unit_usd": 18.04,
+        "total_batch_cost_usd": 47562.0,
+        "total_cost_per_finished_unit_usd": 158.54,
+        "total_procurement_cost_usd": 42022.0
+      },
+      "identification": {
+        "job_number": "BP-2407",
+        "product_name": "Axiom actuator",
+        "revision": "B"
+      },
+      "schedule": {
+        "planned_start_date": "2024-07-15",
+        "planned_finish_date": "2024-07-26",
+        "production_line": "Line 3"
+      },
+      "quality_checks": [
+        {
+          "inspection_area": "control boards",
+          "sample_size": 10,
+          "acceptance_criteria": "zero solder-joint defects"
+        }
+      ],
+      "packaging": {
+        "units_per_carton": 12,
+        "packaging_material": "foam inserts",
+        "carton_label_code": "AXM-REV-B"
+      },
+      "safety_requirements": [
+        {
+          "ppe": "ESD wrist straps",
+          "tooling_control": "torque-limited drivers",
+          "service_precaution": "lockout before fixture servicing"
+        }
+      ],
+      "maintenance_tasks": [
+        {
+          "timing": "before run",
+          "task": "lubricate slide rails",
+          "record_form": "MF-17"
+        }
+      ],
+      "storage_requirements": [
+        {
+          "material_group": "servo motors",
+          "storage_condition": "dry storage at 15-25 C",
+          "storage_location": "main electronics cage"
+        }
+      ],
+      "contacts": {
+        "planner": "Nina Patel",
+        "manufacturing_engineer": "Marco Diaz",
+        "quality_lead": "Erin Wu"
+      },
+      "status": "released"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "build 240->300: per component gross=qpu*300, net=gross-on_hand, procurement=roundup(net,order_multiple), extended=gross*unit_cost, proc_cost=procurement*unit_cost; labor total_hours/cost; cost_summary aggregates. per-unit cost rates (material/labor/total per unit) are constant -> unchanged.",
+  "annotated": true,
+  "excluded": false
+}

@@ -1,0 +1,527 @@
+{
+  "id": "invoice_L100_00",
+  "domain": "invoice",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start the invoice with the number INV-2026-041."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice_number\", \"value\": \"INV-2026-041\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Start the billable work with 12 hours of design consulting at $95 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/line_items\", \"value\": [{\"label\": \"Design consulting\", \"quantity\": 12, \"unit_price\": 95.0}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Please show the design consulting line as coming to $1,140."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/line_items/0/amount\", \"value\": 1140.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another charge for 8 hours of backend development at $120 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/line_items/-\", \"value\": {\"label\": \"Backend development\", \"quantity\": 8, \"unit_price\": 120.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the backend development charge totaling $960."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/line_items/1/amount\", \"value\": 960.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Include 5 hours of QA testing at $80 per hour as the next billable item."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/line_items/-\", \"value\": {\"label\": \"QA testing\", \"quantity\": 5, \"unit_price\": 80.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the QA testing item as $400 in all."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/line_items/2/amount\", \"value\": 400.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Add project management for 6 hours at $75 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/line_items/-\", \"value\": {\"label\": \"Project management\", \"quantity\": 6, \"unit_price\": 75.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the project management line to total $450."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/line_items/3/amount\", \"value\": 450.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Include deployment support for 4 hours at $110 per hour as another item."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/line_items/-\", \"value\": {\"label\": \"Deployment support\", \"quantity\": 4, \"unit_price\": 110.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Show deployment support as adding up to $440."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/line_items/4/amount\", \"value\": 440.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Now add up the work charges before any taxes or other adjustments."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subtotal\", \"value\": 3390.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply a 5% courtesy discount to the work total."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/discount_rate\", \"value\": 0.05}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the discount as $169.50."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/discount_amount\", \"value\": 169.5}]"
+    },
+    {
+      "role": "user",
+      "content": "Give me the amount after that discount is taken off."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/discounted_subtotal\", \"value\": 3220.5}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an 8% sales tax rate to the amount after the discount."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tax_rate\", \"value\": 0.08}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the sales tax as $257.64."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tax_amount\", \"value\": 257.64}]"
+    },
+    {
+      "role": "user",
+      "content": "Now give the total after adding the sales tax."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/total_after_tax\", \"value\": 3478.14}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the company sending the invoice as Northstar Digital Studio in Portland, Oregon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/issuer\", \"value\": {\"name\": \"Northstar Digital Studio\", \"city\": \"Portland\", \"state\": \"OR\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Bill it to Acme Robotics in Seattle, Washington."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/client\", \"value\": {\"name\": \"Acme Robotics\", \"city\": \"Seattle\", \"state\": \"WA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use 811 Eastlake Avenue, ZIP 98109, USA for Acme’s mailing details."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/client/address\", \"value\": {\"street\": \"811 Eastlake Avenue\", \"postal_code\": \"98109\", \"country\": \"USA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that Acme has already paid $1,200 toward this invoice."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/amount_paid\", \"value\": 1200.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate what remains due after that payment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/balance_due\", \"value\": 2278.14}]"
+    },
+    {
+      "role": "user",
+      "content": "Date it May 15, 2026, make it due June 14, 2026, and use US dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/issue_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/due_date\", \"value\": \"2026-06-14\"}, {\"op\": \"add\", \"path\": \"/currency\", \"value\": \"USD\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For Northstar, use 214 NW Everett Street, ZIP 97209, USA for their mailing details."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/issuer/address\", \"value\": {\"street\": \"214 NW Everett Street\", \"postal_code\": \"97209\", \"country\": \"USA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For reaching Northstar, use hello@northstardigital.example, (503) 555-0184, and Oregon registration OR-781244."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/issuer/contact\", \"value\": {\"email\": \"hello@northstardigital.example\", \"phone\": \"(503) 555-0184\", \"registration_id\": \"OR-781244\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Acme’s contact person, list Maya Chen with maya.chen@acmerobotics.example and (206) 555-0137."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/client/contact\", \"value\": {\"name\": \"Maya Chen\", \"email\": \"maya.chen@acmerobotics.example\", \"phone\": \"(206) 555-0137\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note this invoice is for the Atlas portal refresh, purchase order PO-44918, and internal job code AR-PORTAL-26."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project_details\", \"value\": {\"project_name\": \"Atlas portal refresh\", \"purchase_order\": \"PO-44918\", \"job_code\": \"AR-PORTAL-26\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add ACH payment details with routing 123456789, account ending 4321, and the bank named Cascade Business Bank."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/payment_instructions/ach\", \"value\": {\"routing_number\": \"123456789\", \"account_last4\": \"4321\", \"bank_name\": \"Cascade Business Bank\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include card payment details showing Visa is accepted, a 3% processing fee applies, and the portal is pay.northstardigital.example."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/payment_instructions/card\", \"value\": {\"accepted_brand\": \"Visa\", \"processing_fee_rate\": 0.03, \"payment_portal\": \"pay.northstardigital.example\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add net-30 payment terms, a 1.5% monthly late fee, and a note that disputes must be raised within 10 days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/terms\", \"value\": {\"payment_terms\": \"Net 30\", \"late_fee_monthly_rate\": 0.015, \"dispute_window_days\": 10}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that the invoice should be sent by email, with a PDF attachment, and that a paper copy is not required."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/delivery_preferences\", \"value\": {\"method\": \"Email\", \"attachment_format\": \"PDF\", \"paper_copy_required\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the work period as May 1 through May 14, 2026, in Pacific time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/service_period\", \"value\": {\"start_date\": \"2026-05-01\", \"end_date\": \"2026-05-14\", \"time_zone\": \"America/Los_Angeles\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that the work was approved by Jordan Patel on May 14, 2026, with approval reference APR-5582."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approval\", \"value\": {\"approved_by\": \"Jordan Patel\", \"approved_on\": \"2026-05-14\", \"reference\": \"APR-5582\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the tax location as Washington, King County, with destination-based sourcing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tax_details\", \"value\": {\"state\": \"WA\", \"county\": \"King\", \"sourcing\": \"Destination-based\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add shipping notation showing no physical shipment, no tracking number, and digital delivery only."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/fulfillment\", \"value\": {\"physical_shipment\": false, \"tracking_number\": \"N/A\", \"delivery_type\": \"Digital\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short memo saying the work covered sprint stabilization, accessibility fixes, and launch readiness."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/memo\", \"value\": {\"summary\": \"Sprint stabilization\", \"secondary_focus\": \"Accessibility fixes\", \"final_focus\": \"Launch readiness\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the sender’s remittance address as PO Box 1842, Portland, Oregon 97208."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/remittance_address\", \"value\": {\"line1\": \"PO Box 1842\", \"city_state\": \"Portland, OR\", \"postal_code\": \"97208\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include an internal reviewer named Priya Nair, mark the review as finance-approved, and use review ticket FIN-9046."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/internal_review\", \"value\": {\"reviewer\": \"Priya Nair\", \"status\": \"Finance-approved\", \"ticket\": \"FIN-9046\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add document settings showing the language as English, the page size as letter, and the template as professional services."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/document_settings\", \"value\": {\"language\": \"English\", \"page_size\": \"Letter\", \"template\": \"Professional services\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a processing note showing it was created in QuickBooks, exported by Sam Rivera, and tagged as ready to send."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/processing_note\", \"value\": {\"created_in\": \"QuickBooks\", \"exported_by\": \"Sam Rivera\", \"send_status\": \"Ready to send\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a compliance note saying the sales tax was reviewed, the client exemption is not on file, and records should be retained for seven years."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance_note\", \"value\": {\"tax_reviewed\": true, \"exemption_certificate_on_file\": false, \"record_retention_years\": 7}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add filing details placing it in 2026 receivables, under the finance retention class, owned by accounts receivable."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/filing_details\", \"value\": {\"folder\": \"2026 Receivables\", \"retention_class\": \"Finance\", \"owner\": \"Accounts receivable\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the invoice as open."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/status\", \"value\": \"Open\"}]"
+    }
+  ],
+  "edit_instruction": "Change the QA testing quantity to 7 hours.",
+  "theme": "Recomputing the invoice total chain",
+  "master_data": null,
+  "current_json": {
+    "invoice_number": "INV-2026-041",
+    "line_items": [
+      {
+        "label": "Design consulting",
+        "quantity": 12,
+        "unit_price": 95.0,
+        "amount": 1140.0
+      },
+      {
+        "label": "Backend development",
+        "quantity": 8,
+        "unit_price": 120.0,
+        "amount": 960.0
+      },
+      {
+        "label": "QA testing",
+        "quantity": 5,
+        "unit_price": 80.0,
+        "amount": 400.0
+      },
+      {
+        "label": "Project management",
+        "quantity": 6,
+        "unit_price": 75.0,
+        "amount": 450.0
+      },
+      {
+        "label": "Deployment support",
+        "quantity": 4,
+        "unit_price": 110.0,
+        "amount": 440.0
+      }
+    ],
+    "subtotal": 3390.0,
+    "discount_rate": 0.05,
+    "discount_amount": 169.5,
+    "discounted_subtotal": 3220.5,
+    "tax_rate": 0.08,
+    "tax_amount": 257.64,
+    "total_after_tax": 3478.14,
+    "issuer": {
+      "name": "Northstar Digital Studio",
+      "city": "Portland",
+      "state": "OR",
+      "address": {
+        "street": "214 NW Everett Street",
+        "postal_code": "97209",
+        "country": "USA"
+      },
+      "contact": {
+        "email": "hello@northstardigital.example",
+        "phone": "(503) 555-0184",
+        "registration_id": "OR-781244"
+      }
+    },
+    "client": {
+      "name": "Acme Robotics",
+      "city": "Seattle",
+      "state": "WA",
+      "address": {
+        "street": "811 Eastlake Avenue",
+        "postal_code": "98109",
+        "country": "USA"
+      },
+      "contact": {
+        "name": "Maya Chen",
+        "email": "maya.chen@acmerobotics.example",
+        "phone": "(206) 555-0137"
+      }
+    },
+    "amount_paid": 1200.0,
+    "balance_due": 2278.14,
+    "issue_date": "2026-05-15",
+    "due_date": "2026-06-14",
+    "currency": "USD",
+    "project_details": {
+      "project_name": "Atlas portal refresh",
+      "purchase_order": "PO-44918",
+      "job_code": "AR-PORTAL-26"
+    },
+    "payment_instructions": {
+      "ach": {
+        "routing_number": "123456789",
+        "account_last4": "4321",
+        "bank_name": "Cascade Business Bank"
+      },
+      "card": {
+        "accepted_brand": "Visa",
+        "processing_fee_rate": 0.03,
+        "payment_portal": "pay.northstardigital.example"
+      }
+    },
+    "terms": {
+      "payment_terms": "Net 30",
+      "late_fee_monthly_rate": 0.015,
+      "dispute_window_days": 10
+    },
+    "delivery_preferences": {
+      "method": "Email",
+      "attachment_format": "PDF",
+      "paper_copy_required": false
+    },
+    "service_period": {
+      "start_date": "2026-05-01",
+      "end_date": "2026-05-14",
+      "time_zone": "America/Los_Angeles"
+    },
+    "approval": {
+      "approved_by": "Jordan Patel",
+      "approved_on": "2026-05-14",
+      "reference": "APR-5582"
+    },
+    "tax_details": {
+      "state": "WA",
+      "county": "King",
+      "sourcing": "Destination-based"
+    },
+    "fulfillment": {
+      "physical_shipment": false,
+      "tracking_number": "N/A",
+      "delivery_type": "Digital"
+    },
+    "memo": {
+      "summary": "Sprint stabilization",
+      "secondary_focus": "Accessibility fixes",
+      "final_focus": "Launch readiness"
+    },
+    "remittance_address": {
+      "line1": "PO Box 1842",
+      "city_state": "Portland, OR",
+      "postal_code": "97208"
+    },
+    "internal_review": {
+      "reviewer": "Priya Nair",
+      "status": "Finance-approved",
+      "ticket": "FIN-9046"
+    },
+    "document_settings": {
+      "language": "English",
+      "page_size": "Letter",
+      "template": "Professional services"
+    },
+    "processing_note": {
+      "created_in": "QuickBooks",
+      "exported_by": "Sam Rivera",
+      "send_status": "Ready to send"
+    },
+    "compliance_note": {
+      "tax_reviewed": true,
+      "exemption_certificate_on_file": false,
+      "record_retention_years": 7
+    },
+    "filing_details": {
+      "folder": "2026 Receivables",
+      "retention_class": "Finance",
+      "owner": "Accounts receivable"
+    },
+    "status": "Open"
+  },
+  "conversation_pattern": "Center the artifact on an invoice whose totals form a chain, where each line item is labeled with what it is for and its amount derives from a quantity and a unit price, a subtotal sums the line amounts, and charges and a final balance build on the subtotal, so the inputs determine the whole chain. Each line item must be distinguishable from the others by its label, so a single line can be named unambiguously. Around this core, add the realistic, independent details an invoice would carry that do not depend on the line amounts, and vary their number from sample to sample.",
+  "edit_pattern": "Change one line item's unit price or quantity to a specific new value.",
+  "cascade_pattern": "Editing one input re-derives its line amount, then the chain recomputes level by level: the subtotal re-sums and every total built on it follows in order. Other lines and the stated rates stay unchanged.",
+  "requires_master_data": false
+}

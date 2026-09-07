@@ -1,0 +1,168 @@
+{
+  "id": "manufacturing_bom_L10_02",
+  "domain": "manufacturing_bom",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a manufacturing plan for the PX-40 palletizer control panel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan\", \"value\": {\"productName\": \"PX-40 palletizer control panel\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the safety relay for the panel and have it sourced from NorthBridge Controls."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan/components\", \"value\": [{\"componentName\": \"safety relay\", \"supplier\": \"NorthBridge Controls\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Use two of those relays in each panel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan/components/0/quantityPerPanel\", \"value\": 2}]"
+    },
+    {
+      "role": "user",
+      "content": "NorthBridge quoted the relay at $18.75 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan/components/0/unitCostUsd\", \"value\": 18.75}]"
+    },
+    {
+      "role": "user",
+      "content": "NorthBridge’s current delivery promise for that relay is 21 calendar days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan/components/0/leadTimeDays\", \"value\": 21}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the NorthBridge sourcing details too: it ships from Canada, there’s no supply risk flag, and Maya Chen is the buyer contact."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan/components/0/procurement\", \"value\": {\"countryOfOrigin\": \"Canada\", \"supplyRiskFlag\": false, \"procurementContact\": \"Maya Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate what the two relays add to the panel cost."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan/components/0/extendedCostUsd\", \"value\": 37.5}]"
+    }
+  ],
+  "edit_instruction": "For the safety relay, replace NorthBridge Controls with Alpine Safety Supply.",
+  "current_json": {
+    "plan": {
+      "productName": "PX-40 palletizer control panel",
+      "components": [
+        {
+          "componentName": "safety relay",
+          "supplier": "NorthBridge Controls",
+          "quantityPerPanel": 2,
+          "unitCostUsd": 18.75,
+          "leadTimeDays": 21,
+          "procurement": {
+            "countryOfOrigin": "Canada",
+            "supplyRiskFlag": false,
+            "procurementContact": "Maya Chen"
+          },
+          "extendedCostUsd": 37.5
+        }
+      ]
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/plan/components/0/supplier",
+      "kind": "direct",
+      "value": "Alpine Safety Supply"
+    },
+    {
+      "op": "replace",
+      "path": "/plan/components/0/unitCostUsd",
+      "kind": "cascade",
+      "value": 16.4
+    },
+    {
+      "op": "replace",
+      "path": "/plan/components/0/leadTimeDays",
+      "kind": "cascade",
+      "value": 28
+    },
+    {
+      "op": "replace",
+      "path": "/plan/components/0/procurement/countryOfOrigin",
+      "kind": "cascade",
+      "value": "Germany"
+    },
+    {
+      "op": "replace",
+      "path": "/plan/components/0/procurement/supplyRiskFlag",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/plan/components/0/procurement/procurementContact",
+      "kind": "cascade",
+      "value": "Lena Vogt"
+    },
+    {
+      "op": "replace",
+      "path": "/plan/components/0/extendedCostUsd",
+      "kind": "cascade",
+      "value": 32.8
+    }
+  ],
+  "expected_json": {
+    "plan": {
+      "productName": "PX-40 palletizer control panel",
+      "components": [
+        {
+          "componentName": "safety relay",
+          "supplier": "Alpine Safety Supply",
+          "quantityPerPanel": 2,
+          "unitCostUsd": 16.4,
+          "leadTimeDays": 28,
+          "procurement": {
+            "countryOfOrigin": "Germany",
+            "supplyRiskFlag": true,
+            "procurementContact": "Lena Vogt"
+          },
+          "extendedCostUsd": 32.8
+        }
+      ]
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "supplier swap: every supplier-governed field takes Alpine master_data attrs; extendedCost=16.4*2=32.8; quantityPerPanel=2 unchanged.",
+  "annotated": true,
+  "excluded": false,
+  "theme": "Substituting a component supplier",
+  "conversation_pattern": "Center the artifact on a BOM component sourced from one supplier, where supplier attributes determine unit cost, lead time, country-of-origin, risk flag, and procurement contact. Around this core, add the realistic, independent details a manufacturing plan would carry that do not depend on the supplier, and vary their number from sample to sample. Do not embed a lookup or reference card for any supplier inside the artifact; the artifact holds only the current supplier's own fields.",
+  "edit_pattern": "Switch one component to a different specific supplier.",
+  "cascade_pattern": "Every supplier-governed field takes the replacement supplier's supplied attributes, and derived totals such as cost and lead time recompute from them. Component quantity and unrelated components stay unchanged. This is determined because the replacement supplier's attributes are provided with the edit.",
+  "requires_master_data": true,
+  "master_data": {
+    "Alpine Safety Supply": {
+      "unitCostUsd": 16.4,
+      "leadTimeDays": 28,
+      "countryOfOrigin": "Germany",
+      "supplyRiskFlag": true,
+      "procurementContact": "Lena Vogt"
+    }
+  }
+}

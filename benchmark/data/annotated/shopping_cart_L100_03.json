@@ -1,0 +1,675 @@
+{
+  "id": "shopping_cart_L100_03",
+  "domain": "shopping_cart",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a shopping cart for Maya Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart\", \"value\": {\"customerName\": \"Maya Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a Sony Alpha ZV-E10 II camera body as the first item she’s buying, priced at $999.99 for one."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items\", \"value\": [{\"name\": \"Sony Alpha ZV-E10 II camera body\", \"quantity\": 1, \"unitPrice\": 999.99}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the matching Sony ZV-E10 II creator grip kit for that camera, one at $149.99."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Sony ZV-E10 II creator grip kit for the camera body\", \"quantity\": 1, \"unitPrice\": 149.99}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a Sony ZV-E10 II spare battery pack that goes with the camera, one at $79.99."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Sony ZV-E10 II spare battery pack for the camera body\", \"quantity\": 1, \"unitPrice\": 79.99}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put in a protective screen cover made for the Sony ZV-E10 II, one for $19.99."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Sony ZV-E10 II tempered glass screen cover for the camera body\", \"quantity\": 1, \"unitPrice\": 19.99}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the Sony E 11mm wide-angle lens that’s intended for the ZV-E10 II camera, one at $549.99."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Sony E 11mm F1.8 wide-angle lens for the ZV-E10 II camera body\", \"quantity\": 1, \"unitPrice\": 549.99}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also add a MacBook Air for her, one at $1099."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Apple MacBook Air 13-inch M3\", \"quantity\": 1, \"unitPrice\": 1099.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a USB-C hub made for the MacBook Air, one for $59.95."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"USB-C hub for Apple MacBook Air 13-inch M3\", \"quantity\": 1, \"unitPrice\": 59.95}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a sleeve sized for the MacBook Air, one at $34.5."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Protective sleeve for Apple MacBook Air 13-inch M3\", \"quantity\": 1, \"unitPrice\": 34.5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a Bluetooth mouse for the MacBook Air as well, one priced at $29.99."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Bluetooth mouse for Apple MacBook Air 13-inch M3\", \"quantity\": 1, \"unitPrice\": 29.99}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a Nintendo Switch OLED console for the same cart, one at $349.99."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Nintendo Switch OLED console\", \"quantity\": 1, \"unitPrice\": 349.99}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put in a carrying case that’s specifically for the Nintendo Switch OLED, one for $24.99."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Carrying case for Nintendo Switch OLED console\", \"quantity\": 1, \"unitPrice\": 24.99}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a screen protector for the Nintendo Switch OLED too, one at $12.99."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Tempered glass screen protector for Nintendo Switch OLED console\", \"quantity\": 1, \"unitPrice\": 12.99}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include an extra controller set for the Nintendo Switch OLED, one at $79.99."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Extra Joy-Con controller set for Nintendo Switch OLED console\", \"quantity\": 1, \"unitPrice\": 79.99}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code SONY-ZVE10II-BODY for the camera body."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/0/sku\", \"value\": \"SONY-ZVE10II-BODY\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code SONY-ZVE10II-GRIP for the creator grip kit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/1/sku\", \"value\": \"SONY-ZVE10II-GRIP\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code SONY-ZVE10II-BATT for the spare battery pack."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/2/sku\", \"value\": \"SONY-ZVE10II-BATT\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code SONY-ZVE10II-SCREEN for the camera screen cover."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/3/sku\", \"value\": \"SONY-ZVE10II-SCREEN\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code SONY-E11MM-ZVE10II for the wide-angle lens."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/4/sku\", \"value\": \"SONY-E11MM-ZVE10II\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code MBA13-M3-256 for the MacBook Air."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/5/sku\", \"value\": \"MBA13-M3-256\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code HUB-MBA13-USBC for the USB-C hub."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/6/sku\", \"value\": \"HUB-MBA13-USBC\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code SLEEVE-MBA13-GRAY for the MacBook sleeve."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/7/sku\", \"value\": \"SLEEVE-MBA13-GRAY\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code MOUSE-BT-MBA13 for the Bluetooth mouse."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/8/sku\", \"value\": \"MOUSE-BT-MBA13\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code NS-OLED-WHITE for the Nintendo Switch OLED console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/9/sku\", \"value\": \"NS-OLED-WHITE\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code CASE-NS-OLED for the Nintendo Switch carrying case."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/10/sku\", \"value\": \"CASE-NS-OLED\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code GLASS-NS-OLED for the Nintendo Switch screen protector."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/11/sku\", \"value\": \"GLASS-NS-OLED\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use product code JOYCON-NS-OLED for the extra controller set."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/12/sku\", \"value\": \"JOYCON-NS-OLED\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the pre-tax line amounts for the camera body and the first two camera add-ons."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/0/lineSubtotal\", \"value\": 999.99}, {\"op\": \"add\", \"path\": \"/cart/items/1/lineSubtotal\", \"value\": 149.99}, {\"op\": \"add\", \"path\": \"/cart/items/2/lineSubtotal\", \"value\": 79.99}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the pre-tax line amounts for the camera screen cover, the wide-angle lens, and the MacBook Air."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/3/lineSubtotal\", \"value\": 19.99}, {\"op\": \"add\", \"path\": \"/cart/items/4/lineSubtotal\", \"value\": 549.99}, {\"op\": \"add\", \"path\": \"/cart/items/5/lineSubtotal\", \"value\": 1099.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the pre-tax line amounts for the MacBook Air accessories."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/6/lineSubtotal\", \"value\": 59.95}, {\"op\": \"add\", \"path\": \"/cart/items/7/lineSubtotal\", \"value\": 34.5}, {\"op\": \"add\", \"path\": \"/cart/items/8/lineSubtotal\", \"value\": 29.99}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the pre-tax line amounts for the Nintendo Switch console, its carrying case, and its screen protector."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/9/lineSubtotal\", \"value\": 349.99}, {\"op\": \"add\", \"path\": \"/cart/items/10/lineSubtotal\", \"value\": 24.99}, {\"op\": \"add\", \"path\": \"/cart/items/11/lineSubtotal\", \"value\": 12.99}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the pre-tax line amount for the extra Nintendo Switch controller set."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/12/lineSubtotal\", \"value\": 79.99}]"
+    },
+    {
+      "role": "user",
+      "content": "Give this cart a reference number, note that it was started on March 8, 2026, and keep the prices in U.S. dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/cartId\", \"value\": \"CART-2026-0308-MC\"}, {\"op\": \"add\", \"path\": \"/cart/createdAt\", \"value\": \"2026-03-08T14:25:00-05:00\"}, {\"op\": \"add\", \"path\": \"/cart/currency\", \"value\": \"USD\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Ship it to Maya’s home in Brooklyn."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shippingAddress\", \"value\": {\"recipient\": \"Maya Chen\", \"street\": \"1187 Pacific Street Apt 4B\", \"city\": \"Brooklyn\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the address with New York, the ZIP code, and the country."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shippingAddress/state\", \"value\": \"NY\"}, {\"op\": \"add\", \"path\": \"/cart/shippingAddress/postalCode\", \"value\": \"11216\"}, {\"op\": \"add\", \"path\": \"/cart/shippingAddress/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it go by UPS Ground, with shipping costing $18.95."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shippingOption\", \"value\": {\"carrier\": \"UPS\", \"service\": \"Ground\", \"cost\": 18.95}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya’s contact details so the store can send updates."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/contact\", \"value\": {\"email\": \"maya.chen@example.com\", \"phone\": \"+1-718-555-0194\", \"smsOptIn\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Maya’s Visa ending in 4242 for checkout, with the payment authorized but not captured yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/payment\", \"value\": {\"method\": \"Visa\", \"last4\": \"4242\", \"status\": \"authorized\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply the standard New York sales tax rate and summarize the cart before tax."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/totals\", \"value\": {\"itemCount\": 13, \"merchandiseSubtotal\": 3491.35, \"taxRate\": 0.08875}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now include the sales tax, the shipping charge in the checkout total, and the final amount Maya would authorize."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/totals/taxAmount\", \"value\": 309.86}, {\"op\": \"add\", \"path\": \"/cart/totals/shippingCost\", \"value\": 18.95}, {\"op\": \"add\", \"path\": \"/cart/totals/grandTotal\", \"value\": 3820.16}]"
+    },
+    {
+      "role": "user",
+      "content": "Add delivery preferences: leave the package with the doorman, don’t require a signature, and aim for March 13, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/deliveryPreferences\", \"value\": {\"instructions\": \"Leave package with doorman\", \"signatureRequired\": false, \"requestedDeliveryDate\": \"2026-03-13\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this as being fulfilled from the Queens warehouse, with standard packing and no gift wrap."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/fulfillment\", \"value\": {\"warehouse\": \"Queens Distribution Center\", \"packingType\": \"standard\", \"giftWrap\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish with a quick checkout note: it came through the online store, is still pending fulfillment, has a 30-day return window, and didn’t use a promo code."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/checkoutNote\", \"value\": {\"channel\": \"online store\", \"fulfillmentStatus\": \"pending\", \"returnWindowDays\": 30, \"promoCodeUsed\": false}}]"
+    }
+  ],
+  "edit_instruction": "Please remove the Sony Alpha ZV-E10 II camera body from Maya’s cart, along with all the accessories that go with that camera.",
+  "theme": "Removing a product and its bound accessories",
+  "master_data": null,
+  "current_json": {
+    "cart": {
+      "customerName": "Maya Chen",
+      "items": [
+        {
+          "name": "Sony Alpha ZV-E10 II camera body",
+          "quantity": 1,
+          "unitPrice": 999.99,
+          "sku": "SONY-ZVE10II-BODY",
+          "lineSubtotal": 999.99
+        },
+        {
+          "name": "Sony ZV-E10 II creator grip kit for the camera body",
+          "quantity": 1,
+          "unitPrice": 149.99,
+          "sku": "SONY-ZVE10II-GRIP",
+          "lineSubtotal": 149.99
+        },
+        {
+          "name": "Sony ZV-E10 II spare battery pack for the camera body",
+          "quantity": 1,
+          "unitPrice": 79.99,
+          "sku": "SONY-ZVE10II-BATT",
+          "lineSubtotal": 79.99
+        },
+        {
+          "name": "Sony ZV-E10 II tempered glass screen cover for the camera body",
+          "quantity": 1,
+          "unitPrice": 19.99,
+          "sku": "SONY-ZVE10II-SCREEN",
+          "lineSubtotal": 19.99
+        },
+        {
+          "name": "Sony E 11mm F1.8 wide-angle lens for the ZV-E10 II camera body",
+          "quantity": 1,
+          "unitPrice": 549.99,
+          "sku": "SONY-E11MM-ZVE10II",
+          "lineSubtotal": 549.99
+        },
+        {
+          "name": "Apple MacBook Air 13-inch M3",
+          "quantity": 1,
+          "unitPrice": 1099.0,
+          "sku": "MBA13-M3-256",
+          "lineSubtotal": 1099.0
+        },
+        {
+          "name": "USB-C hub for Apple MacBook Air 13-inch M3",
+          "quantity": 1,
+          "unitPrice": 59.95,
+          "sku": "HUB-MBA13-USBC",
+          "lineSubtotal": 59.95
+        },
+        {
+          "name": "Protective sleeve for Apple MacBook Air 13-inch M3",
+          "quantity": 1,
+          "unitPrice": 34.5,
+          "sku": "SLEEVE-MBA13-GRAY",
+          "lineSubtotal": 34.5
+        },
+        {
+          "name": "Bluetooth mouse for Apple MacBook Air 13-inch M3",
+          "quantity": 1,
+          "unitPrice": 29.99,
+          "sku": "MOUSE-BT-MBA13",
+          "lineSubtotal": 29.99
+        },
+        {
+          "name": "Nintendo Switch OLED console",
+          "quantity": 1,
+          "unitPrice": 349.99,
+          "sku": "NS-OLED-WHITE",
+          "lineSubtotal": 349.99
+        },
+        {
+          "name": "Carrying case for Nintendo Switch OLED console",
+          "quantity": 1,
+          "unitPrice": 24.99,
+          "sku": "CASE-NS-OLED",
+          "lineSubtotal": 24.99
+        },
+        {
+          "name": "Tempered glass screen protector for Nintendo Switch OLED console",
+          "quantity": 1,
+          "unitPrice": 12.99,
+          "sku": "GLASS-NS-OLED",
+          "lineSubtotal": 12.99
+        },
+        {
+          "name": "Extra Joy-Con controller set for Nintendo Switch OLED console",
+          "quantity": 1,
+          "unitPrice": 79.99,
+          "sku": "JOYCON-NS-OLED",
+          "lineSubtotal": 79.99
+        }
+      ],
+      "cartId": "CART-2026-0308-MC",
+      "createdAt": "2026-03-08T14:25:00-05:00",
+      "currency": "USD",
+      "shippingAddress": {
+        "recipient": "Maya Chen",
+        "street": "1187 Pacific Street Apt 4B",
+        "city": "Brooklyn",
+        "state": "NY",
+        "postalCode": "11216",
+        "country": "US"
+      },
+      "shippingOption": {
+        "carrier": "UPS",
+        "service": "Ground",
+        "cost": 18.95
+      },
+      "contact": {
+        "email": "maya.chen@example.com",
+        "phone": "+1-718-555-0194",
+        "smsOptIn": true
+      },
+      "payment": {
+        "method": "Visa",
+        "last4": "4242",
+        "status": "authorized"
+      },
+      "totals": {
+        "itemCount": 13,
+        "merchandiseSubtotal": 3491.35,
+        "taxRate": 0.08875,
+        "taxAmount": 309.86,
+        "shippingCost": 18.95,
+        "grandTotal": 3820.16
+      },
+      "deliveryPreferences": {
+        "instructions": "Leave package with doorman",
+        "signatureRequired": false,
+        "requestedDeliveryDate": "2026-03-13"
+      },
+      "fulfillment": {
+        "warehouse": "Queens Distribution Center",
+        "packingType": "standard",
+        "giftWrap": false
+      },
+      "checkoutNote": {
+        "channel": "online store",
+        "fulfillmentStatus": "pending",
+        "returnWindowDays": 30,
+        "promoCodeUsed": false
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "remove",
+      "path": "/cart/items/4",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/cart/items/3",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/cart/items/2",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/cart/items/1",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/cart/items/0",
+      "kind": "direct"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/totals/itemCount",
+      "kind": "cascade",
+      "value": 8
+    },
+    {
+      "op": "replace",
+      "path": "/cart/totals/merchandiseSubtotal",
+      "kind": "cascade",
+      "value": 1691.4
+    },
+    {
+      "op": "replace",
+      "path": "/cart/totals/taxAmount",
+      "kind": "cascade",
+      "value": 150.11
+    },
+    {
+      "op": "replace",
+      "path": "/cart/totals/grandTotal",
+      "kind": "cascade",
+      "value": 1860.46
+    }
+  ],
+  "expected_json": {
+    "cart": {
+      "customerName": "Maya Chen",
+      "items": [
+        {
+          "name": "Apple MacBook Air 13-inch M3",
+          "quantity": 1,
+          "unitPrice": 1099.0,
+          "sku": "MBA13-M3-256",
+          "lineSubtotal": 1099.0
+        },
+        {
+          "name": "USB-C hub for Apple MacBook Air 13-inch M3",
+          "quantity": 1,
+          "unitPrice": 59.95,
+          "sku": "HUB-MBA13-USBC",
+          "lineSubtotal": 59.95
+        },
+        {
+          "name": "Protective sleeve for Apple MacBook Air 13-inch M3",
+          "quantity": 1,
+          "unitPrice": 34.5,
+          "sku": "SLEEVE-MBA13-GRAY",
+          "lineSubtotal": 34.5
+        },
+        {
+          "name": "Bluetooth mouse for Apple MacBook Air 13-inch M3",
+          "quantity": 1,
+          "unitPrice": 29.99,
+          "sku": "MOUSE-BT-MBA13",
+          "lineSubtotal": 29.99
+        },
+        {
+          "name": "Nintendo Switch OLED console",
+          "quantity": 1,
+          "unitPrice": 349.99,
+          "sku": "NS-OLED-WHITE",
+          "lineSubtotal": 349.99
+        },
+        {
+          "name": "Carrying case for Nintendo Switch OLED console",
+          "quantity": 1,
+          "unitPrice": 24.99,
+          "sku": "CASE-NS-OLED",
+          "lineSubtotal": 24.99
+        },
+        {
+          "name": "Tempered glass screen protector for Nintendo Switch OLED console",
+          "quantity": 1,
+          "unitPrice": 12.99,
+          "sku": "GLASS-NS-OLED",
+          "lineSubtotal": 12.99
+        },
+        {
+          "name": "Extra Joy-Con controller set for Nintendo Switch OLED console",
+          "quantity": 1,
+          "unitPrice": 79.99,
+          "sku": "JOYCON-NS-OLED",
+          "lineSubtotal": 79.99
+        }
+      ],
+      "cartId": "CART-2026-0308-MC",
+      "createdAt": "2026-03-08T14:25:00-05:00",
+      "currency": "USD",
+      "shippingAddress": {
+        "recipient": "Maya Chen",
+        "street": "1187 Pacific Street Apt 4B",
+        "city": "Brooklyn",
+        "state": "NY",
+        "postalCode": "11216",
+        "country": "US"
+      },
+      "shippingOption": {
+        "carrier": "UPS",
+        "service": "Ground",
+        "cost": 18.95
+      },
+      "contact": {
+        "email": "maya.chen@example.com",
+        "phone": "+1-718-555-0194",
+        "smsOptIn": true
+      },
+      "payment": {
+        "method": "Visa",
+        "last4": "4242",
+        "status": "authorized"
+      },
+      "totals": {
+        "itemCount": 8,
+        "merchandiseSubtotal": 1691.4,
+        "taxRate": 0.08875,
+        "taxAmount": 150.11,
+        "shippingCost": 18.95,
+        "grandTotal": 1860.46
+      },
+      "deliveryPreferences": {
+        "instructions": "Leave package with doorman",
+        "signatureRequired": false,
+        "requestedDeliveryDate": "2026-03-13"
+      },
+      "fulfillment": {
+        "warehouse": "Queens Distribution Center",
+        "packingType": "standard",
+        "giftWrap": false
+      },
+      "checkoutNote": {
+        "channel": "online store",
+        "fulfillmentStatus": "pending",
+        "returnWindowDays": 30,
+        "promoCodeUsed": false
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Remove the Sony Alpha ZV-E10 II camera body (index 0, direct) and its four bound accessories - creator grip (1), spare battery (2), screen cover (3), and the E 11mm lens for the ZV-E10 II (4) - identified by the camera-body naming (cascade). MacBook Air group and Nintendo Switch group stay. Removes listed high-index-first. totals: itemCount 13->8, merchandiseSubtotal 3491.35->1691.40, taxAmount 1691.40*0.08875=150.11, grandTotal 1691.40+150.11+18.95=1860.46. taxRate and shippingCost stay.",
+  "conversation_pattern": "Center the artifact on a cart with a main product plus accessories that each belong to one of the main products, where each accessory's tie to its main is made evident from its own name or description rather than from a dedicated link field naming the main it depends on, rolling up to a count and totals. Around this core, add the realistic, independent details a cart would carry — including products and accessories that belong to a different main — that do not depend on the removed main, and vary their number from sample to sample.",
+  "edit_pattern": "Remove one main product, along with the accessories that go with it, from the cart. Name the main product and refer to its accompanying accessories collectively, without listing them individually.",
+  "cascade_pattern": "Removing a main product also removes every accessory that belongs to it, and the count and totals re-aggregate. Accessories that belong to a different main stay. This is determined because each accessory's main is unambiguous from its name or description.",
+  "requires_master_data": false
+}

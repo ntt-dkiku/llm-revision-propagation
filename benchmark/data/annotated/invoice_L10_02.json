@@ -1,0 +1,159 @@
+{
+  "id": "invoice_L10_02",
+  "domain": "invoice",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start an invoice numbered INV-2048."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoiceNumber\", \"value\": \"INV-2048\"}]"
+    },
+    {
+      "role": "user",
+      "content": "It's been sent out to the customer but hasn't been settled yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/status\", \"value\": \"issued\"}]"
+    },
+    {
+      "role": "user",
+      "content": "No payment has come in against it yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/amountPaid\", \"value\": 0}]"
+    },
+    {
+      "role": "user",
+      "content": "The full balance is still outstanding at 1,200 dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/balanceDue\", \"value\": 1200}]"
+    },
+    {
+      "role": "user",
+      "content": "The invoice total comes to 1,200 dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/totalAmount\", \"value\": 1200}]"
+    },
+    {
+      "role": "user",
+      "content": "Since it’s unpaid, keep a reminder queued for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminderQueued\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Don't mark a receipt as issued while it's still unsettled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/receiptIssued\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Send it to Northstar Design Studio at their billing address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer\", \"value\": {\"name\": \"Northstar Design Studio\", \"email\": \"billing@northstardesign.example\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep it open in collections until the payment clears."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/collectionStatus\", \"value\": \"open\"}]"
+    }
+  ],
+  "edit_instruction": "Mark this invoice as paid.",
+  "theme": "Marking the invoice as paid",
+  "master_data": null,
+  "current_json": {
+    "invoiceNumber": "INV-2048",
+    "status": "issued",
+    "amountPaid": 0,
+    "balanceDue": 1200,
+    "totalAmount": 1200,
+    "reminderQueued": true,
+    "receiptIssued": false,
+    "customer": {
+      "name": "Northstar Design Studio",
+      "email": "billing@northstardesign.example"
+    },
+    "collectionStatus": "open"
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/status",
+      "kind": "direct",
+      "value": "paid"
+    },
+    {
+      "op": "replace",
+      "path": "/amountPaid",
+      "kind": "cascade",
+      "value": 1200
+    },
+    {
+      "op": "replace",
+      "path": "/balanceDue",
+      "kind": "cascade",
+      "value": 0
+    },
+    {
+      "op": "replace",
+      "path": "/reminderQueued",
+      "kind": "cascade",
+      "value": false
+    },
+    {
+      "op": "replace",
+      "path": "/receiptIssued",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/collectionStatus",
+      "kind": "cascade",
+      "value": "closed",
+      "matcher": "regex_match",
+      "pattern": "(?i)^(closed|settled|resolved|complete|completed)$"
+    }
+  ],
+  "expected_json": {
+    "invoiceNumber": "INV-2048",
+    "status": "paid",
+    "amountPaid": 1200,
+    "balanceDue": 0,
+    "totalAmount": 1200,
+    "reminderQueued": false,
+    "receiptIssued": true,
+    "customer": {
+      "name": "Northstar Design Studio",
+      "email": "billing@northstardesign.example"
+    },
+    "collectionStatus": "<matches /(?i)^(closed|settled|resolved|complete|completed)$/>"
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "Mark paid. amountPaid->1200, balanceDue->0, reminderQueued->false, receiptIssued->true, collectionStatus open->closed. totalAmount stays.",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on an invoice currently in one status, carrying a set of fields whose present values follow from that status, where moving it to the paid status has one well-understood effect on each. Around this core, add the realistic, independent details an invoice would carry that do not depend on the status, and vary their number from sample to sample.",
+  "edit_pattern": "Change the invoice status from issued to paid.",
+  "cascade_pattern": "Marking it paid moves every status-governed field to its paid-state value, while fields the status does not govern stay. Each new value is fixed because the effect of payment on each field is unambiguous.",
+  "requires_master_data": false
+}

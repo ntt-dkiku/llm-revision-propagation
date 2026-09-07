@@ -1,0 +1,146 @@
+{
+  "id": "shopping_cart_L10_00",
+  "domain": "shopping_cart",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Please start a shopping cart for Maya Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shopperName\", \"value\": \"Maya Chen\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one product line for 2 cartons of Oatly Barista oat milk at $5.49 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items\", \"value\": [{\"productName\": \"Oatly Barista oat milk, 32 oz carton\", \"quantity\": 2, \"unitPrice\": 5.49}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that each carton weighs 2.4 pounds for delivery estimates."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/0/unitWeightLb\", \"value\": 2.4}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you work out that line’s cost and total delivery weight from the quantity?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/0/lineSubtotal\", \"value\": 10.98}, {\"op\": \"add\", \"path\": \"/items/0/lineWeightLb\", \"value\": 4.8}]"
+    },
+    {
+      "role": "user",
+      "content": "Please finish the cart totals now: use the line cost for the merchandise total, charge delivery at $1.25 per pound, and show the amount due."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cartSubtotal\", \"value\": 10.98}, {\"op\": \"add\", \"path\": \"/deliveryFee\", \"value\": 6.0}, {\"op\": \"add\", \"path\": \"/cartTotal\", \"value\": 16.98}]"
+    }
+  ],
+  "edit_instruction": "Please swap the Oatly Barista oat milk, 32 oz carton for Califia Farms Unsweetened Almondmilk, 48 oz bottle.",
+  "theme": "Substituting one product for another",
+  "master_data": {
+    "Califia Farms Unsweetened Almondmilk, 48 oz bottle": {
+      "unitPrice": 4.29,
+      "unitWeightLb": 3.4
+    }
+  },
+  "current_json": {
+    "shopperName": "Maya Chen",
+    "items": [
+      {
+        "productName": "Oatly Barista oat milk, 32 oz carton",
+        "quantity": 2,
+        "unitPrice": 5.49,
+        "unitWeightLb": 2.4,
+        "lineSubtotal": 10.98,
+        "lineWeightLb": 4.8
+      }
+    ],
+    "cartSubtotal": 10.98,
+    "deliveryFee": 6.0,
+    "cartTotal": 16.98
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/items/0/productName",
+      "kind": "direct",
+      "value": "Califia Farms Unsweetened Almondmilk, 48 oz bottle"
+    },
+    {
+      "op": "replace",
+      "path": "/items/0/unitPrice",
+      "kind": "cascade",
+      "value": 4.29
+    },
+    {
+      "op": "replace",
+      "path": "/items/0/unitWeightLb",
+      "kind": "cascade",
+      "value": 3.4
+    },
+    {
+      "op": "replace",
+      "path": "/items/0/lineSubtotal",
+      "kind": "cascade",
+      "value": 8.58
+    },
+    {
+      "op": "replace",
+      "path": "/items/0/lineWeightLb",
+      "kind": "cascade",
+      "value": 6.8
+    },
+    {
+      "op": "replace",
+      "path": "/cartSubtotal",
+      "kind": "cascade",
+      "value": 8.58
+    },
+    {
+      "op": "replace",
+      "path": "/deliveryFee",
+      "kind": "cascade",
+      "value": 8.5
+    },
+    {
+      "op": "replace",
+      "path": "/cartTotal",
+      "kind": "cascade",
+      "value": 17.08
+    }
+  ],
+  "expected_json": {
+    "shopperName": "Maya Chen",
+    "items": [
+      {
+        "productName": "Califia Farms Unsweetened Almondmilk, 48 oz bottle",
+        "quantity": 2,
+        "unitPrice": 4.29,
+        "unitWeightLb": 3.4,
+        "lineSubtotal": 8.58,
+        "lineWeightLb": 6.8
+      }
+    ],
+    "cartSubtotal": 8.58,
+    "deliveryFee": 8.5,
+    "cartTotal": 17.08
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "Swap to Califia (master $4.29, 3.4 lb), qty stays 2. lineSubtotal 2*4.29=8.58, lineWeight 2*3.4=6.8, cartSubtotal 8.58. deliveryFee is weight-based at the stated $1.25/lb: 6.8*1.25=8.5. cartTotal 8.58+8.5=17.08. | REVIEW EDIT (with author): deliveryFee and cartTotal were originally computed as if delivery were a flat fee; corrected to the weight-based $1.25/lb rate stated in the conversation (6.8 lb -> deliveryFee 8.5; cartTotal 8.58+8.5=17.08).",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a cart holding a product line whose attributes are stated on the line — including the numeric ones that drive money or weight totals — with line and cart totals and any fees derived from those attributes by stated arithmetic, so the line's values determine them. Around this core, add the realistic, independent details a cart would carry that do not depend on that product line, and vary their number from sample to sample.",
+  "edit_pattern": "Replace one product in the cart with a different specific product.",
+  "cascade_pattern": "Every attribute of the swapped line takes the replacement product's value (the replacement's attributes are supplied with the edit instruction), and every total or fee derived from those attributes recomputes. Other lines and unrelated fields stay. This is determined because the replacement's attributes are provided with the edit.",
+  "requires_master_data": true
+}

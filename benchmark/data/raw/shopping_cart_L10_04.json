@@ -1,0 +1,99 @@
+{
+  "id": "shopping_cart_L10_04",
+  "domain": "shopping_cart",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a shopping cart with reference CART-48219."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cartId\", \"value\": \"CART-48219\"}]"
+    },
+    {
+      "role": "user",
+      "content": "This is just a regular purchase for the buyer, not meant as a present."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/giftMode\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Since it's not a gift, keep the prices visible on the packing slip."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation/showPricesOnPackingSlip\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "For the same reason, don't include any special wrapping with this order."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation/giftWrap\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Also leave out the option for a recipient note because the buyer is keeping it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation/includeGiftMessage\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Use standard shipping for this cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping/method\", \"value\": \"standard\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one item to the cart: the ceramic travel mug, SKU MUG-204, quantity 2."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items\", \"value\": [{\"sku\": \"MUG-204\", \"name\": \"ceramic travel mug\", \"quantity\": 2}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply the welcome discount to the cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/discountCode\", \"value\": \"WELCOME10\"}]"
+    }
+  ],
+  "edit_instruction": "Set the order to gift mode.",
+  "theme": "Switching the order to gift mode",
+  "master_data": null,
+  "current_json": {
+    "cartId": "CART-48219",
+    "giftMode": false,
+    "presentation": {
+      "showPricesOnPackingSlip": true,
+      "giftWrap": false,
+      "includeGiftMessage": false
+    },
+    "shipping": {
+      "method": "standard"
+    },
+    "items": [
+      {
+        "sku": "MUG-204",
+        "name": "ceramic travel mug",
+        "quantity": 2
+      }
+    ],
+    "discountCode": "WELCOME10"
+  },
+  "conversation_pattern": "Center the artifact on a cart that is currently a non-gift order, carrying a set of presentation fields whose present values follow from it not being a gift, where switching it to a gift order flips each to a single, unambiguous gift-state value — booleans or fixed states only, never free-form text or an open-ended choice. Around this core, add the realistic, independent details a cart would carry that do not depend on whether the order is a gift, and vary their number from sample to sample.",
+  "edit_pattern": "Turn gift mode on for the order.",
+  "cascade_pattern": "Switching to a gift order moves every gift-governed presentation field to its gift-state value, while fields the gift setting does not govern stay. Each new value is fixed because the effect of the gift setting on each field is unambiguous.",
+  "requires_master_data": false
+}

@@ -1,0 +1,121 @@
+{
+  "id": "software_deployment_config_L10_02",
+  "domain": "software_deployment_config",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I’m setting up a deployment config for the checkout API; start by naming the service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/service_name\", \"value\": \"checkout-api\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan for this service to run three copies in production."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/replicas\", \"value\": 3}]"
+    },
+    {
+      "role": "user",
+      "content": "Give each copy a 2 GiB memory reservation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/per_pod_memory_gib\", \"value\": 2}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the memory sizing rule: multiply the copy count by each copy’s reservation, compare that result to a 6 GiB cutoff, and at that cutoff or below keep the standard-small nodes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/memory_policy\", \"value\": {\"total_memory_formula\": \"total_memory_gib = replicas * per_pod_memory_gib\", \"node_memory_budget_gib\": 6, \"baseline_node_pool_tier\": \"standard-small\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also spell out what happens when the memory total goes over that cutoff: move it to memory-optimized-medium nodes and treat larger nodes as required; otherwise keep standard-small and don’t require them."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/memory_policy/branch_rule\", \"value\": \"if total_memory_gib > node_memory_budget_gib then node_pool_tier = memory-optimized-medium and needs_larger_nodes = true; otherwise node_pool_tier = standard-small and needs_larger_nodes = false\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now apply that sizing rule to the current production plan so the selected nodes and larger-node decision are recorded."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/total_memory_gib\", \"value\": 6}, {\"op\": \"add\", \"path\": \"/node_pool_tier\", \"value\": \"standard-small\"}, {\"op\": \"add\", \"path\": \"/needs_larger_nodes\", \"value\": false}]"
+    }
+  ],
+  "edit_instruction": "Change each pod’s memory request to 3 GiB.",
+  "current_json": {
+    "service_name": "checkout-api",
+    "replicas": 3,
+    "per_pod_memory_gib": 2,
+    "memory_policy": {
+      "total_memory_formula": "total_memory_gib = replicas * per_pod_memory_gib",
+      "node_memory_budget_gib": 6,
+      "baseline_node_pool_tier": "standard-small",
+      "branch_rule": "if total_memory_gib > node_memory_budget_gib then node_pool_tier = memory-optimized-medium and needs_larger_nodes = true; otherwise node_pool_tier = standard-small and needs_larger_nodes = false"
+    },
+    "total_memory_gib": 6,
+    "node_pool_tier": "standard-small",
+    "needs_larger_nodes": false
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/per_pod_memory_gib",
+      "kind": "direct",
+      "value": 3
+    },
+    {
+      "op": "replace",
+      "path": "/total_memory_gib",
+      "kind": "cascade",
+      "value": 9
+    },
+    {
+      "op": "replace",
+      "path": "/node_pool_tier",
+      "kind": "cascade",
+      "value": "memory-optimized-medium"
+    },
+    {
+      "op": "replace",
+      "path": "/needs_larger_nodes",
+      "kind": "cascade",
+      "value": true
+    }
+  ],
+  "expected_json": {
+    "service_name": "checkout-api",
+    "replicas": 3,
+    "per_pod_memory_gib": 3,
+    "memory_policy": {
+      "total_memory_formula": "total_memory_gib = replicas * per_pod_memory_gib",
+      "node_memory_budget_gib": 6,
+      "baseline_node_pool_tier": "standard-small",
+      "branch_rule": "if total_memory_gib > node_memory_budget_gib then node_pool_tier = memory-optimized-medium and needs_larger_nodes = true; otherwise node_pool_tier = standard-small and needs_larger_nodes = false"
+    },
+    "total_memory_gib": 9,
+    "node_pool_tier": "memory-optimized-medium",
+    "needs_larger_nodes": true
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "per_pod 2->3; total=3*3=9. 9>6 budget -> branch: node_pool_tier=memory-optimized-medium, needs_larger_nodes=true.",
+  "annotated": true,
+  "excluded": false,
+  "theme": "Crossing the node memory budget",
+  "conversation_pattern": "Center the artifact on a deployment with a replica count, a per-pod memory request, a stated total-memory formula (total = replicas * perPodMem), and a STATED node memory budget with two explicit branches: if total memory exceeds the budget, 'node_pool_tier' steps up to a specific stated larger tier and a 'needs_larger_nodes' flag is true; if total is at or below the budget, the tier stays at its stated baseline and the flag is false. Record the budget and both branch targets explicitly. Around this core, add realistic independent details that do not depend on memory, and vary their number from sample to sample.",
+  "edit_pattern": "Change the per-pod memory request to a specific new value.",
+  "cascade_pattern": "Editing the per-pod memory re-derives total memory from the stated formula, AND — only if total memory now crosses the stated node budget relative to before — steps node_pool_tier to the stated target and flips needs_larger_nodes. If the budget boundary is not crossed, the tier and flag stay unchanged. The outcome is determined by the stated budget and branch targets.",
+  "requires_master_data": false
+}

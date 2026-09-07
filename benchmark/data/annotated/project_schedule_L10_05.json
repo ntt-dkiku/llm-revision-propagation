@@ -1,0 +1,129 @@
+{
+  "id": "project_schedule_L10_05",
+  "domain": "project_schedule",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a plan for the mobile checkout refresh."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project_name\", \"value\": \"Mobile Checkout Refresh\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the payment API wiring work and put Jordan on it for six hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"task\": \"Payment API wiring\", \"owner\": \"Jordan\", \"effort_hours\": 6}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include the empty-cart message update, and have Priya handle that for four hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task\": \"Empty-cart message update\", \"owner\": \"Priya\", \"effort_hours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now add the staffing check, assuming each person has six hours available for this plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/capacity_hours_per_owner\", \"value\": 6}, {\"op\": \"add\", \"path\": \"/workload_summary\", \"value\": {\"Jordan\": {\"assigned_effort_hours\": 6, \"within_capacity\": true}, \"Priya\": {\"assigned_effort_hours\": 4, \"within_capacity\": true}}}]"
+    }
+  ],
+  "edit_instruction": "Move the Payment API wiring work from Jordan to Priya.",
+  "theme": "Reassigning a task to another owner",
+  "master_data": null,
+  "current_json": {
+    "project_name": "Mobile Checkout Refresh",
+    "tasks": [
+      {
+        "task": "Payment API wiring",
+        "owner": "Jordan",
+        "effort_hours": 6
+      },
+      {
+        "task": "Empty-cart message update",
+        "owner": "Priya",
+        "effort_hours": 4
+      }
+    ],
+    "capacity_hours_per_owner": 6,
+    "workload_summary": {
+      "Jordan": {
+        "assigned_effort_hours": 6,
+        "within_capacity": true
+      },
+      "Priya": {
+        "assigned_effort_hours": 4,
+        "within_capacity": true
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/tasks/0/owner",
+      "kind": "direct",
+      "value": "Priya"
+    },
+    {
+      "op": "replace",
+      "path": "/workload_summary/Jordan/assigned_effort_hours",
+      "kind": "cascade",
+      "value": 0
+    },
+    {
+      "op": "replace",
+      "path": "/workload_summary/Priya/assigned_effort_hours",
+      "kind": "cascade",
+      "value": 10
+    },
+    {
+      "op": "replace",
+      "path": "/workload_summary/Priya/within_capacity",
+      "kind": "cascade",
+      "value": false
+    }
+  ],
+  "expected_json": {
+    "project_name": "Mobile Checkout Refresh",
+    "tasks": [
+      {
+        "task": "Payment API wiring",
+        "owner": "Priya",
+        "effort_hours": 6
+      },
+      {
+        "task": "Empty-cart message update",
+        "owner": "Priya",
+        "effort_hours": 4
+      }
+    ],
+    "capacity_hours_per_owner": 6,
+    "workload_summary": {
+      "Jordan": {
+        "assigned_effort_hours": 0,
+        "within_capacity": true
+      },
+      "Priya": {
+        "assigned_effort_hours": 10,
+        "within_capacity": false
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "Payment API wiring (6h) Jordan->Priya. Jordan 6->0h (stays within cap 6). Priya 4->10h (>6 -> within_capacity false). Jordan within_capacity stays true (not patched).",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a task list where each task has an owner and an effort estimate, with a per-owner workload aggregating each owner's tasks and a capacity check derived from a stated capacity. Around this core, add the realistic, independent details a project plan would carry that do not depend on who owns each task, and vary their number and the number of tasks and owners from sample to sample.",
+  "edit_pattern": "Reassign one task from its current owner to a different specific owner.",
+  "cascade_pattern": "Reassigning a task moves its effort from the old owner's workload to the new owner's, re-sums both, and re-evaluates each owner's capacity check against the stated capacity. Other tasks and owners stay. This is determined because the efforts and capacities are stated.",
+  "requires_master_data": false
+}

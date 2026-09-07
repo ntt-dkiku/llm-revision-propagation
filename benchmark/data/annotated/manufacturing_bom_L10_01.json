@@ -1,0 +1,164 @@
+{
+  "id": "manufacturing_bom_L10_01",
+  "domain": "manufacturing_bom",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a BOM for a compact tabletop labeler, and use TLB-220 as the assembly code."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/assembly\", \"value\": {\"assembly_code\": \"TLB-220\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan this build around a run of 40 finished units."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/production_run_size\", \"value\": 40}]"
+    },
+    {
+      "role": "user",
+      "content": "For the feed roller set, use 3 per finished machine."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components\", \"value\": {\"feed_roller_set\": {\"per_unit_quantity\": 3}}}]"
+    },
+    {
+      "role": "user",
+      "content": "The feed roller set weighs 0.18 kg each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/feed_roller_set/unit_weight_kg\", \"value\": 0.18}]"
+    },
+    {
+      "role": "user",
+      "content": "Price the feed roller set at $2.40 each for the build estimate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/feed_roller_set/unit_cost_usd\", \"value\": 2.4}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and calculate the feed roller set totals for this 40-unit run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/feed_roller_set/total_demand_units\", \"value\": 120}, {\"op\": \"add\", \"path\": \"/components/feed_roller_set/extended_cost_usd\", \"value\": 288}, {\"op\": \"add\", \"path\": \"/components/feed_roller_set/weight_contribution_kg\", \"value\": 0.54}]"
+    },
+    {
+      "role": "user",
+      "content": "Wrap it up with the current finished-unit weight calculation and the freight decision: anything over 0.60 kg should move to the sturdier carton plan, otherwise keep the light setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/assembly/total_weight_kg_statement\", \"value\": \"assembly_total_weight_kg = sum(component weight_contribution_kg) = 0.54 kg (feed_roller_set 0.54 kg)\"}, {\"op\": \"add\", \"path\": \"/logistics\", \"value\": {\"shipping_class_rule\": \"If assembly_total_weight_kg exceeds 0.60 kg, shipping_class steps up to Parcel-Standard and packaging_spec upgrades to double-wall carton; if assembly_total_weight_kg is at or below 0.60 kg, shipping_class stays Parcel-Light and packaging_spec stays padded mailer.\", \"shipping_class\": \"Parcel-Light\", \"packaging_spec\": \"padded mailer\"}}]"
+    }
+  ],
+  "edit_instruction": "Change the feed roller set to 4 per finished machine.",
+  "current_json": {
+    "assembly": {
+      "assembly_code": "TLB-220",
+      "total_weight_kg_statement": "assembly_total_weight_kg = sum(component weight_contribution_kg) = 0.54 kg (feed_roller_set 0.54 kg)"
+    },
+    "production_run_size": 40,
+    "components": {
+      "feed_roller_set": {
+        "per_unit_quantity": 3,
+        "unit_weight_kg": 0.18,
+        "unit_cost_usd": 2.4,
+        "total_demand_units": 120,
+        "extended_cost_usd": 288,
+        "weight_contribution_kg": 0.54
+      }
+    },
+    "logistics": {
+      "shipping_class_rule": "If assembly_total_weight_kg exceeds 0.60 kg, shipping_class steps up to Parcel-Standard and packaging_spec upgrades to double-wall carton; if assembly_total_weight_kg is at or below 0.60 kg, shipping_class stays Parcel-Light and packaging_spec stays padded mailer.",
+      "shipping_class": "Parcel-Light",
+      "packaging_spec": "padded mailer"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/components/feed_roller_set/per_unit_quantity",
+      "kind": "direct",
+      "value": 4
+    },
+    {
+      "op": "replace",
+      "path": "/components/feed_roller_set/total_demand_units",
+      "kind": "cascade",
+      "value": 160
+    },
+    {
+      "op": "replace",
+      "path": "/components/feed_roller_set/extended_cost_usd",
+      "kind": "cascade",
+      "value": 384
+    },
+    {
+      "op": "replace",
+      "path": "/components/feed_roller_set/weight_contribution_kg",
+      "kind": "cascade",
+      "value": 0.72
+    },
+    {
+      "op": "replace",
+      "path": "/assembly/total_weight_kg_statement",
+      "kind": "cascade",
+      "matcher": "regex_match",
+      "pattern": "0\\.72"
+    },
+    {
+      "op": "replace",
+      "path": "/logistics/shipping_class",
+      "kind": "cascade",
+      "value": "Parcel-Standard"
+    },
+    {
+      "op": "replace",
+      "path": "/logistics/packaging_spec",
+      "kind": "cascade",
+      "value": "double-wall carton"
+    }
+  ],
+  "expected_json": {
+    "assembly": {
+      "assembly_code": "TLB-220",
+      "total_weight_kg_statement": "<matches /0\\.72/>"
+    },
+    "production_run_size": 40,
+    "components": {
+      "feed_roller_set": {
+        "per_unit_quantity": 4,
+        "unit_weight_kg": 0.18,
+        "unit_cost_usd": 2.4,
+        "total_demand_units": 160,
+        "extended_cost_usd": 384,
+        "weight_contribution_kg": 0.72
+      }
+    },
+    "logistics": {
+      "shipping_class_rule": "If assembly_total_weight_kg exceeds 0.60 kg, shipping_class steps up to Parcel-Standard and packaging_spec upgrades to double-wall carton; if assembly_total_weight_kg is at or below 0.60 kg, shipping_class stays Parcel-Light and packaging_spec stays padded mailer.",
+      "shipping_class": "Parcel-Standard",
+      "packaging_spec": "double-wall carton"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "qty 3->4 (run 40); demand=160, ext_cost=2.4*160=384, weight=0.18*4=0.72; total=0.72>0.60 -> Parcel-Standard + double-wall carton. total_weight statement is in-string -> regex on 0.72.",
+  "annotated": true,
+  "excluded": false,
+  "theme": "Crossing the shipping-weight class",
+  "conversation_pattern": "Center the artifact on a BOM where one component's per-unit quantity drives its weight contribution and the assembly total weight, defined explicitly as a stated sum over component weight contributions, and a STATED shipping-class rule with two explicit branches: if the assembly total weight exceeds a stated threshold, 'shipping_class' steps up to a specific stated heavier class and the packaging spec upgrades to a stated target; if total weight is at or below the threshold, the class and packaging stay at their stated baseline. Record the threshold and both branch targets explicitly. Around this core, add the realistic, independent details a BOM would carry that do not depend on that component quantity, and vary their number from sample to sample.",
+  "edit_pattern": "Change one component's per-unit quantity to a specific new value.",
+  "cascade_pattern": "Editing the component's per-unit quantity re-derives its total demand, component cost, and weight contribution, and the assembly total weight as the stated sum, AND — only if the total weight now crosses the stated threshold relative to before — steps shipping_class to the stated heavier class and upgrades the packaging spec. If the threshold is not crossed, the class and packaging stay unchanged. Other component quantities and unrelated fields stay unchanged.",
+  "requires_master_data": false
+}

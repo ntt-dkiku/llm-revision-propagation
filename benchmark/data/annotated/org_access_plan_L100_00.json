@@ -1,0 +1,1414 @@
+{
+  "id": "org_access_plan_L100_00",
+  "domain": "org_access_plan",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start an access plan for Morgan Lee."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee\", \"value\": {\"full_name\": \"Morgan Lee\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set Morgan up as a Procurement Manager for this plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile\", \"value\": {\"role\": \"Procurement Manager\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give Morgan the main purchasing approval entitlement that goes with that job."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups\", \"value\": [\"Coupa Approver - Manager\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include the vendor setup access Morgan needs for that role."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Vendor Master Maintainer\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the spending authority Morgan should have in purchasing approvals."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/approval_limit\", \"value\": {\"amount\": 75000, \"currency\": \"USD\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the purchasing policy training Morgan has to complete for this job."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings\", \"value\": [\"Procurement Policy Annual\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the fraud prevention course tied to Morgan's purchasing responsibilities too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Fraud Red Flags\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set how often this purchasing access should be checked."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/review_interval\", \"value\": \"Quarterly\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Route Morgan's help requests to the purchasing systems team."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/support_queue\", \"value\": \"Procurement Systems Support\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the contract workspace access Morgan also needs in that purchasing leadership role."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Contract Workspace Manager\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the negotiation compliance course that comes with Morgan’s purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Negotiation Compliance Basics\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier analytics access Morgan should have in this role."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Performance Analytics\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan also needs the sourcing ethics course for the purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Sourcing Ethics Certification\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the risk review access that belongs with Morgan’s purchasing manager duties."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Risk Reviewers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the data protection course required for Morgan’s supplier-facing responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Data Protection\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Give Morgan the purchase order exception access that rounds out the purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Purchase Order Exception Handlers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use E-78423 as Morgan’s internal company number."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/employee_id\", \"value\": \"E-78423\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan works out of the Denver office."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/location\", \"value\": \"Denver\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Morgan in the Finance Operations division."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/division\", \"value\": \"Finance Operations\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have Taylor Nguyen be Morgan’s direct supervisor."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/manager\", \"value\": {\"name\": \"Taylor Nguyen\", \"employee_id\": \"E-44109\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also give Morgan the blanket purchase order oversight access that comes with the purchasing manager role."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Blanket PO Oversight\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the invoice matching exception access Morgan should have for this purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Invoice Match Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the spend analytics dashboard access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Spend Analytics Dashboard\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the access active starting April 15, 2025, with no planned end date yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_window\", \"value\": {\"start_date\": \"2025-04-15\", \"end_date\": null}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the contract approval workflow training Morgan needs for the purchasing manager role."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Contract Approval Workflow\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also have the preferred supplier catalog access that goes with this purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Preferred Supplier Catalog Admin\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the purchase requisition audit course Morgan needs for the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Purchase Requisition Audit\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier onboarding approval access Morgan should have in the purchasing manager role."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Onboarding Approvers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan also needs the competitive bidding exception course for the purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Competitive Bidding Exceptions\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the capital equipment purchasing access Morgan should have with this role."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Capital Equipment Purchasing\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the emergency supplier substitution course Morgan needs for the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Emergency Supplier Substitution\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the regional sourcing committee access Morgan should have as a purchasing manager."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Regional Sourcing Committee\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should complete the purchase card oversight course for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Purchase Card Oversight\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the approved supplier scorecard access Morgan should have with the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Approved Supplier Scorecards\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the commodity code maintenance access Morgan should have as part of the purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Commodity Code Maintainers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also take the procurement records retention course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Procurement Records Retention\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier contract renewal access Morgan should have with the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Contract Renewal Admins\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the sustainable sourcing approval access Morgan should have as part of the purchasing manager role."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Sustainable Sourcing Approvers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan also needs the supplier diversity reporting course tied to this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Diversity Reporting\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the strategic sourcing negotiation access Morgan should have with the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Strategic Sourcing Negotiators\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the supplier performance remediation course Morgan needs for this purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Performance Remediation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the preferred vendor exception approval access Morgan should have as a purchasing manager."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Preferred Vendor Exception Approvers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use morgan.lee@northstar.example as Morgan’s work contact address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/email\", \"value\": \"morgan.lee@northstar.example\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier rebate review access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Rebate Reviewers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the procurement compliance attestation Morgan needs for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Procurement Compliance Attestation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier payment hold release access Morgan should have with the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Payment Hold Release\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the purchase contract amendment access Morgan should have as part of the purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Purchase Contract Amendment Approvers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also take the supplier audit response course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Audit Response\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier escalation board access Morgan should have with the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Escalation Board\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the supplier dispute resolution course Morgan needs for this purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Dispute Resolution\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the procurement category strategy access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Procurement Category Strategy\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the supplier confidentiality handling course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Confidentiality Handling\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier quality waiver access Morgan should have with the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Quality Waiver Approvers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the supplier corrective action course Morgan needs for this purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Corrective Action\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the vendor master deactivation access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Vendor Master Deactivation Approvers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the vendor banking change control course for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Vendor Banking Change Control\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier tax documentation access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Tax Documentation Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the supplier sanctions screening course Morgan needs for this purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Sanctions Screening\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the preferred supplier performance bonus access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Preferred Supplier Performance Bonus Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the conflict minerals sourcing course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Conflict Minerals Sourcing\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier insurance certificate review access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Insurance Certificate Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the supplier cybersecurity review course Morgan needs for this purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Cybersecurity Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier site visit approval access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Site Visit Approvers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the supplier site safety briefing for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Site Safety Briefing\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier travel expense approval access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Travel Expense Approvers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the supplier travel policy course Morgan needs for this purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Travel Policy\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier hospitality exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Hospitality Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the supplier gifts and entertainment course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Gifts and Entertainment\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier meal limit exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Meal Limit Exception Approvers\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the supplier meeting documentation course Morgan needs for this purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Meeting Documentation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier charitable contribution review access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Charitable Contribution Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the supplier community engagement course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Community Engagement\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier environmental exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Environmental Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the supplier environmental documentation course Morgan needs for this purchasing manager setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Environmental Documentation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier labor standards exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Labor Standards Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the supplier labor practices course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Labor Practices\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier human rights exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Human Rights Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the supplier human rights documentation course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Human Rights Documentation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier modern slavery exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Modern Slavery Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the modern slavery documentation course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Modern Slavery Documentation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier forced labor exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Forced Labor Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the forced labor documentation course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Forced Labor Documentation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier child labor exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Child Labor Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the child labor documentation course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Child Labor Documentation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier wage compliance exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Wage Compliance Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the wage compliance documentation course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Wage Compliance Documentation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use 6240-FINOPS as the chargeback home for Morgan’s access costs in the Rocky Mountain finance operations area."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/cost_center\", \"value\": {\"code\": \"6240-FINOPS\", \"name\": \"Finance Operations Shared Services\", \"region\": \"Rocky Mountain\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier overtime exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Overtime Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the supplier overtime documentation course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Overtime Documentation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier working hours exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Working Hours Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the working hours documentation course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Working Hours Documentation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier rest period exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Rest Period Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the rest period documentation course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Rest Period Documentation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier safety incident exception access Morgan should have as part of the purchasing manager responsibilities."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/permission_groups/-\", \"value\": \"Supplier Safety Incident Exception Review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Morgan should also complete the supplier safety incident documentation course required for this purchasing manager access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_profile/required_trainings/-\", \"value\": \"Supplier Safety Incident Documentation\"}]"
+    }
+  ],
+  "edit_instruction": "Change Morgan’s role to Accounts Payable Supervisor.",
+  "theme": "Changing an employee role",
+  "conversation_pattern": "Center the artifact on an employee access plan where the employee's role determines permission groups, approval limit, required trainings, review interval, and support queue by role attributes. Around this core, add the realistic, independent details an access record would carry that do not depend on the role, and vary their number from sample to sample. Do not embed a lookup or reference card for any role inside the artifact; the artifact holds only the current role's own fields.",
+  "edit_pattern": "Change the employee's role to a different specific role, and supply the replacement role's attributes in master_data.",
+  "cascade_pattern": "Every role-governed field takes the replacement role's supplied attributes, including permission groups, approval limit, required trainings, review interval, and support queue. Identity fields and unrelated assignments stay unchanged. This is determined because the replacement role's attributes are provided with the edit.",
+  "requires_master_data": true,
+  "master_data": {
+    "Accounts Payable Supervisor": {
+      "permission_groups": [
+        "AP Invoice Processor",
+        "AP Payment Batch Approver",
+        "Vendor Banking View Only",
+        "1099 Reporting Reviewers",
+        "Invoice Exception Resolution"
+      ],
+      "approval_limit": {
+        "amount": 25000,
+        "currency": "USD"
+      },
+      "required_trainings": [
+        "Accounts Payable Policy Annual",
+        "Payment Fraud Prevention",
+        "Invoice Handling Compliance",
+        "Vendor Banking Privacy"
+      ],
+      "review_interval": "Monthly",
+      "support_queue": "Accounts Payable Systems Support"
+    }
+  },
+  "current_json": {
+    "employee": {
+      "full_name": "Morgan Lee",
+      "employee_id": "E-78423",
+      "location": "Denver",
+      "division": "Finance Operations",
+      "manager": {
+        "name": "Taylor Nguyen",
+        "employee_id": "E-44109"
+      },
+      "email": "morgan.lee@northstar.example",
+      "cost_center": {
+        "code": "6240-FINOPS",
+        "name": "Finance Operations Shared Services",
+        "region": "Rocky Mountain"
+      }
+    },
+    "access_profile": {
+      "role": "Procurement Manager",
+      "permission_groups": [
+        "Coupa Approver - Manager",
+        "Vendor Master Maintainer",
+        "Contract Workspace Manager",
+        "Supplier Performance Analytics",
+        "Supplier Risk Reviewers",
+        "Purchase Order Exception Handlers",
+        "Blanket PO Oversight",
+        "Invoice Match Exception Review",
+        "Spend Analytics Dashboard",
+        "Preferred Supplier Catalog Admin",
+        "Supplier Onboarding Approvers",
+        "Capital Equipment Purchasing",
+        "Regional Sourcing Committee",
+        "Approved Supplier Scorecards",
+        "Commodity Code Maintainers",
+        "Supplier Contract Renewal Admins",
+        "Sustainable Sourcing Approvers",
+        "Strategic Sourcing Negotiators",
+        "Preferred Vendor Exception Approvers",
+        "Supplier Rebate Reviewers",
+        "Supplier Payment Hold Release",
+        "Purchase Contract Amendment Approvers",
+        "Supplier Escalation Board",
+        "Procurement Category Strategy",
+        "Supplier Quality Waiver Approvers",
+        "Vendor Master Deactivation Approvers",
+        "Supplier Tax Documentation Review",
+        "Preferred Supplier Performance Bonus Review",
+        "Supplier Insurance Certificate Review",
+        "Supplier Site Visit Approvers",
+        "Supplier Travel Expense Approvers",
+        "Supplier Hospitality Exception Review",
+        "Supplier Meal Limit Exception Approvers",
+        "Supplier Charitable Contribution Review",
+        "Supplier Environmental Exception Review",
+        "Supplier Labor Standards Exception Review",
+        "Supplier Human Rights Exception Review",
+        "Supplier Modern Slavery Exception Review",
+        "Supplier Forced Labor Exception Review",
+        "Supplier Child Labor Exception Review",
+        "Supplier Wage Compliance Exception Review",
+        "Supplier Overtime Exception Review",
+        "Supplier Working Hours Exception Review",
+        "Supplier Rest Period Exception Review",
+        "Supplier Safety Incident Exception Review"
+      ],
+      "approval_limit": {
+        "amount": 75000,
+        "currency": "USD"
+      },
+      "required_trainings": [
+        "Procurement Policy Annual",
+        "Supplier Fraud Red Flags",
+        "Negotiation Compliance Basics",
+        "Sourcing Ethics Certification",
+        "Supplier Data Protection",
+        "Contract Approval Workflow",
+        "Purchase Requisition Audit",
+        "Competitive Bidding Exceptions",
+        "Emergency Supplier Substitution",
+        "Purchase Card Oversight",
+        "Procurement Records Retention",
+        "Supplier Diversity Reporting",
+        "Supplier Performance Remediation",
+        "Procurement Compliance Attestation",
+        "Supplier Audit Response",
+        "Supplier Dispute Resolution",
+        "Supplier Confidentiality Handling",
+        "Supplier Corrective Action",
+        "Vendor Banking Change Control",
+        "Supplier Sanctions Screening",
+        "Conflict Minerals Sourcing",
+        "Supplier Cybersecurity Review",
+        "Supplier Site Safety Briefing",
+        "Supplier Travel Policy",
+        "Supplier Gifts and Entertainment",
+        "Supplier Meeting Documentation",
+        "Supplier Community Engagement",
+        "Supplier Environmental Documentation",
+        "Supplier Labor Practices",
+        "Supplier Human Rights Documentation",
+        "Modern Slavery Documentation",
+        "Forced Labor Documentation",
+        "Child Labor Documentation",
+        "Wage Compliance Documentation",
+        "Supplier Overtime Documentation",
+        "Supplier Working Hours Documentation",
+        "Supplier Rest Period Documentation",
+        "Supplier Safety Incident Documentation"
+      ],
+      "review_interval": "Quarterly",
+      "support_queue": "Procurement Systems Support"
+    },
+    "access_window": {
+      "start_date": "2025-04-15",
+      "end_date": null
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/access_profile/role",
+      "kind": "direct",
+      "value": "Accounts Payable Supervisor"
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/permission_groups/0",
+      "kind": "cascade",
+      "value": "AP Invoice Processor"
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/permission_groups/1",
+      "kind": "cascade",
+      "value": "AP Payment Batch Approver"
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/permission_groups/2",
+      "kind": "cascade",
+      "value": "Vendor Banking View Only"
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/permission_groups/3",
+      "kind": "cascade",
+      "value": "1099 Reporting Reviewers"
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/permission_groups/4",
+      "kind": "cascade",
+      "value": "Invoice Exception Resolution"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/44",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/43",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/42",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/41",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/40",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/39",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/38",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/37",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/36",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/35",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/34",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/33",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/32",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/31",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/30",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/29",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/28",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/27",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/26",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/25",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/24",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/23",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/22",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/21",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/20",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/19",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/18",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/17",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/16",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/15",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/14",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/13",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/12",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/11",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/10",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/9",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/8",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/7",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/6",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/permission_groups/5",
+      "kind": "cascade"
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/required_trainings/0",
+      "kind": "cascade",
+      "value": "Accounts Payable Policy Annual"
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/required_trainings/1",
+      "kind": "cascade",
+      "value": "Payment Fraud Prevention"
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/required_trainings/2",
+      "kind": "cascade",
+      "value": "Invoice Handling Compliance"
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/required_trainings/3",
+      "kind": "cascade",
+      "value": "Vendor Banking Privacy"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/37",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/36",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/35",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/34",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/33",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/32",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/31",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/30",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/29",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/28",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/27",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/26",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/25",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/24",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/23",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/22",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/21",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/20",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/19",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/18",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/17",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/16",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/15",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/14",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/13",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/12",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/11",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/10",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/9",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/8",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/7",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/6",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/5",
+      "kind": "cascade"
+    },
+    {
+      "op": "remove",
+      "path": "/access_profile/required_trainings/4",
+      "kind": "cascade"
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/approval_limit/amount",
+      "kind": "cascade",
+      "value": 25000
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/review_interval",
+      "kind": "cascade",
+      "value": "Monthly"
+    },
+    {
+      "op": "replace",
+      "path": "/access_profile/support_queue",
+      "kind": "cascade",
+      "value": "Accounts Payable Systems Support"
+    }
+  ],
+  "expected_json": {
+    "employee": {
+      "full_name": "Morgan Lee",
+      "employee_id": "E-78423",
+      "location": "Denver",
+      "division": "Finance Operations",
+      "manager": {
+        "name": "Taylor Nguyen",
+        "employee_id": "E-44109"
+      },
+      "email": "morgan.lee@northstar.example",
+      "cost_center": {
+        "code": "6240-FINOPS",
+        "name": "Finance Operations Shared Services",
+        "region": "Rocky Mountain"
+      }
+    },
+    "access_profile": {
+      "role": "Accounts Payable Supervisor",
+      "permission_groups": [
+        "AP Invoice Processor",
+        "AP Payment Batch Approver",
+        "Vendor Banking View Only",
+        "1099 Reporting Reviewers",
+        "Invoice Exception Resolution"
+      ],
+      "approval_limit": {
+        "amount": 25000,
+        "currency": "USD"
+      },
+      "required_trainings": [
+        "Accounts Payable Policy Annual",
+        "Payment Fraud Prevention",
+        "Invoice Handling Compliance",
+        "Vendor Banking Privacy"
+      ],
+      "review_interval": "Monthly",
+      "support_queue": "Accounts Payable Systems Support"
+    },
+    "access_window": {
+      "start_date": "2025-04-15",
+      "end_date": null
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "role swap Procurement Manager->Accounts Payable Supervisor: permission_groups (45->5) and required_trainings (38->4) replaced element-wise + trailing removes; approval_limit.amount 75000->25000 (currency USD same), review_interval Quarterly->Monthly, support_queue from md. employee/* and access_window unchanged.",
+  "annotated": true,
+  "excluded": false
+}

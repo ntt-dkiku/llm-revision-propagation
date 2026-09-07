@@ -1,0 +1,471 @@
+{
+  "id": "invoice_L50_04",
+  "domain": "invoice",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Please start an invoice using INV-2025-0147 as the invoice number."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoiceNumber\", \"value\": \"INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a simple document title that shows this is for INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/documentTitle\", \"value\": \"Invoice INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the code customers should use when paying, and make it based on INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentReference\", \"value\": \"PAY-INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a short note for the email subject line that mentions INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emailSubject\", \"value\": \"Invoice INV-2025-0147 from Northstar Creative\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a filename for the saved copy, using INV-2025-0147 in it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pdfFileName\", \"value\": \"invoice_INV-2025-0147.pdf\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a customer portal link that includes INV-2025-0147 so it opens the right invoice."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customerPortalUrl\", \"value\": \"https://billing.northstarcreative.com/invoices/INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the memo text we want printed on the check stub, and have it point to INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/checkStubMemo\", \"value\": \"Remittance for invoice INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an internal tracking label for the accounting team that includes INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/accountingTrackingLabel\", \"value\": \"AR Case INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the text that should be encoded in the payment QR code, with INV-2025-0147 included so it matches the invoice."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentQrPayload\", \"value\": \"northstarcreative://pay?invoice=INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short label for the remittance slip that clearly ties it to INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/remittanceSlipLabel\", \"value\": \"Detach and return with INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the envelope reference line for mailed payments, and include INV-2025-0147 in that line."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/mailingEnvelopeReference\", \"value\": \"Attn: Payments - INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short confirmation line for the client receipt that mentions INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/clientReceiptConfirmation\", \"value\": \"Payment received for INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the main dates for the invoice: it went out on March 4, 2025, and payment is due April 3, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dates\", \"value\": {\"issued\": \"2025-03-04\", \"due\": \"2025-04-03\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add the sender’s basic contact details: Northstar Creative, billing@northstarcreative.com, and (503) 555-0184."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller\", \"value\": {\"name\": \"Northstar Creative\", \"email\": \"billing@northstarcreative.com\", \"phone\": \"(503) 555-0184\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the recipient’s basic contact details: Harbor & Pine Events, accounts@harborpineevents.com, and (206) 555-0142."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/buyer\", \"value\": {\"name\": \"Harbor & Pine Events\", \"email\": \"accounts@harborpineevents.com\", \"phone\": \"(206) 555-0142\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the sender’s mailing address: 812 NW Everett Street, Suite 410, Portland, OR 97209."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller/address\", \"value\": {\"street\": \"812 NW Everett Street, Suite 410\", \"city\": \"Portland\", \"regionPostal\": \"OR 97209\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the recipient’s mailing address: 44 Pier Avenue, Floor 2, Seattle, WA 98101."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/buyer/address\", \"value\": {\"street\": \"44 Pier Avenue, Floor 2\", \"city\": \"Seattle\", \"regionPostal\": \"WA 98101\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first charge for the event brand refresh work: 12 hours at $95 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems\", \"value\": [{\"description\": \"Event brand refresh work\", \"quantity\": 12, \"unitPrice\": 95}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another charge for on-site signage layout: 6 hours at $110 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"description\": \"On-site signage layout\", \"quantity\": 6, \"unitPrice\": 110}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one more charge for preparing the final print-ready files: 4 hours at $85 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"description\": \"Final print-ready files\", \"quantity\": 4, \"unitPrice\": 85}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now add the calculated money summary using an 8.8% sales tax rate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/amounts\", \"value\": {\"subtotal\": 2140, \"tax\": 188.32, \"total\": 2328.32}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the wire transfer details for payments: Cascade Bank, routing number 123456789, account ending in 4421."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/wireTransfer\", \"value\": {\"bankName\": \"Cascade Bank\", \"routingNumber\": \"123456789\", \"accountEnding\": \"4421\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the payment terms: net 30, a 1.5% monthly late fee after the due date, and acceptance of ACH or check."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentTerms\", \"value\": {\"term\": \"Net 30\", \"lateFee\": \"1.5% per month after due date\", \"acceptedMethods\": \"ACH or check\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the client’s purchasing details: PO-HP-7742, Events Marketing, and Marisol Chen as the approver."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/purchaseOrder\", \"value\": {\"number\": \"PO-HP-7742\", \"department\": \"Events Marketing\", \"approver\": \"Marisol Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the reminder wording we’ll use if this isn’t paid, and make each reminder clearly refer to INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentReminderTemplates\", \"value\": {\"firstNotice\": \"Friendly reminder: INV-2025-0147 is due soon\", \"pastDueNotice\": \"Past due notice for INV-2025-0147\", \"finalNotice\": \"Final payment request for INV-2025-0147\"}}]"
+    }
+  ],
+  "edit_instruction": "Please change the invoice number from INV-2025-0147 to INV-2025-0198.",
+  "theme": "Propagating a changed invoice number",
+  "master_data": null,
+  "current_json": {
+    "invoiceNumber": "INV-2025-0147",
+    "documentTitle": "Invoice INV-2025-0147",
+    "paymentReference": "PAY-INV-2025-0147",
+    "emailSubject": "Invoice INV-2025-0147 from Northstar Creative",
+    "pdfFileName": "invoice_INV-2025-0147.pdf",
+    "customerPortalUrl": "https://billing.northstarcreative.com/invoices/INV-2025-0147",
+    "checkStubMemo": "Remittance for invoice INV-2025-0147",
+    "accountingTrackingLabel": "AR Case INV-2025-0147",
+    "paymentQrPayload": "northstarcreative://pay?invoice=INV-2025-0147",
+    "remittanceSlipLabel": "Detach and return with INV-2025-0147",
+    "mailingEnvelopeReference": "Attn: Payments - INV-2025-0147",
+    "clientReceiptConfirmation": "Payment received for INV-2025-0147",
+    "dates": {
+      "issued": "2025-03-04",
+      "due": "2025-04-03"
+    },
+    "seller": {
+      "name": "Northstar Creative",
+      "email": "billing@northstarcreative.com",
+      "phone": "(503) 555-0184",
+      "address": {
+        "street": "812 NW Everett Street, Suite 410",
+        "city": "Portland",
+        "regionPostal": "OR 97209"
+      }
+    },
+    "buyer": {
+      "name": "Harbor & Pine Events",
+      "email": "accounts@harborpineevents.com",
+      "phone": "(206) 555-0142",
+      "address": {
+        "street": "44 Pier Avenue, Floor 2",
+        "city": "Seattle",
+        "regionPostal": "WA 98101"
+      }
+    },
+    "lineItems": [
+      {
+        "description": "Event brand refresh work",
+        "quantity": 12,
+        "unitPrice": 95
+      },
+      {
+        "description": "On-site signage layout",
+        "quantity": 6,
+        "unitPrice": 110
+      },
+      {
+        "description": "Final print-ready files",
+        "quantity": 4,
+        "unitPrice": 85
+      }
+    ],
+    "amounts": {
+      "subtotal": 2140,
+      "tax": 188.32,
+      "total": 2328.32
+    },
+    "wireTransfer": {
+      "bankName": "Cascade Bank",
+      "routingNumber": "123456789",
+      "accountEnding": "4421"
+    },
+    "paymentTerms": {
+      "term": "Net 30",
+      "lateFee": "1.5% per month after due date",
+      "acceptedMethods": "ACH or check"
+    },
+    "purchaseOrder": {
+      "number": "PO-HP-7742",
+      "department": "Events Marketing",
+      "approver": "Marisol Chen"
+    },
+    "paymentReminderTemplates": {
+      "firstNotice": "Friendly reminder: INV-2025-0147 is due soon",
+      "pastDueNotice": "Past due notice for INV-2025-0147",
+      "finalNotice": "Final payment request for INV-2025-0147"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/invoiceNumber",
+      "kind": "direct",
+      "value": "INV-2025-0198"
+    },
+    {
+      "op": "replace",
+      "path": "/accountingTrackingLabel",
+      "kind": "cascade",
+      "value": "AR Case INV-2025-0198"
+    },
+    {
+      "op": "replace",
+      "path": "/checkStubMemo",
+      "kind": "cascade",
+      "value": "Remittance for invoice INV-2025-0198"
+    },
+    {
+      "op": "replace",
+      "path": "/clientReceiptConfirmation",
+      "kind": "cascade",
+      "value": "Payment received for INV-2025-0198"
+    },
+    {
+      "op": "replace",
+      "path": "/customerPortalUrl",
+      "kind": "cascade",
+      "value": "https://billing.northstarcreative.com/invoices/INV-2025-0198"
+    },
+    {
+      "op": "replace",
+      "path": "/documentTitle",
+      "kind": "cascade",
+      "value": "Invoice INV-2025-0198"
+    },
+    {
+      "op": "replace",
+      "path": "/emailSubject",
+      "kind": "cascade",
+      "value": "Invoice INV-2025-0198 from Northstar Creative"
+    },
+    {
+      "op": "replace",
+      "path": "/mailingEnvelopeReference",
+      "kind": "cascade",
+      "value": "Attn: Payments - INV-2025-0198"
+    },
+    {
+      "op": "replace",
+      "path": "/paymentQrPayload",
+      "kind": "cascade",
+      "value": "northstarcreative://pay?invoice=INV-2025-0198"
+    },
+    {
+      "op": "replace",
+      "path": "/paymentReference",
+      "kind": "cascade",
+      "value": "PAY-INV-2025-0198"
+    },
+    {
+      "op": "replace",
+      "path": "/paymentReminderTemplates/finalNotice",
+      "kind": "cascade",
+      "value": "Final payment request for INV-2025-0198"
+    },
+    {
+      "op": "replace",
+      "path": "/paymentReminderTemplates/firstNotice",
+      "kind": "cascade",
+      "value": "Friendly reminder: INV-2025-0198 is due soon"
+    },
+    {
+      "op": "replace",
+      "path": "/paymentReminderTemplates/pastDueNotice",
+      "kind": "cascade",
+      "value": "Past due notice for INV-2025-0198"
+    },
+    {
+      "op": "replace",
+      "path": "/pdfFileName",
+      "kind": "cascade",
+      "value": "invoice_INV-2025-0198.pdf"
+    },
+    {
+      "op": "replace",
+      "path": "/remittanceSlipLabel",
+      "kind": "cascade",
+      "value": "Detach and return with INV-2025-0198"
+    }
+  ],
+  "expected_json": {
+    "invoiceNumber": "INV-2025-0198",
+    "documentTitle": "Invoice INV-2025-0198",
+    "paymentReference": "PAY-INV-2025-0198",
+    "emailSubject": "Invoice INV-2025-0198 from Northstar Creative",
+    "pdfFileName": "invoice_INV-2025-0198.pdf",
+    "customerPortalUrl": "https://billing.northstarcreative.com/invoices/INV-2025-0198",
+    "checkStubMemo": "Remittance for invoice INV-2025-0198",
+    "accountingTrackingLabel": "AR Case INV-2025-0198",
+    "paymentQrPayload": "northstarcreative://pay?invoice=INV-2025-0198",
+    "remittanceSlipLabel": "Detach and return with INV-2025-0198",
+    "mailingEnvelopeReference": "Attn: Payments - INV-2025-0198",
+    "clientReceiptConfirmation": "Payment received for INV-2025-0198",
+    "dates": {
+      "issued": "2025-03-04",
+      "due": "2025-04-03"
+    },
+    "seller": {
+      "name": "Northstar Creative",
+      "email": "billing@northstarcreative.com",
+      "phone": "(503) 555-0184",
+      "address": {
+        "street": "812 NW Everett Street, Suite 410",
+        "city": "Portland",
+        "regionPostal": "OR 97209"
+      }
+    },
+    "buyer": {
+      "name": "Harbor & Pine Events",
+      "email": "accounts@harborpineevents.com",
+      "phone": "(206) 555-0142",
+      "address": {
+        "street": "44 Pier Avenue, Floor 2",
+        "city": "Seattle",
+        "regionPostal": "WA 98101"
+      }
+    },
+    "lineItems": [
+      {
+        "description": "Event brand refresh work",
+        "quantity": 12,
+        "unitPrice": 95
+      },
+      {
+        "description": "On-site signage layout",
+        "quantity": 6,
+        "unitPrice": 110
+      },
+      {
+        "description": "Final print-ready files",
+        "quantity": 4,
+        "unitPrice": 85
+      }
+    ],
+    "amounts": {
+      "subtotal": 2140,
+      "tax": 188.32,
+      "total": 2328.32
+    },
+    "wireTransfer": {
+      "bankName": "Cascade Bank",
+      "routingNumber": "123456789",
+      "accountEnding": "4421"
+    },
+    "paymentTerms": {
+      "term": "Net 30",
+      "lateFee": "1.5% per month after due date",
+      "acceptedMethods": "ACH or check"
+    },
+    "purchaseOrder": {
+      "number": "PO-HP-7742",
+      "department": "Events Marketing",
+      "approver": "Marisol Chen"
+    },
+    "paymentReminderTemplates": {
+      "firstNotice": "Friendly reminder: INV-2025-0198 is due soon",
+      "pastDueNotice": "Past due notice for INV-2025-0198",
+      "finalNotice": "Final payment request for INV-2025-0198"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Invoice number INV-2025-0147 -> INV-2025-0198. Every field embedding the token gets it substituted while surrounding text is preserved: documentTitle, paymentReference, emailSubject, pdfFileName, customerPortalUrl, checkStubMemo, accountingTrackingLabel, paymentQrPayload, remittanceSlipLabel, mailingEnvelopeReference, clientReceiptConfirmation, and the three paymentReminderTemplates. invoiceNumber is the direct edit; the rest are cascade. Amounts, dates, addresses, line items, and other fields stay.",
+  "conversation_pattern": "Center the artifact on an invoice that declares one identifier, where several other fields embed or reference that identifier as a visible token. Around this core, add the realistic, independent details an invoice would carry that do not embed that identifier, and vary their number from sample to sample.",
+  "edit_pattern": "Change the invoice number to a different identifier.",
+  "cascade_pattern": "Changing the identifier updates every field that embeds it, substituting the token while the surrounding text stays. Identifiers and fields that do not reference it are unaffected.",
+  "requires_master_data": false
+}

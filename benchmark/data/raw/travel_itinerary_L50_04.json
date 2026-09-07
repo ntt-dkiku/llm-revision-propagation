@@ -1,0 +1,259 @@
+{
+  "id": "travel_itinerary_L50_04",
+  "domain": "travel_itinerary",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm putting together a one-day itinerary for Kyoto."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/destination\", \"value\": \"Kyoto\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's have the day begin at 9:00 in the morning."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/day_start_time\", \"value\": \"09:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Build in a 15-minute breather between each place we visit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/between_stop_gap_minutes\", \"value\": 15}]"
+    },
+    {
+      "role": "user",
+      "content": "Make Fushimi Inari the first stop, and plan on spending 75 minutes there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops\", \"value\": [{\"sequence\": 1, \"name\": \"Fushimi Inari Taisha\", \"duration_minutes\": 75}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Please pin down when that first visit begins and wraps up."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/0/start_time\", \"value\": \"09:00\"}, {\"op\": \"add\", \"path\": \"/stops/0/end_time\", \"value\": \"10:15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After that, add Kiyomizu-dera as the second visit and give it an hour and a half."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"sequence\": 2, \"name\": \"Kiyomizu-dera\", \"duration_minutes\": 90}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please work out the timing for that second visit based on the break after the first one."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/1/start_time\", \"value\": \"10:30\"}, {\"op\": \"add\", \"path\": \"/stops/1/end_time\", \"value\": \"12:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, include Nishiki Market for a one-hour lunch and browsing stop."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"sequence\": 3, \"name\": \"Nishiki Market\", \"duration_minutes\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you calculate the start and finish for the market stop too?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/2/start_time\", \"value\": \"12:15\"}, {\"op\": \"add\", \"path\": \"/stops/2/end_time\", \"value\": \"13:15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Then put Nijo Castle after lunch, with 80 minutes set aside for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"sequence\": 4, \"name\": \"Nijo Castle\", \"duration_minutes\": 80}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the exact timing for Nijo Castle using the same 15-minute pause before it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/3/start_time\", \"value\": \"13:30\"}, {\"op\": \"add\", \"path\": \"/stops/3/end_time\", \"value\": \"14:50\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After the castle, add the Philosopher's Path for a relaxed 70-minute walk."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"sequence\": 5, \"name\": \"Philosopher's Path\", \"duration_minutes\": 70}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add the timing for the Philosopher's Path walk as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/4/start_time\", \"value\": \"15:05\"}, {\"op\": \"add\", \"path\": \"/stops/4/end_time\", \"value\": \"16:15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the route with Gion as the last stop, allowing 60 minutes to wander around there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"sequence\": 6, \"name\": \"Gion\", \"duration_minutes\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate when the Gion wander starts and ends."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/5/start_time\", \"value\": \"16:30\"}, {\"op\": \"add\", \"path\": \"/stops/5/end_time\", \"value\": \"17:30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now that the route is complete, please total up the number of visits, the time spent at places, and the time set aside for breaks."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary/stop_count\", \"value\": 6}, {\"op\": \"add\", \"path\": \"/summary/total_stop_duration_minutes\", \"value\": 435}, {\"op\": \"add\", \"path\": \"/summary/total_gap_minutes\", \"value\": 75}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note the overall finish time for the day and how many minutes the whole outing runs from the first start to the last finish."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary/day_end_time\", \"value\": \"17:30\"}, {\"op\": \"add\", \"path\": \"/summary/total_day_minutes\", \"value\": 510}]"
+    },
+    {
+      "role": "user",
+      "content": "Add our hotel base so it's handy for reference: Hotel Granvia Kyoto at Kyoto Station, with the main phone number included."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging\", \"value\": {\"name\": \"Hotel Granvia Kyoto\", \"area\": \"Kyoto Station\", \"phone\": \"+81-75-344-8888\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the transit pass we'll use: the Kyoto City Bus and Subway one-day pass, costing 1100 yen, and say we'll buy it at the station."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transit_pass\", \"value\": {\"name\": \"Kyoto City Bus and Subway One-Day Pass\", \"cost_yen\": 1100, \"purchase_location\": \"Kyoto Station\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a quick weather note for planning: sunny, a high of 24°C, and only a 10% chance of rain."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/weather\", \"value\": {\"condition\": \"sunny\", \"high_celsius\": 24, \"rain_chance_percent\": 10}}]"
+    },
+    {
+      "role": "user",
+      "content": "For after the sightseeing, note a table at Pontocho Kappa at 7:00 p.m. under the name Sato."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/evening_meal\", \"value\": {\"restaurant\": \"Pontocho Kappa\", \"reservation_time\": \"19:00\", \"booking_name\": \"Sato\"}}]"
+    }
+  ],
+  "edit_instruction": "Please change Nijo Castle’s spot in the day to 2, swapping it with Kiyomizu-dera.",
+  "theme": "Swapping the order of two stops",
+  "master_data": null,
+  "current_json": {
+    "destination": "Kyoto",
+    "day_start_time": "09:00",
+    "between_stop_gap_minutes": 15,
+    "stops": [
+      {
+        "sequence": 1,
+        "name": "Fushimi Inari Taisha",
+        "duration_minutes": 75,
+        "start_time": "09:00",
+        "end_time": "10:15"
+      },
+      {
+        "sequence": 2,
+        "name": "Kiyomizu-dera",
+        "duration_minutes": 90,
+        "start_time": "10:30",
+        "end_time": "12:00"
+      },
+      {
+        "sequence": 3,
+        "name": "Nishiki Market",
+        "duration_minutes": 60,
+        "start_time": "12:15",
+        "end_time": "13:15"
+      },
+      {
+        "sequence": 4,
+        "name": "Nijo Castle",
+        "duration_minutes": 80,
+        "start_time": "13:30",
+        "end_time": "14:50"
+      },
+      {
+        "sequence": 5,
+        "name": "Philosopher's Path",
+        "duration_minutes": 70,
+        "start_time": "15:05",
+        "end_time": "16:15"
+      },
+      {
+        "sequence": 6,
+        "name": "Gion",
+        "duration_minutes": 60,
+        "start_time": "16:30",
+        "end_time": "17:30"
+      }
+    ],
+    "summary": {
+      "stop_count": 6,
+      "total_stop_duration_minutes": 435,
+      "total_gap_minutes": 75,
+      "day_end_time": "17:30",
+      "total_day_minutes": 510
+    },
+    "lodging": {
+      "name": "Hotel Granvia Kyoto",
+      "area": "Kyoto Station",
+      "phone": "+81-75-344-8888"
+    },
+    "transit_pass": {
+      "name": "Kyoto City Bus and Subway One-Day Pass",
+      "cost_yen": 1100,
+      "purchase_location": "Kyoto Station"
+    },
+    "weather": {
+      "condition": "sunny",
+      "high_celsius": 24,
+      "rain_chance_percent": 10
+    },
+    "evening_meal": {
+      "restaurant": "Pontocho Kappa",
+      "reservation_time": "19:00",
+      "booking_name": "Sato"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a one-day itinerary built as an ordered list of timed stops, where each stop's time follows from the previous stop's end plus a stated gap and its own stated duration, rolling up to overall counts and a day-end time. Around this core, add the realistic, independent details a planner would record that do not depend on a stop's position in the day, and vary their number and the number of stops from sample to sample.",
+  "edit_pattern": "Swap the positions of two specific stops in the day.",
+  "cascade_pattern": "When two stops exchange positions, the times from the earlier of the two positions onward recompute along the chain and any order-derived fields update; the counts and the day-end stay because the same stops and gaps are kept. Stops before the earlier position keep their times. This is determined because the durations, the gap, and the two positions are stated.",
+  "requires_master_data": false
+}

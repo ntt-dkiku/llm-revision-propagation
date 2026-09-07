@@ -1,0 +1,1273 @@
+{
+  "id": "invoice_L100_04",
+  "domain": "invoice",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start the invoice with identifier INV-2026-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoiceNumber\", \"value\": \"INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a clear heading at the top that reads “Invoice INV-2026-0147.”"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/documentTitle\", \"value\": \"Invoice INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a payment note telling the client to use INV-2026-0147 as the transfer reference."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentInstructions/referenceNote\", \"value\": \"Please use INV-2026-0147 as the transfer reference.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Also add a short internal memo line saying this bill was created from sales order SO-8842 for INV-2026-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/internalMemo\", \"value\": \"Created from sales order SO-8842 for INV-2026-0147.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Name the saved PDF in a way that includes INV-2026-0147 and the client’s short name, Northstar."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pdfFileName\", \"value\": \"INV-2026-0147_Northstar.pdf\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an email subject line for sending it that mentions INV-2026-0147 and Northstar."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emailSubject\", \"value\": \"Invoice INV-2026-0147 for Northstar\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a client portal link that ends with the invoice identifier so it’s easy to trace."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/clientPortalUrl\", \"value\": \"https://billing.example.com/invoices/INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a remittance slip section that repeats INV-2026-0147 on the slip title, scan label, and mailing note."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/remittanceSlip/title\", \"value\": \"Remittance Slip for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/remittanceSlip/scanLabel\", \"value\": \"Scan to pay INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/remittanceSlip/mailingNote\", \"value\": \"Detach and return with payment for INV-2026-0147.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the QR payment text so it includes the same identifier and the amount placeholder for the payment terminal."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentInstructions/qrPayload\", \"value\": \"PAY|REF=INV-2026-0147|AMOUNT_DUE\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include an archive folder path for the billing files that uses INV-2026-0147 at the end."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/archive/folderPath\", \"value\": \"/clients/Northstar/invoices/INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the same invoice identifier in the footer: one line for document tracking, one for the print batch, and one for the audit trail."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/footer/trackingLine\", \"value\": \"Document tracking: INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/footer/printBatchLine\", \"value\": \"Print batch includes INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/footer/auditTrailLine\", \"value\": \"Audit trail opened for INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three short labels for the approval workflow that each show INV-2026-0147 so reviewers can match the paperwork."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approvalWorkflow/managerReviewLabel\", \"value\": \"Manager review for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/approvalWorkflow/financeApprovalLabel\", \"value\": \"Finance approval for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/approvalWorkflow/releaseLabel\", \"value\": \"Release invoice INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three customer-facing status messages that mention INV-2026-0147: one for when it’s sent, one when viewed, and one when paid."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customerStatusMessages/sent\", \"value\": \"INV-2026-0147 has been sent to Northstar.\"}, {\"op\": \"add\", \"path\": \"/customerStatusMessages/viewed\", \"value\": \"INV-2026-0147 was viewed in the customer portal.\"}, {\"op\": \"add\", \"path\": \"/customerStatusMessages/paid\", \"value\": \"INV-2026-0147 has been marked as paid.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three automated reminder lines that include INV-2026-0147: one before the due date, one on the due date, and one after it’s overdue."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reminderMessages/beforeDue\", \"value\": \"Reminder: INV-2026-0147 is due soon.\"}, {\"op\": \"add\", \"path\": \"/reminderMessages/onDueDate\", \"value\": \"Reminder: INV-2026-0147 is due today.\"}, {\"op\": \"add\", \"path\": \"/reminderMessages/overdue\", \"value\": \"Reminder: INV-2026-0147 is now overdue.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three short export names for our accounting system that all include INV-2026-0147: one for the invoice file, one for the payment file, and one for the receipt file."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/accountingExport/invoiceFileName\", \"value\": \"export_invoice_INV-2026-0147.csv\"}, {\"op\": \"add\", \"path\": \"/accountingExport/paymentFileName\", \"value\": \"export_payment_INV-2026-0147.csv\"}, {\"op\": \"add\", \"path\": \"/accountingExport/receiptFileName\", \"value\": \"export_receipt_INV-2026-0147.csv\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three file labels for the document package that include INV-2026-0147: one for the cover page, one for the backup materials, and one for the client copy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/documentPackage/coverPageLabel\", \"value\": \"Cover page for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/documentPackage/backupMaterialsLabel\", \"value\": \"Backup materials for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/documentPackage/clientCopyLabel\", \"value\": \"Client copy of INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three reconciliation notes that include INV-2026-0147: one for matching bank deposits, one for checking the ledger, and one for closing the month."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reconciliationNotes/bankDepositMatch\", \"value\": \"Match bank deposit against INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/reconciliationNotes/ledgerCheck\", \"value\": \"Verify ledger entry for INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/reconciliationNotes/monthClose\", \"value\": \"Include INV-2026-0147 in month-end close review.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three support-team notes that mention INV-2026-0147: one for client questions, one for dispute handling, and one for follow-up calls."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supportNotes/clientQuestions\", \"value\": \"For client questions, reference INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/supportNotes/disputeHandling\", \"value\": \"Route any dispute about INV-2026-0147 to billing support.\"}, {\"op\": \"add\", \"path\": \"/supportNotes/followUpCalls\", \"value\": \"Mention INV-2026-0147 during follow-up calls.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three collections notes for the billing team that mention INV-2026-0147: one for first outreach, one for escalation, and one for final review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/collectionsNotes/firstOutreach\", \"value\": \"First outreach should reference INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/collectionsNotes/escalation\", \"value\": \"Escalate unpaid balance for INV-2026-0147 after approval.\"}, {\"op\": \"add\", \"path\": \"/collectionsNotes/finalReview\", \"value\": \"Final collections review for INV-2026-0147.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three delivery tracking notes that include INV-2026-0147: one for the email log, one for postal handling, and one for portal delivery."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deliveryTracking/emailLog\", \"value\": \"Email delivery logged for INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/deliveryTracking/postalHandling\", \"value\": \"Postal handling packet marked INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/deliveryTracking/portalDelivery\", \"value\": \"Portal delivery confirmed for INV-2026-0147.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three sales handoff notes that mention INV-2026-0147: one for the account owner, one for the renewal team, and one for customer success."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/salesHandoff/accountOwnerNote\", \"value\": \"Account owner should review INV-2026-0147 before the next check-in.\"}, {\"op\": \"add\", \"path\": \"/salesHandoff/renewalTeamNote\", \"value\": \"Renewal team should consider INV-2026-0147 in account planning.\"}, {\"op\": \"add\", \"path\": \"/salesHandoff/customerSuccessNote\", \"value\": \"Customer success has visibility into INV-2026-0147.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three tax filing notes that include INV-2026-0147: one for quarterly reporting, one for exemption review, and one for the year-end binder."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/taxFilingNotes/quarterlyReporting\", \"value\": \"Include INV-2026-0147 in quarterly sales tax reporting.\"}, {\"op\": \"add\", \"path\": \"/taxFilingNotes/exemptionReview\", \"value\": \"Review tax exemption status for INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/taxFilingNotes/yearEndBinder\", \"value\": \"Place INV-2026-0147 in the year-end tax binder.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three warehouse billing notes that mention INV-2026-0147: one for packing records, one for shipment billing, and one for proof of delivery."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/warehouseBillingNotes/packingRecords\", \"value\": \"Attach packing records to INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/warehouseBillingNotes/shipmentBilling\", \"value\": \"Shipment billing cross-check for INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/warehouseBillingNotes/proofOfDelivery\", \"value\": \"Proof of delivery retained with INV-2026-0147.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three project billing notes that include INV-2026-0147: one for milestone acceptance, one for consultant time, and one for expense backup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projectBillingNotes/milestoneAcceptance\", \"value\": \"Milestone acceptance documentation attached to INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/projectBillingNotes/consultantTime\", \"value\": \"Consultant time reviewed for INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/projectBillingNotes/expenseBackup\", \"value\": \"Expense backup filed with INV-2026-0147.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three legal review notes that mention INV-2026-0147: one for contract terms, one for purchase order alignment, and one for record retention."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/legalReviewNotes/contractTerms\", \"value\": \"Confirm contract terms support INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/legalReviewNotes/purchaseOrderAlignment\", \"value\": \"Check purchase order alignment for INV-2026-0147.\"}, {\"op\": \"add\", \"path\": \"/legalReviewNotes/recordRetention\", \"value\": \"Retain legal backup for INV-2026-0147.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three analytics labels that include INV-2026-0147: one for revenue tracking, one for aging analysis, and one for payment velocity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/analyticsLabels/revenueTracking\", \"value\": \"Revenue tracking: INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/analyticsLabels/agingAnalysis\", \"value\": \"Aging analysis: INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/analyticsLabels/paymentVelocity\", \"value\": \"Payment velocity: INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three dashboard captions that mention INV-2026-0147: one for open balance, one for recent activity, and one for client payment history."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dashboardCaptions/openBalance\", \"value\": \"Open balance for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/dashboardCaptions/recentActivity\", \"value\": \"Recent activity on INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/dashboardCaptions/clientPaymentHistory\", \"value\": \"Client payment history linked to INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three notification snippets for our internal billing alerts that mention INV-2026-0147: one for creation, one for approval, and one for payment posting."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/internalBillingAlerts/created\", \"value\": \"Billing alert: INV-2026-0147 was created.\"}, {\"op\": \"add\", \"path\": \"/internalBillingAlerts/approved\", \"value\": \"Billing alert: INV-2026-0147 was approved.\"}, {\"op\": \"add\", \"path\": \"/internalBillingAlerts/paymentPosted\", \"value\": \"Billing alert: payment posted for INV-2026-0147.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three short audit tags that use INV-2026-0147: one for creation, one for sending, and one for payment matching."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/auditTags/creationTag\", \"value\": \"audit-create-INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/auditTags/sendingTag\", \"value\": \"audit-send-INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/auditTags/paymentMatchTag\", \"value\": \"audit-match-INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three labels for the billing calendar that include INV-2026-0147: one for issue day, one for the payment deadline, and one for the follow-up date."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billingCalendar/issueDayLabel\", \"value\": \"Issue day for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/billingCalendar/paymentDeadlineLabel\", \"value\": \"Payment deadline for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/billingCalendar/followUpDateLabel\", \"value\": \"Follow-up date for INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three short labels for the mobile app view that mention INV-2026-0147: one for the summary card, one for payment details, and one for the document download."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/mobileAppLabels/summaryCard\", \"value\": \"Summary for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/mobileAppLabels/paymentDetails\", \"value\": \"Payment details for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/mobileAppLabels/documentDownload\", \"value\": \"Download INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three labels for the customer portal timeline that mention INV-2026-0147: one for upload, one for customer view, and one for payment receipt."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/portalTimeline/uploadLabel\", \"value\": \"Uploaded INV-2026-0147 to portal\"}, {\"op\": \"add\", \"path\": \"/portalTimeline/customerViewLabel\", \"value\": \"Customer viewed INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/portalTimeline/paymentReceiptLabel\", \"value\": \"Payment receipt for INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three short labels for the downloadable records that mention INV-2026-0147: one for the invoice PDF, one for the payment receipt, and one for the audit log."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/downloadableRecords/invoicePdfLabel\", \"value\": \"Download invoice PDF for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/downloadableRecords/paymentReceiptLabel\", \"value\": \"Download payment receipt for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/downloadableRecords/auditLogLabel\", \"value\": \"Download audit log for INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three quick search phrases for staff that mention INV-2026-0147: one for invoice lookup, one for payment lookup, and one for support lookup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/staffSearchPhrases/invoiceLookup\", \"value\": \"Search invoice INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/staffSearchPhrases/paymentLookup\", \"value\": \"Search payment for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/staffSearchPhrases/supportLookup\", \"value\": \"Search support history for INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three webhook labels for system integrations that mention INV-2026-0147: one for invoice creation, one for approval sync, and one for payment confirmation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/integrationWebhooks/invoiceCreatedLabel\", \"value\": \"Webhook invoice-created for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/integrationWebhooks/approvalSyncLabel\", \"value\": \"Webhook approval-sync for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/integrationWebhooks/paymentConfirmedLabel\", \"value\": \"Webhook payment-confirmed for INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three print-room labels that mention INV-2026-0147: one for the tray cover, one for the envelope stack, and one for the pickup bin."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/printRoomLabels/trayCover\", \"value\": \"Tray cover for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/printRoomLabels/envelopeStack\", \"value\": \"Envelope stack for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/printRoomLabels/pickupBin\", \"value\": \"Pickup bin for INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three short labels for the scanning station that mention INV-2026-0147: one for intake, one for quality check, and one for final indexing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/scanningStationLabels/intake\", \"value\": \"Scan intake for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/scanningStationLabels/qualityCheck\", \"value\": \"Scan quality check for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/scanningStationLabels/finalIndexing\", \"value\": \"Final scan indexing for INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three labels for the overnight mail packet that mention INV-2026-0147: one for the cover sheet, one for the tracking slip, and one for the delivery confirmation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/overnightMailPacket/coverSheet\", \"value\": \"Overnight cover sheet for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/overnightMailPacket/trackingSlip\", \"value\": \"Tracking slip for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/overnightMailPacket/deliveryConfirmation\", \"value\": \"Delivery confirmation for INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three final checklist lines that mention INV-2026-0147: one for confirming the address, one for verifying the amount, and one for sending the client copy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/finalChecklist/addressConfirmed\", \"value\": \"Address confirmed for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/finalChecklist/amountVerified\", \"value\": \"Amount verified for INV-2026-0147\"}, {\"op\": \"add\", \"path\": \"/finalChecklist/clientCopySent\", \"value\": \"Client copy sent for INV-2026-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one last closing note that says the invoice packet for INV-2026-0147 is ready to send."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/closingNote\", \"value\": \"Invoice packet for INV-2026-0147 is ready to send.\"}]"
+    }
+  ],
+  "edit_instruction": "Please change the invoice number from INV-2026-0147 to INV-2026-0219.",
+  "theme": "Propagating a changed invoice number",
+  "master_data": null,
+  "current_json": {
+    "invoiceNumber": "INV-2026-0147",
+    "documentTitle": "Invoice INV-2026-0147",
+    "paymentInstructions": {
+      "referenceNote": "Please use INV-2026-0147 as the transfer reference.",
+      "qrPayload": "PAY|REF=INV-2026-0147|AMOUNT_DUE"
+    },
+    "internalMemo": "Created from sales order SO-8842 for INV-2026-0147.",
+    "pdfFileName": "INV-2026-0147_Northstar.pdf",
+    "emailSubject": "Invoice INV-2026-0147 for Northstar",
+    "clientPortalUrl": "https://billing.example.com/invoices/INV-2026-0147",
+    "remittanceSlip": {
+      "title": "Remittance Slip for INV-2026-0147",
+      "scanLabel": "Scan to pay INV-2026-0147",
+      "mailingNote": "Detach and return with payment for INV-2026-0147."
+    },
+    "archive": {
+      "folderPath": "/clients/Northstar/invoices/INV-2026-0147"
+    },
+    "footer": {
+      "trackingLine": "Document tracking: INV-2026-0147",
+      "printBatchLine": "Print batch includes INV-2026-0147",
+      "auditTrailLine": "Audit trail opened for INV-2026-0147"
+    },
+    "approvalWorkflow": {
+      "managerReviewLabel": "Manager review for INV-2026-0147",
+      "financeApprovalLabel": "Finance approval for INV-2026-0147",
+      "releaseLabel": "Release invoice INV-2026-0147"
+    },
+    "customerStatusMessages": {
+      "sent": "INV-2026-0147 has been sent to Northstar.",
+      "viewed": "INV-2026-0147 was viewed in the customer portal.",
+      "paid": "INV-2026-0147 has been marked as paid."
+    },
+    "reminderMessages": {
+      "beforeDue": "Reminder: INV-2026-0147 is due soon.",
+      "onDueDate": "Reminder: INV-2026-0147 is due today.",
+      "overdue": "Reminder: INV-2026-0147 is now overdue."
+    },
+    "accountingExport": {
+      "invoiceFileName": "export_invoice_INV-2026-0147.csv",
+      "paymentFileName": "export_payment_INV-2026-0147.csv",
+      "receiptFileName": "export_receipt_INV-2026-0147.csv"
+    },
+    "documentPackage": {
+      "coverPageLabel": "Cover page for INV-2026-0147",
+      "backupMaterialsLabel": "Backup materials for INV-2026-0147",
+      "clientCopyLabel": "Client copy of INV-2026-0147"
+    },
+    "reconciliationNotes": {
+      "bankDepositMatch": "Match bank deposit against INV-2026-0147.",
+      "ledgerCheck": "Verify ledger entry for INV-2026-0147.",
+      "monthClose": "Include INV-2026-0147 in month-end close review."
+    },
+    "supportNotes": {
+      "clientQuestions": "For client questions, reference INV-2026-0147.",
+      "disputeHandling": "Route any dispute about INV-2026-0147 to billing support.",
+      "followUpCalls": "Mention INV-2026-0147 during follow-up calls."
+    },
+    "collectionsNotes": {
+      "firstOutreach": "First outreach should reference INV-2026-0147.",
+      "escalation": "Escalate unpaid balance for INV-2026-0147 after approval.",
+      "finalReview": "Final collections review for INV-2026-0147."
+    },
+    "deliveryTracking": {
+      "emailLog": "Email delivery logged for INV-2026-0147.",
+      "postalHandling": "Postal handling packet marked INV-2026-0147.",
+      "portalDelivery": "Portal delivery confirmed for INV-2026-0147."
+    },
+    "salesHandoff": {
+      "accountOwnerNote": "Account owner should review INV-2026-0147 before the next check-in.",
+      "renewalTeamNote": "Renewal team should consider INV-2026-0147 in account planning.",
+      "customerSuccessNote": "Customer success has visibility into INV-2026-0147."
+    },
+    "taxFilingNotes": {
+      "quarterlyReporting": "Include INV-2026-0147 in quarterly sales tax reporting.",
+      "exemptionReview": "Review tax exemption status for INV-2026-0147.",
+      "yearEndBinder": "Place INV-2026-0147 in the year-end tax binder."
+    },
+    "warehouseBillingNotes": {
+      "packingRecords": "Attach packing records to INV-2026-0147.",
+      "shipmentBilling": "Shipment billing cross-check for INV-2026-0147.",
+      "proofOfDelivery": "Proof of delivery retained with INV-2026-0147."
+    },
+    "projectBillingNotes": {
+      "milestoneAcceptance": "Milestone acceptance documentation attached to INV-2026-0147.",
+      "consultantTime": "Consultant time reviewed for INV-2026-0147.",
+      "expenseBackup": "Expense backup filed with INV-2026-0147."
+    },
+    "legalReviewNotes": {
+      "contractTerms": "Confirm contract terms support INV-2026-0147.",
+      "purchaseOrderAlignment": "Check purchase order alignment for INV-2026-0147.",
+      "recordRetention": "Retain legal backup for INV-2026-0147."
+    },
+    "analyticsLabels": {
+      "revenueTracking": "Revenue tracking: INV-2026-0147",
+      "agingAnalysis": "Aging analysis: INV-2026-0147",
+      "paymentVelocity": "Payment velocity: INV-2026-0147"
+    },
+    "dashboardCaptions": {
+      "openBalance": "Open balance for INV-2026-0147",
+      "recentActivity": "Recent activity on INV-2026-0147",
+      "clientPaymentHistory": "Client payment history linked to INV-2026-0147"
+    },
+    "internalBillingAlerts": {
+      "created": "Billing alert: INV-2026-0147 was created.",
+      "approved": "Billing alert: INV-2026-0147 was approved.",
+      "paymentPosted": "Billing alert: payment posted for INV-2026-0147."
+    },
+    "auditTags": {
+      "creationTag": "audit-create-INV-2026-0147",
+      "sendingTag": "audit-send-INV-2026-0147",
+      "paymentMatchTag": "audit-match-INV-2026-0147"
+    },
+    "billingCalendar": {
+      "issueDayLabel": "Issue day for INV-2026-0147",
+      "paymentDeadlineLabel": "Payment deadline for INV-2026-0147",
+      "followUpDateLabel": "Follow-up date for INV-2026-0147"
+    },
+    "mobileAppLabels": {
+      "summaryCard": "Summary for INV-2026-0147",
+      "paymentDetails": "Payment details for INV-2026-0147",
+      "documentDownload": "Download INV-2026-0147"
+    },
+    "portalTimeline": {
+      "uploadLabel": "Uploaded INV-2026-0147 to portal",
+      "customerViewLabel": "Customer viewed INV-2026-0147",
+      "paymentReceiptLabel": "Payment receipt for INV-2026-0147"
+    },
+    "downloadableRecords": {
+      "invoicePdfLabel": "Download invoice PDF for INV-2026-0147",
+      "paymentReceiptLabel": "Download payment receipt for INV-2026-0147",
+      "auditLogLabel": "Download audit log for INV-2026-0147"
+    },
+    "staffSearchPhrases": {
+      "invoiceLookup": "Search invoice INV-2026-0147",
+      "paymentLookup": "Search payment for INV-2026-0147",
+      "supportLookup": "Search support history for INV-2026-0147"
+    },
+    "integrationWebhooks": {
+      "invoiceCreatedLabel": "Webhook invoice-created for INV-2026-0147",
+      "approvalSyncLabel": "Webhook approval-sync for INV-2026-0147",
+      "paymentConfirmedLabel": "Webhook payment-confirmed for INV-2026-0147"
+    },
+    "printRoomLabels": {
+      "trayCover": "Tray cover for INV-2026-0147",
+      "envelopeStack": "Envelope stack for INV-2026-0147",
+      "pickupBin": "Pickup bin for INV-2026-0147"
+    },
+    "scanningStationLabels": {
+      "intake": "Scan intake for INV-2026-0147",
+      "qualityCheck": "Scan quality check for INV-2026-0147",
+      "finalIndexing": "Final scan indexing for INV-2026-0147"
+    },
+    "overnightMailPacket": {
+      "coverSheet": "Overnight cover sheet for INV-2026-0147",
+      "trackingSlip": "Tracking slip for INV-2026-0147",
+      "deliveryConfirmation": "Delivery confirmation for INV-2026-0147"
+    },
+    "finalChecklist": {
+      "addressConfirmed": "Address confirmed for INV-2026-0147",
+      "amountVerified": "Amount verified for INV-2026-0147",
+      "clientCopySent": "Client copy sent for INV-2026-0147"
+    },
+    "closingNote": "Invoice packet for INV-2026-0147 is ready to send."
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/invoiceNumber",
+      "kind": "direct",
+      "value": "INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/accountingExport/invoiceFileName",
+      "kind": "cascade",
+      "value": "export_invoice_INV-2026-0219.csv"
+    },
+    {
+      "op": "replace",
+      "path": "/accountingExport/paymentFileName",
+      "kind": "cascade",
+      "value": "export_payment_INV-2026-0219.csv"
+    },
+    {
+      "op": "replace",
+      "path": "/accountingExport/receiptFileName",
+      "kind": "cascade",
+      "value": "export_receipt_INV-2026-0219.csv"
+    },
+    {
+      "op": "replace",
+      "path": "/analyticsLabels/agingAnalysis",
+      "kind": "cascade",
+      "value": "Aging analysis: INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/analyticsLabels/paymentVelocity",
+      "kind": "cascade",
+      "value": "Payment velocity: INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/analyticsLabels/revenueTracking",
+      "kind": "cascade",
+      "value": "Revenue tracking: INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/approvalWorkflow/financeApprovalLabel",
+      "kind": "cascade",
+      "value": "Finance approval for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/approvalWorkflow/managerReviewLabel",
+      "kind": "cascade",
+      "value": "Manager review for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/approvalWorkflow/releaseLabel",
+      "kind": "cascade",
+      "value": "Release invoice INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/archive/folderPath",
+      "kind": "cascade",
+      "value": "/clients/Northstar/invoices/INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/auditTags/creationTag",
+      "kind": "cascade",
+      "value": "audit-create-INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/auditTags/paymentMatchTag",
+      "kind": "cascade",
+      "value": "audit-match-INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/auditTags/sendingTag",
+      "kind": "cascade",
+      "value": "audit-send-INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/billingCalendar/followUpDateLabel",
+      "kind": "cascade",
+      "value": "Follow-up date for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/billingCalendar/issueDayLabel",
+      "kind": "cascade",
+      "value": "Issue day for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/billingCalendar/paymentDeadlineLabel",
+      "kind": "cascade",
+      "value": "Payment deadline for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/clientPortalUrl",
+      "kind": "cascade",
+      "value": "https://billing.example.com/invoices/INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/closingNote",
+      "kind": "cascade",
+      "value": "Invoice packet for INV-2026-0219 is ready to send."
+    },
+    {
+      "op": "replace",
+      "path": "/collectionsNotes/escalation",
+      "kind": "cascade",
+      "value": "Escalate unpaid balance for INV-2026-0219 after approval."
+    },
+    {
+      "op": "replace",
+      "path": "/collectionsNotes/finalReview",
+      "kind": "cascade",
+      "value": "Final collections review for INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/collectionsNotes/firstOutreach",
+      "kind": "cascade",
+      "value": "First outreach should reference INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/customerStatusMessages/paid",
+      "kind": "cascade",
+      "value": "INV-2026-0219 has been marked as paid."
+    },
+    {
+      "op": "replace",
+      "path": "/customerStatusMessages/sent",
+      "kind": "cascade",
+      "value": "INV-2026-0219 has been sent to Northstar."
+    },
+    {
+      "op": "replace",
+      "path": "/customerStatusMessages/viewed",
+      "kind": "cascade",
+      "value": "INV-2026-0219 was viewed in the customer portal."
+    },
+    {
+      "op": "replace",
+      "path": "/dashboardCaptions/clientPaymentHistory",
+      "kind": "cascade",
+      "value": "Client payment history linked to INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/dashboardCaptions/openBalance",
+      "kind": "cascade",
+      "value": "Open balance for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/dashboardCaptions/recentActivity",
+      "kind": "cascade",
+      "value": "Recent activity on INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/deliveryTracking/emailLog",
+      "kind": "cascade",
+      "value": "Email delivery logged for INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/deliveryTracking/portalDelivery",
+      "kind": "cascade",
+      "value": "Portal delivery confirmed for INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/deliveryTracking/postalHandling",
+      "kind": "cascade",
+      "value": "Postal handling packet marked INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/documentPackage/backupMaterialsLabel",
+      "kind": "cascade",
+      "value": "Backup materials for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/documentPackage/clientCopyLabel",
+      "kind": "cascade",
+      "value": "Client copy of INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/documentPackage/coverPageLabel",
+      "kind": "cascade",
+      "value": "Cover page for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/documentTitle",
+      "kind": "cascade",
+      "value": "Invoice INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/downloadableRecords/auditLogLabel",
+      "kind": "cascade",
+      "value": "Download audit log for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/downloadableRecords/invoicePdfLabel",
+      "kind": "cascade",
+      "value": "Download invoice PDF for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/downloadableRecords/paymentReceiptLabel",
+      "kind": "cascade",
+      "value": "Download payment receipt for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/emailSubject",
+      "kind": "cascade",
+      "value": "Invoice INV-2026-0219 for Northstar"
+    },
+    {
+      "op": "replace",
+      "path": "/finalChecklist/addressConfirmed",
+      "kind": "cascade",
+      "value": "Address confirmed for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/finalChecklist/amountVerified",
+      "kind": "cascade",
+      "value": "Amount verified for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/finalChecklist/clientCopySent",
+      "kind": "cascade",
+      "value": "Client copy sent for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/footer/auditTrailLine",
+      "kind": "cascade",
+      "value": "Audit trail opened for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/footer/printBatchLine",
+      "kind": "cascade",
+      "value": "Print batch includes INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/footer/trackingLine",
+      "kind": "cascade",
+      "value": "Document tracking: INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/integrationWebhooks/approvalSyncLabel",
+      "kind": "cascade",
+      "value": "Webhook approval-sync for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/integrationWebhooks/invoiceCreatedLabel",
+      "kind": "cascade",
+      "value": "Webhook invoice-created for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/integrationWebhooks/paymentConfirmedLabel",
+      "kind": "cascade",
+      "value": "Webhook payment-confirmed for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/internalBillingAlerts/approved",
+      "kind": "cascade",
+      "value": "Billing alert: INV-2026-0219 was approved."
+    },
+    {
+      "op": "replace",
+      "path": "/internalBillingAlerts/created",
+      "kind": "cascade",
+      "value": "Billing alert: INV-2026-0219 was created."
+    },
+    {
+      "op": "replace",
+      "path": "/internalBillingAlerts/paymentPosted",
+      "kind": "cascade",
+      "value": "Billing alert: payment posted for INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/internalMemo",
+      "kind": "cascade",
+      "value": "Created from sales order SO-8842 for INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/legalReviewNotes/contractTerms",
+      "kind": "cascade",
+      "value": "Confirm contract terms support INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/legalReviewNotes/purchaseOrderAlignment",
+      "kind": "cascade",
+      "value": "Check purchase order alignment for INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/legalReviewNotes/recordRetention",
+      "kind": "cascade",
+      "value": "Retain legal backup for INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/mobileAppLabels/documentDownload",
+      "kind": "cascade",
+      "value": "Download INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/mobileAppLabels/paymentDetails",
+      "kind": "cascade",
+      "value": "Payment details for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/mobileAppLabels/summaryCard",
+      "kind": "cascade",
+      "value": "Summary for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/overnightMailPacket/coverSheet",
+      "kind": "cascade",
+      "value": "Overnight cover sheet for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/overnightMailPacket/deliveryConfirmation",
+      "kind": "cascade",
+      "value": "Delivery confirmation for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/overnightMailPacket/trackingSlip",
+      "kind": "cascade",
+      "value": "Tracking slip for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/paymentInstructions/qrPayload",
+      "kind": "cascade",
+      "value": "PAY|REF=INV-2026-0219|AMOUNT_DUE"
+    },
+    {
+      "op": "replace",
+      "path": "/paymentInstructions/referenceNote",
+      "kind": "cascade",
+      "value": "Please use INV-2026-0219 as the transfer reference."
+    },
+    {
+      "op": "replace",
+      "path": "/pdfFileName",
+      "kind": "cascade",
+      "value": "INV-2026-0219_Northstar.pdf"
+    },
+    {
+      "op": "replace",
+      "path": "/portalTimeline/customerViewLabel",
+      "kind": "cascade",
+      "value": "Customer viewed INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/portalTimeline/paymentReceiptLabel",
+      "kind": "cascade",
+      "value": "Payment receipt for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/portalTimeline/uploadLabel",
+      "kind": "cascade",
+      "value": "Uploaded INV-2026-0219 to portal"
+    },
+    {
+      "op": "replace",
+      "path": "/printRoomLabels/envelopeStack",
+      "kind": "cascade",
+      "value": "Envelope stack for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/printRoomLabels/pickupBin",
+      "kind": "cascade",
+      "value": "Pickup bin for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/printRoomLabels/trayCover",
+      "kind": "cascade",
+      "value": "Tray cover for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/projectBillingNotes/consultantTime",
+      "kind": "cascade",
+      "value": "Consultant time reviewed for INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/projectBillingNotes/expenseBackup",
+      "kind": "cascade",
+      "value": "Expense backup filed with INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/projectBillingNotes/milestoneAcceptance",
+      "kind": "cascade",
+      "value": "Milestone acceptance documentation attached to INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/reconciliationNotes/bankDepositMatch",
+      "kind": "cascade",
+      "value": "Match bank deposit against INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/reconciliationNotes/ledgerCheck",
+      "kind": "cascade",
+      "value": "Verify ledger entry for INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/reconciliationNotes/monthClose",
+      "kind": "cascade",
+      "value": "Include INV-2026-0219 in month-end close review."
+    },
+    {
+      "op": "replace",
+      "path": "/reminderMessages/beforeDue",
+      "kind": "cascade",
+      "value": "Reminder: INV-2026-0219 is due soon."
+    },
+    {
+      "op": "replace",
+      "path": "/reminderMessages/onDueDate",
+      "kind": "cascade",
+      "value": "Reminder: INV-2026-0219 is due today."
+    },
+    {
+      "op": "replace",
+      "path": "/reminderMessages/overdue",
+      "kind": "cascade",
+      "value": "Reminder: INV-2026-0219 is now overdue."
+    },
+    {
+      "op": "replace",
+      "path": "/remittanceSlip/mailingNote",
+      "kind": "cascade",
+      "value": "Detach and return with payment for INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/remittanceSlip/scanLabel",
+      "kind": "cascade",
+      "value": "Scan to pay INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/remittanceSlip/title",
+      "kind": "cascade",
+      "value": "Remittance Slip for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/salesHandoff/accountOwnerNote",
+      "kind": "cascade",
+      "value": "Account owner should review INV-2026-0219 before the next check-in."
+    },
+    {
+      "op": "replace",
+      "path": "/salesHandoff/customerSuccessNote",
+      "kind": "cascade",
+      "value": "Customer success has visibility into INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/salesHandoff/renewalTeamNote",
+      "kind": "cascade",
+      "value": "Renewal team should consider INV-2026-0219 in account planning."
+    },
+    {
+      "op": "replace",
+      "path": "/scanningStationLabels/finalIndexing",
+      "kind": "cascade",
+      "value": "Final scan indexing for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/scanningStationLabels/intake",
+      "kind": "cascade",
+      "value": "Scan intake for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/scanningStationLabels/qualityCheck",
+      "kind": "cascade",
+      "value": "Scan quality check for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/staffSearchPhrases/invoiceLookup",
+      "kind": "cascade",
+      "value": "Search invoice INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/staffSearchPhrases/paymentLookup",
+      "kind": "cascade",
+      "value": "Search payment for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/staffSearchPhrases/supportLookup",
+      "kind": "cascade",
+      "value": "Search support history for INV-2026-0219"
+    },
+    {
+      "op": "replace",
+      "path": "/supportNotes/clientQuestions",
+      "kind": "cascade",
+      "value": "For client questions, reference INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/supportNotes/disputeHandling",
+      "kind": "cascade",
+      "value": "Route any dispute about INV-2026-0219 to billing support."
+    },
+    {
+      "op": "replace",
+      "path": "/supportNotes/followUpCalls",
+      "kind": "cascade",
+      "value": "Mention INV-2026-0219 during follow-up calls."
+    },
+    {
+      "op": "replace",
+      "path": "/taxFilingNotes/exemptionReview",
+      "kind": "cascade",
+      "value": "Review tax exemption status for INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/taxFilingNotes/quarterlyReporting",
+      "kind": "cascade",
+      "value": "Include INV-2026-0219 in quarterly sales tax reporting."
+    },
+    {
+      "op": "replace",
+      "path": "/taxFilingNotes/yearEndBinder",
+      "kind": "cascade",
+      "value": "Place INV-2026-0219 in the year-end tax binder."
+    },
+    {
+      "op": "replace",
+      "path": "/warehouseBillingNotes/packingRecords",
+      "kind": "cascade",
+      "value": "Attach packing records to INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/warehouseBillingNotes/proofOfDelivery",
+      "kind": "cascade",
+      "value": "Proof of delivery retained with INV-2026-0219."
+    },
+    {
+      "op": "replace",
+      "path": "/warehouseBillingNotes/shipmentBilling",
+      "kind": "cascade",
+      "value": "Shipment billing cross-check for INV-2026-0219."
+    }
+  ],
+  "expected_json": {
+    "invoiceNumber": "INV-2026-0219",
+    "documentTitle": "Invoice INV-2026-0219",
+    "paymentInstructions": {
+      "referenceNote": "Please use INV-2026-0219 as the transfer reference.",
+      "qrPayload": "PAY|REF=INV-2026-0219|AMOUNT_DUE"
+    },
+    "internalMemo": "Created from sales order SO-8842 for INV-2026-0219.",
+    "pdfFileName": "INV-2026-0219_Northstar.pdf",
+    "emailSubject": "Invoice INV-2026-0219 for Northstar",
+    "clientPortalUrl": "https://billing.example.com/invoices/INV-2026-0219",
+    "remittanceSlip": {
+      "title": "Remittance Slip for INV-2026-0219",
+      "scanLabel": "Scan to pay INV-2026-0219",
+      "mailingNote": "Detach and return with payment for INV-2026-0219."
+    },
+    "archive": {
+      "folderPath": "/clients/Northstar/invoices/INV-2026-0219"
+    },
+    "footer": {
+      "trackingLine": "Document tracking: INV-2026-0219",
+      "printBatchLine": "Print batch includes INV-2026-0219",
+      "auditTrailLine": "Audit trail opened for INV-2026-0219"
+    },
+    "approvalWorkflow": {
+      "managerReviewLabel": "Manager review for INV-2026-0219",
+      "financeApprovalLabel": "Finance approval for INV-2026-0219",
+      "releaseLabel": "Release invoice INV-2026-0219"
+    },
+    "customerStatusMessages": {
+      "sent": "INV-2026-0219 has been sent to Northstar.",
+      "viewed": "INV-2026-0219 was viewed in the customer portal.",
+      "paid": "INV-2026-0219 has been marked as paid."
+    },
+    "reminderMessages": {
+      "beforeDue": "Reminder: INV-2026-0219 is due soon.",
+      "onDueDate": "Reminder: INV-2026-0219 is due today.",
+      "overdue": "Reminder: INV-2026-0219 is now overdue."
+    },
+    "accountingExport": {
+      "invoiceFileName": "export_invoice_INV-2026-0219.csv",
+      "paymentFileName": "export_payment_INV-2026-0219.csv",
+      "receiptFileName": "export_receipt_INV-2026-0219.csv"
+    },
+    "documentPackage": {
+      "coverPageLabel": "Cover page for INV-2026-0219",
+      "backupMaterialsLabel": "Backup materials for INV-2026-0219",
+      "clientCopyLabel": "Client copy of INV-2026-0219"
+    },
+    "reconciliationNotes": {
+      "bankDepositMatch": "Match bank deposit against INV-2026-0219.",
+      "ledgerCheck": "Verify ledger entry for INV-2026-0219.",
+      "monthClose": "Include INV-2026-0219 in month-end close review."
+    },
+    "supportNotes": {
+      "clientQuestions": "For client questions, reference INV-2026-0219.",
+      "disputeHandling": "Route any dispute about INV-2026-0219 to billing support.",
+      "followUpCalls": "Mention INV-2026-0219 during follow-up calls."
+    },
+    "collectionsNotes": {
+      "firstOutreach": "First outreach should reference INV-2026-0219.",
+      "escalation": "Escalate unpaid balance for INV-2026-0219 after approval.",
+      "finalReview": "Final collections review for INV-2026-0219."
+    },
+    "deliveryTracking": {
+      "emailLog": "Email delivery logged for INV-2026-0219.",
+      "postalHandling": "Postal handling packet marked INV-2026-0219.",
+      "portalDelivery": "Portal delivery confirmed for INV-2026-0219."
+    },
+    "salesHandoff": {
+      "accountOwnerNote": "Account owner should review INV-2026-0219 before the next check-in.",
+      "renewalTeamNote": "Renewal team should consider INV-2026-0219 in account planning.",
+      "customerSuccessNote": "Customer success has visibility into INV-2026-0219."
+    },
+    "taxFilingNotes": {
+      "quarterlyReporting": "Include INV-2026-0219 in quarterly sales tax reporting.",
+      "exemptionReview": "Review tax exemption status for INV-2026-0219.",
+      "yearEndBinder": "Place INV-2026-0219 in the year-end tax binder."
+    },
+    "warehouseBillingNotes": {
+      "packingRecords": "Attach packing records to INV-2026-0219.",
+      "shipmentBilling": "Shipment billing cross-check for INV-2026-0219.",
+      "proofOfDelivery": "Proof of delivery retained with INV-2026-0219."
+    },
+    "projectBillingNotes": {
+      "milestoneAcceptance": "Milestone acceptance documentation attached to INV-2026-0219.",
+      "consultantTime": "Consultant time reviewed for INV-2026-0219.",
+      "expenseBackup": "Expense backup filed with INV-2026-0219."
+    },
+    "legalReviewNotes": {
+      "contractTerms": "Confirm contract terms support INV-2026-0219.",
+      "purchaseOrderAlignment": "Check purchase order alignment for INV-2026-0219.",
+      "recordRetention": "Retain legal backup for INV-2026-0219."
+    },
+    "analyticsLabels": {
+      "revenueTracking": "Revenue tracking: INV-2026-0219",
+      "agingAnalysis": "Aging analysis: INV-2026-0219",
+      "paymentVelocity": "Payment velocity: INV-2026-0219"
+    },
+    "dashboardCaptions": {
+      "openBalance": "Open balance for INV-2026-0219",
+      "recentActivity": "Recent activity on INV-2026-0219",
+      "clientPaymentHistory": "Client payment history linked to INV-2026-0219"
+    },
+    "internalBillingAlerts": {
+      "created": "Billing alert: INV-2026-0219 was created.",
+      "approved": "Billing alert: INV-2026-0219 was approved.",
+      "paymentPosted": "Billing alert: payment posted for INV-2026-0219."
+    },
+    "auditTags": {
+      "creationTag": "audit-create-INV-2026-0219",
+      "sendingTag": "audit-send-INV-2026-0219",
+      "paymentMatchTag": "audit-match-INV-2026-0219"
+    },
+    "billingCalendar": {
+      "issueDayLabel": "Issue day for INV-2026-0219",
+      "paymentDeadlineLabel": "Payment deadline for INV-2026-0219",
+      "followUpDateLabel": "Follow-up date for INV-2026-0219"
+    },
+    "mobileAppLabels": {
+      "summaryCard": "Summary for INV-2026-0219",
+      "paymentDetails": "Payment details for INV-2026-0219",
+      "documentDownload": "Download INV-2026-0219"
+    },
+    "portalTimeline": {
+      "uploadLabel": "Uploaded INV-2026-0219 to portal",
+      "customerViewLabel": "Customer viewed INV-2026-0219",
+      "paymentReceiptLabel": "Payment receipt for INV-2026-0219"
+    },
+    "downloadableRecords": {
+      "invoicePdfLabel": "Download invoice PDF for INV-2026-0219",
+      "paymentReceiptLabel": "Download payment receipt for INV-2026-0219",
+      "auditLogLabel": "Download audit log for INV-2026-0219"
+    },
+    "staffSearchPhrases": {
+      "invoiceLookup": "Search invoice INV-2026-0219",
+      "paymentLookup": "Search payment for INV-2026-0219",
+      "supportLookup": "Search support history for INV-2026-0219"
+    },
+    "integrationWebhooks": {
+      "invoiceCreatedLabel": "Webhook invoice-created for INV-2026-0219",
+      "approvalSyncLabel": "Webhook approval-sync for INV-2026-0219",
+      "paymentConfirmedLabel": "Webhook payment-confirmed for INV-2026-0219"
+    },
+    "printRoomLabels": {
+      "trayCover": "Tray cover for INV-2026-0219",
+      "envelopeStack": "Envelope stack for INV-2026-0219",
+      "pickupBin": "Pickup bin for INV-2026-0219"
+    },
+    "scanningStationLabels": {
+      "intake": "Scan intake for INV-2026-0219",
+      "qualityCheck": "Scan quality check for INV-2026-0219",
+      "finalIndexing": "Final scan indexing for INV-2026-0219"
+    },
+    "overnightMailPacket": {
+      "coverSheet": "Overnight cover sheet for INV-2026-0219",
+      "trackingSlip": "Tracking slip for INV-2026-0219",
+      "deliveryConfirmation": "Delivery confirmation for INV-2026-0219"
+    },
+    "finalChecklist": {
+      "addressConfirmed": "Address confirmed for INV-2026-0219",
+      "amountVerified": "Amount verified for INV-2026-0219",
+      "clientCopySent": "Client copy sent for INV-2026-0219"
+    },
+    "closingNote": "Invoice packet for INV-2026-0219 is ready to send."
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Invoice number INV-2026-0147 -> INV-2026-0219. Every field embedding the token gets it substituted while surrounding text is preserved (documentTitle, payment/QR references, file names, URLs, all label/message/note groups across the document). invoiceNumber is the direct edit; the rest are cascade. No non-token fields exist to leave untouched in this artifact.",
+  "conversation_pattern": "Center the artifact on an invoice that declares one identifier, where several other fields embed or reference that identifier as a visible token. Around this core, add the realistic, independent details an invoice would carry that do not embed that identifier, and vary their number from sample to sample.",
+  "edit_pattern": "Change the invoice number to a different identifier.",
+  "cascade_pattern": "Changing the identifier updates every field that embeds it, substituting the token while the surrounding text stays. Identifiers and fields that do not reference it are unaffected.",
+  "requires_master_data": false
+}

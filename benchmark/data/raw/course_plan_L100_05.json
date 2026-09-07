@@ -1,0 +1,557 @@
+{
+  "id": "course_plan_L100_05",
+  "domain": "course_plan",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a degree plan for Maya Patel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student\", \"value\": {\"name\": \"Maya Patel\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the program up so Maya needs 120 credits to graduate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree\", \"value\": {\"requiredCredits\": 120}}]"
+    },
+    {
+      "role": "user",
+      "content": "She has already completed 78 credits toward it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/earnedCredits\", \"value\": 78}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan around her taking 15 credits each term."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/plannedCreditsPerTerm\", \"value\": 15}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and show how many credits she still needs after the ones she has completed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/remainingCredits\", \"value\": 42}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark whether that pace keeps her on schedule for finishing the program."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/onTrack\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include the number of terms that pace leaves before she finishes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/projectedTermsToCompletion\", \"value\": 3}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that Maya is pursuing a Bachelor of Science in Environmental Studies."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/program\", \"value\": {\"level\": \"Bachelor of Science\", \"major\": \"Environmental Studies\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that she's in the College of Natural Resources."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/college\", \"value\": \"College of Natural Resources\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her academic advisor, Dr. Elena Morris, with an email contact."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisor\", \"value\": {\"name\": \"Dr. Elena Morris\", \"email\": \"elena.morris@university.edu\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her university ID and note that she’s currently a junior."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student/id\", \"value\": \"U4829136\"}, {\"op\": \"add\", \"path\": \"/student/classStanding\", \"value\": \"Junior\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that Maya is enrolled full time for Spring 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student/currentEnrollment\", \"value\": {\"term\": \"Spring 2026\", \"status\": \"Full time\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include that her home campus is Riverbend and her catalog year is 2023–2024."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/campus\", \"value\": \"Riverbend\"}, {\"op\": \"add\", \"path\": \"/degree/catalogYear\", \"value\": \"2023–2024\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a concentration in watershed management."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/program/concentration\", \"value\": \"Watershed Management\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a reminder that her capstone proposal is due by October 15, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestones\", \"value\": [{\"name\": \"Capstone proposal\", \"dueDate\": \"2026-10-15\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another reminder for the internship reflection that’s due on December 5, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestones/-\", \"value\": {\"name\": \"Internship reflection\", \"dueDate\": \"2026-12-05\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a final reminder for her degree audit review on March 20, 2027."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestones/-\", \"value\": {\"name\": \"Degree audit review\", \"dueDate\": \"2027-03-20\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that Dr. Morris meets with students in Oak Hall 214 on Tuesday afternoons."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisor/office\", \"value\": \"Oak Hall 214\"}, {\"op\": \"add\", \"path\": \"/advisor/officeHours\", \"value\": \"Tuesdays, 1:00–3:00 PM\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her spring hydrology class, including the instructor’s name."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/currentCourses\", \"value\": [{\"courseCode\": \"ENVS 342\", \"title\": \"Watershed Hydrology\", \"instructor\": \"Prof. Samuel Chen\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her environmental law class with its instructor too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/currentCourses/-\", \"value\": {\"courseCode\": \"ENVS 318\", \"title\": \"Environmental Law and Policy\", \"instructor\": \"Dr. Priya Nair\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her GIS class and who teaches it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/currentCourses/-\", \"value\": {\"courseCode\": \"GEOG 255\", \"title\": \"Introduction to GIS\", \"instructor\": \"Prof. Alicia Romero\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her ecology lab with the instructor listed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/currentCourses/-\", \"value\": {\"courseCode\": \"BIOL 306L\", \"title\": \"Field Ecology Lab\", \"instructor\": \"Dr. Marcus Lee\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include that the hydrology class meets Mondays and Wednesdays from 10:00 to 11:15 in Science Center 108."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/currentCourses/0/meeting\", \"value\": {\"days\": \"Mondays and Wednesdays\", \"time\": \"10:00–11:15 AM\", \"location\": \"Science Center 108\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the environmental law class, add that it meets Tuesdays and Thursdays from 9:30 to 10:45 in Green Hall 220."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/currentCourses/1/meeting\", \"value\": {\"days\": \"Tuesdays and Thursdays\", \"time\": \"9:30–10:45 AM\", \"location\": \"Green Hall 220\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For GIS, add that it meets Fridays from 1:00 to 3:45 in the Mapping Lab."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/currentCourses/2/meeting\", \"value\": {\"days\": \"Fridays\", \"time\": \"1:00–3:45 PM\", \"location\": \"Mapping Lab\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the ecology lab, add that it meets Thursdays from 2:00 to 5:00 at the Outdoor Research Station."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/currentCourses/3/meeting\", \"value\": {\"days\": \"Thursdays\", \"time\": \"2:00–5:00 PM\", \"location\": \"Outdoor Research Station\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a checklist reminder for Maya to submit her graduation application through the registrar by February 1, 2027."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/graduationChecklist\", \"value\": [{\"task\": \"Submit graduation application\", \"office\": \"Registrar\", \"dueDate\": \"2027-02-01\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another checklist item to confirm her capstone presentation date with the department office by January 15, 2027."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/graduationChecklist/-\", \"value\": {\"task\": \"Confirm capstone presentation date\", \"office\": \"Department Office\", \"dueDate\": \"2027-01-15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a checklist item for ordering her cap and gown from the campus store by March 1, 2027."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/graduationChecklist/-\", \"value\": {\"task\": \"Order cap and gown\", \"office\": \"Campus Store\", \"dueDate\": \"2027-03-01\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that Maya made the Dean’s List in Fall 2025 with a 3.72 GPA."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/academicHonors\", \"value\": [{\"term\": \"Fall 2025\", \"recognition\": \"Dean’s List\", \"gpa\": 3.72}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that she received the River Steward Scholarship for the 2025–2026 year, worth $2,500."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/scholarships\", \"value\": [{\"name\": \"River Steward Scholarship\", \"awardYear\": \"2025–2026\", \"amount\": 2500}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her planned summer internship with the county water quality office and the site supervisor’s name."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/internships\", \"value\": [{\"organization\": \"County Water Quality Office\", \"term\": \"Summer 2026\", \"supervisor\": \"Nadia Brooks\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that the internship is expected to run from June 1 through August 7, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/internships/0/startDate\", \"value\": \"2026-06-01\"}, {\"op\": \"add\", \"path\": \"/internships/0/endDate\", \"value\": \"2026-08-07\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that she’s working toward a minor in data science through the Statistics Department."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/minor\", \"value\": {\"name\": \"Data Science\", \"department\": \"Statistics Department\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the minor advisor, Dr. Kenji Watanabe, and his contact email."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/minor/advisor\", \"value\": {\"name\": \"Dr. Kenji Watanabe\", \"email\": \"kenji.watanabe@university.edu\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her undergraduate research project on urban stream restoration with Dr. Samuel Chen as the mentor."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/researchProjects\", \"value\": [{\"title\": \"Urban Stream Restoration\", \"mentor\": \"Dr. Samuel Chen\", \"status\": \"In progress\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that she belongs to the Environmental Student Association, serves as treasurer, and joined in 2024."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/studentOrganizations\", \"value\": [{\"name\": \"Environmental Student Association\", \"role\": \"Treasurer\", \"joinedYear\": 2024}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that she volunteers with River Cleanup Crew as a site lead and started in 2023."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/serviceActivities\", \"value\": [{\"organization\": \"River Cleanup Crew\", \"role\": \"Site Lead\", \"startYear\": 2023}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that she completed study abroad in Costa Rica during Summer 2025 with a focus on tropical ecology."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/studyAbroad\", \"value\": [{\"location\": \"Costa Rica\", \"term\": \"Summer 2025\", \"focus\": \"Tropical Ecology\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that after graduation she hopes to become a watershed analyst with a public agency in the Pacific Northwest."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/careerGoal\", \"value\": {\"targetRole\": \"Watershed Analyst\", \"preferredEmployerType\": \"Public agency\", \"preferredRegion\": \"Pacific Northwest\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an emergency contact for Maya: her mother, Leena Patel, reachable at 555-0148."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emergencyContact\", \"value\": {\"name\": \"Leena Patel\", \"relationship\": \"Mother\", \"phone\": \"555-0148\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her preferred way to be contacted, using her campus email in the mornings."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student/contactPreference\", \"value\": {\"method\": \"Campus email\", \"bestTime\": \"Mornings\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that Maya completed campus safety training on January 10, 2026, and it remains valid until January 10, 2028."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trainings\", \"value\": [{\"name\": \"Campus Safety Training\", \"completedDate\": \"2026-01-10\", \"validUntil\": \"2028-01-10\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her next advising appointment for April 8, 2026, as an in-person meeting."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisor/nextAppointment\", \"value\": {\"date\": \"2026-04-08\", \"mode\": \"In person\"}}]"
+    }
+  ],
+  "edit_instruction": "Update Maya’s program so the degree now requires 135 total credits.",
+  "theme": "Changing the degree credit requirement",
+  "master_data": null,
+  "current_json": {
+    "student": {
+      "name": "Maya Patel",
+      "id": "U4829136",
+      "classStanding": "Junior",
+      "currentEnrollment": {
+        "term": "Spring 2026",
+        "status": "Full time"
+      },
+      "contactPreference": {
+        "method": "Campus email",
+        "bestTime": "Mornings"
+      }
+    },
+    "degree": {
+      "requiredCredits": 120,
+      "earnedCredits": 78,
+      "plannedCreditsPerTerm": 15,
+      "remainingCredits": 42,
+      "onTrack": true,
+      "projectedTermsToCompletion": 3,
+      "program": {
+        "level": "Bachelor of Science",
+        "major": "Environmental Studies",
+        "concentration": "Watershed Management"
+      },
+      "college": "College of Natural Resources",
+      "campus": "Riverbend",
+      "catalogYear": "2023–2024"
+    },
+    "advisor": {
+      "name": "Dr. Elena Morris",
+      "email": "elena.morris@university.edu",
+      "office": "Oak Hall 214",
+      "officeHours": "Tuesdays, 1:00–3:00 PM",
+      "nextAppointment": {
+        "date": "2026-04-08",
+        "mode": "In person"
+      }
+    },
+    "milestones": [
+      {
+        "name": "Capstone proposal",
+        "dueDate": "2026-10-15"
+      },
+      {
+        "name": "Internship reflection",
+        "dueDate": "2026-12-05"
+      },
+      {
+        "name": "Degree audit review",
+        "dueDate": "2027-03-20"
+      }
+    ],
+    "currentCourses": [
+      {
+        "courseCode": "ENVS 342",
+        "title": "Watershed Hydrology",
+        "instructor": "Prof. Samuel Chen",
+        "meeting": {
+          "days": "Mondays and Wednesdays",
+          "time": "10:00–11:15 AM",
+          "location": "Science Center 108"
+        }
+      },
+      {
+        "courseCode": "ENVS 318",
+        "title": "Environmental Law and Policy",
+        "instructor": "Dr. Priya Nair",
+        "meeting": {
+          "days": "Tuesdays and Thursdays",
+          "time": "9:30–10:45 AM",
+          "location": "Green Hall 220"
+        }
+      },
+      {
+        "courseCode": "GEOG 255",
+        "title": "Introduction to GIS",
+        "instructor": "Prof. Alicia Romero",
+        "meeting": {
+          "days": "Fridays",
+          "time": "1:00–3:45 PM",
+          "location": "Mapping Lab"
+        }
+      },
+      {
+        "courseCode": "BIOL 306L",
+        "title": "Field Ecology Lab",
+        "instructor": "Dr. Marcus Lee",
+        "meeting": {
+          "days": "Thursdays",
+          "time": "2:00–5:00 PM",
+          "location": "Outdoor Research Station"
+        }
+      }
+    ],
+    "graduationChecklist": [
+      {
+        "task": "Submit graduation application",
+        "office": "Registrar",
+        "dueDate": "2027-02-01"
+      },
+      {
+        "task": "Confirm capstone presentation date",
+        "office": "Department Office",
+        "dueDate": "2027-01-15"
+      },
+      {
+        "task": "Order cap and gown",
+        "office": "Campus Store",
+        "dueDate": "2027-03-01"
+      }
+    ],
+    "academicHonors": [
+      {
+        "term": "Fall 2025",
+        "recognition": "Dean’s List",
+        "gpa": 3.72
+      }
+    ],
+    "scholarships": [
+      {
+        "name": "River Steward Scholarship",
+        "awardYear": "2025–2026",
+        "amount": 2500
+      }
+    ],
+    "internships": [
+      {
+        "organization": "County Water Quality Office",
+        "term": "Summer 2026",
+        "supervisor": "Nadia Brooks",
+        "startDate": "2026-06-01",
+        "endDate": "2026-08-07"
+      }
+    ],
+    "minor": {
+      "name": "Data Science",
+      "department": "Statistics Department",
+      "advisor": {
+        "name": "Dr. Kenji Watanabe",
+        "email": "kenji.watanabe@university.edu"
+      }
+    },
+    "researchProjects": [
+      {
+        "title": "Urban Stream Restoration",
+        "mentor": "Dr. Samuel Chen",
+        "status": "In progress"
+      }
+    ],
+    "studentOrganizations": [
+      {
+        "name": "Environmental Student Association",
+        "role": "Treasurer",
+        "joinedYear": 2024
+      }
+    ],
+    "serviceActivities": [
+      {
+        "organization": "River Cleanup Crew",
+        "role": "Site Lead",
+        "startYear": 2023
+      }
+    ],
+    "studyAbroad": [
+      {
+        "location": "Costa Rica",
+        "term": "Summer 2025",
+        "focus": "Tropical Ecology"
+      }
+    ],
+    "careerGoal": {
+      "targetRole": "Watershed Analyst",
+      "preferredEmployerType": "Public agency",
+      "preferredRegion": "Pacific Northwest"
+    },
+    "emergencyContact": {
+      "name": "Leena Patel",
+      "relationship": "Mother",
+      "phone": "555-0148"
+    },
+    "trainings": [
+      {
+        "name": "Campus Safety Training",
+        "completedDate": "2026-01-10",
+        "validUntil": "2028-01-10"
+      }
+    ]
+  },
+  "conversation_pattern": "Center the artifact on a degree plan with a credit requirement and credits earned, where a remaining-to-requirement, an on-track flag, and a projected completion derive from the requirement, the earned credits, and a stated per-term load. Around this core, add the realistic, independent details a degree plan would carry that do not depend on the credit requirement, and vary their number from sample to sample.",
+  "edit_pattern": "Change the degree's required total credits to a specific new number.",
+  "cascade_pattern": "Editing the requirement re-derives the remaining-to-requirement, re-evaluates the on-track flag, and re-derives the projected completion from the remaining and the stated per-term load. The earned credits and per-term load stay. This is determined because the per-term load and earned credits are stated.",
+  "requires_master_data": false
+}

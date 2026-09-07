@@ -1,0 +1,731 @@
+{
+  "id": "course_plan_L100_00",
+  "domain": "course_plan",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm putting together a term plan; start it with the school, Northern Lakes University."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schoolName\", \"value\": \"Northern Lakes University\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's use a standard 4.0 grading scale, starting with A being worth 4.0 points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/gradePointScale\", \"value\": [{\"letter\": \"A\", \"points\": 4.0}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that a B should count as 3.0 points on that same scale."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/gradePointScale/-\", \"value\": {\"letter\": \"B\", \"points\": 3.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include C as 2.0 points too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/gradePointScale/-\", \"value\": {\"letter\": \"C\", \"points\": 2.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "And add D as 1.0 point."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/gradePointScale/-\", \"value\": {\"letter\": \"D\", \"points\": 1.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the scale with F counting as 0.0 points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/gradePointScale/-\", \"value\": {\"letter\": \"F\", \"points\": 0.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "For academic status, treat a 2.0 or higher as good standing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/standingThresholds\", \"value\": [{\"standing\": \"good\", \"minimumGpa\": 2.0}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also mark anything below 2.0 as probation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/standingThresholds/-\", \"value\": {\"standing\": \"probation\", \"maximumGpaExclusive\": 2.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first class as Biology 101, worth 4 credits, with a B so far."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses\", \"value\": [{\"courseTitle\": \"Biology 101\", \"creditHours\": 4, \"letterGrade\": \"B\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "For Biology 101, note that its B earns 3.0 points on the scale."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/gradePoints\", \"value\": 3.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Add College Algebra as a 3-credit class with a C."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"College Algebra\", \"creditHours\": 3, \"letterGrade\": \"C\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For College Algebra, record that the C is worth 2.0 points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/1/gradePoints\", \"value\": 2.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Add English Composition as a 3-credit course with a C."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"English Composition\", \"creditHours\": 3, \"letterGrade\": \"C\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For English Composition, note that the C earns 2.0 points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/2/gradePoints\", \"value\": 2.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Add World History as a 3-credit class with a D."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"World History\", \"creditHours\": 3, \"letterGrade\": \"D\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For World History, record that the D counts as 1.0 point."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/3/gradePoints\", \"value\": 1.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Introduction to Psychology as a 3-credit class with a B."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Introduction to Psychology\", \"creditHours\": 3, \"letterGrade\": \"B\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Introduction to Psychology, note that the B earns 3.0 points."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/4/gradePoints\", \"value\": 3.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Add General Chemistry as a 4-credit class with a D."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"General Chemistry\", \"creditHours\": 4, \"letterGrade\": \"D\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For General Chemistry, record that the D is 1.0 point."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/5/gradePoints\", \"value\": 1.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the term total based on those six classes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary\", \"value\": {\"totalCreditHours\": 20, \"totalQualityPoints\": 40.0, \"gpa\": 2.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Based on that 2.0 result, mark the student as in good standing and not on probation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/standingEvaluation\", \"value\": {\"currentStanding\": \"good\", \"isGoodStanding\": true, \"isOnProbation\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Attach this plan to Maya Chen, student ID NLU-28491, in the Biology major."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student\", \"value\": {\"fullName\": \"Maya Chen\", \"studentId\": \"NLU-28491\", \"major\": \"Biology\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also show that this is for Fall 2026, the undergraduate level, and full-time enrollment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/termDetails\", \"value\": {\"term\": \"Fall 2026\", \"level\": \"Undergraduate\", \"enrollmentLoad\": \"Full-time\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Dr. Elena Morris as the advisor, with Morr Hall 214 as the office and advising@nlu.edu as the contact."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisor\", \"value\": {\"name\": \"Dr. Elena Morris\", \"office\": \"Morr Hall 214\", \"email\": \"advising@nlu.edu\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include that the classes are on the Lakeside campus, mostly in person, with one blended lab component."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deliveryPlan\", \"value\": {\"campus\": \"Lakeside\", \"primaryMode\": \"In person\", \"labMode\": \"Blended\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that registration was completed on April 18, 2026, through the student portal, with no override needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/registration\", \"value\": {\"completedDate\": \"2026-04-18\", \"method\": \"Student portal\", \"overrideRequired\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note an estimated tuition charge of 12,400 dollars, a 1,250 dollar scholarship, and a remaining balance of 11,150 dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tuitionEstimate\", \"value\": {\"tuitionCharge\": 12400, \"scholarshipAmount\": 1250, \"remainingBalance\": 11150}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that Maya has 42 credits already completed, needs 120 for the degree, and is aiming for graduation in Spring 2028."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degreeProgress\", \"value\": {\"completedCreditsBeforeTerm\": 42, \"degreeCreditRequirement\": 120, \"targetGraduationTerm\": \"Spring 2028\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include her emergency contact as Linda Chen, her mother, reachable at 218-555-0194."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emergencyContact\", \"value\": {\"name\": \"Linda Chen\", \"relationship\": \"Mother\", \"phone\": \"218-555-0194\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add reminders that she should meet her advisor by September 10, order lab goggles, and confirm her payment plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/actionItems\", \"value\": [\"Meet advisor by September 10\", \"Order lab goggles\", \"Confirm payment plan\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that she has priority seating approved, may record lectures, and has no separate exam setup requested."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supportArrangements\", \"value\": {\"prioritySeating\": true, \"lectureRecordingAllowed\": true, \"separateExamSetup\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the Biology 101 meeting details: Mondays and Wednesdays at 9:00 AM in Science Center 118."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/schedule\", \"value\": {\"days\": \"Monday/Wednesday\", \"time\": \"9:00 AM\", \"location\": \"Science Center 118\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the College Algebra meeting details: Tuesdays and Thursdays at 10:30 AM in Math Hall 204."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/1/schedule\", \"value\": {\"days\": \"Tuesday/Thursday\", \"time\": \"10:30 AM\", \"location\": \"Math Hall 204\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the English Composition meeting details: Mondays at 1:00 PM in Humanities 310."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/2/schedule\", \"value\": {\"days\": \"Monday\", \"time\": \"1:00 PM\", \"location\": \"Humanities 310\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the World History meeting details: Wednesdays at 2:00 PM in Founders Hall 122."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/3/schedule\", \"value\": {\"days\": \"Wednesday\", \"time\": \"2:00 PM\", \"location\": \"Founders Hall 122\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the Introduction to Psychology meeting details: Fridays at 11:00 AM in Social Sciences 205."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/4/schedule\", \"value\": {\"days\": \"Friday\", \"time\": \"11:00 AM\", \"location\": \"Social Sciences 205\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the General Chemistry meeting details: Tuesdays at 1:30 PM in Chemistry Building 140."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/5/schedule\", \"value\": {\"days\": \"Tuesday\", \"time\": \"1:30 PM\", \"location\": \"Chemistry Building 140\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add materials for Biology 101: Campbell Biology, a lab notebook, and a calculator."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/materials\", \"value\": [\"Campbell Biology\", \"Lab notebook\", \"Calculator\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "For College Algebra, list the required supplies as a graphing calculator, graph paper, a ruler, and access to MyMathLab."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/1/materials\", \"value\": [\"Graphing calculator\", \"Graph paper\", \"Ruler\", \"MyMathLab access\"]}]"
+    }
+  ],
+  "edit_instruction": "Update Biology 101’s grade to D.",
+  "theme": "Changing a course grade",
+  "master_data": null,
+  "current_json": {
+    "schoolName": "Northern Lakes University",
+    "gradePointScale": [
+      {
+        "letter": "A",
+        "points": 4.0
+      },
+      {
+        "letter": "B",
+        "points": 3.0
+      },
+      {
+        "letter": "C",
+        "points": 2.0
+      },
+      {
+        "letter": "D",
+        "points": 1.0
+      },
+      {
+        "letter": "F",
+        "points": 0.0
+      }
+    ],
+    "standingThresholds": [
+      {
+        "standing": "good",
+        "minimumGpa": 2.0
+      },
+      {
+        "standing": "probation",
+        "maximumGpaExclusive": 2.0
+      }
+    ],
+    "courses": [
+      {
+        "courseTitle": "Biology 101",
+        "creditHours": 4,
+        "letterGrade": "B",
+        "gradePoints": 3.0,
+        "schedule": {
+          "days": "Monday/Wednesday",
+          "time": "9:00 AM",
+          "location": "Science Center 118"
+        },
+        "materials": [
+          "Campbell Biology",
+          "Lab notebook",
+          "Calculator"
+        ]
+      },
+      {
+        "courseTitle": "College Algebra",
+        "creditHours": 3,
+        "letterGrade": "C",
+        "gradePoints": 2.0,
+        "schedule": {
+          "days": "Tuesday/Thursday",
+          "time": "10:30 AM",
+          "location": "Math Hall 204"
+        },
+        "materials": [
+          "Graphing calculator",
+          "Graph paper",
+          "Ruler",
+          "MyMathLab access"
+        ]
+      },
+      {
+        "courseTitle": "English Composition",
+        "creditHours": 3,
+        "letterGrade": "C",
+        "gradePoints": 2.0,
+        "schedule": {
+          "days": "Monday",
+          "time": "1:00 PM",
+          "location": "Humanities 310"
+        }
+      },
+      {
+        "courseTitle": "World History",
+        "creditHours": 3,
+        "letterGrade": "D",
+        "gradePoints": 1.0,
+        "schedule": {
+          "days": "Wednesday",
+          "time": "2:00 PM",
+          "location": "Founders Hall 122"
+        }
+      },
+      {
+        "courseTitle": "Introduction to Psychology",
+        "creditHours": 3,
+        "letterGrade": "B",
+        "gradePoints": 3.0,
+        "schedule": {
+          "days": "Friday",
+          "time": "11:00 AM",
+          "location": "Social Sciences 205"
+        }
+      },
+      {
+        "courseTitle": "General Chemistry",
+        "creditHours": 4,
+        "letterGrade": "D",
+        "gradePoints": 1.0,
+        "schedule": {
+          "days": "Tuesday",
+          "time": "1:30 PM",
+          "location": "Chemistry Building 140"
+        }
+      }
+    ],
+    "summary": {
+      "totalCreditHours": 20,
+      "totalQualityPoints": 40.0,
+      "gpa": 2.0
+    },
+    "standingEvaluation": {
+      "currentStanding": "good",
+      "isGoodStanding": true,
+      "isOnProbation": false
+    },
+    "student": {
+      "fullName": "Maya Chen",
+      "studentId": "NLU-28491",
+      "major": "Biology"
+    },
+    "termDetails": {
+      "term": "Fall 2026",
+      "level": "Undergraduate",
+      "enrollmentLoad": "Full-time"
+    },
+    "advisor": {
+      "name": "Dr. Elena Morris",
+      "office": "Morr Hall 214",
+      "email": "advising@nlu.edu"
+    },
+    "deliveryPlan": {
+      "campus": "Lakeside",
+      "primaryMode": "In person",
+      "labMode": "Blended"
+    },
+    "registration": {
+      "completedDate": "2026-04-18",
+      "method": "Student portal",
+      "overrideRequired": false
+    },
+    "tuitionEstimate": {
+      "tuitionCharge": 12400,
+      "scholarshipAmount": 1250,
+      "remainingBalance": 11150
+    },
+    "degreeProgress": {
+      "completedCreditsBeforeTerm": 42,
+      "degreeCreditRequirement": 120,
+      "targetGraduationTerm": "Spring 2028"
+    },
+    "emergencyContact": {
+      "name": "Linda Chen",
+      "relationship": "Mother",
+      "phone": "218-555-0194"
+    },
+    "actionItems": [
+      "Meet advisor by September 10",
+      "Order lab goggles",
+      "Confirm payment plan"
+    ],
+    "supportArrangements": {
+      "prioritySeating": true,
+      "lectureRecordingAllowed": true,
+      "separateExamSetup": false
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/courses/0/letterGrade",
+      "kind": "direct",
+      "value": "D"
+    },
+    {
+      "op": "replace",
+      "path": "/courses/0/gradePoints",
+      "kind": "cascade",
+      "value": 1.0
+    },
+    {
+      "op": "replace",
+      "path": "/summary/totalQualityPoints",
+      "kind": "cascade",
+      "value": 32.0
+    },
+    {
+      "op": "replace",
+      "path": "/summary/gpa",
+      "kind": "cascade",
+      "value": 1.6
+    },
+    {
+      "op": "replace",
+      "path": "/standingEvaluation/currentStanding",
+      "kind": "cascade",
+      "value": "probation"
+    },
+    {
+      "op": "replace",
+      "path": "/standingEvaluation/isGoodStanding",
+      "kind": "cascade",
+      "value": false
+    },
+    {
+      "op": "replace",
+      "path": "/standingEvaluation/isOnProbation",
+      "kind": "cascade",
+      "value": true
+    }
+  ],
+  "expected_json": {
+    "schoolName": "Northern Lakes University",
+    "gradePointScale": [
+      {
+        "letter": "A",
+        "points": 4.0
+      },
+      {
+        "letter": "B",
+        "points": 3.0
+      },
+      {
+        "letter": "C",
+        "points": 2.0
+      },
+      {
+        "letter": "D",
+        "points": 1.0
+      },
+      {
+        "letter": "F",
+        "points": 0.0
+      }
+    ],
+    "standingThresholds": [
+      {
+        "standing": "good",
+        "minimumGpa": 2.0
+      },
+      {
+        "standing": "probation",
+        "maximumGpaExclusive": 2.0
+      }
+    ],
+    "courses": [
+      {
+        "courseTitle": "Biology 101",
+        "creditHours": 4,
+        "letterGrade": "D",
+        "gradePoints": 1.0,
+        "schedule": {
+          "days": "Monday/Wednesday",
+          "time": "9:00 AM",
+          "location": "Science Center 118"
+        },
+        "materials": [
+          "Campbell Biology",
+          "Lab notebook",
+          "Calculator"
+        ]
+      },
+      {
+        "courseTitle": "College Algebra",
+        "creditHours": 3,
+        "letterGrade": "C",
+        "gradePoints": 2.0,
+        "schedule": {
+          "days": "Tuesday/Thursday",
+          "time": "10:30 AM",
+          "location": "Math Hall 204"
+        },
+        "materials": [
+          "Graphing calculator",
+          "Graph paper",
+          "Ruler",
+          "MyMathLab access"
+        ]
+      },
+      {
+        "courseTitle": "English Composition",
+        "creditHours": 3,
+        "letterGrade": "C",
+        "gradePoints": 2.0,
+        "schedule": {
+          "days": "Monday",
+          "time": "1:00 PM",
+          "location": "Humanities 310"
+        }
+      },
+      {
+        "courseTitle": "World History",
+        "creditHours": 3,
+        "letterGrade": "D",
+        "gradePoints": 1.0,
+        "schedule": {
+          "days": "Wednesday",
+          "time": "2:00 PM",
+          "location": "Founders Hall 122"
+        }
+      },
+      {
+        "courseTitle": "Introduction to Psychology",
+        "creditHours": 3,
+        "letterGrade": "B",
+        "gradePoints": 3.0,
+        "schedule": {
+          "days": "Friday",
+          "time": "11:00 AM",
+          "location": "Social Sciences 205"
+        }
+      },
+      {
+        "courseTitle": "General Chemistry",
+        "creditHours": 4,
+        "letterGrade": "D",
+        "gradePoints": 1.0,
+        "schedule": {
+          "days": "Tuesday",
+          "time": "1:30 PM",
+          "location": "Chemistry Building 140"
+        }
+      }
+    ],
+    "summary": {
+      "totalCreditHours": 20,
+      "totalQualityPoints": 32.0,
+      "gpa": 1.6
+    },
+    "standingEvaluation": {
+      "currentStanding": "probation",
+      "isGoodStanding": false,
+      "isOnProbation": true
+    },
+    "student": {
+      "fullName": "Maya Chen",
+      "studentId": "NLU-28491",
+      "major": "Biology"
+    },
+    "termDetails": {
+      "term": "Fall 2026",
+      "level": "Undergraduate",
+      "enrollmentLoad": "Full-time"
+    },
+    "advisor": {
+      "name": "Dr. Elena Morris",
+      "office": "Morr Hall 214",
+      "email": "advising@nlu.edu"
+    },
+    "deliveryPlan": {
+      "campus": "Lakeside",
+      "primaryMode": "In person",
+      "labMode": "Blended"
+    },
+    "registration": {
+      "completedDate": "2026-04-18",
+      "method": "Student portal",
+      "overrideRequired": false
+    },
+    "tuitionEstimate": {
+      "tuitionCharge": 12400,
+      "scholarshipAmount": 1250,
+      "remainingBalance": 11150
+    },
+    "degreeProgress": {
+      "completedCreditsBeforeTerm": 42,
+      "degreeCreditRequirement": 120,
+      "targetGraduationTerm": "Spring 2028"
+    },
+    "emergencyContact": {
+      "name": "Linda Chen",
+      "relationship": "Mother",
+      "phone": "218-555-0194"
+    },
+    "actionItems": [
+      "Meet advisor by September 10",
+      "Order lab goggles",
+      "Confirm payment plan"
+    ],
+    "supportArrangements": {
+      "prioritySeating": true,
+      "lectureRecordingAllowed": true,
+      "separateExamSetup": false
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Biology 101 grade B->D; gradePoints from the scale 3.0 -> 1.0. Quality points for that course 4*1.0=4.0; totalQualityPoints 40.0 -> 32.0; gpa = 32/20 = 1.6 (credit-weighted). Crossing below the 2.0 good-standing threshold flips standing: currentStanding good->probation, isGoodStanding true->false, isOnProbation false->true. totalCreditHours, other courses, scale, thresholds, and descriptive fields stay.",
+  "conversation_pattern": "Center the artifact on a course list where each course has credit hours and a letter grade, with a stated letter-grade-to-grade-point scale from which each course's grade points derive, a GPA derives as the credit-weighted average of those grade points, and standing flags derive from the GPA against stated thresholds. Around this core, add the realistic, independent details a course plan would carry that do not depend on the grades, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Change one course's letter grade to a specific new letter grade.",
+  "cascade_pattern": "Editing a course's letter grade re-derives that course's grade points from the stated scale, then the GPA re-derives as the credit-weighted average, and the standing flags re-evaluate against the stated thresholds. Other grades and credits stay. This is determined because the grade scale and thresholds are stated.",
+  "requires_master_data": false
+}

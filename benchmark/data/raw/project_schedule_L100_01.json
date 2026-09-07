@@ -1,0 +1,465 @@
+{
+  "id": "project_schedule_L100_01",
+  "domain": "project_schedule",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a project plan for the customer portal rollout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projectName\", \"value\": \"Customer Portal Rollout\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the work kick off on Monday, April 7, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projectStart\", \"value\": \"2025-04-07\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the first activity a three-day discovery workshop."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"id\": \"T1\", \"taskName\": \"Discovery workshop\", \"durationDays\": 3}]}]"
+    },
+    {
+      "role": "user",
+      "content": "After that, add a two-day requirements confirmation session."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T2\", \"taskName\": \"Requirements confirmation\", \"durationDays\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Then schedule a four-day solution design activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T3\", \"taskName\": \"Solution design\", \"durationDays\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Follow that with a five-day prototype build."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T4\", \"taskName\": \"Prototype build\", \"durationDays\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Next comes a three-day stakeholder review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T5\", \"taskName\": \"Stakeholder review\", \"durationDays\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "After the review, put in a six-day core development phase."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T6\", \"taskName\": \"Core development\", \"durationDays\": 6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Then add a four-day integration testing activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T7\", \"taskName\": \"Integration testing\", \"durationDays\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "After testing, include a two-day launch readiness check."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T8\", \"taskName\": \"Launch readiness check\", \"durationDays\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use calendar days for the plan, and show each finish as the handoff date when the next activity begins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/scheduleConvention\", \"value\": \"Calendar days; finish dates are exclusive handoff dates, and each task starts on its predecessor's finish date.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the discovery workshop as starting right at kickoff and ending three days later, with nothing before it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/0/predecessorId\", \"value\": \"START\"}, {\"op\": \"add\", \"path\": \"/tasks/0/startDate\", \"value\": \"2025-04-07\"}, {\"op\": \"add\", \"path\": \"/tasks/0/finishDate\", \"value\": \"2025-04-10\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have requirements confirmation pick up immediately after the workshop and run for its two days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/1/predecessorId\", \"value\": \"T1\"}, {\"op\": \"add\", \"path\": \"/tasks/1/startDate\", \"value\": \"2025-04-10\"}, {\"op\": \"add\", \"path\": \"/tasks/1/finishDate\", \"value\": \"2025-04-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put solution design directly after the requirements session, lasting the four days planned."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/2/predecessorId\", \"value\": \"T2\"}, {\"op\": \"add\", \"path\": \"/tasks/2/startDate\", \"value\": \"2025-04-12\"}, {\"op\": \"add\", \"path\": \"/tasks/2/finishDate\", \"value\": \"2025-04-16\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the prototype build start as soon as design is done and take its five days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/3/predecessorId\", \"value\": \"T3\"}, {\"op\": \"add\", \"path\": \"/tasks/3/startDate\", \"value\": \"2025-04-16\"}, {\"op\": \"add\", \"path\": \"/tasks/3/finishDate\", \"value\": \"2025-04-21\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Place the stakeholder review right after the prototype build and let it run three days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/4/predecessorId\", \"value\": \"T4\"}, {\"op\": \"add\", \"path\": \"/tasks/4/startDate\", \"value\": \"2025-04-21\"}, {\"op\": \"add\", \"path\": \"/tasks/4/finishDate\", \"value\": \"2025-04-24\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have core development begin once the review finishes and run for its six days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/5/predecessorId\", \"value\": \"T5\"}, {\"op\": \"add\", \"path\": \"/tasks/5/startDate\", \"value\": \"2025-04-24\"}, {\"op\": \"add\", \"path\": \"/tasks/5/finishDate\", \"value\": \"2025-04-30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put integration testing immediately after core development, for the four days already planned."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/6/predecessorId\", \"value\": \"T6\"}, {\"op\": \"add\", \"path\": \"/tasks/6/startDate\", \"value\": \"2025-04-30\"}, {\"op\": \"add\", \"path\": \"/tasks/6/finishDate\", \"value\": \"2025-05-04\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the launch readiness check start as soon as testing wraps and take its two days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/7/predecessorId\", \"value\": \"T7\"}, {\"op\": \"add\", \"path\": \"/tasks/7/startDate\", \"value\": \"2025-05-04\"}, {\"op\": \"add\", \"path\": \"/tasks/7/finishDate\", \"value\": \"2025-05-06\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now summarize the plan with how many activities it has and the date the rollout work finishes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary/taskCount\", \"value\": 8}, {\"op\": \"add\", \"path\": \"/summary/projectEnd\", \"value\": \"2025-05-06\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maria Chen from Digital Banking as the executive sponsor."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders\", \"value\": [{\"name\": \"Maria Chen\", \"role\": \"Executive Sponsor\", \"department\": \"Digital Banking\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include Priya Nair from Product as the day-to-day product owner."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"name\": \"Priya Nair\", \"role\": \"Product Owner\", \"department\": \"Product\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Omar Reyes from Engineering as the technical lead."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"name\": \"Omar Reyes\", \"role\": \"Technical Lead\", \"department\": \"Engineering\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Lena Brooks from QA as the test manager."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"name\": \"Lena Brooks\", \"role\": \"Test Manager\", \"department\": \"QA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note a medium concern around delayed access to the staging environment, owned by Engineering."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks\", \"value\": [{\"risk\": \"Delayed staging environment access\", \"severity\": \"Medium\", \"owner\": \"Engineering\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture a high concern that content approvals might be late, with Product owning it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks/-\", \"value\": {\"risk\": \"Late content approvals\", \"severity\": \"High\", \"owner\": \"Product\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note a low concern about training attendance, with Customer Support watching it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks/-\", \"value\": {\"risk\": \"Low training attendance\", \"severity\": \"Low\", \"owner\": \"Customer Support\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a weekly Tuesday steering update for executives, sent by Maria."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications\", \"value\": [{\"audience\": \"Executives\", \"cadence\": \"Weekly Tuesday\", \"owner\": \"Maria Chen\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a daily standup note for the delivery team, owned by Omar."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications/-\", \"value\": {\"audience\": \"Delivery Team\", \"cadence\": \"Daily\", \"owner\": \"Omar Reyes\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a Friday readiness note for Customer Support, with Lena handling it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications/-\", \"value\": {\"audience\": \"Customer Support\", \"cadence\": \"Weekly Friday\", \"owner\": \"Lena Brooks\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "List the signed requirements pack as an expected deliverable, with Priya approving it and the status still planned."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deliverables\", \"value\": [{\"deliverable\": \"Signed requirements pack\", \"approver\": \"Priya Nair\", \"status\": \"Planned\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include the clickable prototype as a planned deliverable approved by Omar."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deliverables/-\", \"value\": {\"deliverable\": \"Clickable prototype\", \"approver\": \"Omar Reyes\", \"status\": \"Planned\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the tested release candidate as planned, with Lena as the approver."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deliverables/-\", \"value\": {\"deliverable\": \"Tested release candidate\", \"approver\": \"Lena Brooks\", \"status\": \"Planned\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the financial baseline at 185,000 dollars, with a ten percent tolerance for tracking."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget\", \"value\": {\"baselineAmount\": 185000, \"currency\": \"USD\", \"tolerancePercent\": 10}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the rollout is for the North America region, with English and Spanish support."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rolloutScope\", \"value\": {\"region\": \"North America\", \"primaryLanguage\": \"English\", \"secondaryLanguage\": \"Spanish\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Jira for tracking the rollout work, maintained by the PMO."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trackingSetup\", \"value\": {\"trackingTool\": \"Jira\", \"maintainedBy\": \"PMO\"}}]"
+    }
+  ],
+  "edit_instruction": "Insert a new two-day security review immediately after solution design and before the prototype build.",
+  "theme": "Inserting a task into the schedule",
+  "master_data": null,
+  "current_json": {
+    "projectName": "Customer Portal Rollout",
+    "projectStart": "2025-04-07",
+    "tasks": [
+      {
+        "id": "T1",
+        "taskName": "Discovery workshop",
+        "durationDays": 3,
+        "predecessorId": "START",
+        "startDate": "2025-04-07",
+        "finishDate": "2025-04-10"
+      },
+      {
+        "id": "T2",
+        "taskName": "Requirements confirmation",
+        "durationDays": 2,
+        "predecessorId": "T1",
+        "startDate": "2025-04-10",
+        "finishDate": "2025-04-12"
+      },
+      {
+        "id": "T3",
+        "taskName": "Solution design",
+        "durationDays": 4,
+        "predecessorId": "T2",
+        "startDate": "2025-04-12",
+        "finishDate": "2025-04-16"
+      },
+      {
+        "id": "T4",
+        "taskName": "Prototype build",
+        "durationDays": 5,
+        "predecessorId": "T3",
+        "startDate": "2025-04-16",
+        "finishDate": "2025-04-21"
+      },
+      {
+        "id": "T5",
+        "taskName": "Stakeholder review",
+        "durationDays": 3,
+        "predecessorId": "T4",
+        "startDate": "2025-04-21",
+        "finishDate": "2025-04-24"
+      },
+      {
+        "id": "T6",
+        "taskName": "Core development",
+        "durationDays": 6,
+        "predecessorId": "T5",
+        "startDate": "2025-04-24",
+        "finishDate": "2025-04-30"
+      },
+      {
+        "id": "T7",
+        "taskName": "Integration testing",
+        "durationDays": 4,
+        "predecessorId": "T6",
+        "startDate": "2025-04-30",
+        "finishDate": "2025-05-04"
+      },
+      {
+        "id": "T8",
+        "taskName": "Launch readiness check",
+        "durationDays": 2,
+        "predecessorId": "T7",
+        "startDate": "2025-05-04",
+        "finishDate": "2025-05-06"
+      }
+    ],
+    "scheduleConvention": "Calendar days; finish dates are exclusive handoff dates, and each task starts on its predecessor's finish date.",
+    "summary": {
+      "taskCount": 8,
+      "projectEnd": "2025-05-06"
+    },
+    "stakeholders": [
+      {
+        "name": "Maria Chen",
+        "role": "Executive Sponsor",
+        "department": "Digital Banking"
+      },
+      {
+        "name": "Priya Nair",
+        "role": "Product Owner",
+        "department": "Product"
+      },
+      {
+        "name": "Omar Reyes",
+        "role": "Technical Lead",
+        "department": "Engineering"
+      },
+      {
+        "name": "Lena Brooks",
+        "role": "Test Manager",
+        "department": "QA"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Delayed staging environment access",
+        "severity": "Medium",
+        "owner": "Engineering"
+      },
+      {
+        "risk": "Late content approvals",
+        "severity": "High",
+        "owner": "Product"
+      },
+      {
+        "risk": "Low training attendance",
+        "severity": "Low",
+        "owner": "Customer Support"
+      }
+    ],
+    "communications": [
+      {
+        "audience": "Executives",
+        "cadence": "Weekly Tuesday",
+        "owner": "Maria Chen"
+      },
+      {
+        "audience": "Delivery Team",
+        "cadence": "Daily",
+        "owner": "Omar Reyes"
+      },
+      {
+        "audience": "Customer Support",
+        "cadence": "Weekly Friday",
+        "owner": "Lena Brooks"
+      }
+    ],
+    "deliverables": [
+      {
+        "deliverable": "Signed requirements pack",
+        "approver": "Priya Nair",
+        "status": "Planned"
+      },
+      {
+        "deliverable": "Clickable prototype",
+        "approver": "Omar Reyes",
+        "status": "Planned"
+      },
+      {
+        "deliverable": "Tested release candidate",
+        "approver": "Lena Brooks",
+        "status": "Planned"
+      }
+    ],
+    "budget": {
+      "baselineAmount": 185000,
+      "currency": "USD",
+      "tolerancePercent": 10
+    },
+    "rolloutScope": {
+      "region": "North America",
+      "primaryLanguage": "English",
+      "secondaryLanguage": "Spanish"
+    },
+    "trackingSetup": {
+      "trackingTool": "Jira",
+      "maintainedBy": "PMO"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a task list where each task has a stated duration and starts when its predecessor finishes, so finishes derive along the precedence chain, rolling up to a task count and a project end. Around this core, add the realistic, independent details a project plan would carry that do not depend on the schedule dates, and vary their number and the number of tasks from sample to sample.",
+  "edit_pattern": "Insert one new task with a specific duration at a specific point in the precedence chain.",
+  "cascade_pattern": "Inserting a task shifts every downstream task later by the inserted duration, raises the task count by one, and moves the project end. Tasks before the insertion point stay. This is determined because durations and links are stated.",
+  "requires_master_data": false
+}

@@ -1,0 +1,711 @@
+{
+  "id": "invoice_L100_01",
+  "domain": "invoice",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Please start a billing record for invoice INV-2026-0418."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice_number\", \"value\": \"INV-2026-0418\"}]"
+    },
+    {
+      "role": "user",
+      "content": "The subscription plan costs $90.00 for this billing cycle."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subscription/fee_amount\", \"value\": 90.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the billing cycle a 30-day period for the proration."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subscription/billing_period_days\", \"value\": 30}]"
+    },
+    {
+      "role": "user",
+      "content": "The customer canceled after using 18 days of the cycle."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subscription/used_days\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "That leaves 12 days of service unused for the credit calculation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subscription/unused_days\", \"value\": 12}]"
+    },
+    {
+      "role": "user",
+      "content": "That works out to three dollars per day for the subscription proration."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subscription/daily_rate\", \"value\": 3.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply the unused portion as a thirty-six dollar credit on the subscription."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subscription/prorated_credit\", \"value\": 36.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the customer owing fifty-four dollars after that credit is taken off the subscription charge."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subscription/net_charge\", \"value\": 54.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Use April 1 through April 30, 2026 as the service window for this cycle."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subscription/service_start_date\", \"value\": \"2026-04-01\"}, {\"op\": \"add\", \"path\": \"/subscription/service_end_date\", \"value\": \"2026-04-30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Before any taxes or payments, make the invoice subtotal match the adjusted subscription amount."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/totals/subtotal\", \"value\": 54.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply an 8 percent sales tax rate to the adjusted subscription amount."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tax/rate\", \"value\": 0.08}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the sales tax as four dollars and thirty-two cents."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tax/amount\", \"value\": 4.32}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the amount due for the invoice to fifty-eight dollars and thirty-two cents after adding the tax."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/totals/amount_due\", \"value\": 58.32}]"
+    },
+    {
+      "role": "user",
+      "content": "Bill this to Northstar Analytics under account NA-4412, with billing emails going to ap@northstar.example."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer\", \"value\": {\"account_id\": \"NA-4412\", \"name\": \"Northstar Analytics\", \"billing_email\": \"ap@northstar.example\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Date the invoice April 18, 2026, make it payable by May 2, and mark it as open for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice_date\", \"value\": \"2026-04-18\"}, {\"op\": \"add\", \"path\": \"/due_date\", \"value\": \"2026-05-02\"}, {\"op\": \"add\", \"path\": \"/status\", \"value\": \"open\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use 410 Aurora Avenue, Suite 500, Seattle, Washington for the billing address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer/billing_address\", \"value\": {\"street\": \"410 Aurora Avenue\", \"suite\": \"Suite 500\", \"city\": \"Seattle\", \"state\": \"WA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish that address with ZIP code 98109 in the United States."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer/billing_address/postal_code\", \"value\": \"98109\"}, {\"op\": \"add\", \"path\": \"/customer/billing_address/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "List the seller as Meridian Cloud Services, with support reachable at billing@meridiancloud.example and 1-206-555-0148."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller\", \"value\": {\"name\": \"Meridian Cloud Services\", \"email\": \"billing@meridiancloud.example\", \"phone\": \"1-206-555-0148\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the seller’s office address at 88 Pine Street, Floor 12, in Portland, Oregon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller/address\", \"value\": {\"street\": \"88 Pine Street\", \"floor\": \"Floor 12\", \"city\": \"Portland\", \"state\": \"OR\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Complete the seller’s address with ZIP code 97204 and the United States."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller/address/postal_code\", \"value\": \"97204\"}, {\"op\": \"add\", \"path\": \"/seller/address/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For bank transfer instructions, use Cascadia Business Bank with routing number 125000024 and account ending 7788."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/payment_instructions\", \"value\": {\"bank_name\": \"Cascadia Business Bank\", \"routing_number\": \"125000024\", \"account_last4\": \"7788\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For card backup, note that the saved Visa ending in 4242 expires in September 2028."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/payment_instructions/card_backup\", \"value\": {\"brand\": \"Visa\", \"last4\": \"4242\", \"expires\": \"2028-09\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tie this invoice to purchase order PO-77831 from Dana Holt in Finance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/purchase_order\", \"value\": {\"number\": \"PO-77831\", \"requester\": \"Dana Holt\", \"department\": \"Finance\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Describe the service as the Enterprise Analytics Suite, billed monthly in U.S. dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subscription/plan_name\", \"value\": \"Enterprise Analytics Suite\"}, {\"op\": \"add\", \"path\": \"/subscription/billing_frequency\", \"value\": \"monthly\"}, {\"op\": \"add\", \"path\": \"/currency\", \"value\": \"USD\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the cancellation was handled through the admin portal under request CR-90214 by agent Miles Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cancellation_record\", \"value\": {\"request_id\": \"CR-90214\", \"channel\": \"admin portal\", \"handled_by\": \"Miles Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send any follow-up about this billing issue to Priya Shah at priya.shah@northstar.example, using 1-206-555-0199 if a phone call is needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer/billing_contact\", \"value\": {\"name\": \"Priya Shah\", \"email\": \"priya.shah@northstar.example\", \"phone\": \"1-206-555-0199\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include an internal reference tying this to workspace WS-3107, region US-West, and contract CN-55490."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/internal_reference\", \"value\": {\"workspace_id\": \"WS-3107\", \"region\": \"US-West\", \"contract_number\": \"CN-55490\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add standard net-14 payment terms, with late notices starting three days after the deadline and statements sent electronically."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/payment_terms\", \"value\": {\"term\": \"Net 14\", \"late_notice_grace_days\": 3, \"delivery_method\": \"email\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Classify this internally as a SaaS account cancellation that should go through the proration review queue."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/classification\", \"value\": {\"account_type\": \"SaaS\", \"reason\": \"cancellation\", \"review_queue\": \"proration review\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an audit trail showing this was created by the billing automation on April 18 at 10:42 Pacific time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/audit\", \"value\": {\"created_by\": \"billing automation\", \"created_at\": \"2026-04-18T10:42:00-07:00\", \"timezone\": \"America/Los_Angeles\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have copies sent to the accounts payable inbox, the finance lead, and the customer success manager."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/copy_recipients\", \"value\": [\"ap@northstar.example\", \"finance-lead@northstar.example\", \"csm@meridiancloud.example\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Send the invoice as a PDF, use English, and include the standard payment link in the message."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/delivery_preferences\", \"value\": {\"format\": \"PDF\", \"language\": \"en-US\", \"include_payment_link\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "For compliance notes, record Meridian’s federal registration as 93-2847610, show the customer is not exempt, and keep the data residency in the U.S."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance\", \"value\": {\"seller_tax_id\": \"93-2847610\", \"customer_tax_exempt\": false, \"data_residency\": \"US\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tag the record for the Northwest enterprise segment, with high-touch support and normal priority."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/account_segmentation\", \"value\": {\"market\": \"Northwest enterprise\", \"support_tier\": \"high-touch\", \"priority\": \"normal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a memo saying the credit reflects the unused portion after mid-cycle cancellation, and note no separate refund is being issued."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/memo\", \"value\": \"Credit reflects unused portion after mid-cycle cancellation.\"}, {\"op\": \"add\", \"path\": \"/refund_issued\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "For recordkeeping, file this under billing adjustments, retain it for seven years, and attach checksum sha256:9b7c4a18e2."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/document_archive\", \"value\": {\"folder\": \"billing adjustments\", \"retention_years\": 7, \"checksum\": \"sha256:9b7c4a18e2\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add review details showing Jordan Lee approved it, approval happened on April 18, and the review code was RV-614."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/review\", \"value\": {\"approved_by\": \"Jordan Lee\", \"approved_date\": \"2026-04-18\", \"review_code\": \"RV-614\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that the invoice notice was queued successfully on April 18 at 10:45 Pacific time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/notification_log\", \"value\": {\"queued_at\": \"2026-04-18T10:45:00-07:00\", \"status\": \"queued\", \"attempt\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reconciliation marker for batch RB-2026-04-18, sequence 27, with no exceptions."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reconciliation\", \"value\": {\"batch_id\": \"RB-2026-04-18\", \"sequence\": 27, \"exception_flag\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Track the related support case as SC-11872, opened by Priya Shah, and mark its current state as closed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/support_case\", \"value\": {\"case_id\": \"SC-11872\", \"opened_by\": \"Priya Shah\", \"case_status\": \"closed\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add operational ownership details: Olivia Grant owns the billing follow-up, the team is revenue operations, and the handoff is complete."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/operational_owner\", \"value\": {\"name\": \"Olivia Grant\", \"team\": \"Revenue Operations\", \"handoff_complete\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a brief note on how the proration was figured: daily proration, using the monthly price divided by the cycle length times the unused days, rounded to the nearest cent."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/calculation_notes\", \"value\": {\"method\": \"daily proration\", \"formula\": \"fee_amount / billing_period_days * unused_days\", \"rounding\": \"nearest cent\"}}]"
+    }
+  ],
+  "edit_instruction": "Please change the subscription’s monthly price to $120.00.",
+  "theme": "Prorating an unused subscription period",
+  "master_data": null,
+  "current_json": {
+    "invoice_number": "INV-2026-0418",
+    "subscription": {
+      "fee_amount": 90.0,
+      "billing_period_days": 30,
+      "used_days": 18,
+      "unused_days": 12,
+      "daily_rate": 3.0,
+      "prorated_credit": 36.0,
+      "net_charge": 54.0,
+      "service_start_date": "2026-04-01",
+      "service_end_date": "2026-04-30",
+      "plan_name": "Enterprise Analytics Suite",
+      "billing_frequency": "monthly"
+    },
+    "totals": {
+      "subtotal": 54.0,
+      "amount_due": 58.32
+    },
+    "tax": {
+      "rate": 0.08,
+      "amount": 4.32
+    },
+    "customer": {
+      "account_id": "NA-4412",
+      "name": "Northstar Analytics",
+      "billing_email": "ap@northstar.example",
+      "billing_address": {
+        "street": "410 Aurora Avenue",
+        "suite": "Suite 500",
+        "city": "Seattle",
+        "state": "WA",
+        "postal_code": "98109",
+        "country": "US"
+      },
+      "billing_contact": {
+        "name": "Priya Shah",
+        "email": "priya.shah@northstar.example",
+        "phone": "1-206-555-0199"
+      }
+    },
+    "invoice_date": "2026-04-18",
+    "due_date": "2026-05-02",
+    "status": "open",
+    "seller": {
+      "name": "Meridian Cloud Services",
+      "email": "billing@meridiancloud.example",
+      "phone": "1-206-555-0148",
+      "address": {
+        "street": "88 Pine Street",
+        "floor": "Floor 12",
+        "city": "Portland",
+        "state": "OR",
+        "postal_code": "97204",
+        "country": "US"
+      }
+    },
+    "payment_instructions": {
+      "bank_name": "Cascadia Business Bank",
+      "routing_number": "125000024",
+      "account_last4": "7788",
+      "card_backup": {
+        "brand": "Visa",
+        "last4": "4242",
+        "expires": "2028-09"
+      }
+    },
+    "purchase_order": {
+      "number": "PO-77831",
+      "requester": "Dana Holt",
+      "department": "Finance"
+    },
+    "currency": "USD",
+    "cancellation_record": {
+      "request_id": "CR-90214",
+      "channel": "admin portal",
+      "handled_by": "Miles Chen"
+    },
+    "internal_reference": {
+      "workspace_id": "WS-3107",
+      "region": "US-West",
+      "contract_number": "CN-55490"
+    },
+    "payment_terms": {
+      "term": "Net 14",
+      "late_notice_grace_days": 3,
+      "delivery_method": "email"
+    },
+    "classification": {
+      "account_type": "SaaS",
+      "reason": "cancellation",
+      "review_queue": "proration review"
+    },
+    "audit": {
+      "created_by": "billing automation",
+      "created_at": "2026-04-18T10:42:00-07:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "copy_recipients": [
+      "ap@northstar.example",
+      "finance-lead@northstar.example",
+      "csm@meridiancloud.example"
+    ],
+    "delivery_preferences": {
+      "format": "PDF",
+      "language": "en-US",
+      "include_payment_link": true
+    },
+    "compliance": {
+      "seller_tax_id": "93-2847610",
+      "customer_tax_exempt": false,
+      "data_residency": "US"
+    },
+    "account_segmentation": {
+      "market": "Northwest enterprise",
+      "support_tier": "high-touch",
+      "priority": "normal"
+    },
+    "memo": "Credit reflects unused portion after mid-cycle cancellation.",
+    "refund_issued": false,
+    "document_archive": {
+      "folder": "billing adjustments",
+      "retention_years": 7,
+      "checksum": "sha256:9b7c4a18e2"
+    },
+    "review": {
+      "approved_by": "Jordan Lee",
+      "approved_date": "2026-04-18",
+      "review_code": "RV-614"
+    },
+    "notification_log": {
+      "queued_at": "2026-04-18T10:45:00-07:00",
+      "status": "queued",
+      "attempt": 1
+    },
+    "reconciliation": {
+      "batch_id": "RB-2026-04-18",
+      "sequence": 27,
+      "exception_flag": false
+    },
+    "support_case": {
+      "case_id": "SC-11872",
+      "opened_by": "Priya Shah",
+      "case_status": "closed"
+    },
+    "operational_owner": {
+      "name": "Olivia Grant",
+      "team": "Revenue Operations",
+      "handoff_complete": true
+    },
+    "calculation_notes": {
+      "method": "daily proration",
+      "formula": "fee_amount / billing_period_days * unused_days",
+      "rounding": "nearest cent"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/subscription/fee_amount",
+      "kind": "direct",
+      "value": 120.0
+    },
+    {
+      "op": "replace",
+      "path": "/subscription/daily_rate",
+      "kind": "cascade",
+      "value": 4.0
+    },
+    {
+      "op": "replace",
+      "path": "/subscription/prorated_credit",
+      "kind": "cascade",
+      "value": 48.0
+    },
+    {
+      "op": "replace",
+      "path": "/subscription/net_charge",
+      "kind": "cascade",
+      "value": 72.0
+    },
+    {
+      "op": "replace",
+      "path": "/totals/subtotal",
+      "kind": "cascade",
+      "value": 72.0
+    },
+    {
+      "op": "replace",
+      "path": "/tax/amount",
+      "kind": "cascade",
+      "value": 5.76
+    },
+    {
+      "op": "replace",
+      "path": "/totals/amount_due",
+      "kind": "cascade",
+      "value": 77.76
+    }
+  ],
+  "expected_json": {
+    "invoice_number": "INV-2026-0418",
+    "subscription": {
+      "fee_amount": 120.0,
+      "billing_period_days": 30,
+      "used_days": 18,
+      "unused_days": 12,
+      "daily_rate": 4.0,
+      "prorated_credit": 48.0,
+      "net_charge": 72.0,
+      "service_start_date": "2026-04-01",
+      "service_end_date": "2026-04-30",
+      "plan_name": "Enterprise Analytics Suite",
+      "billing_frequency": "monthly"
+    },
+    "totals": {
+      "subtotal": 72.0,
+      "amount_due": 77.76
+    },
+    "tax": {
+      "rate": 0.08,
+      "amount": 5.76
+    },
+    "customer": {
+      "account_id": "NA-4412",
+      "name": "Northstar Analytics",
+      "billing_email": "ap@northstar.example",
+      "billing_address": {
+        "street": "410 Aurora Avenue",
+        "suite": "Suite 500",
+        "city": "Seattle",
+        "state": "WA",
+        "postal_code": "98109",
+        "country": "US"
+      },
+      "billing_contact": {
+        "name": "Priya Shah",
+        "email": "priya.shah@northstar.example",
+        "phone": "1-206-555-0199"
+      }
+    },
+    "invoice_date": "2026-04-18",
+    "due_date": "2026-05-02",
+    "status": "open",
+    "seller": {
+      "name": "Meridian Cloud Services",
+      "email": "billing@meridiancloud.example",
+      "phone": "1-206-555-0148",
+      "address": {
+        "street": "88 Pine Street",
+        "floor": "Floor 12",
+        "city": "Portland",
+        "state": "OR",
+        "postal_code": "97204",
+        "country": "US"
+      }
+    },
+    "payment_instructions": {
+      "bank_name": "Cascadia Business Bank",
+      "routing_number": "125000024",
+      "account_last4": "7788",
+      "card_backup": {
+        "brand": "Visa",
+        "last4": "4242",
+        "expires": "2028-09"
+      }
+    },
+    "purchase_order": {
+      "number": "PO-77831",
+      "requester": "Dana Holt",
+      "department": "Finance"
+    },
+    "currency": "USD",
+    "cancellation_record": {
+      "request_id": "CR-90214",
+      "channel": "admin portal",
+      "handled_by": "Miles Chen"
+    },
+    "internal_reference": {
+      "workspace_id": "WS-3107",
+      "region": "US-West",
+      "contract_number": "CN-55490"
+    },
+    "payment_terms": {
+      "term": "Net 14",
+      "late_notice_grace_days": 3,
+      "delivery_method": "email"
+    },
+    "classification": {
+      "account_type": "SaaS",
+      "reason": "cancellation",
+      "review_queue": "proration review"
+    },
+    "audit": {
+      "created_by": "billing automation",
+      "created_at": "2026-04-18T10:42:00-07:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "copy_recipients": [
+      "ap@northstar.example",
+      "finance-lead@northstar.example",
+      "csm@meridiancloud.example"
+    ],
+    "delivery_preferences": {
+      "format": "PDF",
+      "language": "en-US",
+      "include_payment_link": true
+    },
+    "compliance": {
+      "seller_tax_id": "93-2847610",
+      "customer_tax_exempt": false,
+      "data_residency": "US"
+    },
+    "account_segmentation": {
+      "market": "Northwest enterprise",
+      "support_tier": "high-touch",
+      "priority": "normal"
+    },
+    "memo": "Credit reflects unused portion after mid-cycle cancellation.",
+    "refund_issued": false,
+    "document_archive": {
+      "folder": "billing adjustments",
+      "retention_years": 7,
+      "checksum": "sha256:9b7c4a18e2"
+    },
+    "review": {
+      "approved_by": "Jordan Lee",
+      "approved_date": "2026-04-18",
+      "review_code": "RV-614"
+    },
+    "notification_log": {
+      "queued_at": "2026-04-18T10:45:00-07:00",
+      "status": "queued",
+      "attempt": 1
+    },
+    "reconciliation": {
+      "batch_id": "RB-2026-04-18",
+      "sequence": 27,
+      "exception_flag": false
+    },
+    "support_case": {
+      "case_id": "SC-11872",
+      "opened_by": "Priya Shah",
+      "case_status": "closed"
+    },
+    "operational_owner": {
+      "name": "Olivia Grant",
+      "team": "Revenue Operations",
+      "handoff_complete": true
+    },
+    "calculation_notes": {
+      "method": "daily proration",
+      "formula": "fee_amount / billing_period_days * unused_days",
+      "rounding": "nearest cent"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Subscription fee_amount 90->120. daily_rate 120/30=4.0; prorated_credit 4*12(unused)=48.0; net_charge 120-48=72.0; totals.subtotal=72.0; tax.amount 72*0.08=5.76; totals.amount_due 77.76. billing_period_days, used/unused days, and tax rate stay.",
+  "conversation_pattern": "Center the artifact on a subscription charge with a fee, an explicitly stated billing-period length in days, and used and unused day spans, where a prorated credit and the net charge follow from the fee and the unused span by standard daily proration, so the fee and the spans determine them. Choose the fee and the period length so the daily rate divides evenly, keeping the credit exact. Around this core, add the realistic, independent details a billing record would carry that do not depend on the fee or the unused span, and vary their number from sample to sample.",
+  "edit_pattern": "Change the monthly fee (or the cancellation date that sets the unused days) to a specific new value.",
+  "cascade_pattern": "Editing the fee (or the span that sets the unused days) re-derives the prorated credit and the net charge by standard daily proration, and any totals built on them follow. The period length and the spans stay. Each new value is fixed because daily proration on the stated period has one unambiguous result.",
+  "requires_master_data": false
+}

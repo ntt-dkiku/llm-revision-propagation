@@ -1,0 +1,75 @@
+{
+  "id": "course_plan_L10_04",
+  "domain": "course_plan",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I've already finished Introduction to Programming, so start the plan from that."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/completed_courses\", \"value\": [\"Introduction to Programming\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Data Structures as a course I’m considering next; it should require Introduction to Programming, so mark it as available to take."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses\", \"value\": [{\"course\": \"Data Structures\", \"prerequisite\": \"Introduction to Programming\", \"eligible\": true}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include Database Systems, which should come after Data Structures, and note that I’m not cleared for it yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"Database Systems\", \"prerequisite\": \"Data Structures\", \"eligible\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please make the takeability rule explicit: a class should count as available only when its direct requirement and any earlier requirements behind it are already in my finished coursework."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/eligibility_rule\", \"value\": {\"scope\": \"planned courses\", \"required_chain\": \"direct prerequisite plus all upstream prerequisites\", \"satisfied_by\": \"completed coursework\"}}]"
+    }
+  ],
+  "edit_instruction": "Change Database Systems so it requires Discrete Mathematics instead of Data Structures.",
+  "theme": "Changing a course's prerequisite",
+  "master_data": {
+    "Discrete Mathematics": {
+      "upstream_prerequisites": [
+        "Introduction to Programming"
+      ]
+    }
+  },
+  "current_json": {
+    "completed_courses": [
+      "Introduction to Programming"
+    ],
+    "planned_courses": [
+      {
+        "course": "Data Structures",
+        "prerequisite": "Introduction to Programming",
+        "eligible": true
+      },
+      {
+        "course": "Database Systems",
+        "prerequisite": "Data Structures",
+        "eligible": false
+      }
+    ],
+    "eligibility_rule": {
+      "scope": "planned courses",
+      "required_chain": "direct prerequisite plus all upstream prerequisites",
+      "satisfied_by": "completed coursework"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a course list where each planned course's eligibility derives from whether its prerequisite chain is satisfied by a stated set of completed courses, with the eligibility rule stated. Around this core, add the realistic, independent details a course plan would carry that do not depend on the prerequisites, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Change one course's prerequisite to a different specific course.",
+  "cascade_pattern": "Changing a course's prerequisite to a new one (whose own prerequisite chain is supplied with the edit instruction) re-derives that course's eligibility from whether the new chain is satisfied by the completed set. Courses with unchanged prerequisites stay. This is determined because the new prerequisite's chain is provided with the edit.",
+  "requires_master_data": true
+}

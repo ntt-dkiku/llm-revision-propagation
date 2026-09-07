@@ -1,0 +1,117 @@
+{
+  "id": "travel_itinerary_L10_01",
+  "domain": "travel_itinerary",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm putting together a single-day Kyoto itinerary; make the fixed starting point 9:00 AM on May 14, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/anchor_start\", \"value\": \"2026-05-14T09:00:00+09:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a hotel pickup exactly 30 minutes after that fixed start."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule\", \"value\": [{\"activity\": \"Hotel pickup\", \"offset_minutes\": 30, \"start_time\": \"2026-05-14T09:30:00+09:00\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Then put in lunch at Nishiki Market exactly 4 hours after the fixed start."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Lunch at Nishiki Market\", \"offset_minutes\": 240, \"start_time\": \"2026-05-14T13:00:00+09:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the evening Gion walk exactly 15 hours after the fixed start, even if that makes it late."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Evening walk in Gion\", \"offset_minutes\": 900, \"start_time\": \"2026-05-15T00:00:00+09:00\"}}]"
+    }
+  ],
+  "edit_instruction": "Please change the fixed starting point to 11:00 AM on May 14, 2026.",
+  "theme": "Shifting the schedule's anchor time",
+  "master_data": null,
+  "current_json": {
+    "anchor_start": "2026-05-14T09:00:00+09:00",
+    "schedule": [
+      {
+        "activity": "Hotel pickup",
+        "offset_minutes": 30,
+        "start_time": "2026-05-14T09:30:00+09:00"
+      },
+      {
+        "activity": "Lunch at Nishiki Market",
+        "offset_minutes": 240,
+        "start_time": "2026-05-14T13:00:00+09:00"
+      },
+      {
+        "activity": "Evening walk in Gion",
+        "offset_minutes": 900,
+        "start_time": "2026-05-15T00:00:00+09:00"
+      }
+    ]
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/anchor_start",
+      "kind": "direct",
+      "value": "2026-05-14T11:00:00+09:00"
+    },
+    {
+      "op": "replace",
+      "path": "/schedule/0/start_time",
+      "kind": "cascade",
+      "value": "2026-05-14T11:30:00+09:00"
+    },
+    {
+      "op": "replace",
+      "path": "/schedule/1/start_time",
+      "kind": "cascade",
+      "value": "2026-05-14T15:00:00+09:00"
+    },
+    {
+      "op": "replace",
+      "path": "/schedule/2/start_time",
+      "kind": "cascade",
+      "value": "2026-05-15T02:00:00+09:00"
+    }
+  ],
+  "expected_json": {
+    "anchor_start": "2026-05-14T11:00:00+09:00",
+    "schedule": [
+      {
+        "activity": "Hotel pickup",
+        "offset_minutes": 30,
+        "start_time": "2026-05-14T11:30:00+09:00"
+      },
+      {
+        "activity": "Lunch at Nishiki Market",
+        "offset_minutes": 240,
+        "start_time": "2026-05-14T15:00:00+09:00"
+      },
+      {
+        "activity": "Evening walk in Gion",
+        "offset_minutes": 900,
+        "start_time": "2026-05-15T02:00:00+09:00"
+      }
+    ]
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "Anchor 09:00->11:00 (+2h). Each = anchor + offset. pickup 11:30, lunch 15:00, evening walk 11:00+900min -> 2026-05-15T02:00. offsets stay.",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a single-day schedule anchored on one time, where several other times each derive from that anchor by a fixed offset stated in the conversation, so the anchor alone determines them. Around this core, add the realistic, independent details a traveler would record that do not depend on the times of day, and vary their number from sample to sample.",
+  "edit_pattern": "Move the anchor time to a specific new time a fixed number of hours from the original.",
+  "cascade_pattern": "Every time that derives from the anchor shifts by the same delta, since each is the anchor plus a fixed offset, so the new anchor fixes them all; a time crossing midnight rolls its date deterministically. Values that do not derive from the anchor time stay unchanged.",
+  "requires_master_data": false
+}

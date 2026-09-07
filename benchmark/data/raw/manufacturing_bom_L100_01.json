@@ -1,0 +1,625 @@
+{
+  "id": "manufacturing_bom_L100_01",
+  "domain": "manufacturing_bom",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'd like to start a bill of materials for a compact pump assembly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/assembly_name\", \"value\": \"Compact Pump Assembly\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's plan it around a production run of 120 finished assemblies."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/build_quantity\", \"value\": 120}]"
+    },
+    {
+      "role": "user",
+      "content": "Include two motor brackets in each pump assembly to mount the drive unit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components\", \"value\": [{\"component_id\": \"C-100\", \"description\": \"Motor bracket\", \"quantity_per_assembly\": 2}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Each motor bracket should be treated as weighing 1.8 pounds."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/0/unit_weight_lb\", \"value\": 1.8}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a cost of 14 dollars for each bracket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/0/unit_cost_usd\", \"value\": 14}]"
+    },
+    {
+      "role": "user",
+      "content": "For the 120-unit run, calculate how many motor brackets need to be ordered."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/0/total_demand_units\", \"value\": 240}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the extended bracket cost for the full run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/0/extended_cost_usd\", \"value\": 3360}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out how much weight the brackets add to one finished pump."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/0/weight_contribution_lb\", \"value\": 3.6}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one cast pump housing to each assembly as the main body."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"component_id\": \"C-200\", \"description\": \"Cast pump housing\", \"quantity_per_assembly\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Count the cast housing at 9.5 pounds per pump."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/1/unit_weight_lb\", \"value\": 9.5}]"
+    },
+    {
+      "role": "user",
+      "content": "Use 82 dollars as the cost for each cast housing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/1/unit_cost_usd\", \"value\": 82}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the number of cast housings needed for the full production run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/1/total_demand_units\", \"value\": 120}]"
+    },
+    {
+      "role": "user",
+      "content": "Now extend the cast housing cost across all 120 pumps."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/1/extended_cost_usd\", \"value\": 9840}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out the cast housing's weight contribution to one completed pump."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/1/weight_contribution_lb\", \"value\": 9.5}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one seal kit per pump for the wet-end assembly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"component_id\": \"C-300\", \"description\": \"Seal kit\", \"quantity_per_assembly\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Treat each seal kit as adding 0.7 pounds."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/2/unit_weight_lb\", \"value\": 0.7}]"
+    },
+    {
+      "role": "user",
+      "content": "Price the seal kit at 18 dollars each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/2/unit_cost_usd\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the seal kits needed for the whole 120-pump build."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/2/total_demand_units\", \"value\": 120}]"
+    },
+    {
+      "role": "user",
+      "content": "Extend the seal kit cost across the full run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/2/extended_cost_usd\", \"value\": 2160}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out the seal kit's weight contribution to a single pump."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/2/weight_contribution_lb\", \"value\": 0.7}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one stainless impeller to each pump for the rotating element."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"component_id\": \"C-400\", \"description\": \"Stainless impeller\", \"quantity_per_assembly\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Count the stainless impeller at 2.4 pounds per pump."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/3/unit_weight_lb\", \"value\": 2.4}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a unit price of 46 dollars for the stainless impeller."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/3/unit_cost_usd\", \"value\": 46}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate how many impellers are needed for all 120 pumps."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/3/total_demand_units\", \"value\": 120}]"
+    },
+    {
+      "role": "user",
+      "content": "Extend the impeller cost over the full build."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/3/extended_cost_usd\", \"value\": 5520}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out the impeller's weight contribution to one completed pump."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/3/weight_contribution_lb\", \"value\": 2.4}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a small fastener pack for each pump so final assembly hardware is covered."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"component_id\": \"C-500\", \"description\": \"Final assembly fastener pack\", \"quantity_per_assembly\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Treat each fastener pack as weighing 0.6 pounds."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/4/unit_weight_lb\", \"value\": 0.6}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the cost for each fastener pack at 7 dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/4/unit_cost_usd\", \"value\": 7}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate how many fastener packs are required for the run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/4/total_demand_units\", \"value\": 120}]"
+    },
+    {
+      "role": "user",
+      "content": "Extend the fastener pack cost for all 120 pumps."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/4/extended_cost_usd\", \"value\": 840}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out the fastener pack's weight contribution to one finished pump."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/4/weight_contribution_lb\", \"value\": 0.6}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the vendor we’ll use for the motor brackets."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/0/preferred_supplier\", \"value\": \"Apex Stamping Co.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Note the cast housing supplier as our foundry partner."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/1/preferred_supplier\", \"value\": \"Northlake Foundry\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier for the seal kits."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/2/preferred_supplier\", \"value\": \"PureSeal Industrial\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the impeller supplier we normally use."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/3/preferred_supplier\", \"value\": \"Vector Machining\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the supplier for the fastener packs too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/4/preferred_supplier\", \"value\": \"BoltWorks Supply\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now total up the component weight for one finished pump and show the arithmetic used."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/weight_summary\", \"value\": {\"calculation\": \"3.6 + 9.5 + 0.7 + 2.4 + 0.6\", \"assembly_total_weight_lb\": 16.8}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use 18 pounds as the cutoff for deciding whether this pump ships in the heavier category."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping_rule\", \"value\": {\"threshold_lb\": 18}}]"
+    },
+    {
+      "role": "user",
+      "content": "Spell out that at the cutoff or below, it stays in the regular parcel category and uses the standard carton."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping_rule/at_or_below_threshold\", \"value\": {\"shipping_class\": \"Parcel-Standard\", \"packaging_spec\": \"single-wall carton with molded pulp inserts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also spell out that anything over the cutoff moves to the heavier parcel category and the reinforced carton."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping_rule/above_threshold\", \"value\": {\"shipping_class\": \"Parcel-Heavy\", \"packaging_spec\": \"double-wall reinforced carton with foam corner blocks\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Given the current total, set the shipping category and carton choice for the pump."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping_decision\", \"value\": {\"basis\": \"16.8 lb is at or below 18 lb\", \"shipping_class\": \"Parcel-Standard\", \"packaging_spec\": \"single-wall carton with molded pulp inserts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that production will run at the Cleveland assembly plant in the United States."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturing_site\", \"value\": {\"site_name\": \"Cleveland Assembly Plant\", \"city\": \"Cleveland\", \"country\": \"USA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an incoming inspection item for the cast housings so receiving knows what to verify."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quality_checks\", \"value\": [{\"check_id\": \"QC-01\", \"applies_to\": \"Cast pump housing\", \"requirement\": \"no visible cracks or casting voids\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a final leak test requirement for each completed pump before it leaves the line."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quality_checks/-\", \"value\": {\"check_id\": \"QC-02\", \"applies_to\": \"Completed pump assembly\", \"requirement\": \"hold 60 psi for 2 minutes with no pressure drop\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a torque verification for the final assembly hardware."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quality_checks/-\", \"value\": {\"check_id\": \"QC-03\", \"applies_to\": \"Final assembly fastener pack\", \"requirement\": \"verify fasteners are torqued to 18 in-lb\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the engineer responsible for this pump build and the current release status."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom_control\", \"value\": {\"owner\": \"Maya Chen\", \"release_status\": \"draft\", \"revision\": \"A\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the planned production dates for this Cleveland build."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/production_schedule\", \"value\": {\"start_date\": \"2025-04-14\", \"end_date\": \"2025-04-25\", \"shift\": \"day shift\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the buying terms our purchasing team should use for this build."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/procurement_terms\", \"value\": {\"incoterm\": \"FOB origin\", \"payment_terms\": \"Net 30\", \"currency\": \"USD\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the internal work order details so the shop floor can tie this build back to planning."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/work_order\", \"value\": {\"order_number\": \"WO-25-0414-PMP\", \"planner\": \"Luis Romero\", \"priority\": \"normal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer order reference this production run is tied to."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer_order\", \"value\": {\"customer_name\": \"HarborLine Utilities\", \"customer_po\": \"PO-HLU-77821\", \"requested_ship_date\": \"2025-04-30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the product label details that should appear on each packed pump."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/labeling\", \"value\": {\"model_code\": \"CP-1200\", \"serial_prefix\": \"CPA25\", \"label_material\": \"polyester thermal transfer\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the standard safety markings that should be included with each packaged unit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/safety_markings\", \"value\": {\"warning_label\": \"disconnect power before service\", \"certification_mark\": \"UL Recognized\", \"manual_insert\": \"installation and maintenance guide\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the storage guidance for finished pumps waiting to ship."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/finished_goods_storage\", \"value\": {\"area\": \"FG aisle 4\", \"max_stack_height\": \"2 cartons\", \"environment\": \"dry indoor storage\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the documents that should travel with the first shipment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping_documents\", \"value\": {\"packing_list\": \"required\", \"certificate_of_conformance\": \"required\", \"commercial_invoice\": \"required\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short release note so the team knows why this draft was created."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/release_note\", \"value\": {\"note_id\": \"RN-001\", \"author\": \"Maya Chen\", \"summary\": \"initial production BOM for 120-unit pump build\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark that this draft still needs approval before it can be released."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approval_required\", \"value\": true}]"
+    }
+  ],
+  "edit_instruction": "Change the motor bracket quantity to 3 per pump assembly.",
+  "theme": "Crossing the shipping-weight class",
+  "conversation_pattern": "Center the artifact on a BOM where one component's per-unit quantity drives its weight contribution and the assembly total weight, defined explicitly as a stated sum over component weight contributions, and a STATED shipping-class rule with two explicit branches: if the assembly total weight exceeds a stated threshold, 'shipping_class' steps up to a specific stated heavier class and the packaging spec upgrades to a stated target; if total weight is at or below the threshold, the class and packaging stay at their stated baseline. Record the threshold and both branch targets explicitly. Around this core, add the realistic, independent details a BOM would carry that do not depend on that component quantity, and vary their number from sample to sample.",
+  "edit_pattern": "Change one component's per-unit quantity to a specific new value.",
+  "cascade_pattern": "Editing the component's per-unit quantity re-derives its total demand, component cost, and weight contribution, and the assembly total weight as the stated sum, AND — only if the total weight now crosses the stated threshold relative to before — steps shipping_class to the stated heavier class and upgrades the packaging spec. If the threshold is not crossed, the class and packaging stay unchanged. Other component quantities and unrelated fields stay unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "assembly_name": "Compact Pump Assembly",
+    "build_quantity": 120,
+    "components": [
+      {
+        "component_id": "C-100",
+        "description": "Motor bracket",
+        "quantity_per_assembly": 2,
+        "unit_weight_lb": 1.8,
+        "unit_cost_usd": 14,
+        "total_demand_units": 240,
+        "extended_cost_usd": 3360,
+        "weight_contribution_lb": 3.6,
+        "preferred_supplier": "Apex Stamping Co."
+      },
+      {
+        "component_id": "C-200",
+        "description": "Cast pump housing",
+        "quantity_per_assembly": 1,
+        "unit_weight_lb": 9.5,
+        "unit_cost_usd": 82,
+        "total_demand_units": 120,
+        "extended_cost_usd": 9840,
+        "weight_contribution_lb": 9.5,
+        "preferred_supplier": "Northlake Foundry"
+      },
+      {
+        "component_id": "C-300",
+        "description": "Seal kit",
+        "quantity_per_assembly": 1,
+        "unit_weight_lb": 0.7,
+        "unit_cost_usd": 18,
+        "total_demand_units": 120,
+        "extended_cost_usd": 2160,
+        "weight_contribution_lb": 0.7,
+        "preferred_supplier": "PureSeal Industrial"
+      },
+      {
+        "component_id": "C-400",
+        "description": "Stainless impeller",
+        "quantity_per_assembly": 1,
+        "unit_weight_lb": 2.4,
+        "unit_cost_usd": 46,
+        "total_demand_units": 120,
+        "extended_cost_usd": 5520,
+        "weight_contribution_lb": 2.4,
+        "preferred_supplier": "Vector Machining"
+      },
+      {
+        "component_id": "C-500",
+        "description": "Final assembly fastener pack",
+        "quantity_per_assembly": 1,
+        "unit_weight_lb": 0.6,
+        "unit_cost_usd": 7,
+        "total_demand_units": 120,
+        "extended_cost_usd": 840,
+        "weight_contribution_lb": 0.6,
+        "preferred_supplier": "BoltWorks Supply"
+      }
+    ],
+    "weight_summary": {
+      "calculation": "3.6 + 9.5 + 0.7 + 2.4 + 0.6",
+      "assembly_total_weight_lb": 16.8
+    },
+    "shipping_rule": {
+      "threshold_lb": 18,
+      "at_or_below_threshold": {
+        "shipping_class": "Parcel-Standard",
+        "packaging_spec": "single-wall carton with molded pulp inserts"
+      },
+      "above_threshold": {
+        "shipping_class": "Parcel-Heavy",
+        "packaging_spec": "double-wall reinforced carton with foam corner blocks"
+      }
+    },
+    "shipping_decision": {
+      "basis": "16.8 lb is at or below 18 lb",
+      "shipping_class": "Parcel-Standard",
+      "packaging_spec": "single-wall carton with molded pulp inserts"
+    },
+    "manufacturing_site": {
+      "site_name": "Cleveland Assembly Plant",
+      "city": "Cleveland",
+      "country": "USA"
+    },
+    "quality_checks": [
+      {
+        "check_id": "QC-01",
+        "applies_to": "Cast pump housing",
+        "requirement": "no visible cracks or casting voids"
+      },
+      {
+        "check_id": "QC-02",
+        "applies_to": "Completed pump assembly",
+        "requirement": "hold 60 psi for 2 minutes with no pressure drop"
+      },
+      {
+        "check_id": "QC-03",
+        "applies_to": "Final assembly fastener pack",
+        "requirement": "verify fasteners are torqued to 18 in-lb"
+      }
+    ],
+    "bom_control": {
+      "owner": "Maya Chen",
+      "release_status": "draft",
+      "revision": "A"
+    },
+    "production_schedule": {
+      "start_date": "2025-04-14",
+      "end_date": "2025-04-25",
+      "shift": "day shift"
+    },
+    "procurement_terms": {
+      "incoterm": "FOB origin",
+      "payment_terms": "Net 30",
+      "currency": "USD"
+    },
+    "work_order": {
+      "order_number": "WO-25-0414-PMP",
+      "planner": "Luis Romero",
+      "priority": "normal"
+    },
+    "customer_order": {
+      "customer_name": "HarborLine Utilities",
+      "customer_po": "PO-HLU-77821",
+      "requested_ship_date": "2025-04-30"
+    },
+    "labeling": {
+      "model_code": "CP-1200",
+      "serial_prefix": "CPA25",
+      "label_material": "polyester thermal transfer"
+    },
+    "safety_markings": {
+      "warning_label": "disconnect power before service",
+      "certification_mark": "UL Recognized",
+      "manual_insert": "installation and maintenance guide"
+    },
+    "finished_goods_storage": {
+      "area": "FG aisle 4",
+      "max_stack_height": "2 cartons",
+      "environment": "dry indoor storage"
+    },
+    "shipping_documents": {
+      "packing_list": "required",
+      "certificate_of_conformance": "required",
+      "commercial_invoice": "required"
+    },
+    "release_note": {
+      "note_id": "RN-001",
+      "author": "Maya Chen",
+      "summary": "initial production BOM for 120-unit pump build"
+    },
+    "approval_required": true
+  }
+}

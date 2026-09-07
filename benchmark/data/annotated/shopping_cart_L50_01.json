@@ -1,0 +1,491 @@
+{
+  "id": "shopping_cart_L50_01",
+  "domain": "shopping_cart",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm building a cart—start it with a Nintendo Switch OLED console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart\", \"value\": {\"base_product\": {\"brand\": \"Nintendo\", \"model\": \"Switch OLED\", \"sku\": \"HDH-001-OLED-WHT\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the official dock that fits this console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories\", \"value\": [{\"type\": \"dock\", \"name\": \"Nintendo Switch OLED Dock - White\", \"sku\": \"HEG-007-WHT\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a carrying case that’s made for this version too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"type\": \"case\", \"name\": \"Nintendo Switch OLED Carrying Case & Screen Protector\", \"sku\": \"HEG-A-P3SAA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the right protective screen glass for the OLED screen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"type\": \"screen_protector\", \"name\": \"amFilm Tempered Glass Screen Protector for Switch OLED\", \"sku\": \"AF-SW-OLED-GLASS\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put in the compatible wired LAN adapter for it as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"type\": \"lan_adapter\", \"name\": \"Hori Wired Internet LAN Adapter for Nintendo Switch OLED\", \"sku\": \"NSW-004U-OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the matching Joy-Con charging grip that works with this system."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"type\": \"charging_grip\", \"name\": \"Nintendo Joy-Con Charging Grip for Switch OLED\", \"sku\": \"HAC-012-OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a spare power adapter that’s the correct one for this console."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"type\": \"power_adapter\", \"name\": \"Nintendo Switch AC Adapter for Switch OLED\", \"sku\": \"HAC-002-OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the right compact travel stand for this Switch setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"type\": \"travel_stand\", \"name\": \"Hori Compact PlayStand for Nintendo Switch OLED\", \"sku\": \"NSW-029U-OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the wired headset adapter that fits this console’s bottom port."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"type\": \"headset_adapter\", \"name\": \"GuliKit USB-C Audio Adapter for Nintendo Switch OLED\", \"sku\": \"GK-NS05-OLED\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the order come from GameHub’s online store with standard home delivery."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/fulfillment\", \"value\": {\"merchant\": \"GameHub Online\", \"method\": \"standard_home_delivery\", \"service_level\": \"Ground\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Ship it to my apartment in Portland."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shipping_address\", \"value\": {\"city\": \"Portland\", \"state\": \"OR\", \"postal_code\": \"97214\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Maya Chen as the recipient, and send delivery updates to her phone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/recipient\", \"value\": {\"name\": \"Maya Chen\", \"phone\": \"+1-503-555-0186\", \"delivery_updates\": \"sms\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Pay with my Visa card ending in 4242 and use the same Portland ZIP for billing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/payment\", \"value\": {\"method\": \"Visa\", \"last_four\": \"4242\", \"billing_postal_code\": \"97214\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make it a birthday gift with simple wrapping and no price slip inside."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/gift_options\", \"value\": {\"occasion\": \"birthday\", \"wrapping_style\": \"simple\", \"hide_prices\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please ask the courier to leave it at the front desk, and mark weekends as okay for delivery."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/delivery_preferences\", \"value\": {\"dropoff_location\": \"front_desk\", \"weekend_delivery_ok\": true, \"signature_required\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply my promo code for this order if it’s accepted."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/promotion\", \"value\": {\"code\": \"BIRTHDAY10\", \"applied\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Save this as my birthday console order and make it a normal-priority checkout from the mobile app."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/order_context\", \"value\": {\"cart_name\": \"birthday console order\", \"priority\": \"normal\", \"source\": \"mobile_app\"}}]"
+    }
+  ],
+  "edit_instruction": "Actually make the console model Switch 2 instead.",
+  "theme": "Swapping the base product and its compatible accessories",
+  "master_data": {
+    "Switch 2": {
+      "base_product_sku": "NTS-001-BLK",
+      "compatible_accessories": [
+        {
+          "type": "dock",
+          "name": "Nintendo Switch 2 Dock - Black",
+          "sku": "NTS-007-BLK"
+        },
+        {
+          "type": "case",
+          "name": "Nintendo Switch 2 Carrying Case & Screen Protector",
+          "sku": "NTS-A-P3SAA"
+        },
+        {
+          "type": "screen_protector",
+          "name": "amFilm Tempered Glass Screen Protector for Switch 2",
+          "sku": "AF-SW2-GLASS"
+        },
+        {
+          "type": "lan_adapter",
+          "name": "Hori Wired Internet LAN Adapter for Nintendo Switch 2",
+          "sku": "NS2-004U"
+        },
+        {
+          "type": "charging_grip",
+          "name": "Nintendo Joy-Con 2 Charging Grip for Switch 2",
+          "sku": "NTS-012"
+        },
+        {
+          "type": "power_adapter",
+          "name": "Nintendo Switch 2 AC Adapter",
+          "sku": "NTS-002"
+        },
+        {
+          "type": "travel_stand",
+          "name": "Hori Compact PlayStand for Nintendo Switch 2",
+          "sku": "NS2-029U"
+        },
+        {
+          "type": "headset_adapter",
+          "name": "GuliKit USB-C Audio Adapter for Nintendo Switch 2",
+          "sku": "GK-NS05-SW2"
+        }
+      ]
+    }
+  },
+  "current_json": {
+    "cart": {
+      "base_product": {
+        "brand": "Nintendo",
+        "model": "Switch OLED",
+        "sku": "HDH-001-OLED-WHT"
+      },
+      "accessories": [
+        {
+          "type": "dock",
+          "name": "Nintendo Switch OLED Dock - White",
+          "sku": "HEG-007-WHT"
+        },
+        {
+          "type": "case",
+          "name": "Nintendo Switch OLED Carrying Case & Screen Protector",
+          "sku": "HEG-A-P3SAA"
+        },
+        {
+          "type": "screen_protector",
+          "name": "amFilm Tempered Glass Screen Protector for Switch OLED",
+          "sku": "AF-SW-OLED-GLASS"
+        },
+        {
+          "type": "lan_adapter",
+          "name": "Hori Wired Internet LAN Adapter for Nintendo Switch OLED",
+          "sku": "NSW-004U-OLED"
+        },
+        {
+          "type": "charging_grip",
+          "name": "Nintendo Joy-Con Charging Grip for Switch OLED",
+          "sku": "HAC-012-OLED"
+        },
+        {
+          "type": "power_adapter",
+          "name": "Nintendo Switch AC Adapter for Switch OLED",
+          "sku": "HAC-002-OLED"
+        },
+        {
+          "type": "travel_stand",
+          "name": "Hori Compact PlayStand for Nintendo Switch OLED",
+          "sku": "NSW-029U-OLED"
+        },
+        {
+          "type": "headset_adapter",
+          "name": "GuliKit USB-C Audio Adapter for Nintendo Switch OLED",
+          "sku": "GK-NS05-OLED"
+        }
+      ],
+      "fulfillment": {
+        "merchant": "GameHub Online",
+        "method": "standard_home_delivery",
+        "service_level": "Ground"
+      },
+      "shipping_address": {
+        "city": "Portland",
+        "state": "OR",
+        "postal_code": "97214"
+      },
+      "recipient": {
+        "name": "Maya Chen",
+        "phone": "+1-503-555-0186",
+        "delivery_updates": "sms"
+      },
+      "payment": {
+        "method": "Visa",
+        "last_four": "4242",
+        "billing_postal_code": "97214"
+      },
+      "gift_options": {
+        "occasion": "birthday",
+        "wrapping_style": "simple",
+        "hide_prices": true
+      },
+      "delivery_preferences": {
+        "dropoff_location": "front_desk",
+        "weekend_delivery_ok": true,
+        "signature_required": false
+      },
+      "promotion": {
+        "code": "BIRTHDAY10",
+        "applied": true
+      },
+      "order_context": {
+        "cart_name": "birthday console order",
+        "priority": "normal",
+        "source": "mobile_app"
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/cart/base_product/model",
+      "kind": "direct",
+      "value": "Switch 2"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/0/name",
+      "kind": "cascade",
+      "value": "Nintendo Switch 2 Dock - Black"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/0/sku",
+      "kind": "cascade",
+      "value": "NTS-007-BLK"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/1/name",
+      "kind": "cascade",
+      "value": "Nintendo Switch 2 Carrying Case & Screen Protector"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/1/sku",
+      "kind": "cascade",
+      "value": "NTS-A-P3SAA"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/2/name",
+      "kind": "cascade",
+      "value": "amFilm Tempered Glass Screen Protector for Switch 2"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/2/sku",
+      "kind": "cascade",
+      "value": "AF-SW2-GLASS"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/3/name",
+      "kind": "cascade",
+      "value": "Hori Wired Internet LAN Adapter for Nintendo Switch 2"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/3/sku",
+      "kind": "cascade",
+      "value": "NS2-004U"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/4/name",
+      "kind": "cascade",
+      "value": "Nintendo Joy-Con 2 Charging Grip for Switch 2"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/4/sku",
+      "kind": "cascade",
+      "value": "NTS-012"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/5/name",
+      "kind": "cascade",
+      "value": "Nintendo Switch 2 AC Adapter"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/5/sku",
+      "kind": "cascade",
+      "value": "NTS-002"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/6/name",
+      "kind": "cascade",
+      "value": "Hori Compact PlayStand for Nintendo Switch 2"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/6/sku",
+      "kind": "cascade",
+      "value": "NS2-029U"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/7/name",
+      "kind": "cascade",
+      "value": "GuliKit USB-C Audio Adapter for Nintendo Switch 2"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/7/sku",
+      "kind": "cascade",
+      "value": "GK-NS05-SW2"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/base_product/sku",
+      "kind": "cascade",
+      "value": "NTS-001-BLK"
+    }
+  ],
+  "expected_json": {
+    "cart": {
+      "base_product": {
+        "brand": "Nintendo",
+        "model": "Switch 2",
+        "sku": "NTS-001-BLK"
+      },
+      "accessories": [
+        {
+          "type": "dock",
+          "name": "Nintendo Switch 2 Dock - Black",
+          "sku": "NTS-007-BLK"
+        },
+        {
+          "type": "case",
+          "name": "Nintendo Switch 2 Carrying Case & Screen Protector",
+          "sku": "NTS-A-P3SAA"
+        },
+        {
+          "type": "screen_protector",
+          "name": "amFilm Tempered Glass Screen Protector for Switch 2",
+          "sku": "AF-SW2-GLASS"
+        },
+        {
+          "type": "lan_adapter",
+          "name": "Hori Wired Internet LAN Adapter for Nintendo Switch 2",
+          "sku": "NS2-004U"
+        },
+        {
+          "type": "charging_grip",
+          "name": "Nintendo Joy-Con 2 Charging Grip for Switch 2",
+          "sku": "NTS-012"
+        },
+        {
+          "type": "power_adapter",
+          "name": "Nintendo Switch 2 AC Adapter",
+          "sku": "NTS-002"
+        },
+        {
+          "type": "travel_stand",
+          "name": "Hori Compact PlayStand for Nintendo Switch 2",
+          "sku": "NS2-029U"
+        },
+        {
+          "type": "headset_adapter",
+          "name": "GuliKit USB-C Audio Adapter for Nintendo Switch 2",
+          "sku": "GK-NS05-SW2"
+        }
+      ],
+      "fulfillment": {
+        "merchant": "GameHub Online",
+        "method": "standard_home_delivery",
+        "service_level": "Ground"
+      },
+      "shipping_address": {
+        "city": "Portland",
+        "state": "OR",
+        "postal_code": "97214"
+      },
+      "recipient": {
+        "name": "Maya Chen",
+        "phone": "+1-503-555-0186",
+        "delivery_updates": "sms"
+      },
+      "payment": {
+        "method": "Visa",
+        "last_four": "4242",
+        "billing_postal_code": "97214"
+      },
+      "gift_options": {
+        "occasion": "birthday",
+        "wrapping_style": "simple",
+        "hide_prices": true
+      },
+      "delivery_preferences": {
+        "dropoff_location": "front_desk",
+        "weekend_delivery_ok": true,
+        "signature_required": false
+      },
+      "promotion": {
+        "code": "BIRTHDAY10",
+        "applied": true
+      },
+      "order_context": {
+        "cart_name": "birthday console order",
+        "priority": "normal",
+        "source": "mobile_app"
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Swap base product Switch OLED -> Switch 2 (master_data supplies the new base sku and the compatible accessory for each type). base_product.model is the direct edit; base_product.sku and each accessory name+sku switch to the Switch 2 version matched by accessory type (8 types, 16 fields). brand (Nintendo), accessory types, and all unrelated cart fields stay.",
+  "conversation_pattern": "Center the artifact on a cart with one base product and several accessories whose choice depends on that base, each being the one valid for it. Around this core, add the realistic, independent details a cart would carry that do not depend on the base product, and vary their number from sample to sample.",
+  "edit_pattern": "Change the base product (device, platform, or model) to a different specific one.",
+  "cascade_pattern": "Each base-dependent accessory switches to the one valid for the new base (the valid accessories for the new base are supplied with the edit instruction), while accessories and fields that do not depend on the base stay. This is determined because the valid accessories for the new base are provided with the edit.",
+  "requires_master_data": true
+}

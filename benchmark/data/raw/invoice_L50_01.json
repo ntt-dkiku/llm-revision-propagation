@@ -1,0 +1,285 @@
+{
+  "id": "invoice_L50_01",
+  "domain": "invoice",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start an invoice record for Northstar Analytics LLC."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record\", \"value\": {\"customer\": {\"company_name\": \"Northstar Analytics LLC\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set their subscription price for the billing cycle at $300."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/subscription_charge\", \"value\": {\"fee\": {\"amount\": 300, \"currency\": \"USD\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make that price cover a 30-day billing cycle."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/subscription_charge/billing_period_days\", \"value\": 30}]"
+    },
+    {
+      "role": "user",
+      "content": "Show that they used 18 days of the cycle before canceling, leaving 12 days unused."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/subscription_charge/proration_span\", \"value\": {\"used_days\": 18, \"unused_days\": 12}}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the per-day price from that cycle charge."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/subscription_charge/daily_rate\", \"value\": {\"amount\": 10, \"currency\": \"USD\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now apply the unused 12 days as a prorated credit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/subscription_charge/prorated_credit\", \"value\": {\"amount\": 120, \"currency\": \"USD\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the remaining charge after subtracting that credit from the subscription price."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/subscription_charge/net_charge\", \"value\": {\"amount\": 180, \"currency\": \"USD\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use that remaining charge as the amount before any tax is considered."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/amount_before_tax\", \"value\": {\"amount\": 180, \"currency\": \"USD\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply an 8% sales tax to this invoice."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/tax/rate_percent\", \"value\": 8}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the tax from that percentage."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/tax/amount\", \"value\": {\"amount\": 14.4, \"currency\": \"USD\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add those together for the final amount due."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/total_due\", \"value\": {\"amount\": 194.4, \"currency\": \"USD\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give this invoice the number INV-2025-0418, dated April 18, 2025, with payment due May 2, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/invoice_details\", \"value\": {\"invoice_number\": \"INV-2025-0418\", \"issue_date\": \"2025-04-18\", \"due_date\": \"2025-05-02\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the billing contact for Northstar as Priya Raman, using her work email and direct phone number."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/customer/billing_contact\", \"value\": {\"name\": \"Priya Raman\", \"email\": \"priya.raman@northstaranalytics.example\", \"phone\": \"+1-415-555-0198\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Northstar’s billing address in San Francisco."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/customer/billing_address\", \"value\": {\"street\": \"88 Spear Street, Suite 1200\", \"city\": \"San Francisco\", \"state\": \"CA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish that address with the ZIP code and country."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/customer/billing_address/postal_code\", \"value\": \"94105\"}, {\"op\": \"add\", \"path\": \"/billing_record/customer/billing_address/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the seller as CloudMetric Billing Services, with their support email and tax ID."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/vendor\", \"value\": {\"name\": \"CloudMetric Billing Services\", \"support_email\": \"billing@cloudmetric.example\", \"tax_id\": \"US-98-7654321\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add CloudMetric’s mailing address in Austin."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/vendor/mailing_address\", \"value\": {\"street\": \"410 Congress Avenue, Floor 6\", \"city\": \"Austin\", \"state\": \"TX\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish CloudMetric’s address with the ZIP code and country."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/vendor/mailing_address/postal_code\", \"value\": \"78701\"}, {\"op\": \"add\", \"path\": \"/billing_record/vendor/mailing_address/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that payment will be collected by ACH through Stripe, ending in account 4421."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/payment_collection\", \"value\": {\"method\": \"ACH debit\", \"processor\": \"Stripe\", \"account_last4\": \"4421\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the subscription’s plan name, workspace reference, and service region for clarity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/subscription_charge/service_context\", \"value\": {\"plan_name\": \"Insights Pro Monthly\", \"workspace_ref\": \"northstar-prod\", \"service_region\": \"US-West\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark it as still open, note that the cancellation was due to team downsizing, and make clear there are no late fees."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/accounting_notes\", \"value\": {\"invoice_status\": \"open\", \"cancellation_reason\": \"team downsizing\", \"late_fee_policy\": \"none\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add internal tracking details showing the finance approver, the department charged, and the purchase order reference."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/billing_record/internal_tracking\", \"value\": {\"finance_approver\": \"Marcus Lee\", \"department\": \"Data Operations\", \"purchase_order\": \"PO-77841\"}}]"
+    }
+  ],
+  "edit_instruction": "Please change the subscription price for the billing cycle to $360.",
+  "theme": "Prorating an unused subscription period",
+  "master_data": null,
+  "current_json": {
+    "billing_record": {
+      "customer": {
+        "company_name": "Northstar Analytics LLC",
+        "billing_contact": {
+          "name": "Priya Raman",
+          "email": "priya.raman@northstaranalytics.example",
+          "phone": "+1-415-555-0198"
+        },
+        "billing_address": {
+          "street": "88 Spear Street, Suite 1200",
+          "city": "San Francisco",
+          "state": "CA",
+          "postal_code": "94105",
+          "country": "US"
+        }
+      },
+      "subscription_charge": {
+        "fee": {
+          "amount": 300,
+          "currency": "USD"
+        },
+        "billing_period_days": 30,
+        "proration_span": {
+          "used_days": 18,
+          "unused_days": 12
+        },
+        "daily_rate": {
+          "amount": 10,
+          "currency": "USD"
+        },
+        "prorated_credit": {
+          "amount": 120,
+          "currency": "USD"
+        },
+        "net_charge": {
+          "amount": 180,
+          "currency": "USD"
+        },
+        "service_context": {
+          "plan_name": "Insights Pro Monthly",
+          "workspace_ref": "northstar-prod",
+          "service_region": "US-West"
+        }
+      },
+      "amount_before_tax": {
+        "amount": 180,
+        "currency": "USD"
+      },
+      "tax": {
+        "rate_percent": 8,
+        "amount": {
+          "amount": 14.4,
+          "currency": "USD"
+        }
+      },
+      "total_due": {
+        "amount": 194.4,
+        "currency": "USD"
+      },
+      "invoice_details": {
+        "invoice_number": "INV-2025-0418",
+        "issue_date": "2025-04-18",
+        "due_date": "2025-05-02"
+      },
+      "vendor": {
+        "name": "CloudMetric Billing Services",
+        "support_email": "billing@cloudmetric.example",
+        "tax_id": "US-98-7654321",
+        "mailing_address": {
+          "street": "410 Congress Avenue, Floor 6",
+          "city": "Austin",
+          "state": "TX",
+          "postal_code": "78701",
+          "country": "US"
+        }
+      },
+      "payment_collection": {
+        "method": "ACH debit",
+        "processor": "Stripe",
+        "account_last4": "4421"
+      },
+      "accounting_notes": {
+        "invoice_status": "open",
+        "cancellation_reason": "team downsizing",
+        "late_fee_policy": "none"
+      },
+      "internal_tracking": {
+        "finance_approver": "Marcus Lee",
+        "department": "Data Operations",
+        "purchase_order": "PO-77841"
+      }
+    }
+  },
+  "conversation_pattern": "Center the artifact on a subscription charge with a fee, an explicitly stated billing-period length in days, and used and unused day spans, where a prorated credit and the net charge follow from the fee and the unused span by standard daily proration, so the fee and the spans determine them. Choose the fee and the period length so the daily rate divides evenly, keeping the credit exact. Around this core, add the realistic, independent details a billing record would carry that do not depend on the fee or the unused span, and vary their number from sample to sample.",
+  "edit_pattern": "Change the monthly fee (or the cancellation date that sets the unused days) to a specific new value.",
+  "cascade_pattern": "Editing the fee (or the span that sets the unused days) re-derives the prorated credit and the net charge by standard daily proration, and any totals built on them follow. The period length and the spans stay. Each new value is fixed because daily proration on the stated period has one unambiguous result.",
+  "requires_master_data": false
+}

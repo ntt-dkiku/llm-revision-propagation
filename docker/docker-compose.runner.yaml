@@ -1,0 +1,39 @@
+name: llm-revision-propagation
+
+services:
+  runner:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile_runner
+      args:
+        UV_VERSION: "0.9.28"
+    image: llm-revision-propagation/runner:0.1
+    container_name: revpropbench-runner
+    ipc: host
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # Load docker/.env into the container if present (hosted-model keys like
+    # OPENAI_API_KEY / ANTHROPIC_API_KEY become available to litellm). Optional:
+    # local vLLM works without it. Re-run `make runner-up` after editing keys.
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      # Explicit entries override env_file. Python clients talk directly to
+      # vLLM's OpenAI-compatible /v1 endpoint.
+      - VLLM_BASE_URL=http://host.docker.internal:${VLLM_HOST_PORT}/v1
+      - VLLM_HOST_PORT=${VLLM_HOST_PORT}
+      - VLLM_SERVED_NAME=${VLLM_SERVED_NAME:-local-llm}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ..:/work
+      - hf-cache:/root/.cache/huggingface
+      - uv-cache:/root/.cache/uv
+    working_dir: /work
+    stdin_open: true
+    tty: true
+    command: ["bash", "-lc", "tail -f /dev/null"]
+
+volumes:
+  hf-cache: {}
+  uv-cache: {}

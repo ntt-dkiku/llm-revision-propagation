@@ -1,0 +1,212 @@
+{
+  "id": "software_deployment_config_L10_01",
+  "domain": "software_deployment_config",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a deployment record for the payments API."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/service/name\", \"value\": \"payments-api\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set this up for staging to start."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/name\", \"value\": \"staging\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the usual staging workspace for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/namespace\", \"value\": \"payments-staging\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Point traffic at the staging address customers use for testing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ingress/primaryHost\", \"value\": \"payments-api.staging.example.com\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it pull credentials from the staging vault entry."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/secrets/paymentProviderRef\", \"value\": \"vault://staging/payments-api/provider\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Send staging incidents to the payments test responders."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/alerts/route\", \"value\": \"payments-staging-oncall\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep it on the staging rollout stream."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/release/channel\", \"value\": \"staging\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Run three copies of the service for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/replicas\", \"value\": 3}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include the internal staging address the cluster will use."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ingress/internalHost\", \"value\": \"payments-api.staging.svc.cluster.local\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the staging TLS certificate bundle for HTTPS."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/secrets/tlsCertificateRef\", \"value\": \"vault://staging/payments-api/tls\"}]"
+    }
+  ],
+  "edit_instruction": "Change the deployment environment to production.",
+  "current_json": {
+    "service": {
+      "name": "payments-api"
+    },
+    "environment": {
+      "name": "staging",
+      "namespace": "payments-staging"
+    },
+    "ingress": {
+      "primaryHost": "payments-api.staging.example.com",
+      "internalHost": "payments-api.staging.svc.cluster.local"
+    },
+    "secrets": {
+      "paymentProviderRef": "vault://staging/payments-api/provider",
+      "tlsCertificateRef": "vault://staging/payments-api/tls"
+    },
+    "alerts": {
+      "route": "payments-staging-oncall"
+    },
+    "release": {
+      "channel": "staging"
+    },
+    "deployment": {
+      "replicas": 3
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/environment/name",
+      "kind": "direct",
+      "value": "production"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/namespace",
+      "kind": "cascade",
+      "value": "payments-prod"
+    },
+    {
+      "op": "replace",
+      "path": "/ingress/primaryHost",
+      "kind": "cascade",
+      "value": "payments-api.example.com"
+    },
+    {
+      "op": "replace",
+      "path": "/ingress/internalHost",
+      "kind": "cascade",
+      "value": "payments-api.prod.svc.cluster.local"
+    },
+    {
+      "op": "replace",
+      "path": "/secrets/paymentProviderRef",
+      "kind": "cascade",
+      "value": "vault://prod/payments-api/provider"
+    },
+    {
+      "op": "replace",
+      "path": "/secrets/tlsCertificateRef",
+      "kind": "cascade",
+      "value": "vault://prod/payments-api/tls"
+    },
+    {
+      "op": "replace",
+      "path": "/alerts/route",
+      "kind": "cascade",
+      "value": "payments-prod-oncall"
+    },
+    {
+      "op": "replace",
+      "path": "/release/channel",
+      "kind": "cascade",
+      "value": "stable"
+    }
+  ],
+  "expected_json": {
+    "service": {
+      "name": "payments-api"
+    },
+    "environment": {
+      "name": "production",
+      "namespace": "payments-prod"
+    },
+    "ingress": {
+      "primaryHost": "payments-api.example.com",
+      "internalHost": "payments-api.prod.svc.cluster.local"
+    },
+    "secrets": {
+      "paymentProviderRef": "vault://prod/payments-api/provider",
+      "tlsCertificateRef": "vault://prod/payments-api/tls"
+    },
+    "alerts": {
+      "route": "payments-prod-oncall"
+    },
+    "release": {
+      "channel": "stable"
+    },
+    "deployment": {
+      "replicas": 3
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "env staging->production: every env-governed field takes production master_data attrs; deployment.replicas unrelated.",
+  "annotated": true,
+  "excluded": false,
+  "theme": "Switching the deployment environment",
+  "conversation_pattern": "Center the artifact on a service configured for one environment, where namespace, hostnames, secret references, alert routing, and release channel all follow from the environment's supplied attributes. Around this core, add the realistic, independent details a deployment record would carry that do not depend on the environment, and vary their number from sample to sample. Do not embed a lookup or reference card for any environment inside the artifact; the artifact holds only the current environment's own fields.",
+  "edit_pattern": "Move the deployment to a different specific environment, and supply the target environment's attributes in master_data.",
+  "cascade_pattern": "Every environment-governed field takes the replacement environment's supplied attributes: namespace, hostnames, secret references, alert routing, and release channel. Service-specific fields that do not depend on the environment stay unchanged. This is determined because the replacement environment's attributes are provided with the edit.",
+  "requires_master_data": true,
+  "master_data": {
+    "production": {
+      "namespace": "payments-prod",
+      "primaryHost": "payments-api.example.com",
+      "internalHost": "payments-api.prod.svc.cluster.local",
+      "paymentProviderRef": "vault://prod/payments-api/provider",
+      "tlsCertificateRef": "vault://prod/payments-api/tls",
+      "alertRoute": "payments-prod-oncall",
+      "releaseChannel": "stable"
+    }
+  }
+}

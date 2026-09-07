@@ -1,0 +1,34 @@
+name: llm-revision-propagation
+
+services:
+  vllm-qwen27b:
+    image: ${VLLM_IMAGE:-vllm/vllm-openai:latest}
+    container_name: revpropbench-vllm-qwen27b
+    restart: unless-stopped
+    runtime: nvidia
+    ipc: host
+    shm_size: "16gb"
+    ports:
+      - "8005:8000"
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HUGGINGFACE_HUB_TOKEN}
+      - HF_HOME=/root/.cache/huggingface
+      - NVIDIA_VISIBLE_DEVICES=${VLLM_GPUS:-0}
+      - VLLM_LOGGING_LEVEL=INFO
+    volumes:
+      - ${HF_HOME}:/root/.cache/huggingface
+    command: >
+      --model Qwen/Qwen3.5-27B
+      --served-model-name qwen27b-llm
+      --tensor-parallel-size 1
+      --gpu-memory-utilization 0.90
+      --max-model-len 65536
+      --dtype bfloat16
+      --reasoning-parser qwen3
+      --trust-remote-code
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8000/v1/models >/dev/null || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 60
+      start_period: 600s

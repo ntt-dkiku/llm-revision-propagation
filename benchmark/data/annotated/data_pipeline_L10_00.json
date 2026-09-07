@@ -1,0 +1,143 @@
+{
+  "id": "data_pipeline_L10_00",
+  "domain": "data_pipeline",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start the operations record with the fact that this job runs every 45 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule\", \"value\": {\"interval_minutes\": 45}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the freshness commitment for the job, and make it clear that it is always fifteen minutes longer than the run cadence."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/freshness_sla\", \"value\": {\"minutes\": 60, \"formula\": \"interval_minutes + 15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include the retry allowance, with the rule that it lasts for twice the run cadence."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/retry_window\", \"value\": {\"minutes\": 90, \"formula\": \"interval_minutes * 2\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include when downstream teams should expect the refreshed data, using the rule that it lands twenty minutes after each run cadence."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/downstream_refresh_expectation\", \"value\": {\"minutes_after_start\": 65, \"formula\": \"interval_minutes + 20\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the stale-data paging point too, with the rule that alerts fire thirty minutes after the run cadence."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stale_data_alert_threshold\", \"value\": {\"minutes\": 75, \"formula\": \"interval_minutes + 30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, note that the data platform on-call group owns this record."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/owner\", \"value\": \"data-platform-oncall\"}]"
+    }
+  ],
+  "edit_instruction": "Change the run cadence to 30 minutes.",
+  "current_json": {
+    "schedule": {
+      "interval_minutes": 45
+    },
+    "freshness_sla": {
+      "minutes": 60,
+      "formula": "interval_minutes + 15"
+    },
+    "retry_window": {
+      "minutes": 90,
+      "formula": "interval_minutes * 2"
+    },
+    "downstream_refresh_expectation": {
+      "minutes_after_start": 65,
+      "formula": "interval_minutes + 20"
+    },
+    "stale_data_alert_threshold": {
+      "minutes": 75,
+      "formula": "interval_minutes + 30"
+    },
+    "owner": "data-platform-oncall"
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/schedule/interval_minutes",
+      "kind": "direct",
+      "value": 30
+    },
+    {
+      "op": "replace",
+      "path": "/freshness_sla/minutes",
+      "kind": "cascade",
+      "value": 45
+    },
+    {
+      "op": "replace",
+      "path": "/retry_window/minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/downstream_refresh_expectation/minutes_after_start",
+      "kind": "cascade",
+      "value": 50
+    },
+    {
+      "op": "replace",
+      "path": "/stale_data_alert_threshold/minutes",
+      "kind": "cascade",
+      "value": 60
+    }
+  ],
+  "expected_json": {
+    "schedule": {
+      "interval_minutes": 30
+    },
+    "freshness_sla": {
+      "minutes": 45,
+      "formula": "interval_minutes + 15"
+    },
+    "retry_window": {
+      "minutes": 60,
+      "formula": "interval_minutes * 2"
+    },
+    "downstream_refresh_expectation": {
+      "minutes_after_start": 50,
+      "formula": "interval_minutes + 20"
+    },
+    "stale_data_alert_threshold": {
+      "minutes": 60,
+      "formula": "interval_minutes + 30"
+    },
+    "owner": "data-platform-oncall"
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "interval 45->30; sla=30+15=45, retry=30*2=60, refresh=30+20=50, stale=30+30=60 per stated formulas. owner unrelated.",
+  "annotated": true,
+  "excluded": false,
+  "theme": "Changing the pipeline schedule interval",
+  "conversation_pattern": "Center the artifact on a scheduled pipeline whose run interval determines freshness SLA, retry window, downstream expected refresh time, and stale-data alert threshold by arithmetic rules written explicitly in the artifact (state each formula, e.g. freshness_sla = interval + 15). Around this core, add the realistic, independent details an operations record would carry that do not depend on the schedule interval, and vary their number from sample to sample.",
+  "edit_pattern": "Change the pipeline schedule interval to a different specific interval.",
+  "cascade_pattern": "Editing the interval re-derives the SLA, retry window, downstream refresh expectation, and stale-data alert threshold from the stated formulas. Owners, descriptions, and fields that do not read the interval stay unchanged.",
+  "requires_master_data": false
+}

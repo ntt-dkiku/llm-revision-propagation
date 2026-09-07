@@ -1,0 +1,1261 @@
+{
+  "id": "software_deployment_config_L100_01",
+  "domain": "software_deployment_config",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a deployment record for the checkout-api service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/service\", \"value\": {\"name\": \"checkout-api\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set it up for the staging environment to begin with."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment\", \"value\": {\"name\": \"staging\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the staging namespace that platform assigned for this service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/namespace\", \"value\": \"stg-checkout\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Point the customer-facing traffic at the staging checkout address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts\", \"value\": {\"public\": \"checkout.staging.example.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also route service-to-service calls through the staging internal address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/internal\", \"value\": \"checkout.staging.svc.cluster.local\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it pull the database credentials from the staging secret bundle."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets\", \"value\": {\"databaseCredentials\": \"stg-checkout-db-credentials\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the staging payment token bundle too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/paymentProviderToken\", \"value\": \"stg-checkout-payment-token\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Send staging alerts to the checkout staging Slack route."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/alertRouting\", \"value\": {\"slackChannel\": \"#checkout-staging-alerts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the staging PagerDuty path for incidents from this service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/alertRouting/pagerDutyService\", \"value\": \"pd-checkout-staging\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Track this one on the staging rollout stream."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/releaseChannel\", \"value\": \"staging-canary\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging operations endpoint that our runbooks use for this service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/ops\", \"value\": \"checkout-ops.staging.example.com\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make sure TLS for the staging checkout address uses the staging certificate bundle."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/tlsCertificate\", \"value\": \"stg-checkout-tls-cert\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Copy critical staging notifications to the checkout staging email list as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/alertRouting/emailList\", \"value\": \"checkout-staging-oncall@example.com\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the service use the staging feature flag token when it starts up."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/featureFlagToken\", \"value\": \"stg-checkout-feature-flags\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Send metrics from this setup to the staging telemetry endpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/metrics\", \"value\": \"metrics.staging.example.com\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Ship application logs from this staging deployment to the staging log intake address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/logs\", \"value\": \"logs.staging.example.com\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the staging signing bundle for checkout session tokens."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/sessionSigningKey\", \"value\": \"stg-checkout-session-signing\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Connect refund processing to the staging credentials bundle as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/refundProcessorCredentials\", \"value\": \"stg-checkout-refund-processor\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have warning-level staging alerts go to the checkout triage webhook."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/alertRouting/webhook\", \"value\": \"https://hooks.staging.example.com/checkout-triage\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the staging container registry path for images promoted into this rollout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/registry\", \"value\": \"registry.staging.example.com/checkout\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Escalate unresolved staging incidents through the checkout staging escalation policy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/alertRouting/escalationPolicy\", \"value\": \"checkout-staging-escalation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Verify promoted images with the staging checkout signature bundle."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/imageSignatureBundle\", \"value\": \"stg-checkout-image-signatures\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging addresses for static assets, callbacks, and the admin console while we're wiring traffic."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/staticAssets\", \"value\": \"assets.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/callbacks\", \"value\": \"callbacks.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/adminConsole\", \"value\": \"checkout-admin.staging.example.com\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the remaining staging credential bundles for the fraud, tax, and shipping integrations."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/fraudServiceCredentials\", \"value\": \"stg-checkout-fraud-credentials\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/taxServiceCredentials\", \"value\": \"stg-checkout-tax-credentials\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/shippingServiceCredentials\", \"value\": \"stg-checkout-shipping-credentials\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Round out the staging alert setup with the incident room, status page, and low-priority ticket queue."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/alertRouting/incidentRoom\", \"value\": \"checkout-staging-war-room\"}, {\"op\": \"add\", \"path\": \"/environment/alertRouting/statusPage\", \"value\": \"status-staging-checkout\"}, {\"op\": \"add\", \"path\": \"/environment/alertRouting/ticketQueue\", \"value\": \"OPS-STG-CHECKOUT\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Wire the staging addresses for GraphQL traffic, health checks, and auth callbacks too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/graphql\", \"value\": \"graphql.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/health\", \"value\": \"health.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/authCallback\", \"value\": \"auth.staging.example.com/checkout/callback\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging bundles for analytics export, customer identity, and coupon validation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/analyticsExportToken\", \"value\": \"stg-checkout-analytics-export\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/customerIdentityCredentials\", \"value\": \"stg-checkout-customer-identity\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/couponValidationKey\", \"value\": \"stg-checkout-coupon-validation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the last few staging destinations for audit events, search indexing, and CDN invalidation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/auditEvents\", \"value\": \"audit.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/searchIndex\", \"value\": \"search.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/cdnInvalidation\", \"value\": \"cdn.staging.example.com/checkout/invalidate\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the staging bundles for gift cards, loyalty points, and invoice generation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/giftCardServiceCredentials\", \"value\": \"stg-checkout-gift-card-credentials\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/loyaltyProgramToken\", \"value\": \"stg-checkout-loyalty-token\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/invoiceGenerationKey\", \"value\": \"stg-checkout-invoice-generation\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Pin the build we’re deploying to the current checkout container from the main repository."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/service/artifact\", \"value\": {\"repository\": \"ghcr.io/acme/checkout-api\", \"tag\": \"2026.06.08-1432\", \"digest\": \"sha256:9f2d8a1c6b7e5d4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging destinations for order queues, payment webhooks, and fulfillment callbacks."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/orderQueue\", \"value\": \"orders.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/paymentWebhook\", \"value\": \"payments.staging.example.com/checkout/webhook\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/fulfillmentCallback\", \"value\": \"fulfillment.staging.example.com/checkout/callback\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging bundles for address verification, risk scoring, and receipt delivery."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/addressVerificationToken\", \"value\": \"stg-checkout-address-verification\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/riskScoringCredentials\", \"value\": \"stg-checkout-risk-scoring\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/receiptDeliveryKey\", \"value\": \"stg-checkout-receipt-delivery\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the staging notification targets with the mobile push group, the executive summary list, and the security review queue."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/alertRouting/mobilePushGroup\", \"value\": \"checkout-staging-mobile-push\"}, {\"op\": \"add\", \"path\": \"/environment/alertRouting/executiveSummaryList\", \"value\": \"checkout-staging-summary@example.com\"}, {\"op\": \"add\", \"path\": \"/environment/alertRouting/securityReviewQueue\", \"value\": \"SEC-STG-CHECKOUT\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging endpoints used by returns, subscriptions, and account credit flows."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/returns\", \"value\": \"returns.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/subscriptions\", \"value\": \"subscriptions.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/accountCredit\", \"value\": \"credits.staging.example.com/checkout\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the staging bundles for store credit, deferred billing, and customer messaging."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/storeCreditCredentials\", \"value\": \"stg-checkout-store-credit\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/deferredBillingToken\", \"value\": \"stg-checkout-deferred-billing\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/customerMessagingKey\", \"value\": \"stg-checkout-customer-messaging\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging addresses the service calls for recommendations, inventory checks, and pricing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/recommendations\", \"value\": \"recommendations.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/inventory\", \"value\": \"inventory.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/pricing\", \"value\": \"pricing.staging.example.com/checkout\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the rollout sizing for this service to a modest staging footprint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment\", \"value\": {\"replicas\": 3, \"strategy\": \"RollingUpdate\", \"maxUnavailable\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give the containers their normal CPU and memory reservations."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources\", \"value\": {\"cpuRequest\": \"500m\", \"memoryRequest\": \"768Mi\", \"cpuLimit\": \"1500m\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging bundles for product catalog reads, cart recovery, and promotion rules."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/productCatalogToken\", \"value\": \"stg-checkout-product-catalog\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/cartRecoveryCredentials\", \"value\": \"stg-checkout-cart-recovery\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/promotionRulesKey\", \"value\": \"stg-checkout-promotion-rules\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Complete the resource limits with memory, storage, and a short startup grace period."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources/memoryLimit\", \"value\": \"1536Mi\"}, {\"op\": \"add\", \"path\": \"/deployment/resources/ephemeralStorageLimit\", \"value\": \"2Gi\"}, {\"op\": \"add\", \"path\": \"/deployment/startupGraceSeconds\", \"value\": 90}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging endpoints for shipment tracking, warehouse allocation, and fraud review callbacks."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/shipmentTracking\", \"value\": \"tracking.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/warehouseAllocation\", \"value\": \"warehouse.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/fraudReviewCallback\", \"value\": \"fraud-review.staging.example.com/checkout/callback\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the staging bundles for manual order adjustment, dispute handling, and tax exemption checks."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/manualAdjustmentCredentials\", \"value\": \"stg-checkout-manual-adjustment\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/disputeHandlingToken\", \"value\": \"stg-checkout-dispute-handling\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/taxExemptionKey\", \"value\": \"stg-checkout-tax-exemption\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging endpoints for digital wallet callbacks, payment retries, and order reconciliation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/digitalWalletCallback\", \"value\": \"wallet.staging.example.com/checkout/callback\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/paymentRetry\", \"value\": \"payment-retry.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/orderReconciliation\", \"value\": \"reconcile.staging.example.com/checkout\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the staging bundles for wallet settlement, chargeback evidence, and customer refunds."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/walletSettlementCredentials\", \"value\": \"stg-checkout-wallet-settlement\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/chargebackEvidenceToken\", \"value\": \"stg-checkout-chargeback-evidence\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/customerRefundKey\", \"value\": \"stg-checkout-customer-refunds\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging endpoints for abandoned cart reminders, invoice callbacks, and loyalty reconciliation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/abandonedCartReminder\", \"value\": \"abandoned-cart.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/invoiceCallback\", \"value\": \"invoice.staging.example.com/checkout/callback\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/loyaltyReconciliation\", \"value\": \"loyalty-reconcile.staging.example.com/checkout\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the staging bundles for subscription billing, return authorization, and order export."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/subscriptionBillingToken\", \"value\": \"stg-checkout-subscription-billing\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/returnAuthorizationCredentials\", \"value\": \"stg-checkout-return-authorization\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/orderExportKey\", \"value\": \"stg-checkout-order-export\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the staging endpoints for customer notes, fraud signals, and settlement reporting."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/hosts/customerNotes\", \"value\": \"notes.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/fraudSignals\", \"value\": \"fraud-signals.staging.example.com/checkout\"}, {\"op\": \"add\", \"path\": \"/environment/hosts/settlementReports\", \"value\": \"settlements.staging.example.com/checkout\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the staging setup with the bundles for tax document upload, payment ledger access, and delivery estimates."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/secrets/taxDocumentUploadToken\", \"value\": \"stg-checkout-tax-document-upload\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/paymentLedgerCredentials\", \"value\": \"stg-checkout-payment-ledger\"}, {\"op\": \"add\", \"path\": \"/environment/secrets/deliveryEstimateKey\", \"value\": \"stg-checkout-delivery-estimates\"}]"
+    }
+  ],
+  "edit_instruction": "Please move this deployment to production.",
+  "theme": "Switching the deployment environment",
+  "conversation_pattern": "Center the artifact on a service configured for one environment, where namespace, hostnames, secret references, alert routing, and release channel all follow from the environment's supplied attributes. Around this core, add the realistic, independent details a deployment record would carry that do not depend on the environment, and vary their number from sample to sample. Do not embed a lookup or reference card for any environment inside the artifact; the artifact holds only the current environment's own fields.",
+  "edit_pattern": "Move the deployment to a different specific environment, and supply the target environment's attributes in master_data.",
+  "cascade_pattern": "Every environment-governed field takes the replacement environment's supplied attributes: namespace, hostnames, secret references, alert routing, and release channel. Service-specific fields that do not depend on the environment stay unchanged. This is determined because the replacement environment's attributes are provided with the edit.",
+  "requires_master_data": true,
+  "master_data": {
+    "environments": {
+      "production": {
+        "namespace": "prod-checkout",
+        "hosts": {
+          "public": "checkout.example.com",
+          "internal": "checkout.prod.svc.cluster.local",
+          "ops": "checkout-ops.example.com",
+          "metrics": "metrics.prod.example.com",
+          "logs": "logs.prod.example.com",
+          "registry": "registry.prod.example.com/checkout",
+          "staticAssets": "assets.example.com/checkout",
+          "callbacks": "callbacks.example.com/checkout",
+          "adminConsole": "checkout-admin.example.com",
+          "graphql": "graphql.example.com/checkout",
+          "health": "health.example.com/checkout",
+          "authCallback": "auth.example.com/checkout/callback",
+          "auditEvents": "audit.prod.example.com/checkout",
+          "searchIndex": "search.prod.example.com/checkout",
+          "cdnInvalidation": "cdn.example.com/checkout/invalidate",
+          "orderQueue": "orders.prod.example.com/checkout",
+          "paymentWebhook": "payments.example.com/checkout/webhook",
+          "fulfillmentCallback": "fulfillment.example.com/checkout/callback",
+          "returns": "returns.example.com/checkout",
+          "subscriptions": "subscriptions.example.com/checkout",
+          "accountCredit": "credits.example.com/checkout",
+          "recommendations": "recommendations.prod.example.com/checkout",
+          "inventory": "inventory.prod.example.com/checkout",
+          "pricing": "pricing.prod.example.com/checkout",
+          "shipmentTracking": "tracking.example.com/checkout",
+          "warehouseAllocation": "warehouse.prod.example.com/checkout",
+          "fraudReviewCallback": "fraud-review.example.com/checkout/callback",
+          "digitalWalletCallback": "wallet.example.com/checkout/callback",
+          "paymentRetry": "payment-retry.example.com/checkout",
+          "orderReconciliation": "reconcile.prod.example.com/checkout",
+          "abandonedCartReminder": "abandoned-cart.example.com/checkout",
+          "invoiceCallback": "invoice.example.com/checkout/callback",
+          "loyaltyReconciliation": "loyalty-reconcile.prod.example.com/checkout",
+          "customerNotes": "notes.prod.example.com/checkout",
+          "fraudSignals": "fraud-signals.prod.example.com/checkout",
+          "settlementReports": "settlements.prod.example.com/checkout"
+        },
+        "secrets": {
+          "databaseCredentials": "prod-checkout-db-credentials",
+          "paymentProviderToken": "prod-checkout-payment-token",
+          "tlsCertificate": "prod-checkout-tls-cert",
+          "featureFlagToken": "prod-checkout-feature-flags",
+          "sessionSigningKey": "prod-checkout-session-signing",
+          "refundProcessorCredentials": "prod-checkout-refund-processor",
+          "imageSignatureBundle": "prod-checkout-image-signatures",
+          "fraudServiceCredentials": "prod-checkout-fraud-credentials",
+          "taxServiceCredentials": "prod-checkout-tax-credentials",
+          "shippingServiceCredentials": "prod-checkout-shipping-credentials",
+          "analyticsExportToken": "prod-checkout-analytics-export",
+          "customerIdentityCredentials": "prod-checkout-customer-identity",
+          "couponValidationKey": "prod-checkout-coupon-validation",
+          "giftCardServiceCredentials": "prod-checkout-gift-card-credentials",
+          "loyaltyProgramToken": "prod-checkout-loyalty-token",
+          "invoiceGenerationKey": "prod-checkout-invoice-generation",
+          "addressVerificationToken": "prod-checkout-address-verification",
+          "riskScoringCredentials": "prod-checkout-risk-scoring",
+          "receiptDeliveryKey": "prod-checkout-receipt-delivery",
+          "storeCreditCredentials": "prod-checkout-store-credit",
+          "deferredBillingToken": "prod-checkout-deferred-billing",
+          "customerMessagingKey": "prod-checkout-customer-messaging",
+          "productCatalogToken": "prod-checkout-product-catalog",
+          "cartRecoveryCredentials": "prod-checkout-cart-recovery",
+          "promotionRulesKey": "prod-checkout-promotion-rules",
+          "manualAdjustmentCredentials": "prod-checkout-manual-adjustment",
+          "disputeHandlingToken": "prod-checkout-dispute-handling",
+          "taxExemptionKey": "prod-checkout-tax-exemption",
+          "walletSettlementCredentials": "prod-checkout-wallet-settlement",
+          "chargebackEvidenceToken": "prod-checkout-chargeback-evidence",
+          "customerRefundKey": "prod-checkout-customer-refunds",
+          "subscriptionBillingToken": "prod-checkout-subscription-billing",
+          "returnAuthorizationCredentials": "prod-checkout-return-authorization",
+          "orderExportKey": "prod-checkout-order-export",
+          "taxDocumentUploadToken": "prod-checkout-tax-document-upload",
+          "paymentLedgerCredentials": "prod-checkout-payment-ledger",
+          "deliveryEstimateKey": "prod-checkout-delivery-estimates"
+        },
+        "alertRouting": {
+          "slackChannel": "#checkout-prod-alerts",
+          "pagerDutyService": "pd-checkout-prod",
+          "emailList": "checkout-prod-oncall@example.com",
+          "webhook": "https://hooks.prod.example.com/checkout-triage",
+          "escalationPolicy": "checkout-prod-escalation",
+          "incidentRoom": "checkout-prod-war-room",
+          "statusPage": "status-prod-checkout",
+          "ticketQueue": "OPS-PROD-CHECKOUT",
+          "mobilePushGroup": "checkout-prod-mobile-push",
+          "executiveSummaryList": "checkout-prod-summary@example.com",
+          "securityReviewQueue": "SEC-PROD-CHECKOUT"
+        },
+        "releaseChannel": "production-stable"
+      }
+    }
+  },
+  "current_json": {
+    "service": {
+      "name": "checkout-api",
+      "artifact": {
+        "repository": "ghcr.io/acme/checkout-api",
+        "tag": "2026.06.08-1432",
+        "digest": "sha256:9f2d8a1c6b7e5d4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f"
+      }
+    },
+    "environment": {
+      "name": "staging",
+      "namespace": "stg-checkout",
+      "hosts": {
+        "public": "checkout.staging.example.com",
+        "internal": "checkout.staging.svc.cluster.local",
+        "ops": "checkout-ops.staging.example.com",
+        "metrics": "metrics.staging.example.com",
+        "logs": "logs.staging.example.com",
+        "registry": "registry.staging.example.com/checkout",
+        "staticAssets": "assets.staging.example.com/checkout",
+        "callbacks": "callbacks.staging.example.com/checkout",
+        "adminConsole": "checkout-admin.staging.example.com",
+        "graphql": "graphql.staging.example.com/checkout",
+        "health": "health.staging.example.com/checkout",
+        "authCallback": "auth.staging.example.com/checkout/callback",
+        "auditEvents": "audit.staging.example.com/checkout",
+        "searchIndex": "search.staging.example.com/checkout",
+        "cdnInvalidation": "cdn.staging.example.com/checkout/invalidate",
+        "orderQueue": "orders.staging.example.com/checkout",
+        "paymentWebhook": "payments.staging.example.com/checkout/webhook",
+        "fulfillmentCallback": "fulfillment.staging.example.com/checkout/callback",
+        "returns": "returns.staging.example.com/checkout",
+        "subscriptions": "subscriptions.staging.example.com/checkout",
+        "accountCredit": "credits.staging.example.com/checkout",
+        "recommendations": "recommendations.staging.example.com/checkout",
+        "inventory": "inventory.staging.example.com/checkout",
+        "pricing": "pricing.staging.example.com/checkout",
+        "shipmentTracking": "tracking.staging.example.com/checkout",
+        "warehouseAllocation": "warehouse.staging.example.com/checkout",
+        "fraudReviewCallback": "fraud-review.staging.example.com/checkout/callback",
+        "digitalWalletCallback": "wallet.staging.example.com/checkout/callback",
+        "paymentRetry": "payment-retry.staging.example.com/checkout",
+        "orderReconciliation": "reconcile.staging.example.com/checkout",
+        "abandonedCartReminder": "abandoned-cart.staging.example.com/checkout",
+        "invoiceCallback": "invoice.staging.example.com/checkout/callback",
+        "loyaltyReconciliation": "loyalty-reconcile.staging.example.com/checkout",
+        "customerNotes": "notes.staging.example.com/checkout",
+        "fraudSignals": "fraud-signals.staging.example.com/checkout",
+        "settlementReports": "settlements.staging.example.com/checkout"
+      },
+      "secrets": {
+        "databaseCredentials": "stg-checkout-db-credentials",
+        "paymentProviderToken": "stg-checkout-payment-token",
+        "tlsCertificate": "stg-checkout-tls-cert",
+        "featureFlagToken": "stg-checkout-feature-flags",
+        "sessionSigningKey": "stg-checkout-session-signing",
+        "refundProcessorCredentials": "stg-checkout-refund-processor",
+        "imageSignatureBundle": "stg-checkout-image-signatures",
+        "fraudServiceCredentials": "stg-checkout-fraud-credentials",
+        "taxServiceCredentials": "stg-checkout-tax-credentials",
+        "shippingServiceCredentials": "stg-checkout-shipping-credentials",
+        "analyticsExportToken": "stg-checkout-analytics-export",
+        "customerIdentityCredentials": "stg-checkout-customer-identity",
+        "couponValidationKey": "stg-checkout-coupon-validation",
+        "giftCardServiceCredentials": "stg-checkout-gift-card-credentials",
+        "loyaltyProgramToken": "stg-checkout-loyalty-token",
+        "invoiceGenerationKey": "stg-checkout-invoice-generation",
+        "addressVerificationToken": "stg-checkout-address-verification",
+        "riskScoringCredentials": "stg-checkout-risk-scoring",
+        "receiptDeliveryKey": "stg-checkout-receipt-delivery",
+        "storeCreditCredentials": "stg-checkout-store-credit",
+        "deferredBillingToken": "stg-checkout-deferred-billing",
+        "customerMessagingKey": "stg-checkout-customer-messaging",
+        "productCatalogToken": "stg-checkout-product-catalog",
+        "cartRecoveryCredentials": "stg-checkout-cart-recovery",
+        "promotionRulesKey": "stg-checkout-promotion-rules",
+        "manualAdjustmentCredentials": "stg-checkout-manual-adjustment",
+        "disputeHandlingToken": "stg-checkout-dispute-handling",
+        "taxExemptionKey": "stg-checkout-tax-exemption",
+        "walletSettlementCredentials": "stg-checkout-wallet-settlement",
+        "chargebackEvidenceToken": "stg-checkout-chargeback-evidence",
+        "customerRefundKey": "stg-checkout-customer-refunds",
+        "subscriptionBillingToken": "stg-checkout-subscription-billing",
+        "returnAuthorizationCredentials": "stg-checkout-return-authorization",
+        "orderExportKey": "stg-checkout-order-export",
+        "taxDocumentUploadToken": "stg-checkout-tax-document-upload",
+        "paymentLedgerCredentials": "stg-checkout-payment-ledger",
+        "deliveryEstimateKey": "stg-checkout-delivery-estimates"
+      },
+      "alertRouting": {
+        "slackChannel": "#checkout-staging-alerts",
+        "pagerDutyService": "pd-checkout-staging",
+        "emailList": "checkout-staging-oncall@example.com",
+        "webhook": "https://hooks.staging.example.com/checkout-triage",
+        "escalationPolicy": "checkout-staging-escalation",
+        "incidentRoom": "checkout-staging-war-room",
+        "statusPage": "status-staging-checkout",
+        "ticketQueue": "OPS-STG-CHECKOUT",
+        "mobilePushGroup": "checkout-staging-mobile-push",
+        "executiveSummaryList": "checkout-staging-summary@example.com",
+        "securityReviewQueue": "SEC-STG-CHECKOUT"
+      },
+      "releaseChannel": "staging-canary"
+    },
+    "deployment": {
+      "replicas": 3,
+      "strategy": "RollingUpdate",
+      "maxUnavailable": 1,
+      "resources": {
+        "cpuRequest": "500m",
+        "memoryRequest": "768Mi",
+        "cpuLimit": "1500m",
+        "memoryLimit": "1536Mi",
+        "ephemeralStorageLimit": "2Gi"
+      },
+      "startupGraceSeconds": 90
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/environment/name",
+      "kind": "direct",
+      "value": "production"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/namespace",
+      "kind": "cascade",
+      "value": "prod-checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/releaseChannel",
+      "kind": "cascade",
+      "value": "production-stable"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/public",
+      "kind": "cascade",
+      "value": "checkout.example.com"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/internal",
+      "kind": "cascade",
+      "value": "checkout.prod.svc.cluster.local"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/ops",
+      "kind": "cascade",
+      "value": "checkout-ops.example.com"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/metrics",
+      "kind": "cascade",
+      "value": "metrics.prod.example.com"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/logs",
+      "kind": "cascade",
+      "value": "logs.prod.example.com"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/registry",
+      "kind": "cascade",
+      "value": "registry.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/staticAssets",
+      "kind": "cascade",
+      "value": "assets.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/callbacks",
+      "kind": "cascade",
+      "value": "callbacks.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/adminConsole",
+      "kind": "cascade",
+      "value": "checkout-admin.example.com"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/graphql",
+      "kind": "cascade",
+      "value": "graphql.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/health",
+      "kind": "cascade",
+      "value": "health.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/authCallback",
+      "kind": "cascade",
+      "value": "auth.example.com/checkout/callback"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/auditEvents",
+      "kind": "cascade",
+      "value": "audit.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/searchIndex",
+      "kind": "cascade",
+      "value": "search.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/cdnInvalidation",
+      "kind": "cascade",
+      "value": "cdn.example.com/checkout/invalidate"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/orderQueue",
+      "kind": "cascade",
+      "value": "orders.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/paymentWebhook",
+      "kind": "cascade",
+      "value": "payments.example.com/checkout/webhook"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/fulfillmentCallback",
+      "kind": "cascade",
+      "value": "fulfillment.example.com/checkout/callback"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/returns",
+      "kind": "cascade",
+      "value": "returns.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/subscriptions",
+      "kind": "cascade",
+      "value": "subscriptions.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/accountCredit",
+      "kind": "cascade",
+      "value": "credits.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/recommendations",
+      "kind": "cascade",
+      "value": "recommendations.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/inventory",
+      "kind": "cascade",
+      "value": "inventory.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/pricing",
+      "kind": "cascade",
+      "value": "pricing.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/shipmentTracking",
+      "kind": "cascade",
+      "value": "tracking.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/warehouseAllocation",
+      "kind": "cascade",
+      "value": "warehouse.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/fraudReviewCallback",
+      "kind": "cascade",
+      "value": "fraud-review.example.com/checkout/callback"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/digitalWalletCallback",
+      "kind": "cascade",
+      "value": "wallet.example.com/checkout/callback"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/paymentRetry",
+      "kind": "cascade",
+      "value": "payment-retry.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/orderReconciliation",
+      "kind": "cascade",
+      "value": "reconcile.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/abandonedCartReminder",
+      "kind": "cascade",
+      "value": "abandoned-cart.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/invoiceCallback",
+      "kind": "cascade",
+      "value": "invoice.example.com/checkout/callback"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/loyaltyReconciliation",
+      "kind": "cascade",
+      "value": "loyalty-reconcile.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/customerNotes",
+      "kind": "cascade",
+      "value": "notes.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/fraudSignals",
+      "kind": "cascade",
+      "value": "fraud-signals.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/hosts/settlementReports",
+      "kind": "cascade",
+      "value": "settlements.prod.example.com/checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/databaseCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-db-credentials"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/paymentProviderToken",
+      "kind": "cascade",
+      "value": "prod-checkout-payment-token"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/tlsCertificate",
+      "kind": "cascade",
+      "value": "prod-checkout-tls-cert"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/featureFlagToken",
+      "kind": "cascade",
+      "value": "prod-checkout-feature-flags"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/sessionSigningKey",
+      "kind": "cascade",
+      "value": "prod-checkout-session-signing"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/refundProcessorCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-refund-processor"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/imageSignatureBundle",
+      "kind": "cascade",
+      "value": "prod-checkout-image-signatures"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/fraudServiceCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-fraud-credentials"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/taxServiceCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-tax-credentials"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/shippingServiceCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-shipping-credentials"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/analyticsExportToken",
+      "kind": "cascade",
+      "value": "prod-checkout-analytics-export"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/customerIdentityCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-customer-identity"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/couponValidationKey",
+      "kind": "cascade",
+      "value": "prod-checkout-coupon-validation"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/giftCardServiceCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-gift-card-credentials"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/loyaltyProgramToken",
+      "kind": "cascade",
+      "value": "prod-checkout-loyalty-token"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/invoiceGenerationKey",
+      "kind": "cascade",
+      "value": "prod-checkout-invoice-generation"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/addressVerificationToken",
+      "kind": "cascade",
+      "value": "prod-checkout-address-verification"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/riskScoringCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-risk-scoring"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/receiptDeliveryKey",
+      "kind": "cascade",
+      "value": "prod-checkout-receipt-delivery"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/storeCreditCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-store-credit"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/deferredBillingToken",
+      "kind": "cascade",
+      "value": "prod-checkout-deferred-billing"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/customerMessagingKey",
+      "kind": "cascade",
+      "value": "prod-checkout-customer-messaging"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/productCatalogToken",
+      "kind": "cascade",
+      "value": "prod-checkout-product-catalog"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/cartRecoveryCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-cart-recovery"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/promotionRulesKey",
+      "kind": "cascade",
+      "value": "prod-checkout-promotion-rules"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/manualAdjustmentCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-manual-adjustment"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/disputeHandlingToken",
+      "kind": "cascade",
+      "value": "prod-checkout-dispute-handling"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/taxExemptionKey",
+      "kind": "cascade",
+      "value": "prod-checkout-tax-exemption"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/walletSettlementCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-wallet-settlement"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/chargebackEvidenceToken",
+      "kind": "cascade",
+      "value": "prod-checkout-chargeback-evidence"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/customerRefundKey",
+      "kind": "cascade",
+      "value": "prod-checkout-customer-refunds"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/subscriptionBillingToken",
+      "kind": "cascade",
+      "value": "prod-checkout-subscription-billing"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/returnAuthorizationCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-return-authorization"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/orderExportKey",
+      "kind": "cascade",
+      "value": "prod-checkout-order-export"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/taxDocumentUploadToken",
+      "kind": "cascade",
+      "value": "prod-checkout-tax-document-upload"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/paymentLedgerCredentials",
+      "kind": "cascade",
+      "value": "prod-checkout-payment-ledger"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/secrets/deliveryEstimateKey",
+      "kind": "cascade",
+      "value": "prod-checkout-delivery-estimates"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/alertRouting/slackChannel",
+      "kind": "cascade",
+      "value": "#checkout-prod-alerts"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/alertRouting/pagerDutyService",
+      "kind": "cascade",
+      "value": "pd-checkout-prod"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/alertRouting/emailList",
+      "kind": "cascade",
+      "value": "checkout-prod-oncall@example.com"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/alertRouting/webhook",
+      "kind": "cascade",
+      "value": "https://hooks.prod.example.com/checkout-triage"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/alertRouting/escalationPolicy",
+      "kind": "cascade",
+      "value": "checkout-prod-escalation"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/alertRouting/incidentRoom",
+      "kind": "cascade",
+      "value": "checkout-prod-war-room"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/alertRouting/statusPage",
+      "kind": "cascade",
+      "value": "status-prod-checkout"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/alertRouting/ticketQueue",
+      "kind": "cascade",
+      "value": "OPS-PROD-CHECKOUT"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/alertRouting/mobilePushGroup",
+      "kind": "cascade",
+      "value": "checkout-prod-mobile-push"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/alertRouting/executiveSummaryList",
+      "kind": "cascade",
+      "value": "checkout-prod-summary@example.com"
+    },
+    {
+      "op": "replace",
+      "path": "/environment/alertRouting/securityReviewQueue",
+      "kind": "cascade",
+      "value": "SEC-PROD-CHECKOUT"
+    }
+  ],
+  "expected_json": {
+    "service": {
+      "name": "checkout-api",
+      "artifact": {
+        "repository": "ghcr.io/acme/checkout-api",
+        "tag": "2026.06.08-1432",
+        "digest": "sha256:9f2d8a1c6b7e5d4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f"
+      }
+    },
+    "environment": {
+      "name": "production",
+      "namespace": "prod-checkout",
+      "hosts": {
+        "public": "checkout.example.com",
+        "internal": "checkout.prod.svc.cluster.local",
+        "ops": "checkout-ops.example.com",
+        "metrics": "metrics.prod.example.com",
+        "logs": "logs.prod.example.com",
+        "registry": "registry.prod.example.com/checkout",
+        "staticAssets": "assets.example.com/checkout",
+        "callbacks": "callbacks.example.com/checkout",
+        "adminConsole": "checkout-admin.example.com",
+        "graphql": "graphql.example.com/checkout",
+        "health": "health.example.com/checkout",
+        "authCallback": "auth.example.com/checkout/callback",
+        "auditEvents": "audit.prod.example.com/checkout",
+        "searchIndex": "search.prod.example.com/checkout",
+        "cdnInvalidation": "cdn.example.com/checkout/invalidate",
+        "orderQueue": "orders.prod.example.com/checkout",
+        "paymentWebhook": "payments.example.com/checkout/webhook",
+        "fulfillmentCallback": "fulfillment.example.com/checkout/callback",
+        "returns": "returns.example.com/checkout",
+        "subscriptions": "subscriptions.example.com/checkout",
+        "accountCredit": "credits.example.com/checkout",
+        "recommendations": "recommendations.prod.example.com/checkout",
+        "inventory": "inventory.prod.example.com/checkout",
+        "pricing": "pricing.prod.example.com/checkout",
+        "shipmentTracking": "tracking.example.com/checkout",
+        "warehouseAllocation": "warehouse.prod.example.com/checkout",
+        "fraudReviewCallback": "fraud-review.example.com/checkout/callback",
+        "digitalWalletCallback": "wallet.example.com/checkout/callback",
+        "paymentRetry": "payment-retry.example.com/checkout",
+        "orderReconciliation": "reconcile.prod.example.com/checkout",
+        "abandonedCartReminder": "abandoned-cart.example.com/checkout",
+        "invoiceCallback": "invoice.example.com/checkout/callback",
+        "loyaltyReconciliation": "loyalty-reconcile.prod.example.com/checkout",
+        "customerNotes": "notes.prod.example.com/checkout",
+        "fraudSignals": "fraud-signals.prod.example.com/checkout",
+        "settlementReports": "settlements.prod.example.com/checkout"
+      },
+      "secrets": {
+        "databaseCredentials": "prod-checkout-db-credentials",
+        "paymentProviderToken": "prod-checkout-payment-token",
+        "tlsCertificate": "prod-checkout-tls-cert",
+        "featureFlagToken": "prod-checkout-feature-flags",
+        "sessionSigningKey": "prod-checkout-session-signing",
+        "refundProcessorCredentials": "prod-checkout-refund-processor",
+        "imageSignatureBundle": "prod-checkout-image-signatures",
+        "fraudServiceCredentials": "prod-checkout-fraud-credentials",
+        "taxServiceCredentials": "prod-checkout-tax-credentials",
+        "shippingServiceCredentials": "prod-checkout-shipping-credentials",
+        "analyticsExportToken": "prod-checkout-analytics-export",
+        "customerIdentityCredentials": "prod-checkout-customer-identity",
+        "couponValidationKey": "prod-checkout-coupon-validation",
+        "giftCardServiceCredentials": "prod-checkout-gift-card-credentials",
+        "loyaltyProgramToken": "prod-checkout-loyalty-token",
+        "invoiceGenerationKey": "prod-checkout-invoice-generation",
+        "addressVerificationToken": "prod-checkout-address-verification",
+        "riskScoringCredentials": "prod-checkout-risk-scoring",
+        "receiptDeliveryKey": "prod-checkout-receipt-delivery",
+        "storeCreditCredentials": "prod-checkout-store-credit",
+        "deferredBillingToken": "prod-checkout-deferred-billing",
+        "customerMessagingKey": "prod-checkout-customer-messaging",
+        "productCatalogToken": "prod-checkout-product-catalog",
+        "cartRecoveryCredentials": "prod-checkout-cart-recovery",
+        "promotionRulesKey": "prod-checkout-promotion-rules",
+        "manualAdjustmentCredentials": "prod-checkout-manual-adjustment",
+        "disputeHandlingToken": "prod-checkout-dispute-handling",
+        "taxExemptionKey": "prod-checkout-tax-exemption",
+        "walletSettlementCredentials": "prod-checkout-wallet-settlement",
+        "chargebackEvidenceToken": "prod-checkout-chargeback-evidence",
+        "customerRefundKey": "prod-checkout-customer-refunds",
+        "subscriptionBillingToken": "prod-checkout-subscription-billing",
+        "returnAuthorizationCredentials": "prod-checkout-return-authorization",
+        "orderExportKey": "prod-checkout-order-export",
+        "taxDocumentUploadToken": "prod-checkout-tax-document-upload",
+        "paymentLedgerCredentials": "prod-checkout-payment-ledger",
+        "deliveryEstimateKey": "prod-checkout-delivery-estimates"
+      },
+      "alertRouting": {
+        "slackChannel": "#checkout-prod-alerts",
+        "pagerDutyService": "pd-checkout-prod",
+        "emailList": "checkout-prod-oncall@example.com",
+        "webhook": "https://hooks.prod.example.com/checkout-triage",
+        "escalationPolicy": "checkout-prod-escalation",
+        "incidentRoom": "checkout-prod-war-room",
+        "statusPage": "status-prod-checkout",
+        "ticketQueue": "OPS-PROD-CHECKOUT",
+        "mobilePushGroup": "checkout-prod-mobile-push",
+        "executiveSummaryList": "checkout-prod-summary@example.com",
+        "securityReviewQueue": "SEC-PROD-CHECKOUT"
+      },
+      "releaseChannel": "production-stable"
+    },
+    "deployment": {
+      "replicas": 3,
+      "strategy": "RollingUpdate",
+      "maxUnavailable": 1,
+      "resources": {
+        "cpuRequest": "500m",
+        "memoryRequest": "768Mi",
+        "cpuLimit": "1500m",
+        "memoryLimit": "1536Mi",
+        "ephemeralStorageLimit": "2Gi"
+      },
+      "startupGraceSeconds": 90
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "env staging->production: name + namespace + releaseChannel + every hosts/secrets/alertRouting entry takes the production master_data value (keys align 1:1). service.artifact and deployment.* are env-independent -> unchanged.",
+  "annotated": true,
+  "excluded": false
+}

@@ -1,0 +1,554 @@
+{
+  "id": "course_plan_L100_04",
+  "domain": "course_plan",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm putting together a plan for Maya Chen, who's a second-year data science major."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student\", \"value\": {\"name\": \"Maya Chen\", \"academic_year\": \"second-year\", \"major\": \"Data Science\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use her completed coursework as the basis for deciding whether she's ready for planned classes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/completed_courses\", \"value\": [\"MATH 101\", \"CS 101\", \"STAT 200\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's be explicit that a planned class is considered okay only when everything leading up to its listed requirement has already been completed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/eligibility_rule\", \"value\": \"A planned course is eligible only if its direct prerequisite and every course in that prerequisite's supplied prerequisite chain are included in the completed coursework list.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Start the planned classes with Data Structures, and note that it needs CS 101 beforehand."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses\", \"value\": [{\"course_code\": \"CS 201\", \"title\": \"Data Structures\", \"direct_prerequisite\": \"CS 101\", \"prerequisite_chain\": []}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Since Maya already finished CS 101, mark Data Structures as ready for her to take."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/0/eligible\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Linear Algebra to the plan too, with MATH 101 as the course she needs first."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course_code\": \"MATH 210\", \"title\": \"Linear Algebra\", \"direct_prerequisite\": \"MATH 101\", \"prerequisite_chain\": []}}]"
+    },
+    {
+      "role": "user",
+      "content": "Linear Algebra should also be shown as ready, because that math requirement is already done."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/1/eligible\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Probability for Data Science as another planned class, with STAT 200 required before it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course_code\": \"STAT 310\", \"title\": \"Probability for Data Science\", \"direct_prerequisite\": \"STAT 200\", \"prerequisite_chain\": []}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark Probability for Data Science as ready as well, since Maya has already completed the statistics course it depends on."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/2/eligible\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Database Systems as a planned option, and have it depend on Data Structures."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course_code\": \"CS 320\", \"title\": \"Database Systems\", \"direct_prerequisite\": \"CS 201\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Database Systems, include the earlier course behind Data Structures so the readiness check can follow the whole path."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/3/prerequisite_chain\", \"value\": [\"CS 101\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Database Systems shouldn't be shown as ready, because Maya hasn't completed Data Structures yet even though she has the intro course behind it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/3/eligible\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Machine Learning as another planned class, with Probability for Data Science as the course that has to come first."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course_code\": \"DS 340\", \"title\": \"Machine Learning\", \"direct_prerequisite\": \"STAT 310\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Machine Learning, include the statistics course behind Probability so the full readiness path is clear."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/4/prerequisite_chain\", \"value\": [\"STAT 200\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Machine Learning should not be listed as ready yet, since Probability itself isn't completed even though its earlier statistics requirement is."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/4/eligible\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Algorithms as another planned class, with Data Structures needing to come before it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course_code\": \"CS 330\", \"title\": \"Algorithms\", \"direct_prerequisite\": \"CS 201\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Algorithms, include the intro programming course behind Data Structures so the full path is visible."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/5/prerequisite_chain\", \"value\": [\"CS 101\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Algorithms should not be marked ready, because Maya hasn't completed Data Structures yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/5/eligible\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Data Visualization to the plan, with Linear Algebra as the class Maya would need first."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course_code\": \"DS 310\", \"title\": \"Data Visualization\", \"direct_prerequisite\": \"MATH 210\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Data Visualization, include the math class behind Linear Algebra so the prerequisite path is complete."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/6/prerequisite_chain\", \"value\": [\"MATH 101\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Data Visualization should not be shown as ready yet, because Maya hasn't completed Linear Algebra itself."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/6/eligible\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Software Engineering too, with Database Systems as the class that should come first."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course_code\": \"CS 350\", \"title\": \"Software Engineering\", \"direct_prerequisite\": \"CS 320\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Software Engineering, include the path behind Database Systems so the readiness check accounts for Data Structures and the intro programming course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/7/prerequisite_chain\", \"value\": [\"CS 201\", \"CS 101\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Software Engineering should not be shown as ready, because Database Systems itself is not completed yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/7/eligible\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Artificial Intelligence as another planned class, with Algorithms as the course Maya would need first."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course_code\": \"CS 410\", \"title\": \"Artificial Intelligence\", \"direct_prerequisite\": \"CS 330\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Artificial Intelligence, include the courses behind Algorithms so the full sequence is visible."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/8/prerequisite_chain\", \"value\": [\"CS 201\", \"CS 101\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Artificial Intelligence should not be marked ready, because Algorithms itself has not been completed yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/8/eligible\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Deep Learning as another option, with Machine Learning needing to come first."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course_code\": \"DS 440\", \"title\": \"Deep Learning\", \"direct_prerequisite\": \"DS 340\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Deep Learning, include the courses behind Machine Learning so the readiness path goes through Probability and the earlier statistics class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/9/prerequisite_chain\", \"value\": [\"STAT 310\", \"STAT 200\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Deep Learning should not be shown as ready, because Machine Learning itself is not completed yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/9/eligible\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a senior capstone option, with Artificial Intelligence needing to come before it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course_code\": \"DS 480\", \"title\": \"Data Science Capstone\", \"direct_prerequisite\": \"CS 410\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the capstone, include the full path behind Artificial Intelligence so the sequence is clear."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/10/prerequisite_chain\", \"value\": [\"CS 330\", \"CS 201\", \"CS 101\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "The capstone should not be shown as ready, because Artificial Intelligence has not been completed yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/10/eligible\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "For Data Structures, note that Maya would take it in Fall 2025 for 4 credits on campus."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/0/offering\", \"value\": {\"semester\": \"Fall 2025\", \"credits\": 4, \"format\": \"on campus\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Linear Algebra, put it in Fall 2025 as a 3-credit on-campus class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/1/offering\", \"value\": {\"semester\": \"Fall 2025\", \"credits\": 3, \"format\": \"on campus\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Probability for Data Science, schedule it for Spring 2026 as a 3-credit online class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/2/offering\", \"value\": {\"semester\": \"Spring 2026\", \"credits\": 3, \"format\": \"online\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Database Systems, place it in Spring 2026 as a 3-credit hybrid class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/3/offering\", \"value\": {\"semester\": \"Spring 2026\", \"credits\": 3, \"format\": \"hybrid\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Machine Learning, set it in Fall 2026 as a 4-credit on-campus class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/4/offering\", \"value\": {\"semester\": \"Fall 2026\", \"credits\": 4, \"format\": \"on campus\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Algorithms, make it a Fall 2026, 3-credit on-campus class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/5/offering\", \"value\": {\"semester\": \"Fall 2026\", \"credits\": 3, \"format\": \"on campus\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Data Visualization, put it in Spring 2026 as a 3-credit online class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/6/offering\", \"value\": {\"semester\": \"Spring 2026\", \"credits\": 3, \"format\": \"online\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Software Engineering, schedule it for Spring 2027 as a 3-credit hybrid class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/7/offering\", \"value\": {\"semester\": \"Spring 2027\", \"credits\": 3, \"format\": \"hybrid\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Artificial Intelligence, set it for Spring 2027 as a 4-credit on-campus class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/8/offering\", \"value\": {\"semester\": \"Spring 2027\", \"credits\": 4, \"format\": \"on campus\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Deep Learning, put it in Fall 2027 as a 4-credit online class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/9/offering\", \"value\": {\"semester\": \"Fall 2027\", \"credits\": 4, \"format\": \"online\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the capstone, schedule it for Spring 2028 as a 4-credit hybrid class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/10/offering\", \"value\": {\"semester\": \"Spring 2028\", \"credits\": 4, \"format\": \"hybrid\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a brief advising note that Maya should review this plan with Dr. Patel before registration opens on April 7, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advising_note\", \"value\": {\"advisor\": \"Dr. Patel\", \"action\": \"review plan before registration\", \"deadline\": \"2025-04-07\"}}]"
+    }
+  ],
+  "edit_instruction": "For Linear Algebra, change the required prior course to PHYS 150.",
+  "theme": "Changing a course's prerequisite",
+  "master_data": {
+    "PHYS 150": {
+      "prerequisite_chain": [
+        "MATH 101"
+      ]
+    }
+  },
+  "current_json": {
+    "student": {
+      "name": "Maya Chen",
+      "academic_year": "second-year",
+      "major": "Data Science"
+    },
+    "completed_courses": [
+      "MATH 101",
+      "CS 101",
+      "STAT 200"
+    ],
+    "eligibility_rule": "A planned course is eligible only if its direct prerequisite and every course in that prerequisite's supplied prerequisite chain are included in the completed coursework list.",
+    "planned_courses": [
+      {
+        "course_code": "CS 201",
+        "title": "Data Structures",
+        "direct_prerequisite": "CS 101",
+        "prerequisite_chain": [],
+        "eligible": true,
+        "offering": {
+          "semester": "Fall 2025",
+          "credits": 4,
+          "format": "on campus"
+        }
+      },
+      {
+        "course_code": "MATH 210",
+        "title": "Linear Algebra",
+        "direct_prerequisite": "MATH 101",
+        "prerequisite_chain": [],
+        "eligible": true,
+        "offering": {
+          "semester": "Fall 2025",
+          "credits": 3,
+          "format": "on campus"
+        }
+      },
+      {
+        "course_code": "STAT 310",
+        "title": "Probability for Data Science",
+        "direct_prerequisite": "STAT 200",
+        "prerequisite_chain": [],
+        "eligible": true,
+        "offering": {
+          "semester": "Spring 2026",
+          "credits": 3,
+          "format": "online"
+        }
+      },
+      {
+        "course_code": "CS 320",
+        "title": "Database Systems",
+        "direct_prerequisite": "CS 201",
+        "prerequisite_chain": [
+          "CS 101"
+        ],
+        "eligible": false,
+        "offering": {
+          "semester": "Spring 2026",
+          "credits": 3,
+          "format": "hybrid"
+        }
+      },
+      {
+        "course_code": "DS 340",
+        "title": "Machine Learning",
+        "direct_prerequisite": "STAT 310",
+        "prerequisite_chain": [
+          "STAT 200"
+        ],
+        "eligible": false,
+        "offering": {
+          "semester": "Fall 2026",
+          "credits": 4,
+          "format": "on campus"
+        }
+      },
+      {
+        "course_code": "CS 330",
+        "title": "Algorithms",
+        "direct_prerequisite": "CS 201",
+        "prerequisite_chain": [
+          "CS 101"
+        ],
+        "eligible": false,
+        "offering": {
+          "semester": "Fall 2026",
+          "credits": 3,
+          "format": "on campus"
+        }
+      },
+      {
+        "course_code": "DS 310",
+        "title": "Data Visualization",
+        "direct_prerequisite": "MATH 210",
+        "prerequisite_chain": [
+          "MATH 101"
+        ],
+        "eligible": false,
+        "offering": {
+          "semester": "Spring 2026",
+          "credits": 3,
+          "format": "online"
+        }
+      },
+      {
+        "course_code": "CS 350",
+        "title": "Software Engineering",
+        "direct_prerequisite": "CS 320",
+        "prerequisite_chain": [
+          "CS 201",
+          "CS 101"
+        ],
+        "eligible": false,
+        "offering": {
+          "semester": "Spring 2027",
+          "credits": 3,
+          "format": "hybrid"
+        }
+      },
+      {
+        "course_code": "CS 410",
+        "title": "Artificial Intelligence",
+        "direct_prerequisite": "CS 330",
+        "prerequisite_chain": [
+          "CS 201",
+          "CS 101"
+        ],
+        "eligible": false,
+        "offering": {
+          "semester": "Spring 2027",
+          "credits": 4,
+          "format": "on campus"
+        }
+      },
+      {
+        "course_code": "DS 440",
+        "title": "Deep Learning",
+        "direct_prerequisite": "DS 340",
+        "prerequisite_chain": [
+          "STAT 310",
+          "STAT 200"
+        ],
+        "eligible": false,
+        "offering": {
+          "semester": "Fall 2027",
+          "credits": 4,
+          "format": "online"
+        }
+      },
+      {
+        "course_code": "DS 480",
+        "title": "Data Science Capstone",
+        "direct_prerequisite": "CS 410",
+        "prerequisite_chain": [
+          "CS 330",
+          "CS 201",
+          "CS 101"
+        ],
+        "eligible": false,
+        "offering": {
+          "semester": "Spring 2028",
+          "credits": 4,
+          "format": "hybrid"
+        }
+      }
+    ],
+    "advising_note": {
+      "advisor": "Dr. Patel",
+      "action": "review plan before registration",
+      "deadline": "2025-04-07"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a course list where each planned course's eligibility derives from whether its prerequisite chain is satisfied by a stated set of completed courses, with the eligibility rule stated. Around this core, add the realistic, independent details a course plan would carry that do not depend on the prerequisites, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Change one course's prerequisite to a different specific course.",
+  "cascade_pattern": "Changing a course's prerequisite to a new one (whose own prerequisite chain is supplied with the edit instruction) re-derives that course's eligibility from whether the new chain is satisfied by the completed set. Courses with unchanged prerequisites stay. This is determined because the new prerequisite's chain is provided with the edit.",
+  "requires_master_data": true
+}

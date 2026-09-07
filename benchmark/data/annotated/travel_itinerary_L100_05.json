@@ -1,0 +1,811 @@
+{
+  "id": "travel_itinerary_L100_05",
+  "domain": "travel_itinerary",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm planning a one-day visit in Kyoto."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/destination\", \"value\": \"Kyoto\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's have the day begin at 9:00 in the morning."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/day_start_time\", \"value\": \"09:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please leave 15 minutes for getting between places after each visit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transfer_gap_minutes\", \"value\": 15}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's make the first visit Fushimi Inari Shrine and spend 75 minutes there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops\", \"value\": [{\"name\": \"Fushimi Inari Shrine\", \"duration_minutes\": 75}]}]"
+    },
+    {
+      "role": "user",
+      "content": "After that, I'd like to visit Tofuku-ji Temple for 50 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Tofuku-ji Temple\", \"duration_minutes\": 50}}]"
+    },
+    {
+      "role": "user",
+      "content": "Then add Kiyomizu-dera for a 70-minute visit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Kiyomizu-dera\", \"duration_minutes\": 70}}]"
+    },
+    {
+      "role": "user",
+      "content": "I'd like Nishiki Market after that, with an hour set aside there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Nishiki Market\", \"duration_minutes\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, include Nijo Castle and plan 65 minutes for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Nijo Castle\", \"duration_minutes\": 65}}]"
+    },
+    {
+      "role": "user",
+      "content": "After the castle, add Kinkaku-ji and give it 55 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Kinkaku-ji\", \"duration_minutes\": 55}}]"
+    },
+    {
+      "role": "user",
+      "content": "Then put Ryoan-ji on the route for 40 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Ryoan-ji\", \"duration_minutes\": 40}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the route with the Arashiyama Bamboo Grove, and plan 50 minutes there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Arashiyama Bamboo Grove\", \"duration_minutes\": 50}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please start laying out the actual times, beginning with when the shrine visit starts and ends."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/0/start_time\", \"value\": \"09:00\"}, {\"op\": \"add\", \"path\": \"/stops/0/end_time\", \"value\": \"10:15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now place the temple visit right after the travel break from the shrine."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/1/start_time\", \"value\": \"10:30\"}, {\"op\": \"add\", \"path\": \"/stops/1/end_time\", \"value\": \"11:20\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please continue the timing with Kiyomizu-dera after the next 15-minute transfer."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/2/start_time\", \"value\": \"11:35\"}, {\"op\": \"add\", \"path\": \"/stops/2/end_time\", \"value\": \"12:45\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the market visit after the next travel gap too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/3/start_time\", \"value\": \"13:00\"}, {\"op\": \"add\", \"path\": \"/stops/3/end_time\", \"value\": \"14:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Then schedule Nijo Castle with the same travel break beforehand."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/4/start_time\", \"value\": \"14:15\"}, {\"op\": \"add\", \"path\": \"/stops/4/end_time\", \"value\": \"15:20\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Kinkaku-ji after that next transfer."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/5/start_time\", \"value\": \"15:35\"}, {\"op\": \"add\", \"path\": \"/stops/5/end_time\", \"value\": \"16:30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now time Ryoan-ji after the following travel break."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/6/start_time\", \"value\": \"16:45\"}, {\"op\": \"add\", \"path\": \"/stops/6/end_time\", \"value\": \"17:25\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, set the bamboo grove visit after the last transfer."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/7/start_time\", \"value\": \"17:40\"}, {\"op\": \"add\", \"path\": \"/stops/7/end_time\", \"value\": \"18:30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you summarize the day now that the timing is all in place?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stop_count\", \"value\": 8}, {\"op\": \"add\", \"path\": \"/day_end_time\", \"value\": \"18:30\"}, {\"op\": \"add\", \"path\": \"/total_visit_minutes\", \"value\": 465}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's make this plan for April 14, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/date\", \"value\": \"2026-04-14\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep the pace comfortable rather than rushed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pace\", \"value\": \"comfortable\"}]"
+    },
+    {
+      "role": "user",
+      "content": "It'll be just two adults traveling, and neither of us has mobility limitations."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/travel_party\", \"value\": {\"adults\": 2, \"children\": 0, \"mobility_limitations\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "We'll be based at Hotel Granvia Kyoto near Kyoto Station."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging\", \"value\": {\"name\": \"Hotel Granvia Kyoto\", \"area\": \"Kyoto Station\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For getting around, I'd prefer trains and buses, with taxis only as a backup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport_preferences\", \"value\": {\"primary\": \"trains and buses\", \"backup\": \"taxi\", \"rail_pass_available\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "For lunch, I'd like something casual, ideally around Nishiki Market, and vegetarian-friendly would be great."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lunch_preference\", \"value\": {\"style\": \"casual\", \"preferred_area\": \"Nishiki Market\", \"vegetarian_friendly\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please keep the overall spending plan moderate, with about 18,000 yen available for the day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget\", \"value\": {\"level\": \"moderate\", \"currency\": \"JPY\", \"amount\": 18000}}]"
+    },
+    {
+      "role": "user",
+      "content": "Since it's spring, note that we should be prepared for mild weather and a chance of light rain."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/weather_expectation\", \"value\": {\"season\": \"spring\", \"temperature\": \"mild\", \"rain_risk\": \"light rain possible\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "I care most about temples, gardens, and good photo spots."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/interests\", \"value\": [\"temples\", \"gardens\", \"photography\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "For the shrine, note that no advance booking is needed and entry is free."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/booking_notes\", \"value\": [{\"place\": \"Fushimi Inari Shrine\", \"advance_booking_needed\": false, \"entry_fee_yen\": 0}]}]"
+    },
+    {
+      "role": "user",
+      "content": "For Tofuku-ji, add that we can buy admission there and budget 600 yen each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/booking_notes/-\", \"value\": {\"place\": \"Tofuku-ji Temple\", \"advance_booking_needed\": false, \"entry_fee_yen\": 600}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Kiyomizu-dera, note that we don't need to reserve ahead and should allow 500 yen each for admission."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/booking_notes/-\", \"value\": {\"place\": \"Kiyomizu-dera\", \"advance_booking_needed\": false, \"entry_fee_yen\": 500}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Nishiki Market, add that there's no reservation needed and no admission cost."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/booking_notes/-\", \"value\": {\"place\": \"Nishiki Market\", \"advance_booking_needed\": false, \"entry_fee_yen\": 0}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Nijo Castle, note that we can handle tickets on arrival and budget 1,300 yen each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/booking_notes/-\", \"value\": {\"place\": \"Nijo Castle\", \"advance_booking_needed\": false, \"entry_fee_yen\": 1300}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Kinkaku-ji, add that we can pay when we arrive and should expect 500 yen each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/booking_notes/-\", \"value\": {\"place\": \"Kinkaku-ji\", \"advance_booking_needed\": false, \"entry_fee_yen\": 500}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Ryoan-ji, note that tickets can be bought there and admission should be 600 yen each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/booking_notes/-\", \"value\": {\"place\": \"Ryoan-ji\", \"advance_booking_needed\": false, \"entry_fee_yen\": 600}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the bamboo grove, add that it doesn't need tickets and is free to enter."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/booking_notes/-\", \"value\": {\"place\": \"Arashiyama Bamboo Grove\", \"advance_booking_needed\": false, \"entry_fee_yen\": 0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add a few things we should remember to bring: umbrellas, comfortable shoes, and a portable charger."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packing_reminders\", \"value\": [\"umbrella\", \"comfortable shoes\", \"portable charger\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's also plan on using a pocket Wi-Fi, keeping phone data as backup, and downloading offline maps before we go."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/connectivity_plan\", \"value\": {\"primary\": \"pocket Wi-Fi\", \"backup\": \"phone data\", \"offline_maps_downloaded\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an emergency contact for the day: Kyoto Tourist Information Center, reachable at +81-75-343-0548, and mark it as English-speaking."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emergency_contact\", \"value\": {\"name\": \"Kyoto Tourist Information Center\", \"phone\": \"+81-75-343-0548\", \"english_speaking\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include a few etiquette reminders: speak quietly at temples, avoid photographing restricted areas, and carry out any trash."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/etiquette_reminders\", \"value\": [\"speak quietly at temples\", \"avoid photographing restricted areas\", \"carry out trash\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "For after the sightseeing day, let's keep dinner casual, somewhere around Kyoto Station, and without needing a reservation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dinner_preference\", \"value\": {\"style\": \"casual\", \"preferred_area\": \"Kyoto Station\", \"reservation_needed\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give the day an overall scenic feel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/overall_mood\", \"value\": \"scenic\"}]"
+    }
+  ],
+  "edit_instruction": "Please add Sanjusangen-do as a 45-minute sightseeing stop immediately after Tofuku-ji Temple.",
+  "theme": "Adding a stop to the day's schedule",
+  "master_data": null,
+  "current_json": {
+    "destination": "Kyoto",
+    "day_start_time": "09:00",
+    "transfer_gap_minutes": 15,
+    "stops": [
+      {
+        "name": "Fushimi Inari Shrine",
+        "duration_minutes": 75,
+        "start_time": "09:00",
+        "end_time": "10:15"
+      },
+      {
+        "name": "Tofuku-ji Temple",
+        "duration_minutes": 50,
+        "start_time": "10:30",
+        "end_time": "11:20"
+      },
+      {
+        "name": "Kiyomizu-dera",
+        "duration_minutes": 70,
+        "start_time": "11:35",
+        "end_time": "12:45"
+      },
+      {
+        "name": "Nishiki Market",
+        "duration_minutes": 60,
+        "start_time": "13:00",
+        "end_time": "14:00"
+      },
+      {
+        "name": "Nijo Castle",
+        "duration_minutes": 65,
+        "start_time": "14:15",
+        "end_time": "15:20"
+      },
+      {
+        "name": "Kinkaku-ji",
+        "duration_minutes": 55,
+        "start_time": "15:35",
+        "end_time": "16:30"
+      },
+      {
+        "name": "Ryoan-ji",
+        "duration_minutes": 40,
+        "start_time": "16:45",
+        "end_time": "17:25"
+      },
+      {
+        "name": "Arashiyama Bamboo Grove",
+        "duration_minutes": 50,
+        "start_time": "17:40",
+        "end_time": "18:30"
+      }
+    ],
+    "stop_count": 8,
+    "day_end_time": "18:30",
+    "total_visit_minutes": 465,
+    "date": "2026-04-14",
+    "pace": "comfortable",
+    "travel_party": {
+      "adults": 2,
+      "children": 0,
+      "mobility_limitations": false
+    },
+    "lodging": {
+      "name": "Hotel Granvia Kyoto",
+      "area": "Kyoto Station"
+    },
+    "transport_preferences": {
+      "primary": "trains and buses",
+      "backup": "taxi",
+      "rail_pass_available": false
+    },
+    "lunch_preference": {
+      "style": "casual",
+      "preferred_area": "Nishiki Market",
+      "vegetarian_friendly": true
+    },
+    "budget": {
+      "level": "moderate",
+      "currency": "JPY",
+      "amount": 18000
+    },
+    "weather_expectation": {
+      "season": "spring",
+      "temperature": "mild",
+      "rain_risk": "light rain possible"
+    },
+    "interests": [
+      "temples",
+      "gardens",
+      "photography"
+    ],
+    "booking_notes": [
+      {
+        "place": "Fushimi Inari Shrine",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 0
+      },
+      {
+        "place": "Tofuku-ji Temple",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 600
+      },
+      {
+        "place": "Kiyomizu-dera",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 500
+      },
+      {
+        "place": "Nishiki Market",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 0
+      },
+      {
+        "place": "Nijo Castle",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 1300
+      },
+      {
+        "place": "Kinkaku-ji",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 500
+      },
+      {
+        "place": "Ryoan-ji",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 600
+      },
+      {
+        "place": "Arashiyama Bamboo Grove",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 0
+      }
+    ],
+    "packing_reminders": [
+      "umbrella",
+      "comfortable shoes",
+      "portable charger"
+    ],
+    "connectivity_plan": {
+      "primary": "pocket Wi-Fi",
+      "backup": "phone data",
+      "offline_maps_downloaded": true
+    },
+    "emergency_contact": {
+      "name": "Kyoto Tourist Information Center",
+      "phone": "+81-75-343-0548",
+      "english_speaking": true
+    },
+    "etiquette_reminders": [
+      "speak quietly at temples",
+      "avoid photographing restricted areas",
+      "carry out trash"
+    ],
+    "dinner_preference": {
+      "style": "casual",
+      "preferred_area": "Kyoto Station",
+      "reservation_needed": false
+    },
+    "overall_mood": "scenic"
+  },
+  "expected_patch": [
+    {
+      "op": "add",
+      "path": "/stops/2",
+      "kind": "direct",
+      "value": {
+        "name": "Sanjusangen-do",
+        "duration_minutes": 45,
+        "start_time": "11:35",
+        "end_time": "12:20"
+      }
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/start_time",
+      "kind": "cascade",
+      "value": "12:35"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/end_time",
+      "kind": "cascade",
+      "value": "13:45"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/4/start_time",
+      "kind": "cascade",
+      "value": "14:00"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/4/end_time",
+      "kind": "cascade",
+      "value": "15:00"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/5/start_time",
+      "kind": "cascade",
+      "value": "15:15"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/5/end_time",
+      "kind": "cascade",
+      "value": "16:20"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/6/start_time",
+      "kind": "cascade",
+      "value": "16:35"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/6/end_time",
+      "kind": "cascade",
+      "value": "17:30"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/7/start_time",
+      "kind": "cascade",
+      "value": "17:45"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/7/end_time",
+      "kind": "cascade",
+      "value": "18:25"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/8/start_time",
+      "kind": "cascade",
+      "value": "18:40"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/8/end_time",
+      "kind": "cascade",
+      "value": "19:30"
+    },
+    {
+      "op": "replace",
+      "path": "/stop_count",
+      "kind": "cascade",
+      "value": 9
+    },
+    {
+      "op": "replace",
+      "path": "/day_end_time",
+      "kind": "cascade",
+      "value": "19:30"
+    },
+    {
+      "op": "replace",
+      "path": "/total_visit_minutes",
+      "kind": "cascade",
+      "value": 510
+    },
+    {
+      "op": "add",
+      "path": "/booking_notes/-",
+      "kind": "cascade",
+      "value": {
+        "place": "Sanjusangen-do",
+        "advance_booking_needed": "<any>",
+        "entry_fee_yen": "<any>"
+      }
+    }
+  ],
+  "expected_json": {
+    "destination": "Kyoto",
+    "day_start_time": "09:00",
+    "transfer_gap_minutes": 15,
+    "stops": [
+      {
+        "name": "Fushimi Inari Shrine",
+        "duration_minutes": 75,
+        "start_time": "09:00",
+        "end_time": "10:15"
+      },
+      {
+        "name": "Tofuku-ji Temple",
+        "duration_minutes": 50,
+        "start_time": "10:30",
+        "end_time": "11:20"
+      },
+      {
+        "name": "Sanjusangen-do",
+        "duration_minutes": 45,
+        "start_time": "11:35",
+        "end_time": "12:20"
+      },
+      {
+        "name": "Kiyomizu-dera",
+        "duration_minutes": 70,
+        "start_time": "12:35",
+        "end_time": "13:45"
+      },
+      {
+        "name": "Nishiki Market",
+        "duration_minutes": 60,
+        "start_time": "14:00",
+        "end_time": "15:00"
+      },
+      {
+        "name": "Nijo Castle",
+        "duration_minutes": 65,
+        "start_time": "15:15",
+        "end_time": "16:20"
+      },
+      {
+        "name": "Kinkaku-ji",
+        "duration_minutes": 55,
+        "start_time": "16:35",
+        "end_time": "17:30"
+      },
+      {
+        "name": "Ryoan-ji",
+        "duration_minutes": 40,
+        "start_time": "17:45",
+        "end_time": "18:25"
+      },
+      {
+        "name": "Arashiyama Bamboo Grove",
+        "duration_minutes": 50,
+        "start_time": "18:40",
+        "end_time": "19:30"
+      }
+    ],
+    "stop_count": 9,
+    "day_end_time": "19:30",
+    "total_visit_minutes": 510,
+    "date": "2026-04-14",
+    "pace": "comfortable",
+    "travel_party": {
+      "adults": 2,
+      "children": 0,
+      "mobility_limitations": false
+    },
+    "lodging": {
+      "name": "Hotel Granvia Kyoto",
+      "area": "Kyoto Station"
+    },
+    "transport_preferences": {
+      "primary": "trains and buses",
+      "backup": "taxi",
+      "rail_pass_available": false
+    },
+    "lunch_preference": {
+      "style": "casual",
+      "preferred_area": "Nishiki Market",
+      "vegetarian_friendly": true
+    },
+    "budget": {
+      "level": "moderate",
+      "currency": "JPY",
+      "amount": 18000
+    },
+    "weather_expectation": {
+      "season": "spring",
+      "temperature": "mild",
+      "rain_risk": "light rain possible"
+    },
+    "interests": [
+      "temples",
+      "gardens",
+      "photography"
+    ],
+    "booking_notes": [
+      {
+        "place": "Fushimi Inari Shrine",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 0
+      },
+      {
+        "place": "Tofuku-ji Temple",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 600
+      },
+      {
+        "place": "Kiyomizu-dera",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 500
+      },
+      {
+        "place": "Nishiki Market",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 0
+      },
+      {
+        "place": "Nijo Castle",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 1300
+      },
+      {
+        "place": "Kinkaku-ji",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 500
+      },
+      {
+        "place": "Ryoan-ji",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 600
+      },
+      {
+        "place": "Arashiyama Bamboo Grove",
+        "advance_booking_needed": false,
+        "entry_fee_yen": 0
+      },
+      {
+        "place": "Sanjusangen-do",
+        "advance_booking_needed": "<any>",
+        "entry_fee_yen": "<any>"
+      }
+    ],
+    "packing_reminders": [
+      "umbrella",
+      "comfortable shoes",
+      "portable charger"
+    ],
+    "connectivity_plan": {
+      "primary": "pocket Wi-Fi",
+      "backup": "phone data",
+      "offline_maps_downloaded": true
+    },
+    "emergency_contact": {
+      "name": "Kyoto Tourist Information Center",
+      "phone": "+81-75-343-0548",
+      "english_speaking": true
+    },
+    "etiquette_reminders": [
+      "speak quietly at temples",
+      "avoid photographing restricted areas",
+      "carry out trash"
+    ],
+    "dinner_preference": {
+      "style": "casual",
+      "preferred_area": "Kyoto Station",
+      "reservation_needed": false
+    },
+    "overall_mood": "scenic"
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Insert Sanjusangen-do (45 min) at index 2, immediately after Tofuku-ji (ends 11:20): start 11:20+15=11:35, end 12:20. Sequential application shifts the later stops (indices 3-8) +60 min (45 dur + one 15 gap): Kiyomizu 12:35-13:45, Nishiki 14:00-15:00, Nijo 15:15-16:20, Kinkaku-ji 16:35-17:30, Ryoan-ji 17:45-18:25, Arashiyama 18:40-19:30. stop_count 8->9, day_end_time 18:30->19:30, total_visit_minutes 465->510. booking_notes is left unchanged (the new stop entry fee is not given). Names/durations of shifted stops stay. | REVIEW EDIT (with author): booking_notes is a per-stop list (1:1 with stops), so adding the Sanjusangen-do stop must add a matching booking_notes entry place is determinate (\"Sanjusangen-do\"); advance_booking_needed and entry_fee_yen are NOT given by the edit/document, so they use the \"<any>\" sentinel. Insert position is free (identity scorer matches the added element regardless of index).",
+  "conversation_pattern": "Center the artifact on a one-day itinerary built as an ordered list of timed stops, where each stop's time follows from the previous stop's end plus a stated gap and its own stated duration, rolling up to overall counts and a day-end time. Around this core, add the realistic, independent details a planner would record that do not depend on a stop's position in the day, and vary their number and the number of stops from sample to sample.",
+  "edit_pattern": "Add one specific sightseeing stop with a given visit duration at a specific point in the day.",
+  "cascade_pattern": "When a stop is inserted, every later stop's time shifts later by the inserted stop's duration plus one gap, the day-end shifts later, and the stop count rises by one. Stops before the insertion point keep their times. This is determined because the durations and the gap are stated.",
+  "requires_master_data": false
+}

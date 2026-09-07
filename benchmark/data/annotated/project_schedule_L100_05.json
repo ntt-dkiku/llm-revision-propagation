@@ -1,0 +1,691 @@
+{
+  "id": "project_schedule_L100_05",
+  "domain": "project_schedule",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a plan for the customer portal migration."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/projectName\", \"value\": \"Customer Portal Migration\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Maya will be on the team, and she can take on up to 32 hours that week."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/owners\", \"value\": [{\"ownerId\": \"OWN-1\", \"name\": \"Maya Chen\", \"capacityHours\": 32}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Leo as another team member, with 28 hours available."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/owners/-\", \"value\": {\"ownerId\": \"OWN-2\", \"name\": \"Leo Martinez\", \"capacityHours\": 28}}]"
+    },
+    {
+      "role": "user",
+      "content": "Priya should be included too, and she has 30 hours to work with."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/owners/-\", \"value\": {\"ownerId\": \"OWN-3\", \"name\": \"Priya Nair\", \"capacityHours\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Maya should handle discovery workshop prep, and that should take 6 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"taskName\": \"Discovery workshop prep\", \"ownerId\": \"OWN-1\", \"effortHours\": 6}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the API inventory work with Leo and estimate it at 9 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"API inventory\", \"ownerId\": \"OWN-2\", \"effortHours\": 9}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have Priya take care of the data mapping draft, and mark it as 8 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"Data mapping draft\", \"ownerId\": \"OWN-3\", \"effortHours\": 8}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give Maya the content freeze checklist as well, and estimate that at 5 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"Content freeze checklist\", \"ownerId\": \"OWN-1\", \"effortHours\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Assign the SSO configuration review to Leo and put it at 7 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"SSO configuration review\", \"ownerId\": \"OWN-2\", \"effortHours\": 7}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the redirect testing plan with Priya and estimate it at 6 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"Redirect testing plan\", \"ownerId\": \"OWN-3\", \"effortHours\": 6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Maya should also own the launch communications outline, with 4 hours planned for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"Launch communications outline\", \"ownerId\": \"OWN-1\", \"effortHours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Leo can take the browser compatibility checklist too, and that should be 5 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"Browser compatibility checklist\", \"ownerId\": \"OWN-2\", \"effortHours\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have Priya own the analytics tagging review, and estimate it at 7 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"Analytics tagging review\", \"ownerId\": \"OWN-3\", \"effortHours\": 7}}]"
+    },
+    {
+      "role": "user",
+      "content": "Maya should take the stakeholder sign-off packet, and let's budget 8 hours for that."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"Stakeholder sign-off packet\", \"ownerId\": \"OWN-1\", \"effortHours\": 8}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give Leo the cutover runbook draft, and set that at 6 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"Cutover runbook draft\", \"ownerId\": \"OWN-2\", \"effortHours\": 6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Priya should also take the UAT scenario cleanup, and that one is 5 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"UAT scenario cleanup\", \"ownerId\": \"OWN-3\", \"effortHours\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Maya can take the accessibility smoke test notes too, and that should only be 3 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"taskName\": \"Accessibility smoke test notes\", \"ownerId\": \"OWN-1\", \"effortHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now total up Maya’s planned work against her availability."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ownerWorkloads\", \"value\": [{\"ownerId\": \"OWN-1\", \"totalEffortHours\": 26, \"capacityCheck\": \"within capacity by 6 hours\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Do the same availability check for Leo."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ownerWorkloads/-\", \"value\": {\"ownerId\": \"OWN-2\", \"totalEffortHours\": 27, \"capacityCheck\": \"within capacity by 1 hour\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please total Priya’s planned work against her availability too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ownerWorkloads/-\", \"value\": {\"ownerId\": \"OWN-3\", \"totalEffortHours\": 26, \"capacityCheck\": \"within capacity by 4 hours\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the plan to run from April 7 through April 18, using Eastern time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule\", \"value\": {\"startDate\": \"2025-04-07\", \"endDate\": \"2025-04-18\", \"timezone\": \"America/New_York\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a kickoff milestone for April 7 and show it as confirmed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestones\", \"value\": [{\"name\": \"Kickoff\", \"date\": \"2025-04-07\", \"status\": \"confirmed\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the content freeze milestone for April 11, and mark it as planned."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestones/-\", \"value\": {\"name\": \"Content freeze\", \"date\": \"2025-04-11\", \"status\": \"planned\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the UAT readiness milestone on April 16, marked as planned."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestones/-\", \"value\": {\"name\": \"UAT readiness\", \"date\": \"2025-04-16\", \"status\": \"planned\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the launch checkpoint for April 18, and mark it as planned."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestones/-\", \"value\": {\"name\": \"Launch checkpoint\", \"date\": \"2025-04-18\", \"status\": \"planned\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Jordan from Acme as the main client contact, and note that they’re the sponsor."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders\", \"value\": [{\"name\": \"Jordan Blake\", \"organization\": \"Acme Retail\", \"role\": \"Sponsor\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Nina from Acme as the operations contact, with that role noted."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"name\": \"Nina Patel\", \"organization\": \"Acme Retail\", \"role\": \"Operations contact\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture a dependency on the identity provider team, with the SSO test account access needed by April 9."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dependencies\", \"value\": [{\"description\": \"SSO test account access\", \"ownerGroup\": \"Identity Provider Team\", \"neededBy\": \"2025-04-09\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that the data warehouse team needs to provide the analytics export sample by April 10."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dependencies/-\", \"value\": {\"description\": \"Analytics export sample\", \"ownerGroup\": \"Data Warehouse Team\", \"neededBy\": \"2025-04-10\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a risk about late redirect validation causing launch churn, with a medium likelihood and high impact."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks\", \"value\": [{\"description\": \"Late redirect validation could cause launch churn\", \"likelihood\": \"medium\", \"impact\": \"high\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture another risk: browser issues may show up late, with low likelihood but medium impact."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks/-\", \"value\": {\"description\": \"Browser issues may appear late in testing\", \"likelihood\": \"low\", \"impact\": \"medium\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a weekly status update plan: send it every Friday through Slack."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications\", \"value\": {\"cadence\": \"weekly\", \"day\": \"Friday\", \"channel\": \"Slack\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that Jordan needs to approve the final go/no-go by April 17 over email."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approval\", \"value\": {\"approver\": \"Jordan Blake\", \"dueDate\": \"2025-04-17\", \"method\": \"email\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, note the production rollout target as the Acme customer portal, hosted in the east region."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rolloutTarget\", \"value\": {\"environment\": \"production\", \"system\": \"Acme customer portal\", \"region\": \"us-east-1\"}}]"
+    }
+  ],
+  "edit_instruction": "Please move the Cutover runbook draft to Priya Nair.",
+  "theme": "Reassigning a task to another owner",
+  "master_data": null,
+  "current_json": {
+    "projectName": "Customer Portal Migration",
+    "owners": [
+      {
+        "ownerId": "OWN-1",
+        "name": "Maya Chen",
+        "capacityHours": 32
+      },
+      {
+        "ownerId": "OWN-2",
+        "name": "Leo Martinez",
+        "capacityHours": 28
+      },
+      {
+        "ownerId": "OWN-3",
+        "name": "Priya Nair",
+        "capacityHours": 30
+      }
+    ],
+    "tasks": [
+      {
+        "taskName": "Discovery workshop prep",
+        "ownerId": "OWN-1",
+        "effortHours": 6
+      },
+      {
+        "taskName": "API inventory",
+        "ownerId": "OWN-2",
+        "effortHours": 9
+      },
+      {
+        "taskName": "Data mapping draft",
+        "ownerId": "OWN-3",
+        "effortHours": 8
+      },
+      {
+        "taskName": "Content freeze checklist",
+        "ownerId": "OWN-1",
+        "effortHours": 5
+      },
+      {
+        "taskName": "SSO configuration review",
+        "ownerId": "OWN-2",
+        "effortHours": 7
+      },
+      {
+        "taskName": "Redirect testing plan",
+        "ownerId": "OWN-3",
+        "effortHours": 6
+      },
+      {
+        "taskName": "Launch communications outline",
+        "ownerId": "OWN-1",
+        "effortHours": 4
+      },
+      {
+        "taskName": "Browser compatibility checklist",
+        "ownerId": "OWN-2",
+        "effortHours": 5
+      },
+      {
+        "taskName": "Analytics tagging review",
+        "ownerId": "OWN-3",
+        "effortHours": 7
+      },
+      {
+        "taskName": "Stakeholder sign-off packet",
+        "ownerId": "OWN-1",
+        "effortHours": 8
+      },
+      {
+        "taskName": "Cutover runbook draft",
+        "ownerId": "OWN-2",
+        "effortHours": 6
+      },
+      {
+        "taskName": "UAT scenario cleanup",
+        "ownerId": "OWN-3",
+        "effortHours": 5
+      },
+      {
+        "taskName": "Accessibility smoke test notes",
+        "ownerId": "OWN-1",
+        "effortHours": 3
+      }
+    ],
+    "ownerWorkloads": [
+      {
+        "ownerId": "OWN-1",
+        "totalEffortHours": 26,
+        "capacityCheck": "within capacity by 6 hours"
+      },
+      {
+        "ownerId": "OWN-2",
+        "totalEffortHours": 27,
+        "capacityCheck": "within capacity by 1 hour"
+      },
+      {
+        "ownerId": "OWN-3",
+        "totalEffortHours": 26,
+        "capacityCheck": "within capacity by 4 hours"
+      }
+    ],
+    "schedule": {
+      "startDate": "2025-04-07",
+      "endDate": "2025-04-18",
+      "timezone": "America/New_York"
+    },
+    "milestones": [
+      {
+        "name": "Kickoff",
+        "date": "2025-04-07",
+        "status": "confirmed"
+      },
+      {
+        "name": "Content freeze",
+        "date": "2025-04-11",
+        "status": "planned"
+      },
+      {
+        "name": "UAT readiness",
+        "date": "2025-04-16",
+        "status": "planned"
+      },
+      {
+        "name": "Launch checkpoint",
+        "date": "2025-04-18",
+        "status": "planned"
+      }
+    ],
+    "stakeholders": [
+      {
+        "name": "Jordan Blake",
+        "organization": "Acme Retail",
+        "role": "Sponsor"
+      },
+      {
+        "name": "Nina Patel",
+        "organization": "Acme Retail",
+        "role": "Operations contact"
+      }
+    ],
+    "dependencies": [
+      {
+        "description": "SSO test account access",
+        "ownerGroup": "Identity Provider Team",
+        "neededBy": "2025-04-09"
+      },
+      {
+        "description": "Analytics export sample",
+        "ownerGroup": "Data Warehouse Team",
+        "neededBy": "2025-04-10"
+      }
+    ],
+    "risks": [
+      {
+        "description": "Late redirect validation could cause launch churn",
+        "likelihood": "medium",
+        "impact": "high"
+      },
+      {
+        "description": "Browser issues may appear late in testing",
+        "likelihood": "low",
+        "impact": "medium"
+      }
+    ],
+    "communications": {
+      "cadence": "weekly",
+      "day": "Friday",
+      "channel": "Slack"
+    },
+    "approval": {
+      "approver": "Jordan Blake",
+      "dueDate": "2025-04-17",
+      "method": "email"
+    },
+    "rolloutTarget": {
+      "environment": "production",
+      "system": "Acme customer portal",
+      "region": "us-east-1"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/tasks/10/ownerId",
+      "kind": "direct",
+      "value": "OWN-3"
+    },
+    {
+      "op": "replace",
+      "path": "/ownerWorkloads/1/totalEffortHours",
+      "kind": "cascade",
+      "value": 21
+    },
+    {
+      "op": "replace",
+      "path": "/ownerWorkloads/1/capacityCheck",
+      "kind": "cascade",
+      "value": "within capacity by 7 hours",
+      "matcher": "regex_match",
+      "pattern": "(?i)(within|under|below).*\\b7\\b"
+    },
+    {
+      "op": "replace",
+      "path": "/ownerWorkloads/2/totalEffortHours",
+      "kind": "cascade",
+      "value": 32
+    },
+    {
+      "op": "replace",
+      "path": "/ownerWorkloads/2/capacityCheck",
+      "kind": "cascade",
+      "value": "over capacity by 2 hours",
+      "matcher": "regex_match",
+      "pattern": "(?i)(over|exceed|above|beyond).*\\b2\\b"
+    }
+  ],
+  "expected_json": {
+    "projectName": "Customer Portal Migration",
+    "owners": [
+      {
+        "ownerId": "OWN-1",
+        "name": "Maya Chen",
+        "capacityHours": 32
+      },
+      {
+        "ownerId": "OWN-2",
+        "name": "Leo Martinez",
+        "capacityHours": 28
+      },
+      {
+        "ownerId": "OWN-3",
+        "name": "Priya Nair",
+        "capacityHours": 30
+      }
+    ],
+    "tasks": [
+      {
+        "taskName": "Discovery workshop prep",
+        "ownerId": "OWN-1",
+        "effortHours": 6
+      },
+      {
+        "taskName": "API inventory",
+        "ownerId": "OWN-2",
+        "effortHours": 9
+      },
+      {
+        "taskName": "Data mapping draft",
+        "ownerId": "OWN-3",
+        "effortHours": 8
+      },
+      {
+        "taskName": "Content freeze checklist",
+        "ownerId": "OWN-1",
+        "effortHours": 5
+      },
+      {
+        "taskName": "SSO configuration review",
+        "ownerId": "OWN-2",
+        "effortHours": 7
+      },
+      {
+        "taskName": "Redirect testing plan",
+        "ownerId": "OWN-3",
+        "effortHours": 6
+      },
+      {
+        "taskName": "Launch communications outline",
+        "ownerId": "OWN-1",
+        "effortHours": 4
+      },
+      {
+        "taskName": "Browser compatibility checklist",
+        "ownerId": "OWN-2",
+        "effortHours": 5
+      },
+      {
+        "taskName": "Analytics tagging review",
+        "ownerId": "OWN-3",
+        "effortHours": 7
+      },
+      {
+        "taskName": "Stakeholder sign-off packet",
+        "ownerId": "OWN-1",
+        "effortHours": 8
+      },
+      {
+        "taskName": "Cutover runbook draft",
+        "ownerId": "OWN-3",
+        "effortHours": 6
+      },
+      {
+        "taskName": "UAT scenario cleanup",
+        "ownerId": "OWN-3",
+        "effortHours": 5
+      },
+      {
+        "taskName": "Accessibility smoke test notes",
+        "ownerId": "OWN-1",
+        "effortHours": 3
+      }
+    ],
+    "ownerWorkloads": [
+      {
+        "ownerId": "OWN-1",
+        "totalEffortHours": 26,
+        "capacityCheck": "within capacity by 6 hours"
+      },
+      {
+        "ownerId": "OWN-2",
+        "totalEffortHours": 21,
+        "capacityCheck": "within capacity by 7 hours"
+      },
+      {
+        "ownerId": "OWN-3",
+        "totalEffortHours": 32,
+        "capacityCheck": "over capacity by 2 hours"
+      }
+    ],
+    "schedule": {
+      "startDate": "2025-04-07",
+      "endDate": "2025-04-18",
+      "timezone": "America/New_York"
+    },
+    "milestones": [
+      {
+        "name": "Kickoff",
+        "date": "2025-04-07",
+        "status": "confirmed"
+      },
+      {
+        "name": "Content freeze",
+        "date": "2025-04-11",
+        "status": "planned"
+      },
+      {
+        "name": "UAT readiness",
+        "date": "2025-04-16",
+        "status": "planned"
+      },
+      {
+        "name": "Launch checkpoint",
+        "date": "2025-04-18",
+        "status": "planned"
+      }
+    ],
+    "stakeholders": [
+      {
+        "name": "Jordan Blake",
+        "organization": "Acme Retail",
+        "role": "Sponsor"
+      },
+      {
+        "name": "Nina Patel",
+        "organization": "Acme Retail",
+        "role": "Operations contact"
+      }
+    ],
+    "dependencies": [
+      {
+        "description": "SSO test account access",
+        "ownerGroup": "Identity Provider Team",
+        "neededBy": "2025-04-09"
+      },
+      {
+        "description": "Analytics export sample",
+        "ownerGroup": "Data Warehouse Team",
+        "neededBy": "2025-04-10"
+      }
+    ],
+    "risks": [
+      {
+        "description": "Late redirect validation could cause launch churn",
+        "likelihood": "medium",
+        "impact": "high"
+      },
+      {
+        "description": "Browser issues may appear late in testing",
+        "likelihood": "low",
+        "impact": "medium"
+      }
+    ],
+    "communications": {
+      "cadence": "weekly",
+      "day": "Friday",
+      "channel": "Slack"
+    },
+    "approval": {
+      "approver": "Jordan Blake",
+      "dueDate": "2025-04-17",
+      "method": "email"
+    },
+    "rolloutTarget": {
+      "environment": "production",
+      "system": "Acme customer portal",
+      "region": "us-east-1"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Reassign Cutover runbook draft (6 h) from OWN-2 (Leo) to OWN-3 (Priya Nair). OWN-2 workload 27->21 (within capacity by 7 h). OWN-3 workload 26->32, which exceeds the 30 h capacity, so its capacityCheck flips from within-capacity to over capacity by 2 hours. totalEffortHours are exact; capacityCheck is a templated string scored with a regex matcher (within/over + the margin number). OWN-1, capacities, effort estimates, and other tasks stay. | REVIEW EDIT (with author): broadened the capacityCheck regexes to accept over-capacity synonyms (over|exceed|above|beyond) and within-capacity synonyms (within|under|below), keeping the margin number (\\b2\\b / \\b7\\b). capacityCheck is an open-vocabulary templated string, so over/within synonyms are equally valid and the original over-only pattern was too narrow; matches the project_schedule_L50_05 precedent.",
+  "conversation_pattern": "Center the artifact on a task list where each task has an owner and an effort estimate, with a per-owner workload aggregating each owner's tasks and a capacity check derived from a stated capacity. Around this core, add the realistic, independent details a project plan would carry that do not depend on who owns each task, and vary their number and the number of tasks and owners from sample to sample.",
+  "edit_pattern": "Reassign one task from its current owner to a different specific owner.",
+  "cascade_pattern": "Reassigning a task moves its effort from the old owner's workload to the new owner's, re-sums both, and re-evaluates each owner's capacity check against the stated capacity. Other tasks and owners stay. This is determined because the efforts and capacities are stated.",
+  "requires_master_data": false
+}

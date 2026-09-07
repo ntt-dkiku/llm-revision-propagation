@@ -1,0 +1,295 @@
+{
+  "id": "travel_itinerary_L50_01",
+  "domain": "travel_itinerary",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let’s plan my Kyoto day around leaving my hotel at 8:30 in the morning."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/anchor\", \"value\": {\"event\": \"leave hotel\", \"time\": \"08:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make my first stop Kyoto Station, 45 minutes after I leave the hotel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary\", \"value\": [{\"activity\": \"Kyoto Station arrival\", \"offset_from_anchor_minutes\": 45, \"time\": \"09:15\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the Fushimi Inari visit for 1 hour and 30 minutes after I leave the hotel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/-\", \"value\": {\"activity\": \"Fushimi Inari visit\", \"offset_from_anchor_minutes\": 90, \"time\": \"10:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put in a Nishiki Market lunch 4 hours after I leave the hotel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/-\", \"value\": {\"activity\": \"Nishiki Market lunch\", \"offset_from_anchor_minutes\": 240, \"time\": \"12:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule Kiyomizu-dera for 6 hours and 15 minutes after I leave the hotel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/-\", \"value\": {\"activity\": \"Kiyomizu-dera visit\", \"offset_from_anchor_minutes\": 375, \"time\": \"14:45\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an early dinner in Gion 9 hours after I leave the hotel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/-\", \"value\": {\"activity\": \"Gion early dinner\", \"offset_from_anchor_minutes\": 540, \"time\": \"17:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include an evening walk along the Kamogawa 12 hours after I leave the hotel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/-\", \"value\": {\"activity\": \"Kamogawa evening walk\", \"offset_from_anchor_minutes\": 720, \"time\": \"20:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a late ramen stop 15 hours and 45 minutes after I leave the hotel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/-\", \"value\": {\"activity\": \"Late ramen stop\", \"offset_from_anchor_minutes\": 945, \"time\": \"00:15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "This Kyoto day is for October 12, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/anchor/date\", \"value\": \"2026-10-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make sure the Kyoto Station stop is marked for the same calendar day as when I leave."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/0/date\", \"value\": \"2026-10-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the Fushimi Inari visit for the same day too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/1/date\", \"value\": \"2026-10-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the Nishiki Market lunch on that same day as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/2/date\", \"value\": \"2026-10-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark Kiyomizu-dera for October 12 too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/3/date\", \"value\": \"2026-10-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the Gion dinner on October 12 as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/4/date\", \"value\": \"2026-10-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep the Kamogawa walk on October 12 too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/5/date\", \"value\": \"2026-10-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Since the ramen stop is after midnight, mark it for the next calendar day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/6/date\", \"value\": \"2026-10-13\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a quick coffee pickup 15 minutes before I leave the hotel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/-\", \"value\": {\"activity\": \"Coffee pickup near hotel\", \"offset_from_anchor_minutes\": -15, \"time\": \"08:15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the coffee pickup on the same morning as my hotel departure."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/7/date\", \"value\": \"2026-10-12\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that I’m staying at Hotel Granvia Kyoto, right by the station, at the Karasuma side entrance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging\", \"value\": {\"name\": \"Hotel Granvia Kyoto\", \"area\": \"Kyoto Station\", \"access_note\": \"Karasuma side entrance\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add getting back to the hotel 17 hours after I leave in the morning."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/-\", \"value\": {\"activity\": \"Return to hotel\", \"offset_from_anchor_minutes\": 1020, \"time\": \"01:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Since I’ll get back after midnight, put the hotel return on the next calendar day too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/8/date\", \"value\": \"2026-10-13\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a taxi pickup in Gion for 16 hours and 30 minutes after I leave the hotel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/-\", \"value\": {\"activity\": \"Gion taxi pickup\", \"offset_from_anchor_minutes\": 990, \"time\": \"01:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "That taxi pickup is after midnight too, so put it on the next calendar day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/9/date\", \"value\": \"2026-10-13\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one last convenience-store stop 18 hours after I leave the hotel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/-\", \"value\": {\"activity\": \"Convenience-store stop\", \"offset_from_anchor_minutes\": 1080, \"time\": \"02:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Since that convenience-store stop is in the early hours after midnight, put it on October 13 too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/itinerary/10/date\", \"value\": \"2026-10-13\"}]"
+    }
+  ],
+  "edit_instruction": "Please change my hotel departure time to 11:30 in the morning.",
+  "theme": "Shifting the schedule's anchor time",
+  "master_data": null,
+  "current_json": {
+    "anchor": {
+      "event": "leave hotel",
+      "time": "08:30",
+      "date": "2026-10-12"
+    },
+    "itinerary": [
+      {
+        "activity": "Kyoto Station arrival",
+        "offset_from_anchor_minutes": 45,
+        "time": "09:15",
+        "date": "2026-10-12"
+      },
+      {
+        "activity": "Fushimi Inari visit",
+        "offset_from_anchor_minutes": 90,
+        "time": "10:00",
+        "date": "2026-10-12"
+      },
+      {
+        "activity": "Nishiki Market lunch",
+        "offset_from_anchor_minutes": 240,
+        "time": "12:30",
+        "date": "2026-10-12"
+      },
+      {
+        "activity": "Kiyomizu-dera visit",
+        "offset_from_anchor_minutes": 375,
+        "time": "14:45",
+        "date": "2026-10-12"
+      },
+      {
+        "activity": "Gion early dinner",
+        "offset_from_anchor_minutes": 540,
+        "time": "17:30",
+        "date": "2026-10-12"
+      },
+      {
+        "activity": "Kamogawa evening walk",
+        "offset_from_anchor_minutes": 720,
+        "time": "20:30",
+        "date": "2026-10-12"
+      },
+      {
+        "activity": "Late ramen stop",
+        "offset_from_anchor_minutes": 945,
+        "time": "00:15",
+        "date": "2026-10-13"
+      },
+      {
+        "activity": "Coffee pickup near hotel",
+        "offset_from_anchor_minutes": -15,
+        "time": "08:15",
+        "date": "2026-10-12"
+      },
+      {
+        "activity": "Return to hotel",
+        "offset_from_anchor_minutes": 1020,
+        "time": "01:30",
+        "date": "2026-10-13"
+      },
+      {
+        "activity": "Gion taxi pickup",
+        "offset_from_anchor_minutes": 990,
+        "time": "01:00",
+        "date": "2026-10-13"
+      },
+      {
+        "activity": "Convenience-store stop",
+        "offset_from_anchor_minutes": 1080,
+        "time": "02:30",
+        "date": "2026-10-13"
+      }
+    ],
+    "lodging": {
+      "name": "Hotel Granvia Kyoto",
+      "area": "Kyoto Station",
+      "access_note": "Karasuma side entrance"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a single-day schedule anchored on one time, where several other times each derive from that anchor by a fixed offset stated in the conversation, so the anchor alone determines them. Around this core, add the realistic, independent details a traveler would record that do not depend on the times of day, and vary their number from sample to sample.",
+  "edit_pattern": "Move the anchor time to a specific new time a fixed number of hours from the original.",
+  "cascade_pattern": "Every time that derives from the anchor shifts by the same delta, since each is the anchor plus a fixed offset, so the new anchor fixes them all; a time crossing midnight rolls its date deterministically. Values that do not derive from the anchor time stay unchanged.",
+  "requires_master_data": false
+}

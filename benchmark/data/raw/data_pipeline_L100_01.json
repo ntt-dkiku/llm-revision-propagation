@@ -1,0 +1,555 @@
+{
+  "id": "data_pipeline_L100_01",
+  "domain": "data_pipeline",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a pipeline spec for a daily customer events feed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline\", \"value\": {\"name\": \"daily_customer_events_feed\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Shopify as the starting system for the feed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source\", \"value\": {\"connector\": \"shopify_bulk_api\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it pull from Shopify’s bulk customer events export endpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/extraction_path\", \"value\": \"shopify://bulk/customers/events\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the production Shopify secret already stored in the warehouse vault."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/credential_ref\", \"value\": \"vault://prod/shopify/bulk_api_token\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the commerce integrations team responsible for that source."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/owner_group\", \"value\": \"commerce_integrations\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Run the Shopify pull as a nightly full refresh rather than an incremental sync."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/ingest_mode\", \"value\": \"full_refresh_nightly\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For planning, assume that Shopify setup costs about twelve dollars per run and takes around forty-five minutes to finish."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/connector_estimates\", \"value\": {\"cost_usd_per_run\": 12, \"latency_minutes\": 45}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also capture the daily planning numbers implied by that source setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/planning\", \"value\": {\"daily_cost_usd\": 12, \"expected_completion_minutes\": 45}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the readiness expectation to match the Shopify run duration so analysts know when the feed should be available."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/readiness\", \"value\": {\"available_after_minutes\": 45, \"based_on\": \"connector_latency\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Route any source-side incidents to the same commerce integrations team that owns the Shopify connection."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/incident_routing\", \"value\": {\"primary_group\": \"commerce_integrations\", \"routing_basis\": \"source_owner_group\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give the extraction step a Shopify-specific label and have it point at the same endpoint we just chose."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/extraction_step\", \"value\": {\"label\": \"shopify_bulk_customer_events_extract\", \"path_used\": \"shopify://bulk/customers/events\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a preflight check that validates the same Shopify vault secret before the pull starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/preflight_check\", \"value\": {\"check_name\": \"validate_shopify_bulk_api_token\", \"secret_used\": \"vault://prod/shopify/bulk_api_token\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the daily chargeback land with the commerce integrations team and use the Shopify run estimate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/chargeback\", \"value\": {\"team\": \"commerce_integrations\", \"amount_usd\": 12, \"calculated_from\": \"connector_cost_usd_per_run\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Spell out the run cadence that follows from the nightly full-refresh choice."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/run_cadence\", \"value\": {\"cadence\": \"nightly\", \"derived_from\": \"full_refresh_nightly\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send source health alerts to the commerce integrations channel too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/health_alerts\", \"value\": {\"notify_group\": \"commerce_integrations\", \"channel\": \"#commerce-integrations-alerts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a lineage entry that names the Shopify source and the endpoint it reads from."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/lineage_entry\", \"value\": {\"system\": \"shopify_bulk_api\", \"read_location\": \"shopify://bulk/customers/events\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a small manifest note saying the feed comes through Shopify and uses the full nightly refresh setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/manifest_note\", \"value\": {\"connector_name\": \"shopify_bulk_api\", \"refresh_pattern\": \"full_refresh_nightly\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Reserve the early-morning slot for the source pull and size it to the Shopify runtime estimate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/schedule_window\", \"value\": {\"start_time_utc\": \"01:00\", \"reserved_minutes\": 45}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark that early-morning slot as ending right after the expected Shopify runtime completes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/schedule_window/end_time_utc\", \"value\": \"01:45\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a brief operational summary that reflects the Shopify source, its team, and the planned daily cost."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/operational_summary\", \"value\": {\"source_system\": \"shopify_bulk_api\", \"responsible_group\": \"commerce_integrations\", \"daily_cost_usd\": 12}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an access review note tying the Shopify connection to its vault secret and owning team."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/access_review\", \"value\": {\"system_reviewed\": \"shopify_bulk_api\", \"secret_reviewed\": \"vault://prod/shopify/bulk_api_token\", \"review_group\": \"commerce_integrations\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the source service target using the Shopify runtime so support can compare actual completion against it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source/service_target\", \"value\": {\"target_minutes\": 45, \"measured_from\": \"connector_latency_minutes\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first cleanup step to standardize event timestamps before the data gets modeled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/transforms\", \"value\": [{\"name\": \"standardize_event_timestamps\", \"input_column\": \"event_time\", \"timezone\": \"UTC\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another cleanup step that removes duplicate customer events based on the event identifier."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/transforms/-\", \"value\": {\"name\": \"deduplicate_customer_events\", \"match_column\": \"event_id\", \"keep\": \"latest\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send the cleaned events into the analytics warehouse table for customer activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/destination\", \"value\": {\"warehouse\": \"snowflake_prod\", \"schema\": \"analytics\", \"table\": \"customer_activity_events\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a basic freshness check for the warehouse table so the team knows if yesterday’s activity is missing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/quality_checks\", \"value\": [{\"name\": \"daily_freshness_check\", \"target_column\": \"event_date\", \"maximum_lag_hours\": 24}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a check that catches empty customer identifiers before the table is published."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/quality_checks/-\", \"value\": {\"name\": \"customer_id_not_null\", \"target_column\": \"customer_id\", \"severity\": \"error\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Notify the analytics operations channel when the table load finishes successfully."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/notifications\", \"value\": {\"on_success\": true, \"channel\": \"#analytics-ops\", \"message\": \"Customer activity events load completed\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep a short retention policy for the raw landing files before they’re cleaned up."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/retention\", \"value\": {\"raw_days\": 14, \"curated_days\": 730, \"delete_mode\": \"automatic\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tag the dataset for customer analytics and lifecycle reporting."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/tags\", \"value\": [\"customer_analytics\", \"lifecycle_reporting\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one business contact for questions about the modeled customer activity data."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/stakeholders\", \"value\": [{\"name\": \"Maya Chen\", \"role\": \"analytics_owner\", \"email\": \"maya.chen@example.com\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a technical contact for questions about warehouse jobs and failures."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/stakeholders/-\", \"value\": {\"name\": \"Owen Patel\", \"role\": \"data_engineering_contact\", \"email\": \"owen.patel@example.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Classify the published table as internal and include the customer-data sensitivity level."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/governance\", \"value\": {\"classification\": \"internal\", \"sensitivity\": \"customer_behavior\", \"pii_present\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the warehouse loading method and make sure failed loads can roll back cleanly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/load_strategy\", \"value\": {\"method\": \"merge\", \"primary_key\": \"event_id\", \"rollback_on_failure\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Partition the warehouse table by the event date so routine reports scan less data."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/partitioning\", \"value\": {\"column\": \"event_date\", \"granularity\": \"day\", \"clustering_column\": \"customer_id\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Track the code location and branch used for the transformation logic."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/code_reference\", \"value\": {\"repository\": \"git@example.com:data/customer-events.git\", \"branch\": \"main\", \"path\": \"models/customer_activity\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the orchestrator details so the job can be scheduled from the existing platform."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/orchestration\", \"value\": {\"tool\": \"airflow\", \"dag_id\": \"daily_customer_events_feed\", \"retries\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the retry delay and timeout for the scheduled job."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/orchestration/retry_delay_minutes\", \"value\": 10}, {\"op\": \"add\", \"path\": \"/pipeline/orchestration/task_timeout_minutes\", \"value\": 120}]"
+    },
+    {
+      "role": "user",
+      "content": "Note the compute environment the scheduled work should use."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/execution_environment\", \"value\": {\"queue\": \"standard_etl\", \"worker_size\": \"medium\", \"max_parallel_tasks\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an audit trail setting so each run keeps its run identifier and status history."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/audit\", \"value\": {\"store_run_id\": true, \"store_status_history\": true, \"history_days\": 90}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add two catalog labels so people can find this asset by subject and refresh behavior."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/catalog_labels\", \"value\": {\"subject_area\": \"customer_engagement\", \"refresh_frequency\": \"daily\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a service note that tells analysts who to contact if the published table looks wrong."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/support_note\", \"value\": {\"contact_group\": \"data_platform_support\", \"response_hours\": 8, \"escalation\": \"analytics_operations_manager\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Document the expected incoming file layout with its version, format, and delimiter."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/input_contract\", \"value\": {\"layout_version\": \"v1\", \"format\": \"parquet\", \"delimiter\": \"none\"}}]"
+    }
+  ],
+  "edit_instruction": "Switch the feed’s upstream connection to bigcommerce_bulk_api.",
+  "theme": "Switching the source connector",
+  "conversation_pattern": "Center the artifact on a pipeline source connector whose connector attributes feed extraction path, credential reference, owner group, ingest mode, and stated cost or latency estimates. Around this core, add the realistic, independent details a data pipeline spec would carry that do not depend on the connector, and vary their number from sample to sample. Do not embed a lookup or reference card for any connector inside the artifact; the artifact holds only the current connector's own fields.",
+  "edit_pattern": "Switch the source connector to a different specific connector, and supply the replacement connector's attributes in master_data.",
+  "cascade_pattern": "Every connector-governed field takes the replacement connector's supplied attributes, and derived estimates recompute from those attributes. Downstream transforms that do not read connector attributes stay unchanged. This is determined because the replacement connector's attributes are provided with the edit.",
+  "requires_master_data": true,
+  "master_data": {
+    "connectors": {
+      "bigcommerce_bulk_api": {
+        "extraction_path": "bigcommerce://bulk/customers/events",
+        "credential_ref": "vault://prod/bigcommerce/bulk_api_token",
+        "owner_group": "commerce_platform_integrations",
+        "ingest_mode": "full_refresh_nightly",
+        "cost_usd_per_run": 9,
+        "latency_minutes": 30,
+        "extraction_step_label": "bigcommerce_bulk_customer_events_extract",
+        "preflight_check_name": "validate_bigcommerce_bulk_api_token",
+        "health_alert_channel": "#commerce-platform-integrations-alerts"
+      }
+    }
+  },
+  "current_json": {
+    "pipeline": {
+      "name": "daily_customer_events_feed",
+      "source": {
+        "connector": "shopify_bulk_api",
+        "extraction_path": "shopify://bulk/customers/events",
+        "credential_ref": "vault://prod/shopify/bulk_api_token",
+        "owner_group": "commerce_integrations",
+        "ingest_mode": "full_refresh_nightly",
+        "connector_estimates": {
+          "cost_usd_per_run": 12,
+          "latency_minutes": 45
+        },
+        "planning": {
+          "daily_cost_usd": 12,
+          "expected_completion_minutes": 45
+        },
+        "readiness": {
+          "available_after_minutes": 45,
+          "based_on": "connector_latency"
+        },
+        "incident_routing": {
+          "primary_group": "commerce_integrations",
+          "routing_basis": "source_owner_group"
+        },
+        "extraction_step": {
+          "label": "shopify_bulk_customer_events_extract",
+          "path_used": "shopify://bulk/customers/events"
+        },
+        "preflight_check": {
+          "check_name": "validate_shopify_bulk_api_token",
+          "secret_used": "vault://prod/shopify/bulk_api_token"
+        },
+        "chargeback": {
+          "team": "commerce_integrations",
+          "amount_usd": 12,
+          "calculated_from": "connector_cost_usd_per_run"
+        },
+        "run_cadence": {
+          "cadence": "nightly",
+          "derived_from": "full_refresh_nightly"
+        },
+        "health_alerts": {
+          "notify_group": "commerce_integrations",
+          "channel": "#commerce-integrations-alerts"
+        },
+        "lineage_entry": {
+          "system": "shopify_bulk_api",
+          "read_location": "shopify://bulk/customers/events"
+        },
+        "manifest_note": {
+          "connector_name": "shopify_bulk_api",
+          "refresh_pattern": "full_refresh_nightly"
+        },
+        "schedule_window": {
+          "start_time_utc": "01:00",
+          "reserved_minutes": 45,
+          "end_time_utc": "01:45"
+        },
+        "operational_summary": {
+          "source_system": "shopify_bulk_api",
+          "responsible_group": "commerce_integrations",
+          "daily_cost_usd": 12
+        },
+        "access_review": {
+          "system_reviewed": "shopify_bulk_api",
+          "secret_reviewed": "vault://prod/shopify/bulk_api_token",
+          "review_group": "commerce_integrations"
+        },
+        "service_target": {
+          "target_minutes": 45,
+          "measured_from": "connector_latency_minutes"
+        }
+      },
+      "transforms": [
+        {
+          "name": "standardize_event_timestamps",
+          "input_column": "event_time",
+          "timezone": "UTC"
+        },
+        {
+          "name": "deduplicate_customer_events",
+          "match_column": "event_id",
+          "keep": "latest"
+        }
+      ],
+      "destination": {
+        "warehouse": "snowflake_prod",
+        "schema": "analytics",
+        "table": "customer_activity_events"
+      },
+      "quality_checks": [
+        {
+          "name": "daily_freshness_check",
+          "target_column": "event_date",
+          "maximum_lag_hours": 24
+        },
+        {
+          "name": "customer_id_not_null",
+          "target_column": "customer_id",
+          "severity": "error"
+        }
+      ],
+      "notifications": {
+        "on_success": true,
+        "channel": "#analytics-ops",
+        "message": "Customer activity events load completed"
+      },
+      "retention": {
+        "raw_days": 14,
+        "curated_days": 730,
+        "delete_mode": "automatic"
+      },
+      "tags": [
+        "customer_analytics",
+        "lifecycle_reporting"
+      ],
+      "stakeholders": [
+        {
+          "name": "Maya Chen",
+          "role": "analytics_owner",
+          "email": "maya.chen@example.com"
+        },
+        {
+          "name": "Owen Patel",
+          "role": "data_engineering_contact",
+          "email": "owen.patel@example.com"
+        }
+      ],
+      "governance": {
+        "classification": "internal",
+        "sensitivity": "customer_behavior",
+        "pii_present": false
+      },
+      "load_strategy": {
+        "method": "merge",
+        "primary_key": "event_id",
+        "rollback_on_failure": true
+      },
+      "partitioning": {
+        "column": "event_date",
+        "granularity": "day",
+        "clustering_column": "customer_id"
+      },
+      "code_reference": {
+        "repository": "git@example.com:data/customer-events.git",
+        "branch": "main",
+        "path": "models/customer_activity"
+      },
+      "orchestration": {
+        "tool": "airflow",
+        "dag_id": "daily_customer_events_feed",
+        "retries": 2,
+        "retry_delay_minutes": 10,
+        "task_timeout_minutes": 120
+      },
+      "execution_environment": {
+        "queue": "standard_etl",
+        "worker_size": "medium",
+        "max_parallel_tasks": 4
+      },
+      "audit": {
+        "store_run_id": true,
+        "store_status_history": true,
+        "history_days": 90
+      },
+      "catalog_labels": {
+        "subject_area": "customer_engagement",
+        "refresh_frequency": "daily"
+      },
+      "support_note": {
+        "contact_group": "data_platform_support",
+        "response_hours": 8,
+        "escalation": "analytics_operations_manager"
+      },
+      "input_contract": {
+        "layout_version": "v1",
+        "format": "parquet",
+        "delimiter": "none"
+      }
+    }
+  }
+}

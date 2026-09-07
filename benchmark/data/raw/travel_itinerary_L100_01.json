@@ -1,0 +1,469 @@
+{
+  "id": "travel_itinerary_L100_01",
+  "domain": "travel_itinerary",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start the itinerary around leaving the hotel at 8:30 AM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/anchor_departure_time\", \"value\": \"08:30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Ten minutes after leaving, I want to start walking to the nearest metro station."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule\", \"value\": [{\"activity\": \"Walk to nearest metro station\", \"offset_minutes_from_departure\": 10, \"start_time\": \"08:40\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Twenty-five minutes after leaving the hotel, I should be boarding the Blue Line toward the old town."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Board Blue Line toward old town\", \"offset_minutes_from_departure\": 25, \"start_time\": \"08:55\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "About fifty-five minutes after we head out, I'd like to arrive at the old town square for a quick look around."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Arrive at old town square\", \"offset_minutes_from_departure\": 55, \"start_time\": \"09:25\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "An hour and twenty minutes after leaving, let's have the cathedral visit begin."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Begin cathedral visit\", \"offset_minutes_from_departure\": 80, \"start_time\": \"09:50\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Two hours after departure, put in a coffee break near the cathedral."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Coffee break near cathedral\", \"offset_minutes_from_departure\": 120, \"start_time\": \"10:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "At two hours and forty minutes after we leave, I'd like to reach the riverside market."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Reach riverside market\", \"offset_minutes_from_departure\": 160, \"start_time\": \"11:10\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Three hours and fifteen minutes after leaving, schedule lunch at the market hall."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Lunch at market hall\", \"offset_minutes_from_departure\": 195, \"start_time\": \"11:45\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Four hours after we head out, I want to visit the design museum."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Visit design museum\", \"offset_minutes_from_departure\": 240, \"start_time\": \"12:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Five hours and ten minutes after leaving, let's start a walk through the botanical garden."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Walk through botanical garden\", \"offset_minutes_from_departure\": 310, \"start_time\": \"13:40\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Six hours after we leave, add a stop at the harbor viewpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Stop at harbor viewpoint\", \"offset_minutes_from_departure\": 360, \"start_time\": \"14:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Seven hours and twenty minutes after departure, plan to catch the ferry back toward the central pier."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Catch ferry back toward central pier\", \"offset_minutes_from_departure\": 440, \"start_time\": \"15:50\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Eight hours after we leave the hotel, put in an early dinner in the theater district."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Early dinner in theater district\", \"offset_minutes_from_departure\": 480, \"start_time\": \"16:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Ten hours after departure, I'd like to be seated for the evening concert."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Attend evening concert\", \"offset_minutes_from_departure\": 600, \"start_time\": \"18:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Eleven and a half hours after leaving, add a short dessert stop near the concert hall."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Dessert stop near concert hall\", \"offset_minutes_from_departure\": 690, \"start_time\": \"20:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Twelve and a half hours after leaving, plan a taxi ride back toward the hotel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Taxi ride back toward hotel\", \"offset_minutes_from_departure\": 750, \"start_time\": \"21:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Thirteen hours after leaving the hotel, let's mark the return to the lobby."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/-\", \"value\": {\"activity\": \"Return to hotel lobby\", \"offset_minutes_from_departure\": 780, \"start_time\": \"21:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's make the whole outing happen on Friday, May 15, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip_date\", \"value\": \"2026-05-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please tie the first few planned stops to the same calendar day as the hotel departure, since their timing comes from that departure."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/0/start_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/schedule/1/start_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/schedule/2/start_date\", \"value\": \"2026-05-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep the cathedral, coffee, and market stops on that same day too, since they’re all timed from the morning departure."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/3/start_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/schedule/4/start_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/schedule/5/start_date\", \"value\": \"2026-05-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Lunch, the museum, and the garden walk should also stay on May 15 because their times are calculated from that same departure."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/6/start_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/schedule/7/start_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/schedule/8/start_date\", \"value\": \"2026-05-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "The harbor stop, ferry ride, and early dinner should land on May 15 as well, all based on the same departure time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/9/start_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/schedule/10/start_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/schedule/11/start_date\", \"value\": \"2026-05-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please mark the concert, dessert, taxi, and hotel return with the correct calendar day too; they still come from that same morning departure."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/12/start_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/schedule/13/start_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/schedule/14/start_date\", \"value\": \"2026-05-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "And make sure the final arrival back at the hotel is dated the same way, since it’s still thirteen hours after the original departure."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/15/start_date\", \"value\": \"2026-05-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the hotel we’re starting from: Hotel Aurora in the central district, with the front desk number saved for reference."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging\", \"value\": {\"name\": \"Hotel Aurora\", \"neighborhood\": \"Central District\", \"front_desk_phone\": \"+34 91 555 0148\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For getting around, note that I’ll use a day transit pass loaded on the city travel card."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transit_pass\", \"value\": {\"type\": \"Day pass\", \"media\": \"City travel card\", \"zone_coverage\": \"Central zones\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the evening concert, save the ticket details so I have them handy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/concert_ticket\", \"value\": {\"venue\": \"Gran Teatro Luna\", \"seat\": \"Balcony B12\", \"booking_reference\": \"LUNA-5839\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a few things I should keep in my day bag for the long sightseeing day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/day_bag_items\", \"value\": [\"Portable charger\", \"Reusable water bottle\", \"Light rain jacket\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also save my local emergency contact in case I need help during the day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emergency_contact\", \"value\": {\"name\": \"Marina Soler\", \"relationship\": \"Hotel concierge\", \"phone\": \"+34 91 555 0199\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add a quick overview of the timed part of the day now that the planned stops are in place."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule_overview\", \"value\": {\"scheduled_stop_count\": 16, \"first_planned_stop_time\": \"08:40\", \"final_planned_stop_time\": \"21:30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Since the day starts pretty early, remind me five minutes before leaving to check out of the room."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/departure_reminders\", \"value\": [{\"task\": \"Check out of room\", \"offset_minutes_from_departure\": -5, \"reminder_time\": \"08:25\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also remind me twenty minutes before leaving to grab breakfast from the lobby café."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/departure_reminders/-\", \"value\": {\"task\": \"Grab breakfast from lobby café\", \"offset_minutes_from_departure\": -20, \"reminder_time\": \"08:10\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put both pre-departure reminders on the departure day for now, since their alert times are calculated from when we leave."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/departure_reminders/0/reminder_date\", \"value\": \"2026-05-15\"}, {\"op\": \"add\", \"path\": \"/departure_reminders/1/reminder_date\", \"value\": \"2026-05-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one more alert for thirty minutes before leaving so I remember to pick up the packed snacks from reception."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/departure_reminders/-\", \"value\": {\"task\": \"Pick up packed snacks from reception\", \"offset_minutes_from_departure\": -30, \"reminder_time\": \"08:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put that snack pickup alert on the same date too, since it’s also counted back from the hotel departure."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/departure_reminders/2/reminder_date\", \"value\": \"2026-05-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Could you also save the exact hotel departure moment as one calendar-friendly timestamp?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/anchor_departure_datetime\", \"value\": \"2026-05-15T08:30:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish it with a simple timing snapshot: the outing starts when I leave the hotel, ends when I’m back in the lobby, and lasts thirteen hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/timing_snapshot\", \"value\": {\"outing_start_time\": \"08:30\", \"outing_end_time\": \"21:30\", \"duration_hours\": 13}}]"
+    }
+  ],
+  "edit_instruction": "Please change the hotel departure time to 3:30 PM.",
+  "theme": "Shifting the schedule's anchor time",
+  "master_data": null,
+  "current_json": {
+    "anchor_departure_time": "08:30",
+    "schedule": [
+      {
+        "activity": "Walk to nearest metro station",
+        "offset_minutes_from_departure": 10,
+        "start_time": "08:40",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Board Blue Line toward old town",
+        "offset_minutes_from_departure": 25,
+        "start_time": "08:55",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Arrive at old town square",
+        "offset_minutes_from_departure": 55,
+        "start_time": "09:25",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Begin cathedral visit",
+        "offset_minutes_from_departure": 80,
+        "start_time": "09:50",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Coffee break near cathedral",
+        "offset_minutes_from_departure": 120,
+        "start_time": "10:30",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Reach riverside market",
+        "offset_minutes_from_departure": 160,
+        "start_time": "11:10",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Lunch at market hall",
+        "offset_minutes_from_departure": 195,
+        "start_time": "11:45",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Visit design museum",
+        "offset_minutes_from_departure": 240,
+        "start_time": "12:30",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Walk through botanical garden",
+        "offset_minutes_from_departure": 310,
+        "start_time": "13:40",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Stop at harbor viewpoint",
+        "offset_minutes_from_departure": 360,
+        "start_time": "14:30",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Catch ferry back toward central pier",
+        "offset_minutes_from_departure": 440,
+        "start_time": "15:50",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Early dinner in theater district",
+        "offset_minutes_from_departure": 480,
+        "start_time": "16:30",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Attend evening concert",
+        "offset_minutes_from_departure": 600,
+        "start_time": "18:30",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Dessert stop near concert hall",
+        "offset_minutes_from_departure": 690,
+        "start_time": "20:00",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Taxi ride back toward hotel",
+        "offset_minutes_from_departure": 750,
+        "start_time": "21:00",
+        "start_date": "2026-05-15"
+      },
+      {
+        "activity": "Return to hotel lobby",
+        "offset_minutes_from_departure": 780,
+        "start_time": "21:30",
+        "start_date": "2026-05-15"
+      }
+    ],
+    "trip_date": "2026-05-15",
+    "lodging": {
+      "name": "Hotel Aurora",
+      "neighborhood": "Central District",
+      "front_desk_phone": "+34 91 555 0148"
+    },
+    "transit_pass": {
+      "type": "Day pass",
+      "media": "City travel card",
+      "zone_coverage": "Central zones"
+    },
+    "concert_ticket": {
+      "venue": "Gran Teatro Luna",
+      "seat": "Balcony B12",
+      "booking_reference": "LUNA-5839"
+    },
+    "day_bag_items": [
+      "Portable charger",
+      "Reusable water bottle",
+      "Light rain jacket"
+    ],
+    "emergency_contact": {
+      "name": "Marina Soler",
+      "relationship": "Hotel concierge",
+      "phone": "+34 91 555 0199"
+    },
+    "schedule_overview": {
+      "scheduled_stop_count": 16,
+      "first_planned_stop_time": "08:40",
+      "final_planned_stop_time": "21:30"
+    },
+    "departure_reminders": [
+      {
+        "task": "Check out of room",
+        "offset_minutes_from_departure": -5,
+        "reminder_time": "08:25",
+        "reminder_date": "2026-05-15"
+      },
+      {
+        "task": "Grab breakfast from lobby café",
+        "offset_minutes_from_departure": -20,
+        "reminder_time": "08:10",
+        "reminder_date": "2026-05-15"
+      },
+      {
+        "task": "Pick up packed snacks from reception",
+        "offset_minutes_from_departure": -30,
+        "reminder_time": "08:00",
+        "reminder_date": "2026-05-15"
+      }
+    ],
+    "anchor_departure_datetime": "2026-05-15T08:30:00",
+    "timing_snapshot": {
+      "outing_start_time": "08:30",
+      "outing_end_time": "21:30",
+      "duration_hours": 13
+    }
+  },
+  "conversation_pattern": "Center the artifact on a single-day schedule anchored on one time, where several other times each derive from that anchor by a fixed offset stated in the conversation, so the anchor alone determines them. Around this core, add the realistic, independent details a traveler would record that do not depend on the times of day, and vary their number from sample to sample.",
+  "edit_pattern": "Move the anchor time to a specific new time a fixed number of hours from the original.",
+  "cascade_pattern": "Every time that derives from the anchor shifts by the same delta, since each is the anchor plus a fixed offset, so the new anchor fixes them all; a time crossing midnight rolls its date deterministically. Values that do not derive from the anchor time stay unchanged.",
+  "requires_master_data": false
+}

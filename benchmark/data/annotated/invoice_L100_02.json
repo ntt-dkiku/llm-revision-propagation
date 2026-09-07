@@ -1,0 +1,833 @@
+{
+  "id": "invoice_L100_02",
+  "domain": "invoice",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start an invoice numbered INV-2026-0417."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoiceNumber\", \"value\": \"INV-2026-0417\"}]"
+    },
+    {
+      "role": "user",
+      "content": "It's been issued to the customer, but it hasn't been paid yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/status\", \"value\": \"issued\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Leave it marked as not settled for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/settled\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Also make clear it isn't paid in full yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidInFull\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a note that it's still awaiting payment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentStatusLabel\", \"value\": \"Awaiting payment\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For the current state, allow payment reminders to go out."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentReminderEligible\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Don't provide a receipt for it yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/receiptAvailable\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Since it's unpaid, show the next step as asking the customer to pay."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/nextAction\", \"value\": \"Request payment\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep the closing date empty until the invoice is actually settled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/closedDate\", \"value\": null}]"
+    },
+    {
+      "role": "user",
+      "content": "Don't record any payment date yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentDate\", \"value\": null}]"
+    },
+    {
+      "role": "user",
+      "content": "Don't assign a receipt number until money comes in."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/receiptNumber\", \"value\": null}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep it out of collections while we're simply waiting for payment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/collectionStage\", \"value\": \"not_started\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Show that nothing has been collected against it so far."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/amountPaid\", \"value\": 0}]"
+    },
+    {
+      "role": "user",
+      "content": "Also show that the full balance is still outstanding for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/balanceDue\", \"value\": 0}]"
+    },
+    {
+      "role": "user",
+      "content": "Date it as April 17, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/issueDate\", \"value\": \"2026-04-17\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the customer's payment deadline for May 17, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dueDate\", \"value\": \"2026-05-17\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the seller Brightline Studio LLC, based in Denver, Colorado."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller\", \"value\": {\"name\": \"Brightline Studio LLC\", \"city\": \"Denver\", \"state\": \"CO\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Bill Arcadia Market Co. in Boulder, Colorado."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer\", \"value\": {\"name\": \"Arcadia Market Co.\", \"city\": \"Boulder\", \"state\": \"CO\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use U.S. dollars for all money on this invoice."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/currency\", \"value\": \"USD\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that payment would be handled by bank transfer once it arrives."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paymentTerms\", \"value\": {\"method\": \"Bank transfer\", \"netDays\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the monthly design retainer for April: 20 hours at $120 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems\", \"value\": [{\"description\": \"April design retainer\", \"quantity\": 20, \"unitPrice\": 120}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a rush landing-page refresh for 8 hours at $150 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"description\": \"Rush landing-page refresh\", \"quantity\": 8, \"unitPrice\": 150}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a brand style guide update for 5 hours at $110 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"description\": \"Brand style guide update\", \"quantity\": 5, \"unitPrice\": 110}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add product photography direction for 6 hours at $130 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"description\": \"Product photography direction\", \"quantity\": 6, \"unitPrice\": 130}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add final print-ready exports for 3 hours at $95 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"description\": \"Final print-ready exports\", \"quantity\": 3, \"unitPrice\": 95}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one more charge for social ad graphics: 4 hours at $105 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"description\": \"Social ad graphics\", \"quantity\": 4, \"unitPrice\": 105}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a storefront signage concept too: 7 hours at $115 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"description\": \"Storefront signage concept\", \"quantity\": 7, \"unitPrice\": 115}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add packaging mockups as the last service: 2 hours at $125 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lineItems/-\", \"value\": {\"description\": \"Packaging mockups\", \"quantity\": 2, \"unitPrice\": 125}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the pre-tax service charges for everything listed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/subtotal\", \"value\": 6690}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply a 7.5% sales tax rate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/taxRate\", \"value\": 0.075}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the sales tax from that rate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/taxAmount\", \"value\": 501.75}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the invoice math by adding the amount owed after tax."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/total\", \"value\": 7191.75}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the seller's mailing address on Market Street, suite 410, in ZIP code 80202."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller/address\", \"value\": {\"street\": \"1550 Market Street\", \"suite\": \"Suite 410\", \"postalCode\": \"80202\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer's mailing address on Pearl Street, suite 200, with ZIP code 80302."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer/address\", \"value\": {\"street\": \"1420 Pearl Street\", \"suite\": \"Suite 200\", \"postalCode\": \"80302\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the seller contact as Maya Chen, using her billing email and main phone number."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/seller/contact\", \"value\": {\"name\": \"Maya Chen\", \"email\": \"billing@brightlinestudio.example\", \"phone\": \"+1-303-555-0148\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer contact as Jordan Ellis, with their accounts payable email and office phone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer/contact\", \"value\": {\"name\": \"Jordan Ellis\", \"email\": \"ap@arcadiamarket.example\", \"phone\": \"+1-303-555-0196\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "If the customer’s payment is later marked complete, use May 3, 2026 as the settlement day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidStateDefaults\", \"value\": {\"settlementDate\": \"2026-05-03\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "When it’s eventually settled, use receipt RCPT-2026-0417 for the customer’s proof of payment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidStateDefaults/receiptNumber\", \"value\": \"RCPT-2026-0417\"}]"
+    },
+    {
+      "role": "user",
+      "content": "When it’s settled, record the collected amount as the full invoice total."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidStateDefaults/amountPaid\", \"value\": 7191.75}]"
+    },
+    {
+      "role": "user",
+      "content": "Once the customer has paid, there should be no remaining balance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidStateDefaults/balanceDue\", \"value\": 0}]"
+    },
+    {
+      "role": "user",
+      "content": "Once the customer has paid, treat the invoice as settled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidStateDefaults/settled\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "If the customer pays, consider the invoice paid in full."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidStateDefaults/paidInFull\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "After payment, show the customer-facing label as simply paid."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidStateDefaults/paymentStatusLabel\", \"value\": \"Paid\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After payment, stop sending payment reminders."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidStateDefaults/paymentReminderEligible\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "After payment, make the receipt available and leave no follow-up task."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidStateDefaults/receiptAvailable\", \"value\": true}, {\"op\": \"add\", \"path\": \"/paidStateDefaults/nextAction\", \"value\": \"None\"}]"
+    },
+    {
+      "role": "user",
+      "content": "When it’s paid, use May 3, 2026 for both the closeout and money-received dates, and consider collections closed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/paidStateDefaults/closedDate\", \"value\": \"2026-05-03\"}, {\"op\": \"add\", \"path\": \"/paidStateDefaults/paymentDate\", \"value\": \"2026-05-03\"}, {\"op\": \"add\", \"path\": \"/paidStateDefaults/collectionStage\", \"value\": \"closed\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Attach Arcadia’s purchase order PO-8842, approved by Priya Shah on April 12, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/purchaseOrder\", \"value\": {\"number\": \"PO-8842\", \"approvedBy\": \"Priya Shah\", \"approvalDate\": \"2026-04-12\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tie this to Arcadia’s Spring Launch Refresh work, using code AM-SLR-2026 and Leo Grant as the project lead."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project\", \"value\": {\"name\": \"Spring Launch Refresh\", \"code\": \"AM-SLR-2026\", \"manager\": \"Leo Grant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the finished materials were delivered digitally on April 18, 2026, as PDF proofs."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/delivery\", \"value\": {\"method\": \"Digital delivery\", \"date\": \"2026-04-18\", \"format\": \"PDF proofs\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For bank transfers, send funds to Alpine Bank, routing 102000021, account 4455667788."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/remittanceBank\", \"value\": {\"bankName\": \"Alpine Bank\", \"routingNumber\": \"102000021\", \"accountNumber\": \"4455667788\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add internal routing for the creative department, cost center CC-410, with Elena Morris reviewing it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/internalRouting\", \"value\": {\"department\": \"Creative Services\", \"costCenter\": \"CC-410\", \"reviewer\": \"Elena Morris\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Link it to the signed statement of work SOW-2026-09, version 3, signed on April 10, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/contractReference\", \"value\": {\"documentNumber\": \"SOW-2026-09\", \"version\": 3, \"signedDate\": \"2026-04-10\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short customer-facing note thanking them for prompt attention, signed by the billing desk, with normal priority."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customerMessage\", \"value\": {\"text\": \"Thank you for your prompt attention.\", \"signoff\": \"Billing Desk\", \"priority\": \"normal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For accounting, keep it open on the ledger while we wait for payment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ledgerStatus\", \"value\": \"open\"}]"
+    }
+  ],
+  "edit_instruction": "Mark the invoice’s status as paid.",
+  "theme": "Marking the invoice as paid",
+  "master_data": null,
+  "current_json": {
+    "invoiceNumber": "INV-2026-0417",
+    "status": "issued",
+    "settled": false,
+    "paidInFull": false,
+    "paymentStatusLabel": "Awaiting payment",
+    "paymentReminderEligible": true,
+    "receiptAvailable": false,
+    "nextAction": "Request payment",
+    "closedDate": null,
+    "paymentDate": null,
+    "receiptNumber": null,
+    "collectionStage": "not_started",
+    "amountPaid": 0,
+    "balanceDue": 0,
+    "issueDate": "2026-04-17",
+    "dueDate": "2026-05-17",
+    "seller": {
+      "name": "Brightline Studio LLC",
+      "city": "Denver",
+      "state": "CO",
+      "address": {
+        "street": "1550 Market Street",
+        "suite": "Suite 410",
+        "postalCode": "80202"
+      },
+      "contact": {
+        "name": "Maya Chen",
+        "email": "billing@brightlinestudio.example",
+        "phone": "+1-303-555-0148"
+      }
+    },
+    "customer": {
+      "name": "Arcadia Market Co.",
+      "city": "Boulder",
+      "state": "CO",
+      "address": {
+        "street": "1420 Pearl Street",
+        "suite": "Suite 200",
+        "postalCode": "80302"
+      },
+      "contact": {
+        "name": "Jordan Ellis",
+        "email": "ap@arcadiamarket.example",
+        "phone": "+1-303-555-0196"
+      }
+    },
+    "currency": "USD",
+    "paymentTerms": {
+      "method": "Bank transfer",
+      "netDays": 30
+    },
+    "lineItems": [
+      {
+        "description": "April design retainer",
+        "quantity": 20,
+        "unitPrice": 120
+      },
+      {
+        "description": "Rush landing-page refresh",
+        "quantity": 8,
+        "unitPrice": 150
+      },
+      {
+        "description": "Brand style guide update",
+        "quantity": 5,
+        "unitPrice": 110
+      },
+      {
+        "description": "Product photography direction",
+        "quantity": 6,
+        "unitPrice": 130
+      },
+      {
+        "description": "Final print-ready exports",
+        "quantity": 3,
+        "unitPrice": 95
+      },
+      {
+        "description": "Social ad graphics",
+        "quantity": 4,
+        "unitPrice": 105
+      },
+      {
+        "description": "Storefront signage concept",
+        "quantity": 7,
+        "unitPrice": 115
+      },
+      {
+        "description": "Packaging mockups",
+        "quantity": 2,
+        "unitPrice": 125
+      }
+    ],
+    "subtotal": 6690,
+    "taxRate": 0.075,
+    "taxAmount": 501.75,
+    "total": 7191.75,
+    "paidStateDefaults": {
+      "settlementDate": "2026-05-03",
+      "receiptNumber": "RCPT-2026-0417",
+      "amountPaid": 7191.75,
+      "balanceDue": 0,
+      "settled": true,
+      "paidInFull": true,
+      "paymentStatusLabel": "Paid",
+      "paymentReminderEligible": false,
+      "receiptAvailable": true,
+      "nextAction": "None",
+      "closedDate": "2026-05-03",
+      "paymentDate": "2026-05-03",
+      "collectionStage": "closed"
+    },
+    "purchaseOrder": {
+      "number": "PO-8842",
+      "approvedBy": "Priya Shah",
+      "approvalDate": "2026-04-12"
+    },
+    "project": {
+      "name": "Spring Launch Refresh",
+      "code": "AM-SLR-2026",
+      "manager": "Leo Grant"
+    },
+    "delivery": {
+      "method": "Digital delivery",
+      "date": "2026-04-18",
+      "format": "PDF proofs"
+    },
+    "remittanceBank": {
+      "bankName": "Alpine Bank",
+      "routingNumber": "102000021",
+      "accountNumber": "4455667788"
+    },
+    "internalRouting": {
+      "department": "Creative Services",
+      "costCenter": "CC-410",
+      "reviewer": "Elena Morris"
+    },
+    "contractReference": {
+      "documentNumber": "SOW-2026-09",
+      "version": 3,
+      "signedDate": "2026-04-10"
+    },
+    "customerMessage": {
+      "text": "Thank you for your prompt attention.",
+      "signoff": "Billing Desk",
+      "priority": "normal"
+    },
+    "ledgerStatus": "open"
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/status",
+      "kind": "direct",
+      "value": "paid"
+    },
+    {
+      "op": "replace",
+      "path": "/receiptNumber",
+      "kind": "cascade",
+      "value": "RCPT-2026-0417"
+    },
+    {
+      "op": "replace",
+      "path": "/amountPaid",
+      "kind": "cascade",
+      "value": 7191.75
+    },
+    {
+      "op": "replace",
+      "path": "/settled",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/paidInFull",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/paymentStatusLabel",
+      "kind": "cascade",
+      "value": "Paid"
+    },
+    {
+      "op": "replace",
+      "path": "/paymentReminderEligible",
+      "kind": "cascade",
+      "value": false
+    },
+    {
+      "op": "replace",
+      "path": "/receiptAvailable",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/nextAction",
+      "kind": "cascade",
+      "value": "None"
+    },
+    {
+      "op": "replace",
+      "path": "/closedDate",
+      "kind": "cascade",
+      "value": "2026-05-03"
+    },
+    {
+      "op": "replace",
+      "path": "/paymentDate",
+      "kind": "cascade",
+      "value": "2026-05-03"
+    },
+    {
+      "op": "replace",
+      "path": "/collectionStage",
+      "kind": "cascade",
+      "value": "closed"
+    },
+    {
+      "op": "replace",
+      "path": "/ledgerStatus",
+      "kind": "cascade",
+      "value": "closed",
+      "matcher": "regex_match",
+      "pattern": "(?i)(closed|settled|paid|cleared|reconciled)"
+    }
+  ],
+  "expected_json": {
+    "invoiceNumber": "INV-2026-0417",
+    "status": "paid",
+    "settled": true,
+    "paidInFull": true,
+    "paymentStatusLabel": "Paid",
+    "paymentReminderEligible": false,
+    "receiptAvailable": true,
+    "nextAction": "None",
+    "closedDate": "2026-05-03",
+    "paymentDate": "2026-05-03",
+    "receiptNumber": "RCPT-2026-0417",
+    "collectionStage": "closed",
+    "amountPaid": 7191.75,
+    "balanceDue": 0,
+    "issueDate": "2026-04-17",
+    "dueDate": "2026-05-17",
+    "seller": {
+      "name": "Brightline Studio LLC",
+      "city": "Denver",
+      "state": "CO",
+      "address": {
+        "street": "1550 Market Street",
+        "suite": "Suite 410",
+        "postalCode": "80202"
+      },
+      "contact": {
+        "name": "Maya Chen",
+        "email": "billing@brightlinestudio.example",
+        "phone": "+1-303-555-0148"
+      }
+    },
+    "customer": {
+      "name": "Arcadia Market Co.",
+      "city": "Boulder",
+      "state": "CO",
+      "address": {
+        "street": "1420 Pearl Street",
+        "suite": "Suite 200",
+        "postalCode": "80302"
+      },
+      "contact": {
+        "name": "Jordan Ellis",
+        "email": "ap@arcadiamarket.example",
+        "phone": "+1-303-555-0196"
+      }
+    },
+    "currency": "USD",
+    "paymentTerms": {
+      "method": "Bank transfer",
+      "netDays": 30
+    },
+    "lineItems": [
+      {
+        "description": "April design retainer",
+        "quantity": 20,
+        "unitPrice": 120
+      },
+      {
+        "description": "Rush landing-page refresh",
+        "quantity": 8,
+        "unitPrice": 150
+      },
+      {
+        "description": "Brand style guide update",
+        "quantity": 5,
+        "unitPrice": 110
+      },
+      {
+        "description": "Product photography direction",
+        "quantity": 6,
+        "unitPrice": 130
+      },
+      {
+        "description": "Final print-ready exports",
+        "quantity": 3,
+        "unitPrice": 95
+      },
+      {
+        "description": "Social ad graphics",
+        "quantity": 4,
+        "unitPrice": 105
+      },
+      {
+        "description": "Storefront signage concept",
+        "quantity": 7,
+        "unitPrice": 115
+      },
+      {
+        "description": "Packaging mockups",
+        "quantity": 2,
+        "unitPrice": 125
+      }
+    ],
+    "subtotal": 6690,
+    "taxRate": 0.075,
+    "taxAmount": 501.75,
+    "total": 7191.75,
+    "paidStateDefaults": {
+      "settlementDate": "2026-05-03",
+      "receiptNumber": "RCPT-2026-0417",
+      "amountPaid": 7191.75,
+      "balanceDue": 0,
+      "settled": true,
+      "paidInFull": true,
+      "paymentStatusLabel": "Paid",
+      "paymentReminderEligible": false,
+      "receiptAvailable": true,
+      "nextAction": "None",
+      "closedDate": "2026-05-03",
+      "paymentDate": "2026-05-03",
+      "collectionStage": "closed"
+    },
+    "purchaseOrder": {
+      "number": "PO-8842",
+      "approvedBy": "Priya Shah",
+      "approvalDate": "2026-04-12"
+    },
+    "project": {
+      "name": "Spring Launch Refresh",
+      "code": "AM-SLR-2026",
+      "manager": "Leo Grant"
+    },
+    "delivery": {
+      "method": "Digital delivery",
+      "date": "2026-04-18",
+      "format": "PDF proofs"
+    },
+    "remittanceBank": {
+      "bankName": "Alpine Bank",
+      "routingNumber": "102000021",
+      "accountNumber": "4455667788"
+    },
+    "internalRouting": {
+      "department": "Creative Services",
+      "costCenter": "CC-410",
+      "reviewer": "Elena Morris"
+    },
+    "contractReference": {
+      "documentNumber": "SOW-2026-09",
+      "version": 3,
+      "signedDate": "2026-04-10"
+    },
+    "customerMessage": {
+      "text": "Thank you for your prompt attention.",
+      "signoff": "Billing Desk",
+      "priority": "normal"
+    },
+    "ledgerStatus": "closed"
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Status issued->paid. Every status-governed field moves to the value enumerated in paidStateDefaults: settled true, paidInFull true, paymentStatusLabel \"Paid\", paymentReminderEligible false, receiptAvailable true, nextAction \"None\", closedDate/paymentDate 2026-05-03, receiptNumber RCPT-2026-0417, collectionStage \"closed\", amountPaid 7191.75. balanceDue stays 0 (already 0). paidStateDefaults (the source reference) and ledgerStatus (not listed there, hence not status-governed) stay; all descriptive fields stay. | REVIEW EDIT (with author): ledgerStatus REVERSED from \"stays\" to a cascade. Turn 106 set ledgerStatus=\"open\" explicitly conditioned on \"while we wait for payment\"; marking the invoice paid dissolves that condition, so the ledger no longer stays open. The exact closed-state string is not supplied by the conversation or paidStateDefaults, so it was added as a regex_match cascade accepting any closed/settled-type value (value \"closed\", mirrors invoice_L50_02 /accounting/ledgerStatus).",
+  "conversation_pattern": "Center the artifact on an invoice currently in one status, carrying a set of fields whose present values follow from that status, where moving it to the paid status has one well-understood effect on each. Around this core, add the realistic, independent details an invoice would carry that do not depend on the status, and vary their number from sample to sample.",
+  "edit_pattern": "Change the invoice status from issued to paid.",
+  "cascade_pattern": "Marking it paid moves every status-governed field to its paid-state value, while fields the status does not govern stay. Each new value is fixed because the effect of payment on each field is unambiguous.",
+  "requires_master_data": false
+}

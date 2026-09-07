@@ -1,0 +1,295 @@
+{
+  "id": "shopping_cart_L50_04",
+  "domain": "shopping_cart",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a shopping cart for a regular personal purchase, not a gift."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/giftMode\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Since this is just for me, keep the prices visible on the paperwork in the box."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation\", \"value\": {\"showPricesOnPackingSlip\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Don’t include any special gift receipt for this order."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation/includeGiftReceipt\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Also, don’t add gift wrapping since it’s not being sent as a present."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation/giftWrap\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the normal return instructions instead of the gift-friendly version."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation/giftReturnInstructions\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "It’s fine for item prices to appear in the order emails too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation/showPricesInEmails\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the regular outside package labeling, not anything gift-specific."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation/packageLabelStyle\", \"value\": \"standard\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Don’t send any recipient-style delivery alerts for this one."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation/recipientDeliveryAlerts\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Skip the little note card insert too, since there’s no occasion attached to this order."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation/messageCardIncluded\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the plain packing materials inside the box, not the nicer present-style setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/presentation/insidePackagingStyle\", \"value\": \"plain\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Give this cart the reference number SC-48291 so I can find it later."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cartId\", \"value\": \"SC-48291\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Send it to Maya Chen at 2148 Cedar Lane in Portland."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shippingAddress\", \"value\": {\"recipientName\": \"Maya Chen\", \"street\": \"2148 Cedar Lane\", \"city\": \"Portland\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish that address with Oregon, ZIP code 97214, in the United States."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shippingAddress/state\", \"value\": \"OR\"}, {\"op\": \"add\", \"path\": \"/shippingAddress/postalCode\", \"value\": \"97214\"}, {\"op\": \"add\", \"path\": \"/shippingAddress/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Maya’s email, maya.chen@example.com, for updates, and text her at 503-555-0186 if needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/contact\", \"value\": {\"email\": \"maya.chen@example.com\", \"phone\": \"503-555-0186\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add two stainless travel mugs at $18.50 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items\", \"value\": [{\"name\": \"Stainless Travel Mug\", \"quantity\": 2, \"unitPrice\": 18.5}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one bag of dark roast coffee for $14.25."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/-\", \"value\": {\"name\": \"Dark Roast Coffee Beans\", \"quantity\": 1, \"unitPrice\": 14.25}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include three oatmeal breakfast bars at $2.75 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/-\", \"value\": {\"name\": \"Oatmeal Breakfast Bar\", \"quantity\": 3, \"unitPrice\": 2.75}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one lined notebook for $9.99."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/-\", \"value\": {\"name\": \"Lined Notebook\", \"quantity\": 1, \"unitPrice\": 9.99}}]"
+    },
+    {
+      "role": "user",
+      "content": "Ship it with the standard delivery option, arriving in about five business days for $6.99."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shippingOption\", \"value\": {\"service\": \"Standard Delivery\", \"estimatedTransitDays\": 5, \"cost\": 6.99}}]"
+    },
+    {
+      "role": "user",
+      "content": "Pay with Maya’s Visa ending in 4242, expiring in November 2027."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/payment\", \"value\": {\"cardholderName\": \"Maya Chen\", \"cardBrand\": \"Visa\", \"last4\": \"4242\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the expiration details for that card: November 2027."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/payment/expiryMonth\", \"value\": 11}, {\"op\": \"add\", \"path\": \"/payment/expiryYear\", \"value\": 2027}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the promo SAVE10 for this cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/promotion\", \"value\": {\"code\": \"SAVE10\", \"discountAmount\": 10}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tie this to Maya’s store profile, number CUST-1187, with loyalty perks active."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/buyerProfile\", \"value\": {\"profileId\": \"CUST-1187\", \"loyaltyMember\": true, \"marketingOptIn\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it delivered on a weekday afternoon, between 2 and 6 if that option is available."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deliveryWindow\", \"value\": {\"dayType\": \"weekday\", \"startHour\": 14, \"endHour\": 18}}]"
+    },
+    {
+      "role": "user",
+      "content": "If nobody answers, leaving the package at the door is fine, and don’t require a signature or swap in substitutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/fulfillmentPreferences\", \"value\": {\"leaveAtDoor\": true, \"signatureRequired\": false, \"allowSubstitutions\": false}}]"
+    }
+  ],
+  "edit_instruction": "Turn gift mode on for this order.",
+  "theme": "Switching the order to gift mode",
+  "master_data": null,
+  "current_json": {
+    "giftMode": false,
+    "presentation": {
+      "showPricesOnPackingSlip": true,
+      "includeGiftReceipt": false,
+      "giftWrap": false,
+      "giftReturnInstructions": false,
+      "showPricesInEmails": true,
+      "packageLabelStyle": "standard",
+      "recipientDeliveryAlerts": false,
+      "messageCardIncluded": false,
+      "insidePackagingStyle": "plain"
+    },
+    "cartId": "SC-48291",
+    "shippingAddress": {
+      "recipientName": "Maya Chen",
+      "street": "2148 Cedar Lane",
+      "city": "Portland",
+      "state": "OR",
+      "postalCode": "97214",
+      "country": "US"
+    },
+    "contact": {
+      "email": "maya.chen@example.com",
+      "phone": "503-555-0186"
+    },
+    "items": [
+      {
+        "name": "Stainless Travel Mug",
+        "quantity": 2,
+        "unitPrice": 18.5
+      },
+      {
+        "name": "Dark Roast Coffee Beans",
+        "quantity": 1,
+        "unitPrice": 14.25
+      },
+      {
+        "name": "Oatmeal Breakfast Bar",
+        "quantity": 3,
+        "unitPrice": 2.75
+      },
+      {
+        "name": "Lined Notebook",
+        "quantity": 1,
+        "unitPrice": 9.99
+      }
+    ],
+    "shippingOption": {
+      "service": "Standard Delivery",
+      "estimatedTransitDays": 5,
+      "cost": 6.99
+    },
+    "payment": {
+      "cardholderName": "Maya Chen",
+      "cardBrand": "Visa",
+      "last4": "4242",
+      "expiryMonth": 11,
+      "expiryYear": 2027
+    },
+    "promotion": {
+      "code": "SAVE10",
+      "discountAmount": 10
+    },
+    "buyerProfile": {
+      "profileId": "CUST-1187",
+      "loyaltyMember": true,
+      "marketingOptIn": false
+    },
+    "deliveryWindow": {
+      "dayType": "weekday",
+      "startHour": 14,
+      "endHour": 18
+    },
+    "fulfillmentPreferences": {
+      "leaveAtDoor": true,
+      "signatureRequired": false,
+      "allowSubstitutions": false
+    }
+  },
+  "conversation_pattern": "Center the artifact on a cart that is currently a non-gift order, carrying a set of presentation fields whose present values follow from it not being a gift, where switching it to a gift order flips each to a single, unambiguous gift-state value — booleans or fixed states only, never free-form text or an open-ended choice. Around this core, add the realistic, independent details a cart would carry that do not depend on whether the order is a gift, and vary their number from sample to sample.",
+  "edit_pattern": "Turn gift mode on for the order.",
+  "cascade_pattern": "Switching to a gift order moves every gift-governed presentation field to its gift-state value, while fields the gift setting does not govern stay. Each new value is fixed because the effect of the gift setting on each field is unambiguous.",
+  "requires_master_data": false
+}

@@ -1,0 +1,499 @@
+{
+  "id": "data_pipeline_L100_00",
+  "domain": "data_pipeline",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start an operations record for the customer orders ingestion pipeline."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline\", \"value\": {\"pipeline_id\": \"customer_orders_ingestion\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it run every 30 minutes so the rest of the operating targets can be based on that cadence."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schedule\", \"value\": {\"interval_minutes\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the freshness commitment to be fifteen minutes longer than the run cadence."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/freshness_sla\", \"value\": {\"formula\": \"freshness_sla_minutes = interval_minutes + 15\", \"minutes\": 45}}]"
+    },
+    {
+      "role": "user",
+      "content": "Allow retries to keep going for twice the run cadence before the run is treated as exhausted."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/retry_window\", \"value\": {\"formula\": \"retry_window_minutes = interval_minutes * 2\", \"minutes\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "For consumers, note that refreshed outputs should be expected five minutes after each run cadence completes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/downstream_refresh_expectation\", \"value\": {\"formula\": \"downstream_expected_refresh_minutes = interval_minutes + 5\", \"minutes\": 35}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also trigger stale-data paging when the latest successful load is twenty minutes older than the cadence target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/stale_data_alert_threshold\", \"value\": {\"formula\": \"stale_data_alert_threshold_minutes = interval_minutes + 20\", \"minutes\": 50}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short purpose note saying it keeps the warehouse order tables current for analytics and support teams."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/description\", \"value\": \"Keeps warehouse order tables current for analytics and support teams.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Assign Dana from data engineering as the primary person to contact for this pipeline."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/owners\", \"value\": [{\"name\": \"Dana Patel\", \"team\": \"data engineering\", \"role\": \"primary\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Miguel from platform operations as the backup contact in case Dana is unavailable."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/owners/-\", \"value\": {\"name\": \"Miguel Santos\", \"team\": \"platform operations\", \"role\": \"backup\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the input comes from the production orders table in Shopify."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source\", \"value\": {\"system\": \"Shopify\", \"database\": \"orders_prod\", \"table\": \"orders\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send the cleaned results to the analytics warehouse orders mart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/destination\", \"value\": {\"system\": \"Snowflake\", \"database\": \"analytics_wh\", \"table\": \"mart_orders\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the orchestrator as Airflow in the production environment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/runtime\", \"value\": {\"orchestrator\": \"Airflow\", \"environment\": \"production\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use UTC, anchor the cadence at midnight, and don’t apply daylight-saving adjustments."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schedule/timezone\", \"value\": \"UTC\"}, {\"op\": \"add\", \"path\": \"/pipeline/schedule/anchor_time\", \"value\": \"00:00\"}, {\"op\": \"add\", \"path\": \"/pipeline/schedule/daylight_saving_observed\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the Airflow identifier and note that catch-up runs should stay disabled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/runtime/dag_id\", \"value\": \"customer_orders_ingestion_dag\"}, {\"op\": \"add\", \"path\": \"/pipeline/runtime/catchup_enabled\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Please have operational alerts go to the data-platform Slack room under a P1 paging policy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/notifications\", \"value\": {\"slack_channel\": \"#data-platform\", \"severity\": \"P1\", \"paging_policy\": \"orders-ingestion-primary\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the runbook link and the dashboard people should check during incidents."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/operations_links\", \"value\": {\"runbook_url\": \"https://runbooks.example.com/customer-orders-ingestion\", \"dashboard_url\": \"https://grafana.example.com/d/orders-ingestion\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a validation that rejects loads when any order record is missing its identifier."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/quality_checks\", \"value\": [{\"name\": \"order_id_not_null\", \"condition\": \"order_id IS NOT NULL\", \"action\": \"fail_load\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also make sure duplicate order identifiers stop the load rather than letting conflicting rows through."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/quality_checks/-\", \"value\": {\"name\": \"order_id_unique\", \"condition\": \"COUNT(*) = COUNT(DISTINCT order_id)\", \"action\": \"fail_load\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a transformation step that normalizes currency amounts before the records land in the warehouse."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/transformations\", \"value\": [{\"name\": \"normalize_currency_amounts\", \"tool\": \"dbt\", \"status\": \"enabled\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include another enabled cleanup step that standardizes customer email casing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/transformations/-\", \"value\": {\"name\": \"standardize_customer_email_case\", \"tool\": \"dbt\", \"status\": \"enabled\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the incremental loading approach using the order update timestamp and a ten-minute overlap."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/incremental_strategy\", \"value\": {\"mode\": \"watermark\", \"watermark_column\": \"updated_at\", \"lookback_minutes\": 10}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the retry behavior to make three attempts, wait five minutes between them, and avoid exponential backoff."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/retry_policy\", \"value\": {\"max_attempts\": 3, \"delay_minutes\": 5, \"exponential_backoff\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Store the warehouse table partitioned by order date and clustered by customer account for query performance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/storage_layout\", \"value\": {\"partition_by\": \"order_date\", \"cluster_by\": \"customer_id\", \"retention_days\": 730}}]"
+    },
+    {
+      "role": "user",
+      "content": "Limit warehouse write permissions to the engineering service account, while analysts should only be able to read the published table."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/access_control\", \"value\": {\"writer_principal\": \"svc_airflow_orders\", \"reader_group\": \"analytics_readers\", \"pii_access_required\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Classify the data as internal and note that payment card details are not included."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/data_governance\", \"value\": {\"classification\": \"internal\", \"contains_pci\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add lineage notes showing the upstream feed name and the published dataset name consumers recognize."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage\", \"value\": {\"upstream_feed\": \"shopify_orders_cdc\", \"published_dataset\": \"orders_mart\", \"catalog_visible\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the deployment details for the current release branch and image version."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/deployment\", \"value\": {\"git_branch\": \"main\", \"image_tag\": \"orders-ingestion-2024.11.3\", \"release_channel\": \"stable\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add cost tracking for the compute pool, with the monthly budget in dollars and the finance tag."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/cost_tracking\", \"value\": {\"warehouse_size\": \"medium\", \"monthly_budget_usd\": 1200, \"cost_center\": \"FIN-OPS-042\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Track recent maintenance by noting the last review date, who approved it, and the next review date."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/maintenance\", \"value\": {\"last_reviewed_on\": \"2024-11-15\", \"approved_by\": \"Dana Patel\", \"next_review_on\": \"2025-02-15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that historical reloads can go back one year and must be manually approved before they start."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/backfill_policy\", \"value\": {\"max_history_days\": 365, \"requires_approval\": true, \"approval_group\": \"data-governance\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first consumer dependency for the finance team’s revenue reporting job."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/downstream_dependencies\", \"value\": [{\"name\": \"revenue_reporting_job\", \"owner_team\": \"finance analytics\", \"criticality\": \"high\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also list the support team's order status dashboard as a medium-priority consumer."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/downstream_dependencies/-\", \"value\": {\"name\": \"order_status_dashboard\", \"owner_team\": \"customer support\", \"criticality\": \"medium\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add observability settings so each run emits metrics, keeps logs for ninety days, and tags traces with the order ingestion service name."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/observability\", \"value\": {\"metrics_enabled\": true, \"log_retention_days\": 90, \"trace_service\": \"orders-ingestion\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add encryption settings for the warehouse data at rest and in transit, using the managed key for this pipeline."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/encryption\", \"value\": {\"at_rest\": true, \"in_transit\": true, \"kms_key_alias\": \"alias/orders-ingestion\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the incident process with the escalation team, target acknowledgement time, and where postmortems should be filed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/incident_response\", \"value\": {\"escalation_team\": \"data platform on-call\", \"ack_target_minutes\": 10, \"postmortem_folder\": \"ops/postmortems/orders-ingestion\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the service-level reporting details, including the monthly review audience, the scorecard name, and the reporting owner."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/service_reporting\", \"value\": {\"review_cadence\": \"monthly\", \"scorecard\": \"orders_pipeline_health\", \"owner_team\": \"data engineering\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture who to contact for vendor-side source outages, including the partner name, support email, and contract tier."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/vendor_support\", \"value\": {\"partner\": \"Shopify Plus\", \"support_email\": \"plus-support@shopify.example\", \"contract_tier\": \"enterprise\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please also capture who handles audits, where the evidence is stored, and that it should be kept for seven years."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/audit\", \"value\": {\"owner_team\": \"compliance engineering\", \"evidence_repository\": \"s3://company-audit-evidence/orders-ingestion\", \"retention_years\": 7}}]"
+    }
+  ],
+  "edit_instruction": "Change the pipeline’s run cadence to every 45 minutes.",
+  "theme": "Changing the pipeline schedule interval",
+  "conversation_pattern": "Center the artifact on a scheduled pipeline whose run interval determines freshness SLA, retry window, downstream expected refresh time, and stale-data alert threshold by arithmetic rules written explicitly in the artifact (state each formula, e.g. freshness_sla = interval + 15). Around this core, add the realistic, independent details an operations record would carry that do not depend on the schedule interval, and vary their number from sample to sample.",
+  "edit_pattern": "Change the pipeline schedule interval to a different specific interval.",
+  "cascade_pattern": "Editing the interval re-derives the SLA, retry window, downstream refresh expectation, and stale-data alert threshold from the stated formulas. Owners, descriptions, and fields that do not read the interval stay unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "pipeline": {
+      "pipeline_id": "customer_orders_ingestion",
+      "schedule": {
+        "interval_minutes": 30,
+        "timezone": "UTC",
+        "anchor_time": "00:00",
+        "daylight_saving_observed": false
+      },
+      "freshness_sla": {
+        "formula": "freshness_sla_minutes = interval_minutes + 15",
+        "minutes": 45
+      },
+      "retry_window": {
+        "formula": "retry_window_minutes = interval_minutes * 2",
+        "minutes": 60
+      },
+      "downstream_refresh_expectation": {
+        "formula": "downstream_expected_refresh_minutes = interval_minutes + 5",
+        "minutes": 35
+      },
+      "stale_data_alert_threshold": {
+        "formula": "stale_data_alert_threshold_minutes = interval_minutes + 20",
+        "minutes": 50
+      },
+      "description": "Keeps warehouse order tables current for analytics and support teams.",
+      "owners": [
+        {
+          "name": "Dana Patel",
+          "team": "data engineering",
+          "role": "primary"
+        },
+        {
+          "name": "Miguel Santos",
+          "team": "platform operations",
+          "role": "backup"
+        }
+      ],
+      "source": {
+        "system": "Shopify",
+        "database": "orders_prod",
+        "table": "orders"
+      },
+      "destination": {
+        "system": "Snowflake",
+        "database": "analytics_wh",
+        "table": "mart_orders"
+      },
+      "runtime": {
+        "orchestrator": "Airflow",
+        "environment": "production",
+        "dag_id": "customer_orders_ingestion_dag",
+        "catchup_enabled": false
+      },
+      "notifications": {
+        "slack_channel": "#data-platform",
+        "severity": "P1",
+        "paging_policy": "orders-ingestion-primary"
+      },
+      "operations_links": {
+        "runbook_url": "https://runbooks.example.com/customer-orders-ingestion",
+        "dashboard_url": "https://grafana.example.com/d/orders-ingestion"
+      },
+      "quality_checks": [
+        {
+          "name": "order_id_not_null",
+          "condition": "order_id IS NOT NULL",
+          "action": "fail_load"
+        },
+        {
+          "name": "order_id_unique",
+          "condition": "COUNT(*) = COUNT(DISTINCT order_id)",
+          "action": "fail_load"
+        }
+      ],
+      "transformations": [
+        {
+          "name": "normalize_currency_amounts",
+          "tool": "dbt",
+          "status": "enabled"
+        },
+        {
+          "name": "standardize_customer_email_case",
+          "tool": "dbt",
+          "status": "enabled"
+        }
+      ],
+      "incremental_strategy": {
+        "mode": "watermark",
+        "watermark_column": "updated_at",
+        "lookback_minutes": 10
+      },
+      "retry_policy": {
+        "max_attempts": 3,
+        "delay_minutes": 5,
+        "exponential_backoff": false
+      },
+      "storage_layout": {
+        "partition_by": "order_date",
+        "cluster_by": "customer_id",
+        "retention_days": 730
+      },
+      "access_control": {
+        "writer_principal": "svc_airflow_orders",
+        "reader_group": "analytics_readers",
+        "pii_access_required": false
+      },
+      "data_governance": {
+        "classification": "internal",
+        "contains_pci": false
+      },
+      "lineage": {
+        "upstream_feed": "shopify_orders_cdc",
+        "published_dataset": "orders_mart",
+        "catalog_visible": true
+      },
+      "deployment": {
+        "git_branch": "main",
+        "image_tag": "orders-ingestion-2024.11.3",
+        "release_channel": "stable"
+      },
+      "cost_tracking": {
+        "warehouse_size": "medium",
+        "monthly_budget_usd": 1200,
+        "cost_center": "FIN-OPS-042"
+      },
+      "maintenance": {
+        "last_reviewed_on": "2024-11-15",
+        "approved_by": "Dana Patel",
+        "next_review_on": "2025-02-15"
+      },
+      "backfill_policy": {
+        "max_history_days": 365,
+        "requires_approval": true,
+        "approval_group": "data-governance"
+      },
+      "downstream_dependencies": [
+        {
+          "name": "revenue_reporting_job",
+          "owner_team": "finance analytics",
+          "criticality": "high"
+        },
+        {
+          "name": "order_status_dashboard",
+          "owner_team": "customer support",
+          "criticality": "medium"
+        }
+      ],
+      "observability": {
+        "metrics_enabled": true,
+        "log_retention_days": 90,
+        "trace_service": "orders-ingestion"
+      },
+      "encryption": {
+        "at_rest": true,
+        "in_transit": true,
+        "kms_key_alias": "alias/orders-ingestion"
+      },
+      "incident_response": {
+        "escalation_team": "data platform on-call",
+        "ack_target_minutes": 10,
+        "postmortem_folder": "ops/postmortems/orders-ingestion"
+      },
+      "service_reporting": {
+        "review_cadence": "monthly",
+        "scorecard": "orders_pipeline_health",
+        "owner_team": "data engineering"
+      },
+      "vendor_support": {
+        "partner": "Shopify Plus",
+        "support_email": "plus-support@shopify.example",
+        "contract_tier": "enterprise"
+      },
+      "audit": {
+        "owner_team": "compliance engineering",
+        "evidence_repository": "s3://company-audit-evidence/orders-ingestion",
+        "retention_years": 7
+      }
+    }
+  }
+}

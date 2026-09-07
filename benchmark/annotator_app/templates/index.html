@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmark Annotator</title>
+<style>
+  :root, [data-theme="light"] {
+    --bg: #f4f5f7; --panel: #fff; --border: #e2e8f0; --text: #1c2024; --muted: #64748b;
+    --sidebar-bg: #1f2933; --sidebar-text: #cbd5e1; --sidebar-muted: #94a3b8; --sidebar-active: #2d3a47;
+    --code-bg: #f1f5f9; --code-text: #334155;
+    --instruction-bg: #fffbeb; --instruction-border: #fde68a; --instruction-text: #92600e;
+    --tree-key: #7c3aed; --tree-val: #0369a1;
+    --leaf-hover: #eef2ff; --leaf-hover-out: #c7d2fe; --leaf-pick: #dcfce7; --leaf-pick-out: #86efac;
+    --input-border: #cbd5e1; --table-border: #eef2f6;
+    --tag-bg: #e0f2fe; --tag-text: #0369a1; --tag-direct-bg: #fef3c7; --tag-direct-text: #92600e;
+    --primary: #2563eb; --primary-hover: #1d4ed8; --ghost-bg: #f1f5f9; --ghost-text: #475569;
+    --danger: #ef4444; --preview-bg: #0f172a; --preview-text: #e2e8f0;
+  }
+  [data-theme="dark"] {
+    --bg: #0f1419; --panel: #1a2027; --border: #2d3742; --text: #e5e9ef; --muted: #8b98a8;
+    --sidebar-bg: #11161b; --sidebar-text: #cbd5e1; --sidebar-muted: #7a8694; --sidebar-active: #232c35;
+    --code-bg: #232c35; --code-text: #c5cfdb;
+    --instruction-bg: #2a2410; --instruction-border: #5c4d1a; --instruction-text: #fcd34d;
+    --tree-key: #c4b5fd; --tree-val: #7dd3fc;
+    --leaf-hover: #232c35; --leaf-hover-out: #3a4654; --leaf-pick: #14351f; --leaf-pick-out: #2f7d4d;
+    --input-border: #3a4654; --table-border: #2d3742;
+    --tag-bg: #1e3a4f; --tag-text: #7dd3fc; --tag-direct-bg: #3a3410; --tag-direct-text: #fcd34d;
+    --primary: #3b82f6; --primary-hover: #2563eb; --ghost-bg: #232c35; --ghost-text: #c5cfdb;
+    --danger: #f87171; --preview-bg: #0a0e13; --preview-text: #cbd5e1;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+         font-size: 14px; color: var(--text); background: var(--bg); }
+  #app { display: flex; height: 100vh; }
+  #sidebar { width: 280px; background: var(--sidebar-bg); color: var(--sidebar-text); overflow-y: auto; flex-shrink: 0; }
+  #sidebar.collapsed { display: none; }
+  #sidebar-head { display: flex; align-items: center; justify-content: space-between; }
+  #sidebar-head h2 { font-size: 13px; letter-spacing: .03em; padding: 14px 0 6px 16px; margin: 0; color: var(--sidebar-muted); }
+  .sb-head-btns { display: flex; align-items: center; padding-right: 6px; }
+  .sb-btn { background: none; border: none; color: var(--sidebar-muted); cursor: pointer; font-size: 16px; padding: 8px; line-height: 1; }
+  .sb-btn:hover { color: var(--sidebar-text); }
+  .sb-btn svg { display: block; }
+  .sb-expand { position: fixed; top: 12px; left: 12px; z-index: 100; font-size: 17px; line-height: 1;
+    width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--panel); color: var(--text); cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  #progress { padding: 0 16px 10px; font-size: 12px; color: var(--sidebar-muted); }
+  #filters { padding: 2px 16px 6px; border-bottom: 1px solid rgba(127,127,127,.18); margin-bottom: 4px; }
+  .filter-head { font-size: 12px; font-weight: 600; color: var(--sidebar-text); padding: 4px 0 4px; }
+  .filter-title { font-size: 11px; color: var(--sidebar-muted); padding: 5px 0; user-select: none;
+                  display: flex; align-items: center; justify-content: space-between; }
+  .filter-allnone a { cursor: pointer; }
+  .filter-allnone a:hover { color: var(--sidebar-text); text-decoration: underline; }
+  .filter-body { display: flex; flex-wrap: wrap; gap: 3px 12px; padding: 2px 0 6px; }
+  .filter-body label { font-size: 11.5px; color: var(--sidebar-text); display: flex; align-items: center; gap: 4px; cursor: pointer; white-space: nowrap; }
+  .tree-domain { padding: 6px 12px; cursor: pointer; font-size: 12.5px; color: var(--sidebar-text); font-weight: 600; user-select: none; }
+  .tree-sub { padding: 4px 12px 4px 28px; cursor: pointer; font-size: 12px; color: var(--sidebar-text); user-select: none; }
+  .tree-domain:hover, .tree-sub:hover { background: var(--sidebar-active); }
+  .tree-caret { display: inline-block; width: 14px; color: var(--sidebar-muted); }
+  .tree-count { color: var(--sidebar-muted); font-weight: 400; font-size: 11px; }
+  .sample-item { padding: 8px 16px; cursor: pointer; border-left: 3px solid transparent;
+                 white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12.5px; }
+  #sample-tree .sample-item { padding: 6px 12px 6px 42px; }
+  .sample-item:hover { background: var(--sidebar-active); }
+  .sample-item.active { background: var(--sidebar-active); border-left-color: #38bdf8; color: #fff; }
+  .sample-item.annotated { color: #4ade80; }
+  .sample-item.edited { color: #facc15; }
+  .sample-item.excluded { color: #ef4444; }
+  #main { flex: 1; overflow-y: auto; padding: 18px 24px; }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+           padding: 14px 16px; margin-bottom: 16px; }
+  .panel h3 { margin: 0 0 10px; font-size: 13px; letter-spacing: .02em; color: var(--muted); font-weight: 600; }
+  .page-title { font-size: 18px; font-weight: 700; color: var(--text); margin: 4px 0 14px; }
+  .hint { font-size: 12.5px; color: var(--muted); margin: -4px 0 10px; }
+  .warn { font-size: 12.5px; color: #c2410c; background: rgba(234,88,12,.12);
+          border: 1px solid rgba(234,88,12,.35); border-radius: 6px; padding: 6px 10px; margin-bottom: 10px; }
+  .info-table td { border: none; padding: 3px 6px; }
+  .info-table .info-label { color: var(--muted); font-size: 12px; width: 90px; white-space: nowrap; }
+  #sample-info #sample-id { color: var(--text); }
+  #sample-info #topic { color: var(--text); }
+  #sample-info #n-leaves { color: var(--text); }
+  #conversation { max-height: 38vh; overflow-y: auto; }
+  #tree { max-height: 55vh; overflow-y: auto; padding: 2px 2px 2px 4px; }
+  .conv-turn { margin-bottom: 8px; }
+  .conv-role { font-weight: 600; font-size: 11px; color: var(--muted); }
+  .conv-user { color: var(--text); }
+  .conv-asst code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px;
+                    font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--code-text); }
+  #instruction { color: var(--text); }
+  /* tree */
+  ul.tree { list-style: none; margin: 0; padding-left: 16px; }
+  ul.tree.root { padding-left: 0; }
+  .tree li { margin: 1px 0; }
+  .tree-key { color: var(--tree-key); font-family: ui-monospace, Menlo, monospace; }
+  .tree-val { color: var(--tree-val); font-family: ui-monospace, Menlo, monospace; }
+  .tree-branch { padding: 1px 6px; display: inline-block; border-radius: 4px; cursor: pointer; }
+  .tree-branch:hover { background: var(--leaf-hover); outline: 1px solid var(--leaf-hover-out); }
+  .tree-branch.picked { background: var(--leaf-pick); outline: 1px solid var(--leaf-pick-out); }
+  .leaf { cursor: pointer; padding: 1px 6px; border-radius: 4px; display: inline-block; }
+  .leaf:hover { background: var(--leaf-hover); outline: 1px solid var(--leaf-hover-out); }
+  .leaf.picked { background: var(--leaf-pick); outline: 1px solid var(--leaf-pick-out); }
+  /* patch */
+  table { width: 100%; border-collapse: collapse; }
+  #patch-table { table-layout: fixed; }
+  #patch-table td code { overflow-wrap: anywhere; }
+  th, td { text-align: left; padding: 5px 6px; border-bottom: 1px solid var(--table-border); vertical-align: top; }
+  th { font-size: 11px; color: var(--muted); font-weight: 600; }
+  td code { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--code-text); }
+  input[type=text], select, textarea { font: inherit; padding: 4px 6px; border: 1px solid var(--input-border);
+    border-radius: 4px; width: 100%; font-size: 12.5px; background: var(--panel); color: var(--text); }
+  input[type=text], select { height: 30px; }
+  textarea { font-family: ui-monospace, Menlo, monospace; }
+  .tag { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 10px;
+         background: var(--tag-bg); color: var(--tag-text); margin-left: 6px; }
+  .tag.direct { background: var(--tag-direct-bg); color: var(--tag-direct-text); }
+  .btn { font: inherit; border: none; border-radius: 6px; padding: 7px 14px; cursor: pointer; }
+  .btn-primary { background: var(--primary); color: #fff; font-weight: 600; }
+  .btn-primary:hover { background: var(--primary-hover); }
+  .btn-ghost { background: var(--ghost-bg); color: var(--ghost-text); }
+  .btn-x { background: none; color: var(--danger); cursor: pointer; border: none; font-size: 15px; }
+  .row { display: flex; gap: 10px; align-items: center; }
+  .muted { color: var(--muted); }
+  pre.preview { background: var(--preview-bg); color: var(--preview-text); padding: 12px; border-radius: 6px;
+    overflow-x: auto; font-size: 12px; margin: 0; }
+  #toast { position: fixed; bottom: 20px; right: 20px; background: #16a34a; color: #fff;
+    padding: 10px 16px; border-radius: 6px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+  #toast.show { opacity: 1; }
+  #toast.err { background: #dc2626; }
+  .theme-toggle { position: fixed; top: 12px; right: 16px; z-index: 100; font: inherit; font-size: 22px;
+    line-height: 1; width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--panel); color: var(--text); cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  .theme-toggle:hover { border-color: var(--muted); }
+</style>
+</head>
+<body>
+<button id="theme-btn" class="theme-toggle" onclick="toggleTheme()"></button>
+<button id="sb-expand" class="sb-expand" onclick="toggleSidebar()" title="Show samples" style="display:none;">»</button>
+<div id="app">
+  <div id="sidebar">
+    <div id="sidebar-head">
+      <h2>Sample list</h2>
+      <div class="sb-head-btns">
+        <button class="sb-btn" onclick="toggleFilters()" title="Filters"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8.5V21l-4-2.5v-5z" fill="currentColor"/></svg></button>
+        <button class="sb-btn" onclick="toggleSidebar()" title="Collapse sidebar">«</button>
+      </div>
+    </div>
+    <div id="progress"></div>
+    <div id="filters">
+      <div class="filter-head">Filter</div>
+      <div class="filter-title">
+        <span>Domain</span>
+        <span class="filter-allnone"><a onclick="setAllFilter('domain',true)">all</a> / <a onclick="setAllFilter('domain',false)">none</a></span>
+      </div>
+      <div id="filter-domain" class="filter-body"></div>
+      <div class="filter-title">
+        <span>Leaves</span>
+        <span class="filter-allnone"><a onclick="setAllFilter('leaves',true)">all</a> / <a onclick="setAllFilter('leaves',false)">none</a></span>
+      </div>
+      <div id="filter-leaves" class="filter-body"></div>
+      <div class="filter-title">
+        <span>Status</span>
+        <span class="filter-allnone"><a onclick="setAllFilter('status',true)">all</a> / <a onclick="setAllFilter('status',false)">none</a></span>
+      </div>
+      <div id="filter-status" class="filter-body"></div>
+    </div>
+    <div id="sample-tree"></div>
+  </div>
+  <div id="main">
+    <div id="empty" class="muted" style="padding:40px;text-align:center;">← Select a sample to annotate</div>
+    <div id="editor" style="display:none;">
+      <h2 class="page-title">Sample Information</h2>
+      <div class="panel" id="sample-info">
+        <h3>Meta data</h3>
+        <table class="info-table">
+          <tr><td class="info-label">ID</td><td><span id="sample-id"></span></td></tr>
+          <tr><td class="info-label">Topic</td><td><span id="topic"></span></td></tr>
+          <tr><td class="info-label"># Leaves</td><td><span id="n-leaves"></span></td></tr>
+          <tr><td class="info-label">Theme</td><td><span id="sk-theme"></span></td></tr>
+          <tr><td class="info-label">Conversation pattern</td><td><span id="sk-cp"></span></td></tr>
+          <tr><td class="info-label">Edit pattern</td><td><span id="sk-ep"></span></td></tr>
+          <tr><td class="info-label">Cascade pattern</td><td><span id="sk-cup"></span></td></tr>
+          <tr><td class="info-label">Requires master_data</td><td><span id="sk-md"></span></td></tr>
+          <tr id="sk-md-row"><td class="info-label">master_data</td><td><pre id="sk-md-data" style="margin:0; white-space:pre-wrap; font-size:12px;"></pre></td></tr>
+        </table>
+      </div>
+      <div class="panel">
+        <h3>Conversation</h3>
+        <div id="conversation"></div>
+      </div>
+      <div class="panel">
+        <h3>Edit instruction</h3>
+        <div id="instruction"></div>
+      </div>
+      <h2 class="page-title">Annotation Workspace</h2>
+      <div class="panel">
+        <h3>Edit instruction</h3>
+        <div class="hint">overrides the sample's instruction in the saved annotation</div>
+        <textarea id="instruction-edit" rows="2" style="width:100%; box-sizing:border-box; font-family:inherit; padding:8px;"></textarea>
+      </div>
+      <div class="panel">
+        <h3>Generated JSON</h3>
+        <div class="hint">click a value to add it to the patch</div>
+        <div id="tree"></div>
+      </div>
+      <div class="panel">
+        <h3>Expected patch</h3>
+        <div class="hint">matcher relaxes the value check beyond exact match (date_range / regex_match / sum_with / ref_equal = must equal the model value at ref_path, for free identifiers). optional marks the leaf as not required to change. Inside an add value, set a sub-field to the string "&lt;any&gt;" to accept any value there (e.g. an inserted element's free id).</div>
+        <div id="patch-warn" class="warn" style="display:none;"></div>
+        <table id="patch-table">
+          <thead><tr>
+            <th style="width:24px"></th>
+            <th style="width:96px">kind</th>
+            <th style="width:88px">op</th>
+            <th>path</th>
+            <th style="width:120px">matcher</th>
+            <th>expected value</th>
+            <th style="width:64px">optional</th>
+            <th style="width:30px"></th>
+          </tr></thead>
+          <tbody id="patch-body"></tbody>
+        </table>
+        <button class="btn btn-ghost" style="margin-top:8px;" onclick="addManualOp()">+ Add patch</button>
+      </div>
+      <div class="panel">
+        <h3>Expected JSON (preview)</h3>
+        <pre class="preview" id="preview"></pre>
+      </div>
+      <div class="panel">
+        <div class="row" style="margin-bottom:10px;">
+          <label style="width:120px">Annotator</label>
+          <input type="text" id="annotator" placeholder="your name" style="max-width:220px">
+        </div>
+        <div class="row" style="margin-bottom:12px; align-items:flex-start;">
+          <label style="width:120px">Notes</label>
+          <textarea id="notes" rows="2" placeholder="optional"></textarea>
+        </div>
+        <div class="row">
+          <button class="btn btn-primary" onclick="save()">Save annotation</button>
+          <button class="btn btn-ghost" onclick="resetAnn()">Reset</button>
+          <button class="btn btn-ghost" id="btn-exclude" onclick="toggleExclude()" style="display:none;">Exclude from eval</button>
+          <span id="save-status" class="muted"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+let samples = [];
+let sample = null;       // current loaded sample
+// each op: {op, path, value, kind, matcher?, after?, before?, pattern?, partner_path?, expected_sum?, optional?}
+let patch = [];
+// sidebar state
+let domainFilter = new Set();
+let leavesFilter = new Set();
+let statusFilter = new Set();
+const collapsedDomains = new Set();
+const collapsedLeaves = new Set();
+let sidebarCollapsed = false;
+
+// ---------- JSON Pointer (mirror of benchmark/jsonptr.py) ----------
+function escSeg(k){ return String(k).replace(/~/g,'~0').replace(/\//g,'~1'); }
+function splitPtr(p){ if(!p) return []; return p.slice(1).split('/').map(s=>s.replace(/~1/g,'/').replace(/~0/g,'~')); }
+function ptrGet(obj,p){ let c=obj; for(const s of splitPtr(p)){ c = Array.isArray(c)? c[parseInt(s)] : (c?c[s]:undefined); } return c; }
+function ptrSet(obj,p,v){ const segs=splitPtr(p); let c=obj; for(let i=0;i<segs.length-1;i++){ const s=segs[i]; if(Array.isArray(c)) c=c[parseInt(s)]; else { if(!(s in c)) c[s]={}; c=c[s]; } } const last=segs[segs.length-1]; if(Array.isArray(c)) c[parseInt(last)]=v; else c[last]=v; }
+function ptrRemove(obj,p){ const segs=splitPtr(p); let c=obj; for(let i=0;i<segs.length-1;i++){ const s=segs[i]; c=Array.isArray(c)?c[parseInt(s)]:c[s]; } const last=segs[segs.length-1]; if(Array.isArray(c)) c.splice(parseInt(last),1); else delete c[last]; }
+function specPlaceholder(op){
+  const m = op.matcher || 'strict';
+  const opt = op.optional ? '(optional) ' : '';
+  if(m==='date_range'){
+    const a=op.after||'(none)'; const b=op.before||'(none)';
+    return `<${opt}date in (${a}, ${b}]>`;
+  }
+  if(m==='regex_match') return `<${opt}matches /${op.pattern||''}/>`;
+  if(m==='any') return `<${opt}any value>`;
+  if(m==='sum_with') return `<${opt}sums to ${op.expected_sum} across [${(op.paths||[]).join(', ')}]>`;
+  if(m==='ref_equal') return `<${opt}same value as ${op.ref_path||'(ref_path?)'}>`;
+  return null;
+}
+function applyPatch(doc,p){
+  // When multiple ops share the same path, they are OR alternatives. Apply
+  // only the FIRST occurrence per path to derive a canonical preview.
+  // Multi-path constraint ops (e.g. sum_with) expand into one placeholder
+  // per constituent path.
+  const out=JSON.parse(JSON.stringify(doc));
+  const seenPaths=new Set();
+  for(const op of p){
+    try{
+      if(op.paths && op.paths.length){
+        const ph = specPlaceholder(op);
+        for(const pp of op.paths){
+          if(seenPaths.has(pp)) continue;
+          seenPaths.add(pp);
+          ptrSet(out,pp,ph);
+        }
+        continue;
+      }
+      if(seenPaths.has(op.path)) continue;
+      seenPaths.add(op.path);
+      if(op.op==='remove'){ ptrRemove(out,op.path); }
+      else {
+        const m=op.matcher||'strict';
+        // strict ops apply their literal value (a "<any>" sub-field shows as-is);
+        // everything else (ref_equal / regex / date_range / any) shows a spec.
+        if(m==='strict'){ ptrSet(out,op.path, op.value); }
+        else { ptrSet(out,op.path, specPlaceholder(op)); }
+      }
+    }catch(e){}
+  }
+  return out;
+}
+
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function leafCount(obj){
+  if(Array.isArray(obj)) return obj.reduce((a,v)=>a+leafCount(v),0);
+  if(obj && typeof obj==='object') return Object.values(obj).reduce((a,v)=>a+leafCount(v),0);
+  return 1;
+}
+// group/filter by the leaf-count TARGET (so a --leaves N run clusters into
+// one bucket even though actual counts overshoot); fall back to actual for
+// older samples that predate target_leaves.
+function sampleLeaves(s){ return (s.target_leaves != null) ? s.target_leaves : s.n_leaves; }
+
+// ---------- sidebar: filters + grouped tree ----------
+async function loadSamples(){
+  samples = await (await fetch('/api/samples')).json();
+  initFilters();
+  refreshSidebar();
+}
+function addFilterBox(container, which, value, label){
+  const lbl=document.createElement('label');
+  const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=true; cb.dataset.val=String(value);
+  cb.onchange=()=>{ rebuildFilterSet(which); renderSampleTree(); };
+  lbl.appendChild(cb); lbl.appendChild(document.createTextNode(label));
+  container.appendChild(lbl);
+}
+function rebuildFilterSet(which){
+  const vals=[...document.getElementById('filter-'+which).querySelectorAll('input:checked')].map(b=>b.dataset.val);
+  if(which==='domain') domainFilter=new Set(vals);
+  else if(which==='leaves') leavesFilter=new Set(vals.map(Number));
+  else statusFilter=new Set(vals.map(v=>v==='true'));
+}
+function setAllFilter(which, checked){
+  document.getElementById('filter-'+which).querySelectorAll('input[type=checkbox]').forEach(b=>{ b.checked=checked; });
+  rebuildFilterSet(which); renderSampleTree();
+}
+function sampleStatus(s){
+  if(s.excluded) return 'excluded';
+  if(s.review_edited) return 'edited';
+  if(s.annotated) return 'annotated';
+  return 'not_annotated';
+}
+function initFilters(){
+  const domains = [...new Set(samples.map(s=>s.domain))].sort();
+  const leaves = [...new Set(samples.map(sampleLeaves))].sort((a,b)=>a-b);
+  domainFilter = new Set(domains);
+  leavesFilter = new Set(leaves);
+  statusFilter = new Set(['annotated','edited','excluded','not_annotated']);
+  const fd=document.getElementById('filter-domain'); fd.innerHTML='';
+  domains.forEach(d=>addFilterBox(fd,'domain',d,d));
+  const fl=document.getElementById('filter-leaves'); fl.innerHTML='';
+  leaves.forEach(t=>addFilterBox(fl,'leaves',t,t));
+  const fs=document.getElementById('filter-status'); fs.innerHTML='';
+  addFilterBox(fs,'status','annotated','Annotated');
+  addFilterBox(fs,'status','edited','Edited');
+  addFilterBox(fs,'status','excluded','Excluded');
+  addFilterBox(fs,'status','not_annotated','Not annotated');
+}
+function renderProgress(){
+  const done = samples.filter(s=>s.annotated && !s.excluded).length;
+  const exc = samples.filter(s=>s.excluded).length;
+  const total = samples.length;
+  const tail = exc ? ` (${exc} excluded)` : '';
+  document.getElementById('progress').textContent = `${done} / ${total} annotated${tail}`;
+}
+function refreshSidebar(){ renderProgress(); renderSampleTree(); }
+function renderSampleTree(){
+  const el=document.getElementById('sample-tree'); el.innerHTML='';
+  const shown = samples.filter(s=>domainFilter.has(s.domain) && leavesFilter.has(sampleLeaves(s)) && statusFilter.has(sampleStatus(s)));
+  const byDomain={};
+  shown.forEach(s=>{ (byDomain[s.domain] = byDomain[s.domain]||[]).push(s); });
+  Object.keys(byDomain).sort().forEach(domain=>{
+    const dOpen = !collapsedDomains.has(domain);
+    const dHead=document.createElement('div'); dHead.className='tree-domain';
+    dHead.innerHTML=`<span class="tree-caret">${dOpen?'▾':'▸'}</span>${escHtml(domain)} <span class="tree-count">(${byDomain[domain].length})</span>`;
+    dHead.onclick=()=>{ dOpen?collapsedDomains.add(domain):collapsedDomains.delete(domain); renderSampleTree(); };
+    el.appendChild(dHead);
+    if(!dOpen) return;
+    const byLeaves={};
+    byDomain[domain].forEach(s=>{ const k=sampleLeaves(s); (byLeaves[k] = byLeaves[k]||[]).push(s); });
+    Object.keys(byLeaves).map(Number).sort((a,b)=>a-b).forEach(t=>{
+      const key=domain+'::'+t;
+      const tOpen=!collapsedLeaves.has(key);
+      const tHead=document.createElement('div'); tHead.className='tree-sub';
+      tHead.innerHTML=`<span class="tree-caret">${tOpen?'▾':'▸'}</span>${t} leaves <span class="tree-count">(${byLeaves[t].length})</span>`;
+      tHead.onclick=()=>{ tOpen?collapsedLeaves.add(key):collapsedLeaves.delete(key); renderSampleTree(); };
+      el.appendChild(tHead);
+      if(!tOpen) return;
+      byLeaves[t].forEach(s=>{
+        const div=document.createElement('div');
+        const statusCls = s.excluded ? ' excluded' : (s.review_edited ? ' edited' : (s.annotated ? ' annotated' : ''));
+        div.className='sample-item'+(sample&&sample.id===s.id?' active':'')+statusCls;
+        div.onclick=()=>loadSample(s.id);
+        div.innerHTML=escHtml(s.id);
+        el.appendChild(div);
+      });
+    });
+  });
+}
+function toggleFilters(){
+  const f=document.getElementById('filters');
+  f.style.display = (f.style.display==='none') ? 'block' : 'none';
+}
+function toggleSidebar(){
+  sidebarCollapsed = !sidebarCollapsed;
+  document.getElementById('sidebar').classList.toggle('collapsed', sidebarCollapsed);
+  document.getElementById('sb-expand').style.display = sidebarCollapsed ? 'block' : 'none';
+}
+
+// ---------- load one sample ----------
+async function loadSample(id){
+  sample = await (await fetch('/api/sample/'+encodeURIComponent(id))).json();
+  patch = [];
+  // pre-fill from existing annotation
+  if(sample.annotation){
+    patch = (sample.annotation.expected_patch||[]).map((o,i)=>({
+      ...o, kind: o.kind || (i===0 ? 'direct' : 'cascade'),
+    }));
+    // Fold any legacy `value_constraints` onto the matching patch op, or
+    // synthesize an optional placeholder op if the path isn't in the patch.
+    // Also normalize legacy `type` -> `matcher`.
+    (sample.annotation.value_constraints||[]).forEach(vc=>{
+      const matcher = vc.matcher || vc.type || 'date_range';
+      const spec = {matcher, after: vc.after, before: vc.before, pattern: vc.pattern, optional: !!vc.optional};
+      const found = patch.find(o => o.path === vc.path);
+      if(found){
+        Object.assign(found, spec);
+      } else {
+        patch.push({op:'replace', path:vc.path, value:null, kind:'cascade', ...spec, _manual:true});
+      }
+    });
+    document.getElementById('notes').value = sample.annotation.annotation_notes||'';
+  } else {
+    document.getElementById('notes').value = '';
+  }
+  document.getElementById('empty').style.display='none';
+  document.getElementById('editor').style.display='block';
+  document.getElementById('save-status').textContent='';
+  refreshExcludeButton();
+  refreshSidebar();
+  renderConversation();
+  // Top "Sample Information" box: always shows the ORIGINAL instruction from the sample file.
+  document.getElementById('instruction').textContent = sample.edit_instruction;
+  // Workspace box: shows the annotated instruction if it was previously saved,
+  // otherwise pre-fills with the original. Editing here overrides on save.
+  document.getElementById('instruction-edit').value =
+    (sample.annotation && sample.annotation.edit_instruction) || sample.edit_instruction || '';
+  document.getElementById('sample-id').textContent = sample.id;
+  document.getElementById('topic').textContent = sample.domain;
+  const actualLeaves = leafCount(sample.current_json);
+  document.getElementById('n-leaves').textContent =
+    (sample.target_leaves != null) ? `target=${sample.target_leaves}, actual=${actualLeaves}` : `actual=${actualLeaves}`;
+  const sk = sample.skeleton || {};
+  document.getElementById('sk-theme').textContent = sample.theme || '—';
+  document.getElementById('sk-cp').textContent = sk.conversation_pattern || '—';
+  document.getElementById('sk-ep').textContent = sk.edit_pattern || '—';
+  document.getElementById('sk-cup').textContent = sk.cascade_pattern || '—';
+  document.getElementById('sk-md').textContent =
+    (sk.requires_master_data === undefined) ? '—' : String(sk.requires_master_data);
+  // master_data: show at the bottom of Meta data only when the skeleton needs it
+  const mdRow = document.getElementById('sk-md-row');
+  if (sk.requires_master_data && sample.master_data) {
+    document.getElementById('sk-md-data').textContent = JSON.stringify(sample.master_data, null, 2);
+    mdRow.style.display = '';
+  } else {
+    mdRow.style.display = 'none';
+  }
+  render();
+}
+
+function renderConversation(){
+  const el = document.getElementById('conversation');
+  el.innerHTML = '';
+  for(const m of sample.conversation){
+    const d = document.createElement('div'); d.className='conv-turn';
+    if(m.role==='user'){
+      d.innerHTML = `<span class="conv-role">user</span> <span class="conv-user">${escHtml(m.content)}</span>`;
+    } else {
+      d.className += ' conv-asst';
+      d.innerHTML = `<span class="conv-role">assistant</span> <code>${escHtml(m.content)}</code>`;
+    }
+    el.appendChild(d);
+  }
+}
+
+// ---------- tree ----------
+function renderTree(){
+  const root = document.getElementById('tree');
+  root.innerHTML='';
+  _origTargets = computeOrigTargets();
+  const ul = document.createElement('ul'); ul.className='tree root';
+  buildTree(sample.current_json, '', ul);
+  root.appendChild(ul);
+}
+// A node is "picked" when a patch op targets it OR an ancestor container of
+// it. So `remove /courses/1` (or an object-valued replace/add at /courses/1)
+// highlights the whole element AND its children, while a leaf op like
+// /courses/1/credits highlights only that leaf (a descendant op never lights
+// up its parent). Empty op paths (a half-typed manual op) match nothing.
+// Op paths are written in the SEQUENTIALLY-APPLIED coordinate system (RFC 6902:
+// after `remove /tasks/2`, later ops address the post-remove indices). The tree
+// shows the ORIGINAL document, so we map each op path back to its original-index
+// path before highlighting — otherwise an array remove/insert shifts the indices
+// and the highlight lands on the wrong elements (e.g. the last task looks
+// untouched). `_origTargets` is recomputed from `patch` on every renderTree().
+let _origTargets = [];
+function _ensureProv(prov, parent){
+  if(!(parent in prov)){
+    const arr = ptrGet(sample.current_json, parent);
+    prov[parent] = Array.isArray(arr) ? arr.map((_, i) => i) : null;
+  }
+  return prov[parent];
+}
+// Translate a current-coordinate path to the original-coordinate path using the
+// per-array provenance (original index currently sitting at each position).
+// Returns null when the path points at an inserted element with no original.
+function _remapToOriginal(pp, prov){
+  const segs = pp.split('/');
+  let out = '';
+  for(let i = 1; i < segs.length; i++){
+    const seg = segs[i];
+    const parent = segs.slice(0, i).join('/');
+    if(/^\d+$/.test(seg)){
+      const p = _ensureProv(prov, parent);
+      if(p){
+        const orig = p[parseInt(seg, 10)];
+        if(orig === null || orig === undefined) return null;  // inserted element
+        out += '/' + orig;
+        continue;
+      }
+    }
+    out += '/' + seg;
+  }
+  return out;
+}
+// Apply a structural (add/remove) op to the provenance so later ops remap right.
+function _applyStructural(o, prov){
+  const m = (o.path || '').match(/^(.*)\/(\d+|-)$/);
+  if(!m) return;
+  const parent = m[1];
+  const p = _ensureProv(prov, parent);
+  if(!p) return;
+  if(o.op === 'remove'){
+    const idx = m[2] === '-' ? p.length - 1 : parseInt(m[2], 10);
+    if(idx >= 0 && idx < p.length) p.splice(idx, 1);
+  } else if(o.op === 'add'){
+    const idx = m[2] === '-' ? p.length : parseInt(m[2], 10);
+    p.splice(idx, 0, null);  // inserted element: no original counterpart
+  }
+}
+function computeOrigTargets(){
+  const prov = {};
+  const out = [];
+  for(const o of patch){
+    // `add` inserts a NEW element/key with no counterpart in the original
+    // document, so there is nothing in the displayed tree to highlight for it.
+    // (`remove` is kept: the element being removed DOES exist in the original.)
+    if(o.op !== 'add'){
+      const cands = (o.paths && o.paths.length) ? o.paths : [o.path];
+      for(const pp of cands){
+        if(!pp) continue;
+        const mapped = _remapToOriginal(pp, prov);
+        if(mapped !== null) out.push(mapped);
+      }
+    }
+    if(o.op === 'remove' || o.op === 'add') _applyStructural(o, prov);
+  }
+  return out;
+}
+// A node is "picked" when a (remapped) op target equals it OR is an ancestor
+// container of it — so a remove/object-replace lights the whole element AND its
+// children, while a leaf op lights only that leaf.
+function isPicked(path){
+  return _origTargets.some(pp => pp === path || path.startsWith(pp + '/'));
+}
+function buildTree(obj, prefix, ul){
+  const entries = Array.isArray(obj) ? obj.map((v,i)=>[i,v]) : Object.entries(obj);
+  for(const [k,v] of entries){
+    const li=document.createElement('li');
+    const path = prefix + '/' + escSeg(k);
+    if(v && typeof v==='object'){
+      const lbl=document.createElement('span');
+      lbl.className='tree-branch' + (isPicked(path)?' picked':'');
+      lbl.dataset.path=path; lbl.title=path;
+      lbl.innerHTML = `<span class="tree-key">${escHtml(k)}</span> ${Array.isArray(v)?'[…]':'{…}'}`;
+      lbl.onclick = ()=>onLeafClick(path);
+      li.appendChild(lbl);
+      const sub=document.createElement('ul'); sub.className='tree';
+      buildTree(v, path, sub);
+      li.appendChild(sub);
+    } else {
+      const leaf=document.createElement('span');
+      const picked = isPicked(path);
+      leaf.className='leaf' + (picked?' picked':'');
+      leaf.dataset.path=path; leaf.title=path;
+      leaf.innerHTML = `<span class="tree-key">${escHtml(k)}</span>: <span class="tree-val">${escHtml(JSON.stringify(v))}</span>`;
+      leaf.onclick = ()=>onLeafClick(path);
+      li.appendChild(leaf);
+    }
+    ul.appendChild(li);
+  }
+}
+function onLeafClick(path){
+  // re-click toggles a clicked (non-manual) op off
+  const existing = patch.findIndex(o=>o.path===path && !o._manual);
+  if(existing>=0){ patch.splice(existing, 1); render(); return; }
+  const cur = ptrGet(sample.current_json, path);
+  const kind = patch.some(o=>o.kind==='direct') ? 'cascade' : 'direct';
+  patch.push({op:'replace', path, value: cur, kind});
+  render();
+}
+function addManualOp(){
+  // a manually-added op for a key NOT present in current_json (op=add)
+  const kind = patch.some(o=>o.kind==='direct') ? 'cascade' : 'direct';
+  patch.push({op:'add', path:'', value:'', kind, _manual:true});
+  render();
+}
+
+// ---------- patch + preview ----------
+function render(){
+  renderTree();
+  renderPatch();
+  renderPreview();
+}
+// drag-to-reorder state: index of the row currently being dragged
+let dragIdx = null;
+function renderPatch(){
+  const body=document.getElementById('patch-body'); body.innerHTML='';
+  // warn on more than one direct edit at DIFFERENT paths. Multiple direct
+  // ops sharing the same path are OR alternatives for the same direct edit,
+  // so they're fine.
+  const directPaths = new Set(patch.filter(o=>o.kind==='direct').map(o=>o.path));
+  const warn = document.getElementById('patch-warn');
+  if(directPaths.size >= 2){ warn.style.display='block';
+    warn.textContent='⚠ More than one path is marked "direct" — exactly one direct edit is expected (OR alternatives at the same path are OK).'; }
+  else { warn.style.display='none'; }
+  patch.forEach((op,i)=>{
+    const tr=document.createElement('tr');
+    // drag-to-reorder: the row is only draggable while the user is pressing
+    // on the leftmost handle cell. This prevents accidental drags when
+    // interacting with the dropdowns/inputs in other cells.
+    tr.dataset.idx = String(i);
+    const tdH=document.createElement('td');
+    tdH.title = 'Drag to reorder';
+    tdH.style.cssText = 'cursor: grab; user-select: none; vertical-align: middle; padding: 0;';
+    const tdHInner = document.createElement('div');
+    tdHInner.textContent = '⋮⋮';
+    tdHInner.style.cssText = 'display: flex; align-items: center; justify-content: center; height: 100%; color: #888; font-weight: bold;';
+    tdH.appendChild(tdHInner);
+    tdH.addEventListener('mousedown', ()=>{ tr.draggable = true; });
+    // Disarm after the drag completes OR if the user releases without dragging.
+    tdH.addEventListener('mouseup',   ()=>{ tr.draggable = false; });
+    tr.addEventListener('dragstart', (e)=>{
+      if(!tr.draggable) return;
+      dragIdx = i;
+      tr.style.opacity = '0.4';
+      tdH.style.cursor = 'grabbing';
+      e.dataTransfer.effectAllowed = 'move';
+      try{ e.dataTransfer.setData('text/plain', String(i)); }catch(err){}
+    });
+    tr.addEventListener('dragend', ()=>{
+      tr.style.opacity = '';
+      tdH.style.cursor = 'grab';
+      tr.draggable = false;
+      dragIdx = null;
+    });
+    tr.addEventListener('dragover', (e)=>{
+      if(dragIdx === null) return;
+      e.preventDefault(); e.dataTransfer.dropEffect = 'move';
+      tr.style.borderTop = '2px solid var(--instruction-border)';
+    });
+    tr.addEventListener('dragleave', ()=>{ tr.style.borderTop = ''; });
+    tr.addEventListener('drop', (e)=>{
+      e.preventDefault();
+      tr.style.borderTop = '';
+      const src = dragIdx;
+      if(src === null || src === i) return;
+      const [moved] = patch.splice(src, 1);
+      patch.splice(i, 0, moved);
+      dragIdx = null;
+      render();
+    });
+    tr.appendChild(tdH);
+    // type (direct / cascade)
+    const tdT=document.createElement('td');
+    const kindSel=document.createElement('select');
+    ['direct','cascade'].forEach(k=>{ const o=document.createElement('option'); o.value=k; o.textContent=k; if(k===op.kind)o.selected=true; kindSel.appendChild(o); });
+    kindSel.onchange=()=>{ op.kind=kindSel.value; renderPatch(); };
+    tdT.appendChild(kindSel); tr.appendChild(tdT);
+    // op — clicked rows default to replace/remove; manual rows can also add.
+    // Always keep the op's CURRENT value selectable (e.g. a loaded `add` op for
+    // an array append), so loading an annotation never silently drops its op.
+    const tdO=document.createElement('td');
+    const opSel=document.createElement('select');
+    const opBase = op._manual ? ['add','replace','remove'] : ['replace','remove'];
+    const opOpts = opBase.includes(op.op) ? opBase : [op.op, ...opBase];
+    opOpts.forEach(o=>{
+      const opt=document.createElement('option'); opt.value=o; opt.textContent=o; if(o===op.op)opt.selected=true; opSel.appendChild(opt); });
+    opSel.onchange=()=>{ op.op=opSel.value; render(); };
+    tdO.appendChild(opSel); tr.appendChild(tdO);
+    // path — for sum_with, a comma-separated `paths` input lives here.
+    // Otherwise, an editable text input (allows tweaking even rows that
+    // were originally added by clicking a leaf in the tree).
+    const tdP=document.createElement('td');
+    if(op.matcher === 'sum_with'){
+      const pin=document.createElement('input'); pin.type='text';
+      pin.value=(op.paths||[]).join(', ');
+      pin.placeholder='/path/a, /path/b (comma-separated)';
+      pin.style.width='100%'; pin.style.fontFamily='monospace';
+      pin.oninput=()=>{
+        const arr = pin.value.split(',').map(s=>s.trim()).filter(s=>s.length>0);
+        op.paths = arr.length ? arr : null;
+        renderTree(); renderPreview();
+      };
+      tdP.appendChild(pin);
+    } else {
+      const pin=document.createElement('input'); pin.type='text';
+      pin.value=op.path||'';
+      pin.placeholder=op._manual ? '/new_key' : '/path';
+      pin.style.width='100%'; pin.style.fontFamily='monospace';
+      pin.oninput=()=>{ op.path=pin.value; renderTree(); renderPreview(); };
+      tdP.appendChild(pin);
+    }
+    tr.appendChild(tdP);
+    // matcher dropdown (strict / date_range / regex_match / any)
+    const tdM=document.createElement('td');
+    const mSel=document.createElement('select');
+    const curMatcher = op.matcher || 'strict';  // legacy null -> strict
+    [{v:'strict', l:'strict'},{v:'date_range', l:'date_range'},{v:'regex_match', l:'regex_match'},{v:'any', l:'any'},{v:'sum_with', l:'sum_with'},{v:'ref_equal', l:'ref_equal'}].forEach(({v,l})=>{
+      const o=document.createElement('option'); o.value=v; o.textContent=l; if(v===curMatcher)o.selected=true; mSel.appendChild(o);
+    });
+    mSel.onchange=()=>{ op.matcher=mSel.value; renderPatch(); };
+    tdM.appendChild(mSel); tr.appendChild(tdM);
+    // merged value-or-spec cell (matcher-aware)
+    const tdSpec=document.createElement('td');
+    if(op.op==='remove'){
+      tdSpec.innerHTML='<span class="muted">—</span>';
+    } else if(curMatcher==='strict'){
+      // editable JSON value. A sub-field set to the string "<any>" is scored as
+      // a free field (any value accepted) — e.g. an inserted element's id.
+      const inp=document.createElement('input'); inp.type='text'; inp.value=JSON.stringify(op.value);
+      inp.style.width='100%';
+      inp.oninput=()=>{ try{ op.value=JSON.parse(inp.value); inp.style.borderColor=''; }catch(e){ op.value=inp.value; inp.style.borderColor='#f59e0b'; } renderPreview(); };
+      tdSpec.appendChild(inp);
+    } else if(curMatcher==='date_range'){
+      const wrap=document.createElement('div'); wrap.style.display='flex'; wrap.style.gap='6px';
+      const afterIn=document.createElement('input'); afterIn.type='text'; afterIn.value=op.after||''; afterIn.placeholder='after (YYYY-MM-DD)';
+      afterIn.style.flex='1';
+      afterIn.oninput=()=>{ op.after=afterIn.value||null; renderPreview(); };
+      const beforeIn=document.createElement('input'); beforeIn.type='text'; beforeIn.value=op.before||''; beforeIn.placeholder='before (YYYY-MM-DD)';
+      beforeIn.style.flex='1';
+      beforeIn.oninput=()=>{ op.before=beforeIn.value||null; renderPreview(); };
+      wrap.appendChild(afterIn); wrap.appendChild(beforeIn);
+      tdSpec.appendChild(wrap);
+    } else if(curMatcher==='regex_match'){
+      const patIn=document.createElement('input'); patIn.type='text'; patIn.value=op.pattern||''; patIn.placeholder='Python regex (re.search semantics)';
+      patIn.style.width='100%'; patIn.style.fontFamily='monospace';
+      patIn.oninput=()=>{ op.pattern=patIn.value||null; renderPreview(); };
+      tdSpec.appendChild(patIn);
+    } else if(curMatcher==='any'){
+      const inp=document.createElement('input'); inp.type='text';
+      inp.value=''; inp.placeholder='— (any value)';
+      inp.disabled=true;
+      inp.style.cssText='width:100%; background:#e5e7eb; color:#9ca3af; cursor:not-allowed;';
+      tdSpec.appendChild(inp);
+    } else if(curMatcher==='sum_with'){
+      const sumIn=document.createElement('input'); sumIn.type='text';
+      sumIn.value=(op.expected_sum!=null?String(op.expected_sum):'');
+      sumIn.placeholder='expected_sum';
+      sumIn.style.width='100%';
+      sumIn.oninput=()=>{
+        const raw = sumIn.value.trim();
+        if(raw === ''){ op.expected_sum = null; sumIn.style.borderColor=''; }
+        else {
+          const n = Number(raw);
+          if(Number.isFinite(n)){ op.expected_sum = n; sumIn.style.borderColor=''; }
+          else { op.expected_sum = null; sumIn.style.borderColor='#f59e0b'; }
+        }
+        renderPreview();
+      };
+      tdSpec.appendChild(sumIn);
+    } else if(curMatcher==='ref_equal'){
+      // referential matcher: this leaf must equal the model's value at ref_path
+      // (e.g. an inserted task's free id). Only the ref_path is needed.
+      const refIn=document.createElement('input'); refIn.type='text'; refIn.value=op.ref_path||'';
+      refIn.placeholder='ref_path — must equal model value here (e.g. /tasks/3/id)';
+      refIn.style.width='100%'; refIn.style.fontFamily='monospace';
+      refIn.oninput=()=>{ op.ref_path=refIn.value||null; renderPreview(); };
+      tdSpec.appendChild(refIn);
+    }
+    tr.appendChild(tdSpec);
+    // optional checkbox (vertically centered via inner flex div)
+    const tdOpt=document.createElement('td');
+    tdOpt.style.cssText='vertical-align: middle; padding: 0;';
+    const optInner=document.createElement('div');
+    optInner.style.cssText='display: flex; align-items: center; justify-content: center; height: 100%;';
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=!!op.optional;
+    cb.onchange=()=>{ op.optional=cb.checked; renderPreview(); };
+    optInner.appendChild(cb); tdOpt.appendChild(optInner); tr.appendChild(tdOpt);
+    // remove row (trash icon, vertically centered)
+    const tdX=document.createElement('td');
+    tdX.style.cssText='vertical-align: middle; padding: 0;';
+    const xInner=document.createElement('div');
+    xInner.style.cssText='display: flex; align-items: center; justify-content: center; height: 100%;';
+    const x=document.createElement('button'); x.className='btn-x';
+    x.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>';
+    x.title='Delete row';
+    x.onclick=()=>{ patch.splice(i,1); render(); };
+    xInner.appendChild(x); tdX.appendChild(xInner); tr.appendChild(tdX);
+    body.appendChild(tr);
+  });
+}
+function renderPreview(){
+  const out = applyPatch(sample.current_json, patch);
+  document.getElementById('preview').textContent = JSON.stringify(out, null, 2);
+}
+
+// ---------- save ----------
+function resetAnn(){ patch=[]; document.getElementById('notes').value=''; render(); }
+async function save(){
+  const annotator = document.getElementById('annotator').value.trim();
+  localStorage.setItem('annotator', annotator);
+  const body = {
+    id: sample.id,
+    expected_patch: patch.map(o => {
+      const out = { op: o.op, kind: o.kind };
+      // Multi-path constraint ops (sum_with): emit `paths`, omit singular path.
+      // Single-path ops: emit `path`.
+      if(o.matcher === 'sum_with' && o.paths && o.paths.length){
+        // path omitted
+      } else if(o.path){
+        out.path = o.path;
+      }
+      if(o.op !== 'remove' && o.matcher !== 'sum_with') out.value = o.value;
+      // omit `matcher: strict` since it's the default; serialize the others.
+      if(o.matcher && o.matcher !== 'strict'){
+        out.matcher = o.matcher;
+        if(o.matcher === 'date_range'){
+          if(o.after) out.after = o.after;
+          if(o.before) out.before = o.before;
+        } else if(o.matcher === 'regex_match'){
+          if(o.pattern) out.pattern = o.pattern;
+        } else if(o.matcher === 'sum_with'){
+          if(o.paths && o.paths.length) out.paths = o.paths;
+          if(o.expected_sum != null) out.expected_sum = o.expected_sum;
+        } else if(o.matcher === 'ref_equal'){
+          if(o.ref_path) out.ref_path = o.ref_path;
+        }
+        // matcher === 'any' has no params
+      }
+      if(o.optional) out.optional = true;
+      return out;
+    }),
+    edit_instruction: document.getElementById('instruction-edit').value,
+    annotator,
+    annotation_notes: document.getElementById('notes').value,
+  };
+  const res = await fetch('/api/annotate', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+  const data = await res.json();
+  if(data.ok){
+    toast('Saved ✓');
+    const s = samples.find(x=>x.id===sample.id); if(s) s.annotated=true;
+    if(!sample.annotation) sample.annotation = {};
+    sample.annotation.excluded = !!(s && s.excluded);
+    refreshExcludeButton();
+    refreshSidebar();
+    gotoNextUnannotated();
+  } else {
+    toast('Error: '+(data.error||'unknown'), true);
+  }
+}
+function gotoNextUnannotated(){
+  const next = samples.find(s=>!s.annotated);
+  if(next) loadSample(next.id);
+  else document.getElementById('save-status').textContent = 'All samples annotated 🎉';
+}
+function refreshExcludeButton(){
+  const btn = document.getElementById('btn-exclude');
+  if(!sample || !sample.annotation){ btn.style.display='none'; return; }
+  const isExcluded = !!sample.annotation.excluded;
+  btn.style.display = 'inline-block';
+  btn.textContent = isExcluded ? 'Include in eval' : 'Exclude from eval';
+}
+async function toggleExclude(){
+  if(!sample || !sample.annotation){
+    toast('Save the annotation first before excluding.', true); return;
+  }
+  const next = !sample.annotation.excluded;
+  const res = await fetch('/api/exclude', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({id: sample.id, excluded: next})});
+  const data = await res.json();
+  if(data.ok){
+    sample.annotation.excluded = data.excluded;
+    const s = samples.find(x=>x.id===sample.id); if(s) s.excluded = data.excluded;
+    refreshExcludeButton();
+    refreshSidebar();
+    toast(next ? 'Marked excluded' : 'Included again');
+  } else {
+    toast('Error: '+(data.error||'unknown'), true);
+  }
+}
+function toast(msg, err){
+  const t=document.getElementById('toast'); t.textContent=msg; t.className='show'+(err?' err':'');
+  setTimeout(()=>{ t.className=''; }, 1800);
+}
+
+// ---------- theme ----------
+function setTheme(t){
+  document.documentElement.dataset.theme = t;
+  localStorage.setItem('theme', t);
+  document.getElementById('theme-btn').textContent = (t === 'dark') ? '☀' : '☾';
+}
+function toggleTheme(){
+  setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+}
+
+// ---------- init ----------
+setTheme(localStorage.getItem('theme') || 'light');
+document.getElementById('annotator').value = localStorage.getItem('annotator')||'';
+loadSamples();
+</script>
+</body>
+</html>

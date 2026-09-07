@@ -1,0 +1,368 @@
+{
+  "id": "course_plan_L50_03",
+  "domain": "course_plan",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start this course plan for Fall 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/term\", \"value\": \"Fall 2026\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the plan aim for a 30-credit semester load requirement."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/creditRequirement\", \"value\": 30}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Calculus I on the plan for 4 credits."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses\", \"value\": [{\"code\": \"MATH 151\", \"title\": \"Calculus I\", \"credits\": 4}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Introductory Biology with its 4 credits too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"code\": \"BIOL 110\", \"title\": \"Introductory Biology\", \"credits\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include English Composition as a 3-credit class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"code\": \"ENGL 101\", \"title\": \"English Composition\", \"credits\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add General Psychology for 3 credits."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"code\": \"PSYC 101\", \"title\": \"General Psychology\", \"credits\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Chemistry I with Lab on there as a 4-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"code\": \"CHEM 121\", \"title\": \"Chemistry I with Lab\", \"credits\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include World History as a 3-credit class as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"code\": \"HIST 102\", \"title\": \"World History\", \"credits\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Public Speaking for 3 credits."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"code\": \"COMM 120\", \"title\": \"Public Speaking\", \"credits\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Environmental Science as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"code\": \"ENVS 105\", \"title\": \"Environmental Science\", \"credits\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now tally where the plan stands against the 30-credit target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/creditSummary\", \"value\": {\"totalCredits\": 27, \"creditsRemaining\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the academic advisor's basic contact details so the student knows who to check in with."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisor\", \"value\": {\"name\": \"Dr. Lena Morales\", \"department\": \"First-Year Advising\", \"email\": \"lena.morales@college.edu\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the campus and overall format for the plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/delivery\", \"value\": {\"campus\": \"North Campus\", \"format\": \"In person\", \"primarySchedule\": \"Weekdays\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the registration timing so the student knows when to handle enrollment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/registration\", \"value\": {\"opens\": \"2026-04-06\", \"priorityDeadline\": \"2026-05-15\", \"addDropDeadline\": \"2026-09-04\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a few planning preferences for how the student wants the semester arranged."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/preferences\", \"value\": {\"avoidEarlyMornings\": true, \"preferredStartTime\": \"10:00\", \"maxConsecutiveClasses\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short note about support resources the student plans to use during the semester."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supportResources\", \"value\": [{\"name\": \"Math Learning Center\", \"purpose\": \"Calculus tutoring\", \"frequency\": \"Weekly\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include one more regular support option, this time for writing help."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supportResources/-\", \"value\": {\"name\": \"Writing Center\", \"purpose\": \"Essay drafting support\", \"frequency\": \"Biweekly\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish it with the advising review appointment details."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisingReview\", \"value\": {\"date\": \"2026-08-12\", \"time\": \"14:00\", \"location\": \"Student Success Center 214\", \"status\": \"Scheduled\"}}]"
+    }
+  ],
+  "edit_instruction": "Please add Introduction to Sociology (SOC 101) as a 3-credit course to the plan.",
+  "theme": "Adding a course",
+  "master_data": null,
+  "current_json": {
+    "term": "Fall 2026",
+    "creditRequirement": 30,
+    "courses": [
+      {
+        "code": "MATH 151",
+        "title": "Calculus I",
+        "credits": 4
+      },
+      {
+        "code": "BIOL 110",
+        "title": "Introductory Biology",
+        "credits": 4
+      },
+      {
+        "code": "ENGL 101",
+        "title": "English Composition",
+        "credits": 3
+      },
+      {
+        "code": "PSYC 101",
+        "title": "General Psychology",
+        "credits": 3
+      },
+      {
+        "code": "CHEM 121",
+        "title": "Chemistry I with Lab",
+        "credits": 4
+      },
+      {
+        "code": "HIST 102",
+        "title": "World History",
+        "credits": 3
+      },
+      {
+        "code": "COMM 120",
+        "title": "Public Speaking",
+        "credits": 3
+      },
+      {
+        "code": "ENVS 105",
+        "title": "Environmental Science",
+        "credits": 3
+      }
+    ],
+    "creditSummary": {
+      "totalCredits": 27,
+      "creditsRemaining": 3
+    },
+    "advisor": {
+      "name": "Dr. Lena Morales",
+      "department": "First-Year Advising",
+      "email": "lena.morales@college.edu"
+    },
+    "delivery": {
+      "campus": "North Campus",
+      "format": "In person",
+      "primarySchedule": "Weekdays"
+    },
+    "registration": {
+      "opens": "2026-04-06",
+      "priorityDeadline": "2026-05-15",
+      "addDropDeadline": "2026-09-04"
+    },
+    "preferences": {
+      "avoidEarlyMornings": true,
+      "preferredStartTime": "10:00",
+      "maxConsecutiveClasses": 3
+    },
+    "supportResources": [
+      {
+        "name": "Math Learning Center",
+        "purpose": "Calculus tutoring",
+        "frequency": "Weekly"
+      },
+      {
+        "name": "Writing Center",
+        "purpose": "Essay drafting support",
+        "frequency": "Biweekly"
+      }
+    ],
+    "advisingReview": {
+      "date": "2026-08-12",
+      "time": "14:00",
+      "location": "Student Success Center 214",
+      "status": "Scheduled"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "add",
+      "path": "/courses/-",
+      "kind": "direct",
+      "value": {
+        "code": "SOC 101",
+        "title": "Introduction to Sociology",
+        "credits": 3
+      }
+    },
+    {
+      "op": "replace",
+      "path": "/creditSummary/totalCredits",
+      "kind": "cascade",
+      "value": 30
+    },
+    {
+      "op": "replace",
+      "path": "/creditSummary/creditsRemaining",
+      "kind": "cascade",
+      "value": 0
+    }
+  ],
+  "expected_json": {
+    "term": "Fall 2026",
+    "creditRequirement": 30,
+    "courses": [
+      {
+        "code": "MATH 151",
+        "title": "Calculus I",
+        "credits": 4
+      },
+      {
+        "code": "BIOL 110",
+        "title": "Introductory Biology",
+        "credits": 4
+      },
+      {
+        "code": "ENGL 101",
+        "title": "English Composition",
+        "credits": 3
+      },
+      {
+        "code": "PSYC 101",
+        "title": "General Psychology",
+        "credits": 3
+      },
+      {
+        "code": "CHEM 121",
+        "title": "Chemistry I with Lab",
+        "credits": 4
+      },
+      {
+        "code": "HIST 102",
+        "title": "World History",
+        "credits": 3
+      },
+      {
+        "code": "COMM 120",
+        "title": "Public Speaking",
+        "credits": 3
+      },
+      {
+        "code": "ENVS 105",
+        "title": "Environmental Science",
+        "credits": 3
+      },
+      {
+        "code": "SOC 101",
+        "title": "Introduction to Sociology",
+        "credits": 3
+      }
+    ],
+    "creditSummary": {
+      "totalCredits": 30,
+      "creditsRemaining": 0
+    },
+    "advisor": {
+      "name": "Dr. Lena Morales",
+      "department": "First-Year Advising",
+      "email": "lena.morales@college.edu"
+    },
+    "delivery": {
+      "campus": "North Campus",
+      "format": "In person",
+      "primarySchedule": "Weekdays"
+    },
+    "registration": {
+      "opens": "2026-04-06",
+      "priorityDeadline": "2026-05-15",
+      "addDropDeadline": "2026-09-04"
+    },
+    "preferences": {
+      "avoidEarlyMornings": true,
+      "preferredStartTime": "10:00",
+      "maxConsecutiveClasses": 3
+    },
+    "supportResources": [
+      {
+        "name": "Math Learning Center",
+        "purpose": "Calculus tutoring",
+        "frequency": "Weekly"
+      },
+      {
+        "name": "Writing Center",
+        "purpose": "Essay drafting support",
+        "frequency": "Biweekly"
+      }
+    ],
+    "advisingReview": {
+      "date": "2026-08-12",
+      "time": "14:00",
+      "location": "Student Success Center 214",
+      "status": "Scheduled"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Add Introduction to Sociology (SOC 101, 3 credits) to the course list. creditSummary.totalCredits 27 -> 30; creditsRemaining = requirement 30 - 30 = 0. Existing courses, creditRequirement, and descriptive fields stay.",
+  "conversation_pattern": "Center the artifact on a course list where each course carries credit hours, with a running credit total and a remaining-to-requirement derived from those credits against a stated requirement, so the credits determine them. Around this core, add the realistic, independent details a course plan would carry that do not depend on the credit total, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Add one specific course, with its credit hours, to the plan.",
+  "cascade_pattern": "Adding the course raises the credit total by its credit hours and lowers the remaining-to-requirement by the same amount. Other courses and the requirement stay. This is determined because the added course's credit hours are given with the edit.",
+  "requires_master_data": false
+}

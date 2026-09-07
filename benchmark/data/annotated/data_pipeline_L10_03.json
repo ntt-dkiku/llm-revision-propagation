@@ -1,0 +1,159 @@
+{
+  "id": "data_pipeline_L10_03",
+  "domain": "data_pipeline",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Can you start a runbook for the daily revenue mart pipeline and call the job revenue_mart_daily?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline\", \"value\": {\"dag_id\": \"revenue_mart_daily\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "The main source it reads from should be warehouse.raw_orders_v1, since that's the table we expect to rename later if ingestion changes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/upstream_table\", \"value\": \"warehouse.raw_orders_v1\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the transformation step that builds the daily revenue mart by selecting order totals from that source and joining to the customer dimension."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/tasks\", \"value\": [{\"task_id\": \"build_daily_revenue\", \"sql\": \"CREATE TABLE marts.daily_revenue AS SELECT o.order_date, SUM(o.order_total) AS gross_revenue FROM warehouse.raw_orders_v1 o JOIN warehouse.dim_customers c ON o.customer_id = c.customer_id GROUP BY o.order_date;\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the lineage note showing that this raw orders source feeds the daily revenue mart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage\", \"value\": [{\"source\": \"warehouse.raw_orders_v1\", \"target\": \"marts.daily_revenue\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the executive revenue dashboard as a consumer, and make sure it points back to the raw orders source it depends on."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/dashboards\", \"value\": [{\"name\": \"Executive Revenue Overview\", \"source_table\": \"warehouse.raw_orders_v1\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a freshness check for the same raw orders source so on-call can see when new rows stop arriving."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerts\", \"value\": [{\"name\": \"raw_orders_freshness\", \"query\": \"SELECT COUNT(*) AS stale_rows FROM warehouse.raw_orders_v1 WHERE ingested_at < CURRENT_TIMESTAMP - INTERVAL '2 hours';\"}]}]"
+    }
+  ],
+  "edit_instruction": "Rename the upstream table from warehouse.raw_orders_v1 to warehouse.raw_orders_v2.",
+  "current_json": {
+    "pipeline": {
+      "dag_id": "revenue_mart_daily",
+      "upstream_table": "warehouse.raw_orders_v1",
+      "tasks": [
+        {
+          "task_id": "build_daily_revenue",
+          "sql": "CREATE TABLE marts.daily_revenue AS SELECT o.order_date, SUM(o.order_total) AS gross_revenue FROM warehouse.raw_orders_v1 o JOIN warehouse.dim_customers c ON o.customer_id = c.customer_id GROUP BY o.order_date;"
+        }
+      ],
+      "lineage": [
+        {
+          "source": "warehouse.raw_orders_v1",
+          "target": "marts.daily_revenue"
+        }
+      ],
+      "dashboards": [
+        {
+          "name": "Executive Revenue Overview",
+          "source_table": "warehouse.raw_orders_v1"
+        }
+      ],
+      "alerts": [
+        {
+          "name": "raw_orders_freshness",
+          "query": "SELECT COUNT(*) AS stale_rows FROM warehouse.raw_orders_v1 WHERE ingested_at < CURRENT_TIMESTAMP - INTERVAL '2 hours';"
+        }
+      ]
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/pipeline/upstream_table",
+      "kind": "direct",
+      "value": "warehouse.raw_orders_v2"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/tasks/0/sql",
+      "kind": "cascade",
+      "value": "CREATE TABLE marts.daily_revenue AS SELECT o.order_date, SUM(o.order_total) AS gross_revenue FROM warehouse.raw_orders_v2 o JOIN warehouse.dim_customers c ON o.customer_id = c.customer_id GROUP BY o.order_date;"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/lineage/0/source",
+      "kind": "cascade",
+      "value": "warehouse.raw_orders_v2"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/dashboards/0/source_table",
+      "kind": "cascade",
+      "value": "warehouse.raw_orders_v2"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/alerts/0/query",
+      "kind": "cascade",
+      "value": "SELECT COUNT(*) AS stale_rows FROM warehouse.raw_orders_v2 WHERE ingested_at < CURRENT_TIMESTAMP - INTERVAL '2 hours';"
+    }
+  ],
+  "expected_json": {
+    "pipeline": {
+      "dag_id": "revenue_mart_daily",
+      "upstream_table": "warehouse.raw_orders_v2",
+      "tasks": [
+        {
+          "task_id": "build_daily_revenue",
+          "sql": "CREATE TABLE marts.daily_revenue AS SELECT o.order_date, SUM(o.order_total) AS gross_revenue FROM warehouse.raw_orders_v2 o JOIN warehouse.dim_customers c ON o.customer_id = c.customer_id GROUP BY o.order_date;"
+        }
+      ],
+      "lineage": [
+        {
+          "source": "warehouse.raw_orders_v2",
+          "target": "marts.daily_revenue"
+        }
+      ],
+      "dashboards": [
+        {
+          "name": "Executive Revenue Overview",
+          "source_table": "warehouse.raw_orders_v2"
+        }
+      ],
+      "alerts": [
+        {
+          "name": "raw_orders_freshness",
+          "query": "SELECT COUNT(*) AS stale_rows FROM warehouse.raw_orders_v2 WHERE ingested_at < CURRENT_TIMESTAMP - INTERVAL '2 hours';"
+        }
+      ]
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "rename v1->v2 substituted in every reference (sql, lineage, dashboard, alert); dim_customers untouched.",
+  "annotated": true,
+  "excluded": false,
+  "theme": "Renaming an upstream table",
+  "conversation_pattern": "Center the artifact on a data pipeline DAG where one upstream table name is referenced by downstream SQL, lineage entries, dashboard source references, and alert queries as a visible token. Around this core, add the realistic, independent details a data engineering runbook would carry that do not reference that table name, including other table names that must NOT be touched, and vary their number from sample to sample.",
+  "edit_pattern": "Rename the upstream table to a different specific table identifier.",
+  "cascade_pattern": "Changing the table identifier substitutes the new token in every SQL statement, lineage reference, dashboard source, and alert query that references the old name, while preserving surrounding text and leaving every other table reference unchanged. This is determined because each reference embeds the old table name visibly.",
+  "requires_master_data": false
+}

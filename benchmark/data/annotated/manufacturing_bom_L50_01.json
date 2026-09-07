@@ -1,0 +1,428 @@
+{
+  "id": "manufacturing_bom_L50_01",
+  "domain": "manufacturing_bom",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a bill of materials for assembly PUMP-420."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom\", \"value\": {\"assembly_id\": \"PUMP-420\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Each pump should use 6 cast-iron clamp rings, item CR-110."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components\", \"value\": [{\"component_id\": \"CR-110\", \"description\": \"cast-iron clamp ring\", \"quantity_per_assembly\": 6}]}]"
+    },
+    {
+      "role": "user",
+      "content": "We're planning to build 40 pumps in this production run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/planned_build_quantity\", \"value\": 40}]"
+    },
+    {
+      "role": "user",
+      "content": "For those clamp rings, calculate the run requirement from the 40-pump plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/0/total_demand\", \"value\": 240}]"
+    },
+    {
+      "role": "user",
+      "content": "The clamp rings cost $3.25 each, so include the extended cost for the run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/0/unit_cost_usd\", \"value\": 3.25}, {\"op\": \"add\", \"path\": \"/bom/components/0/extended_cost_usd\", \"value\": 780}]"
+    },
+    {
+      "role": "user",
+      "content": "Each clamp ring weighs 0.42 kg, and I want the pump-level weight contribution noted from that usage."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/0/unit_weight_kg\", \"value\": 0.42}, {\"op\": \"add\", \"path\": \"/bom/components/0/assembly_weight_contribution_kg\", \"value\": 2.52}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the main machined housing as part MH-220; each pump uses one."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/-\", \"value\": {\"component_id\": \"MH-220\", \"description\": \"machined pump housing\", \"quantity_per_assembly\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the housing, figure the run need against the 40-pump build."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/1/total_demand\", \"value\": 40}]"
+    },
+    {
+      "role": "user",
+      "content": "The machined housing is $48.00 each, so include the extended run cost."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/1/unit_cost_usd\", \"value\": 48}, {\"op\": \"add\", \"path\": \"/bom/components/1/extended_cost_usd\", \"value\": 1920}]"
+    },
+    {
+      "role": "user",
+      "content": "The housing weighs 5.80 kg on each pump, since there is only one housing per unit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/1/unit_weight_kg\", \"value\": 5.8}, {\"op\": \"add\", \"path\": \"/bom/components/1/assembly_weight_contribution_kg\", \"value\": 5.8}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the drive motor as item DM-310, one per pump."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/-\", \"value\": {\"component_id\": \"DM-310\", \"description\": \"drive motor\", \"quantity_per_assembly\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the motor, calculate the total needed for the 40-pump run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/2/total_demand\", \"value\": 40}]"
+    },
+    {
+      "role": "user",
+      "content": "The drive motor is $92.50 each, so add its extended cost for this run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/2/unit_cost_usd\", \"value\": 92.5}, {\"op\": \"add\", \"path\": \"/bom/components/2/extended_cost_usd\", \"value\": 3700}]"
+    },
+    {
+      "role": "user",
+      "content": "The motor weighs 2.10 kg on each finished pump."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/2/unit_weight_kg\", \"value\": 2.1}, {\"op\": \"add\", \"path\": \"/bom/components/2/assembly_weight_contribution_kg\", \"value\": 2.1}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the clamp rings come from North Ridge Foundry under supplier code NRF."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/0/supplier\", \"value\": {\"name\": \"North Ridge Foundry\", \"supplier_code\": \"NRF\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "The machined housings should be sourced from AlloyWorks with supplier code AWK."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/1/supplier\", \"value\": {\"name\": \"AlloyWorks\", \"supplier_code\": \"AWK\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use ElectroMotion as the motor supplier, with supplier code EMO."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/components/2/supplier\", \"value\": {\"name\": \"ElectroMotion\", \"supplier_code\": \"EMO\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now total the finished pump weight from the three component contributions we've already listed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/assembly_weight_calculation\", \"value\": {\"stated_sum\": \"2.52 + 5.80 + 2.10\", \"total_weight_kg\": 10.42}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the shipping cutoff at 12.00 kg; pumps at that weight or lighter stay in standard parcel service with a corrugated carton."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/shipping_weight_rule\", \"value\": {\"threshold_kg\": 12, \"at_or_below_threshold\": {\"shipping_class\": \"standard_parcel\", \"packaging_spec\": \"single-wall corrugated carton\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "If a finished pump goes over that cutoff, route it as heavy parcel and switch to a reinforced double-wall carton with foam blocking."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/shipping_weight_rule/above_threshold\", \"value\": {\"shipping_class\": \"heavy_parcel\", \"packaging_spec\": \"reinforced double-wall carton with foam blocking\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Since the pump is currently under the cutoff, apply the standard parcel handling and carton choice for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/shipping_class\", \"value\": \"standard_parcel\"}, {\"op\": \"add\", \"path\": \"/bom/packaging_spec\", \"value\": \"single-wall corrugated carton\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this release as revision A, approved for production, effective 2026-03-15."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/revision\", \"value\": {\"revision_code\": \"A\", \"status\": \"approved for production\", \"effective_date\": \"2026-03-15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note the build routing: assembly happens in Cell 4, final inspection uses gauge set GS-17, and the line lead is Mara Singh."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/production_routing\", \"value\": {\"assembly_cell\": \"Cell 4\", \"inspection_gauge_set\": \"GS-17\", \"line_lead\": \"Mara Singh\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the compliance notes: RoHS compliant, no export restriction, and records should be retained for seven years."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom/compliance_notes\", \"value\": {\"rohs_compliant\": true, \"export_restriction\": \"none\", \"record_retention_years\": 7}}]"
+    }
+  ],
+  "edit_instruction": "Change the clamp ring usage to 10 per pump.",
+  "theme": "Crossing the shipping-weight class",
+  "conversation_pattern": "Center the artifact on a BOM where one component's per-unit quantity drives its weight contribution and the assembly total weight, defined explicitly as a stated sum over component weight contributions, and a STATED shipping-class rule with two explicit branches: if the assembly total weight exceeds a stated threshold, 'shipping_class' steps up to a specific stated heavier class and the packaging spec upgrades to a stated target; if total weight is at or below the threshold, the class and packaging stay at their stated baseline. Record the threshold and both branch targets explicitly. Around this core, add the realistic, independent details a BOM would carry that do not depend on that component quantity, and vary their number from sample to sample.",
+  "edit_pattern": "Change one component's per-unit quantity to a specific new value.",
+  "cascade_pattern": "Editing the component's per-unit quantity re-derives its total demand, component cost, and weight contribution, and the assembly total weight as the stated sum, AND — only if the total weight now crosses the stated threshold relative to before — steps shipping_class to the stated heavier class and upgrades the packaging spec. If the threshold is not crossed, the class and packaging stay unchanged. Other component quantities and unrelated fields stay unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "bom": {
+      "assembly_id": "PUMP-420",
+      "components": [
+        {
+          "component_id": "CR-110",
+          "description": "cast-iron clamp ring",
+          "quantity_per_assembly": 6,
+          "total_demand": 240,
+          "unit_cost_usd": 3.25,
+          "extended_cost_usd": 780,
+          "unit_weight_kg": 0.42,
+          "assembly_weight_contribution_kg": 2.52,
+          "supplier": {
+            "name": "North Ridge Foundry",
+            "supplier_code": "NRF"
+          }
+        },
+        {
+          "component_id": "MH-220",
+          "description": "machined pump housing",
+          "quantity_per_assembly": 1,
+          "total_demand": 40,
+          "unit_cost_usd": 48,
+          "extended_cost_usd": 1920,
+          "unit_weight_kg": 5.8,
+          "assembly_weight_contribution_kg": 5.8,
+          "supplier": {
+            "name": "AlloyWorks",
+            "supplier_code": "AWK"
+          }
+        },
+        {
+          "component_id": "DM-310",
+          "description": "drive motor",
+          "quantity_per_assembly": 1,
+          "total_demand": 40,
+          "unit_cost_usd": 92.5,
+          "extended_cost_usd": 3700,
+          "unit_weight_kg": 2.1,
+          "assembly_weight_contribution_kg": 2.1,
+          "supplier": {
+            "name": "ElectroMotion",
+            "supplier_code": "EMO"
+          }
+        }
+      ],
+      "planned_build_quantity": 40,
+      "assembly_weight_calculation": {
+        "stated_sum": "2.52 + 5.80 + 2.10",
+        "total_weight_kg": 10.42
+      },
+      "shipping_weight_rule": {
+        "threshold_kg": 12,
+        "at_or_below_threshold": {
+          "shipping_class": "standard_parcel",
+          "packaging_spec": "single-wall corrugated carton"
+        },
+        "above_threshold": {
+          "shipping_class": "heavy_parcel",
+          "packaging_spec": "reinforced double-wall carton with foam blocking"
+        }
+      },
+      "shipping_class": "standard_parcel",
+      "packaging_spec": "single-wall corrugated carton",
+      "revision": {
+        "revision_code": "A",
+        "status": "approved for production",
+        "effective_date": "2026-03-15"
+      },
+      "production_routing": {
+        "assembly_cell": "Cell 4",
+        "inspection_gauge_set": "GS-17",
+        "line_lead": "Mara Singh"
+      },
+      "compliance_notes": {
+        "rohs_compliant": true,
+        "export_restriction": "none",
+        "record_retention_years": 7
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/bom/components/0/quantity_per_assembly",
+      "kind": "direct",
+      "value": 10
+    },
+    {
+      "op": "replace",
+      "path": "/bom/components/0/total_demand",
+      "kind": "cascade",
+      "value": 400
+    },
+    {
+      "op": "replace",
+      "path": "/bom/components/0/extended_cost_usd",
+      "kind": "cascade",
+      "value": 1300.0
+    },
+    {
+      "op": "replace",
+      "path": "/bom/components/0/assembly_weight_contribution_kg",
+      "kind": "cascade",
+      "value": 4.2
+    },
+    {
+      "op": "replace",
+      "path": "/bom/assembly_weight_calculation/stated_sum",
+      "kind": "cascade",
+      "matcher": "regex_match",
+      "pattern": "(?<!\\d)4\\.20*(?!\\d)"
+    },
+    {
+      "op": "replace",
+      "path": "/bom/assembly_weight_calculation/total_weight_kg",
+      "kind": "cascade",
+      "value": 12.1
+    },
+    {
+      "op": "replace",
+      "path": "/bom/shipping_class",
+      "kind": "cascade",
+      "value": "heavy_parcel"
+    },
+    {
+      "op": "replace",
+      "path": "/bom/packaging_spec",
+      "kind": "cascade",
+      "value": "reinforced double-wall carton with foam blocking"
+    }
+  ],
+  "expected_json": {
+    "bom": {
+      "assembly_id": "PUMP-420",
+      "components": [
+        {
+          "component_id": "CR-110",
+          "description": "cast-iron clamp ring",
+          "quantity_per_assembly": 10,
+          "total_demand": 400,
+          "unit_cost_usd": 3.25,
+          "extended_cost_usd": 1300.0,
+          "unit_weight_kg": 0.42,
+          "assembly_weight_contribution_kg": 4.2,
+          "supplier": {
+            "name": "North Ridge Foundry",
+            "supplier_code": "NRF"
+          }
+        },
+        {
+          "component_id": "MH-220",
+          "description": "machined pump housing",
+          "quantity_per_assembly": 1,
+          "total_demand": 40,
+          "unit_cost_usd": 48,
+          "extended_cost_usd": 1920,
+          "unit_weight_kg": 5.8,
+          "assembly_weight_contribution_kg": 5.8,
+          "supplier": {
+            "name": "AlloyWorks",
+            "supplier_code": "AWK"
+          }
+        },
+        {
+          "component_id": "DM-310",
+          "description": "drive motor",
+          "quantity_per_assembly": 1,
+          "total_demand": 40,
+          "unit_cost_usd": 92.5,
+          "extended_cost_usd": 3700,
+          "unit_weight_kg": 2.1,
+          "assembly_weight_contribution_kg": 2.1,
+          "supplier": {
+            "name": "ElectroMotion",
+            "supplier_code": "EMO"
+          }
+        }
+      ],
+      "planned_build_quantity": 40,
+      "assembly_weight_calculation": {
+        "stated_sum": "<matches /4\\.20/>",
+        "total_weight_kg": 12.1
+      },
+      "shipping_weight_rule": {
+        "threshold_kg": 12,
+        "at_or_below_threshold": {
+          "shipping_class": "standard_parcel",
+          "packaging_spec": "single-wall corrugated carton"
+        },
+        "above_threshold": {
+          "shipping_class": "heavy_parcel",
+          "packaging_spec": "reinforced double-wall carton with foam blocking"
+        }
+      },
+      "shipping_class": "heavy_parcel",
+      "packaging_spec": "reinforced double-wall carton with foam blocking",
+      "revision": {
+        "revision_code": "A",
+        "status": "approved for production",
+        "effective_date": "2026-03-15"
+      },
+      "production_routing": {
+        "assembly_cell": "Cell 4",
+        "inspection_gauge_set": "GS-17",
+        "line_lead": "Mara Singh"
+      },
+      "compliance_notes": {
+        "rohs_compliant": true,
+        "export_restriction": "none",
+        "record_retention_years": 7
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "clamp ring qty 6->10 (build 40): demand=400, extended=10*3.25*40=1300, weight_contrib=10*0.42=4.2; total=4.2+5.8+2.1=12.1 > 12 -> heavy_parcel + reinforced double-wall. | REVIEW EDIT (with author): relaxed stated_sum regex from '4\\\\.20' to '(?<!\\\\d)4\\\\.20?(?!\\\\d)' so a trailing-zero-free decimal (e.g. '4.2' vs '4.20') is not penalized; analogous to numeric tolerance for strings.",
+  "annotated": true,
+  "excluded": false,
+  "review_edited": true
+}

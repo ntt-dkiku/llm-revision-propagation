@@ -1,0 +1,740 @@
+{
+  "id": "data_pipeline_L100_02",
+  "domain": "data_pipeline",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start with a pipeline record for the daily orders feed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline\", \"value\": {\"name\": \"daily_orders_feed\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "The feed currently processes 72 million rows each day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/daily_rows\", \"value\": 72000000}]"
+    },
+    {
+      "role": "user",
+      "content": "Use an average payload size of 850 bytes per row when estimating storage."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/storage_estimate/bytes_per_row\", \"value\": 850}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the storage estimate calculate daily size as rows per day multiplied by bytes per row, then converted to gigabytes using 1,000,000,000 bytes per GB."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/storage_estimate/formula\", \"value\": \"daily_rows * bytes_per_row / 1000000000\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and include the resulting daily storage estimate from that calculation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/storage_estimate/daily_gb\", \"value\": 61.2}]"
+    },
+    {
+      "role": "user",
+      "content": "Use 80 million rows a day as the cutoff for deciding when the pipeline should move into the higher-volume handling mode."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/volume_policy/threshold_daily_rows\", \"value\": 80000000}]"
+    },
+    {
+      "role": "user",
+      "content": "When the daily amount is above that cutoff, it should use the partitioned approach."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/volume_policy/above_threshold/partition_strategy\", \"value\": \"partitioned\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For that same higher-volume mode, set compaction to the gold tier."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/volume_policy/above_threshold/compaction_tier\", \"value\": \"gold\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Also make the higher-volume retention class extended."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/volume_policy/above_threshold/retention_class\", \"value\": \"extended\"}]"
+    },
+    {
+      "role": "user",
+      "content": "When the daily amount is not over the cutoff, keep the layout as one file instead."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/volume_policy/at_or_below_threshold/partition_strategy\", \"value\": \"single_file\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For that lower-volume case, keep compaction at bronze."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/volume_policy/at_or_below_threshold/compaction_tier\", \"value\": \"bronze\"}]"
+    },
+    {
+      "role": "user",
+      "content": "And keep the lower-volume retention class standard."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/volume_policy/at_or_below_threshold/retention_class\", \"value\": \"standard\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture what those rules mean for the current daily amount."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/current_volume_outcome\", \"value\": {\"partition_strategy\": \"single_file\", \"compaction_tier\": \"bronze\", \"retention_class\": \"standard\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add where this feed is coming from: the commerce app’s orders table in the production environment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source\", \"value\": {\"application\": \"commerce_app\", \"table\": \"orders\", \"environment\": \"production\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send the processed data into the analytics lake under the curated sales area."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/destination\", \"value\": {\"platform\": \"analytics_lake\", \"zone\": \"curated\", \"domain\": \"sales\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it run every day at 2:15 AM UTC with a two-hour completion target."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schedule\", \"value\": {\"frequency\": \"daily\", \"start_time_utc\": \"02:15\", \"sla_hours\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tag the engineering owner as Data Platform, with Priya Nair as the main contact and a Slack channel for order data issues."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/owner\", \"value\": {\"team\": \"Data Platform\", \"primary_contact\": \"Priya Nair\", \"slack_channel\": \"#order-data\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the order identifier in the published layout as required text."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schema\", \"value\": [{\"name\": \"order_id\", \"data_type\": \"string\", \"nullable\": false}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer identifier as another required text value in the published layout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schema/-\", \"value\": {\"name\": \"customer_id\", \"data_type\": \"string\", \"nullable\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the order timestamp as a required timestamp value."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schema/-\", \"value\": {\"name\": \"order_ts\", \"data_type\": \"timestamp\", \"nullable\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the total order amount as a required decimal value."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schema/-\", \"value\": {\"name\": \"order_total\", \"data_type\": \"decimal(12,2)\", \"nullable\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the currency code as optional text."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schema/-\", \"value\": {\"name\": \"currency_code\", \"data_type\": \"string\", \"nullable\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Track the order status as required text too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schema/-\", \"value\": {\"name\": \"order_status\", \"data_type\": \"string\", \"nullable\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the fulfillment channel, and allow it to be blank when the source doesn’t provide one."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schema/-\", \"value\": {\"name\": \"fulfillment_channel\", \"data_type\": \"string\", \"nullable\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a freshness check that fails if the newest order is more than 45 minutes behind."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/data_quality/checks\", \"value\": [{\"name\": \"freshness_lag\", \"rule\": \"max(order_ts) within 45 minutes\", \"severity\": \"critical\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a check that rejects records missing an order identifier, and make it critical."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/data_quality/checks/-\", \"value\": {\"name\": \"order_id_not_null\", \"rule\": \"order_id is not null\", \"severity\": \"critical\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a warning check that order totals are never negative."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/data_quality/checks/-\", \"value\": {\"name\": \"non_negative_order_total\", \"rule\": \"order_total >= 0\", \"severity\": \"warning\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the transaction date and order identifier together for deduping incoming records."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/deduplication\", \"value\": {\"strategy\": \"latest_by_order_id_and_order_date\", \"primary_key\": \"order_id\", \"tie_breaker\": \"order_ts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For late-arriving records, allow a three-day window and send anything older to quarantine."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/late_arrival_handling\", \"value\": {\"allowed_window_days\": 3, \"action_after_window\": \"quarantine\", \"time_basis\": \"order_ts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep audit history for 180 days, with change logs written to the governance bucket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/audit\", \"value\": {\"history_retention_days\": 180, \"change_log_target\": \"s3://gov-audit/order-feed\", \"pii_review_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "For observability, emit run metrics to Datadog every five minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/observability\", \"value\": {\"metrics_sink\": \"Datadog\", \"metrics_interval_minutes\": 5, \"log_level\": \"INFO\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Page the on-call analytics engineer for critical failures, but only send email for warnings."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerting\", \"value\": {\"critical_route\": \"pagerduty_analytics_oncall\", \"warning_route\": \"email_data_platform\", \"mute_on_success\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make sure access goes through the analytics service role, with encryption turned on and restricted to the sales analyst group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/security\", \"value\": {\"service_role\": \"analytics_orders_reader\", \"encryption\": \"AES256\", \"access_group\": \"sales_analysts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Publish it as Parquet with Snappy compression and schema evolution disabled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/output_format\", \"value\": {\"file_type\": \"parquet\", \"compression\": \"snappy\", \"schema_evolution\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "If a run fails, retry it twice with a 20-minute pause, then stop trying automatically."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/retry_policy\", \"value\": {\"max_attempts\": 2, \"backoff_minutes\": 20, \"give_up_action\": \"stop\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For deployment, promote changes from dev to staging and then production."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/deployment\", \"value\": {\"dev_environment\": \"orders_dev\", \"staging_environment\": \"orders_staging\", \"production_environment\": \"orders_prod\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include backfill support starting from January 1, 2023, capped at seven days per request."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/backfill\", \"value\": {\"enabled\": true, \"earliest_date\": \"2023-01-01\", \"max_days_per_request\": 7}}]"
+    },
+    {
+      "role": "user",
+      "content": "For cost reporting, charge this work to the sales analytics center with a medium priority and monthly review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/cost_allocation\", \"value\": {\"chargeback_code\": \"SALES-ANALYTICS\", \"priority\": \"medium\", \"review_cadence\": \"monthly\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the downstream consumers are the revenue dashboard, finance reconciliation jobs, and the customer retention model."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/consumers\", \"value\": [\"revenue_dashboard\", \"finance_reconciliation\", \"customer_retention_model\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three rollout milestones: design approval, pilot validation, and full launch."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/rollout_milestones\", \"value\": [\"design_approval\", \"pilot_validation\", \"full_launch\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Reserve a Sunday maintenance slot at 4 AM UTC, lasting 90 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/maintenance_window\", \"value\": {\"day\": \"Sunday\", \"start_time_utc\": \"04:00\", \"duration_minutes\": 90}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this pipeline as active for tracking."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/status\", \"value\": \"active\"}]"
+    }
+  ],
+  "edit_instruction": "Update the daily row volume to 95,000,000.",
+  "theme": "Crossing a data-volume threshold",
+  "conversation_pattern": "Center the artifact on a dataset with a stated daily row-volume figure, a volume-derived storage-size estimate (stated formula), and a STATED volume threshold rule with two explicit branches: if daily volume exceeds the threshold, the partition strategy must be 'partitioned' and the compaction tier and retention class step up to specific stated targets; if it is at or below the threshold, the strategy stays 'single_file' and those tiers stay at their stated baseline. Record the threshold and both branch targets explicitly so the outcome is uniquely determined. Around this core, add realistic independent details that do not depend on volume, and vary their number from sample to sample.",
+  "edit_pattern": "Change the daily row volume to a specific new number.",
+  "cascade_pattern": "Editing the volume re-derives the storage-size estimate from the stated formula, AND — only if the new volume crosses the stated threshold relative to the old value — flips the partition strategy and steps the compaction tier and retention class to the stated branch targets. If the threshold is not crossed, the strategy and tiers stay unchanged. The outcome is determined by the stated threshold and branch targets.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "pipeline": {
+      "name": "daily_orders_feed",
+      "daily_rows": 72000000,
+      "storage_estimate": {
+        "bytes_per_row": 850,
+        "formula": "daily_rows * bytes_per_row / 1000000000",
+        "daily_gb": 61.2
+      },
+      "volume_policy": {
+        "threshold_daily_rows": 80000000,
+        "above_threshold": {
+          "partition_strategy": "partitioned",
+          "compaction_tier": "gold",
+          "retention_class": "extended"
+        },
+        "at_or_below_threshold": {
+          "partition_strategy": "single_file",
+          "compaction_tier": "bronze",
+          "retention_class": "standard"
+        }
+      },
+      "current_volume_outcome": {
+        "partition_strategy": "single_file",
+        "compaction_tier": "bronze",
+        "retention_class": "standard"
+      },
+      "source": {
+        "application": "commerce_app",
+        "table": "orders",
+        "environment": "production"
+      },
+      "destination": {
+        "platform": "analytics_lake",
+        "zone": "curated",
+        "domain": "sales"
+      },
+      "schedule": {
+        "frequency": "daily",
+        "start_time_utc": "02:15",
+        "sla_hours": 2
+      },
+      "owner": {
+        "team": "Data Platform",
+        "primary_contact": "Priya Nair",
+        "slack_channel": "#order-data"
+      },
+      "schema": [
+        {
+          "name": "order_id",
+          "data_type": "string",
+          "nullable": false
+        },
+        {
+          "name": "customer_id",
+          "data_type": "string",
+          "nullable": false
+        },
+        {
+          "name": "order_ts",
+          "data_type": "timestamp",
+          "nullable": false
+        },
+        {
+          "name": "order_total",
+          "data_type": "decimal(12,2)",
+          "nullable": false
+        },
+        {
+          "name": "currency_code",
+          "data_type": "string",
+          "nullable": true
+        },
+        {
+          "name": "order_status",
+          "data_type": "string",
+          "nullable": false
+        },
+        {
+          "name": "fulfillment_channel",
+          "data_type": "string",
+          "nullable": true
+        }
+      ],
+      "data_quality": {
+        "checks": [
+          {
+            "name": "freshness_lag",
+            "rule": "max(order_ts) within 45 minutes",
+            "severity": "critical"
+          },
+          {
+            "name": "order_id_not_null",
+            "rule": "order_id is not null",
+            "severity": "critical"
+          },
+          {
+            "name": "non_negative_order_total",
+            "rule": "order_total >= 0",
+            "severity": "warning"
+          }
+        ]
+      },
+      "deduplication": {
+        "strategy": "latest_by_order_id_and_order_date",
+        "primary_key": "order_id",
+        "tie_breaker": "order_ts"
+      },
+      "late_arrival_handling": {
+        "allowed_window_days": 3,
+        "action_after_window": "quarantine",
+        "time_basis": "order_ts"
+      },
+      "audit": {
+        "history_retention_days": 180,
+        "change_log_target": "s3://gov-audit/order-feed",
+        "pii_review_required": true
+      },
+      "observability": {
+        "metrics_sink": "Datadog",
+        "metrics_interval_minutes": 5,
+        "log_level": "INFO"
+      },
+      "alerting": {
+        "critical_route": "pagerduty_analytics_oncall",
+        "warning_route": "email_data_platform",
+        "mute_on_success": true
+      },
+      "security": {
+        "service_role": "analytics_orders_reader",
+        "encryption": "AES256",
+        "access_group": "sales_analysts"
+      },
+      "output_format": {
+        "file_type": "parquet",
+        "compression": "snappy",
+        "schema_evolution": false
+      },
+      "retry_policy": {
+        "max_attempts": 2,
+        "backoff_minutes": 20,
+        "give_up_action": "stop"
+      },
+      "deployment": {
+        "dev_environment": "orders_dev",
+        "staging_environment": "orders_staging",
+        "production_environment": "orders_prod"
+      },
+      "backfill": {
+        "enabled": true,
+        "earliest_date": "2023-01-01",
+        "max_days_per_request": 7
+      },
+      "cost_allocation": {
+        "chargeback_code": "SALES-ANALYTICS",
+        "priority": "medium",
+        "review_cadence": "monthly"
+      },
+      "consumers": [
+        "revenue_dashboard",
+        "finance_reconciliation",
+        "customer_retention_model"
+      ],
+      "rollout_milestones": [
+        "design_approval",
+        "pilot_validation",
+        "full_launch"
+      ],
+      "maintenance_window": {
+        "day": "Sunday",
+        "start_time_utc": "04:00",
+        "duration_minutes": 90
+      },
+      "status": "active"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/pipeline/daily_rows",
+      "kind": "direct",
+      "value": 95000000
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/storage_estimate/daily_gb",
+      "kind": "cascade",
+      "value": 80.75
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/current_volume_outcome/partition_strategy",
+      "kind": "cascade",
+      "value": "partitioned"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/current_volume_outcome/compaction_tier",
+      "kind": "cascade",
+      "value": "gold"
+    },
+    {
+      "op": "replace",
+      "path": "/pipeline/current_volume_outcome/retention_class",
+      "kind": "cascade",
+      "value": "extended"
+    }
+  ],
+  "expected_json": {
+    "pipeline": {
+      "name": "daily_orders_feed",
+      "daily_rows": 95000000,
+      "storage_estimate": {
+        "bytes_per_row": 850,
+        "formula": "daily_rows * bytes_per_row / 1000000000",
+        "daily_gb": 80.75
+      },
+      "volume_policy": {
+        "threshold_daily_rows": 80000000,
+        "above_threshold": {
+          "partition_strategy": "partitioned",
+          "compaction_tier": "gold",
+          "retention_class": "extended"
+        },
+        "at_or_below_threshold": {
+          "partition_strategy": "single_file",
+          "compaction_tier": "bronze",
+          "retention_class": "standard"
+        }
+      },
+      "current_volume_outcome": {
+        "partition_strategy": "partitioned",
+        "compaction_tier": "gold",
+        "retention_class": "extended"
+      },
+      "source": {
+        "application": "commerce_app",
+        "table": "orders",
+        "environment": "production"
+      },
+      "destination": {
+        "platform": "analytics_lake",
+        "zone": "curated",
+        "domain": "sales"
+      },
+      "schedule": {
+        "frequency": "daily",
+        "start_time_utc": "02:15",
+        "sla_hours": 2
+      },
+      "owner": {
+        "team": "Data Platform",
+        "primary_contact": "Priya Nair",
+        "slack_channel": "#order-data"
+      },
+      "schema": [
+        {
+          "name": "order_id",
+          "data_type": "string",
+          "nullable": false
+        },
+        {
+          "name": "customer_id",
+          "data_type": "string",
+          "nullable": false
+        },
+        {
+          "name": "order_ts",
+          "data_type": "timestamp",
+          "nullable": false
+        },
+        {
+          "name": "order_total",
+          "data_type": "decimal(12,2)",
+          "nullable": false
+        },
+        {
+          "name": "currency_code",
+          "data_type": "string",
+          "nullable": true
+        },
+        {
+          "name": "order_status",
+          "data_type": "string",
+          "nullable": false
+        },
+        {
+          "name": "fulfillment_channel",
+          "data_type": "string",
+          "nullable": true
+        }
+      ],
+      "data_quality": {
+        "checks": [
+          {
+            "name": "freshness_lag",
+            "rule": "max(order_ts) within 45 minutes",
+            "severity": "critical"
+          },
+          {
+            "name": "order_id_not_null",
+            "rule": "order_id is not null",
+            "severity": "critical"
+          },
+          {
+            "name": "non_negative_order_total",
+            "rule": "order_total >= 0",
+            "severity": "warning"
+          }
+        ]
+      },
+      "deduplication": {
+        "strategy": "latest_by_order_id_and_order_date",
+        "primary_key": "order_id",
+        "tie_breaker": "order_ts"
+      },
+      "late_arrival_handling": {
+        "allowed_window_days": 3,
+        "action_after_window": "quarantine",
+        "time_basis": "order_ts"
+      },
+      "audit": {
+        "history_retention_days": 180,
+        "change_log_target": "s3://gov-audit/order-feed",
+        "pii_review_required": true
+      },
+      "observability": {
+        "metrics_sink": "Datadog",
+        "metrics_interval_minutes": 5,
+        "log_level": "INFO"
+      },
+      "alerting": {
+        "critical_route": "pagerduty_analytics_oncall",
+        "warning_route": "email_data_platform",
+        "mute_on_success": true
+      },
+      "security": {
+        "service_role": "analytics_orders_reader",
+        "encryption": "AES256",
+        "access_group": "sales_analysts"
+      },
+      "output_format": {
+        "file_type": "parquet",
+        "compression": "snappy",
+        "schema_evolution": false
+      },
+      "retry_policy": {
+        "max_attempts": 2,
+        "backoff_minutes": 20,
+        "give_up_action": "stop"
+      },
+      "deployment": {
+        "dev_environment": "orders_dev",
+        "staging_environment": "orders_staging",
+        "production_environment": "orders_prod"
+      },
+      "backfill": {
+        "enabled": true,
+        "earliest_date": "2023-01-01",
+        "max_days_per_request": 7
+      },
+      "cost_allocation": {
+        "chargeback_code": "SALES-ANALYTICS",
+        "priority": "medium",
+        "review_cadence": "monthly"
+      },
+      "consumers": [
+        "revenue_dashboard",
+        "finance_reconciliation",
+        "customer_retention_model"
+      ],
+      "rollout_milestones": [
+        "design_approval",
+        "pilot_validation",
+        "full_launch"
+      ],
+      "maintenance_window": {
+        "day": "Sunday",
+        "start_time_utc": "04:00",
+        "duration_minutes": 90
+      },
+      "status": "active"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "rows 72M->95M; storage=95e6*850/1e9=80.75. 95M>80M threshold -> above branch partitioned/gold/extended (was single_file/bronze/standard).",
+  "annotated": true,
+  "excluded": false
+}

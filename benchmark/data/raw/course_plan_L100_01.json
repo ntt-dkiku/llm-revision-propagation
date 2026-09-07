@@ -1,0 +1,461 @@
+{
+  "id": "course_plan_L100_01",
+  "domain": "course_plan",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm putting together a term plan for Maya Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student\", \"value\": {\"name\": \"Maya Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add her first class as Biology 201, worth 4 credits, with a 3.7 grade-point value."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses\", \"value\": [{\"course\": \"Biology 201\", \"credits\": 4, \"gradePoints\": 3.7}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Calculus 102 too, with 3 credits and a 4.0 grade-point value."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course\": \"Calculus 102\", \"credits\": 3, \"gradePoints\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put in World Literature 210 as another class, carrying 3 unit hours and a 3.3 grade-point value."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course\": \"World Literature 210\", \"credits\": 3, \"gradePoints\": 3.3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Intro to Psychology with 3 credits and a 3.0 grade-point value."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course\": \"Intro to Psychology\", \"credits\": 3, \"gradePoints\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include U.S. History 150 as well, at 3 credits with a 3.5 grade-point value."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course\": \"U.S. History 150\", \"credits\": 3, \"gradePoints\": 3.5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Environmental Science 110 with 4 credits and a 3.2 grade-point value."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course\": \"Environmental Science 110\", \"credits\": 4, \"gradePoints\": 3.2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also put in Public Speaking 101 for 2 credits, with a 3.8 grade-point value."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course\": \"Public Speaking 101\", \"credits\": 2, \"gradePoints\": 3.8}}]"
+    },
+    {
+      "role": "user",
+      "content": "She needs 30 credits completed for this planning requirement."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/creditRequirement\", \"value\": 30}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the credit total, the weighted GPA, and how many credits she still needs against that requirement."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary\", \"value\": {\"totalCredits\": 22, \"weightedGPA\": 3.48, \"remainingCredits\": 8}}]"
+    },
+    {
+      "role": "user",
+      "content": "This is for the Fall 2026 term at the Lakeside campus."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/term\", \"value\": {\"season\": \"Fall\", \"year\": 2026, \"campus\": \"Lakeside\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark her advising appointment as September 3, 2026 at 10:30 AM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisingAppointment\", \"value\": {\"date\": \"2026-09-03\", \"time\": \"10:30 AM\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that Maya is a sophomore in the Health Sciences program, with student number S48291."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student/program\", \"value\": \"Health Sciences\"}, {\"op\": \"add\", \"path\": \"/student/classStanding\", \"value\": \"Sophomore\"}, {\"op\": \"add\", \"path\": \"/student/studentNumber\", \"value\": \"S48291\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that Dr. Elena Ruiz is the faculty contact for this plan, reachable at eruiz@lakeside.edu."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/academicAdvisor\", \"value\": {\"name\": \"Dr. Elena Ruiz\", \"email\": \"eruiz@lakeside.edu\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Biology 201, note that it meets on Mondays and Wednesdays in Science Hall 214."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/schedule\", \"value\": {\"days\": \"Mon/Wed\", \"location\": \"Science Hall 214\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For that same biology class, add the meeting time as 9:00 to 10:15 AM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/schedule/startTime\", \"value\": \"9:00 AM\"}, {\"op\": \"add\", \"path\": \"/courses/0/schedule/endTime\", \"value\": \"10:15 AM\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For Calculus 102, note that it meets Tuesdays and Thursdays from 11:00 AM to 12:15 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/1/schedule\", \"value\": {\"days\": \"Tue/Thu\", \"startTime\": \"11:00 AM\", \"endTime\": \"12:15 PM\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that Calculus 102 is in Math Building 305, section B, with Professor Nair."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/1/schedule/location\", \"value\": \"Math Building 305\"}, {\"op\": \"add\", \"path\": \"/courses/1/section\", \"value\": \"B\"}, {\"op\": \"add\", \"path\": \"/courses/1/instructor\", \"value\": \"Professor Nair\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For World Literature 210, add that it meets on Mondays from 1:00 PM to 3:30 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/2/schedule\", \"value\": {\"days\": \"Mon\", \"startTime\": \"1:00 PM\", \"endTime\": \"3:30 PM\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the literature class, add that it takes place in Humanities 118, group A, with Dr. Patel leading it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/2/schedule/location\", \"value\": \"Humanities 118\"}, {\"op\": \"add\", \"path\": \"/courses/2/section\", \"value\": \"A\"}, {\"op\": \"add\", \"path\": \"/courses/2/instructor\", \"value\": \"Dr. Patel\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For Intro to Psychology, note that it meets on Wednesdays from 2:00 PM to 4:30 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/3/schedule\", \"value\": {\"days\": \"Wed\", \"startTime\": \"2:00 PM\", \"endTime\": \"4:30 PM\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the psychology class, add that it meets in Social Sciences 220, section C, with Professor Kim."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/3/schedule/location\", \"value\": \"Social Sciences 220\"}, {\"op\": \"add\", \"path\": \"/courses/3/section\", \"value\": \"C\"}, {\"op\": \"add\", \"path\": \"/courses/3/instructor\", \"value\": \"Professor Kim\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For U.S. History 150, note that it meets Tuesdays and Thursdays from 8:30 AM to 9:45 AM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/4/schedule\", \"value\": {\"days\": \"Tue/Thu\", \"startTime\": \"8:30 AM\", \"endTime\": \"9:45 AM\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the history class, add that it's in Founders Hall 102, section D, taught by Dr. Wallace."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/4/schedule/location\", \"value\": \"Founders Hall 102\"}, {\"op\": \"add\", \"path\": \"/courses/4/section\", \"value\": \"D\"}, {\"op\": \"add\", \"path\": \"/courses/4/instructor\", \"value\": \"Dr. Wallace\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For Environmental Science 110, note that it meets Mondays and Wednesdays from 12:30 PM to 1:45 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/5/schedule\", \"value\": {\"days\": \"Mon/Wed\", \"startTime\": \"12:30 PM\", \"endTime\": \"1:45 PM\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For that environmental science class, add the room as Green Lab 12, section A, with Professor Ortega."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/5/schedule/location\", \"value\": \"Green Lab 12\"}, {\"op\": \"add\", \"path\": \"/courses/5/section\", \"value\": \"A\"}, {\"op\": \"add\", \"path\": \"/courses/5/instructor\", \"value\": \"Professor Ortega\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For Public Speaking 101, note that it meets on Fridays from 10:00 AM to 11:50 AM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/6/schedule\", \"value\": {\"days\": \"Fri\", \"startTime\": \"10:00 AM\", \"endTime\": \"11:50 AM\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the public speaking class, add that it's in Communication Center 44, section F, taught by Ms. Avery."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/6/schedule/location\", \"value\": \"Communication Center 44\"}, {\"op\": \"add\", \"path\": \"/courses/6/section\", \"value\": \"F\"}, {\"op\": \"add\", \"path\": \"/courses/6/instructor\", \"value\": \"Ms. Avery\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For Biology 201, note the main book as Campbell Biology, 13th edition, ISBN 9780135988046."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/textbook\", \"value\": {\"title\": \"Campbell Biology\", \"edition\": \"13th\", \"isbn\": \"9780135988046\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Calculus 102, note the main book as Calculus: Early Transcendentals, 9th edition, ISBN 9781337613927."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/1/textbook\", \"value\": {\"title\": \"Calculus: Early Transcendentals\", \"edition\": \"9th\", \"isbn\": \"9781337613927\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For World Literature 210, note the main book as The Norton Anthology of World Literature, 5th edition, ISBN 9780393265903."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/2/textbook\", \"value\": {\"title\": \"The Norton Anthology of World Literature\", \"edition\": \"5th\", \"isbn\": \"9780393265903\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Intro to Psychology, note the main book as Psychology, 6th edition, ISBN 9781319132101."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/3/textbook\", \"value\": {\"title\": \"Psychology\", \"edition\": \"6th\", \"isbn\": \"9781319132101\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For U.S. History 150, note the main book as Give Me Liberty!, 7th edition, ISBN 9781324040910."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/4/textbook\", \"value\": {\"title\": \"Give Me Liberty!\", \"edition\": \"7th\", \"isbn\": \"9781324040910\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Environmental Science 110, note the main book as Environmental Science: A Global Concern, 16th edition, ISBN 9781260363821."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/5/textbook\", \"value\": {\"title\": \"Environmental Science: A Global Concern\", \"edition\": \"16th\", \"isbn\": \"9781260363821\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Public Speaking 101, note the main book as The Art of Public Speaking, 13th edition, ISBN 9781260412932."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/6/textbook\", \"value\": {\"title\": \"The Art of Public Speaking\", \"edition\": \"13th\", \"isbn\": \"9781260412932\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, note that the plan is still a draft, was prepared by Maya, and was last reviewed on August 20, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planNotes\", \"value\": {\"status\": \"Draft\", \"preparedBy\": \"Maya Chen\", \"lastReviewed\": \"2026-08-20\"}}]"
+    }
+  ],
+  "edit_instruction": "Change Public Speaking 101 to 3 credits.",
+  "theme": "Changing a course's credit hours",
+  "master_data": null,
+  "current_json": {
+    "student": {
+      "name": "Maya Chen",
+      "program": "Health Sciences",
+      "classStanding": "Sophomore",
+      "studentNumber": "S48291"
+    },
+    "courses": [
+      {
+        "course": "Biology 201",
+        "credits": 4,
+        "gradePoints": 3.7,
+        "schedule": {
+          "days": "Mon/Wed",
+          "location": "Science Hall 214",
+          "startTime": "9:00 AM",
+          "endTime": "10:15 AM"
+        },
+        "textbook": {
+          "title": "Campbell Biology",
+          "edition": "13th",
+          "isbn": "9780135988046"
+        }
+      },
+      {
+        "course": "Calculus 102",
+        "credits": 3,
+        "gradePoints": 4,
+        "schedule": {
+          "days": "Tue/Thu",
+          "startTime": "11:00 AM",
+          "endTime": "12:15 PM",
+          "location": "Math Building 305"
+        },
+        "section": "B",
+        "instructor": "Professor Nair",
+        "textbook": {
+          "title": "Calculus: Early Transcendentals",
+          "edition": "9th",
+          "isbn": "9781337613927"
+        }
+      },
+      {
+        "course": "World Literature 210",
+        "credits": 3,
+        "gradePoints": 3.3,
+        "schedule": {
+          "days": "Mon",
+          "startTime": "1:00 PM",
+          "endTime": "3:30 PM",
+          "location": "Humanities 118"
+        },
+        "section": "A",
+        "instructor": "Dr. Patel",
+        "textbook": {
+          "title": "The Norton Anthology of World Literature",
+          "edition": "5th",
+          "isbn": "9780393265903"
+        }
+      },
+      {
+        "course": "Intro to Psychology",
+        "credits": 3,
+        "gradePoints": 3,
+        "schedule": {
+          "days": "Wed",
+          "startTime": "2:00 PM",
+          "endTime": "4:30 PM",
+          "location": "Social Sciences 220"
+        },
+        "section": "C",
+        "instructor": "Professor Kim",
+        "textbook": {
+          "title": "Psychology",
+          "edition": "6th",
+          "isbn": "9781319132101"
+        }
+      },
+      {
+        "course": "U.S. History 150",
+        "credits": 3,
+        "gradePoints": 3.5,
+        "schedule": {
+          "days": "Tue/Thu",
+          "startTime": "8:30 AM",
+          "endTime": "9:45 AM",
+          "location": "Founders Hall 102"
+        },
+        "section": "D",
+        "instructor": "Dr. Wallace",
+        "textbook": {
+          "title": "Give Me Liberty!",
+          "edition": "7th",
+          "isbn": "9781324040910"
+        }
+      },
+      {
+        "course": "Environmental Science 110",
+        "credits": 4,
+        "gradePoints": 3.2,
+        "schedule": {
+          "days": "Mon/Wed",
+          "startTime": "12:30 PM",
+          "endTime": "1:45 PM",
+          "location": "Green Lab 12"
+        },
+        "section": "A",
+        "instructor": "Professor Ortega",
+        "textbook": {
+          "title": "Environmental Science: A Global Concern",
+          "edition": "16th",
+          "isbn": "9781260363821"
+        }
+      },
+      {
+        "course": "Public Speaking 101",
+        "credits": 2,
+        "gradePoints": 3.8,
+        "schedule": {
+          "days": "Fri",
+          "startTime": "10:00 AM",
+          "endTime": "11:50 AM",
+          "location": "Communication Center 44"
+        },
+        "section": "F",
+        "instructor": "Ms. Avery",
+        "textbook": {
+          "title": "The Art of Public Speaking",
+          "edition": "13th",
+          "isbn": "9781260412932"
+        }
+      }
+    ],
+    "creditRequirement": 30,
+    "summary": {
+      "totalCredits": 22,
+      "weightedGPA": 3.48,
+      "remainingCredits": 8
+    },
+    "term": {
+      "season": "Fall",
+      "year": 2026,
+      "campus": "Lakeside"
+    },
+    "advisingAppointment": {
+      "date": "2026-09-03",
+      "time": "10:30 AM"
+    },
+    "academicAdvisor": {
+      "name": "Dr. Elena Ruiz",
+      "email": "eruiz@lakeside.edu"
+    },
+    "planNotes": {
+      "status": "Draft",
+      "preparedBy": "Maya Chen",
+      "lastReviewed": "2026-08-20"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a course list where each course has credit hours and grade points, a GPA derives as the credit-weighted average, and credit totals and a remaining-to-requirement derive from the credits against a stated requirement. Around this core, add the realistic, independent details a course plan would carry that do not depend on the credit hours, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Change one course's credit hours to a specific new number.",
+  "cascade_pattern": "Editing a course's credits re-derives the GPA with its new weight, re-sums the credit total, and re-derives the remaining-to-requirement. Other courses and the requirement stay. This is determined because grades, credits, and the requirement are stated.",
+  "requires_master_data": false
+}

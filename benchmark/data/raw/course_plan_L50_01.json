@@ -1,0 +1,231 @@
+{
+  "id": "course_plan_L50_01",
+  "domain": "course_plan",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm planning courses for a certificate that needs 15 credits altogether."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/credit_requirement\", \"value\": 15}]"
+    },
+    {
+      "role": "user",
+      "content": "Start the plan with Data Analytics as a 3-credit course, and use 3.7 as its grade-point value."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses\", \"value\": [{\"course_title\": \"Data Analytics\", \"credit_hours\": 3, \"grade_points\": 3.7}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Applied Statistics next; it's worth 4 credits, and I'm expecting 3.3 grade points for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course_title\": \"Applied Statistics\", \"credit_hours\": 4, \"grade_points\": 3.3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Database Systems too, as a 3-credit course with a 4.0 grade-point estimate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course_title\": \"Database Systems\", \"credit_hours\": 3, \"grade_points\": 4.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add Project Management as another course, with 2 credits and a 3.5 grade-point estimate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course_title\": \"Project Management\", \"credit_hours\": 2, \"grade_points\": 3.5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Round out the plan with an Ethics in Technology course for 3 credits, using 3.8 as its grade-point estimate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"course_title\": \"Ethics in Technology\", \"credit_hours\": 3, \"grade_points\": 3.8}}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you calculate where the plan stands overall: how many credits are counted, the projected average, and how many credits I'd still need?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/academic_summary\", \"value\": {\"total_credit_hours\": 15, \"projected_gpa\": 3.65, \"credits_remaining\": 0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set this up for the Fall 2026 term at North Valley College, in the online format."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan_context\", \"value\": {\"term\": \"Fall 2026\", \"institution\": \"North Valley College\", \"delivery_format\": \"Online\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For advising notes, add the instructors for the first three courses: Data Analytics with Dr. Lina Cho, Applied Statistics with Prof. Marcus Reed, and Database Systems with Dr. Priya Shah."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/instructor\", \"value\": \"Dr. Lina Cho\"}, {\"op\": \"add\", \"path\": \"/courses/1/instructor\", \"value\": \"Prof. Marcus Reed\"}, {\"op\": \"add\", \"path\": \"/courses/2/instructor\", \"value\": \"Dr. Priya Shah\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the remaining instructor names too: Project Management is with Prof. Elena Park, and Ethics in Technology is with Dr. Samuel Ortiz."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/3/instructor\", \"value\": \"Prof. Elena Park\"}, {\"op\": \"add\", \"path\": \"/courses/4/instructor\", \"value\": \"Dr. Samuel Ortiz\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For scheduling, note that Data Analytics meets on Monday, Applied Statistics on Tuesday, and Database Systems on Wednesday."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/meeting_day\", \"value\": \"Monday\"}, {\"op\": \"add\", \"path\": \"/courses/1/meeting_day\", \"value\": \"Tuesday\"}, {\"op\": \"add\", \"path\": \"/courses/2/meeting_day\", \"value\": \"Wednesday\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that Project Management meets on Thursday and Ethics in Technology meets on Friday; my advisor for the plan is Karen Liu."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/3/meeting_day\", \"value\": \"Thursday\"}, {\"op\": \"add\", \"path\": \"/courses/4/meeting_day\", \"value\": \"Friday\"}, {\"op\": \"add\", \"path\": \"/advisor\", \"value\": \"Karen Liu\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For prep notes, mark the suggested background for the first three classes: spreadsheet basics for Data Analytics, algebra review for Applied Statistics, and SQL fundamentals for Database Systems."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/prerequisite\", \"value\": \"Spreadsheet basics\"}, {\"op\": \"add\", \"path\": \"/courses/1/prerequisite\", \"value\": \"Algebra review\"}, {\"op\": \"add\", \"path\": \"/courses/2/prerequisite\", \"value\": \"SQL fundamentals\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the suggested background for the last two classes as well: team leadership for Project Management and professional conduct for Ethics in Technology. Also tag the plan to the 2026 catalog."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/3/prerequisite\", \"value\": \"Team leadership\"}, {\"op\": \"add\", \"path\": \"/courses/4/prerequisite\", \"value\": \"Professional conduct\"}, {\"op\": \"add\", \"path\": \"/catalog_year\", \"value\": \"2026\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please mark the first three courses with their main learning focus: dashboards for Data Analytics, inference for Applied Statistics, and schema design for Database Systems."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/focus_area\", \"value\": \"Dashboards\"}, {\"op\": \"add\", \"path\": \"/courses/1/focus_area\", \"value\": \"Inference\"}, {\"op\": \"add\", \"path\": \"/courses/2/focus_area\", \"value\": \"Schema design\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the main learning focus for the last two classes too: stakeholder planning for Project Management and digital responsibility for Ethics in Technology. Mark the overall plan as ready for review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/3/focus_area\", \"value\": \"Stakeholder planning\"}, {\"op\": \"add\", \"path\": \"/courses/4/focus_area\", \"value\": \"Digital responsibility\"}, {\"op\": \"add\", \"path\": \"/plan_status\", \"value\": \"Ready for review\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the registration timing too: enrollment opens on April 6, the deadline is August 21, and the confirmation date is August 28."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/registration_timeline\", \"value\": {\"enrollment_opens\": \"2026-04-06\", \"registration_deadline\": \"2026-08-21\", \"confirmation_due\": \"2026-08-28\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, add that I'll meet on September 2 with Maya Patel to go over career fit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/career_review\", \"value\": {\"meeting_date\": \"2026-09-02\", \"coach\": \"Maya Patel\"}}]"
+    }
+  ],
+  "edit_instruction": "Please change Applied Statistics to 3 credits.",
+  "theme": "Changing a course's credit hours",
+  "master_data": null,
+  "current_json": {
+    "credit_requirement": 15,
+    "courses": [
+      {
+        "course_title": "Data Analytics",
+        "credit_hours": 3,
+        "grade_points": 3.7,
+        "instructor": "Dr. Lina Cho",
+        "meeting_day": "Monday",
+        "prerequisite": "Spreadsheet basics",
+        "focus_area": "Dashboards"
+      },
+      {
+        "course_title": "Applied Statistics",
+        "credit_hours": 4,
+        "grade_points": 3.3,
+        "instructor": "Prof. Marcus Reed",
+        "meeting_day": "Tuesday",
+        "prerequisite": "Algebra review",
+        "focus_area": "Inference"
+      },
+      {
+        "course_title": "Database Systems",
+        "credit_hours": 3,
+        "grade_points": 4.0,
+        "instructor": "Dr. Priya Shah",
+        "meeting_day": "Wednesday",
+        "prerequisite": "SQL fundamentals",
+        "focus_area": "Schema design"
+      },
+      {
+        "course_title": "Project Management",
+        "credit_hours": 2,
+        "grade_points": 3.5,
+        "instructor": "Prof. Elena Park",
+        "meeting_day": "Thursday",
+        "prerequisite": "Team leadership",
+        "focus_area": "Stakeholder planning"
+      },
+      {
+        "course_title": "Ethics in Technology",
+        "credit_hours": 3,
+        "grade_points": 3.8,
+        "instructor": "Dr. Samuel Ortiz",
+        "meeting_day": "Friday",
+        "prerequisite": "Professional conduct",
+        "focus_area": "Digital responsibility"
+      }
+    ],
+    "academic_summary": {
+      "total_credit_hours": 15,
+      "projected_gpa": 3.65,
+      "credits_remaining": 0
+    },
+    "plan_context": {
+      "term": "Fall 2026",
+      "institution": "North Valley College",
+      "delivery_format": "Online"
+    },
+    "advisor": "Karen Liu",
+    "catalog_year": "2026",
+    "plan_status": "Ready for review",
+    "registration_timeline": {
+      "enrollment_opens": "2026-04-06",
+      "registration_deadline": "2026-08-21",
+      "confirmation_due": "2026-08-28"
+    },
+    "career_review": {
+      "meeting_date": "2026-09-02",
+      "coach": "Maya Patel"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a course list where each course has credit hours and grade points, a GPA derives as the credit-weighted average, and credit totals and a remaining-to-requirement derive from the credits against a stated requirement. Around this core, add the realistic, independent details a course plan would carry that do not depend on the credit hours, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Change one course's credit hours to a specific new number.",
+  "cascade_pattern": "Editing a course's credits re-derives the GPA with its new weight, re-sums the credit total, and re-derives the remaining-to-requirement. Other courses and the requirement stay. This is determined because grades, credits, and the requirement are stated.",
+  "requires_master_data": false
+}

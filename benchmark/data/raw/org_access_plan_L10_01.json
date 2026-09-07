@@ -1,0 +1,104 @@
+{
+  "id": "org_access_plan_L10_01",
+  "domain": "org_access_plan",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start an org access plan for Maya Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee\", \"value\": {\"name\": \"Maya Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have Maya report to Jordan Patel for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/manager\", \"value\": \"Jordan Patel\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Jordan’s leadership line as Jordan Patel, then Lena Ortiz, then Amal Nasser."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manager_reporting\", \"value\": {\"reporting_chain\": \"Jordan Patel > Lena Ortiz > Amal Nasser\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For Jordan’s approvals, route them through Jordan Patel, then Victor Huang, then Amal Nasser."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manager_reporting/approval_path\", \"value\": \"Jordan Patel > Victor Huang > Amal Nasser\"}]"
+    },
+    {
+      "role": "user",
+      "content": "If something needs urgent handling under Jordan, use Lena Ortiz as the contact."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manager_reporting/escalation_contact\", \"value\": \"Lena Ortiz\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Jordan’s roll-up size for this plan is 18 people."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manager_reporting/team_rollup_count\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out Maya’s line and approval routing from Jordan’s details, and carry over the same urgent contact."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee_derived\", \"value\": {\"reporting_chain\": \"Maya Chen > Jordan Patel > Lena Ortiz > Amal Nasser\", \"approval_path\": \"Maya Chen > Jordan Patel > Victor Huang > Amal Nasser\", \"escalation_contact\": \"Lena Ortiz\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also carry over Jordan’s roll-up size for Maya’s plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee_derived/team_rollup_count\", \"value\": 18}]"
+    }
+  ],
+  "edit_instruction": "Please switch Maya Chen’s manager to Priya Raman.",
+  "theme": "Reassigning a manager",
+  "master_data": {
+    "Priya Raman": {
+      "reporting_chain": "Priya Raman > Omar Delgado > Amal Nasser",
+      "approval_path": "Priya Raman > Nia Brooks > Amal Nasser",
+      "escalation_contact": "Omar Delgado",
+      "team_rollup_count": 24
+    }
+  },
+  "current_json": {
+    "employee": {
+      "name": "Maya Chen",
+      "manager": "Jordan Patel"
+    },
+    "manager_reporting": {
+      "reporting_chain": "Jordan Patel > Lena Ortiz > Amal Nasser",
+      "approval_path": "Jordan Patel > Victor Huang > Amal Nasser",
+      "escalation_contact": "Lena Ortiz",
+      "team_rollup_count": 18
+    },
+    "employee_derived": {
+      "reporting_chain": "Maya Chen > Jordan Patel > Lena Ortiz > Amal Nasser",
+      "approval_path": "Maya Chen > Jordan Patel > Victor Huang > Amal Nasser",
+      "escalation_contact": "Lena Ortiz",
+      "team_rollup_count": 18
+    }
+  },
+  "conversation_pattern": "Center the artifact on an employee record where the manager determines a transitive approval path, reporting chain, escalation contact, and team roll-up count. Provide the replacement manager's own reporting attributes (chain, approval path, escalation contact, and team roll-up count) so each dependent value is uniquely determined: the new reporting chain is the employee prepended to the manager's supplied chain, the new approval path is the employee prepended to the manager's supplied approval path, the escalation contact is the manager's supplied escalation contact, and the team roll-up count is set to the manager's supplied team roll-up count. Around this core, add the realistic, independent details an org access plan would carry that do not depend on the manager, and vary their number from sample to sample. Do not embed a lookup or reference card for any manager inside the artifact; the artifact holds only the current manager's own reporting fields.",
+  "edit_pattern": "Change the employee's manager to a different specific manager, and supply that manager's reporting attributes in master_data.",
+  "cascade_pattern": "Changing the manager re-derives the approval path and reporting chain as the employee prepended to the replacement manager's supplied path and chain, sets the escalation contact to the replacement manager's supplied escalation contact, and sets the team roll-up count to the replacement manager's supplied team roll-up count. Role, access tier, and unrelated fields stay unchanged.",
+  "requires_master_data": true
+}

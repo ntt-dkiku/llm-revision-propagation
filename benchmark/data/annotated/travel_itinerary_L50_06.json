@@ -1,0 +1,408 @@
+{
+  "id": "travel_itinerary_L50_06",
+  "domain": "travel_itinerary",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I’m planning a one-day outing in Kyoto."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/destination\", \"value\": \"Kyoto\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let’s leave 15 minutes to get between each place throughout the day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planning_rules\", \"value\": {\"gap_between_stops_minutes\": 15}}]"
+    },
+    {
+      "role": "user",
+      "content": "I’d like the first visit to begin at 9:00 in the morning."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/day_start_time\", \"value\": \"09:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let’s make Fushimi Inari the first stop, and plan to spend about an hour and a half there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops\", \"value\": [{\"name\": \"Fushimi Inari Taisha\", \"duration_minutes\": 90}]}]"
+    },
+    {
+      "role": "user",
+      "content": "After that, add Nijo Castle as the next visit and give it an hour and fifteen minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Nijo Castle\", \"duration_minutes\": 75}}]"
+    },
+    {
+      "role": "user",
+      "content": "Then put Kiyomizu-dera after the castle and allow an hour and twenty minutes there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Kiyomizu-dera\", \"duration_minutes\": 80}}]"
+    },
+    {
+      "role": "user",
+      "content": "After Kiyomizu-dera, include a lunch stop at Nishiki Market and set aside 50 minutes for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Nishiki Market\", \"duration_minutes\": 50}}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, add the Kyoto Imperial Palace and give that visit one hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Kyoto Imperial Palace\", \"duration_minutes\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the route with an evening wander through Gion for about 45 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Gion\", \"duration_minutes\": 45}}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you pin down the exact clock times for the shrine visit based on that 9:00 start?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/0/start_time\", \"value\": \"09:00\"}, {\"op\": \"add\", \"path\": \"/stops/0/end_time\", \"value\": \"10:30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now set the clock times for the castle stop using the travel buffer after the shrine."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/1/start_time\", \"value\": \"10:45\"}, {\"op\": \"add\", \"path\": \"/stops/1/end_time\", \"value\": \"12:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please continue the timing for Kiyomizu-dera after the castle, keeping the same buffer."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/2/start_time\", \"value\": \"12:15\"}, {\"op\": \"add\", \"path\": \"/stops/2/end_time\", \"value\": \"13:35\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you set the lunch stop’s timing next, with the usual 15 minutes after Kiyomizu-dera?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/3/start_time\", \"value\": \"13:50\"}, {\"op\": \"add\", \"path\": \"/stops/3/end_time\", \"value\": \"14:40\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Then work out the Imperial Palace timing after lunch."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/4/start_time\", \"value\": \"14:55\"}, {\"op\": \"add\", \"path\": \"/stops/4/end_time\", \"value\": \"15:55\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Lastly, set the timing for Gion after the palace visit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/5/start_time\", \"value\": \"16:10\"}, {\"op\": \"add\", \"path\": \"/stops/5/end_time\", \"value\": \"16:55\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you add a simple wrap-up showing how many places we’ll visit and when the day finishes?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary\", \"value\": {\"stop_count\": 6, \"day_end_time\": \"16:55\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "It’ll just be two adults, no kids, and we’re fine with a moderate amount of walking."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/traveler_profile\", \"value\": {\"adults\": 2, \"children\": 0, \"walking_tolerance\": \"moderate\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "We’ll be based near Kyoto Station, at Hotel Granvia Kyoto, and we can leave bags there after checkout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging\", \"value\": {\"name\": \"Hotel Granvia Kyoto\", \"area\": \"Kyoto Station\", \"luggage_storage_available\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "For getting around, let’s mainly use trains, keep taxis as a backup, and avoid renting bikes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport_preferences\", \"value\": {\"primary_mode\": \"train\", \"backup_mode\": \"taxi\", \"avoid_bike_rental\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please note that I want lunch to be casual, preferably with vegetarian choices, and not too pricey."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dining_preferences\", \"value\": {\"lunch_style\": \"casual\", \"vegetarian_options_needed\": true, \"budget_level\": \"moderate\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Since it might rain, add that we should carry umbrellas, wear comfortable shoes, and keep the plan flexible."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/weather_preparedness\", \"value\": {\"carry_umbrella\": true, \"footwear\": \"comfortable walking shoes\", \"flexibility_level\": \"high\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For admission planning, assume we’ll buy shrine offerings with cash, reserve the palace visit in advance, and keep castle tickets flexible."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/booking_notes\", \"value\": {\"cash_for_shrine_offerings\": true, \"palace_reservation\": \"reserve in advance\", \"castle_ticket_plan\": \"buy same day\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a few reminders for the day: start with a full phone battery, bring a reusable water bottle, and keep the pace relaxed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/day_reminders\", \"value\": {\"phone_fully_charged\": true, \"bring_reusable_bottle\": true, \"pace\": \"relaxed\"}}]"
+    }
+  ],
+  "edit_instruction": "Please remove the Nishiki Market stop from the day’s schedule.",
+  "theme": "Removing a stop from the day's schedule",
+  "master_data": null,
+  "current_json": {
+    "destination": "Kyoto",
+    "planning_rules": {
+      "gap_between_stops_minutes": 15
+    },
+    "day_start_time": "09:00",
+    "stops": [
+      {
+        "name": "Fushimi Inari Taisha",
+        "duration_minutes": 90,
+        "start_time": "09:00",
+        "end_time": "10:30"
+      },
+      {
+        "name": "Nijo Castle",
+        "duration_minutes": 75,
+        "start_time": "10:45",
+        "end_time": "12:00"
+      },
+      {
+        "name": "Kiyomizu-dera",
+        "duration_minutes": 80,
+        "start_time": "12:15",
+        "end_time": "13:35"
+      },
+      {
+        "name": "Nishiki Market",
+        "duration_minutes": 50,
+        "start_time": "13:50",
+        "end_time": "14:40"
+      },
+      {
+        "name": "Kyoto Imperial Palace",
+        "duration_minutes": 60,
+        "start_time": "14:55",
+        "end_time": "15:55"
+      },
+      {
+        "name": "Gion",
+        "duration_minutes": 45,
+        "start_time": "16:10",
+        "end_time": "16:55"
+      }
+    ],
+    "summary": {
+      "stop_count": 6,
+      "day_end_time": "16:55"
+    },
+    "traveler_profile": {
+      "adults": 2,
+      "children": 0,
+      "walking_tolerance": "moderate"
+    },
+    "lodging": {
+      "name": "Hotel Granvia Kyoto",
+      "area": "Kyoto Station",
+      "luggage_storage_available": true
+    },
+    "transport_preferences": {
+      "primary_mode": "train",
+      "backup_mode": "taxi",
+      "avoid_bike_rental": true
+    },
+    "dining_preferences": {
+      "lunch_style": "casual",
+      "vegetarian_options_needed": true,
+      "budget_level": "moderate"
+    },
+    "weather_preparedness": {
+      "carry_umbrella": true,
+      "footwear": "comfortable walking shoes",
+      "flexibility_level": "high"
+    },
+    "booking_notes": {
+      "cash_for_shrine_offerings": true,
+      "palace_reservation": "reserve in advance",
+      "castle_ticket_plan": "buy same day"
+    },
+    "day_reminders": {
+      "phone_fully_charged": true,
+      "bring_reusable_bottle": true,
+      "pace": "relaxed"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "remove",
+      "path": "/stops/3",
+      "kind": "direct"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/start_time",
+      "kind": "cascade",
+      "value": "13:50"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/3/end_time",
+      "kind": "cascade",
+      "value": "14:50"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/4/start_time",
+      "kind": "cascade",
+      "value": "15:05"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/4/end_time",
+      "kind": "cascade",
+      "value": "15:50"
+    },
+    {
+      "op": "replace",
+      "path": "/summary/stop_count",
+      "kind": "cascade",
+      "value": 5
+    },
+    {
+      "op": "replace",
+      "path": "/summary/day_end_time",
+      "kind": "cascade",
+      "value": "15:50"
+    }
+  ],
+  "expected_json": {
+    "destination": "Kyoto",
+    "planning_rules": {
+      "gap_between_stops_minutes": 15
+    },
+    "day_start_time": "09:00",
+    "stops": [
+      {
+        "name": "Fushimi Inari Taisha",
+        "duration_minutes": 90,
+        "start_time": "09:00",
+        "end_time": "10:30"
+      },
+      {
+        "name": "Nijo Castle",
+        "duration_minutes": 75,
+        "start_time": "10:45",
+        "end_time": "12:00"
+      },
+      {
+        "name": "Kiyomizu-dera",
+        "duration_minutes": 80,
+        "start_time": "12:15",
+        "end_time": "13:35"
+      },
+      {
+        "name": "Kyoto Imperial Palace",
+        "duration_minutes": 60,
+        "start_time": "13:50",
+        "end_time": "14:50"
+      },
+      {
+        "name": "Gion",
+        "duration_minutes": 45,
+        "start_time": "15:05",
+        "end_time": "15:50"
+      }
+    ],
+    "summary": {
+      "stop_count": 5,
+      "day_end_time": "15:50"
+    },
+    "traveler_profile": {
+      "adults": 2,
+      "children": 0,
+      "walking_tolerance": "moderate"
+    },
+    "lodging": {
+      "name": "Hotel Granvia Kyoto",
+      "area": "Kyoto Station",
+      "luggage_storage_available": true
+    },
+    "transport_preferences": {
+      "primary_mode": "train",
+      "backup_mode": "taxi",
+      "avoid_bike_rental": true
+    },
+    "dining_preferences": {
+      "lunch_style": "casual",
+      "vegetarian_options_needed": true,
+      "budget_level": "moderate"
+    },
+    "weather_preparedness": {
+      "carry_umbrella": true,
+      "footwear": "comfortable walking shoes",
+      "flexibility_level": "high"
+    },
+    "booking_notes": {
+      "cash_for_shrine_offerings": true,
+      "palace_reservation": "reserve in advance",
+      "castle_ticket_plan": "buy same day"
+    },
+    "day_reminders": {
+      "phone_fully_charged": true,
+      "bring_reusable_bottle": true,
+      "pace": "relaxed"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Remove Nishiki Market (index 3, 50 min). Patches apply sequentially: after the remove, the two later stops sit at indices 3-4 and shift -65 min (50 dur + one 15 gap): Kyoto Imperial Palace 13:50-14:50, Gion 15:05-15:50. summary stop_count 6->5, day_end_time 16:55->15:50. Earlier stops (Fushimi/Nijo/Kiyomizu) and their durations stay.",
+  "conversation_pattern": "Center the artifact on a one-day itinerary built as an ordered list of timed stops, where each stop's time follows from the previous stop's end plus a stated gap and its own stated duration, rolling up to overall counts and a day-end time. Around this core, add the realistic, independent details a planner would record that do not depend on a stop's position in the day, and vary their number and the number of stops from sample to sample.",
+  "edit_pattern": "Remove one specific stop from the day.",
+  "cascade_pattern": "When a stop is removed, every later stop's time shifts earlier by the removed stop's duration plus one gap, the day-end shifts earlier, and the stop count falls by one. Stops before the removed one keep their times. This is determined because the durations and the gap are stated.",
+  "requires_master_data": false
+}

@@ -1,0 +1,247 @@
+{
+  "id": "data_pipeline_L50_04",
+  "domain": "data_pipeline",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start with the pipeline identifier: customer_activity_freshness."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline_id\", \"value\": \"customer_activity_freshness\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the freshness ceiling to 60 minutes, with consumers considered compliant only when they refresh within that limit; anything over the limit should be brought down to the ceiling and marked non-compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/freshness_policy\", \"value\": {\"max_allowed_staleness_minutes\": 60, \"rule\": \"consumer is compliant iff refresh_interval_minutes <= max_allowed_staleness_minutes; if refresh_interval_minutes exceeds the max, clamp it to the max and set compliance_status to non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the executive dashboard as the first downstream consumer; it refreshes every 30 minutes, so it should be compliant under the current ceiling."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers\", \"value\": [{\"name\": \"executive_dashboard\", \"refresh_interval_minutes\": 30, \"compliance_status\": \"compliant\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the lifecycle marketing export too; it currently runs every 90 minutes, so it should not be treated as meeting the 60-minute expectation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers/-\", \"value\": {\"name\": \"lifecycle_marketing_export\", \"refresh_interval_minutes\": 90, \"compliance_status\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also add the fraud monitoring feed; it refreshes every 15 minutes and should clearly pass the current freshness expectation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers/-\", \"value\": {\"name\": \"fraud_monitoring_feed\", \"refresh_interval_minutes\": 15, \"compliance_status\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the product recommendations service as another consumer; it refreshes hourly, which should still count as meeting the current policy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers/-\", \"value\": {\"name\": \"product_recommendations_service\", \"refresh_interval_minutes\": 60, \"compliance_status\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the customer support queue feed as well; it updates every 45 minutes, so it still fits within the current expectation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers/-\", \"value\": {\"name\": \"customer_support_queue_feed\", \"refresh_interval_minutes\": 45, \"compliance_status\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the data science feature store as another downstream consumer; it refreshes every 120 minutes, so it should be marked as not meeting the current 60-minute expectation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers/-\", \"value\": {\"name\": \"data_science_feature_store\", \"refresh_interval_minutes\": 120, \"compliance_status\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the mobile personalization API too; it refreshes every 20 minutes, so it should be safely within the freshness expectation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers/-\", \"value\": {\"name\": \"mobile_personalization_api\", \"refresh_interval_minutes\": 20, \"compliance_status\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add the finance revenue mart; it updates every 75 minutes, which means it should be treated as outside the current freshness limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers/-\", \"value\": {\"name\": \"finance_revenue_mart\", \"refresh_interval_minutes\": 75, \"compliance_status\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the email engagement warehouse as one more consumer; it runs every 55 minutes, so it should still qualify under the current freshness ceiling."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers/-\", \"value\": {\"name\": \"email_engagement_warehouse\", \"refresh_interval_minutes\": 55, \"compliance_status\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the partner attribution batch as the next consumer; it refreshes every 40 minutes, so it should be considered within the current freshness limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers/-\", \"value\": {\"name\": \"partner_attribution_batch\", \"refresh_interval_minutes\": 40, \"compliance_status\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Assign the pipeline to the customer data platform team, with Priya Nair as the main on-call contact and the usual Slack room for escalations."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ownership\", \"value\": {\"team\": \"customer_data_platform\", \"primary_oncall\": \"Priya Nair\", \"escalation_channel\": \"#cdp-data-alerts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record where the job runs: it should be on Databricks in the us-east-1 region using the jobs cluster named cdp-prod-small."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/runtime\", \"value\": {\"platform\": \"databricks\", \"region\": \"us-east-1\", \"cluster\": \"cdp-prod-small\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the upstream source details too: this should read from the Segment event stream, starting at the customer events topic, with the raw landing area in the bronze customer bucket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/source\", \"value\": {\"system\": \"segment_event_stream\", \"topic\": \"customer_events\", \"landing_zone\": \"s3://bronze-customer-events/raw\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the alerting setup: page when failures persist for two runs, send warnings after one missed run, and route incidents through PagerDuty."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/alerting\", \"value\": {\"failure_page_threshold_runs\": 2, \"warning_after_missed_runs\": 1, \"incident_tool\": \"pagerduty\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the regular run cadence too: it should start every 10 minutes, use UTC timing, and allow up to three retries before giving up."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule\", \"value\": {\"trigger_interval_minutes\": 10, \"timezone\": \"UTC\", \"max_retries\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, note that the curated outputs should be kept for 180 days, with older archives moved to Glacier."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/retention\", \"value\": {\"curated_output_days\": 180, \"archive_storage_class\": \"glacier\"}}]"
+    }
+  ],
+  "edit_instruction": "Please lower the freshness ceiling to 30 minutes.",
+  "theme": "Tightening the freshness-SLA policy",
+  "conversation_pattern": "Center the artifact on a pipeline with several downstream consumers, each carrying a refresh-interval-minutes value and a compliance flag, governed by a stated policy field 'max_allowed_staleness_minutes' with an explicit rule: a consumer is compliant iff its refresh interval is at most the policy max; a non-compliant consumer must have its refresh interval clamped down to the policy max and its flag set to 'non_compliant'. Make some consumers compliant and some not under the current policy, and ensure every consumer's initial compliance flag already matches the stated rule under the current policy (a consumer within the current max is compliant). Around this core, add realistic independent details that do not depend on the policy, and vary the number of consumers from sample to sample.",
+  "edit_pattern": "Tighten the policy's max_allowed_staleness_minutes to a specific stricter (smaller) value.",
+  "cascade_pattern": "Tightening the policy clamps the refresh interval of only those consumers whose interval now exceeds the new max down to that max and flips their flag to 'non_compliant'; consumers already within the new max and all unrelated fields stay unchanged. The affected set is determined by comparing each consumer's stated interval to the new policy max.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "pipeline_id": "customer_activity_freshness",
+    "freshness_policy": {
+      "max_allowed_staleness_minutes": 60,
+      "rule": "consumer is compliant iff refresh_interval_minutes <= max_allowed_staleness_minutes; if refresh_interval_minutes exceeds the max, clamp it to the max and set compliance_status to non_compliant"
+    },
+    "consumers": [
+      {
+        "name": "executive_dashboard",
+        "refresh_interval_minutes": 30,
+        "compliance_status": "compliant"
+      },
+      {
+        "name": "lifecycle_marketing_export",
+        "refresh_interval_minutes": 90,
+        "compliance_status": "non_compliant"
+      },
+      {
+        "name": "fraud_monitoring_feed",
+        "refresh_interval_minutes": 15,
+        "compliance_status": "compliant"
+      },
+      {
+        "name": "product_recommendations_service",
+        "refresh_interval_minutes": 60,
+        "compliance_status": "compliant"
+      },
+      {
+        "name": "customer_support_queue_feed",
+        "refresh_interval_minutes": 45,
+        "compliance_status": "compliant"
+      },
+      {
+        "name": "data_science_feature_store",
+        "refresh_interval_minutes": 120,
+        "compliance_status": "non_compliant"
+      },
+      {
+        "name": "mobile_personalization_api",
+        "refresh_interval_minutes": 20,
+        "compliance_status": "compliant"
+      },
+      {
+        "name": "finance_revenue_mart",
+        "refresh_interval_minutes": 75,
+        "compliance_status": "non_compliant"
+      },
+      {
+        "name": "email_engagement_warehouse",
+        "refresh_interval_minutes": 55,
+        "compliance_status": "compliant"
+      },
+      {
+        "name": "partner_attribution_batch",
+        "refresh_interval_minutes": 40,
+        "compliance_status": "compliant"
+      }
+    ],
+    "ownership": {
+      "team": "customer_data_platform",
+      "primary_oncall": "Priya Nair",
+      "escalation_channel": "#cdp-data-alerts"
+    },
+    "runtime": {
+      "platform": "databricks",
+      "region": "us-east-1",
+      "cluster": "cdp-prod-small"
+    },
+    "source": {
+      "system": "segment_event_stream",
+      "topic": "customer_events",
+      "landing_zone": "s3://bronze-customer-events/raw"
+    },
+    "alerting": {
+      "failure_page_threshold_runs": 2,
+      "warning_after_missed_runs": 1,
+      "incident_tool": "pagerduty"
+    },
+    "schedule": {
+      "trigger_interval_minutes": 10,
+      "timezone": "UTC",
+      "max_retries": 3
+    },
+    "retention": {
+      "curated_output_days": 180,
+      "archive_storage_class": "glacier"
+    }
+  }
+}

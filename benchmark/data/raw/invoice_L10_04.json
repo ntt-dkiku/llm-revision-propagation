@@ -1,0 +1,107 @@
+{
+  "id": "invoice_L10_04",
+  "domain": "invoice",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Please start an invoice using INV-2025-0147 as its number."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoiceNumber\", \"value\": \"INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short memo that reads: Payment reference: INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/memo\", \"value\": \"Payment reference: INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Name the saved PDF Invoice_INV-2025-0147.pdf."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/documentFileName\", \"value\": \"Invoice_INV-2025-0147.pdf\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a remittance note saying to quote INV-2025-0147 with the bank transfer."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/remittanceNote\", \"value\": \"Quote INV-2025-0147 with bank transfer\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a customer portal link that ends with /invoices/INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customerPortalUrl\", \"value\": \"https://billing.example.com/invoices/INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the email subject to say Invoice INV-2025-0147 from Northstar Studio."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emailSubject\", \"value\": \"Invoice INV-2025-0147 from Northstar Studio\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Put a footer on the invoice that says Records retained under INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/footerText\", \"value\": \"Records retained under INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an internal tracking label that reads AR-INV-2025-0147-open."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/internalTrackingLabel\", \"value\": \"AR-INV-2025-0147-open\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the QR code text resolve to pay:INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/qrCodePayload\", \"value\": \"pay:INV-2025-0147\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a confirmation line saying Northstar Studio acknowledges invoice INV-2025-0147."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/confirmationLine\", \"value\": \"Northstar Studio acknowledges invoice INV-2025-0147\"}]"
+    }
+  ],
+  "edit_instruction": "Please change the invoice number from INV-2025-0147 to INV-2025-0198.",
+  "theme": "Propagating a changed invoice number",
+  "master_data": null,
+  "current_json": {
+    "invoiceNumber": "INV-2025-0147",
+    "memo": "Payment reference: INV-2025-0147",
+    "documentFileName": "Invoice_INV-2025-0147.pdf",
+    "remittanceNote": "Quote INV-2025-0147 with bank transfer",
+    "customerPortalUrl": "https://billing.example.com/invoices/INV-2025-0147",
+    "emailSubject": "Invoice INV-2025-0147 from Northstar Studio",
+    "footerText": "Records retained under INV-2025-0147",
+    "internalTrackingLabel": "AR-INV-2025-0147-open",
+    "qrCodePayload": "pay:INV-2025-0147",
+    "confirmationLine": "Northstar Studio acknowledges invoice INV-2025-0147"
+  },
+  "conversation_pattern": "Center the artifact on an invoice that declares one identifier, where several other fields embed or reference that identifier as a visible token. Around this core, add the realistic, independent details an invoice would carry that do not embed that identifier, and vary their number from sample to sample.",
+  "edit_pattern": "Change the invoice number to a different identifier.",
+  "cascade_pattern": "Changing the identifier updates every field that embeds it, substituting the token while the surrounding text stays. Identifiers and fields that do not reference it are unaffected.",
+  "requires_master_data": false
+}

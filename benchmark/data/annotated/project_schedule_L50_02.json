@@ -1,0 +1,417 @@
+{
+  "id": "project_schedule_L50_02",
+  "domain": "project_schedule",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a plan for the customer portal rollout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project_name\", \"value\": \"Customer Portal Rollout\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the rollout begin on April 7, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/start_date\", \"value\": \"2025-04-07\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the first activity a kickoff and requirements alignment that starts right at the beginning and takes 3 days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"task_id\": \"T1\", \"task_name\": \"Kickoff and Requirements Alignment\", \"duration_days\": 3, \"predecessor\": \"project_start\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the kickoff running from its first day through the end of that three-day effort."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/0/start_date\", \"value\": \"2025-04-07\"}, {\"op\": \"add\", \"path\": \"/tasks/0/finish_date\", \"value\": \"2025-04-09\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, add a solution design activity that follows the kickoff and takes 4 days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task_name\": \"Solution Design\", \"duration_days\": 4, \"predecessor\": \"Kickoff and Requirements Alignment\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Place that design work immediately after kickoff, with the four days filled in on the calendar."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/1/start_date\", \"value\": \"2025-04-10\"}, {\"op\": \"add\", \"path\": \"/tasks/1/finish_date\", \"value\": \"2025-04-13\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After the design is done, add preparation for data migration and give it five days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task_name\": \"Data Migration Prep\", \"duration_days\": 5, \"predecessor\": \"Solution Design\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the migration prep right after design and carry it across its full five-day span."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/2/start_date\", \"value\": \"2025-04-14\"}, {\"op\": \"add\", \"path\": \"/tasks/2/finish_date\", \"value\": \"2025-04-18\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Then add the integration build work after migration prep, and make it a six-day effort."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task_name\": \"Integration Build\", \"duration_days\": 6, \"predecessor\": \"Data Migration Prep\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the integration build immediately after the migration prep and mark out its six calendar days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/3/start_date\", \"value\": \"2025-04-19\"}, {\"op\": \"add\", \"path\": \"/tasks/3/finish_date\", \"value\": \"2025-04-24\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After the build, add user acceptance testing and give it four days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task_name\": \"User Acceptance Testing\", \"duration_days\": 4, \"predecessor\": \"Integration Build\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the testing right after the build, across its four-day window."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/4/start_date\", \"value\": \"2025-04-25\"}, {\"op\": \"add\", \"path\": \"/tasks/4/finish_date\", \"value\": \"2025-04-28\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After testing wraps, add a deployment rehearsal and allow two days for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task_name\": \"Deployment Rehearsal\", \"duration_days\": 2, \"predecessor\": \"User Acceptance Testing\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the rehearsal immediately after testing and show the two days it occupies."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/5/start_date\", \"value\": \"2025-04-29\"}, {\"op\": \"add\", \"path\": \"/tasks/5/finish_date\", \"value\": \"2025-04-30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, add the production launch after the rehearsal, and make it a one-day activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task_name\": \"Production Launch\", \"duration_days\": 1, \"predecessor\": \"Deployment Rehearsal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Place the production launch on the day right after the rehearsal."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/6/start_date\", \"value\": \"2025-05-01\"}, {\"op\": \"add\", \"path\": \"/tasks/6/finish_date\", \"value\": \"2025-05-01\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now summarize the schedule with the total number of activities and the final completion day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule_summary\", \"value\": {\"task_count\": 7, \"project_end_date\": \"2025-05-01\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note Maya Chen as the project manager from the PMO team."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders\", \"value\": [{\"name\": \"Maya Chen\", \"role\": \"Project Manager\", \"team\": \"PMO\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Omar Patel as the technical lead from the engineering group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stakeholders/-\", \"value\": {\"name\": \"Omar Patel\", \"role\": \"Technical Lead\", \"team\": \"Engineering\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a reminder that customer support should get advance notice before launch, with Lena Ortiz owning that communication."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communications\", \"value\": [{\"audience\": \"Customer Support\", \"owner\": \"Lena Ortiz\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a budget note saying finance owns the approved cap of 180,000 dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget\", \"value\": {\"approved_cap_usd\": 180000, \"owner\": \"Finance\"}}]"
+    }
+  ],
+  "edit_instruction": "Please remove the Data Migration Prep activity from the schedule.",
+  "theme": "Removing a task from the schedule",
+  "master_data": null,
+  "current_json": {
+    "project_name": "Customer Portal Rollout",
+    "start_date": "2025-04-07",
+    "tasks": [
+      {
+        "task_id": "T1",
+        "task_name": "Kickoff and Requirements Alignment",
+        "duration_days": 3,
+        "predecessor": "project_start",
+        "start_date": "2025-04-07",
+        "finish_date": "2025-04-09"
+      },
+      {
+        "task_name": "Solution Design",
+        "duration_days": 4,
+        "predecessor": "Kickoff and Requirements Alignment",
+        "start_date": "2025-04-10",
+        "finish_date": "2025-04-13"
+      },
+      {
+        "task_name": "Data Migration Prep",
+        "duration_days": 5,
+        "predecessor": "Solution Design",
+        "start_date": "2025-04-14",
+        "finish_date": "2025-04-18"
+      },
+      {
+        "task_name": "Integration Build",
+        "duration_days": 6,
+        "predecessor": "Data Migration Prep",
+        "start_date": "2025-04-19",
+        "finish_date": "2025-04-24"
+      },
+      {
+        "task_name": "User Acceptance Testing",
+        "duration_days": 4,
+        "predecessor": "Integration Build",
+        "start_date": "2025-04-25",
+        "finish_date": "2025-04-28"
+      },
+      {
+        "task_name": "Deployment Rehearsal",
+        "duration_days": 2,
+        "predecessor": "User Acceptance Testing",
+        "start_date": "2025-04-29",
+        "finish_date": "2025-04-30"
+      },
+      {
+        "task_name": "Production Launch",
+        "duration_days": 1,
+        "predecessor": "Deployment Rehearsal",
+        "start_date": "2025-05-01",
+        "finish_date": "2025-05-01"
+      }
+    ],
+    "schedule_summary": {
+      "task_count": 7,
+      "project_end_date": "2025-05-01"
+    },
+    "stakeholders": [
+      {
+        "name": "Maya Chen",
+        "role": "Project Manager",
+        "team": "PMO"
+      },
+      {
+        "name": "Omar Patel",
+        "role": "Technical Lead",
+        "team": "Engineering"
+      }
+    ],
+    "communications": [
+      {
+        "audience": "Customer Support",
+        "owner": "Lena Ortiz"
+      }
+    ],
+    "budget": {
+      "approved_cap_usd": 180000,
+      "owner": "Finance"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "remove",
+      "path": "/tasks/2",
+      "kind": "direct"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/2/predecessor",
+      "kind": "cascade",
+      "value": "Solution Design"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/2/start_date",
+      "kind": "cascade",
+      "value": "2025-04-14"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/2/finish_date",
+      "kind": "cascade",
+      "value": "2025-04-19"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/3/start_date",
+      "kind": "cascade",
+      "value": "2025-04-20"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/3/finish_date",
+      "kind": "cascade",
+      "value": "2025-04-23"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/4/start_date",
+      "kind": "cascade",
+      "value": "2025-04-24"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/4/finish_date",
+      "kind": "cascade",
+      "value": "2025-04-25"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/5/start_date",
+      "kind": "cascade",
+      "value": "2025-04-26"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/5/finish_date",
+      "kind": "cascade",
+      "value": "2025-04-26"
+    },
+    {
+      "op": "replace",
+      "path": "/schedule_summary/task_count",
+      "kind": "cascade",
+      "value": 6
+    },
+    {
+      "op": "replace",
+      "path": "/schedule_summary/project_end_date",
+      "kind": "cascade",
+      "value": "2025-04-26"
+    }
+  ],
+  "expected_json": {
+    "project_name": "Customer Portal Rollout",
+    "start_date": "2025-04-07",
+    "tasks": [
+      {
+        "task_id": "T1",
+        "task_name": "Kickoff and Requirements Alignment",
+        "duration_days": 3,
+        "predecessor": "project_start",
+        "start_date": "2025-04-07",
+        "finish_date": "2025-04-09"
+      },
+      {
+        "task_name": "Solution Design",
+        "duration_days": 4,
+        "predecessor": "Kickoff and Requirements Alignment",
+        "start_date": "2025-04-10",
+        "finish_date": "2025-04-13"
+      },
+      {
+        "task_name": "Integration Build",
+        "duration_days": 6,
+        "predecessor": "Solution Design",
+        "start_date": "2025-04-14",
+        "finish_date": "2025-04-19"
+      },
+      {
+        "task_name": "User Acceptance Testing",
+        "duration_days": 4,
+        "predecessor": "Integration Build",
+        "start_date": "2025-04-20",
+        "finish_date": "2025-04-23"
+      },
+      {
+        "task_name": "Deployment Rehearsal",
+        "duration_days": 2,
+        "predecessor": "User Acceptance Testing",
+        "start_date": "2025-04-24",
+        "finish_date": "2025-04-25"
+      },
+      {
+        "task_name": "Production Launch",
+        "duration_days": 1,
+        "predecessor": "Deployment Rehearsal",
+        "start_date": "2025-04-26",
+        "finish_date": "2025-04-26"
+      }
+    ],
+    "schedule_summary": {
+      "task_count": 6,
+      "project_end_date": "2025-04-26"
+    },
+    "stakeholders": [
+      {
+        "name": "Maya Chen",
+        "role": "Project Manager",
+        "team": "PMO"
+      },
+      {
+        "name": "Omar Patel",
+        "role": "Technical Lead",
+        "team": "Engineering"
+      }
+    ],
+    "communications": [
+      {
+        "audience": "Customer Support",
+        "owner": "Lena Ortiz"
+      }
+    ],
+    "budget": {
+      "approved_cap_usd": 180000,
+      "owner": "Finance"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Remove Data Migration Prep (index 2, 5 days). Integration Build relinks its predecessor to Solution Design (the removed task predecessor); patches apply sequentially so the later tasks sit at indices 2-5 and shift -5 calendar days (finish = start + duration - 1; successor starts the day after): Integration Build 04-14->04-19, UAT 04-20->04-23, Deployment Rehearsal 04-24->04-25, Production Launch 04-26. schedule_summary.task_count 7->6, project_end_date 05-01->04-26. Kickoff and Solution Design stay.",
+  "conversation_pattern": "Center the artifact on a task list where each task has a stated duration and names the predecessor it starts after, so finishes derive along the precedence chain and a removed task's successors can relink, rolling up to a task count and a project end. Around this core, add the realistic, independent details a project plan would carry that do not depend on the schedule dates, and vary their number and the number of tasks from sample to sample.",
+  "edit_pattern": "Remove one task from the middle of the precedence chain.",
+  "cascade_pattern": "Removing a task relinks its successors to its predecessor, pulls downstream dates earlier, lowers the task count by one, and moves the project end. Tasks upstream of the removal stay. This is determined because durations and links are stated.",
+  "requires_master_data": false
+}

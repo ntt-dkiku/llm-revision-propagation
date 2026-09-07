@@ -1,0 +1,175 @@
+{
+  "id": "travel_itinerary_L10_03",
+  "domain": "travel_itinerary",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "We're planning this getaway for four travelers."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/party_size\", \"value\": 4}]"
+    },
+    {
+      "role": "user",
+      "content": "For the apartment stay, budget $95 per traveler."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging/per_traveler_price\", \"value\": 95}]"
+    },
+    {
+      "role": "user",
+      "content": "That puts the apartment at $380 for everyone together."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging/group_total\", \"value\": 380}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's also include a museum-and-food tour at $45 for each traveler."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/0/per_traveler_price\", \"value\": 45}]"
+    },
+    {
+      "role": "user",
+      "content": "For four of us, that tour comes to $180 altogether."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/0/group_total\", \"value\": 180}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a local transit pass too, at $18 per person."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/per_traveler_price\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "For the whole group, those transit passes add up to $72."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/group_total\", \"value\": 72}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you roll those three costs into one overall trip budget for the group?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget/group_total\", \"value\": 632}]"
+    },
+    {
+      "role": "user",
+      "content": "What should each of us plan to chip in if we split that evenly?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget/per_traveler_share\", \"value\": 158}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's make this getaway to Lisbon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/destination\", \"value\": \"Lisbon\"}]"
+    }
+  ],
+  "edit_instruction": "Actually, make the trip for six travelers.",
+  "theme": "Changing the party size",
+  "master_data": null,
+  "current_json": {
+    "party_size": 4,
+    "lodging": {
+      "per_traveler_price": 95,
+      "group_total": 380
+    },
+    "activities": {
+      "0": {
+        "per_traveler_price": 45,
+        "group_total": 180
+      }
+    },
+    "transport": {
+      "per_traveler_price": 18,
+      "group_total": 72
+    },
+    "budget": {
+      "group_total": 632,
+      "per_traveler_share": 158
+    },
+    "destination": "Lisbon"
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/party_size",
+      "kind": "direct",
+      "value": 6
+    },
+    {
+      "op": "replace",
+      "path": "/lodging/group_total",
+      "kind": "cascade",
+      "value": 570
+    },
+    {
+      "op": "replace",
+      "path": "/activities/0/group_total",
+      "kind": "cascade",
+      "value": 270
+    },
+    {
+      "op": "replace",
+      "path": "/transport/group_total",
+      "kind": "cascade",
+      "value": 108
+    },
+    {
+      "op": "replace",
+      "path": "/budget/group_total",
+      "kind": "cascade",
+      "value": 948
+    }
+  ],
+  "expected_json": {
+    "party_size": 6,
+    "lodging": {
+      "per_traveler_price": 95,
+      "group_total": 570
+    },
+    "activities": {
+      "0": {
+        "per_traveler_price": 45,
+        "group_total": 270
+      }
+    },
+    "transport": {
+      "per_traveler_price": 18,
+      "group_total": 108
+    },
+    "budget": {
+      "group_total": 948,
+      "per_traveler_share": 158
+    },
+    "destination": "Lisbon"
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "Party 4->6. lodging 95*6=570, activities 45*6=270, transport 18*6=108, group_total 948. per_traveler_share is a structural invariant (= sum of per-traveler unit prices 95+45+18=158, independent of party_size), so it never cascades from a party-size change and is excluded from the gold change set; expected_json keeps it at 158. | REVIEW EDIT (with author): per_traveler_share was originally part of the gold change set (cascade, value 158); removed because it is a structural invariant (see above), so a net-effect scorer cannot reward locating it and it produced a spurious miss for every method. expected_json still keeps it at 158.",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a group trip with a party size, where per-unit quantities, aggregate totals, and per-person shares all derive from that count by stated arithmetic (the count times a unit price, sums of those, totals divided by the count), so the count determines them. Around this core, add the realistic, independent details a traveler would record that do not depend on the number of travelers, and vary their number from sample to sample.",
+  "edit_pattern": "Change the party size to a specific new number of travelers.",
+  "cascade_pattern": "Each quantity re-derives as the new count times its unit price, the aggregates re-sum, and per-person shares re-divide by the new count, so the new count fixes each. Unit prices and rates stay unchanged.",
+  "requires_master_data": false
+}

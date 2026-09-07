@@ -1,0 +1,325 @@
+{
+  "id": "travel_itinerary_L50_00",
+  "domain": "travel_itinerary",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm planning a trip that starts on April 10, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip\", \"value\": {\"anchor_start_date\": \"2026-04-10\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the outbound flight leave two days after the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport\", \"value\": {\"outbound_flight\": {\"day_offset_from_start\": 2, \"departure_date\": \"2026-04-12\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the first hotel check-in happen that same day, two days after the trip begins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging\", \"value\": {\"first_hotel_check_in\": {\"day_offset_from_start\": 2, \"date\": \"2026-04-12\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the flight home for nine days after the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/return_flight\", \"value\": {\"day_offset_from_start\": 9, \"departure_date\": \"2026-04-19\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the city museum visit three days after the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities\", \"value\": {\"city_museum_visit\": {\"day_offset_from_start\": 3, \"date\": \"2026-04-13\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a food tour five days after the trip begins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/food_tour\", \"value\": {\"day_offset_from_start\": 5, \"date\": \"2026-04-15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan a day trip to the coast for six days after the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/coastal_day_trip\", \"value\": {\"day_offset_from_start\": 6, \"date\": \"2026-04-16\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the last hotel checkout for the same day as the flight home, nine days after the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging/final_hotel_check_out\", \"value\": {\"day_offset_from_start\": 9, \"date\": \"2026-04-19\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the train ride to the mountain town four days after the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/mountain_town_train\", \"value\": {\"day_offset_from_start\": 4, \"departure_date\": \"2026-04-14\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the farewell dinner seven days after the trip begins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/farewell_dinner\", \"value\": {\"day_offset_from_start\": 7, \"date\": \"2026-04-17\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a relaxed neighborhood walk eight days after the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/neighborhood_walk\", \"value\": {\"day_offset_from_start\": 8, \"date\": \"2026-04-18\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a pre-departure briefing one day after the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/pre_departure_briefing\", \"value\": {\"day_offset_from_start\": 1, \"date\": \"2026-04-11\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule a riverside bike tour for four days after the trip begins, after the train ride."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/riverside_bike_tour\", \"value\": {\"day_offset_from_start\": 4, \"date\": \"2026-04-14\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a spa appointment two days before the flight home, so that’s seven days after the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/spa_appointment\", \"value\": {\"day_offset_from_start\": 7, \"date\": \"2026-04-17\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Remind me to download the tickets three days before the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pre_trip\", \"value\": {\"ticket_download_reminder\": {\"day_offset_from_start\": -3, \"date\": \"2026-04-07\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to check my passport ten days before the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pre_trip/passport_check_reminder\", \"value\": {\"day_offset_from_start\": -10, \"date\": \"2026-03-31\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Remind me to start packing two days before the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pre_trip/packing_reminder\", \"value\": {\"day_offset_from_start\": -2, \"date\": \"2026-04-08\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an airport pickup for the same day I arrive, two days after the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/airport_pickup\", \"value\": {\"day_offset_from_start\": 2, \"date\": \"2026-04-12\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to confirm the pet sitter one week before the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pre_trip/pet_sitter_confirmation\", \"value\": {\"day_offset_from_start\": -7, \"date\": \"2026-04-03\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set a reminder to buy travel insurance two weeks before the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pre_trip/travel_insurance_reminder\", \"value\": {\"day_offset_from_start\": -14, \"date\": \"2026-03-27\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to book the airport parking five days before the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pre_trip/airport_parking_reminder\", \"value\": {\"day_offset_from_start\": -5, \"date\": \"2026-04-05\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Remind me to review visa requirements three weeks before the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pre_trip/visa_requirements_review\", \"value\": {\"day_offset_from_start\": -21, \"date\": \"2026-03-20\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder to order local currency twelve days before the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pre_trip/local_currency_order\", \"value\": {\"day_offset_from_start\": -12, \"date\": \"2026-03-29\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the rental car return on the same day I leave, nine days after the trip starts, and note that it should be at 10:00 in the morning."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/rental_car_return\", \"value\": {\"day_offset_from_start\": 9, \"date\": \"2026-04-19\", \"time\": \"10:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a final photo backup for eight days after the trip starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activities/final_photo_backup\", \"value\": {\"day_offset_from_start\": 8, \"date\": \"2026-04-18\"}}]"
+    }
+  ],
+  "edit_instruction": "Change the trip start date to April 13, 2026.",
+  "theme": "Shifting the trip's anchor date",
+  "master_data": null,
+  "current_json": {
+    "trip": {
+      "anchor_start_date": "2026-04-10"
+    },
+    "transport": {
+      "outbound_flight": {
+        "day_offset_from_start": 2,
+        "departure_date": "2026-04-12"
+      },
+      "return_flight": {
+        "day_offset_from_start": 9,
+        "departure_date": "2026-04-19"
+      },
+      "mountain_town_train": {
+        "day_offset_from_start": 4,
+        "departure_date": "2026-04-14"
+      },
+      "airport_pickup": {
+        "day_offset_from_start": 2,
+        "date": "2026-04-12"
+      },
+      "rental_car_return": {
+        "day_offset_from_start": 9,
+        "date": "2026-04-19",
+        "time": "10:00"
+      }
+    },
+    "lodging": {
+      "first_hotel_check_in": {
+        "day_offset_from_start": 2,
+        "date": "2026-04-12"
+      },
+      "final_hotel_check_out": {
+        "day_offset_from_start": 9,
+        "date": "2026-04-19"
+      }
+    },
+    "activities": {
+      "city_museum_visit": {
+        "day_offset_from_start": 3,
+        "date": "2026-04-13"
+      },
+      "food_tour": {
+        "day_offset_from_start": 5,
+        "date": "2026-04-15"
+      },
+      "coastal_day_trip": {
+        "day_offset_from_start": 6,
+        "date": "2026-04-16"
+      },
+      "farewell_dinner": {
+        "day_offset_from_start": 7,
+        "date": "2026-04-17"
+      },
+      "neighborhood_walk": {
+        "day_offset_from_start": 8,
+        "date": "2026-04-18"
+      },
+      "pre_departure_briefing": {
+        "day_offset_from_start": 1,
+        "date": "2026-04-11"
+      },
+      "riverside_bike_tour": {
+        "day_offset_from_start": 4,
+        "date": "2026-04-14"
+      },
+      "spa_appointment": {
+        "day_offset_from_start": 7,
+        "date": "2026-04-17"
+      },
+      "final_photo_backup": {
+        "day_offset_from_start": 8,
+        "date": "2026-04-18"
+      }
+    },
+    "pre_trip": {
+      "ticket_download_reminder": {
+        "day_offset_from_start": -3,
+        "date": "2026-04-07"
+      },
+      "passport_check_reminder": {
+        "day_offset_from_start": -10,
+        "date": "2026-03-31"
+      },
+      "packing_reminder": {
+        "day_offset_from_start": -2,
+        "date": "2026-04-08"
+      },
+      "pet_sitter_confirmation": {
+        "day_offset_from_start": -7,
+        "date": "2026-04-03"
+      },
+      "travel_insurance_reminder": {
+        "day_offset_from_start": -14,
+        "date": "2026-03-27"
+      },
+      "airport_parking_reminder": {
+        "day_offset_from_start": -5,
+        "date": "2026-04-05"
+      },
+      "visa_requirements_review": {
+        "day_offset_from_start": -21,
+        "date": "2026-03-20"
+      },
+      "local_currency_order": {
+        "day_offset_from_start": -12,
+        "date": "2026-03-29"
+      }
+    }
+  },
+  "conversation_pattern": "Center the artifact on a trip anchored on one date, where several other dates each derive from that anchor by a fixed offset stated in the conversation, so the anchor alone determines them. Around this core, add the realistic, independent details a traveler would record that do not depend on the dates, and vary their number from sample to sample.",
+  "edit_pattern": "Move the anchor start date to a specific new date a few days from the original.",
+  "cascade_pattern": "Every date that derives from the anchor shifts by the same delta, since each is the anchor plus a fixed offset, so the new anchor uniquely fixes them all. Values that do not derive from the anchor date stay unchanged.",
+  "requires_master_data": false
+}

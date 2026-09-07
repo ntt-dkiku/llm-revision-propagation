@@ -1,0 +1,497 @@
+{
+  "id": "software_deployment_config_L100_02",
+  "domain": "software_deployment_config",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Can we start this deployment plan for the payments API?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/service_name\", \"value\": \"payments-api\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let’s run three copies of it to start."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment\", \"value\": {\"replicas\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give each copy 6 GiB of memory for its normal request."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/per_pod_memory_request_gib\", \"value\": 6}]"
+    },
+    {
+      "role": "user",
+      "content": "Please spell out how we’ll calculate the overall memory reservation from those two numbers."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/total_memory_formula\", \"value\": \"total_memory_gib = replicas * per_pod_memory_request_gib\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and work out that overall memory reservation now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/total_memory_gib\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the cutoff at 20 GiB, staying on the m6i.2xlarge pool when we fit and moving to m6i.4xlarge if we go over."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/memory_budget_policy\", \"value\": {\"node_memory_budget_gib\": 20, \"baseline_node_pool_tier\": \"m6i.2xlarge\", \"larger_node_pool_tier\": \"m6i.4xlarge\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also document both outcomes for that cutoff so it’s clear what happens on either side."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/memory_budget_policy/branch_rules\", \"value\": {\"over_budget\": \"if total_memory_gib > node_memory_budget_gib, node_pool_tier = larger_node_pool_tier and needs_larger_nodes = true\", \"at_or_below_budget\": \"if total_memory_gib <= node_memory_budget_gib, node_pool_tier = baseline_node_pool_tier and needs_larger_nodes = false\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Based on the current reservation, choose the node size outcome now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/node_pool_tier\", \"value\": \"m6i.2xlarge\"}, {\"op\": \"add\", \"path\": \"/deployment/needs_larger_nodes\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Put it in production in the US East region, using the main cluster there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment\", \"value\": {\"stage\": \"production\", \"region\": \"us-east-1\", \"cluster\": \"use1-prod-main\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use our ECR-hosted payments image with the 2026.06.1 release tag."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/image\", \"value\": {\"registry\": \"123456789012.dkr.ecr.us-east-1.amazonaws.com\", \"repository\": \"payments-api\", \"tag\": \"2026.06.1\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make it reachable only inside the cluster on port 8080 over HTTP."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/network\", \"value\": {\"exposure\": \"internal\", \"port\": 8080, \"protocol\": \"HTTP\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a simple health check that hits the ready endpoint every ten seconds after a short startup wait."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/health_check\", \"value\": {\"path\": \"/ready\", \"interval_seconds\": 10, \"initial_delay_seconds\": 15}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a rolling rollout and allow one extra instance during the update with none taken down early."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment_strategy\", \"value\": {\"type\": \"RollingUpdate\", \"max_surge\": 1, \"max_unavailable\": 0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Attach it to the payments team and mark the on-call group as the primary owner."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ownership\", \"value\": {\"team\": \"payments\", \"primary_on_call\": \"payments-platform\", \"cost_center\": \"fintech-042\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the standard labels so it’s easy to group with the rest of the payment services."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/labels\", \"value\": {\"app\": \"payments-api\", \"domain\": \"payments\", \"managed_by\": \"platform-team\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a couple of annotations for the runbook and the dashboard."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/annotations\", \"value\": {\"runbook_url\": \"https://runbooks.example.com/payments-api\", \"dashboard_url\": \"https://grafana.example.com/d/payments-api\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set a modest CPU reservation with a two-core cap, and keep the process on UTC time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/runtime\", \"value\": {\"cpu_request_cores\": 1, \"cpu_limit_cores\": 2, \"timezone\": \"UTC\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send application logs to CloudWatch in structured form and keep them around for a month."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/logging\", \"value\": {\"destination\": \"cloudwatch\", \"format\": \"json\", \"retention_days\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Wire it into Prometheus with metrics scraped from the usual endpoint every 30 seconds."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/metrics\", \"value\": {\"enabled\": true, \"scrape_path\": \"/metrics\", \"scrape_interval_seconds\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Store its secrets in AWS Secrets Manager, and point it at the production payments entry."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/secrets\", \"value\": {\"provider\": \"aws-secrets-manager\", \"secret_name\": \"prod/payments/api\", \"rotation_enabled\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the payments service account with the read-only ledger role attached."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/identity\", \"value\": {\"service_account\": \"payments-api-sa\", \"iam_role\": \"arn:aws:iam::123456789012:role/payments-ledger-readonly\", \"automount_token\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the application to live mode, point it at the ledger service, and keep its log level at info."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/application_config\", \"value\": {\"mode\": \"live\", \"ledger_endpoint\": \"https://ledger.internal.svc.cluster.local\", \"log_level\": \"info\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the database connection details for the production payments writer, using SSL."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/database\", \"value\": {\"host\": \"payments-writer.prod.rds.internal\", \"port\": 5432, \"ssl_mode\": \"require\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Limit outbound traffic to the ledger service and the database only."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/egress_allowlist\", \"value\": [{\"name\": \"ledger-service\", \"destination\": \"ledger.internal.svc.cluster.local\", \"port\": 443}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the database destination in that outbound list as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/egress_allowlist/-\", \"value\": {\"name\": \"payments-db\", \"destination\": \"payments-writer.prod.rds.internal\", \"port\": 5432}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set up autoscaling on CPU pressure, but keep it from going below the planned steady size."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/autoscaling\", \"value\": {\"enabled\": true, \"min_replicas\": 3, \"max_replicas\": 6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have that scaling react around 70 percent CPU and wait a few minutes before scaling back down."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/autoscaling/target_cpu_utilization_percent\", \"value\": 70}, {\"op\": \"add\", \"path\": \"/autoscaling/scale_down_stabilization_seconds\", \"value\": 300}]"
+    },
+    {
+      "role": "user",
+      "content": "Add pod placement preferences so copies spread across zones and avoid landing together when possible."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/scheduling\", \"value\": {\"topology_spread\": \"zone\", \"anti_affinity\": \"preferred\", \"priority_class\": \"standard\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give it a disruption allowance so at least two copies remain available during voluntary maintenance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/disruption_budget\", \"value\": {\"min_available\": 2, \"enabled\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short maintenance window for routine platform work late on Sundays."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/maintenance_window\", \"value\": {\"day\": \"Sunday\", \"start_time_utc\": \"04:00\", \"duration_minutes\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the two basic SLO targets for availability and latency."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/slo_targets\", \"value\": {\"availability_percent\": 99.95, \"p95_latency_ms\": 250}}]"
+    },
+    {
+      "role": "user",
+      "content": "Create alerts for error rate and slow responses, and send them to the payments channel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/alerting\", \"value\": {\"error_rate_threshold_percent\": 2, \"latency_threshold_ms\": 500, \"notification_channel\": \"#payments-alerts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a release safety check so deployments pause automatically if health drops during rollout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/release_guard\", \"value\": {\"auto_pause_enabled\": true, \"minimum_healthy_percent\": 90, \"rollback_on_failure\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the container security posture to non-root, with a read-only filesystem and no privilege escalation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/security_context\", \"value\": {\"run_as_non_root\": true, \"read_only_root_filesystem\": true, \"allow_privilege_escalation\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the compliance tags for PCI scope and data sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance\", \"value\": {\"pci_scope\": true, \"data_classification\": \"confidential\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the backup posture for its configuration snapshots, with daily capture and two weeks of retention."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/backup_policy\", \"value\": {\"enabled\": true, \"frequency\": \"daily\", \"retention_days\": 14}}]"
+    },
+    {
+      "role": "user",
+      "content": "Turn on distributed tracing and sample a small slice of requests through X-Ray."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tracing\", \"value\": {\"enabled\": true, \"provider\": \"aws-xray\", \"sample_rate_percent\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add image pull behavior so it only pulls when needed and uses the standard registry credential."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/image_pull\", \"value\": {\"policy\": \"IfNotPresent\", \"secret\": \"ecr-prod-pull\", \"timeout_seconds\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish it off with graceful shutdown settings so in-flight payment calls have time to drain."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shutdown\", \"value\": {\"grace_period_seconds\": 45, \"pre_stop_hook\": \"/drain\", \"drain_timeout_seconds\": 30}}]"
+    }
+  ],
+  "edit_instruction": "Update each pod’s memory request to 8 GiB.",
+  "theme": "Crossing the node memory budget",
+  "conversation_pattern": "Center the artifact on a deployment with a replica count, a per-pod memory request, a stated total-memory formula (total = replicas * perPodMem), and a STATED node memory budget with two explicit branches: if total memory exceeds the budget, 'node_pool_tier' steps up to a specific stated larger tier and a 'needs_larger_nodes' flag is true; if total is at or below the budget, the tier stays at its stated baseline and the flag is false. Record the budget and both branch targets explicitly. Around this core, add realistic independent details that do not depend on memory, and vary their number from sample to sample.",
+  "edit_pattern": "Change the per-pod memory request to a specific new value.",
+  "cascade_pattern": "Editing the per-pod memory re-derives total memory from the stated formula, AND — only if total memory now crosses the stated node budget relative to before — steps node_pool_tier to the stated target and flips needs_larger_nodes. If the budget boundary is not crossed, the tier and flag stay unchanged. The outcome is determined by the stated budget and branch targets.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "service_name": "payments-api",
+    "deployment": {
+      "replicas": 3,
+      "per_pod_memory_request_gib": 6,
+      "total_memory_formula": "total_memory_gib = replicas * per_pod_memory_request_gib",
+      "total_memory_gib": 18,
+      "memory_budget_policy": {
+        "node_memory_budget_gib": 20,
+        "baseline_node_pool_tier": "m6i.2xlarge",
+        "larger_node_pool_tier": "m6i.4xlarge",
+        "branch_rules": {
+          "over_budget": "if total_memory_gib > node_memory_budget_gib, node_pool_tier = larger_node_pool_tier and needs_larger_nodes = true",
+          "at_or_below_budget": "if total_memory_gib <= node_memory_budget_gib, node_pool_tier = baseline_node_pool_tier and needs_larger_nodes = false"
+        }
+      },
+      "node_pool_tier": "m6i.2xlarge",
+      "needs_larger_nodes": false
+    },
+    "environment": {
+      "stage": "production",
+      "region": "us-east-1",
+      "cluster": "use1-prod-main"
+    },
+    "image": {
+      "registry": "123456789012.dkr.ecr.us-east-1.amazonaws.com",
+      "repository": "payments-api",
+      "tag": "2026.06.1"
+    },
+    "network": {
+      "exposure": "internal",
+      "port": 8080,
+      "protocol": "HTTP"
+    },
+    "health_check": {
+      "path": "/ready",
+      "interval_seconds": 10,
+      "initial_delay_seconds": 15
+    },
+    "deployment_strategy": {
+      "type": "RollingUpdate",
+      "max_surge": 1,
+      "max_unavailable": 0
+    },
+    "ownership": {
+      "team": "payments",
+      "primary_on_call": "payments-platform",
+      "cost_center": "fintech-042"
+    },
+    "labels": {
+      "app": "payments-api",
+      "domain": "payments",
+      "managed_by": "platform-team"
+    },
+    "annotations": {
+      "runbook_url": "https://runbooks.example.com/payments-api",
+      "dashboard_url": "https://grafana.example.com/d/payments-api"
+    },
+    "runtime": {
+      "cpu_request_cores": 1,
+      "cpu_limit_cores": 2,
+      "timezone": "UTC"
+    },
+    "logging": {
+      "destination": "cloudwatch",
+      "format": "json",
+      "retention_days": 30
+    },
+    "metrics": {
+      "enabled": true,
+      "scrape_path": "/metrics",
+      "scrape_interval_seconds": 30
+    },
+    "secrets": {
+      "provider": "aws-secrets-manager",
+      "secret_name": "prod/payments/api",
+      "rotation_enabled": true
+    },
+    "identity": {
+      "service_account": "payments-api-sa",
+      "iam_role": "arn:aws:iam::123456789012:role/payments-ledger-readonly",
+      "automount_token": false
+    },
+    "application_config": {
+      "mode": "live",
+      "ledger_endpoint": "https://ledger.internal.svc.cluster.local",
+      "log_level": "info"
+    },
+    "database": {
+      "host": "payments-writer.prod.rds.internal",
+      "port": 5432,
+      "ssl_mode": "require"
+    },
+    "egress_allowlist": [
+      {
+        "name": "ledger-service",
+        "destination": "ledger.internal.svc.cluster.local",
+        "port": 443
+      },
+      {
+        "name": "payments-db",
+        "destination": "payments-writer.prod.rds.internal",
+        "port": 5432
+      }
+    ],
+    "autoscaling": {
+      "enabled": true,
+      "min_replicas": 3,
+      "max_replicas": 6,
+      "target_cpu_utilization_percent": 70,
+      "scale_down_stabilization_seconds": 300
+    },
+    "scheduling": {
+      "topology_spread": "zone",
+      "anti_affinity": "preferred",
+      "priority_class": "standard"
+    },
+    "disruption_budget": {
+      "min_available": 2,
+      "enabled": true
+    },
+    "maintenance_window": {
+      "day": "Sunday",
+      "start_time_utc": "04:00",
+      "duration_minutes": 60
+    },
+    "slo_targets": {
+      "availability_percent": 99.95,
+      "p95_latency_ms": 250
+    },
+    "alerting": {
+      "error_rate_threshold_percent": 2,
+      "latency_threshold_ms": 500,
+      "notification_channel": "#payments-alerts"
+    },
+    "release_guard": {
+      "auto_pause_enabled": true,
+      "minimum_healthy_percent": 90,
+      "rollback_on_failure": true
+    },
+    "security_context": {
+      "run_as_non_root": true,
+      "read_only_root_filesystem": true,
+      "allow_privilege_escalation": false
+    },
+    "compliance": {
+      "pci_scope": true,
+      "data_classification": "confidential"
+    },
+    "backup_policy": {
+      "enabled": true,
+      "frequency": "daily",
+      "retention_days": 14
+    },
+    "tracing": {
+      "enabled": true,
+      "provider": "aws-xray",
+      "sample_rate_percent": 5
+    },
+    "image_pull": {
+      "policy": "IfNotPresent",
+      "secret": "ecr-prod-pull",
+      "timeout_seconds": 60
+    },
+    "shutdown": {
+      "grace_period_seconds": 45,
+      "pre_stop_hook": "/drain",
+      "drain_timeout_seconds": 30
+    }
+  }
+}

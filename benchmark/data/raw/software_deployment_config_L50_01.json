@@ -1,0 +1,308 @@
+{
+  "id": "software_deployment_config_L50_01",
+  "domain": "software_deployment_config",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a deployment record for the payments reconciler application."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/service\", \"value\": {\"name\": \"payments-reconciler\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put it in the staging environment for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment\", \"value\": {\"name\": \"staging\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the usual Kubernetes space for that staging setup."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment/namespace\", \"value\": \"payrec-stg\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Point the public traffic at the staging address we use for this service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ingress\", \"value\": {\"primaryHost\": \"payrec.stg.example.internal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include the staging metrics address that matches it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ingress/metricsHost\", \"value\": \"payrec-metrics.stg.example.internal\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Wire it to the staging database credentials."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/secrets\", \"value\": {\"database\": \"payrec-stg-db-credentials\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the matching staging token bundle for outbound partner calls."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/secrets/partnerApi\", \"value\": \"payrec-stg-partner-token\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Send staging incidents to the finance platform on-call group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/alerts\", \"value\": {\"pagerDutyService\": \"pd-finplat-staging\", \"slackChannel\": \"#finplat-staging-alerts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep it on the staging release track."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/release\", \"value\": {\"channel\": \"staging-candidate\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Pin the build to the current reconciler container release from our registry."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/image\", \"value\": {\"repository\": \"registry.example.com/finance/payments-reconciler\", \"tag\": \"2.14.7\", \"pullPolicy\": \"IfNotPresent\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run it as two pods and roll updates without taking more than one pod down at a time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workload\", \"value\": {\"replicas\": 2, \"strategy\": \"RollingUpdate\", \"maxUnavailable\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give each pod modest resource sizing for steady reconciliation work."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/resources\", \"value\": {\"cpuRequest\": \"250m\", \"memoryRequest\": \"512Mi\", \"cpuLimit\": \"1\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Cap memory at one gibibyte as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/resources/memoryLimit\", \"value\": \"1Gi\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the app listen on 8080 for traffic and 9090 for Prometheus over TCP."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/network\", \"value\": {\"httpPort\": 8080, \"metricsPort\": 9090, \"protocol\": \"TCP\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the usual health checks so Kubernetes can tell when it is alive and ready."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/healthChecks\", \"value\": {\"readinessPath\": \"/ready\", \"livenessPath\": \"/healthz\", \"initialDelaySeconds\": 20}}]"
+    },
+    {
+      "role": "user",
+      "content": "Let those checks time out quickly and run at a normal cadence."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/healthChecks/periodSeconds\", \"value\": 10}, {\"op\": \"add\", \"path\": \"/healthChecks/timeoutSeconds\", \"value\": 2}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the reconciliation runtime to use UTC, process 500 records at a time, and actually post adjustments rather than just simulating them."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/runtime\", \"value\": {\"timezone\": \"UTC\", \"batchSize\": 500, \"dryRun\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run the reconciliation shortly after the nightly payment files land, and avoid overlapping runs."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule\", \"value\": {\"cron\": \"15 2 * * *\", \"concurrencyPolicy\": \"Forbid\", \"successfulHistoryLimit\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep three failed run records around for troubleshooting."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/failedHistoryLimit\", \"value\": 3}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the finance platform team as responsible and route internal questions to their service channel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/ownership\", \"value\": {\"team\": \"finance-platform\", \"costCenter\": \"FIN-042\", \"contactChannel\": \"#finplat-service-ops\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use structured info-level logs and keep trace identifiers in the output."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/logging\", \"value\": {\"level\": \"info\", \"format\": \"json\", \"includeTraceId\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Scrape Prometheus metrics from the app and keep the standard reconciliation dashboard enabled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/observability\", \"value\": {\"prometheusScrape\": true, \"metricsPath\": \"/metrics\", \"dashboard\": \"payments-reconciliation-overview\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run the container with a locked-down security posture."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/security\", \"value\": {\"runAsNonRoot\": true, \"readOnlyRootFilesystem\": true, \"allowPrivilegeEscalation\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the change ticket and note that Maya Chen approved this rollout today."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/audit\", \"value\": {\"changeTicket\": \"CHG-78421\", \"approvedBy\": \"Maya Chen\", \"approvedDate\": \"2026-06-08\"}}]"
+    }
+  ],
+  "edit_instruction": "Move this deployment to production.",
+  "theme": "Switching the deployment environment",
+  "conversation_pattern": "Center the artifact on a service configured for one environment, where namespace, hostnames, secret references, alert routing, and release channel all follow from the environment's supplied attributes. Around this core, add the realistic, independent details a deployment record would carry that do not depend on the environment, and vary their number from sample to sample. Do not embed a lookup or reference card for any environment inside the artifact; the artifact holds only the current environment's own fields.",
+  "edit_pattern": "Move the deployment to a different specific environment, and supply the target environment's attributes in master_data.",
+  "cascade_pattern": "Every environment-governed field takes the replacement environment's supplied attributes: namespace, hostnames, secret references, alert routing, and release channel. Service-specific fields that do not depend on the environment stay unchanged. This is determined because the replacement environment's attributes are provided with the edit.",
+  "requires_master_data": true,
+  "master_data": {
+    "environments": {
+      "production": {
+        "namespace": "payrec-prod",
+        "primaryHost": "payrec.example.com",
+        "metricsHost": "payrec-metrics.example.com",
+        "databaseSecret": "payrec-prod-db-credentials",
+        "partnerApiSecret": "payrec-prod-partner-token",
+        "pagerDutyService": "pd-finplat-production",
+        "slackChannel": "#finplat-production-alerts",
+        "releaseChannel": "stable"
+      }
+    }
+  },
+  "current_json": {
+    "service": {
+      "name": "payments-reconciler"
+    },
+    "environment": {
+      "name": "staging",
+      "namespace": "payrec-stg"
+    },
+    "ingress": {
+      "primaryHost": "payrec.stg.example.internal",
+      "metricsHost": "payrec-metrics.stg.example.internal"
+    },
+    "secrets": {
+      "database": "payrec-stg-db-credentials",
+      "partnerApi": "payrec-stg-partner-token"
+    },
+    "alerts": {
+      "pagerDutyService": "pd-finplat-staging",
+      "slackChannel": "#finplat-staging-alerts"
+    },
+    "release": {
+      "channel": "staging-candidate"
+    },
+    "image": {
+      "repository": "registry.example.com/finance/payments-reconciler",
+      "tag": "2.14.7",
+      "pullPolicy": "IfNotPresent"
+    },
+    "workload": {
+      "replicas": 2,
+      "strategy": "RollingUpdate",
+      "maxUnavailable": 1
+    },
+    "resources": {
+      "cpuRequest": "250m",
+      "memoryRequest": "512Mi",
+      "cpuLimit": "1",
+      "memoryLimit": "1Gi"
+    },
+    "network": {
+      "httpPort": 8080,
+      "metricsPort": 9090,
+      "protocol": "TCP"
+    },
+    "healthChecks": {
+      "readinessPath": "/ready",
+      "livenessPath": "/healthz",
+      "initialDelaySeconds": 20,
+      "periodSeconds": 10,
+      "timeoutSeconds": 2
+    },
+    "runtime": {
+      "timezone": "UTC",
+      "batchSize": 500,
+      "dryRun": false
+    },
+    "schedule": {
+      "cron": "15 2 * * *",
+      "concurrencyPolicy": "Forbid",
+      "successfulHistoryLimit": 3,
+      "failedHistoryLimit": 3
+    },
+    "ownership": {
+      "team": "finance-platform",
+      "costCenter": "FIN-042",
+      "contactChannel": "#finplat-service-ops"
+    },
+    "logging": {
+      "level": "info",
+      "format": "json",
+      "includeTraceId": true
+    },
+    "observability": {
+      "prometheusScrape": true,
+      "metricsPath": "/metrics",
+      "dashboard": "payments-reconciliation-overview"
+    },
+    "security": {
+      "runAsNonRoot": true,
+      "readOnlyRootFilesystem": true,
+      "allowPrivilegeEscalation": false
+    },
+    "audit": {
+      "changeTicket": "CHG-78421",
+      "approvedBy": "Maya Chen",
+      "approvedDate": "2026-06-08"
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "id": "software_deployment_config_L10_03",
+  "domain": "software_deployment_config",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start with the service being the payments API."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment_name\", \"value\": \"payments-api\"}]"
+    },
+    {
+      "role": "user",
+      "content": "The pod should include the main application container, named app."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers\", \"value\": [{\"name\": \"app\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it request half a CPU, use 512 MiB of memory, and listen on 8080."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/0/cpu_request\", \"value\": \"500m\"}, {\"op\": \"add\", \"path\": \"/pod/containers/0/memory_request\", \"value\": \"512Mi\"}, {\"op\": \"add\", \"path\": \"/pod/containers/0/exposed_port\", \"value\": 8080}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a lightweight proxy sidecar alongside it, called envoy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/-\", \"value\": {\"name\": \"envoy\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give the proxy 100 millicores, 128 MiB of memory, and have it expose 9901."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/1/cpu_request\", \"value\": \"100m\"}, {\"op\": \"add\", \"path\": \"/pod/containers/1/memory_request\", \"value\": \"128Mi\"}, {\"op\": \"add\", \"path\": \"/pod/containers/1/exposed_port\", \"value\": 9901}]"
+    },
+    {
+      "role": "user",
+      "content": "Now summarize the pod’s combined footprint and open ports based on those two containers."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/resource_summary\", \"value\": \"2 containers; 600m CPU; 640Mi memory; ports 8080,9901\"}]"
+    }
+  ],
+  "edit_instruction": "Please remove the envoy sidecar from the pod.",
+  "current_json": {
+    "deployment_name": "payments-api",
+    "pod": {
+      "containers": [
+        {
+          "name": "app",
+          "cpu_request": "500m",
+          "memory_request": "512Mi",
+          "exposed_port": 8080
+        },
+        {
+          "name": "envoy",
+          "cpu_request": "100m",
+          "memory_request": "128Mi",
+          "exposed_port": 9901
+        }
+      ],
+      "resource_summary": "2 containers; 600m CPU; 640Mi memory; ports 8080,9901"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "remove",
+      "path": "/pod/containers/1",
+      "kind": "direct"
+    },
+    {
+      "op": "replace",
+      "path": "/pod/resource_summary",
+      "kind": "cascade",
+      "matcher": "regex_match",
+      "pattern": "(?=.*\\b1 container\\b)(?=.*500m)(?=.*512Mi)(?=.*8080)(?!.*9901).*"
+    }
+  ],
+  "expected_json": {
+    "deployment_name": "payments-api",
+    "pod": {
+      "containers": [
+        {
+          "name": "app",
+          "cpu_request": "500m",
+          "memory_request": "512Mi",
+          "exposed_port": 8080
+        }
+      ],
+      "resource_summary": "<matches /(?=.*\\b1 container\\b)(?=.*500m)(?=.*512Mi)(?=.*8080)(?!.*9901).*/>"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "remove envoy; resource_summary re-aggregates over remaining app container: 1 container, 500m, 512Mi, port 8080 (no 9901). Free-text summary -> regex on the recomputed facts.",
+  "annotated": true,
+  "excluded": false,
+  "theme": "Removing a sidecar container",
+  "conversation_pattern": "Center the artifact on a pod with several containers, each with a name, a CPU request, a memory request, and an exposed port, where the pod's container_count, total_cpu, total_memory (stated sums over the containers), and exposed_port_list aggregate over the included containers. Around this core, add the realistic, independent details a deployment record would carry that do not depend on the container list, and vary the number of containers from sample to sample.",
+  "edit_pattern": "Remove one specific sidecar container from the pod.",
+  "cascade_pattern": "Removing the container deletes it from the container list, lowers container_count, removes its port from exposed_port_list, and re-derives total_cpu and total_memory as the stated sums over the remaining containers. Unrelated deployment metadata stays unchanged.",
+  "requires_master_data": false
+}

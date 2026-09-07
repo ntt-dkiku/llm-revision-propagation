@@ -1,0 +1,403 @@
+{
+  "id": "project_schedule_L50_05",
+  "domain": "project_schedule",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a plan for the customer portal refresh."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project_name\", \"value\": \"Customer Portal Refresh\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Maya can help with this and has 18 hours available for the sprint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/team\", \"value\": [{\"owner\": \"Maya Chen\", \"capacity_hours\": 18}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Jonah to the plan too; he has 16 hours free."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/team/-\", \"value\": {\"owner\": \"Jonah Patel\", \"capacity_hours\": 16}}]"
+    },
+    {
+      "role": "user",
+      "content": "Priya is also available, with 14 hours this sprint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/team/-\", \"value\": {\"owner\": \"Priya Nair\", \"capacity_hours\": 14}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Maya on the landing page audit, and estimate it at 6 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"task\": \"Landing page audit\", \"owner\": \"Maya Chen\", \"effort_hours\": 6}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Jonah should handle the authentication cleanup, which looks like 7 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task\": \"Authentication cleanup\", \"owner\": \"Jonah Patel\", \"effort_hours\": 7}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give Priya the mobile navigation fixes; estimate 5 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task\": \"Mobile navigation fixes\", \"owner\": \"Priya Nair\", \"effort_hours\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Maya should also take the release notes draft, and that should be 4 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task\": \"Release notes draft\", \"owner\": \"Maya Chen\", \"effort_hours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a payment error review for Jonah at 6 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task\": \"Payment error review\", \"owner\": \"Jonah Patel\", \"effort_hours\": 6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Priya should also cover accessibility QA, and I think that will take 8 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task\": \"Accessibility QA\", \"owner\": \"Priya Nair\", \"effort_hours\": 8}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have Maya take the dashboard widget polish too; call that 3 hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"task\": \"Dashboard widget polish\", \"owner\": \"Maya Chen\", \"effort_hours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's calculate Maya's booked hours against her availability."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workloads\", \"value\": [{\"owner\": \"Maya Chen\", \"assigned_effort_hours\": 13, \"capacity_hours\": 18}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note whether Maya is still within her available time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workloads/0/capacity_status\", \"value\": \"within capacity\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now do the same booked-hours check for Jonah."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workloads/-\", \"value\": {\"owner\": \"Jonah Patel\", \"assigned_effort_hours\": 13, \"capacity_hours\": 16}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark whether Jonah is within his available time as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workloads/1/capacity_status\", \"value\": \"within capacity\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Run the booked-hours check for Priya too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workloads/-\", \"value\": {\"owner\": \"Priya Nair\", \"assigned_effort_hours\": 13, \"capacity_hours\": 14}}]"
+    },
+    {
+      "role": "user",
+      "content": "And note whether Priya is within her available time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workloads/2/capacity_status\", \"value\": \"within capacity\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the sprint window from April 8 through April 19, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule_window\", \"value\": {\"start_date\": \"2026-04-08\", \"end_date\": \"2026-04-19\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule a mid-sprint review with product leadership on April 15 at 10 AM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/review_meeting\", \"value\": {\"scheduled_for\": \"2026-04-15\", \"time\": \"10:00\", \"attendees\": \"Product leadership\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a deployment freeze reminder for April 18, owned by the release manager."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment_freeze\", \"value\": {\"date\": \"2026-04-18\", \"owner\": \"Release manager\", \"note\": \"No production changes after noon\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one risk: stakeholder feedback may come in late, so we’ll buffer the final QA day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/risks\", \"value\": [{\"risk\": \"Stakeholder feedback may come in late\", \"mitigation\": \"Buffer final QA day\"}]}]"
+    }
+  ],
+  "edit_instruction": "Please move Accessibility QA from Priya Nair to Jonah Patel.",
+  "theme": "Reassigning a task to another owner",
+  "master_data": null,
+  "current_json": {
+    "project_name": "Customer Portal Refresh",
+    "team": [
+      {
+        "owner": "Maya Chen",
+        "capacity_hours": 18
+      },
+      {
+        "owner": "Jonah Patel",
+        "capacity_hours": 16
+      },
+      {
+        "owner": "Priya Nair",
+        "capacity_hours": 14
+      }
+    ],
+    "tasks": [
+      {
+        "task": "Landing page audit",
+        "owner": "Maya Chen",
+        "effort_hours": 6
+      },
+      {
+        "task": "Authentication cleanup",
+        "owner": "Jonah Patel",
+        "effort_hours": 7
+      },
+      {
+        "task": "Mobile navigation fixes",
+        "owner": "Priya Nair",
+        "effort_hours": 5
+      },
+      {
+        "task": "Release notes draft",
+        "owner": "Maya Chen",
+        "effort_hours": 4
+      },
+      {
+        "task": "Payment error review",
+        "owner": "Jonah Patel",
+        "effort_hours": 6
+      },
+      {
+        "task": "Accessibility QA",
+        "owner": "Priya Nair",
+        "effort_hours": 8
+      },
+      {
+        "task": "Dashboard widget polish",
+        "owner": "Maya Chen",
+        "effort_hours": 3
+      }
+    ],
+    "workloads": [
+      {
+        "owner": "Maya Chen",
+        "assigned_effort_hours": 13,
+        "capacity_hours": 18,
+        "capacity_status": "within capacity"
+      },
+      {
+        "owner": "Jonah Patel",
+        "assigned_effort_hours": 13,
+        "capacity_hours": 16,
+        "capacity_status": "within capacity"
+      },
+      {
+        "owner": "Priya Nair",
+        "assigned_effort_hours": 13,
+        "capacity_hours": 14,
+        "capacity_status": "within capacity"
+      }
+    ],
+    "schedule_window": {
+      "start_date": "2026-04-08",
+      "end_date": "2026-04-19"
+    },
+    "review_meeting": {
+      "scheduled_for": "2026-04-15",
+      "time": "10:00",
+      "attendees": "Product leadership"
+    },
+    "deployment_freeze": {
+      "date": "2026-04-18",
+      "owner": "Release manager",
+      "note": "No production changes after noon"
+    },
+    "risks": [
+      {
+        "risk": "Stakeholder feedback may come in late",
+        "mitigation": "Buffer final QA day"
+      }
+    ]
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/tasks/5/owner",
+      "kind": "direct",
+      "value": "Jonah Patel"
+    },
+    {
+      "op": "replace",
+      "path": "/workloads/1/assigned_effort_hours",
+      "kind": "cascade",
+      "value": 21
+    },
+    {
+      "op": "replace",
+      "path": "/workloads/1/capacity_status",
+      "kind": "cascade",
+      "value": "over capacity",
+      "matcher": "regex_match",
+      "pattern": "(?i)(over|exceed|above|beyond|insufficient|short|not within)"
+    },
+    {
+      "op": "replace",
+      "path": "/workloads/2/assigned_effort_hours",
+      "kind": "cascade",
+      "value": 5
+    }
+  ],
+  "expected_json": {
+    "project_name": "Customer Portal Refresh",
+    "team": [
+      {
+        "owner": "Maya Chen",
+        "capacity_hours": 18
+      },
+      {
+        "owner": "Jonah Patel",
+        "capacity_hours": 16
+      },
+      {
+        "owner": "Priya Nair",
+        "capacity_hours": 14
+      }
+    ],
+    "tasks": [
+      {
+        "task": "Landing page audit",
+        "owner": "Maya Chen",
+        "effort_hours": 6
+      },
+      {
+        "task": "Authentication cleanup",
+        "owner": "Jonah Patel",
+        "effort_hours": 7
+      },
+      {
+        "task": "Mobile navigation fixes",
+        "owner": "Priya Nair",
+        "effort_hours": 5
+      },
+      {
+        "task": "Release notes draft",
+        "owner": "Maya Chen",
+        "effort_hours": 4
+      },
+      {
+        "task": "Payment error review",
+        "owner": "Jonah Patel",
+        "effort_hours": 6
+      },
+      {
+        "task": "Accessibility QA",
+        "owner": "Jonah Patel",
+        "effort_hours": 8
+      },
+      {
+        "task": "Dashboard widget polish",
+        "owner": "Maya Chen",
+        "effort_hours": 3
+      }
+    ],
+    "workloads": [
+      {
+        "owner": "Maya Chen",
+        "assigned_effort_hours": 13,
+        "capacity_hours": 18,
+        "capacity_status": "within capacity"
+      },
+      {
+        "owner": "Jonah Patel",
+        "assigned_effort_hours": 21,
+        "capacity_hours": 16,
+        "capacity_status": "over capacity"
+      },
+      {
+        "owner": "Priya Nair",
+        "assigned_effort_hours": 5,
+        "capacity_hours": 14,
+        "capacity_status": "within capacity"
+      }
+    ],
+    "schedule_window": {
+      "start_date": "2026-04-08",
+      "end_date": "2026-04-19"
+    },
+    "review_meeting": {
+      "scheduled_for": "2026-04-15",
+      "time": "10:00",
+      "attendees": "Product leadership"
+    },
+    "deployment_freeze": {
+      "date": "2026-04-18",
+      "owner": "Release manager",
+      "note": "No production changes after noon"
+    },
+    "risks": [
+      {
+        "risk": "Stakeholder feedback may come in late",
+        "mitigation": "Buffer final QA day"
+      }
+    ]
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Reassign Accessibility QA (8 h) from Priya Nair to Jonah Patel. Jonah workload 13->21, which exceeds his 16 h capacity, so his capacity_status flips from within capacity to over-capacity (exact token not stated, regex matcher). Priya workload 13->5 (stays within her 14 h, so capacity_status unchanged and excluded). Maya, capacities, effort estimates, and all other fields stay.",
+  "conversation_pattern": "Center the artifact on a task list where each task has an owner and an effort estimate, with a per-owner workload aggregating each owner's tasks and a capacity check derived from a stated capacity. Around this core, add the realistic, independent details a project plan would carry that do not depend on who owns each task, and vary their number and the number of tasks and owners from sample to sample.",
+  "edit_pattern": "Reassign one task from its current owner to a different specific owner.",
+  "cascade_pattern": "Reassigning a task moves its effort from the old owner's workload to the new owner's, re-sums both, and re-evaluates each owner's capacity check against the stated capacity. Other tasks and owners stay. This is determined because the efforts and capacities are stated.",
+  "requires_master_data": false
+}

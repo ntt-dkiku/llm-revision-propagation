@@ -1,0 +1,699 @@
+{
+  "id": "shopping_cart_L100_05",
+  "domain": "shopping_cart",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a shopping cart for someone browsing at Meadow & Pine Home."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart\", \"value\": {\"store\": \"Meadow & Pine Home\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make delivery free once the basket reaches $75, and charge $8.95 when it’s below that."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shipping_policy\", \"value\": {\"free_shipping_threshold\": 75.0, \"flat_shipping_fee\": 8.95}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a pair of linen napkins at $12 each, with two in the basket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items\", \"value\": [{\"name\": \"Linen napkin pair\", \"unit_price\": 12.0, \"quantity\": 2}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include one ceramic utensil crock priced at $29.50."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Ceramic utensil crock\", \"unit_price\": 29.5, \"quantity\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add three amber glass tumblers at $7.25 apiece."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/-\", \"value\": {\"name\": \"Amber glass tumbler\", \"unit_price\": 7.25, \"quantity\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the napkins, show that the two pairs come to $24.00."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/0/line_amount\", \"value\": 24.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the utensil crock as contributing $29.50 to the basket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/1/line_amount\", \"value\": 29.5}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the three tumblers adding $21.75 to the basket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/2/line_amount\", \"value\": 21.75}]"
+    },
+    {
+      "role": "user",
+      "content": "Now add up the merchandise before delivery so we can see whether it qualifies."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/subtotal\", \"value\": 75.25}]"
+    },
+    {
+      "role": "user",
+      "content": "Since the basket qualifies, make the delivery charge free."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/shipping_fee\", \"value\": 0.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the cart total with delivery included."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/total\", \"value\": 75.25}]"
+    },
+    {
+      "role": "user",
+      "content": "Attach the shopper’s contact details so the order can be followed up if needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/customer\", \"value\": {\"name\": \"Maya Torres\", \"email\": \"maya.torres@example.com\", \"phone\": \"+1-503-555-0184\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add where Maya wants the package delivered."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/delivery_address\", \"value\": {\"street\": \"4287 SE Alder Lane\", \"city\": \"Portland\", \"state\": \"OR\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the apartment and postal code for that delivery spot."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/delivery_address/apartment\", \"value\": \"Apt 3B\"}, {\"op\": \"add\", \"path\": \"/cart/delivery_address/postal_code\", \"value\": \"97214\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that Maya prefers contactless delivery, wants texts instead of calls, and doesn’t need a gift receipt."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/preferences\", \"value\": {\"contactless_delivery\": true, \"preferred_contact_method\": \"text\", \"gift_receipt\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give this cart a reference number, mark when it was started, and keep prices in US dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/cart_id\", \"value\": \"MPH-48291\"}, {\"op\": \"add\", \"path\": \"/cart/created_at\", \"value\": \"2026-06-03T14:25:00-07:00\"}, {\"op\": \"add\", \"path\": \"/cart/currency\", \"value\": \"USD\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that Maya plans to use a Visa ending in 4242, expiring in May 2028."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/payment\", \"value\": {\"card_brand\": \"Visa\", \"card_last4\": \"4242\", \"card_expiration\": \"2028-05\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the billing location tied to that card."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/billing_address\", \"value\": {\"street\": \"4287 SE Alder Lane\", \"city\": \"Portland\", \"state\": \"OR\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the apartment and postal code for billing too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/billing_address/apartment\", \"value\": \"Apt 3B\"}, {\"op\": \"add\", \"path\": \"/cart/billing_address/postal_code\", \"value\": \"97214\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the delivery plan to standard home delivery, arriving between June 6 and June 8."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/fulfillment\", \"value\": {\"method\": \"standard home delivery\", \"earliest_arrival\": \"2026-06-06\", \"latest_arrival\": \"2026-06-08\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add instructions for the courier: leave it on the side porch, use gate code 1937, and don’t ring the bell."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/delivery_instructions\", \"value\": {\"dropoff_spot\": \"side porch\", \"access_code\": \"1937\", \"ring_bell\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply Maya’s rewards profile with silver status, 320 points available, and permission to earn points on this purchase."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/loyalty\", \"value\": {\"tier\": \"silver\", \"points_available\": 320, \"earn_points\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a note that the cart came from the mobile app after Maya tapped a summer home banner."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/attribution\", \"value\": {\"channel\": \"mobile app\", \"campaign\": \"summer home banner\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tag the browsing session as iOS on app version 5.8.2, with notifications enabled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/session\", \"value\": {\"platform\": \"iOS\", \"app_version\": \"5.8.2\", \"notifications_enabled\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this as an active cart that’s ready for checkout, but not paid yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/checkout_state\", \"value\": {\"stage\": \"ready for checkout\", \"active\": true, \"paid\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add product details for the napkins: they’re oatmeal colored, made of linen, and sold under SKU NAP-OAT-02."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/0/details\", \"value\": {\"color\": \"oatmeal\", \"material\": \"linen\", \"sku\": \"NAP-OAT-02\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add product details for the utensil crock: it’s ivory, made of stoneware, and sold under SKU CRK-IVY-01."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/1/details\", \"value\": {\"color\": \"ivory\", \"material\": \"stoneware\", \"sku\": \"CRK-IVY-01\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add product details for the tumblers: they’re amber, made of recycled glass, and sold under SKU TMB-AMB-03."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/2/details\", \"value\": {\"color\": \"amber\", \"material\": \"recycled glass\", \"sku\": \"TMB-AMB-03\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the napkins, note that they’re available from the Portland warehouse with 18 pairs on hand."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/0/inventory\", \"value\": {\"availability\": \"in stock\", \"warehouse\": \"Portland\", \"available_units\": 18}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the utensil crock, note that it’s available from the Salem warehouse with 7 on hand."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/1/inventory\", \"value\": {\"availability\": \"in stock\", \"warehouse\": \"Salem\", \"available_units\": 7}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the tumblers, note that they’re available from the Eugene warehouse with 24 on hand."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/items/2/inventory\", \"value\": {\"availability\": \"in stock\", \"warehouse\": \"Eugene\", \"available_units\": 24}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that returns are allowed within 30 days for unused items with tags, and that Maya needs the receipt."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/return_policy\", \"value\": {\"window_days\": 30, \"condition\": \"unused with tags\", \"receipt_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add packaging choices: recycled box, paper cushioning, and no plastic filler."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/packaging\", \"value\": {\"box_type\": \"recycled box\", \"cushioning\": \"paper\", \"plastic_filler\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a small sustainability summary for the shipment: carbon-neutral carrier, compostable tape, and consolidated packing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/sustainability\", \"value\": {\"carrier_offset\": \"carbon-neutral\", \"tape_type\": \"compostable\", \"packing_style\": \"consolidated\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the customer help contact for this order: online chat, case queue HOME-CARE, and a 24-hour response promise."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/support\", \"value\": {\"contact_channel\": \"online chat\", \"case_queue\": \"HOME-CARE\", \"response_time_hours\": 24}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a fraud check note showing the order passed automatic screening, matched the billing location, and doesn’t need manual review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/risk_review\", \"value\": {\"screening_result\": \"passed\", \"billing_match\": true, \"manual_review_required\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note for packing that fragile pieces should be wrapped, there are no liquids in the order, and Nora completed the check."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/quality_check\", \"value\": {\"fragile_items_wrapped\": true, \"contains_liquids\": false, \"inspected_by\": \"Nora\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add warehouse handling details: pick list batch B-774, priority normal, and pack station 12."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/warehouse_handling\", \"value\": {\"pick_batch\": \"B-774\", \"priority\": \"normal\", \"pack_station\": \"12\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add final readiness notes: the address has been checked, the payment can be authorized, and the customer will get an email confirmation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/readiness\", \"value\": {\"address_verified\": true, \"payment_authorizable\": true, \"email_confirmation\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, note that Maya isn’t using any promo code on this cart."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/promo_code_applied\", \"value\": false}]"
+    }
+  ],
+  "edit_instruction": "Change the amber glass tumblers to a quantity of 2.",
+  "theme": "Crossing the free-shipping threshold",
+  "master_data": null,
+  "current_json": {
+    "cart": {
+      "store": "Meadow & Pine Home",
+      "shipping_policy": {
+        "free_shipping_threshold": 75.0,
+        "flat_shipping_fee": 8.95
+      },
+      "items": [
+        {
+          "name": "Linen napkin pair",
+          "unit_price": 12.0,
+          "quantity": 2,
+          "line_amount": 24.0,
+          "details": {
+            "color": "oatmeal",
+            "material": "linen",
+            "sku": "NAP-OAT-02"
+          },
+          "inventory": {
+            "availability": "in stock",
+            "warehouse": "Portland",
+            "available_units": 18
+          }
+        },
+        {
+          "name": "Ceramic utensil crock",
+          "unit_price": 29.5,
+          "quantity": 1,
+          "line_amount": 29.5,
+          "details": {
+            "color": "ivory",
+            "material": "stoneware",
+            "sku": "CRK-IVY-01"
+          },
+          "inventory": {
+            "availability": "in stock",
+            "warehouse": "Salem",
+            "available_units": 7
+          }
+        },
+        {
+          "name": "Amber glass tumbler",
+          "unit_price": 7.25,
+          "quantity": 3,
+          "line_amount": 21.75,
+          "details": {
+            "color": "amber",
+            "material": "recycled glass",
+            "sku": "TMB-AMB-03"
+          },
+          "inventory": {
+            "availability": "in stock",
+            "warehouse": "Eugene",
+            "available_units": 24
+          }
+        }
+      ],
+      "subtotal": 75.25,
+      "shipping_fee": 0.0,
+      "total": 75.25,
+      "customer": {
+        "name": "Maya Torres",
+        "email": "maya.torres@example.com",
+        "phone": "+1-503-555-0184"
+      },
+      "delivery_address": {
+        "street": "4287 SE Alder Lane",
+        "city": "Portland",
+        "state": "OR",
+        "apartment": "Apt 3B",
+        "postal_code": "97214"
+      },
+      "preferences": {
+        "contactless_delivery": true,
+        "preferred_contact_method": "text",
+        "gift_receipt": false
+      },
+      "cart_id": "MPH-48291",
+      "created_at": "2026-06-03T14:25:00-07:00",
+      "currency": "USD",
+      "payment": {
+        "card_brand": "Visa",
+        "card_last4": "4242",
+        "card_expiration": "2028-05"
+      },
+      "billing_address": {
+        "street": "4287 SE Alder Lane",
+        "city": "Portland",
+        "state": "OR",
+        "apartment": "Apt 3B",
+        "postal_code": "97214"
+      },
+      "fulfillment": {
+        "method": "standard home delivery",
+        "earliest_arrival": "2026-06-06",
+        "latest_arrival": "2026-06-08"
+      },
+      "delivery_instructions": {
+        "dropoff_spot": "side porch",
+        "access_code": "1937",
+        "ring_bell": false
+      },
+      "loyalty": {
+        "tier": "silver",
+        "points_available": 320,
+        "earn_points": true
+      },
+      "attribution": {
+        "channel": "mobile app",
+        "campaign": "summer home banner"
+      },
+      "session": {
+        "platform": "iOS",
+        "app_version": "5.8.2",
+        "notifications_enabled": true
+      },
+      "checkout_state": {
+        "stage": "ready for checkout",
+        "active": true,
+        "paid": false
+      },
+      "return_policy": {
+        "window_days": 30,
+        "condition": "unused with tags",
+        "receipt_required": true
+      },
+      "packaging": {
+        "box_type": "recycled box",
+        "cushioning": "paper",
+        "plastic_filler": false
+      },
+      "sustainability": {
+        "carrier_offset": "carbon-neutral",
+        "tape_type": "compostable",
+        "packing_style": "consolidated"
+      },
+      "support": {
+        "contact_channel": "online chat",
+        "case_queue": "HOME-CARE",
+        "response_time_hours": 24
+      },
+      "risk_review": {
+        "screening_result": "passed",
+        "billing_match": true,
+        "manual_review_required": false
+      },
+      "quality_check": {
+        "fragile_items_wrapped": true,
+        "contains_liquids": false,
+        "inspected_by": "Nora"
+      },
+      "warehouse_handling": {
+        "pick_batch": "B-774",
+        "priority": "normal",
+        "pack_station": "12"
+      },
+      "readiness": {
+        "address_verified": true,
+        "payment_authorizable": true,
+        "email_confirmation": true
+      },
+      "promo_code_applied": false
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/cart/items/2/quantity",
+      "kind": "direct",
+      "value": 2
+    },
+    {
+      "op": "replace",
+      "path": "/cart/items/2/line_amount",
+      "kind": "cascade",
+      "value": 14.5
+    },
+    {
+      "op": "replace",
+      "path": "/cart/subtotal",
+      "kind": "cascade",
+      "value": 68
+    },
+    {
+      "op": "replace",
+      "path": "/cart/shipping_fee",
+      "kind": "cascade",
+      "value": 8.95
+    },
+    {
+      "op": "replace",
+      "path": "/cart/total",
+      "kind": "cascade",
+      "value": 76.95
+    }
+  ],
+  "expected_json": {
+    "cart": {
+      "store": "Meadow & Pine Home",
+      "shipping_policy": {
+        "free_shipping_threshold": 75.0,
+        "flat_shipping_fee": 8.95
+      },
+      "items": [
+        {
+          "name": "Linen napkin pair",
+          "unit_price": 12.0,
+          "quantity": 2,
+          "line_amount": 24.0,
+          "details": {
+            "color": "oatmeal",
+            "material": "linen",
+            "sku": "NAP-OAT-02"
+          },
+          "inventory": {
+            "availability": "in stock",
+            "warehouse": "Portland",
+            "available_units": 18
+          }
+        },
+        {
+          "name": "Ceramic utensil crock",
+          "unit_price": 29.5,
+          "quantity": 1,
+          "line_amount": 29.5,
+          "details": {
+            "color": "ivory",
+            "material": "stoneware",
+            "sku": "CRK-IVY-01"
+          },
+          "inventory": {
+            "availability": "in stock",
+            "warehouse": "Salem",
+            "available_units": 7
+          }
+        },
+        {
+          "name": "Amber glass tumbler",
+          "unit_price": 7.25,
+          "quantity": 2,
+          "line_amount": 14.5,
+          "details": {
+            "color": "amber",
+            "material": "recycled glass",
+            "sku": "TMB-AMB-03"
+          },
+          "inventory": {
+            "availability": "in stock",
+            "warehouse": "Eugene",
+            "available_units": 24
+          }
+        }
+      ],
+      "subtotal": 68,
+      "shipping_fee": 8.95,
+      "total": 76.95,
+      "customer": {
+        "name": "Maya Torres",
+        "email": "maya.torres@example.com",
+        "phone": "+1-503-555-0184"
+      },
+      "delivery_address": {
+        "street": "4287 SE Alder Lane",
+        "city": "Portland",
+        "state": "OR",
+        "apartment": "Apt 3B",
+        "postal_code": "97214"
+      },
+      "preferences": {
+        "contactless_delivery": true,
+        "preferred_contact_method": "text",
+        "gift_receipt": false
+      },
+      "cart_id": "MPH-48291",
+      "created_at": "2026-06-03T14:25:00-07:00",
+      "currency": "USD",
+      "payment": {
+        "card_brand": "Visa",
+        "card_last4": "4242",
+        "card_expiration": "2028-05"
+      },
+      "billing_address": {
+        "street": "4287 SE Alder Lane",
+        "city": "Portland",
+        "state": "OR",
+        "apartment": "Apt 3B",
+        "postal_code": "97214"
+      },
+      "fulfillment": {
+        "method": "standard home delivery",
+        "earliest_arrival": "2026-06-06",
+        "latest_arrival": "2026-06-08"
+      },
+      "delivery_instructions": {
+        "dropoff_spot": "side porch",
+        "access_code": "1937",
+        "ring_bell": false
+      },
+      "loyalty": {
+        "tier": "silver",
+        "points_available": 320,
+        "earn_points": true
+      },
+      "attribution": {
+        "channel": "mobile app",
+        "campaign": "summer home banner"
+      },
+      "session": {
+        "platform": "iOS",
+        "app_version": "5.8.2",
+        "notifications_enabled": true
+      },
+      "checkout_state": {
+        "stage": "ready for checkout",
+        "active": true,
+        "paid": false
+      },
+      "return_policy": {
+        "window_days": 30,
+        "condition": "unused with tags",
+        "receipt_required": true
+      },
+      "packaging": {
+        "box_type": "recycled box",
+        "cushioning": "paper",
+        "plastic_filler": false
+      },
+      "sustainability": {
+        "carrier_offset": "carbon-neutral",
+        "tape_type": "compostable",
+        "packing_style": "consolidated"
+      },
+      "support": {
+        "contact_channel": "online chat",
+        "case_queue": "HOME-CARE",
+        "response_time_hours": 24
+      },
+      "risk_review": {
+        "screening_result": "passed",
+        "billing_match": true,
+        "manual_review_required": false
+      },
+      "quality_check": {
+        "fragile_items_wrapped": true,
+        "contains_liquids": false,
+        "inspected_by": "Nora"
+      },
+      "warehouse_handling": {
+        "pick_batch": "B-774",
+        "priority": "normal",
+        "pack_station": "12"
+      },
+      "readiness": {
+        "address_verified": true,
+        "payment_authorizable": true,
+        "email_confirmation": true
+      },
+      "promo_code_applied": false
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Amber glass tumbler quantity 3->2. line_amount 2*7.25=14.5; subtotal 24+29.5+14.5=68.0. The new subtotal drops BELOW the $75 free-shipping threshold (was 75.25, at/above -> now 68.0, below), so shipping_fee flips 0.0->8.95; total 68.0+8.95=76.95 (reducing the quantity raises the total by losing free shipping). unit_price, threshold/flat fee, other items, and descriptive fields stay.",
+  "conversation_pattern": "Center the artifact on a cart whose subtotal sums its line amounts, carrying a stated free-shipping threshold and a stated flat shipping fee that applies only while the subtotal is below the threshold and drops to zero once the subtotal reaches it, with a total that is the subtotal plus the shipping fee, so the line amounts determine the subtotal, the shipping fee, and the total. State the threshold and the flat fee in the conversation, and set the initial subtotal on one side of the threshold so the shipping fee is in its corresponding state. Around this core, add the realistic, independent details a cart would carry that do not depend on the subtotal, and vary their number from sample to sample.",
+  "edit_pattern": "Change one line item's quantity or unit price to a specific new value chosen so the subtotal moves across the stated free-shipping threshold.",
+  "cascade_pattern": "Editing the line re-derives its amount and then the subtotal; whether the new subtotal reaches the stated threshold determines the shipping fee (zero at or above the threshold, the stated flat fee below it), and the total re-sums the subtotal plus the shipping fee. Lines and fields that do not feed the subtotal stay. This is determined because the threshold and the flat fee are stated in the conversation.",
+  "requires_master_data": false
+}

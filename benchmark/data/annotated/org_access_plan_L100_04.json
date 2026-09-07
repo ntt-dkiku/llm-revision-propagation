@@ -1,0 +1,748 @@
+{
+  "id": "org_access_plan_L100_04",
+  "domain": "org_access_plan",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start with the organization this is for: Northstar Biologics."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/organization_name\", \"value\": \"Northstar Biologics\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For the access rules, set the current ceiling at 90 minutes, with compliance based on whether an entry stays at or below that ceiling."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/session_policy\", \"value\": {\"max_session_timeout_minutes\": 90, \"compliance_rule\": \"An access entry is compliant iff its session timeout is at most the policy maximum; if it exceeds the maximum, it must be clamped to the maximum and marked non_compliant.\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the help desk administrator access for Mira Chen with a 60-minute session limit, and mark it compliant under the current ceiling."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries\", \"value\": [{\"person\": \"Mira Chen\", \"session_timeout_minutes\": 60, \"compliance_flag\": \"compliant\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the clinical data platform owner, Omar Patel, with a 120-minute session limit, and mark that one as not compliant against the current ceiling."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Omar Patel\", \"session_timeout_minutes\": 120, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Priya Nandakumar for manufacturing batch review access with a 45-minute session limit, and show it as compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Priya Nandakumar\", \"session_timeout_minutes\": 45, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Luis Romero for vendor integration maintenance with a 90-minute session limit, and mark it compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Luis Romero\", \"session_timeout_minutes\": 90, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Hannah Brooks for executive reporting access with a 75-minute session limit, and show it as compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Hannah Brooks\", \"session_timeout_minutes\": 75, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Kenji Sato for quality audit exports with a 105-minute session limit, and mark it as not compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Kenji Sato\", \"session_timeout_minutes\": 105, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Sofia Alvarez for laboratory instrument administration with an 80-minute session limit, and mark it compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Sofia Alvarez\", \"session_timeout_minutes\": 80, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Raj Mehta for identity provider configuration with a 95-minute session limit, and mark it as not compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Raj Mehta\", \"session_timeout_minutes\": 95, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Elise Warren for pharmacovigilance case review with a 30-minute session limit, and show it as compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Elise Warren\", \"session_timeout_minutes\": 30, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Marcus Lee for finance approval workflow access with an 85-minute session limit, and mark it compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Marcus Lee\", \"session_timeout_minutes\": 85, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Noor Haddad for regulatory submission staging with a 110-minute session limit, and mark it as not compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Noor Haddad\", \"session_timeout_minutes\": 110, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Ava Thompson for warehouse inventory reconciliation with a 70-minute session limit, and mark it compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Ava Thompson\", \"session_timeout_minutes\": 70, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Daniel Kim for cloud backup administration with a 40-minute session limit, and show it as compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Daniel Kim\", \"session_timeout_minutes\": 40, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Zoe Fischer for training records administration with a 65-minute session limit, and mark it compliant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/-\", \"value\": {\"person\": \"Zoe Fischer\", \"session_timeout_minutes\": 65, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give this access plan an internal reference so we can track it in reviews."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan_reference\", \"value\": \"NAP-2026-Q1-SESSION\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Lena Ortiz as the person responsible for keeping this plan current, in the information security governance group, with her work email included."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan_steward\", \"value\": {\"name\": \"Lena Ortiz\", \"team\": \"Information Security Governance\", \"email\": \"lena.ortiz@northstarbio.example\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the recurring review to happen quarterly, with the next check on April 15, 2026, using Eastern time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/review_schedule\", \"value\": {\"frequency\": \"quarterly\", \"next_review_date\": \"2026-04-15\", \"timezone\": \"America/New_York\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the operating context for this plan: it covers the production environment, applies to GxP-regulated systems, and should be treated as high sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/operating_context\", \"value\": {\"environment\": \"production\", \"regulatory_scope\": \"GxP-regulated\", \"sensitivity\": \"high\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the business approval owner as Grace Malloy from Clinical Operations, and include her email for follow-up."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/business_approval_owner\", \"value\": {\"name\": \"Grace Malloy\", \"department\": \"Clinical Operations\", \"email\": \"grace.malloy@northstarbio.example\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the main escalation contact for audit questions: Thomas Reed in Compliance Assurance, with his email included."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/audit_escalation_contact\", \"value\": {\"name\": \"Thomas Reed\", \"team\": \"Compliance Assurance\", \"email\": \"thomas.reed@northstarbio.example\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note the evidence retention expectations: keep review records for seven years, store them in the validated document repository, and classify them as audit-ready."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/evidence_retention\", \"value\": {\"retention_period_years\": 7, \"storage_location\": \"validated document repository\", \"classification\": \"audit-ready\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the sign-in protection expectations too: require multifactor access, use phishing-resistant methods, and deny shared accounts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/authentication_controls\", \"value\": {\"multifactor_required\": true, \"preferred_method\": \"phishing-resistant\", \"shared_accounts_allowed\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the device posture expectations: company-managed devices only, endpoint protection has to be healthy, and jailbroken devices are not allowed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/device_posture\", \"value\": {\"company_managed_only\": true, \"endpoint_protection_status\": \"healthy required\", \"jailbroken_devices_allowed\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the network restrictions as well: require the corporate VPN, allow use only from the U.S. and Canada, and block public Wi-Fi."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/network_restrictions\", \"value\": {\"corporate_vpn_required\": true, \"allowed_countries\": [\"US\", \"CA\"], \"public_wifi_allowed\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the change control details: use the CAB review process, require implementation approval, and track exceptions through ServiceNow."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/change_control\", \"value\": {\"process\": \"CAB review\", \"implementation_approval_required\": true, \"exception_tracking_system\": \"ServiceNow\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture how monitoring should work: send session alerts to the security operations center, review them daily, and treat critical alerts as immediate response items."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/monitoring\", \"value\": {\"alert_destination\": \"Security Operations Center\", \"review_frequency\": \"daily\", \"critical_alert_response\": \"immediate\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the logging expectations: keep successful sign-ins, failed sign-ins, and timeout events in the audit trail."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/logging_requirements\", \"value\": {\"successful_signins_logged\": true, \"failed_signins_logged\": true, \"timeout_events_logged\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the emergency access expectations: allow it only for validated incidents, require manager approval, and limit activation to two hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emergency_access\", \"value\": {\"allowed_for\": \"validated incidents only\", \"manager_approval_required\": true, \"activation_limit_hours\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the data handling expectations: prohibit local downloads, require encryption for exports, and watermark viewed reports."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/data_handling\", \"value\": {\"local_downloads_allowed\": false, \"export_encryption_required\": true, \"report_watermarking\": \"required\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the training expectations: people need annual access training, the course is Secure GxP System Use, and completion is due before access is granted."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/training_requirements\", \"value\": {\"frequency\": \"annual\", \"course_name\": \"Secure GxP System Use\", \"completion_due\": \"before access granted\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the offboarding expectations: revoke access on the termination date, remove privileged roles within four hours, and keep evidence of the removal."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/offboarding_requirements\", \"value\": {\"termination_date_revocation\": true, \"privileged_role_removal_sla_hours\": 4, \"removal_evidence_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add how temporary exceptions should be handled: they need risk acceptance, they expire after 30 days, and Lena’s team reviews them."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/temporary_exceptions\", \"value\": {\"risk_acceptance_required\": true, \"expiration_days\": 30, \"reviewing_team\": \"Information Security Governance\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the plan as approved and effective starting January 20, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approval_status\", \"value\": {\"state\": \"approved\", \"effective_date\": \"2026-01-20\"}}]"
+    }
+  ],
+  "edit_instruction": "Please tighten the session ceiling to 60 minutes.",
+  "theme": "Tightening the session-timeout policy",
+  "conversation_pattern": "Center the artifact on an access plan listing several access entries, each with a session_timeout_minutes value and a compliance flag, governed by a stated policy field 'max_session_timeout_minutes' with an explicit rule: an entry is compliant iff its timeout is at most the policy max; an entry exceeding it must be clamped down to the max and flagged 'non_compliant'. Make some entries compliant and some not under the current policy, and ensure every entry's initial compliance flag already matches the stated rule under the current policy (an entry within the current max is compliant). Around this core, add realistic independent details that do not depend on the policy, and vary the number of entries from sample to sample.",
+  "edit_pattern": "Tighten the max_session_timeout_minutes to a specific stricter (smaller) value.",
+  "cascade_pattern": "Tightening the policy clamps the timeout of only those entries whose timeout now exceeds the new max down to that max and flips their flag to 'non_compliant'; entries already within the new max and all unrelated fields stay unchanged. The affected set is determined by comparing each entry's stated timeout to the new policy max.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "organization_name": "Northstar Biologics",
+    "session_policy": {
+      "max_session_timeout_minutes": 90,
+      "compliance_rule": "An access entry is compliant iff its session timeout is at most the policy maximum; if it exceeds the maximum, it must be clamped to the maximum and marked non_compliant."
+    },
+    "access_entries": [
+      {
+        "person": "Mira Chen",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Omar Patel",
+        "session_timeout_minutes": 120,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Priya Nandakumar",
+        "session_timeout_minutes": 45,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Luis Romero",
+        "session_timeout_minutes": 90,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Hannah Brooks",
+        "session_timeout_minutes": 75,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Kenji Sato",
+        "session_timeout_minutes": 105,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Sofia Alvarez",
+        "session_timeout_minutes": 80,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Raj Mehta",
+        "session_timeout_minutes": 95,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Elise Warren",
+        "session_timeout_minutes": 30,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Marcus Lee",
+        "session_timeout_minutes": 85,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Noor Haddad",
+        "session_timeout_minutes": 110,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Ava Thompson",
+        "session_timeout_minutes": 70,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Daniel Kim",
+        "session_timeout_minutes": 40,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Zoe Fischer",
+        "session_timeout_minutes": 65,
+        "compliance_flag": "compliant"
+      }
+    ],
+    "plan_reference": "NAP-2026-Q1-SESSION",
+    "plan_steward": {
+      "name": "Lena Ortiz",
+      "team": "Information Security Governance",
+      "email": "lena.ortiz@northstarbio.example"
+    },
+    "review_schedule": {
+      "frequency": "quarterly",
+      "next_review_date": "2026-04-15",
+      "timezone": "America/New_York"
+    },
+    "operating_context": {
+      "environment": "production",
+      "regulatory_scope": "GxP-regulated",
+      "sensitivity": "high"
+    },
+    "business_approval_owner": {
+      "name": "Grace Malloy",
+      "department": "Clinical Operations",
+      "email": "grace.malloy@northstarbio.example"
+    },
+    "audit_escalation_contact": {
+      "name": "Thomas Reed",
+      "team": "Compliance Assurance",
+      "email": "thomas.reed@northstarbio.example"
+    },
+    "evidence_retention": {
+      "retention_period_years": 7,
+      "storage_location": "validated document repository",
+      "classification": "audit-ready"
+    },
+    "authentication_controls": {
+      "multifactor_required": true,
+      "preferred_method": "phishing-resistant",
+      "shared_accounts_allowed": false
+    },
+    "device_posture": {
+      "company_managed_only": true,
+      "endpoint_protection_status": "healthy required",
+      "jailbroken_devices_allowed": false
+    },
+    "network_restrictions": {
+      "corporate_vpn_required": true,
+      "allowed_countries": [
+        "US",
+        "CA"
+      ],
+      "public_wifi_allowed": false
+    },
+    "change_control": {
+      "process": "CAB review",
+      "implementation_approval_required": true,
+      "exception_tracking_system": "ServiceNow"
+    },
+    "monitoring": {
+      "alert_destination": "Security Operations Center",
+      "review_frequency": "daily",
+      "critical_alert_response": "immediate"
+    },
+    "logging_requirements": {
+      "successful_signins_logged": true,
+      "failed_signins_logged": true,
+      "timeout_events_logged": true
+    },
+    "emergency_access": {
+      "allowed_for": "validated incidents only",
+      "manager_approval_required": true,
+      "activation_limit_hours": 2
+    },
+    "data_handling": {
+      "local_downloads_allowed": false,
+      "export_encryption_required": true,
+      "report_watermarking": "required"
+    },
+    "training_requirements": {
+      "frequency": "annual",
+      "course_name": "Secure GxP System Use",
+      "completion_due": "before access granted"
+    },
+    "offboarding_requirements": {
+      "termination_date_revocation": true,
+      "privileged_role_removal_sla_hours": 4,
+      "removal_evidence_required": true
+    },
+    "temporary_exceptions": {
+      "risk_acceptance_required": true,
+      "expiration_days": 30,
+      "reviewing_team": "Information Security Governance"
+    },
+    "approval_status": {
+      "state": "approved",
+      "effective_date": "2026-01-20"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/session_policy/max_session_timeout_minutes",
+      "kind": "direct",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/1/session_timeout_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/3/session_timeout_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/3/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/4/session_timeout_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/4/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/5/session_timeout_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/6/session_timeout_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/6/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/7/session_timeout_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/9/session_timeout_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/9/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/10/session_timeout_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/11/session_timeout_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/11/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/13/session_timeout_minutes",
+      "kind": "cascade",
+      "value": 60
+    },
+    {
+      "op": "replace",
+      "path": "/access_entries/13/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    }
+  ],
+  "expected_json": {
+    "organization_name": "Northstar Biologics",
+    "session_policy": {
+      "max_session_timeout_minutes": 60,
+      "compliance_rule": "An access entry is compliant iff its session timeout is at most the policy maximum; if it exceeds the maximum, it must be clamped to the maximum and marked non_compliant."
+    },
+    "access_entries": [
+      {
+        "person": "Mira Chen",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Omar Patel",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Priya Nandakumar",
+        "session_timeout_minutes": 45,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Luis Romero",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Hannah Brooks",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Kenji Sato",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Sofia Alvarez",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Raj Mehta",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Elise Warren",
+        "session_timeout_minutes": 30,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Marcus Lee",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Noor Haddad",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Ava Thompson",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "person": "Daniel Kim",
+        "session_timeout_minutes": 40,
+        "compliance_flag": "compliant"
+      },
+      {
+        "person": "Zoe Fischer",
+        "session_timeout_minutes": 60,
+        "compliance_flag": "non_compliant"
+      }
+    ],
+    "plan_reference": "NAP-2026-Q1-SESSION",
+    "plan_steward": {
+      "name": "Lena Ortiz",
+      "team": "Information Security Governance",
+      "email": "lena.ortiz@northstarbio.example"
+    },
+    "review_schedule": {
+      "frequency": "quarterly",
+      "next_review_date": "2026-04-15",
+      "timezone": "America/New_York"
+    },
+    "operating_context": {
+      "environment": "production",
+      "regulatory_scope": "GxP-regulated",
+      "sensitivity": "high"
+    },
+    "business_approval_owner": {
+      "name": "Grace Malloy",
+      "department": "Clinical Operations",
+      "email": "grace.malloy@northstarbio.example"
+    },
+    "audit_escalation_contact": {
+      "name": "Thomas Reed",
+      "team": "Compliance Assurance",
+      "email": "thomas.reed@northstarbio.example"
+    },
+    "evidence_retention": {
+      "retention_period_years": 7,
+      "storage_location": "validated document repository",
+      "classification": "audit-ready"
+    },
+    "authentication_controls": {
+      "multifactor_required": true,
+      "preferred_method": "phishing-resistant",
+      "shared_accounts_allowed": false
+    },
+    "device_posture": {
+      "company_managed_only": true,
+      "endpoint_protection_status": "healthy required",
+      "jailbroken_devices_allowed": false
+    },
+    "network_restrictions": {
+      "corporate_vpn_required": true,
+      "allowed_countries": [
+        "US",
+        "CA"
+      ],
+      "public_wifi_allowed": false
+    },
+    "change_control": {
+      "process": "CAB review",
+      "implementation_approval_required": true,
+      "exception_tracking_system": "ServiceNow"
+    },
+    "monitoring": {
+      "alert_destination": "Security Operations Center",
+      "review_frequency": "daily",
+      "critical_alert_response": "immediate"
+    },
+    "logging_requirements": {
+      "successful_signins_logged": true,
+      "failed_signins_logged": true,
+      "timeout_events_logged": true
+    },
+    "emergency_access": {
+      "allowed_for": "validated incidents only",
+      "manager_approval_required": true,
+      "activation_limit_hours": 2
+    },
+    "data_handling": {
+      "local_downloads_allowed": false,
+      "export_encryption_required": true,
+      "report_watermarking": "required"
+    },
+    "training_requirements": {
+      "frequency": "annual",
+      "course_name": "Secure GxP System Use",
+      "completion_due": "before access granted"
+    },
+    "offboarding_requirements": {
+      "termination_date_revocation": true,
+      "privileged_role_removal_sla_hours": 4,
+      "removal_evidence_required": true
+    },
+    "temporary_exceptions": {
+      "risk_acceptance_required": true,
+      "expiration_days": 30,
+      "reviewing_team": "Information Security Governance"
+    },
+    "approval_status": {
+      "state": "approved",
+      "effective_date": "2026-01-20"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "session max 90->60; per rule, every entry with timeout>60 clamped to 60 and flagged non_compliant (only actual changes).",
+  "annotated": true,
+  "excluded": false
+}

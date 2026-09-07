@@ -1,0 +1,432 @@
+{
+  "id": "course_plan_L50_04",
+  "domain": "course_plan",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start the plan by recording that the student has already finished Introduction to Programming."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/completed_courses\", \"value\": [\"CS101 - Introduction to Programming\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that the student completed Calculus I before this plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/completed_courses/-\", \"value\": \"MATH101 - Calculus I\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the standard rule that a planned class is open to the student only when every class in its prerequisite chain is already finished."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/eligibility_rule\", \"value\": \"eligible if every course in the prerequisite chain is included in the completed courses list\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Data Structures as the first class the student wants to take, and base its readiness on Introduction to Programming being done."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses\", \"value\": [{\"course\": \"CS201 - Data Structures\", \"prerequisite_chain\": [\"CS101 - Introduction to Programming\"], \"eligible\": true}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Discrete Mathematics too; it should only require Calculus I, so the student is ready for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"MATH210 - Discrete Mathematics\", \"prerequisite_chain\": [\"MATH101 - Calculus I\"], \"eligible\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Algorithms in the plan as well; it should depend on Data Structures, which itself depends on Introduction to Programming, and the student should not be marked ready yet because Data Structures is not already completed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"CS301 - Algorithms\", \"prerequisite_chain\": [\"CS201 - Data Structures\", \"CS101 - Introduction to Programming\"], \"eligible\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Software Engineering to the planned classes, with Introduction to Programming as its requirement, so the student can take it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"CS320 - Software Engineering\", \"prerequisite_chain\": [\"CS101 - Introduction to Programming\"], \"eligible\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Databases to the plan too; since it relies on Data Structures and that class is not already finished, the student should not be considered ready for it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"CS330 - Databases\", \"prerequisite_chain\": [\"CS201 - Data Structures\"], \"eligible\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include Computer Organization as another planned class; it should require Introduction to Programming, so the student is ready for it now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"CS240 - Computer Organization\", \"prerequisite_chain\": [\"CS101 - Introduction to Programming\"], \"eligible\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Operating Systems as a planned class, and since it depends on Computer Organization, mark the student as not ready for it yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"CS340 - Operating Systems\", \"prerequisite_chain\": [\"CS240 - Computer Organization\"], \"eligible\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Human-Computer Interaction as another option; it only needs Software Engineering first, so the student is not ready for it yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"CS350 - Human-Computer Interaction\", \"prerequisite_chain\": [\"CS320 - Software Engineering\"], \"eligible\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add Computer Networks too; it should come after Computer Organization, so the student is not ready for it yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"CS360 - Computer Networks\", \"prerequisite_chain\": [\"CS240 - Computer Organization\"], \"eligible\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Artificial Intelligence as another planned course; it should require Algorithms first, so the student is not ready for it yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"CS410 - Artificial Intelligence\", \"prerequisite_chain\": [\"CS301 - Algorithms\"], \"eligible\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Cybersecurity as well; it should require Computer Networks first, so the student is not ready for it yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"CS420 - Cybersecurity\", \"prerequisite_chain\": [\"CS360 - Computer Networks\"], \"eligible\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Machine Learning as a later planned class; it should come after Artificial Intelligence, so the student is not ready for it yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planned_courses/-\", \"value\": {\"course\": \"CS430 - Machine Learning\", \"prerequisite_chain\": [\"CS410 - Artificial Intelligence\"], \"eligible\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now add the basic planning preferences: the student is aiming for Fall 2025, wants to stay at 15 credits or less, and prefers a hybrid schedule."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planning_preferences\", \"value\": {\"target_term\": \"Fall 2025\", \"max_credits\": 15, \"preferred_format\": \"hybrid\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the assigned advisor’s contact details so the plan has someone to follow up with."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisor_contact\", \"value\": {\"name\": \"Dr. Elena Park\", \"email\": \"epark@northvalley.edu\", \"office\": \"Science Hall 214\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give me a quick readiness snapshot across the planned classes: how many are listed overall, how many the student can take now, and how many are still blocked."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/eligibility_summary\", \"value\": {\"total_planned\": 12, \"currently_eligible\": 4, \"currently_ineligible\": 8}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one final reminder that the student should review the blocked classes with the advisor before registration opens."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student_note\", \"value\": \"Review blocked classes with the advisor before registration opens.\"}]"
+    }
+  ],
+  "edit_instruction": "For CS320 - Software Engineering, replace CS101 - Introduction to Programming with MATH220 - Linear Algebra as the prerequisite.",
+  "theme": "Changing a course's prerequisite",
+  "master_data": {
+    "courses": {
+      "MATH220 - Linear Algebra": {
+        "prerequisite_chain": [
+          "MATH101 - Calculus I"
+        ]
+      }
+    }
+  },
+  "current_json": {
+    "completed_courses": [
+      "CS101 - Introduction to Programming",
+      "MATH101 - Calculus I"
+    ],
+    "eligibility_rule": "eligible if every course in the prerequisite chain is included in the completed courses list",
+    "planned_courses": [
+      {
+        "course": "CS201 - Data Structures",
+        "prerequisite_chain": [
+          "CS101 - Introduction to Programming"
+        ],
+        "eligible": true
+      },
+      {
+        "course": "MATH210 - Discrete Mathematics",
+        "prerequisite_chain": [
+          "MATH101 - Calculus I"
+        ],
+        "eligible": true
+      },
+      {
+        "course": "CS301 - Algorithms",
+        "prerequisite_chain": [
+          "CS201 - Data Structures",
+          "CS101 - Introduction to Programming"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS320 - Software Engineering",
+        "prerequisite_chain": [
+          "CS101 - Introduction to Programming"
+        ],
+        "eligible": true
+      },
+      {
+        "course": "CS330 - Databases",
+        "prerequisite_chain": [
+          "CS201 - Data Structures"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS240 - Computer Organization",
+        "prerequisite_chain": [
+          "CS101 - Introduction to Programming"
+        ],
+        "eligible": true
+      },
+      {
+        "course": "CS340 - Operating Systems",
+        "prerequisite_chain": [
+          "CS240 - Computer Organization"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS350 - Human-Computer Interaction",
+        "prerequisite_chain": [
+          "CS320 - Software Engineering"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS360 - Computer Networks",
+        "prerequisite_chain": [
+          "CS240 - Computer Organization"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS410 - Artificial Intelligence",
+        "prerequisite_chain": [
+          "CS301 - Algorithms"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS420 - Cybersecurity",
+        "prerequisite_chain": [
+          "CS360 - Computer Networks"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS430 - Machine Learning",
+        "prerequisite_chain": [
+          "CS410 - Artificial Intelligence"
+        ],
+        "eligible": false
+      }
+    ],
+    "planning_preferences": {
+      "target_term": "Fall 2025",
+      "max_credits": 15,
+      "preferred_format": "hybrid"
+    },
+    "advisor_contact": {
+      "name": "Dr. Elena Park",
+      "email": "epark@northvalley.edu",
+      "office": "Science Hall 214"
+    },
+    "eligibility_summary": {
+      "total_planned": 12,
+      "currently_eligible": 4,
+      "currently_ineligible": 8
+    },
+    "student_note": "Review blocked classes with the advisor before registration opens."
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/planned_courses/3/prerequisite_chain/0",
+      "kind": "direct",
+      "value": "MATH220 - Linear Algebra"
+    },
+    {
+      "op": "add",
+      "path": "/planned_courses/3/prerequisite_chain/-",
+      "kind": "cascade",
+      "value": "MATH101 - Calculus I"
+    },
+    {
+      "op": "replace",
+      "path": "/planned_courses/3/eligible",
+      "kind": "cascade",
+      "value": false
+    },
+    {
+      "op": "replace",
+      "path": "/eligibility_summary/currently_eligible",
+      "kind": "cascade",
+      "value": 3
+    },
+    {
+      "op": "replace",
+      "path": "/eligibility_summary/currently_ineligible",
+      "kind": "cascade",
+      "value": 9
+    }
+  ],
+  "expected_json": {
+    "completed_courses": [
+      "CS101 - Introduction to Programming",
+      "MATH101 - Calculus I"
+    ],
+    "eligibility_rule": "eligible if every course in the prerequisite chain is included in the completed courses list",
+    "planned_courses": [
+      {
+        "course": "CS201 - Data Structures",
+        "prerequisite_chain": [
+          "CS101 - Introduction to Programming"
+        ],
+        "eligible": true
+      },
+      {
+        "course": "MATH210 - Discrete Mathematics",
+        "prerequisite_chain": [
+          "MATH101 - Calculus I"
+        ],
+        "eligible": true
+      },
+      {
+        "course": "CS301 - Algorithms",
+        "prerequisite_chain": [
+          "CS201 - Data Structures",
+          "CS101 - Introduction to Programming"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS320 - Software Engineering",
+        "prerequisite_chain": [
+          "MATH220 - Linear Algebra",
+          "MATH101 - Calculus I"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS330 - Databases",
+        "prerequisite_chain": [
+          "CS201 - Data Structures"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS240 - Computer Organization",
+        "prerequisite_chain": [
+          "CS101 - Introduction to Programming"
+        ],
+        "eligible": true
+      },
+      {
+        "course": "CS340 - Operating Systems",
+        "prerequisite_chain": [
+          "CS240 - Computer Organization"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS350 - Human-Computer Interaction",
+        "prerequisite_chain": [
+          "CS320 - Software Engineering"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS360 - Computer Networks",
+        "prerequisite_chain": [
+          "CS240 - Computer Organization"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS410 - Artificial Intelligence",
+        "prerequisite_chain": [
+          "CS301 - Algorithms"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS420 - Cybersecurity",
+        "prerequisite_chain": [
+          "CS360 - Computer Networks"
+        ],
+        "eligible": false
+      },
+      {
+        "course": "CS430 - Machine Learning",
+        "prerequisite_chain": [
+          "CS410 - Artificial Intelligence"
+        ],
+        "eligible": false
+      }
+    ],
+    "planning_preferences": {
+      "target_term": "Fall 2025",
+      "max_credits": 15,
+      "preferred_format": "hybrid"
+    },
+    "advisor_contact": {
+      "name": "Dr. Elena Park",
+      "email": "epark@northvalley.edu",
+      "office": "Science Hall 214"
+    },
+    "eligibility_summary": {
+      "total_planned": 12,
+      "currently_eligible": 3,
+      "currently_ineligible": 9
+    },
+    "student_note": "Review blocked classes with the advisor before registration opens."
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "For CS320 - Software Engineering, replace prerequisite CS101 with MATH220 - Linear Algebra. The DIRECT edit swaps chain element 0 CS101 -> MATH220. Because this plan lists transitive prerequisite chains (e.g. CS301 = [CS201, CS101]) and master_data supplies MATH220's chain [MATH101 - Calculus I], MATH101 is pulled into CS320's chain as a CASCADE (add). eligibility_rule: eligible iff every chain course is in completed_courses [CS101, MATH101]; MATH220 is not completed, so eligible true -> false (cascade). eligibility_summary currently_eligible 4 -> 3, currently_ineligible 8 -> 9 (cascade; total_planned 12 unchanged). Only CS320 re-derives; courses depending on CS320 stay ineligible. | REVIEW EDIT (with author): the prerequisite edit was re-annotated during review. (1) The new chain was restored to the transitive [MATH220 - Linear Algebra, MATH101 - Calculus I] (not the literal one-for-one [MATH220]), because this plan lists transitive chains (CS301 = [CS201, CS101]) and master_data supplies MATH220 prereq chain [MATH101], so the convention-consistent deterministic value includes MATH101. (2) The edit was split by kind: replace /prerequisite_chain/0 CS101->MATH220 is DIRECT (the requested swap), while add /prerequisite_chain/- MATH101 is CASCADE (the transitive prerequisite pulled in) - the literal swap is the direct edit and the MATH101 propagation is the cascade, scored separately.",
+  "conversation_pattern": "Center the artifact on a course list where each planned course's eligibility derives from whether its prerequisite chain is satisfied by a stated set of completed courses, with the eligibility rule stated. Around this core, add the realistic, independent details a course plan would carry that do not depend on the prerequisites, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Change one course's prerequisite to a different specific course.",
+  "cascade_pattern": "Changing a course's prerequisite to a new one (whose own prerequisite chain is supplied with the edit instruction) re-derives that course's eligibility from whether the new chain is satisfied by the completed set. Courses with unchanged prerequisites stay. This is determined because the new prerequisite's chain is provided with the edit.",
+  "requires_master_data": true
+}

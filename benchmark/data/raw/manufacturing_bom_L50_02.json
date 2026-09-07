@@ -1,0 +1,352 @@
+{
+  "id": "manufacturing_bom_L50_02",
+  "domain": "manufacturing_bom",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let’s start the manufacturing plan with work order WO-24-1187."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/workOrderId\", \"value\": \"WO-24-1187\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Northstar Electronics as the source for the motor controller board."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents\", \"value\": [{\"componentName\": \"motor controller board\", \"supplierName\": \"Northstar Electronics\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Their quoted price for that board is 48.75 dollars per unit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/0/unitCostUsd\", \"value\": 48.75}]"
+    },
+    {
+      "role": "user",
+      "content": "They can deliver that board in 21 days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/0/leadTimeDays\", \"value\": 21}]"
+    },
+    {
+      "role": "user",
+      "content": "Northstar ships those boards from Malaysia."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/0/countryOfOrigin\", \"value\": \"Malaysia\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark Northstar as a moderate supply risk for that board."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/0/supplyRiskFlag\", \"value\": \"moderate\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For purchasing questions, use Maya Chen at Northstar, reachable at maya.chen@northstar-elec.com."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/0/procurementContact\", \"value\": {\"name\": \"Maya Chen\", \"email\": \"maya.chen@northstar-elec.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan to use 32 motor controller boards for this work order."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/0/quantity\", \"value\": 32}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the planned spend for the motor controller boards based on that quote and quantity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/0/extendedCostUsd\", \"value\": 1560}]"
+    },
+    {
+      "role": "user",
+      "content": "Assume purchasing will release the order on July 1, 2024."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/procurementReleaseDate\", \"value\": \"2024-07-01\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the expected arrival date for the boards using the release timing and Northstar’s delivery time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/0/expectedReceiptDate\", \"value\": \"2024-07-22\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Tie the work order to the Aster-3 palletizer assembly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/productModel\", \"value\": \"Aster-3 palletizer assembly\"}]"
+    },
+    {
+      "role": "user",
+      "content": "This build is for line 4 at the Dayton plant."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturingSite\", \"value\": {\"plant\": \"Dayton\", \"line\": \"Line 4\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the planned build quantity at 16 finished assemblies."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plannedBuildQuantity\", \"value\": 16}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the welded base frame kit from ForgeWorks Ohio, with 16 needed for the build."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/-\", \"value\": {\"componentName\": \"welded base frame kit\", \"supplierName\": \"ForgeWorks Ohio\", \"quantity\": 16}}]"
+    },
+    {
+      "role": "user",
+      "content": "ForgeWorks quoted the base frame kits at 112.50 dollars each and a two-week delivery window."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/1/unitCostUsd\", \"value\": 112.5}, {\"op\": \"add\", \"path\": \"/bomComponents/1/leadTimeDays\", \"value\": 14}]"
+    },
+    {
+      "role": "user",
+      "content": "ForgeWorks supplies those frame kits domestically and should be treated as low risk."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/1/countryOfOrigin\", \"value\": \"United States\"}, {\"op\": \"add\", \"path\": \"/bomComponents/1/supplyRiskFlag\", \"value\": \"low\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For the frame kits, purchasing should work with Evan Brooks at evan.brooks@forgeworks-oh.com."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/1/procurementContact\", \"value\": {\"name\": \"Evan Brooks\", \"email\": \"evan.brooks@forgeworks-oh.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the planned spend for the base frame kits from the ForgeWorks quote and quantity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/1/extendedCostUsd\", \"value\": 1800}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the expected arrival date for the frame kits using the same purchasing release timing and ForgeWorks delivery window."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/1/expectedReceiptDate\", \"value\": \"2024-07-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the optical safety sensor set from LumaSafe Instruments, with 16 sets needed for the build."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/-\", \"value\": {\"componentName\": \"optical safety sensor set\", \"supplierName\": \"LumaSafe Instruments\", \"quantity\": 16}}]"
+    },
+    {
+      "role": "user",
+      "content": "LumaSafe quoted the sensor sets at 36.40 dollars each and can deliver them in 10 days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/2/unitCostUsd\", \"value\": 36.4}, {\"op\": \"add\", \"path\": \"/bomComponents/2/leadTimeDays\", \"value\": 10}]"
+    },
+    {
+      "role": "user",
+      "content": "LumaSafe ships the sensor sets from Germany, and their supply risk should be low."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/2/countryOfOrigin\", \"value\": \"Germany\"}, {\"op\": \"add\", \"path\": \"/bomComponents/2/supplyRiskFlag\", \"value\": \"low\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For the sensor sets, purchasing should contact Klara Vogel at klara.vogel@lumasafe.de."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/2/procurementContact\", \"value\": {\"name\": \"Klara Vogel\", \"email\": \"klara.vogel@lumasafe.de\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the planned spend for the sensor sets from the LumaSafe quote and quantity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/2/extendedCostUsd\", \"value\": 582.4}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the expected arrival date for the sensor sets using the same purchasing release timing and LumaSafe’s delivery window."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bomComponents/2/expectedReceiptDate\", \"value\": \"2024-07-11\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now summarize the purchasing rollup: total material spend, the longest supplier wait, and when all parts should be in hand."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/procurementSummary\", \"value\": {\"totalMaterialCostUsd\": 3942.4, \"longestLeadTimeDays\": 21, \"allMaterialsAvailableDate\": \"2024-07-22\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan the assembly run to start on July 23, 2024 and finish on July 26, 2024."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/productionSchedule\", \"value\": {\"startDate\": \"2024-07-23\", \"finishDate\": \"2024-07-26\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Assign the run to supervisor Dana Patel and set it for the day shift."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/productionAssignment\", \"value\": {\"supervisor\": \"Dana Patel\", \"shift\": \"Day\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a full final-assembly inspection before the units are released."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/qualityPlan\", \"value\": {\"inspectionStage\": \"final assembly\", \"sampleSizePercent\": 100}}]"
+    },
+    {
+      "role": "user",
+      "content": "Pack the finished assemblies in reusable steel crates with blue traveler labels."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packagingPlan\", \"value\": {\"container\": \"reusable steel crate\", \"travelerLabelColor\": \"blue\"}}]"
+    }
+  ],
+  "edit_instruction": "Change the source for the motor controller board to Pacific Servo Components.",
+  "theme": "Substituting a component supplier",
+  "conversation_pattern": "Center the artifact on a BOM component sourced from one supplier, where supplier attributes determine unit cost, lead time, country-of-origin, risk flag, and procurement contact. Around this core, add the realistic, independent details a manufacturing plan would carry that do not depend on the supplier, and vary their number from sample to sample. Do not embed a lookup or reference card for any supplier inside the artifact; the artifact holds only the current supplier's own fields.",
+  "edit_pattern": "Switch one component to a different specific supplier.",
+  "cascade_pattern": "Every supplier-governed field takes the replacement supplier's supplied attributes, and derived totals such as cost and lead time recompute from them. Component quantity and unrelated components stay unchanged. This is determined because the replacement supplier's attributes are provided with the edit.",
+  "requires_master_data": true,
+  "master_data": {
+    "Pacific Servo Components": {
+      "unitCostUsd": 44.2,
+      "leadTimeDays": 17,
+      "countryOfOrigin": "Thailand",
+      "supplyRiskFlag": "low",
+      "procurementContact": {
+        "name": "Nora Ito",
+        "email": "nora.ito@pacificservo.com"
+      }
+    }
+  },
+  "current_json": {
+    "workOrderId": "WO-24-1187",
+    "bomComponents": [
+      {
+        "componentName": "motor controller board",
+        "supplierName": "Northstar Electronics",
+        "unitCostUsd": 48.75,
+        "leadTimeDays": 21,
+        "countryOfOrigin": "Malaysia",
+        "supplyRiskFlag": "moderate",
+        "procurementContact": {
+          "name": "Maya Chen",
+          "email": "maya.chen@northstar-elec.com"
+        },
+        "quantity": 32,
+        "extendedCostUsd": 1560,
+        "expectedReceiptDate": "2024-07-22"
+      },
+      {
+        "componentName": "welded base frame kit",
+        "supplierName": "ForgeWorks Ohio",
+        "quantity": 16,
+        "unitCostUsd": 112.5,
+        "leadTimeDays": 14,
+        "countryOfOrigin": "United States",
+        "supplyRiskFlag": "low",
+        "procurementContact": {
+          "name": "Evan Brooks",
+          "email": "evan.brooks@forgeworks-oh.com"
+        },
+        "extendedCostUsd": 1800,
+        "expectedReceiptDate": "2024-07-15"
+      },
+      {
+        "componentName": "optical safety sensor set",
+        "supplierName": "LumaSafe Instruments",
+        "quantity": 16,
+        "unitCostUsd": 36.4,
+        "leadTimeDays": 10,
+        "countryOfOrigin": "Germany",
+        "supplyRiskFlag": "low",
+        "procurementContact": {
+          "name": "Klara Vogel",
+          "email": "klara.vogel@lumasafe.de"
+        },
+        "extendedCostUsd": 582.4,
+        "expectedReceiptDate": "2024-07-11"
+      }
+    ],
+    "procurementReleaseDate": "2024-07-01",
+    "productModel": "Aster-3 palletizer assembly",
+    "manufacturingSite": {
+      "plant": "Dayton",
+      "line": "Line 4"
+    },
+    "plannedBuildQuantity": 16,
+    "procurementSummary": {
+      "totalMaterialCostUsd": 3942.4,
+      "longestLeadTimeDays": 21,
+      "allMaterialsAvailableDate": "2024-07-22"
+    },
+    "productionSchedule": {
+      "startDate": "2024-07-23",
+      "finishDate": "2024-07-26"
+    },
+    "productionAssignment": {
+      "supervisor": "Dana Patel",
+      "shift": "Day"
+    },
+    "qualityPlan": {
+      "inspectionStage": "final assembly",
+      "sampleSizePercent": 100
+    },
+    "packagingPlan": {
+      "container": "reusable steel crate",
+      "travelerLabelColor": "blue"
+    }
+  }
+}

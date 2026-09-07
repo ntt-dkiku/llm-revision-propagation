@@ -1,0 +1,458 @@
+{
+  "id": "manufacturing_bom_L50_00",
+  "domain": "manufacturing_bom",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a manufacturing build plan for 120 finished units."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/buildQuantity\", \"value\": 120}]"
+    },
+    {
+      "role": "user",
+      "content": "Each finished unit will need 2 aluminum frames, and each frame costs 18.50."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components\", \"value\": [{\"name\": \"aluminum frame\", \"quantityPerFinishedUnit\": 2, \"unitCost\": 18.5}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the motor requirement too: one motor assembly per unit at 42 dollars each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"name\": \"motor assembly\", \"quantityPerFinishedUnit\": 1, \"unitCost\": 42}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the fasteners as well: eight screw packs go into each finished unit, and they run 1.25 per pack."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"name\": \"screw pack\", \"quantityPerFinishedUnit\": 8, \"unitCost\": 1.25}}]"
+    },
+    {
+      "role": "user",
+      "content": "For assembly work, plan on 1.5 hours for each finished unit at 32 dollars an hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/labor\", \"value\": {\"assemblyHoursPerFinishedUnit\": 1.5, \"assemblyHourlyRate\": 32}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the test and inspection work too: 0.4 hours per finished unit at 28 dollars an hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/labor/testAndInspectionHoursPerFinishedUnit\", \"value\": 0.4}, {\"op\": \"add\", \"path\": \"/labor/testAndInspectionHourlyRate\", \"value\": 28}]"
+    },
+    {
+      "role": "user",
+      "content": "For the aluminum frames, use Apex Metals as the source and order them in multiples of 10."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/0/supplier\", \"value\": \"Apex Metals\"}, {\"op\": \"add\", \"path\": \"/components/0/orderMultiple\", \"value\": 10}]"
+    },
+    {
+      "role": "user",
+      "content": "Source the motor assemblies from MotionCore, with purchasing rounded to lots of 5."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/1/supplier\", \"value\": \"MotionCore\"}, {\"op\": \"add\", \"path\": \"/components/1/orderMultiple\", \"value\": 5}]"
+    },
+    {
+      "role": "user",
+      "content": "Get the screw packs from BoltBarn, and buy them in full cartons of 50 packs."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/2/supplier\", \"value\": \"BoltBarn\"}, {\"op\": \"add\", \"path\": \"/components/2/orderMultiple\", \"value\": 50}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the packaging kit requirement: one kit for every finished unit, costing 6.75 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"name\": \"packaging kit\", \"quantityPerFinishedUnit\": 1, \"unitCost\": 6.75}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the packaging kits, use PackRight Supply and round purchases to bundles of 20."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/3/supplier\", \"value\": \"PackRight Supply\"}, {\"op\": \"add\", \"path\": \"/components/3/orderMultiple\", \"value\": 20}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the aluminum frame totals for this run, including how many are actually needed, how many to buy after rounding, and the purchase cost."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/componentTotals\", \"value\": [{\"componentIndex\": 0, \"totalDemand\": 240, \"procurementQuantity\": 240, \"procurementCost\": 4440}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Do the same rollup for the motor assemblies for this 120-unit run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/componentTotals/-\", \"value\": {\"totalDemand\": 120, \"procurementQuantity\": 120, \"procurementCost\": 5040}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please roll up the screw packs next for the current run."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/componentTotals/-\", \"value\": {\"totalDemand\": 960, \"procurementQuantity\": 1000, \"procurementCost\": 1250}}]"
+    },
+    {
+      "role": "user",
+      "content": "Roll up the packaging kits for the current build as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/componentTotals/-\", \"value\": {\"totalDemand\": 120, \"procurementQuantity\": 120, \"procurementCost\": 810}}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the assembly labor for this run, both the total hours and the cost."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/laborTotals\", \"value\": {\"assemblyHours\": 180, \"assemblyCost\": 5760}}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the test and inspection labor for the same run, with hours and cost."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/laborTotals/testAndInspectionHours\", \"value\": 48}, {\"op\": \"add\", \"path\": \"/laborTotals/testAndInspectionCost\", \"value\": 1344}]"
+    },
+    {
+      "role": "user",
+      "content": "Now summarize the run cost with component spend, labor spend, and the overall batch total."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costSummary\", \"value\": {\"componentCost\": 11540, \"laborCost\": 7104, \"batchCost\": 18644}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a few basic planning details: this is for the compact actuator, built at the North Cell, due on June 28, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/productName\", \"value\": \"compact actuator\"}, {\"op\": \"add\", \"path\": \"/buildLocation\", \"value\": \"North Cell\"}, {\"op\": \"add\", \"path\": \"/dueDate\", \"value\": \"2026-06-28\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish it off with the planner assigned to this build and mark it as ready for procurement review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planner\", \"value\": \"Maya Chen\"}, {\"op\": \"add\", \"path\": \"/status\", \"value\": \"ready for procurement review\"}]"
+    }
+  ],
+  "edit_instruction": "Change the planned build to 135 finished units.",
+  "theme": "Changing the build quantity",
+  "conversation_pattern": "Center the artifact on a manufacturing build plan with a finished-unit quantity, component requirements per finished unit, labor per unit, and per-unit costs, where total component demand, labor hours, batch cost, and procurement quantities derive from the build quantity by stated arithmetic. Around this core, add the realistic, independent details a build plan would carry that do not depend on build quantity, and vary their number from sample to sample.",
+  "edit_pattern": "Change the build quantity to a specific new number of finished units.",
+  "cascade_pattern": "Editing the build quantity re-derives every component demand, procurement quantity, labor total, and batch cost from the stated per-unit requirements and costs. Per-unit requirements, suppliers, and unrelated fields stay unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "buildQuantity": 120,
+    "components": [
+      {
+        "name": "aluminum frame",
+        "quantityPerFinishedUnit": 2,
+        "unitCost": 18.5,
+        "supplier": "Apex Metals",
+        "orderMultiple": 10
+      },
+      {
+        "name": "motor assembly",
+        "quantityPerFinishedUnit": 1,
+        "unitCost": 42,
+        "supplier": "MotionCore",
+        "orderMultiple": 5
+      },
+      {
+        "name": "screw pack",
+        "quantityPerFinishedUnit": 8,
+        "unitCost": 1.25,
+        "supplier": "BoltBarn",
+        "orderMultiple": 50
+      },
+      {
+        "name": "packaging kit",
+        "quantityPerFinishedUnit": 1,
+        "unitCost": 6.75,
+        "supplier": "PackRight Supply",
+        "orderMultiple": 20
+      }
+    ],
+    "labor": {
+      "assemblyHoursPerFinishedUnit": 1.5,
+      "assemblyHourlyRate": 32,
+      "testAndInspectionHoursPerFinishedUnit": 0.4,
+      "testAndInspectionHourlyRate": 28
+    },
+    "componentTotals": [
+      {
+        "componentIndex": 0,
+        "totalDemand": 240,
+        "procurementQuantity": 240,
+        "procurementCost": 4440
+      },
+      {
+        "totalDemand": 120,
+        "procurementQuantity": 120,
+        "procurementCost": 5040
+      },
+      {
+        "totalDemand": 960,
+        "procurementQuantity": 1000,
+        "procurementCost": 1250
+      },
+      {
+        "totalDemand": 120,
+        "procurementQuantity": 120,
+        "procurementCost": 810
+      }
+    ],
+    "laborTotals": {
+      "assemblyHours": 180,
+      "assemblyCost": 5760,
+      "testAndInspectionHours": 48,
+      "testAndInspectionCost": 1344
+    },
+    "costSummary": {
+      "componentCost": 11540,
+      "laborCost": 7104,
+      "batchCost": 18644
+    },
+    "productName": "compact actuator",
+    "buildLocation": "North Cell",
+    "dueDate": "2026-06-28",
+    "planner": "Maya Chen",
+    "status": "ready for procurement review"
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/buildQuantity",
+      "kind": "direct",
+      "value": 135
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/0/totalDemand",
+      "kind": "cascade",
+      "value": 270
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/0/procurementQuantity",
+      "kind": "cascade",
+      "value": 270
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/0/procurementCost",
+      "kind": "cascade",
+      "value": 4995.0
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/1/totalDemand",
+      "kind": "cascade",
+      "value": 135
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/1/procurementQuantity",
+      "kind": "cascade",
+      "value": 135
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/1/procurementCost",
+      "kind": "cascade",
+      "value": 5670
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/2/totalDemand",
+      "kind": "cascade",
+      "value": 1080
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/2/procurementQuantity",
+      "kind": "cascade",
+      "value": 1100
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/2/procurementCost",
+      "kind": "cascade",
+      "value": 1375.0
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/3/totalDemand",
+      "kind": "cascade",
+      "value": 135
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/3/procurementQuantity",
+      "kind": "cascade",
+      "value": 140
+    },
+    {
+      "op": "replace",
+      "path": "/componentTotals/3/procurementCost",
+      "kind": "cascade",
+      "value": 945.0
+    },
+    {
+      "op": "replace",
+      "path": "/laborTotals/assemblyHours",
+      "kind": "cascade",
+      "value": 202.5
+    },
+    {
+      "op": "replace",
+      "path": "/laborTotals/assemblyCost",
+      "kind": "cascade",
+      "value": 6480.0
+    },
+    {
+      "op": "replace",
+      "path": "/laborTotals/testAndInspectionHours",
+      "kind": "cascade",
+      "value": 54.0
+    },
+    {
+      "op": "replace",
+      "path": "/laborTotals/testAndInspectionCost",
+      "kind": "cascade",
+      "value": 1512.0
+    },
+    {
+      "op": "replace",
+      "path": "/costSummary/componentCost",
+      "kind": "cascade",
+      "value": 12985.0
+    },
+    {
+      "op": "replace",
+      "path": "/costSummary/laborCost",
+      "kind": "cascade",
+      "value": 7992.0
+    },
+    {
+      "op": "replace",
+      "path": "/costSummary/batchCost",
+      "kind": "cascade",
+      "value": 20977.0
+    }
+  ],
+  "expected_json": {
+    "buildQuantity": 135,
+    "components": [
+      {
+        "name": "aluminum frame",
+        "quantityPerFinishedUnit": 2,
+        "unitCost": 18.5,
+        "supplier": "Apex Metals",
+        "orderMultiple": 10
+      },
+      {
+        "name": "motor assembly",
+        "quantityPerFinishedUnit": 1,
+        "unitCost": 42,
+        "supplier": "MotionCore",
+        "orderMultiple": 5
+      },
+      {
+        "name": "screw pack",
+        "quantityPerFinishedUnit": 8,
+        "unitCost": 1.25,
+        "supplier": "BoltBarn",
+        "orderMultiple": 50
+      },
+      {
+        "name": "packaging kit",
+        "quantityPerFinishedUnit": 1,
+        "unitCost": 6.75,
+        "supplier": "PackRight Supply",
+        "orderMultiple": 20
+      }
+    ],
+    "labor": {
+      "assemblyHoursPerFinishedUnit": 1.5,
+      "assemblyHourlyRate": 32,
+      "testAndInspectionHoursPerFinishedUnit": 0.4,
+      "testAndInspectionHourlyRate": 28
+    },
+    "componentTotals": [
+      {
+        "componentIndex": 0,
+        "totalDemand": 270,
+        "procurementQuantity": 270,
+        "procurementCost": 4995.0
+      },
+      {
+        "totalDemand": 135,
+        "procurementQuantity": 135,
+        "procurementCost": 5670
+      },
+      {
+        "totalDemand": 1080,
+        "procurementQuantity": 1100,
+        "procurementCost": 1375.0
+      },
+      {
+        "totalDemand": 135,
+        "procurementQuantity": 140,
+        "procurementCost": 945.0
+      }
+    ],
+    "laborTotals": {
+      "assemblyHours": 202.5,
+      "assemblyCost": 6480.0,
+      "testAndInspectionHours": 54.0,
+      "testAndInspectionCost": 1512.0
+    },
+    "costSummary": {
+      "componentCost": 12985.0,
+      "laborCost": 7992.0,
+      "batchCost": 20977.0
+    },
+    "productName": "compact actuator",
+    "buildLocation": "North Cell",
+    "dueDate": "2026-06-28",
+    "planner": "Maya Chen",
+    "status": "ready for procurement review"
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "build 120->135: componentTotals demand=qpu*135, procurement=roundup(order_multiple), procurementCost=procurement*unitCost; labor hours/cost; costSummary componentCost(sum proc cost)/laborCost/batchCost.",
+  "annotated": true,
+  "excluded": false
+}

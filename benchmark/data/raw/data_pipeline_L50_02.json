@@ -1,0 +1,261 @@
+{
+  "id": "data_pipeline_L50_02",
+  "domain": "data_pipeline",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let’s start a pipeline spec for the daily commerce orders dataset."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dataset/name\", \"value\": \"commerce_orders_daily\"}]"
+    },
+    {
+      "role": "user",
+      "content": "The expected load is 1,800,000 rows each day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dataset/daily_row_volume\", \"value\": 1800000}]"
+    },
+    {
+      "role": "user",
+      "content": "For sizing, assume each row averages 900 bytes and express the daily footprint in GiB from that."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/storage_size_estimate/formula\", \"value\": \"daily_row_volume * 900 bytes / 1024^3\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and calculate that daily footprint now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/storage_size_estimate/daily_gib\", \"value\": 1.5087425708770752}]"
+    },
+    {
+      "role": "user",
+      "content": "Treat anything over two million rows a day as the point where it counts as high volume."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/volume_policy/threshold_daily_rows\", \"value\": 2000000}, {\"op\": \"add\", \"path\": \"/volume_policy/high_volume_condition\", \"value\": \"daily_row_volume > threshold_daily_rows\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For loads at or under that cutoff, keep the layout simple: one file, standard compaction, and normal retention."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/volume_policy/at_or_below_threshold_targets\", \"value\": {\"partition_strategy\": \"single_file\", \"compaction_tier\": \"standard\", \"retention_class\": \"normal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For anything above the cutoff, switch to partitioning and step up both maintenance settings."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/volume_policy/above_threshold_targets\", \"value\": {\"partition_strategy\": \"partitioned\", \"compaction_tier\": \"aggressive\", \"retention_class\": \"extended\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Apply those rules to the current expected load so the active layout and maintenance choices are recorded."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/resolved_volume_plan\", \"value\": {\"partition_strategy\": \"single_file\", \"compaction_tier\": \"standard\", \"retention_class\": \"normal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that the orders arrive from the Shopify export feed, and timestamps should be interpreted in UTC."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/source/system\", \"value\": \"Shopify\"}, {\"op\": \"add\", \"path\": \"/source/feed\", \"value\": \"orders_export\"}, {\"op\": \"add\", \"path\": \"/source/timezone\", \"value\": \"UTC\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Run it once each day at 02:15 UTC, with the data ready within four hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule/frequency\", \"value\": \"daily\"}, {\"op\": \"add\", \"path\": \"/schedule/start_time_utc\", \"value\": \"02:15\"}, {\"op\": \"add\", \"path\": \"/schedule/freshness_sla_hours\", \"value\": 4}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the raw landing bucket in S3 for incoming files, under the commerce orders path."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/landing/storage\", \"value\": \"s3\"}, {\"op\": \"add\", \"path\": \"/landing/bucket\", \"value\": \"acme-raw-landing\"}, {\"op\": \"add\", \"path\": \"/landing/prefix\", \"value\": \"commerce/orders/\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Persist the cleaned output as Parquet in the curated warehouse area."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/output/format\", \"value\": \"parquet\"}, {\"op\": \"add\", \"path\": \"/output/storage_zone\", \"value\": \"curated\"}, {\"op\": \"add\", \"path\": \"/output/table\", \"value\": \"warehouse.fact_orders\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Track three required columns: the order identifier, when it was created, and the total amount."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schema/required_columns\", \"value\": [\"order_id\", \"created_at\", \"total_amount\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add basic quality checks so rows without an order identifier fail, negative totals are rejected, and duplicate orders are blocked."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quality_checks\", \"value\": [{\"name\": \"order_id_not_null\", \"severity\": \"error\"}, {\"name\": \"total_amount_non_negative\", \"severity\": \"error\"}, {\"name\": \"order_id_unique\", \"severity\": \"error\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Send operational alerts to the data platform channel, with Sev2 urgency, owned by the analytics engineering team."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/alerting/channel\", \"value\": \"#data-platform\"}, {\"op\": \"add\", \"path\": \"/alerting/urgency\", \"value\": \"Sev2\"}, {\"op\": \"add\", \"path\": \"/alerting/owner_team\", \"value\": \"analytics_engineering\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Normalize money amounts to USD using the daily exchange-rate snapshot from finance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transformations/currency\", \"value\": \"USD\"}, {\"op\": \"add\", \"path\": \"/transformations/exchange_rate_source\", \"value\": \"finance_daily_snapshot\"}, {\"op\": \"add\", \"path\": \"/transformations/rounding_mode\", \"value\": \"half_up\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Classify the dataset as internal use, note that it does not contain PII, and keep it in scope for SOX reporting."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/governance/access_level\", \"value\": \"internal\"}, {\"op\": \"add\", \"path\": \"/governance/contains_pii\", \"value\": false}, {\"op\": \"add\", \"path\": \"/governance/compliance_scope\", \"value\": \"SOX\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Spark for the job, run it on the shared medium cluster, and allow two retries before paging someone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/execution/engine\", \"value\": \"Spark\"}, {\"op\": \"add\", \"path\": \"/execution/cluster_size\", \"value\": \"medium\"}, {\"op\": \"add\", \"path\": \"/execution/max_retries\", \"value\": 2}]"
+    },
+    {
+      "role": "user",
+      "content": "Make it discoverable in DataHub under the commerce area."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/catalog/registry\", \"value\": \"DataHub\"}, {\"op\": \"add\", \"path\": \"/catalog/business_area\", \"value\": \"commerce\"}]"
+    }
+  ],
+  "edit_instruction": "Update the expected load to 2,400,000 rows per day.",
+  "theme": "Crossing a data-volume threshold",
+  "conversation_pattern": "Center the artifact on a dataset with a stated daily row-volume figure, a volume-derived storage-size estimate (stated formula), and a STATED volume threshold rule with two explicit branches: if daily volume exceeds the threshold, the partition strategy must be 'partitioned' and the compaction tier and retention class step up to specific stated targets; if it is at or below the threshold, the strategy stays 'single_file' and those tiers stay at their stated baseline. Record the threshold and both branch targets explicitly so the outcome is uniquely determined. Around this core, add realistic independent details that do not depend on volume, and vary their number from sample to sample.",
+  "edit_pattern": "Change the daily row volume to a specific new number.",
+  "cascade_pattern": "Editing the volume re-derives the storage-size estimate from the stated formula, AND — only if the new volume crosses the stated threshold relative to the old value — flips the partition strategy and steps the compaction tier and retention class to the stated branch targets. If the threshold is not crossed, the strategy and tiers stay unchanged. The outcome is determined by the stated threshold and branch targets.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "dataset": {
+      "name": "commerce_orders_daily",
+      "daily_row_volume": 1800000
+    },
+    "storage_size_estimate": {
+      "formula": "daily_row_volume * 900 bytes / 1024^3",
+      "daily_gib": 1.5087425708770752
+    },
+    "volume_policy": {
+      "threshold_daily_rows": 2000000,
+      "high_volume_condition": "daily_row_volume > threshold_daily_rows",
+      "at_or_below_threshold_targets": {
+        "partition_strategy": "single_file",
+        "compaction_tier": "standard",
+        "retention_class": "normal"
+      },
+      "above_threshold_targets": {
+        "partition_strategy": "partitioned",
+        "compaction_tier": "aggressive",
+        "retention_class": "extended"
+      }
+    },
+    "resolved_volume_plan": {
+      "partition_strategy": "single_file",
+      "compaction_tier": "standard",
+      "retention_class": "normal"
+    },
+    "source": {
+      "system": "Shopify",
+      "feed": "orders_export",
+      "timezone": "UTC"
+    },
+    "schedule": {
+      "frequency": "daily",
+      "start_time_utc": "02:15",
+      "freshness_sla_hours": 4
+    },
+    "landing": {
+      "storage": "s3",
+      "bucket": "acme-raw-landing",
+      "prefix": "commerce/orders/"
+    },
+    "output": {
+      "format": "parquet",
+      "storage_zone": "curated",
+      "table": "warehouse.fact_orders"
+    },
+    "schema": {
+      "required_columns": [
+        "order_id",
+        "created_at",
+        "total_amount"
+      ]
+    },
+    "quality_checks": [
+      {
+        "name": "order_id_not_null",
+        "severity": "error"
+      },
+      {
+        "name": "total_amount_non_negative",
+        "severity": "error"
+      },
+      {
+        "name": "order_id_unique",
+        "severity": "error"
+      }
+    ],
+    "alerting": {
+      "channel": "#data-platform",
+      "urgency": "Sev2",
+      "owner_team": "analytics_engineering"
+    },
+    "transformations": {
+      "currency": "USD",
+      "exchange_rate_source": "finance_daily_snapshot",
+      "rounding_mode": "half_up"
+    },
+    "governance": {
+      "access_level": "internal",
+      "contains_pii": false,
+      "compliance_scope": "SOX"
+    },
+    "execution": {
+      "engine": "Spark",
+      "cluster_size": "medium",
+      "max_retries": 2
+    },
+    "catalog": {
+      "registry": "DataHub",
+      "business_area": "commerce"
+    }
+  }
+}

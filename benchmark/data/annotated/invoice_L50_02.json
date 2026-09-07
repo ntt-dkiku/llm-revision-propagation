@@ -1,0 +1,545 @@
+{
+  "id": "invoice_L50_02",
+  "domain": "invoice",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a bill for Blue Harbor Design."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice\", \"value\": {\"billTo\": {\"company\": \"Blue Harbor Design\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make it a sent invoice that hasn’t been settled yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/status\", \"value\": \"issued\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that it hasn’t been settled yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/settlement/isSettled\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "On the payment side, show that we’re still waiting for the money."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/payment/paymentState\", \"value\": \"awaiting_payment\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that no money has come in yet."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/payment/amountPaidCents\", \"value\": 0}]"
+    },
+    {
+      "role": "user",
+      "content": "Flag it for payment follow-up while it’s still outstanding."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/collections/needsFollowUp\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Don’t create a payment receipt for it while it’s still unpaid."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/receipt/issued\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep this in the active chasing stage for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/collections/stage\", \"value\": \"active_collection\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Show that accounting has not reconciled this yet because it’s still unpaid."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/accounting/reconciled\", \"value\": false}]"
+    },
+    {
+      "role": "user",
+      "content": "Since it’s unpaid, leave it off the closed-out ledger for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/accounting/ledgerStatus\", \"value\": \"open_receivable\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Leave the closing date empty until the customer actually pays."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/settlement/closedAt\", \"value\": null}]"
+    },
+    {
+      "role": "user",
+      "content": "For now, don’t show any payment confirmation number."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/payment/confirmationNumber\", \"value\": null}]"
+    },
+    {
+      "role": "user",
+      "content": "Leave the paid date blank until it’s actually settled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/payment/paidAt\", \"value\": null}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the bill total at $4,800."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/summary/totalCents\", \"value\": 480000}]"
+    },
+    {
+      "role": "user",
+      "content": "Since none has been collected, show the full $4,800 as still due."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/summary/balanceDueCents\", \"value\": 480000}]"
+    },
+    {
+      "role": "user",
+      "content": "Use March 22, 2024 as the settlement day if this clears."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/payment/expectedPaidAt\", \"value\": \"2024-03-22\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Give this bill the number INV-2024-0318."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/invoiceNumber\", \"value\": \"INV-2024-0318\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Blue Harbor’s billing address in Portland."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/billTo/address\", \"value\": {\"street\": \"412 NW Everett Street\", \"city\": \"Portland\", \"state\": \"OR\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the postal code and country for that Portland location."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/billTo/address/postalCode\", \"value\": \"97209\"}, {\"op\": \"add\", \"path\": \"/invoice/billTo/address/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use March 18, 2024 as the day we sent it."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/issueDate\", \"value\": \"2024-03-18\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the due date for April 1, 2024."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/dueDate\", \"value\": \"2024-04-01\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add our company as the sender, with our main email and phone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/from\", \"value\": {\"company\": \"Northstar Creative Co.\", \"email\": \"billing@northstarcreative.co\", \"phone\": \"+1-503-555-0184\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya Lin as the client contact, with her email and phone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/billTo/contact\", \"value\": {\"name\": \"Maya Lin\", \"email\": \"maya.lin@blueharbordesign.com\", \"phone\": \"+1-503-555-0142\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make all the money amounts U.S. dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/currency\", \"value\": \"USD\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Show that the work covered ran from March 1 through March 15, 2024."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/servicePeriod\", \"value\": {\"startDate\": \"2024-03-01\", \"endDate\": \"2024-03-15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "When it does get paid, use PMT-2024-0318 as the payment confirmation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/payment/expectedConfirmationNumber\", \"value\": \"PMT-2024-0318\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short note thanking them for the project."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/notes/customerMessage\", \"value\": \"Thank you for partnering with Northstar Creative Co. on this project.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add our mailing address in Portland too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/from/address\", \"value\": {\"street\": \"88 SE Morrison Street\", \"city\": \"Portland\", \"state\": \"OR\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the postal code and country for our Portland address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/from/address/postalCode\", \"value\": \"97214\"}, {\"op\": \"add\", \"path\": \"/invoice/from/address/country\", \"value\": \"US\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the payment terms net 14."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/paymentTerms\", \"value\": \"Net 14\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For bank transfer, tell them to pay Northstar’s operating account using routing ending 1189 and account ending 4421."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/paymentInstructions/bankTransfer\", \"value\": {\"accountName\": \"Northstar Creative Co. Operating\", \"routingLast4\": \"1189\", \"accountLast4\": \"4421\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the client’s purchase order details for the brand refresh work."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/purchaseOrder\", \"value\": {\"number\": \"PO-BHD-7782\", \"project\": \"Spring Brand Refresh\", \"department\": \"Marketing\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that we sent it by email to Maya, with a copy to the billing inbox."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/delivery\", \"value\": {\"method\": \"email\", \"to\": \"maya.lin@blueharbordesign.com\", \"cc\": \"billing@blueharbordesign.com\"}}]"
+    }
+  ],
+  "edit_instruction": "Change the invoice status to paid.",
+  "theme": "Marking the invoice as paid",
+  "master_data": null,
+  "current_json": {
+    "invoice": {
+      "billTo": {
+        "company": "Blue Harbor Design",
+        "address": {
+          "street": "412 NW Everett Street",
+          "city": "Portland",
+          "state": "OR",
+          "postalCode": "97209",
+          "country": "US"
+        },
+        "contact": {
+          "name": "Maya Lin",
+          "email": "maya.lin@blueharbordesign.com",
+          "phone": "+1-503-555-0142"
+        }
+      },
+      "status": "issued",
+      "settlement": {
+        "isSettled": false,
+        "closedAt": null
+      },
+      "payment": {
+        "paymentState": "awaiting_payment",
+        "amountPaidCents": 0,
+        "confirmationNumber": null,
+        "paidAt": null,
+        "expectedPaidAt": "2024-03-22",
+        "expectedConfirmationNumber": "PMT-2024-0318"
+      },
+      "collections": {
+        "needsFollowUp": true,
+        "stage": "active_collection"
+      },
+      "receipt": {
+        "issued": false
+      },
+      "accounting": {
+        "reconciled": false,
+        "ledgerStatus": "open_receivable"
+      },
+      "summary": {
+        "totalCents": 480000,
+        "balanceDueCents": 480000
+      },
+      "invoiceNumber": "INV-2024-0318",
+      "issueDate": "2024-03-18",
+      "dueDate": "2024-04-01",
+      "from": {
+        "company": "Northstar Creative Co.",
+        "email": "billing@northstarcreative.co",
+        "phone": "+1-503-555-0184",
+        "address": {
+          "street": "88 SE Morrison Street",
+          "city": "Portland",
+          "state": "OR",
+          "postalCode": "97214",
+          "country": "US"
+        }
+      },
+      "currency": "USD",
+      "servicePeriod": {
+        "startDate": "2024-03-01",
+        "endDate": "2024-03-15"
+      },
+      "notes": {
+        "customerMessage": "Thank you for partnering with Northstar Creative Co. on this project."
+      },
+      "paymentTerms": "Net 14",
+      "paymentInstructions": {
+        "bankTransfer": {
+          "accountName": "Northstar Creative Co. Operating",
+          "routingLast4": "1189",
+          "accountLast4": "4421"
+        }
+      },
+      "purchaseOrder": {
+        "number": "PO-BHD-7782",
+        "project": "Spring Brand Refresh",
+        "department": "Marketing"
+      },
+      "delivery": {
+        "method": "email",
+        "to": "maya.lin@blueharbordesign.com",
+        "cc": "billing@blueharbordesign.com"
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/invoice/status",
+      "kind": "direct",
+      "value": "paid"
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/settlement/isSettled",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/settlement/closedAt",
+      "kind": "cascade",
+      "value": "2024-03-22"
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/payment/paymentState",
+      "kind": "cascade",
+      "value": "paid",
+      "matcher": "regex_match",
+      "pattern": "(?i)((?<!un)paid|settled|received|complete)"
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/payment/amountPaidCents",
+      "kind": "cascade",
+      "value": 480000
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/payment/confirmationNumber",
+      "kind": "cascade",
+      "value": "PMT-2024-0318"
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/payment/paidAt",
+      "kind": "cascade",
+      "value": "2024-03-22"
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/collections/needsFollowUp",
+      "kind": "cascade",
+      "value": false
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/collections/stage",
+      "kind": "cascade",
+      "value": "closed",
+      "matcher": "regex_match",
+      "pattern": "(?i)(closed|complete|resolved|settled|done|inactive|no[_ ]?action|not[_ ]?required|paid)"
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/receipt/issued",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/accounting/reconciled",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/accounting/ledgerStatus",
+      "kind": "cascade",
+      "value": "closed",
+      "matcher": "regex_match",
+      "pattern": "(?i)(closed|settled|paid|cleared|reconciled)"
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/summary/balanceDueCents",
+      "kind": "cascade",
+      "value": 0
+    }
+  ],
+  "expected_json": {
+    "invoice": {
+      "billTo": {
+        "company": "Blue Harbor Design",
+        "address": {
+          "street": "412 NW Everett Street",
+          "city": "Portland",
+          "state": "OR",
+          "postalCode": "97209",
+          "country": "US"
+        },
+        "contact": {
+          "name": "Maya Lin",
+          "email": "maya.lin@blueharbordesign.com",
+          "phone": "+1-503-555-0142"
+        }
+      },
+      "status": "paid",
+      "settlement": {
+        "isSettled": true,
+        "closedAt": "2024-03-22"
+      },
+      "payment": {
+        "paymentState": "paid",
+        "amountPaidCents": 480000,
+        "confirmationNumber": "PMT-2024-0318",
+        "paidAt": "2024-03-22",
+        "expectedPaidAt": "2024-03-22",
+        "expectedConfirmationNumber": "PMT-2024-0318"
+      },
+      "collections": {
+        "needsFollowUp": false,
+        "stage": "closed"
+      },
+      "receipt": {
+        "issued": true
+      },
+      "accounting": {
+        "reconciled": true,
+        "ledgerStatus": "closed"
+      },
+      "summary": {
+        "totalCents": 480000,
+        "balanceDueCents": 0
+      },
+      "invoiceNumber": "INV-2024-0318",
+      "issueDate": "2024-03-18",
+      "dueDate": "2024-04-01",
+      "from": {
+        "company": "Northstar Creative Co.",
+        "email": "billing@northstarcreative.co",
+        "phone": "+1-503-555-0184",
+        "address": {
+          "street": "88 SE Morrison Street",
+          "city": "Portland",
+          "state": "OR",
+          "postalCode": "97214",
+          "country": "US"
+        }
+      },
+      "currency": "USD",
+      "servicePeriod": {
+        "startDate": "2024-03-01",
+        "endDate": "2024-03-15"
+      },
+      "notes": {
+        "customerMessage": "Thank you for partnering with Northstar Creative Co. on this project."
+      },
+      "paymentTerms": "Net 14",
+      "paymentInstructions": {
+        "bankTransfer": {
+          "accountName": "Northstar Creative Co. Operating",
+          "routingLast4": "1189",
+          "accountLast4": "4421"
+        }
+      },
+      "purchaseOrder": {
+        "number": "PO-BHD-7782",
+        "project": "Spring Brand Refresh",
+        "department": "Marketing"
+      },
+      "delivery": {
+        "method": "email",
+        "to": "maya.lin@blueharbordesign.com",
+        "cc": "billing@blueharbordesign.com"
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Status issued->paid. Determined flips: settlement.isSettled true, closedAt=2024-03-22 (stated settlement day), payment.amountPaidCents=full 480000, confirmationNumber=PMT-2024-0318 (stated), paidAt=2024-03-22 (stated), collections.needsFollowUp false, receipt.issued true, accounting.reconciled true, summary.balanceDueCents 0. Open-vocabulary state strings whose paid token is not stated verbatim use a regex matcher: payment.paymentState (awaiting_payment->paid-like), collections.stage (active_collection->closed-like), accounting.ledgerStatus (open_receivable->closed-out-like). totalCents, expectedPaidAt/expectedConfirmationNumber (the source placeholders), and all descriptive fields stay. | REVIEW EDIT (with author): broadened the paymentState/collections.stage/accounting.ledgerStatus regex matchers from anchored ^(...)$ alternations to substring keyword matching, because these are open-vocabulary state strings and the strict ^(...)$ alternation rejected legitimate compound paid-state tokens (e.g. \"closed_collection\") as false negatives. Verified the original unpaid tokens still do not match, so the flip remains required.",
+  "conversation_pattern": "Center the artifact on an invoice currently in one status, carrying a set of fields whose present values follow from that status, where moving it to the paid status has one well-understood effect on each. Around this core, add the realistic, independent details an invoice would carry that do not depend on the status, and vary their number from sample to sample.",
+  "edit_pattern": "Change the invoice status from issued to paid.",
+  "cascade_pattern": "Marking it paid moves every status-governed field to its paid-state value, while fields the status does not govern stay. Each new value is fixed because the effect of payment on each field is unambiguous.",
+  "requires_master_data": false
+}

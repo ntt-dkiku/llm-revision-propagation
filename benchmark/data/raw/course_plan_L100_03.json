@@ -1,0 +1,573 @@
+{
+  "id": "course_plan_L100_03",
+  "domain": "course_plan",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I’m putting together a plan for a Bachelor of Science in Data Analytics."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/programName\", \"value\": \"Bachelor of Science in Data Analytics\"}]"
+    },
+    {
+      "role": "user",
+      "content": "The degree should take 120 credits to complete."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/creditRequirement\", \"value\": 120}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first course to the plan: Introduction to Programming, worth 4 credits."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses\", \"value\": [{\"courseTitle\": \"Introduction to Programming\", \"creditHours\": 4}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, include Calculus I as a 4-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Calculus I\", \"creditHours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add Data Literacy as a 3-credit course too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Data Literacy\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add College Writing as another 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"College Writing\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Principles of Statistics as a 4-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Principles of Statistics\", \"creditHours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Database Systems to the list as a 4-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Database Systems\", \"creditHours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include Linear Algebra as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Linear Algebra\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Ethics in Data Science as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Ethics in Data Science\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Data Visualization as a 3-credit course as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Data Visualization\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Machine Learning Fundamentals as a 4-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Machine Learning Fundamentals\", \"creditHours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add Cloud Computing for Analytics as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Cloud Computing for Analytics\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Predictive Analytics as a 4-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Predictive Analytics\", \"creditHours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Business Intelligence as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Business Intelligence\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add Research Methods for Analytics as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Research Methods for Analytics\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Applied Probability as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Applied Probability\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Data Mining as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Data Mining\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Capstone in Data Analytics as a 4-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Capstone in Data Analytics\", \"creditHours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Technical Communication as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Technical Communication\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include Operating Systems for Analytics as a 4-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Operating Systems for Analytics\", \"creditHours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Web Analytics as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Web Analytics\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Cybersecurity Basics as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Cybersecurity Basics\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Natural Language Processing as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Natural Language Processing\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include Time Series Analysis as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Time Series Analysis\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Experimental Design as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Experimental Design\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Regression Modeling as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Regression Modeling\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add Data Wrangling as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Data Wrangling\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Mobile App Analytics as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Mobile App Analytics\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Social Network Analysis as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Social Network Analysis\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Geospatial Analytics as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Geospatial Analytics\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include Healthcare Analytics as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Healthcare Analytics\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Financial Analytics as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseTitle\": \"Financial Analytics\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you total the credits from the courses we have so far and show how many are still needed for the degree?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/creditSummary\", \"value\": {\"plannedCredits\": 101, \"creditsRemaining\": 19}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that this plan is for North Valley University’s downtown campus, with classes mainly offered in person."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/institution\", \"value\": {\"name\": \"North Valley University\", \"campus\": \"Downtown Campus\", \"primaryDelivery\": \"In person\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set it up as a Fall 2026 start, following the 2026–2027 catalog, with Spring 2030 as the target finish."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/timeline\", \"value\": {\"entryTerm\": \"Fall 2026\", \"catalogCycle\": \"2026-2027\", \"completionTarget\": \"Spring 2030\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add the academic advisor for this plan, including their name, department, and email."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisor\", \"value\": {\"name\": \"Dr. Miriam Chen\", \"department\": \"Department of Data Analytics\", \"email\": \"mchen@northvalley.edu\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the student profile details: full-time enrollment, first-year standing, and no transfer credits applied."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/studentProfile\", \"value\": {\"enrollmentStatus\": \"Full-time\", \"academicStanding\": \"First-year\", \"transferCreditsApplied\": \"None\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the review status: it was last reviewed on April 15, 2026, is still a draft, and needs department approval."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/reviewStatus\", \"value\": {\"lastReviewed\": \"2026-04-15\", \"status\": \"Draft\", \"approvalNeeded\": \"Department approval\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the student’s scheduling preferences: morning classes when possible, no Friday labs, and a maximum of 16 credits in any term."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedulingPreferences\", \"value\": {\"preferredClassTime\": \"Morning\", \"avoidance\": \"No Friday labs\", \"maxCreditsPerTerm\": 16}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a note about the student’s career direction: analytics consulting, internships preferred by junior year, and interest in client-facing projects."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/careerDirection\", \"value\": {\"targetArea\": \"Analytics consulting\", \"internshipTiming\": \"Junior year\", \"projectInterest\": \"Client-facing projects\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add support resources for the student: tutoring in statistics, access to the analytics lab, and career coaching."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supportResources\", \"value\": {\"tutoring\": \"Statistics tutoring\", \"labAccess\": \"Analytics lab\", \"careerSupport\": \"Career coaching\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add notes about the experiential learning plan: one required internship, a faculty-supervised practicum option, and participation in the spring analytics showcase."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/experientialLearning\", \"value\": {\"internshipRequirement\": \"One required internship\", \"practicumOption\": \"Faculty-supervised practicum\", \"showcaseParticipation\": \"Spring analytics showcase\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the main software students should be ready to use: Python, R, and Tableau."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/technologyExpectations\", \"value\": {\"primaryLanguage\": \"Python\", \"statisticalTool\": \"R\", \"visualizationTool\": \"Tableau\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add accreditation notes too: the university is regionally accredited, the program is in good standing, and the next review is in 2028."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/accreditation\", \"value\": {\"institutionalStatus\": \"Regionally accredited\", \"programStanding\": \"Good standing\", \"nextReviewYear\": 2028}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the overall priority for this plan as high."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/priority\", \"value\": \"High\"}]"
+    }
+  ],
+  "edit_instruction": "Add Advanced SQL for Analytics as a 3-credit course.",
+  "theme": "Adding a course",
+  "master_data": null,
+  "current_json": {
+    "programName": "Bachelor of Science in Data Analytics",
+    "creditRequirement": 120,
+    "courses": [
+      {
+        "courseTitle": "Introduction to Programming",
+        "creditHours": 4
+      },
+      {
+        "courseTitle": "Calculus I",
+        "creditHours": 4
+      },
+      {
+        "courseTitle": "Data Literacy",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "College Writing",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Principles of Statistics",
+        "creditHours": 4
+      },
+      {
+        "courseTitle": "Database Systems",
+        "creditHours": 4
+      },
+      {
+        "courseTitle": "Linear Algebra",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Ethics in Data Science",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Data Visualization",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Machine Learning Fundamentals",
+        "creditHours": 4
+      },
+      {
+        "courseTitle": "Cloud Computing for Analytics",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Predictive Analytics",
+        "creditHours": 4
+      },
+      {
+        "courseTitle": "Business Intelligence",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Research Methods for Analytics",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Applied Probability",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Data Mining",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Capstone in Data Analytics",
+        "creditHours": 4
+      },
+      {
+        "courseTitle": "Technical Communication",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Operating Systems for Analytics",
+        "creditHours": 4
+      },
+      {
+        "courseTitle": "Web Analytics",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Cybersecurity Basics",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Natural Language Processing",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Time Series Analysis",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Experimental Design",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Regression Modeling",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Data Wrangling",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Mobile App Analytics",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Social Network Analysis",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Geospatial Analytics",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Healthcare Analytics",
+        "creditHours": 3
+      },
+      {
+        "courseTitle": "Financial Analytics",
+        "creditHours": 3
+      }
+    ],
+    "creditSummary": {
+      "plannedCredits": 101,
+      "creditsRemaining": 19
+    },
+    "institution": {
+      "name": "North Valley University",
+      "campus": "Downtown Campus",
+      "primaryDelivery": "In person"
+    },
+    "timeline": {
+      "entryTerm": "Fall 2026",
+      "catalogCycle": "2026-2027",
+      "completionTarget": "Spring 2030"
+    },
+    "advisor": {
+      "name": "Dr. Miriam Chen",
+      "department": "Department of Data Analytics",
+      "email": "mchen@northvalley.edu"
+    },
+    "studentProfile": {
+      "enrollmentStatus": "Full-time",
+      "academicStanding": "First-year",
+      "transferCreditsApplied": "None"
+    },
+    "reviewStatus": {
+      "lastReviewed": "2026-04-15",
+      "status": "Draft",
+      "approvalNeeded": "Department approval"
+    },
+    "schedulingPreferences": {
+      "preferredClassTime": "Morning",
+      "avoidance": "No Friday labs",
+      "maxCreditsPerTerm": 16
+    },
+    "careerDirection": {
+      "targetArea": "Analytics consulting",
+      "internshipTiming": "Junior year",
+      "projectInterest": "Client-facing projects"
+    },
+    "supportResources": {
+      "tutoring": "Statistics tutoring",
+      "labAccess": "Analytics lab",
+      "careerSupport": "Career coaching"
+    },
+    "experientialLearning": {
+      "internshipRequirement": "One required internship",
+      "practicumOption": "Faculty-supervised practicum",
+      "showcaseParticipation": "Spring analytics showcase"
+    },
+    "technologyExpectations": {
+      "primaryLanguage": "Python",
+      "statisticalTool": "R",
+      "visualizationTool": "Tableau"
+    },
+    "accreditation": {
+      "institutionalStatus": "Regionally accredited",
+      "programStanding": "Good standing",
+      "nextReviewYear": 2028
+    },
+    "priority": "High"
+  },
+  "conversation_pattern": "Center the artifact on a course list where each course carries credit hours, with a running credit total and a remaining-to-requirement derived from those credits against a stated requirement, so the credits determine them. Around this core, add the realistic, independent details a course plan would carry that do not depend on the credit total, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Add one specific course, with its credit hours, to the plan.",
+  "cascade_pattern": "Adding the course raises the credit total by its credit hours and lowers the remaining-to-requirement by the same amount. Other courses and the requirement stay. This is determined because the added course's credit hours are given with the edit.",
+  "requires_master_data": false
+}

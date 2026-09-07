@@ -1,0 +1,681 @@
+{
+  "id": "travel_itinerary_L100_03",
+  "domain": "travel_itinerary",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "We're planning this trip for 6 travelers."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/party_size\", \"value\": 6}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a shared lodging estimate of $185 per traveler for the stay."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/lodging/unit_price_per_traveler\", \"value\": 185}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and calculate what that comes to for everyone together."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/lodging/group_total\", \"value\": 1110}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note what each traveler owes for that lodging split."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/lodging/per_person_share\", \"value\": 185}]"
+    },
+    {
+      "role": "user",
+      "content": "Budget $48 per traveler for airport transfers."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/airport_transfers/unit_price_per_traveler\", \"value\": 48}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate the combined transfer cost for the whole group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/airport_transfers/group_total\", \"value\": 288}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the per-traveler amount for those transfers too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/airport_transfers/per_person_share\", \"value\": 48}]"
+    },
+    {
+      "role": "user",
+      "content": "Set aside $72 per traveler for the guided food tour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/guided_food_tour/unit_price_per_traveler\", \"value\": 72}]"
+    },
+    {
+      "role": "user",
+      "content": "Work out the total food tour cost for all of us."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/guided_food_tour/group_total\", \"value\": 432}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the individual share for the food tour as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/guided_food_tour/per_person_share\", \"value\": 72}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan on $95 per traveler for museum and attraction passes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/attraction_passes/unit_price_per_traveler\", \"value\": 95}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the attraction pass total for the group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/attraction_passes/group_total\", \"value\": 570}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the per-person share for those passes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/attraction_passes/per_person_share\", \"value\": 95}]"
+    },
+    {
+      "role": "user",
+      "content": "Include $34 per traveler for the day-trip train tickets."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/day_trip_train/unit_price_per_traveler\", \"value\": 34}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the train ticket total for everyone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/day_trip_train/group_total\", \"value\": 204}]"
+    },
+    {
+      "role": "user",
+      "content": "Show what that train ride costs each person."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/day_trip_train/per_person_share\", \"value\": 34}]"
+    },
+    {
+      "role": "user",
+      "content": "Add $58 per traveler for the river cruise."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/river_cruise/unit_price_per_traveler\", \"value\": 58}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the river cruise total for the whole group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/river_cruise/group_total\", \"value\": 348}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the individual cruise share too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/river_cruise/per_person_share\", \"value\": 58}]"
+    },
+    {
+      "role": "user",
+      "content": "Set aside $66 per traveler for two planned group dinners."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/group_dinners/unit_price_per_traveler\", \"value\": 66}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the dinner budget for everyone combined."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/group_dinners/group_total\", \"value\": 396}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the dinner share per traveler."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/group_dinners/per_person_share\", \"value\": 66}]"
+    },
+    {
+      "role": "user",
+      "content": "Include $41 per traveler for travel insurance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/travel_insurance/unit_price_per_traveler\", \"value\": 41}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the insurance cost for the whole group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/travel_insurance/group_total\", \"value\": 246}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the insurance amount per traveler."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/travel_insurance/per_person_share\", \"value\": 41}]"
+    },
+    {
+      "role": "user",
+      "content": "Add $29 per traveler for local transit passes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/local_transit_passes/unit_price_per_traveler\", \"value\": 29}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the total for the local transit passes for all travelers."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/local_transit_passes/group_total\", \"value\": 174}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the per-traveler share for those transit passes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/local_transit_passes/per_person_share\", \"value\": 29}]"
+    },
+    {
+      "role": "user",
+      "content": "Budget $53 per traveler for a cooking class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/cooking_class/unit_price_per_traveler\", \"value\": 53}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the cooking class total for the group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/cooking_class/group_total\", \"value\": 318}]"
+    },
+    {
+      "role": "user",
+      "content": "Show what each traveler owes for the cooking class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/cooking_class/per_person_share\", \"value\": 53}]"
+    },
+    {
+      "role": "user",
+      "content": "Add $37 per traveler for the rooftop viewpoint tickets."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/rooftop_viewpoint/unit_price_per_traveler\", \"value\": 37}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the viewpoint ticket total for everyone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/rooftop_viewpoint/group_total\", \"value\": 222}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the per-person amount for the viewpoint tickets."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/rooftop_viewpoint/per_person_share\", \"value\": 37}]"
+    },
+    {
+      "role": "user",
+      "content": "Add $44 per traveler for bike rentals during the trip."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/bike_rentals/unit_price_per_traveler\", \"value\": 44}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the bike rental total for everyone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/bike_rentals/group_total\", \"value\": 264}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the bike rental share for each traveler."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/bike_rentals/per_person_share\", \"value\": 44}]"
+    },
+    {
+      "role": "user",
+      "content": "Add $27 per traveler for luggage storage on the last day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/luggage_storage/unit_price_per_traveler\", \"value\": 27}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the luggage storage total for the group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/luggage_storage/group_total\", \"value\": 162}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the luggage storage share per traveler too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/luggage_storage/per_person_share\", \"value\": 27}]"
+    },
+    {
+      "role": "user",
+      "content": "Include $22 per traveler for local SIM cards."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/local_sim_cards/unit_price_per_traveler\", \"value\": 22}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the SIM card total for everyone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/local_sim_cards/group_total\", \"value\": 132}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the SIM card share per traveler."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/local_sim_cards/per_person_share\", \"value\": 22}]"
+    },
+    {
+      "role": "user",
+      "content": "Now add up all of those shared trip costs for the full group."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/overall/group_total\", \"value\": 4866}]"
+    },
+    {
+      "role": "user",
+      "content": "And show the total shared trip cost per traveler."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/overall/per_person_share\", \"value\": 811}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the basic plan: Lisbon from May 14 to May 19, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip_overview\", \"value\": {\"destination\": \"Lisbon, Portugal\", \"start_date\": \"2026-05-14\", \"end_date\": \"2026-05-19\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the place to stay, note that we're using Casa do Carmo in Chiado with a 3:00 PM check-in."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging_details\", \"value\": {\"property_name\": \"Casa do Carmo\", \"neighborhood\": \"Chiado\", \"check_in_time\": \"15:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the checkout time, the booking reference, and that the nearest metro stop is Baixa-Chiado."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging_details/check_out_time\", \"value\": \"11:00\"}, {\"op\": \"add\", \"path\": \"/lodging_details/booking_reference\", \"value\": \"CDCLIS-5821\"}, {\"op\": \"add\", \"path\": \"/lodging_details/nearest_metro\", \"value\": \"Baixa-Chiado\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the arrival flight details: TAP 218 gets into Lisbon at 9:35 AM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/arrival_flight\", \"value\": {\"airline\": \"TAP Air Portugal\", \"flight_number\": \"TP218\", \"arrival_time\": \"09:35\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For getting from the airport, note that we'll meet at Terminal 1 by the Vodafone shop and use Bolt vans."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/airport_pickup\", \"value\": {\"meeting_point\": \"Terminal 1 Vodafone shop\", \"provider\": \"Bolt\", \"vehicle_type\": \"van\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first day plan: wander Alfama at 2:00 PM, starting from Sé Cathedral."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan\", \"value\": [{\"date\": \"2026-05-14\", \"activity\": \"Alfama orientation walk\", \"start_time\": \"14:00\", \"meeting_spot\": \"Sé Cathedral\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "For the next morning, add Belém Tower at 10:00 AM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan/-\", \"value\": {\"date\": \"2026-05-15\", \"activity\": \"Belém Tower visit\", \"start_time\": \"10:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add lunch at Time Out Market on May 15 at 1:00 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan/-\", \"value\": {\"date\": \"2026-05-15\", \"activity\": \"Lunch at Time Out Market\", \"start_time\": \"13:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the guided food tour on May 15 at 6:30 PM, starting in Mouraria."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan/-\", \"value\": {\"date\": \"2026-05-15\", \"activity\": \"Guided food tour\", \"start_time\": \"18:30\", \"meeting_spot\": \"Mouraria\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the Sintra day trip on May 16 with an 8:45 AM train from Rossio."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan/-\", \"value\": {\"date\": \"2026-05-16\", \"activity\": \"Sintra day trip\", \"start_time\": \"08:45\", \"meeting_spot\": \"Rossio Station\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the river cruise for May 17 at 11:00 AM from Cais do Sodré."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan/-\", \"value\": {\"date\": \"2026-05-17\", \"activity\": \"Tagus river cruise\", \"start_time\": \"11:00\", \"meeting_spot\": \"Cais do Sodré\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the cooking class on May 17 at 4:00 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan/-\", \"value\": {\"date\": \"2026-05-17\", \"activity\": \"Cooking class\", \"start_time\": \"16:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the rooftop viewpoint for May 18 at sunset, around 7:45 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan/-\", \"value\": {\"date\": \"2026-05-18\", \"activity\": \"Rooftop viewpoint\", \"start_time\": \"19:45\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the departure flight: TAP 217 leaves Lisbon at 12:10 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transport/departure_flight\", \"value\": {\"airline\": \"TAP Air Portugal\", \"flight_number\": \"TP217\", \"departure_time\": \"12:10\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maria Santos as the local contact, with the number +351 912 555 018 and apartment manager as her role."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/local_contact\", \"value\": {\"name\": \"Maria Santos\", \"phone\": \"+351 912 555 018\", \"role\": \"apartment manager\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a few packing reminders: comfortable walking shoes, a light rain jacket, and a Type F power adapter."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packing_reminders\", \"value\": {\"footwear\": \"comfortable walking shoes\", \"outerwear\": \"light rain jacket\", \"power_adapter\": \"Type F\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish with the dinner reservation details for the first group meal: Taberna da Rua das Flores on May 16 at 8:00 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/restaurant_reservation\", \"value\": {\"restaurant\": \"Taberna da Rua das Flores\", \"date\": \"2026-05-16\", \"time\": \"20:00\"}}]"
+    }
+  ],
+  "edit_instruction": "Actually, make the trip for 8 travelers instead.",
+  "theme": "Changing the party size",
+  "master_data": null,
+  "current_json": {
+    "party_size": 6,
+    "costs": {
+      "lodging": {
+        "unit_price_per_traveler": 185,
+        "group_total": 1110,
+        "per_person_share": 185
+      },
+      "airport_transfers": {
+        "unit_price_per_traveler": 48,
+        "group_total": 288,
+        "per_person_share": 48
+      },
+      "guided_food_tour": {
+        "unit_price_per_traveler": 72,
+        "group_total": 432,
+        "per_person_share": 72
+      },
+      "attraction_passes": {
+        "unit_price_per_traveler": 95,
+        "group_total": 570,
+        "per_person_share": 95
+      },
+      "day_trip_train": {
+        "unit_price_per_traveler": 34,
+        "group_total": 204,
+        "per_person_share": 34
+      },
+      "river_cruise": {
+        "unit_price_per_traveler": 58,
+        "group_total": 348,
+        "per_person_share": 58
+      },
+      "group_dinners": {
+        "unit_price_per_traveler": 66,
+        "group_total": 396,
+        "per_person_share": 66
+      },
+      "travel_insurance": {
+        "unit_price_per_traveler": 41,
+        "group_total": 246,
+        "per_person_share": 41
+      },
+      "local_transit_passes": {
+        "unit_price_per_traveler": 29,
+        "group_total": 174,
+        "per_person_share": 29
+      },
+      "cooking_class": {
+        "unit_price_per_traveler": 53,
+        "group_total": 318,
+        "per_person_share": 53
+      },
+      "rooftop_viewpoint": {
+        "unit_price_per_traveler": 37,
+        "group_total": 222,
+        "per_person_share": 37
+      },
+      "bike_rentals": {
+        "unit_price_per_traveler": 44,
+        "group_total": 264,
+        "per_person_share": 44
+      },
+      "luggage_storage": {
+        "unit_price_per_traveler": 27,
+        "group_total": 162,
+        "per_person_share": 27
+      },
+      "local_sim_cards": {
+        "unit_price_per_traveler": 22,
+        "group_total": 132,
+        "per_person_share": 22
+      },
+      "overall": {
+        "group_total": 4866,
+        "per_person_share": 811
+      }
+    },
+    "trip_overview": {
+      "destination": "Lisbon, Portugal",
+      "start_date": "2026-05-14",
+      "end_date": "2026-05-19"
+    },
+    "lodging_details": {
+      "property_name": "Casa do Carmo",
+      "neighborhood": "Chiado",
+      "check_in_time": "15:00",
+      "check_out_time": "11:00",
+      "booking_reference": "CDCLIS-5821",
+      "nearest_metro": "Baixa-Chiado"
+    },
+    "transport": {
+      "arrival_flight": {
+        "airline": "TAP Air Portugal",
+        "flight_number": "TP218",
+        "arrival_time": "09:35"
+      },
+      "airport_pickup": {
+        "meeting_point": "Terminal 1 Vodafone shop",
+        "provider": "Bolt",
+        "vehicle_type": "van"
+      },
+      "departure_flight": {
+        "airline": "TAP Air Portugal",
+        "flight_number": "TP217",
+        "departure_time": "12:10"
+      }
+    },
+    "daily_plan": [
+      {
+        "date": "2026-05-14",
+        "activity": "Alfama orientation walk",
+        "start_time": "14:00",
+        "meeting_spot": "Sé Cathedral"
+      },
+      {
+        "date": "2026-05-15",
+        "activity": "Belém Tower visit",
+        "start_time": "10:00"
+      },
+      {
+        "date": "2026-05-15",
+        "activity": "Lunch at Time Out Market",
+        "start_time": "13:00"
+      },
+      {
+        "date": "2026-05-15",
+        "activity": "Guided food tour",
+        "start_time": "18:30",
+        "meeting_spot": "Mouraria"
+      },
+      {
+        "date": "2026-05-16",
+        "activity": "Sintra day trip",
+        "start_time": "08:45",
+        "meeting_spot": "Rossio Station"
+      },
+      {
+        "date": "2026-05-17",
+        "activity": "Tagus river cruise",
+        "start_time": "11:00",
+        "meeting_spot": "Cais do Sodré"
+      },
+      {
+        "date": "2026-05-17",
+        "activity": "Cooking class",
+        "start_time": "16:00"
+      },
+      {
+        "date": "2026-05-18",
+        "activity": "Rooftop viewpoint",
+        "start_time": "19:45"
+      }
+    ],
+    "local_contact": {
+      "name": "Maria Santos",
+      "phone": "+351 912 555 018",
+      "role": "apartment manager"
+    },
+    "packing_reminders": {
+      "footwear": "comfortable walking shoes",
+      "outerwear": "light rain jacket",
+      "power_adapter": "Type F"
+    },
+    "restaurant_reservation": {
+      "restaurant": "Taberna da Rua das Flores",
+      "date": "2026-05-16",
+      "time": "20:00"
+    }
+  },
+  "conversation_pattern": "Center the artifact on a group trip with a party size, where per-unit quantities, aggregate totals, and per-person shares all derive from that count by stated arithmetic (the count times a unit price, sums of those, totals divided by the count), so the count determines them. Around this core, add the realistic, independent details a traveler would record that do not depend on the number of travelers, and vary their number from sample to sample.",
+  "edit_pattern": "Change the party size to a specific new number of travelers.",
+  "cascade_pattern": "Each quantity re-derives as the new count times its unit price, the aggregates re-sum, and per-person shares re-divide by the new count, so the new count fixes each. Unit prices and rates stay unchanged.",
+  "requires_master_data": false
+}

@@ -1,0 +1,365 @@
+{
+  "id": "project_schedule_L50_03",
+  "domain": "project_schedule",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I’m putting together a plan for the East Wing office refresh; start it with that as the project."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project\", \"value\": {\"title\": \"East Wing Office Refresh\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the first activity as a two-day site survey beginning on September 8, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks\", \"value\": [{\"id\": \"T1\", \"name\": \"Site survey\", \"duration_days\": 2}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Use simple calendar-day timing and show the survey running from September 8 through September 10, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/0/start_date\", \"value\": \"2025-09-08\"}, {\"op\": \"add\", \"path\": \"/tasks/0/finish_date\", \"value\": \"2025-09-10\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the next activity as a three-day hazardous-materials clearance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T2\", \"name\": \"Hazardous-materials clearance\", \"duration_days\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have that clearance start as soon as the survey is done, so it runs September 10 to September 13, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/1/predecessor_id\", \"value\": \"T1\"}, {\"op\": \"add\", \"path\": \"/tasks/1/start_date\", \"value\": \"2025-09-10\"}, {\"op\": \"add\", \"path\": \"/tasks/1/finish_date\", \"value\": \"2025-09-13\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a four-day demolition activity after the clearance work."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T3\", \"name\": \"Interior demolition\", \"duration_days\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule demolition to begin when clearance ends and finish four days later."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/2/predecessor_id\", \"value\": \"T2\"}, {\"op\": \"add\", \"path\": \"/tasks/2/start_date\", \"value\": \"2025-09-13\"}, {\"op\": \"add\", \"path\": \"/tasks/2/finish_date\", \"value\": \"2025-09-17\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, include a two-day framing inspection once demolition wraps up."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T4\", \"name\": \"Framing inspection\", \"duration_days\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the inspection right after demolition, from September 17 to September 19, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/3/predecessor_id\", \"value\": \"T3\"}, {\"op\": \"add\", \"path\": \"/tasks/3/start_date\", \"value\": \"2025-09-17\"}, {\"op\": \"add\", \"path\": \"/tasks/3/finish_date\", \"value\": \"2025-09-19\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After the inspection, add a five-day electrical rough-in activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T5\", \"name\": \"Electrical rough-in\", \"duration_days\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the electrical rough-in follow the inspection and run from September 19 through September 24, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/4/predecessor_id\", \"value\": \"T4\"}, {\"op\": \"add\", \"path\": \"/tasks/4/start_date\", \"value\": \"2025-09-19\"}, {\"op\": \"add\", \"path\": \"/tasks/4/finish_date\", \"value\": \"2025-09-24\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Then add a four-day drywall installation activity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T6\", \"name\": \"Drywall installation\", \"duration_days\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the drywall work start once the electrical rough-in is finished, running September 24 to September 28, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/5/predecessor_id\", \"value\": \"T5\"}, {\"op\": \"add\", \"path\": \"/tasks/5/start_date\", \"value\": \"2025-09-24\"}, {\"op\": \"add\", \"path\": \"/tasks/5/finish_date\", \"value\": \"2025-09-28\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a final three-day painting and touch-up activity after the drywall is in."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/-\", \"value\": {\"id\": \"T7\", \"name\": \"Painting and touch-ups\", \"duration_days\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have painting follow the drywall work and run from September 28 through October 1, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tasks/6/predecessor_id\", \"value\": \"T6\"}, {\"op\": \"add\", \"path\": \"/tasks/6/start_date\", \"value\": \"2025-09-28\"}, {\"op\": \"add\", \"path\": \"/tasks/6/finish_date\", \"value\": \"2025-10-01\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now show the overall schedule as running from the first survey day through the final painting day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/project/start_date\", \"value\": \"2025-09-08\"}, {\"op\": \"add\", \"path\": \"/project/end_date\", \"value\": \"2025-10-01\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Maria Chen as the city facilities contact for this refresh, with her work email on hand."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/contacts\", \"value\": [{\"name\": \"Maria Chen\", \"role\": \"City facilities contact\", \"email\": \"maria.chen@city.example\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that the work is taking place in Building B on the third floor, in the east wing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/location\", \"value\": {\"building\": \"Building B\", \"floor\": \"3rd floor\", \"area\": \"East Wing\"}}]"
+    }
+  ],
+  "edit_instruction": "Make the Electrical rough-in activity follow T2, Hazardous-materials clearance, instead of the framing inspection.",
+  "theme": "Repointing a task's predecessor",
+  "master_data": null,
+  "current_json": {
+    "project": {
+      "title": "East Wing Office Refresh",
+      "start_date": "2025-09-08",
+      "end_date": "2025-10-01"
+    },
+    "tasks": [
+      {
+        "id": "T1",
+        "name": "Site survey",
+        "duration_days": 2,
+        "start_date": "2025-09-08",
+        "finish_date": "2025-09-10"
+      },
+      {
+        "id": "T2",
+        "name": "Hazardous-materials clearance",
+        "duration_days": 3,
+        "predecessor_id": "T1",
+        "start_date": "2025-09-10",
+        "finish_date": "2025-09-13"
+      },
+      {
+        "id": "T3",
+        "name": "Interior demolition",
+        "duration_days": 4,
+        "predecessor_id": "T2",
+        "start_date": "2025-09-13",
+        "finish_date": "2025-09-17"
+      },
+      {
+        "id": "T4",
+        "name": "Framing inspection",
+        "duration_days": 2,
+        "predecessor_id": "T3",
+        "start_date": "2025-09-17",
+        "finish_date": "2025-09-19"
+      },
+      {
+        "id": "T5",
+        "name": "Electrical rough-in",
+        "duration_days": 5,
+        "predecessor_id": "T4",
+        "start_date": "2025-09-19",
+        "finish_date": "2025-09-24"
+      },
+      {
+        "id": "T6",
+        "name": "Drywall installation",
+        "duration_days": 4,
+        "predecessor_id": "T5",
+        "start_date": "2025-09-24",
+        "finish_date": "2025-09-28"
+      },
+      {
+        "id": "T7",
+        "name": "Painting and touch-ups",
+        "duration_days": 3,
+        "predecessor_id": "T6",
+        "start_date": "2025-09-28",
+        "finish_date": "2025-10-01"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Maria Chen",
+        "role": "City facilities contact",
+        "email": "maria.chen@city.example"
+      }
+    ],
+    "location": {
+      "building": "Building B",
+      "floor": "3rd floor",
+      "area": "East Wing"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/tasks/4/predecessor_id",
+      "kind": "direct",
+      "value": "T2"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/4/start_date",
+      "kind": "cascade",
+      "value": "2025-09-13"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/4/finish_date",
+      "kind": "cascade",
+      "value": "2025-09-18"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/5/start_date",
+      "kind": "cascade",
+      "value": "2025-09-18"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/5/finish_date",
+      "kind": "cascade",
+      "value": "2025-09-22"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/6/start_date",
+      "kind": "cascade",
+      "value": "2025-09-22"
+    },
+    {
+      "op": "replace",
+      "path": "/tasks/6/finish_date",
+      "kind": "cascade",
+      "value": "2025-09-25"
+    },
+    {
+      "op": "replace",
+      "path": "/project/end_date",
+      "kind": "cascade",
+      "value": "2025-09-25"
+    }
+  ],
+  "expected_json": {
+    "project": {
+      "title": "East Wing Office Refresh",
+      "start_date": "2025-09-08",
+      "end_date": "2025-09-25"
+    },
+    "tasks": [
+      {
+        "id": "T1",
+        "name": "Site survey",
+        "duration_days": 2,
+        "start_date": "2025-09-08",
+        "finish_date": "2025-09-10"
+      },
+      {
+        "id": "T2",
+        "name": "Hazardous-materials clearance",
+        "duration_days": 3,
+        "predecessor_id": "T1",
+        "start_date": "2025-09-10",
+        "finish_date": "2025-09-13"
+      },
+      {
+        "id": "T3",
+        "name": "Interior demolition",
+        "duration_days": 4,
+        "predecessor_id": "T2",
+        "start_date": "2025-09-13",
+        "finish_date": "2025-09-17"
+      },
+      {
+        "id": "T4",
+        "name": "Framing inspection",
+        "duration_days": 2,
+        "predecessor_id": "T3",
+        "start_date": "2025-09-17",
+        "finish_date": "2025-09-19"
+      },
+      {
+        "id": "T5",
+        "name": "Electrical rough-in",
+        "duration_days": 5,
+        "predecessor_id": "T2",
+        "start_date": "2025-09-13",
+        "finish_date": "2025-09-18"
+      },
+      {
+        "id": "T6",
+        "name": "Drywall installation",
+        "duration_days": 4,
+        "predecessor_id": "T5",
+        "start_date": "2025-09-18",
+        "finish_date": "2025-09-22"
+      },
+      {
+        "id": "T7",
+        "name": "Painting and touch-ups",
+        "duration_days": 3,
+        "predecessor_id": "T6",
+        "start_date": "2025-09-22",
+        "finish_date": "2025-09-25"
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Maria Chen",
+        "role": "City facilities contact",
+        "email": "maria.chen@city.example"
+      }
+    ],
+    "location": {
+      "building": "Building B",
+      "floor": "3rd floor",
+      "area": "East Wing"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Repoint Electrical rough-in (T5) predecessor T4 (Framing inspection) -> T2 (Hazardous-materials clearance). T5 now starts on T2 finish (09-13) instead of T4 finish (09-19): T5 09-13->09-18, then Drywall (T6) 09-18->09-22 and Painting (T7) 09-22->09-25 follow. project.end_date 10-01->09-25 (latest task finish). T3 and T4 keep their own links/dates (T4 framing now a parallel branch ending 09-19). finish = start + duration; successor starts on predecessor finish.",
+  "conversation_pattern": "Center the artifact on a task list where each task has a stated duration and starts when its predecessor finishes, so finishes and the project end derive from the precedence links. Around this core, add the realistic, independent details a project plan would carry that do not depend on the dependency links, and vary their number and the number of tasks from sample to sample.",
+  "edit_pattern": "Change one task's predecessor to a different specific task.",
+  "cascade_pattern": "Repointing a task to a new predecessor re-derives its start from that predecessor's finish, then its finish and all downstream dates recompute, and the project end follows. Tasks not affected by the relink stay. This is determined because finishes and the new link are stated.",
+  "requires_master_data": false
+}

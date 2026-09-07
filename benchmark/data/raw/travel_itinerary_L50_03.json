@@ -1,0 +1,269 @@
+{
+  "id": "travel_itinerary_L50_03",
+  "domain": "travel_itinerary",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm planning this as a trip for 6 travelers."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/party_size\", \"value\": 6}]"
+    },
+    {
+      "role": "user",
+      "content": "Please note that the airport shuttle is charged at $28 for each traveler."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cost_items\", \"value\": [{\"item\": \"airport shuttle\", \"unit_price_per_person\": 28, \"quantity_people\": 6}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also add the guided food tour; it costs $65 per traveler."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cost_items/-\", \"value\": {\"item\": \"guided food tour\", \"unit_price_per_person\": 65, \"quantity_people\": 6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include museum passes too, at $34 for each person."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cost_items/-\", \"value\": {\"item\": \"museum passes\", \"unit_price_per_person\": 34, \"quantity_people\": 6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the bike rental plan as another per-person cost; it's $42 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cost_items/-\", \"value\": {\"item\": \"bike rentals\", \"unit_price_per_person\": 42, \"quantity_people\": 6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you work out the shuttle total for the whole group?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cost_items/0/line_total\", \"value\": 168}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the full-group amount for the food tour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cost_items/1/line_total\", \"value\": 390}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate the museum pass total for everyone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cost_items/2/line_total\", \"value\": 204}]"
+    },
+    {
+      "role": "user",
+      "content": "And work out the full-group cost for the bike rentals."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cost_items/3/line_total\", \"value\": 252}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you summarize the total trip costs for the group and what that comes to for each traveler?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget_summary\", \"value\": {\"group_total\": 1014, \"per_person_total\": 169}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the basic destination and travel dates for the trip: Lisbon from May 12 to May 16, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip_overview\", \"value\": {\"destination\": \"Lisbon\", \"start_date\": \"2025-05-12\", \"end_date\": \"2025-05-16\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add where we're staying: Hotel Baixa Garden at Rua da Prata 88, with check-in at 3:00 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging\", \"value\": {\"hotel_name\": \"Hotel Baixa Garden\", \"address\": \"Rua da Prata 88\", \"check_in_time\": \"15:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add the arrival flight details: TAP 1352 landing at 10:40 AM at Lisbon Airport."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/arrival_flight\", \"value\": {\"flight_number\": \"TAP 1352\", \"arrival_time\": \"10:40\", \"airport\": \"Lisbon Airport\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the departure flight too: TAP 1353 leaving at 6:15 PM from Lisbon Airport."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/departure_flight\", \"value\": {\"flight_number\": \"TAP 1353\", \"departure_time\": \"18:15\", \"airport\": \"Lisbon Airport\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add the first planned activity: a tram ride on May 12 at 4:30 PM, starting from Martim Moniz."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan\", \"value\": [{\"date\": \"2025-05-12\", \"activity\": \"tram ride\", \"meeting_point\": \"Martim Moniz\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the next planned activity: the food tour on May 13, meeting at Time Out Market."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan/-\", \"value\": {\"date\": \"2025-05-13\", \"activity\": \"food tour\", \"meeting_point\": \"Time Out Market\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the museum visit for May 14, meeting at the Museu Nacional do Azulejo."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan/-\", \"value\": {\"date\": \"2025-05-14\", \"activity\": \"museum visit\", \"meeting_point\": \"Museu Nacional do Azulejo\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the bike ride for May 15, starting at Belém Tower."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/daily_plan/-\", \"value\": {\"date\": \"2025-05-15\", \"activity\": \"bike ride\", \"meeting_point\": \"Belém Tower\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put down Ana Santos as our local contact in Lisbon; she can be reached at +351 912 555 018."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/local_contact\", \"value\": {\"name\": \"Ana Santos\", \"phone\": \"+351 912 555 018\", \"role\": \"hotel concierge\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a dinner booking for May 14 at Taberna da Rua das Flores, set for 8:00 PM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dinner_reservation\", \"value\": {\"restaurant\": \"Taberna da Rua das Flores\", \"date\": \"2025-05-14\", \"time\": \"20:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reminder that everyone should bring comfortable walking shoes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packing_reminder\", \"value\": \"Bring comfortable walking shoes\"}]"
+    }
+  ],
+  "edit_instruction": "Change the trip to 8 travelers.",
+  "theme": "Changing the party size",
+  "master_data": null,
+  "current_json": {
+    "party_size": 6,
+    "cost_items": [
+      {
+        "item": "airport shuttle",
+        "unit_price_per_person": 28,
+        "quantity_people": 6,
+        "line_total": 168
+      },
+      {
+        "item": "guided food tour",
+        "unit_price_per_person": 65,
+        "quantity_people": 6,
+        "line_total": 390
+      },
+      {
+        "item": "museum passes",
+        "unit_price_per_person": 34,
+        "quantity_people": 6,
+        "line_total": 204
+      },
+      {
+        "item": "bike rentals",
+        "unit_price_per_person": 42,
+        "quantity_people": 6,
+        "line_total": 252
+      }
+    ],
+    "budget_summary": {
+      "group_total": 1014,
+      "per_person_total": 169
+    },
+    "trip_overview": {
+      "destination": "Lisbon",
+      "start_date": "2025-05-12",
+      "end_date": "2025-05-16"
+    },
+    "lodging": {
+      "hotel_name": "Hotel Baixa Garden",
+      "address": "Rua da Prata 88",
+      "check_in_time": "15:00"
+    },
+    "arrival_flight": {
+      "flight_number": "TAP 1352",
+      "arrival_time": "10:40",
+      "airport": "Lisbon Airport"
+    },
+    "departure_flight": {
+      "flight_number": "TAP 1353",
+      "departure_time": "18:15",
+      "airport": "Lisbon Airport"
+    },
+    "daily_plan": [
+      {
+        "date": "2025-05-12",
+        "activity": "tram ride",
+        "meeting_point": "Martim Moniz"
+      },
+      {
+        "date": "2025-05-13",
+        "activity": "food tour",
+        "meeting_point": "Time Out Market"
+      },
+      {
+        "date": "2025-05-14",
+        "activity": "museum visit",
+        "meeting_point": "Museu Nacional do Azulejo"
+      },
+      {
+        "date": "2025-05-15",
+        "activity": "bike ride",
+        "meeting_point": "Belém Tower"
+      }
+    ],
+    "local_contact": {
+      "name": "Ana Santos",
+      "phone": "+351 912 555 018",
+      "role": "hotel concierge"
+    },
+    "dinner_reservation": {
+      "restaurant": "Taberna da Rua das Flores",
+      "date": "2025-05-14",
+      "time": "20:00"
+    },
+    "packing_reminder": "Bring comfortable walking shoes"
+  },
+  "conversation_pattern": "Center the artifact on a group trip with a party size, where per-unit quantities, aggregate totals, and per-person shares all derive from that count by stated arithmetic (the count times a unit price, sums of those, totals divided by the count), so the count determines them. Around this core, add the realistic, independent details a traveler would record that do not depend on the number of travelers, and vary their number from sample to sample.",
+  "edit_pattern": "Change the party size to a specific new number of travelers.",
+  "cascade_pattern": "Each quantity re-derives as the new count times its unit price, the aggregates re-sum, and per-person shares re-divide by the new count, so the new count fixes each. Unit prices and rates stay unchanged.",
+  "requires_master_data": false
+}

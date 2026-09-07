@@ -1,0 +1,281 @@
+{
+  "id": "course_plan_L50_05",
+  "domain": "course_plan",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a degree plan for a student pursuing a Bachelor of Science in Environmental Policy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree\", \"value\": {\"programName\": \"Bachelor of Science in Environmental Policy\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the program’s graduation threshold at 120 credits."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/requiredCredits\", \"value\": 120}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that the student has completed 78 credits so far."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/progress\", \"value\": {\"earnedCredits\": 78}}]"
+    },
+    {
+      "role": "user",
+      "content": "Assume the student plans to take 14 credits each term going forward."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/progress/plannedCreditsPerTerm\", \"value\": 14}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate how many credits are still needed for the degree."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/progress/remainingCredits\", \"value\": 42}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark whether that pace keeps the student on schedule to finish."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/progress/onTrack\", \"value\": true}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the expected number of terms left at the planned pace."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/progress/projectedCompletion\", \"value\": {\"termsRemaining\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the student’s basic profile: Maya Chen, student ID EP-2048, with the 2024–2025 catalog year."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student\", \"value\": {\"name\": \"Maya Chen\", \"studentId\": \"EP-2048\", \"catalogYear\": \"2024-2025\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the advising contact as Dr. Elena Ruiz in the School of Public Affairs, reachable at eruiz@university.edu."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisor\", \"value\": {\"name\": \"Dr. Elena Ruiz\", \"department\": \"School of Public Affairs\", \"email\": \"eruiz@university.edu\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that Maya’s focus area is Climate Resilience, she studies at the Denver campus, and she’s enrolled full time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/focusArea\", \"value\": \"Climate Resilience\"}, {\"op\": \"add\", \"path\": \"/student/campus\", \"value\": \"Denver\"}, {\"op\": \"add\", \"path\": \"/student/enrollmentStatus\", \"value\": \"Full-time\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that the program is regionally accredited, with the last review completed in 2023 and the next review due in 2031."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/degree/accreditation\", \"value\": {\"status\": \"Regionally accredited\", \"lastReviewYear\": 2023, \"nextReviewYear\": 2031}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one completed core course: Environmental Law, listed as ENVP 310, with an A-minus grade."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/completedCourses\", \"value\": [{\"code\": \"ENVP 310\", \"title\": \"Environmental Law\", \"grade\": \"A-\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another completed course: GIS for Policy, ENVP 332, with a B-plus grade."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/completedCourses/-\", \"value\": {\"code\": \"ENVP 332\", \"title\": \"GIS for Policy\", \"grade\": \"B+\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a planned spring course: Sustainable Transportation, ENVP 418, for Spring 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plannedCourses\", \"value\": [{\"code\": \"ENVP 418\", \"title\": \"Sustainable Transportation\", \"term\": \"Spring 2026\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another planned course for Spring 2026: Climate Adaptation Workshop, ENVP 452."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plannedCourses/-\", \"value\": {\"code\": \"ENVP 452\", \"title\": \"Climate Adaptation Workshop\", \"term\": \"Spring 2026\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Maya’s approved internship with Denver Water, supervised by Priya Nair, for Summer 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/experientialLearning\", \"value\": {\"organization\": \"Denver Water\", \"supervisor\": \"Priya Nair\", \"term\": \"Summer 2026\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya’s capstone plan: a community wildfire resilience project, mentored by Professor Malik Stone, due in Fall 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/capstone\", \"value\": {\"topic\": \"Community wildfire resilience\", \"mentor\": \"Professor Malik Stone\", \"targetTerm\": \"Fall 2026\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a graduation review scheduled for October 15, 2026, with the registrar, and mark it as pending."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/milestones\", \"value\": [{\"name\": \"Graduation review\", \"date\": \"2026-10-15\", \"status\": \"Pending\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya’s scholarship information: the Green Futures Award for 5,000 dollars, active for the current year."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/financialAid\", \"value\": {\"awardName\": \"Green Futures Award\", \"amount\": 5000, \"status\": \"Active\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that Maya prefers email for advising messages, wants reminders one week ahead, and uses English for university communications."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/communicationPreferences\", \"value\": {\"preferredMethod\": \"Email\", \"reminderLeadTime\": \"One week\", \"language\": \"English\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the research support appointment Maya has with the policy librarian, Jordan Lee, on February 3, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supportServices\", \"value\": {\"service\": \"Policy research consultation\", \"contact\": \"Jordan Lee\", \"appointmentDate\": \"2026-02-03\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that Maya wants to discuss elective options at her next advising meeting."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisingReminder\", \"value\": \"Discuss elective options at next advising meeting\"}]"
+    }
+  ],
+  "edit_instruction": "Please update the degree requirement to 134 total credits.",
+  "theme": "Changing the degree credit requirement",
+  "master_data": null,
+  "current_json": {
+    "degree": {
+      "programName": "Bachelor of Science in Environmental Policy",
+      "requiredCredits": 120,
+      "focusArea": "Climate Resilience",
+      "accreditation": {
+        "status": "Regionally accredited",
+        "lastReviewYear": 2023,
+        "nextReviewYear": 2031
+      }
+    },
+    "progress": {
+      "earnedCredits": 78,
+      "plannedCreditsPerTerm": 14,
+      "remainingCredits": 42,
+      "onTrack": true,
+      "projectedCompletion": {
+        "termsRemaining": 3
+      }
+    },
+    "student": {
+      "name": "Maya Chen",
+      "studentId": "EP-2048",
+      "catalogYear": "2024-2025",
+      "campus": "Denver",
+      "enrollmentStatus": "Full-time"
+    },
+    "advisor": {
+      "name": "Dr. Elena Ruiz",
+      "department": "School of Public Affairs",
+      "email": "eruiz@university.edu"
+    },
+    "completedCourses": [
+      {
+        "code": "ENVP 310",
+        "title": "Environmental Law",
+        "grade": "A-"
+      },
+      {
+        "code": "ENVP 332",
+        "title": "GIS for Policy",
+        "grade": "B+"
+      }
+    ],
+    "plannedCourses": [
+      {
+        "code": "ENVP 418",
+        "title": "Sustainable Transportation",
+        "term": "Spring 2026"
+      },
+      {
+        "code": "ENVP 452",
+        "title": "Climate Adaptation Workshop",
+        "term": "Spring 2026"
+      }
+    ],
+    "experientialLearning": {
+      "organization": "Denver Water",
+      "supervisor": "Priya Nair",
+      "term": "Summer 2026"
+    },
+    "capstone": {
+      "topic": "Community wildfire resilience",
+      "mentor": "Professor Malik Stone",
+      "targetTerm": "Fall 2026"
+    },
+    "milestones": [
+      {
+        "name": "Graduation review",
+        "date": "2026-10-15",
+        "status": "Pending"
+      }
+    ],
+    "financialAid": {
+      "awardName": "Green Futures Award",
+      "amount": 5000,
+      "status": "Active"
+    },
+    "communicationPreferences": {
+      "preferredMethod": "Email",
+      "reminderLeadTime": "One week",
+      "language": "English"
+    },
+    "supportServices": {
+      "service": "Policy research consultation",
+      "contact": "Jordan Lee",
+      "appointmentDate": "2026-02-03"
+    },
+    "advisingReminder": "Discuss elective options at next advising meeting"
+  },
+  "conversation_pattern": "Center the artifact on a degree plan with a credit requirement and credits earned, where a remaining-to-requirement, an on-track flag, and a projected completion derive from the requirement, the earned credits, and a stated per-term load. Around this core, add the realistic, independent details a degree plan would carry that do not depend on the credit requirement, and vary their number from sample to sample.",
+  "edit_pattern": "Change the degree's required total credits to a specific new number.",
+  "cascade_pattern": "Editing the requirement re-derives the remaining-to-requirement, re-evaluates the on-track flag, and re-derives the projected completion from the remaining and the stated per-term load. The earned credits and per-term load stay. This is determined because the per-term load and earned credits are stated.",
+  "requires_master_data": false
+}

@@ -1,0 +1,551 @@
+{
+  "id": "software_deployment_config_L100_00",
+  "domain": "software_deployment_config",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a deployment setup for the checkout service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment\", \"value\": {\"name\": \"checkout-service\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run four copies of it to start."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/replicas\", \"value\": 4}]"
+    },
+    {
+      "role": "user",
+      "content": "Give each copy half a CPU core to work with."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources/requests/perPodCpu\", \"value\": \"500m\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Allocate 768 MiB of memory to each copy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources/requests/perPodMemory\", \"value\": \"768Mi\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Also show the combined CPU request for the whole rollout and how it’s calculated."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources/requests/totalCpu\", \"value\": {\"value\": \"2000m\", \"formula\": \"replicas * perPodCpu = 4 * 500m\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Do the same for the combined memory request."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources/requests/totalMemory\", \"value\": {\"value\": \"3072Mi\", \"formula\": \"replicas * perPodMemory = 4 * 768Mi\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a quick note that summarizes how many running copies this setup provides, including the calculation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/capacitySummary\", \"value\": {\"value\": 4, \"formula\": \"replicas = 4\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "During voluntary disruptions, require one fewer than the full set to stay running, and include the math."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/availability/disruptionBudget/minAvailable\", \"value\": {\"value\": 3, \"formula\": \"replicas - 1 = 4 - 1\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also cap voluntary disruptions at one unavailable copy, with the calculation made explicit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/availability/disruptionBudget/maxUnavailable\", \"value\": {\"value\": 1, \"formula\": \"constant 1\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the checkout container from our registry, pinned to the April release, and pull it only when needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/container/image\", \"value\": {\"repository\": \"registry.example.com/payments/checkout\", \"tag\": \"2026.04.3\", \"pullPolicy\": \"IfNotPresent\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Expose the app’s HTTP traffic on port 8080."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/container/ports\", \"value\": [{\"name\": \"http\", \"containerPort\": 8080, \"protocol\": \"TCP\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Set it to run in production mode."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/container/env\", \"value\": [{\"name\": \"APP_ENV\", \"value\": \"production\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Point it at the internal payment API endpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/container/env/-\", \"value\": {\"name\": \"PAYMENT_API_URL\", \"value\": \"https://payments.internal.svc.cluster.local\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it wait up to five seconds when calling upstream services."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/container/env/-\", \"value\": {\"name\": \"UPSTREAM_TIMEOUT_MS\", \"value\": \"5000\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a readiness check on the app port at /ready, starting after ten seconds."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/probes/readiness\", \"value\": {\"path\": \"/ready\", \"port\": 8080, \"initialDelaySeconds\": 10}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a liveness check on /healthz using the same app port, but let it start after thirty seconds."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/probes/liveness\", \"value\": {\"path\": \"/healthz\", \"port\": 8080, \"initialDelaySeconds\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make it reachable inside the cluster on port 80, forwarding traffic to the app port."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/service\", \"value\": {\"type\": \"ClusterIP\", \"port\": 80, \"targetPort\": 8080}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put it in the payments namespace and label it for the checkout app."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/metadata\", \"value\": {\"namespace\": \"payments\", \"labels\": {\"app\": \"checkout\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add ownership details so the platform team knows who supports it and which cost center to charge."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/metadata/annotations\", \"value\": {\"owner\": \"payments-platform\", \"supportChannel\": \"#payments-oncall\", \"costCenter\": \"fintech-042\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make sure it matches the checkout workload using the app and frontend tier labels."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/selector\", \"value\": {\"matchLabels\": {\"app\": \"checkout\", \"tier\": \"frontend\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Roll out updates gradually, allowing a small surge but no planned downtime."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/strategy\", \"value\": {\"type\": \"RollingUpdate\", \"maxSurge\": 1, \"maxUnavailable\": 0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run the workload as a non-root user and avoid privilege escalation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/securityContext\", \"value\": {\"runAsNonRoot\": true, \"runAsUser\": 10001, \"allowPrivilegeEscalation\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set sensible upper bounds so a single copy can’t consume too much CPU or memory."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources/limits\", \"value\": {\"perPodCpu\": \"1000m\", \"perPodMemory\": \"1Gi\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule it onto the general-purpose Linux worker pool in the primary zone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/scheduling/nodeSelector\", \"value\": {\"kubernetes.io/os\": \"linux\", \"nodepool\": \"general-purpose\", \"topology.kubernetes.io/zone\": \"us-east-1a\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Allow it to run on nodes reserved for payment workloads."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/scheduling/tolerations\", \"value\": [{\"key\": \"workload\", \"operator\": \"Equal\", \"value\": \"payments\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Prefer spreading it across hosts so a single machine issue doesn’t take out multiple copies."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/scheduling/podAntiAffinity\", \"value\": {\"topologyKey\": \"kubernetes.io/hostname\", \"labelSelectorApp\": \"checkout\", \"weight\": 80}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mount the shared config file into the container without allowing writes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/volumes\", \"value\": [{\"name\": \"checkout-config\", \"configMap\": \"checkout-config-v3\", \"readOnly\": true}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Place that configuration under /etc/checkout inside the app."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/container/volumeMounts\", \"value\": [{\"name\": \"checkout-config\", \"mountPath\": \"/etc/checkout\", \"readOnly\": true}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a secret for the payment gateway token and keep it mounted read-only."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/volumes/-\", \"value\": {\"name\": \"gateway-token\", \"secret\": \"payment-gateway-token\", \"readOnly\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mount that token under /var/run/secrets/payments in the container."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/container/volumeMounts/-\", \"value\": {\"name\": \"gateway-token\", \"mountPath\": \"/var/run/secrets/payments\", \"readOnly\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send application logs in structured format at info level, with request identifiers included."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/observability/logging\", \"value\": {\"format\": \"json\", \"level\": \"info\", \"includeRequestId\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Scrape metrics from the app on the usual Prometheus path every half minute."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/observability/metrics\", \"value\": {\"enabled\": true, \"path\": \"/metrics\", \"intervalSeconds\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Turn on tracing and sample one out of ten requests."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/observability/tracing\", \"value\": {\"enabled\": true, \"sampleRate\": 0.1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send traces to the in-cluster collector using OTLP."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/observability/tracing/exporter\", \"value\": {\"endpoint\": \"http://otel-collector.observability.svc:4317\", \"protocol\": \"otlp\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make it available through the internal ingress at checkout.payments.example.com using TLS."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/ingress\", \"value\": {\"className\": \"internal-nginx\", \"host\": \"checkout.payments.example.com\", \"tlsEnabled\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the managed certificate for that hostname and route only the root path."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/ingress/tlsSecretName\", \"value\": \"checkout-payments-tls\"}, {\"op\": \"add\", \"path\": \"/deployment/ingress/path\", \"value\": \"/\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Only allow inbound traffic from the ingress controller and the frontend namespace."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/networkPolicy/ingress\", \"value\": {\"allowedFromNamespace\": \"frontend\", \"allowedFromApp\": \"internal-nginx\", \"policyType\": \"Ingress\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For outbound traffic, let it reach DNS and the payments API."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/networkPolicy/egress\", \"value\": {\"allowDns\": true, \"allowPaymentsApi\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the standard service account with token mounting turned off, and don’t create a new one for this."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/serviceAccount\", \"value\": {\"name\": \"checkout-runtime\", \"automountToken\": false, \"create\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep old rollout history for ten releases and give new copies a minute to shut down cleanly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/lifecycle\", \"value\": {\"revisionHistoryLimit\": 10, \"terminationGracePeriodSeconds\": 60, \"progressDeadlineSeconds\": 600}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish it with basic alert routing for the on-call team, including the severity and runbook link."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/alerts\", \"value\": {\"route\": \"payments-oncall\", \"severity\": \"warning\", \"runbookUrl\": \"https://runbooks.example.com/payments/checkout\"}}]"
+    }
+  ],
+  "edit_instruction": "Update it to run 6 copies of the checkout service.",
+  "theme": "Changing the replica count",
+  "conversation_pattern": "Center the artifact on a deployment with a replica count, per-pod CPU and memory requests, and availability settings, where EVERY derived field carries its own explicit formula written in the artifact: total CPU = replicas * perPodCpu, total memory = replicas * perPodMem, capacity summary = replicas, and each disruption-budget value has a stated formula (e.g. minAvailable = replicas - 1, maxUnavailable = 1). Do not include any availability field whose dependence on the replica count is not given by a stated formula. Around this core, add the realistic, independent details a deployment config would carry that do not depend on the replica count, and vary their number from sample to sample.",
+  "edit_pattern": "Change the replica count to a specific new number.",
+  "cascade_pattern": "Editing the replica count re-derives total CPU, total memory, capacity summary, and each disruption-budget value strictly from its stated per-pod value and formula. Per-pod requests and unrelated deployment fields stay unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "deployment": {
+      "name": "checkout-service",
+      "replicas": 4,
+      "resources": {
+        "requests": {
+          "perPodCpu": "500m",
+          "perPodMemory": "768Mi",
+          "totalCpu": {
+            "value": "2000m",
+            "formula": "replicas * perPodCpu = 4 * 500m"
+          },
+          "totalMemory": {
+            "value": "3072Mi",
+            "formula": "replicas * perPodMemory = 4 * 768Mi"
+          }
+        },
+        "limits": {
+          "perPodCpu": "1000m",
+          "perPodMemory": "1Gi"
+        }
+      },
+      "capacitySummary": {
+        "value": 4,
+        "formula": "replicas = 4"
+      },
+      "availability": {
+        "disruptionBudget": {
+          "minAvailable": {
+            "value": 3,
+            "formula": "replicas - 1 = 4 - 1"
+          },
+          "maxUnavailable": {
+            "value": 1,
+            "formula": "constant 1"
+          }
+        }
+      },
+      "container": {
+        "image": {
+          "repository": "registry.example.com/payments/checkout",
+          "tag": "2026.04.3",
+          "pullPolicy": "IfNotPresent"
+        },
+        "ports": [
+          {
+            "name": "http",
+            "containerPort": 8080,
+            "protocol": "TCP"
+          }
+        ],
+        "env": [
+          {
+            "name": "APP_ENV",
+            "value": "production"
+          },
+          {
+            "name": "PAYMENT_API_URL",
+            "value": "https://payments.internal.svc.cluster.local"
+          },
+          {
+            "name": "UPSTREAM_TIMEOUT_MS",
+            "value": "5000"
+          }
+        ],
+        "volumeMounts": [
+          {
+            "name": "checkout-config",
+            "mountPath": "/etc/checkout",
+            "readOnly": true
+          },
+          {
+            "name": "gateway-token",
+            "mountPath": "/var/run/secrets/payments",
+            "readOnly": true
+          }
+        ]
+      },
+      "probes": {
+        "readiness": {
+          "path": "/ready",
+          "port": 8080,
+          "initialDelaySeconds": 10
+        },
+        "liveness": {
+          "path": "/healthz",
+          "port": 8080,
+          "initialDelaySeconds": 30
+        }
+      },
+      "service": {
+        "type": "ClusterIP",
+        "port": 80,
+        "targetPort": 8080
+      },
+      "metadata": {
+        "namespace": "payments",
+        "labels": {
+          "app": "checkout"
+        },
+        "annotations": {
+          "owner": "payments-platform",
+          "supportChannel": "#payments-oncall",
+          "costCenter": "fintech-042"
+        }
+      },
+      "selector": {
+        "matchLabels": {
+          "app": "checkout",
+          "tier": "frontend"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate",
+        "maxSurge": 1,
+        "maxUnavailable": 0
+      },
+      "securityContext": {
+        "runAsNonRoot": true,
+        "runAsUser": 10001,
+        "allowPrivilegeEscalation": false
+      },
+      "scheduling": {
+        "nodeSelector": {
+          "kubernetes.io/os": "linux",
+          "nodepool": "general-purpose",
+          "topology.kubernetes.io/zone": "us-east-1a"
+        },
+        "tolerations": [
+          {
+            "key": "workload",
+            "operator": "Equal",
+            "value": "payments"
+          }
+        ],
+        "podAntiAffinity": {
+          "topologyKey": "kubernetes.io/hostname",
+          "labelSelectorApp": "checkout",
+          "weight": 80
+        }
+      },
+      "volumes": [
+        {
+          "name": "checkout-config",
+          "configMap": "checkout-config-v3",
+          "readOnly": true
+        },
+        {
+          "name": "gateway-token",
+          "secret": "payment-gateway-token",
+          "readOnly": true
+        }
+      ],
+      "observability": {
+        "logging": {
+          "format": "json",
+          "level": "info",
+          "includeRequestId": true
+        },
+        "metrics": {
+          "enabled": true,
+          "path": "/metrics",
+          "intervalSeconds": 30
+        },
+        "tracing": {
+          "enabled": true,
+          "sampleRate": 0.1,
+          "exporter": {
+            "endpoint": "http://otel-collector.observability.svc:4317",
+            "protocol": "otlp"
+          }
+        }
+      },
+      "ingress": {
+        "className": "internal-nginx",
+        "host": "checkout.payments.example.com",
+        "tlsEnabled": true,
+        "tlsSecretName": "checkout-payments-tls",
+        "path": "/"
+      },
+      "networkPolicy": {
+        "ingress": {
+          "allowedFromNamespace": "frontend",
+          "allowedFromApp": "internal-nginx",
+          "policyType": "Ingress"
+        },
+        "egress": {
+          "allowDns": true,
+          "allowPaymentsApi": true
+        }
+      },
+      "serviceAccount": {
+        "name": "checkout-runtime",
+        "automountToken": false,
+        "create": false
+      },
+      "lifecycle": {
+        "revisionHistoryLimit": 10,
+        "terminationGracePeriodSeconds": 60,
+        "progressDeadlineSeconds": 600
+      },
+      "alerts": {
+        "route": "payments-oncall",
+        "severity": "warning",
+        "runbookUrl": "https://runbooks.example.com/payments/checkout"
+      }
+    }
+  }
+}

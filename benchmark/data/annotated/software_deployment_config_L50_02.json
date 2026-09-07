@@ -1,0 +1,382 @@
+{
+  "id": "software_deployment_config_L50_02",
+  "domain": "software_deployment_config",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Can you start a deployment plan for the checkout API?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment\", \"value\": {\"service_name\": \"checkout-api\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set it up to run three copies in the cluster."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/replicas\", \"value\": 3}]"
+    },
+    {
+      "role": "user",
+      "content": "Give each copy a 3 GiB memory reservation for scheduling."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources/memory_request_gib_per_pod\", \"value\": 3}]"
+    },
+    {
+      "role": "user",
+      "content": "Please capture the cluster-wide memory reservation from those copies and make the calculation clear."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/resources/total_memory_gib_formula\", \"value\": \"total = replicas * perPodMem\"}, {\"op\": \"add\", \"path\": \"/deployment/resources/total_memory_request_gib\", \"value\": 9}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a 10 GiB node memory limit for the sizing decision, starting on the standard 4x8 pool and moving to the memory 8x16 pool if it no longer fits."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/node_sizing\", \"value\": {\"node_memory_budget_gib\": 10, \"baseline_node_pool_tier\": \"standard-4x8\", \"larger_node_pool_tier\": \"memory-8x16\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also spell out what the sizing decision should do when the reservation stays within that limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/node_sizing/when_total_at_or_below_budget\", \"value\": {\"node_pool_tier\": \"standard-4x8\", \"needs_larger_nodes\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "And spell out what should happen if the reservation goes over that limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/node_sizing/when_total_exceeds_budget\", \"value\": {\"node_pool_tier\": \"memory-8x16\", \"needs_larger_nodes\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Given the current reservation, record the actual pool choice for this deployment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/node_sizing/current_decision\", \"value\": {\"node_pool_tier\": \"standard-4x8\", \"needs_larger_nodes\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Place it in the production namespace in us-east-1 for the live environment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/placement\", \"value\": {\"namespace\": \"production\", \"region\": \"us-east-1\", \"environment\": \"live\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the container image details for the release we're deploying."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/container_image\", \"value\": {\"repository\": \"registry.example.com/payments/checkout-api\", \"tag\": \"2026.06.1\", \"pull_policy\": \"IfNotPresent\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Expose it on port 8080 over HTTP with traffic handled through a ClusterIP service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/service\", \"value\": {\"port\": 8080, \"protocol\": \"HTTP\", \"type\": \"ClusterIP\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the usual health checks for the app endpoints."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/health_checks\", \"value\": {\"readiness_path\": \"/ready\", \"liveness_path\": \"/live\", \"initial_delay_seconds\": 20}}]"
+    },
+    {
+      "role": "user",
+      "content": "Configure a conservative rolling rollout so we keep capacity during updates."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/rollout\", \"value\": {\"strategy\": \"RollingUpdate\", \"max_unavailable\": 1, \"max_surge\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Attach the team labels we normally use for ownership and cost tracking."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/labels\", \"value\": {\"team\": \"payments\", \"component\": \"checkout\", \"cost_center\": \"cc-1842\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the environment settings for talking to the payment gateway and keeping logs concise."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/env\", \"value\": {\"PAYMENT_GATEWAY_URL\": \"https://gateway.internal\", \"LOG_LEVEL\": \"info\", \"FEATURE_FLAG_BATCH_CAPTURE\": \"enabled\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the basic autoscaling guardrails, but keep it from changing the planned capacity for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/autoscaling\", \"value\": {\"enabled\": false, \"min_replicas\": 3, \"max_replicas\": 6}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the secrets it should read for database access and gateway signing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/secrets\", \"value\": {\"database_credentials\": \"checkout-db-prod\", \"gateway_signing_key\": \"gateway-signing-prod\", \"tls_certificate\": \"checkout-api-tls\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the monitoring setup so alerts route to the right place."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/monitoring\", \"value\": {\"metrics_enabled\": true, \"dashboard\": \"checkout-api-prod\", \"alert_channel\": \"#payments-alerts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the pod scheduling preferences so it spreads across the availability zones."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/scheduling\", \"value\": {\"anti_affinity\": \"preferred\", \"topology_spread\": \"zone\", \"priority_class\": \"standard-workload\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish it with the network access rules we want around the service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/network_policy\", \"value\": {\"ingress_from\": \"api-gateway\", \"egress_to\": \"payment-gateway\", \"default_deny\": true}}]"
+    }
+  ],
+  "edit_instruction": "Change each pod’s memory reservation to 4 GiB.",
+  "theme": "Crossing the node memory budget",
+  "conversation_pattern": "Center the artifact on a deployment with a replica count, a per-pod memory request, a stated total-memory formula (total = replicas * perPodMem), and a STATED node memory budget with two explicit branches: if total memory exceeds the budget, 'node_pool_tier' steps up to a specific stated larger tier and a 'needs_larger_nodes' flag is true; if total is at or below the budget, the tier stays at its stated baseline and the flag is false. Record the budget and both branch targets explicitly. Around this core, add realistic independent details that do not depend on memory, and vary their number from sample to sample.",
+  "edit_pattern": "Change the per-pod memory request to a specific new value.",
+  "cascade_pattern": "Editing the per-pod memory re-derives total memory from the stated formula, AND — only if total memory now crosses the stated node budget relative to before — steps node_pool_tier to the stated target and flips needs_larger_nodes. If the budget boundary is not crossed, the tier and flag stay unchanged. The outcome is determined by the stated budget and branch targets.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "deployment": {
+      "service_name": "checkout-api",
+      "replicas": 3,
+      "resources": {
+        "memory_request_gib_per_pod": 3,
+        "total_memory_gib_formula": "total = replicas * perPodMem",
+        "total_memory_request_gib": 9
+      },
+      "node_sizing": {
+        "node_memory_budget_gib": 10,
+        "baseline_node_pool_tier": "standard-4x8",
+        "larger_node_pool_tier": "memory-8x16",
+        "when_total_at_or_below_budget": {
+          "node_pool_tier": "standard-4x8",
+          "needs_larger_nodes": false
+        },
+        "when_total_exceeds_budget": {
+          "node_pool_tier": "memory-8x16",
+          "needs_larger_nodes": true
+        },
+        "current_decision": {
+          "node_pool_tier": "standard-4x8",
+          "needs_larger_nodes": false
+        }
+      },
+      "placement": {
+        "namespace": "production",
+        "region": "us-east-1",
+        "environment": "live"
+      },
+      "container_image": {
+        "repository": "registry.example.com/payments/checkout-api",
+        "tag": "2026.06.1",
+        "pull_policy": "IfNotPresent"
+      },
+      "service": {
+        "port": 8080,
+        "protocol": "HTTP",
+        "type": "ClusterIP"
+      },
+      "health_checks": {
+        "readiness_path": "/ready",
+        "liveness_path": "/live",
+        "initial_delay_seconds": 20
+      },
+      "rollout": {
+        "strategy": "RollingUpdate",
+        "max_unavailable": 1,
+        "max_surge": 1
+      },
+      "labels": {
+        "team": "payments",
+        "component": "checkout",
+        "cost_center": "cc-1842"
+      },
+      "env": {
+        "PAYMENT_GATEWAY_URL": "https://gateway.internal",
+        "LOG_LEVEL": "info",
+        "FEATURE_FLAG_BATCH_CAPTURE": "enabled"
+      },
+      "autoscaling": {
+        "enabled": false,
+        "min_replicas": 3,
+        "max_replicas": 6
+      },
+      "secrets": {
+        "database_credentials": "checkout-db-prod",
+        "gateway_signing_key": "gateway-signing-prod",
+        "tls_certificate": "checkout-api-tls"
+      },
+      "monitoring": {
+        "metrics_enabled": true,
+        "dashboard": "checkout-api-prod",
+        "alert_channel": "#payments-alerts"
+      },
+      "scheduling": {
+        "anti_affinity": "preferred",
+        "topology_spread": "zone",
+        "priority_class": "standard-workload"
+      },
+      "network_policy": {
+        "ingress_from": "api-gateway",
+        "egress_to": "payment-gateway",
+        "default_deny": true
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/deployment/resources/memory_request_gib_per_pod",
+      "kind": "direct",
+      "value": 4
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/resources/total_memory_request_gib",
+      "kind": "cascade",
+      "value": 12
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/node_sizing/current_decision/node_pool_tier",
+      "kind": "cascade",
+      "value": "memory-8x16"
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/node_sizing/current_decision/needs_larger_nodes",
+      "kind": "cascade",
+      "value": true
+    }
+  ],
+  "expected_json": {
+    "deployment": {
+      "service_name": "checkout-api",
+      "replicas": 3,
+      "resources": {
+        "memory_request_gib_per_pod": 4,
+        "total_memory_gib_formula": "total = replicas * perPodMem",
+        "total_memory_request_gib": 12
+      },
+      "node_sizing": {
+        "node_memory_budget_gib": 10,
+        "baseline_node_pool_tier": "standard-4x8",
+        "larger_node_pool_tier": "memory-8x16",
+        "when_total_at_or_below_budget": {
+          "node_pool_tier": "standard-4x8",
+          "needs_larger_nodes": false
+        },
+        "when_total_exceeds_budget": {
+          "node_pool_tier": "memory-8x16",
+          "needs_larger_nodes": true
+        },
+        "current_decision": {
+          "node_pool_tier": "memory-8x16",
+          "needs_larger_nodes": true
+        }
+      },
+      "placement": {
+        "namespace": "production",
+        "region": "us-east-1",
+        "environment": "live"
+      },
+      "container_image": {
+        "repository": "registry.example.com/payments/checkout-api",
+        "tag": "2026.06.1",
+        "pull_policy": "IfNotPresent"
+      },
+      "service": {
+        "port": 8080,
+        "protocol": "HTTP",
+        "type": "ClusterIP"
+      },
+      "health_checks": {
+        "readiness_path": "/ready",
+        "liveness_path": "/live",
+        "initial_delay_seconds": 20
+      },
+      "rollout": {
+        "strategy": "RollingUpdate",
+        "max_unavailable": 1,
+        "max_surge": 1
+      },
+      "labels": {
+        "team": "payments",
+        "component": "checkout",
+        "cost_center": "cc-1842"
+      },
+      "env": {
+        "PAYMENT_GATEWAY_URL": "https://gateway.internal",
+        "LOG_LEVEL": "info",
+        "FEATURE_FLAG_BATCH_CAPTURE": "enabled"
+      },
+      "autoscaling": {
+        "enabled": false,
+        "min_replicas": 3,
+        "max_replicas": 6
+      },
+      "secrets": {
+        "database_credentials": "checkout-db-prod",
+        "gateway_signing_key": "gateway-signing-prod",
+        "tls_certificate": "checkout-api-tls"
+      },
+      "monitoring": {
+        "metrics_enabled": true,
+        "dashboard": "checkout-api-prod",
+        "alert_channel": "#payments-alerts"
+      },
+      "scheduling": {
+        "anti_affinity": "preferred",
+        "topology_spread": "zone",
+        "priority_class": "standard-workload"
+      },
+      "network_policy": {
+        "ingress_from": "api-gateway",
+        "egress_to": "payment-gateway",
+        "default_deny": true
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "per_pod 3->4; total=3*4=12 > budget 10 -> memory-8x16 + needs_larger_nodes true (was standard-4x8/false).",
+  "annotated": true,
+  "excluded": false
+}

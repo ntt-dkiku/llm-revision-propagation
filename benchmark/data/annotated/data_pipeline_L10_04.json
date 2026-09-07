@@ -1,0 +1,134 @@
+{
+  "id": "data_pipeline_L10_04",
+  "domain": "data_pipeline",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start with a data pipeline called daily_customer_metrics."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline_name\", \"value\": \"daily_customer_metrics\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the freshness limit at 90 minutes for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/freshness_policy\", \"value\": {\"max_allowed_staleness_minutes\": 90}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also spell out that anything at or below the limit passes, while anything above it gets capped to the limit and marked as out of compliance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/freshness_policy/rule\", \"value\": \"A consumer is compliant iff its refresh interval is at most max_allowed_staleness_minutes; any consumer above the max must have its refresh interval clamped to the max and its compliance flag set to non_compliant.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the dashboard team as the first downstream user, refreshing every 45 minutes, and note that it passes the current limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers\", \"value\": [{\"name\": \"dashboard_team\", \"refresh_interval_minutes\": 45, \"compliance_flag\": \"compliant\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the batch scoring service too; it currently refreshes every two hours, so it should be treated as out of compliance under the current limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/consumers/-\", \"value\": {\"name\": \"batch_scoring_service\", \"refresh_interval_minutes\": 120, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this as running in production."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environment\", \"value\": \"production\"}]"
+    }
+  ],
+  "edit_instruction": "Please tighten the freshness limit to 30 minutes.",
+  "current_json": {
+    "pipeline_name": "daily_customer_metrics",
+    "freshness_policy": {
+      "max_allowed_staleness_minutes": 90,
+      "rule": "A consumer is compliant iff its refresh interval is at most max_allowed_staleness_minutes; any consumer above the max must have its refresh interval clamped to the max and its compliance flag set to non_compliant."
+    },
+    "consumers": [
+      {
+        "name": "dashboard_team",
+        "refresh_interval_minutes": 45,
+        "compliance_flag": "compliant"
+      },
+      {
+        "name": "batch_scoring_service",
+        "refresh_interval_minutes": 120,
+        "compliance_flag": "non_compliant"
+      }
+    ],
+    "environment": "production"
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/freshness_policy/max_allowed_staleness_minutes",
+      "kind": "direct",
+      "value": 30
+    },
+    {
+      "op": "replace",
+      "path": "/consumers/0/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 30
+    },
+    {
+      "op": "replace",
+      "path": "/consumers/0/compliance_flag",
+      "kind": "cascade",
+      "value": "non_compliant"
+    },
+    {
+      "op": "replace",
+      "path": "/consumers/1/refresh_interval_minutes",
+      "kind": "cascade",
+      "value": 30
+    }
+  ],
+  "expected_json": {
+    "pipeline_name": "daily_customer_metrics",
+    "freshness_policy": {
+      "max_allowed_staleness_minutes": 30,
+      "rule": "A consumer is compliant iff its refresh interval is at most max_allowed_staleness_minutes; any consumer above the max must have its refresh interval clamped to the max and its compliance flag set to non_compliant."
+    },
+    "consumers": [
+      {
+        "name": "dashboard_team",
+        "refresh_interval_minutes": 30,
+        "compliance_flag": "non_compliant"
+      },
+      {
+        "name": "batch_scoring_service",
+        "refresh_interval_minutes": 30,
+        "compliance_flag": "non_compliant"
+      }
+    ],
+    "environment": "production"
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "policy 90->30; per rule, consumers above 30 clamped to 30 and flagged non_compliant: dashboard 45->30, batch 120->30 (both now >30). | REVIEW EDIT (with author): removed cascade op /consumers/1/compliance_flag — batch_scoring_service was already non_compliant (120>90) and stays non_compliant at max=30, so its flag does not change; including a no-op as a required cascade caused a spurious miss.",
+  "annotated": true,
+  "excluded": false,
+  "theme": "Tightening the freshness-SLA policy",
+  "conversation_pattern": "Center the artifact on a pipeline with several downstream consumers, each carrying a refresh-interval-minutes value and a compliance flag, governed by a stated policy field 'max_allowed_staleness_minutes' with an explicit rule: a consumer is compliant iff its refresh interval is at most the policy max; a non-compliant consumer must have its refresh interval clamped down to the policy max and its flag set to 'non_compliant'. Make some consumers compliant and some not under the current policy, and ensure every consumer's initial compliance flag already matches the stated rule under the current policy (a consumer within the current max is compliant). Around this core, add realistic independent details that do not depend on the policy, and vary the number of consumers from sample to sample.",
+  "edit_pattern": "Tighten the policy's max_allowed_staleness_minutes to a specific stricter (smaller) value.",
+  "cascade_pattern": "Tightening the policy clamps the refresh interval of only those consumers whose interval now exceeds the new max down to that max and flips their flag to 'non_compliant'; consumers already within the new max and all unrelated fields stay unchanged. The affected set is determined by comparing each consumer's stated interval to the new policy max.",
+  "requires_master_data": false,
+  "review_edited": true
+}

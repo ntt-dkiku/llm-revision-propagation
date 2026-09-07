@@ -1,0 +1,503 @@
+{
+  "id": "org_access_plan_L50_01",
+  "domain": "org_access_plan",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start an org access plan for Priya Nair."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/name\", \"value\": \"Priya Nair\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have her report to Marco Ellis."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manager/name\", \"value\": \"Marco Ellis\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Marco’s reporting line as Marco Ellis up through Dana Cho and then Ravi Menon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manager/reporting_chain\", \"value\": [\"Marco Ellis\", \"Dana Cho\", \"Ravi Menon\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "For approvals, Marco’s route should go from him to Dana Cho and then Ravi Menon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manager/approval_path\", \"value\": [\"Marco Ellis\", \"Dana Cho\", \"Ravi Menon\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "If something needs escalation, use Dana Cho as Marco’s backup contact."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manager/escalation_contact\", \"value\": \"Dana Cho\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Marco’s organization total should be 18 people."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manager/team_rollup_count\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "Start Priya’s reporting line with her, then Marco, then Dana."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/reporting_chain\", \"value\": [\"Priya Nair\", \"Marco Ellis\", \"Dana Cho\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Ravi Menon at the end of Priya’s line as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/reporting_chain/-\", \"value\": \"Ravi Menon\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Begin Priya’s approval route with her, then Marco, then Dana."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/approval_path\", \"value\": [\"Priya Nair\", \"Marco Ellis\", \"Dana Cho\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish that approval route with Ravi Menon."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/approval_path/-\", \"value\": \"Ravi Menon\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Dana Cho for Priya if any access request needs to be escalated."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/escalation_contact\", \"value\": \"Dana Cho\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set Priya’s organization total to match Marco’s at 18 people."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/team_rollup_count\", \"value\": 18}]"
+    },
+    {
+      "role": "user",
+      "content": "She’ll be a Senior Finance Systems Analyst."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/role\", \"value\": \"Senior Finance Systems Analyst\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Make the access level standard privileged access, not admin."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/tier\", \"value\": \"standard_privileged\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Tie this plan to the finance systems group in the North America region."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/business_unit\", \"value\": \"Finance Systems\"}, {\"op\": \"add\", \"path\": \"/access/region\", \"value\": \"North America\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include Workday Finance as an application she needs, with read-write use."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/applications\", \"value\": [{\"name\": \"Workday Finance\", \"permission\": \"read_write\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also give her Coupa access for invoice review only."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/applications/-\", \"value\": {\"name\": \"Coupa\", \"permission\": \"invoice_review\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put her home office in Toronto, Canada."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/location\", \"value\": {\"city\": \"Toronto\", \"country\": \"Canada\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make her start date April 15, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/start_date\", \"value\": \"2025-04-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use priya.nair@example.com as her work email."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/employee/email\", \"value\": \"priya.nair@example.com\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the intake as ticket IAM-48291, opened by Lena Ortiz, and mark it high priority."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/request\", \"value\": {\"ticket_id\": \"IAM-48291\", \"requested_by\": \"Lena Ortiz\", \"priority\": \"high\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a quarterly access review owned by Lena Ortiz, with the first check on July 15, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/governance/review\", \"value\": {\"cadence\": \"quarterly\", \"owner\": \"Lena Ortiz\", \"next_review_date\": \"2025-07-15\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Require MFA, SSO, and VPN when she uses these systems."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/security_controls\", \"value\": [\"MFA\", \"SSO\", \"VPN\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that this is for month-end close support, and keep the access active for twelve months."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/justification\", \"value\": \"month-end close support\"}, {\"op\": \"add\", \"path\": \"/access/duration_months\", \"value\": 12}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a separation-of-duties check that passed, reviewed by Omar Chen, with no exception needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/governance/sod_check\", \"value\": {\"status\": \"passed\", \"reviewer\": \"Omar Chen\", \"exception_required\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Limit the setup to production use and treat the data as confidential."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access/environment\", \"value\": \"production\"}, {\"op\": \"add\", \"path\": \"/access/data_classification\", \"value\": \"confidential\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the setup as pending and due by April 10, 2025."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/provisioning/status\", \"value\": \"pending\"}, {\"op\": \"add\", \"path\": \"/provisioning/due_date\", \"value\": \"2025-04-10\"}]"
+    }
+  ],
+  "edit_instruction": "Please have Priya report to Nina Park instead.",
+  "theme": "Reassigning a manager",
+  "conversation_pattern": "Center the artifact on an employee record where the manager determines a transitive approval path, reporting chain, escalation contact, and team roll-up count. Provide the replacement manager's own reporting attributes (chain, approval path, escalation contact, and team roll-up count) so each dependent value is uniquely determined: the new reporting chain is the employee prepended to the manager's supplied chain, the new approval path is the employee prepended to the manager's supplied approval path, the escalation contact is the manager's supplied escalation contact, and the team roll-up count is set to the manager's supplied team roll-up count. Around this core, add the realistic, independent details an org access plan would carry that do not depend on the manager, and vary their number from sample to sample. Do not embed a lookup or reference card for any manager inside the artifact; the artifact holds only the current manager's own reporting fields.",
+  "edit_pattern": "Change the employee's manager to a different specific manager, and supply that manager's reporting attributes in master_data.",
+  "cascade_pattern": "Changing the manager re-derives the approval path and reporting chain as the employee prepended to the replacement manager's supplied path and chain, sets the escalation contact to the replacement manager's supplied escalation contact, and sets the team roll-up count to the replacement manager's supplied team roll-up count. Role, access tier, and unrelated fields stay unchanged.",
+  "requires_master_data": true,
+  "master_data": {
+    "Nina Park": {
+      "reporting_chain": [
+        "Nina Park",
+        "Elena Rossi",
+        "Ravi Menon"
+      ],
+      "approval_path": [
+        "Nina Park",
+        "Elena Rossi",
+        "Ravi Menon"
+      ],
+      "escalation_contact": "Elena Rossi",
+      "team_rollup_count": 24
+    }
+  },
+  "current_json": {
+    "employee": {
+      "name": "Priya Nair",
+      "reporting_chain": [
+        "Priya Nair",
+        "Marco Ellis",
+        "Dana Cho",
+        "Ravi Menon"
+      ],
+      "approval_path": [
+        "Priya Nair",
+        "Marco Ellis",
+        "Dana Cho",
+        "Ravi Menon"
+      ],
+      "escalation_contact": "Dana Cho",
+      "team_rollup_count": 18,
+      "role": "Senior Finance Systems Analyst",
+      "location": {
+        "city": "Toronto",
+        "country": "Canada"
+      },
+      "start_date": "2025-04-15",
+      "email": "priya.nair@example.com"
+    },
+    "manager": {
+      "name": "Marco Ellis",
+      "reporting_chain": [
+        "Marco Ellis",
+        "Dana Cho",
+        "Ravi Menon"
+      ],
+      "approval_path": [
+        "Marco Ellis",
+        "Dana Cho",
+        "Ravi Menon"
+      ],
+      "escalation_contact": "Dana Cho",
+      "team_rollup_count": 18
+    },
+    "access": {
+      "tier": "standard_privileged",
+      "business_unit": "Finance Systems",
+      "region": "North America",
+      "applications": [
+        {
+          "name": "Workday Finance",
+          "permission": "read_write"
+        },
+        {
+          "name": "Coupa",
+          "permission": "invoice_review"
+        }
+      ],
+      "security_controls": [
+        "MFA",
+        "SSO",
+        "VPN"
+      ],
+      "justification": "month-end close support",
+      "duration_months": 12,
+      "environment": "production",
+      "data_classification": "confidential"
+    },
+    "request": {
+      "ticket_id": "IAM-48291",
+      "requested_by": "Lena Ortiz",
+      "priority": "high"
+    },
+    "governance": {
+      "review": {
+        "cadence": "quarterly",
+        "owner": "Lena Ortiz",
+        "next_review_date": "2025-07-15"
+      },
+      "sod_check": {
+        "status": "passed",
+        "reviewer": "Omar Chen",
+        "exception_required": false
+      }
+    },
+    "provisioning": {
+      "status": "pending",
+      "due_date": "2025-04-10"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/manager/name",
+      "kind": "direct",
+      "value": "Nina Park"
+    },
+    {
+      "op": "replace",
+      "path": "/manager/reporting_chain/0",
+      "kind": "cascade",
+      "value": "Nina Park"
+    },
+    {
+      "op": "replace",
+      "path": "/manager/reporting_chain/1",
+      "kind": "cascade",
+      "value": "Elena Rossi"
+    },
+    {
+      "op": "replace",
+      "path": "/manager/approval_path/0",
+      "kind": "cascade",
+      "value": "Nina Park"
+    },
+    {
+      "op": "replace",
+      "path": "/manager/approval_path/1",
+      "kind": "cascade",
+      "value": "Elena Rossi"
+    },
+    {
+      "op": "replace",
+      "path": "/manager/escalation_contact",
+      "kind": "cascade",
+      "value": "Elena Rossi"
+    },
+    {
+      "op": "replace",
+      "path": "/manager/team_rollup_count",
+      "kind": "cascade",
+      "value": 24
+    },
+    {
+      "op": "replace",
+      "path": "/employee/reporting_chain/1",
+      "kind": "cascade",
+      "value": "Nina Park"
+    },
+    {
+      "op": "replace",
+      "path": "/employee/reporting_chain/2",
+      "kind": "cascade",
+      "value": "Elena Rossi"
+    },
+    {
+      "op": "replace",
+      "path": "/employee/approval_path/1",
+      "kind": "cascade",
+      "value": "Nina Park"
+    },
+    {
+      "op": "replace",
+      "path": "/employee/approval_path/2",
+      "kind": "cascade",
+      "value": "Elena Rossi"
+    },
+    {
+      "op": "replace",
+      "path": "/employee/escalation_contact",
+      "kind": "cascade",
+      "value": "Elena Rossi"
+    },
+    {
+      "op": "replace",
+      "path": "/employee/team_rollup_count",
+      "kind": "cascade",
+      "value": 24
+    }
+  ],
+  "expected_json": {
+    "employee": {
+      "name": "Priya Nair",
+      "reporting_chain": [
+        "Priya Nair",
+        "Nina Park",
+        "Elena Rossi",
+        "Ravi Menon"
+      ],
+      "approval_path": [
+        "Priya Nair",
+        "Nina Park",
+        "Elena Rossi",
+        "Ravi Menon"
+      ],
+      "escalation_contact": "Elena Rossi",
+      "team_rollup_count": 24,
+      "role": "Senior Finance Systems Analyst",
+      "location": {
+        "city": "Toronto",
+        "country": "Canada"
+      },
+      "start_date": "2025-04-15",
+      "email": "priya.nair@example.com"
+    },
+    "manager": {
+      "name": "Nina Park",
+      "reporting_chain": [
+        "Nina Park",
+        "Elena Rossi",
+        "Ravi Menon"
+      ],
+      "approval_path": [
+        "Nina Park",
+        "Elena Rossi",
+        "Ravi Menon"
+      ],
+      "escalation_contact": "Elena Rossi",
+      "team_rollup_count": 24
+    },
+    "access": {
+      "tier": "standard_privileged",
+      "business_unit": "Finance Systems",
+      "region": "North America",
+      "applications": [
+        {
+          "name": "Workday Finance",
+          "permission": "read_write"
+        },
+        {
+          "name": "Coupa",
+          "permission": "invoice_review"
+        }
+      ],
+      "security_controls": [
+        "MFA",
+        "SSO",
+        "VPN"
+      ],
+      "justification": "month-end close support",
+      "duration_months": 12,
+      "environment": "production",
+      "data_classification": "confidential"
+    },
+    "request": {
+      "ticket_id": "IAM-48291",
+      "requested_by": "Lena Ortiz",
+      "priority": "high"
+    },
+    "governance": {
+      "review": {
+        "cadence": "quarterly",
+        "owner": "Lena Ortiz",
+        "next_review_date": "2025-07-15"
+      },
+      "sod_check": {
+        "status": "passed",
+        "reviewer": "Omar Chen",
+        "exception_required": false
+      }
+    },
+    "provisioning": {
+      "status": "pending",
+      "due_date": "2025-04-10"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "manager Marco Ellis->Nina Park: manager card = Nina's md; employee derived chain/path = 'Priya Nair' prepended to Nina's, escalation Elena Rossi, rollup 24.",
+  "annotated": true,
+  "excluded": false
+}

@@ -1,0 +1,723 @@
+{
+  "id": "travel_itinerary_L100_06",
+  "domain": "travel_itinerary",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm planning a single day in Portland, Maine."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/destination\", \"value\": \"Portland, Maine\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's start the day at 9:00 in the morning."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/day_start_time\", \"value\": \"09:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Please leave 15 minutes between each place so the day doesn't feel rushed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transition_gap_minutes\", \"value\": 15}]"
+    },
+    {
+      "role": "user",
+      "content": "Begin with a 45-minute walk around the Eastern Promenade."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops\", \"value\": [{\"name\": \"Eastern Promenade walk\", \"duration_minutes\": 45}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you pin down the timing for that first walk?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/0/start_time\", \"value\": \"09:00\"}, {\"op\": \"add\", \"path\": \"/stops/0/end_time\", \"value\": \"09:45\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After that, add an hour at the Portland Museum of Art."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Portland Museum of Art\", \"duration_minutes\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the museum visit into the schedule based on that travel buffer."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/1/start_time\", \"value\": \"10:00\"}, {\"op\": \"add\", \"path\": \"/stops/1/end_time\", \"value\": \"11:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Then plan a 50-minute seafood lunch at Eventide Oyster Co."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Eventide Oyster Co. lunch\", \"duration_minutes\": 50}}]"
+    },
+    {
+      "role": "user",
+      "content": "Place lunch right after the museum with the usual pause in between."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/2/start_time\", \"value\": \"11:15\"}, {\"op\": \"add\", \"path\": \"/stops/2/end_time\", \"value\": \"12:05\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After lunch, add a 40-minute stroll and browse through the Old Port."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Old Port stroll and browsing\", \"duration_minutes\": 40}}]"
+    },
+    {
+      "role": "user",
+      "content": "Work that Old Port stop into the timeline after lunch."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/3/start_time\", \"value\": \"12:20\"}, {\"op\": \"add\", \"path\": \"/stops/3/end_time\", \"value\": \"13:00\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, include a 75-minute Casco Bay harbor ferry ride."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Casco Bay harbor ferry ride\", \"duration_minutes\": 75}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the ferry ride after the Old Port time, keeping the same short break."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/4/start_time\", \"value\": \"13:15\"}, {\"op\": \"add\", \"path\": \"/stops/4/end_time\", \"value\": \"14:30\"}]"
+    },
+    {
+      "role": "user",
+      "content": "After the ferry, add a relaxed 30-minute coffee stop at Tandem Coffee Roasters."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Tandem Coffee Roasters break\", \"duration_minutes\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the coffee break to the day's timing after the ferry."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/5/start_time\", \"value\": \"14:45\"}, {\"op\": \"add\", \"path\": \"/stops/5/end_time\", \"value\": \"15:15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Then include 55 minutes for visiting Portland Head Light and taking photos."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"name\": \"Portland Head Light photo visit\", \"duration_minutes\": 55}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the lighthouse visit into the schedule after coffee."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/6/start_time\", \"value\": \"15:30\"}, {\"op\": \"add\", \"path\": \"/stops/6/end_time\", \"value\": \"16:25\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Can you wrap up the timed part by noting how many places this includes and when the day finishes?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/summary\", \"value\": {\"scheduled_stop_count\": 7, \"day_end_time\": \"16:25\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that this is for two adults who prefer walking and casual places."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/party\", \"value\": {\"adults\": 2, \"mobility_preference\": \"walking\", \"style_preference\": \"casual\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make a note that the trip is meant for early September, with mild weather in mind."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/season_context\", \"value\": {\"month\": \"September\", \"expected_weather\": \"mild\", \"packing_focus\": \"light layers\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's base ourselves at a downtown hotel so getting around stays simple."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging\", \"value\": {\"area\": \"downtown Portland\", \"lodging_type\": \"hotel\", \"priority\": \"easy walking access\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For lunch, note that I'd rather have a reservation and sit at the bar if possible."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/2/reservation\", \"value\": {\"recommended\": true, \"seating_preference\": \"bar\", \"booking_window\": \"same week\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the museum, remind me to check the special exhibition and use the main Congress Street entrance."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/1/visit_notes\", \"value\": {\"check_exhibition\": true, \"entrance\": \"Congress Street\", \"ticket_plan\": \"buy on arrival\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the ferry, remind me to choose an outdoor seat and bring a windbreaker."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/4/ride_notes\", \"value\": {\"seat_preference\": \"outdoor\", \"bring_item\": \"windbreaker\", \"ticket_plan\": \"buy at terminal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the lighthouse stop, add a reminder about comfortable shoes, the cliff views, and parking."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/6/photo_notes\", \"value\": {\"footwear\": \"comfortable shoes\", \"view_focus\": \"cliff views\", \"parking_plan\": \"use visitor lot\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the morning walk, add a note to start near the water, take photos, and keep the pace easy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/0/walk_notes\", \"value\": {\"starting_focus\": \"waterfront path\", \"photo_priority\": \"sunrise harbor views\", \"pace\": \"easy\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the Old Port time, remind me to browse local shops, look for cobblestone streets, and keep snacks optional."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/3/browsing_notes\", \"value\": {\"shop_focus\": \"local boutiques\", \"scenic_detail\": \"cobblestone streets\", \"snack_plan\": \"optional\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the coffee break, note that I'd like a pastry, a latte, and a quiet seat."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/5/cafe_notes\", \"value\": {\"drink\": \"latte\", \"food\": \"pastry\", \"seating\": \"quiet corner\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a simple spending target for the day, keeping food moderate and leaving room for activity tickets."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget_guidance\", \"value\": {\"daily_target_usd\": 180, \"food_style\": \"moderate\", \"ticket_flexibility\": \"some paid entries okay\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add a getting-around note that favors walking downtown, using a rideshare for the lighthouse, and keeping ferry tickets separate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transportation_notes\", \"value\": {\"downtown_mode\": \"walk\", \"lighthouse_mode\": \"rideshare\", \"ferry_ticket_handling\": \"separate purchase\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a few comfort preferences: avoid steep climbs, keep restroom access in mind, and don’t make the day too formal."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/comfort_preferences\", \"value\": {\"avoid_steep_climbs\": true, \"restroom_awareness\": \"important\", \"formality_level\": \"low\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include a small food preference note: seafood is welcome, heavy meals should be limited, and local bakeries sound good."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/food_preferences\", \"value\": {\"seafood_interest\": \"welcome\", \"heavy_meal_limit\": \"avoid more than one\", \"bakery_interest\": \"local bakeries\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a safety reminder to keep valuables close, use well-lit streets, and save offline directions."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/safety_reminders\", \"value\": {\"valuables\": \"keep close\", \"evening_awareness\": \"use well-lit streets\", \"navigation_backup\": \"save offline directions\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a backup idea in case it rains: prioritize indoor time, carry a compact umbrella, and keep the ferry flexible."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rain_plan\", \"value\": {\"indoor_priority\": \"museum and cafes\", \"carry_item\": \"compact umbrella\", \"ferry_flexibility\": \"check conditions before boarding\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a photography preference: focus on harbor scenes, street details, and lighthouse shots."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/photography_preferences\", \"value\": {\"harbor_scenes\": \"high priority\", \"street_details\": \"medium priority\", \"lighthouse_shots\": \"must capture\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include a souvenir note: look for local ceramics, avoid bulky items, and keep the purchase small."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/souvenir_preferences\", \"value\": {\"interest\": \"local ceramics\", \"size_limit\": \"avoid bulky items\", \"purchase_style\": \"small keepsake\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a note about keeping phone power covered: start fully charged, bring a small battery pack, and download the ferry schedule."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/device_preparation\", \"value\": {\"phone_charge\": \"start full\", \"backup_power\": \"small battery pack\", \"offline_reference\": \"download ferry schedule\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a quick contact plan: keep the hotel number handy, save the ferry office number, and share the schedule with a friend."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/contact_plan\", \"value\": {\"hotel_contact\": \"save front desk number\", \"ferry_contact\": \"save ferry office number\", \"sharing_plan\": \"send itinerary to a friend\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add a packing reminder for the day: bring a reusable water bottle, sunglasses, and a light scarf."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/day_bag_items\", \"value\": {\"water\": \"reusable bottle\", \"sun_protection\": \"sunglasses\", \"extra_layer\": \"light scarf\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one last reminder about timing: leave the morning flexible, keep lunch unhurried, and avoid adding evening plans."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pace_reminders\", \"value\": {\"morning_flexibility\": \"allow small delays\", \"lunch_pace\": \"unhurried\", \"evening_boundary\": \"no extra plans\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, just mark the overall feel as relaxed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip_mood\", \"value\": \"relaxed\"}]"
+    }
+  ],
+  "edit_instruction": "Please remove the Casco Bay harbor ferry ride from the day’s schedule.",
+  "current_json": {
+    "destination": "Portland, Maine",
+    "day_start_time": "09:00",
+    "transition_gap_minutes": 15,
+    "stops": [
+      {
+        "name": "Eastern Promenade walk",
+        "duration_minutes": 45,
+        "start_time": "09:00",
+        "end_time": "09:45",
+        "walk_notes": {
+          "starting_focus": "waterfront path",
+          "photo_priority": "sunrise harbor views",
+          "pace": "easy"
+        }
+      },
+      {
+        "name": "Portland Museum of Art",
+        "duration_minutes": 60,
+        "start_time": "10:00",
+        "end_time": "11:00",
+        "visit_notes": {
+          "check_exhibition": true,
+          "entrance": "Congress Street",
+          "ticket_plan": "buy on arrival"
+        }
+      },
+      {
+        "name": "Eventide Oyster Co. lunch",
+        "duration_minutes": 50,
+        "start_time": "11:15",
+        "end_time": "12:05",
+        "reservation": {
+          "recommended": true,
+          "seating_preference": "bar",
+          "booking_window": "same week"
+        }
+      },
+      {
+        "name": "Old Port stroll and browsing",
+        "duration_minutes": 40,
+        "start_time": "12:20",
+        "end_time": "13:00",
+        "browsing_notes": {
+          "shop_focus": "local boutiques",
+          "scenic_detail": "cobblestone streets",
+          "snack_plan": "optional"
+        }
+      },
+      {
+        "name": "Casco Bay harbor ferry ride",
+        "duration_minutes": 75,
+        "start_time": "13:15",
+        "end_time": "14:30",
+        "ride_notes": {
+          "seat_preference": "outdoor",
+          "bring_item": "windbreaker",
+          "ticket_plan": "buy at terminal"
+        }
+      },
+      {
+        "name": "Tandem Coffee Roasters break",
+        "duration_minutes": 30,
+        "start_time": "14:45",
+        "end_time": "15:15",
+        "cafe_notes": {
+          "drink": "latte",
+          "food": "pastry",
+          "seating": "quiet corner"
+        }
+      },
+      {
+        "name": "Portland Head Light photo visit",
+        "duration_minutes": 55,
+        "start_time": "15:30",
+        "end_time": "16:25",
+        "photo_notes": {
+          "footwear": "comfortable shoes",
+          "view_focus": "cliff views",
+          "parking_plan": "use visitor lot"
+        }
+      }
+    ],
+    "summary": {
+      "scheduled_stop_count": 7,
+      "day_end_time": "16:25"
+    },
+    "party": {
+      "adults": 2,
+      "mobility_preference": "walking",
+      "style_preference": "casual"
+    },
+    "season_context": {
+      "month": "September",
+      "expected_weather": "mild",
+      "packing_focus": "light layers"
+    },
+    "lodging": {
+      "area": "downtown Portland",
+      "lodging_type": "hotel",
+      "priority": "easy walking access"
+    },
+    "budget_guidance": {
+      "daily_target_usd": 180,
+      "food_style": "moderate",
+      "ticket_flexibility": "some paid entries okay"
+    },
+    "transportation_notes": {
+      "downtown_mode": "walk",
+      "lighthouse_mode": "rideshare",
+      "ferry_ticket_handling": "separate purchase"
+    },
+    "comfort_preferences": {
+      "avoid_steep_climbs": true,
+      "restroom_awareness": "important",
+      "formality_level": "low"
+    },
+    "food_preferences": {
+      "seafood_interest": "welcome",
+      "heavy_meal_limit": "avoid more than one",
+      "bakery_interest": "local bakeries"
+    },
+    "safety_reminders": {
+      "valuables": "keep close",
+      "evening_awareness": "use well-lit streets",
+      "navigation_backup": "save offline directions"
+    },
+    "rain_plan": {
+      "indoor_priority": "museum and cafes",
+      "carry_item": "compact umbrella",
+      "ferry_flexibility": "check conditions before boarding"
+    },
+    "photography_preferences": {
+      "harbor_scenes": "high priority",
+      "street_details": "medium priority",
+      "lighthouse_shots": "must capture"
+    },
+    "souvenir_preferences": {
+      "interest": "local ceramics",
+      "size_limit": "avoid bulky items",
+      "purchase_style": "small keepsake"
+    },
+    "device_preparation": {
+      "phone_charge": "start full",
+      "backup_power": "small battery pack",
+      "offline_reference": "download ferry schedule"
+    },
+    "contact_plan": {
+      "hotel_contact": "save front desk number",
+      "ferry_contact": "save ferry office number",
+      "sharing_plan": "send itinerary to a friend"
+    },
+    "day_bag_items": {
+      "water": "reusable bottle",
+      "sun_protection": "sunglasses",
+      "extra_layer": "light scarf"
+    },
+    "pace_reminders": {
+      "morning_flexibility": "allow small delays",
+      "lunch_pace": "unhurried",
+      "evening_boundary": "no extra plans"
+    },
+    "trip_mood": "relaxed"
+  },
+  "expected_patch": [
+    {
+      "op": "remove",
+      "kind": "direct",
+      "path": "/stops/4"
+    },
+    {
+      "op": "replace",
+      "kind": "cascade",
+      "path": "/stops/4/start_time",
+      "value": "13:15"
+    },
+    {
+      "op": "replace",
+      "kind": "cascade",
+      "path": "/stops/4/end_time",
+      "value": "13:45"
+    },
+    {
+      "op": "replace",
+      "kind": "cascade",
+      "path": "/stops/5/start_time",
+      "value": "14:00"
+    },
+    {
+      "op": "replace",
+      "kind": "cascade",
+      "path": "/stops/5/end_time",
+      "value": "14:55"
+    },
+    {
+      "op": "replace",
+      "kind": "cascade",
+      "path": "/summary/scheduled_stop_count",
+      "value": 6
+    },
+    {
+      "op": "replace",
+      "kind": "cascade",
+      "path": "/summary/day_end_time",
+      "value": "14:55"
+    },
+    {
+      "op": "remove",
+      "kind": "cascade",
+      "path": "/contact_plan/ferry_contact"
+    },
+    {
+      "op": "remove",
+      "kind": "cascade",
+      "path": "/rain_plan/ferry_flexibility"
+    },
+    {
+      "op": "remove",
+      "kind": "cascade",
+      "path": "/transportation_notes/ferry_ticket_handling"
+    },
+    {
+      "op": "remove",
+      "kind": "cascade",
+      "path": "/device_preparation/offline_reference"
+    }
+  ],
+  "expected_json": {
+    "destination": "Portland, Maine",
+    "day_start_time": "09:00",
+    "transition_gap_minutes": 15,
+    "stops": [
+      {
+        "name": "Eastern Promenade walk",
+        "duration_minutes": 45,
+        "start_time": "09:00",
+        "end_time": "09:45",
+        "walk_notes": {
+          "starting_focus": "waterfront path",
+          "photo_priority": "sunrise harbor views",
+          "pace": "easy"
+        }
+      },
+      {
+        "name": "Portland Museum of Art",
+        "duration_minutes": 60,
+        "start_time": "10:00",
+        "end_time": "11:00",
+        "visit_notes": {
+          "check_exhibition": true,
+          "entrance": "Congress Street",
+          "ticket_plan": "buy on arrival"
+        }
+      },
+      {
+        "name": "Eventide Oyster Co. lunch",
+        "duration_minutes": 50,
+        "start_time": "11:15",
+        "end_time": "12:05",
+        "reservation": {
+          "recommended": true,
+          "seating_preference": "bar",
+          "booking_window": "same week"
+        }
+      },
+      {
+        "name": "Old Port stroll and browsing",
+        "duration_minutes": 40,
+        "start_time": "12:20",
+        "end_time": "13:00",
+        "browsing_notes": {
+          "shop_focus": "local boutiques",
+          "scenic_detail": "cobblestone streets",
+          "snack_plan": "optional"
+        }
+      },
+      {
+        "name": "Tandem Coffee Roasters break",
+        "duration_minutes": 30,
+        "start_time": "13:15",
+        "end_time": "13:45",
+        "cafe_notes": {
+          "drink": "latte",
+          "food": "pastry",
+          "seating": "quiet corner"
+        }
+      },
+      {
+        "name": "Portland Head Light photo visit",
+        "duration_minutes": 55,
+        "start_time": "14:00",
+        "end_time": "14:55",
+        "photo_notes": {
+          "footwear": "comfortable shoes",
+          "view_focus": "cliff views",
+          "parking_plan": "use visitor lot"
+        }
+      }
+    ],
+    "summary": {
+      "scheduled_stop_count": 6,
+      "day_end_time": "14:55"
+    },
+    "party": {
+      "adults": 2,
+      "mobility_preference": "walking",
+      "style_preference": "casual"
+    },
+    "season_context": {
+      "month": "September",
+      "expected_weather": "mild",
+      "packing_focus": "light layers"
+    },
+    "lodging": {
+      "area": "downtown Portland",
+      "lodging_type": "hotel",
+      "priority": "easy walking access"
+    },
+    "budget_guidance": {
+      "daily_target_usd": 180,
+      "food_style": "moderate",
+      "ticket_flexibility": "some paid entries okay"
+    },
+    "transportation_notes": {
+      "downtown_mode": "walk",
+      "lighthouse_mode": "rideshare"
+    },
+    "comfort_preferences": {
+      "avoid_steep_climbs": true,
+      "restroom_awareness": "important",
+      "formality_level": "low"
+    },
+    "food_preferences": {
+      "seafood_interest": "welcome",
+      "heavy_meal_limit": "avoid more than one",
+      "bakery_interest": "local bakeries"
+    },
+    "safety_reminders": {
+      "valuables": "keep close",
+      "evening_awareness": "use well-lit streets",
+      "navigation_backup": "save offline directions"
+    },
+    "rain_plan": {
+      "indoor_priority": "museum and cafes",
+      "carry_item": "compact umbrella"
+    },
+    "photography_preferences": {
+      "harbor_scenes": "high priority",
+      "street_details": "medium priority",
+      "lighthouse_shots": "must capture"
+    },
+    "souvenir_preferences": {
+      "interest": "local ceramics",
+      "size_limit": "avoid bulky items",
+      "purchase_style": "small keepsake"
+    },
+    "device_preparation": {
+      "phone_charge": "start full",
+      "backup_power": "small battery pack"
+    },
+    "contact_plan": {
+      "hotel_contact": "save front desk number",
+      "sharing_plan": "send itinerary to a friend"
+    },
+    "day_bag_items": {
+      "water": "reusable bottle",
+      "sun_protection": "sunglasses",
+      "extra_layer": "light scarf"
+    },
+    "pace_reminders": {
+      "morning_flexibility": "allow small delays",
+      "lunch_pace": "unhurried",
+      "evening_boundary": "no extra plans"
+    },
+    "trip_mood": "relaxed"
+  },
+  "value_constraints": [],
+  "annotator": "",
+  "annotation_notes": "Remove Casco Bay harbor ferry ride (index 4, 75 min). Sequential application shifts the two later stops (indices 4-5) -90 min (75 dur + one 15 gap): Tandem Coffee 13:15-13:45, Portland Head Light 14:00-14:55. summary scheduled_stop_count 7->6, day_end_time 16:25->14:55. Earlier stops and the descriptive ferry-related preference fields (transportation_notes, rain_plan, contact_plan, etc.) are independent and stay. | REVIEW EDIT (with author): removing the ferry ride also obsoletes its dedicated ferry-prep fields, so they are now removed as a cascade: contact_plan/ferry_contact, rain_plan/ferry_flexibility, transportation_notes/ferry_ticket_handling, and device_preparation/offline_reference (its only content was \"download ferry schedule\"). 3 of 4 have ferry-dedicated keys; the 4th is a generic slot holding only ferry content. Cascade-aware revision should clean these up; leaving them now scores as a miss.",
+  "annotated": true,
+  "excluded": false,
+  "theme": "Removing a stop from the day's schedule",
+  "conversation_pattern": "Center the artifact on a one-day itinerary built as an ordered list of timed stops, where each stop's time follows from the previous stop's end plus a stated gap and its own stated duration, rolling up to overall counts and a day-end time. Around this core, add the realistic, independent details a planner would record that do not depend on a stop's position in the day, and vary their number and the number of stops from sample to sample.",
+  "edit_pattern": "Remove one specific stop from the day.",
+  "cascade_pattern": "When a stop is removed, every later stop's time shifts earlier by the removed stop's duration plus one gap, the day-end shifts earlier, and the stop count falls by one. Stops before the removed one keep their times. This is determined because the durations and the gap are stated.",
+  "requires_master_data": false
+}

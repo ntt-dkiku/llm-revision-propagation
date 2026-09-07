@@ -1,0 +1,135 @@
+{
+  "id": "shopping_cart_L10_05",
+  "domain": "shopping_cart",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Can you start a shopping cart for Maya Chen?"
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer\", \"value\": {\"name\": \"Maya Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put two stainless water bottles in Maya’s cart at $18 each."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items\", \"value\": [{\"product\": \"Stainless water bottle\", \"quantity\": 2, \"unitPrice\": 18.0}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and show the cost for the water bottles together."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/items/0/amount\", \"value\": 36.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Use free shipping once the cart reaches $50, and otherwise charge a $7.95 delivery fee."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shippingPolicy\", \"value\": {\"freeShippingThreshold\": 50.0, \"flatFeeBelowThreshold\": 7.95}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate what Maya owes now based on the current cart and delivery rule."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/totals\", \"value\": {\"subtotal\": 36.0, \"shippingFee\": 7.95, \"total\": 43.95}}]"
+    }
+  ],
+  "edit_instruction": "Change the water bottle quantity to 3.",
+  "theme": "Crossing the free-shipping threshold",
+  "master_data": null,
+  "current_json": {
+    "customer": {
+      "name": "Maya Chen"
+    },
+    "items": [
+      {
+        "product": "Stainless water bottle",
+        "quantity": 2,
+        "unitPrice": 18.0,
+        "amount": 36.0
+      }
+    ],
+    "shippingPolicy": {
+      "freeShippingThreshold": 50.0,
+      "flatFeeBelowThreshold": 7.95
+    },
+    "totals": {
+      "subtotal": 36.0,
+      "shippingFee": 7.95,
+      "total": 43.95
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/items/0/quantity",
+      "kind": "direct",
+      "value": 3
+    },
+    {
+      "op": "replace",
+      "path": "/items/0/amount",
+      "kind": "cascade",
+      "value": 54.0
+    },
+    {
+      "op": "replace",
+      "path": "/totals/subtotal",
+      "kind": "cascade",
+      "value": 54.0
+    },
+    {
+      "op": "replace",
+      "path": "/totals/shippingFee",
+      "kind": "cascade",
+      "value": 0.0
+    },
+    {
+      "op": "replace",
+      "path": "/totals/total",
+      "kind": "cascade",
+      "value": 54.0
+    }
+  ],
+  "expected_json": {
+    "customer": {
+      "name": "Maya Chen"
+    },
+    "items": [
+      {
+        "product": "Stainless water bottle",
+        "quantity": 3,
+        "unitPrice": 18.0,
+        "amount": 54.0
+      }
+    ],
+    "shippingPolicy": {
+      "freeShippingThreshold": 50.0,
+      "flatFeeBelowThreshold": 7.95
+    },
+    "totals": {
+      "subtotal": 54.0,
+      "shippingFee": 0.0,
+      "total": 54.0
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "Quantity 2->3. amount 3*18=54, subtotal 54. The new subtotal crosses the $50 free-shipping threshold (was 36, below -> now 54, at/above), so shippingFee flips 7.95->0; total 54+0=54 (NOT 61.95, which would wrongly keep the shipping fee). shippingPolicy threshold/fee and unitPrice stay.",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a cart whose subtotal sums its line amounts, carrying a stated free-shipping threshold and a stated flat shipping fee that applies only while the subtotal is below the threshold and drops to zero once the subtotal reaches it, with a total that is the subtotal plus the shipping fee, so the line amounts determine the subtotal, the shipping fee, and the total. State the threshold and the flat fee in the conversation, and set the initial subtotal on one side of the threshold so the shipping fee is in its corresponding state. Around this core, add the realistic, independent details a cart would carry that do not depend on the subtotal, and vary their number from sample to sample.",
+  "edit_pattern": "Change one line item's quantity or unit price to a specific new value chosen so the subtotal moves across the stated free-shipping threshold.",
+  "cascade_pattern": "Editing the line re-derives its amount and then the subtotal; whether the new subtotal reaches the stated threshold determines the shipping fee (zero at or above the threshold, the stated flat fee below it), and the total re-sums the subtotal plus the shipping fee. Lines and fields that do not feed the subtotal stay. This is determined because the threshold and the flat fee are stated in the conversation.",
+  "requires_master_data": false
+}

@@ -1,0 +1,511 @@
+{
+  "id": "manufacturing_bom_L100_03",
+  "domain": "manufacturing_bom",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a production record for work order WO-47218."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/work_order_id\", \"value\": \"WO-47218\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan it with an expected material loss of 4%."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/scrap_rate_percent\", \"value\": 4}]"
+    },
+    {
+      "role": "user",
+      "content": "The finished quantity we need to ship is 12,000 usable units."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/usable_unit_target\", \"value\": 12000}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the starting quantity by rounding up the target divided by the good-yield percentage."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quantity_calculations\", \"value\": {\"raw_units_required_formula\": \"ceil(usable_unit_target / (1 - scrap_rate_percent / 100))\", \"raw_units_required\": 12500}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also show the expected leftover loss as the starting quantity minus the shippable quantity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quantity_calculations/waste_estimate_formula\", \"value\": \"raw_units_required - usable_unit_target\"}, {\"op\": \"add\", \"path\": \"/quantity_calculations/waste_estimate_units\", \"value\": 500}]"
+    },
+    {
+      "role": "user",
+      "content": "Use $2.35 as the material cost for each unit we start."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costing\", \"value\": {\"unit_material_cost\": 2.35}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now calculate the full material spend from the starting quantity and that per-unit rate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costing/material_total_formula\", \"value\": \"raw_units_required * unit_material_cost\"}, {\"op\": \"add\", \"path\": \"/costing/material_total\", \"value\": 29375}]"
+    },
+    {
+      "role": "user",
+      "content": "Add $0.80 per started unit for variable conversion work."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costing/unit_conversion_cost\", \"value\": 0.8}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate the total variable conversion charge from the starting quantity and that added rate."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costing/conversion_total_formula\", \"value\": \"raw_units_required * unit_conversion_cost\"}, {\"op\": \"add\", \"path\": \"/costing/conversion_total\", \"value\": 10000}]"
+    },
+    {
+      "role": "user",
+      "content": "Roll the material and variable conversion charges into one planned variable spend total."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costing/total_variable_cost_formula\", \"value\": \"material_total + conversion_total\"}, {\"op\": \"add\", \"path\": \"/costing/total_variable_cost\", \"value\": 39375}]"
+    },
+    {
+      "role": "user",
+      "content": "Identify the product as the AX-17 pump impeller for this order."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/item\", \"value\": {\"sku\": \"AX-17\", \"description\": \"Pump impeller\", \"revision\": \"C\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the production site to Plant 3 in Cleveland."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/site\", \"value\": {\"plant_code\": \"PLT-03\", \"city\": \"Cleveland\", \"country\": \"USA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the run to start on May 6, 2026 and finish two days later."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/schedule\", \"value\": {\"start_date\": \"2026-05-06\", \"end_date\": \"2026-05-08\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "This order is for Acme Fluid Systems in Dallas."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/order_customer\", \"value\": {\"name\": \"Acme Fluid Systems\", \"city\": \"Dallas\", \"account_id\": \"AFS-2041\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "List Maria Chen as the production planner with her internal extension."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planner\", \"value\": {\"name\": \"Maria Chen\", \"employee_id\": \"E-1187\", \"phone_extension\": \"4382\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first shop step: operation 10 is casting at the foundry cell."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/routing_steps\", \"value\": [{\"operation_number\": 10, \"work_center\": \"Foundry Cell F1\", \"activity\": \"Casting\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Next, add operation 20 for CNC machining in machining cell M2."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/routing_steps/-\", \"value\": {\"operation_number\": 20, \"work_center\": \"Machining Cell M2\", \"activity\": \"CNC machining\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add operation 30 for deburring at finishing bench B4."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/routing_steps/-\", \"value\": {\"operation_number\": 30, \"work_center\": \"Finishing Bench B4\", \"activity\": \"Deburring\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the routing with operation 40 for final inspection in quality station Q1."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/routing_steps/-\", \"value\": {\"operation_number\": 40, \"work_center\": \"Quality Station Q1\", \"activity\": \"Final inspection\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the primary aluminum ingot input, item AL-6061, measured in kilograms."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom_components\", \"value\": [{\"component_sku\": \"AL-6061\", \"component_name\": \"Aluminum ingot\", \"unit_of_measure\": \"kg\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the stainless shaft insert, part SS-12, counted by each piece."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom_components/-\", \"value\": {\"component_sku\": \"SS-12\", \"component_name\": \"Stainless shaft insert\", \"unit_of_measure\": \"each\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the protective ceramic coating, code COAT-7, tracked in liters."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/bom_components/-\", \"value\": {\"component_sku\": \"COAT-7\", \"component_name\": \"Ceramic coating\", \"unit_of_measure\": \"L\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first supplier we expect to use: Great Lakes Metals with supplier number SUP-314."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approved_suppliers\", \"value\": [{\"supplier_id\": \"SUP-314\", \"supplier_name\": \"Great Lakes Metals\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include North Coast Fasteners as another approved source, supplier number SUP-882."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approved_suppliers/-\", \"value\": {\"supplier_id\": \"SUP-882\", \"supplier_name\": \"North Coast Fasteners\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark this as a firm released order with standard priority."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/order_control\", \"value\": {\"status\": \"Released\", \"priority\": \"Standard\", \"release_type\": \"Firm\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Pack the finished impellers in returnable blue totes, 250 pieces per tote."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packaging\", \"value\": {\"container_type\": \"Returnable tote\", \"container_color\": \"Blue\", \"units_per_container\": 250}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the inspection standard: use gauge plan GP-AX17 at revision 5, with a one-percent sample."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quality_plan\", \"value\": {\"gauge_plan\": \"GP-AX17\", \"revision\": 5, \"sample_percent\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan the outbound shipment with carrier Reddaway, service level LTL, and freight terms prepaid."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping\", \"value\": {\"carrier\": \"Reddaway\", \"service_level\": \"LTL\", \"freight_terms\": \"Prepaid\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the first required certification as ISO 9001 with certificate Q-7781."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/certifications\", \"value\": [{\"standard\": \"ISO 9001\", \"certificate_id\": \"Q-7781\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the material compliance certification for RoHS under certificate R-4490."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/certifications/-\", \"value\": {\"standard\": \"RoHS\", \"certificate_id\": \"R-4490\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Stage the materials in aisle C, rack 14, bin 07 before the run starts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/material_staging\", \"value\": {\"aisle\": \"C\", \"rack\": \"14\", \"bin\": \"07\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the required tooling is die set D-AX17, fixture FX-220, and cutter kit CK-19."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tooling\", \"value\": {\"die_set\": \"D-AX17\", \"fixture\": \"FX-220\", \"cutter_kit\": \"CK-19\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Assign the crew to shift B, with lead operator Javier Ortiz and quality technician Priya Nair."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/crew_assignment\", \"value\": {\"shift\": \"B\", \"lead_operator\": \"Javier Ortiz\", \"quality_technician\": \"Priya Nair\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a maintenance hold point before the run, checking press P-14 with checklist MC-62."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/maintenance_check\", \"value\": {\"equipment_id\": \"P-14\", \"checklist_id\": \"MC-62\", \"required_before_start\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the environmental controls for the run to 22 degrees Celsius, 45 percent humidity, and normal ventilation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environmental_controls\", \"value\": {\"temperature_celsius\": 22, \"humidity_percent\": 45, \"ventilation_mode\": \"Normal\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the safety requirements: eye protection, cut-resistant gloves, and hearing protection are all required."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/safety_requirements\", \"value\": {\"eye_protection_required\": true, \"gloves_required\": true, \"hearing_protection_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the first lot trace entry for aluminum heat H-88321 received under ticket RC-5510."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lot_traceability\", \"value\": [{\"material\": \"Aluminum ingot\", \"heat_lot\": \"H-88321\", \"receipt_ticket\": \"RC-5510\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add document control details: version 1.0, approved by Lena Patel, approved on April 18, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/document_control\", \"value\": {\"version\": \"1.0\", \"approved_by\": \"Lena Patel\", \"approved_date\": \"2026-04-18\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add receiving checks for incoming materials: verify certificate match, inspect packaging condition, and quarantine anything nonconforming."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/receiving_checks\", \"value\": {\"certificate_match_required\": true, \"packaging_condition_check\": true, \"nonconforming_quarantine_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the final record notes: expedite review is not needed, customer labeling is required, and archive the packet after completion."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/record_notes\", \"value\": {\"expedite_review_required\": false, \"customer_labeling_required\": true, \"archive_after_completion\": true}}]"
+    }
+  ],
+  "edit_instruction": "Update the planned material loss to 6%.",
+  "theme": "Changing the scrap rate",
+  "conversation_pattern": "Center the artifact on a manufacturing plan with a stated scrap rate, usable-unit target, raw-unit requirement, waste estimate, and cost totals where raw demand derives from the target and scrap rate by stated formulas. Around this core, add the realistic, independent details a production record would carry that do not depend on scrap rate, and vary their number from sample to sample.",
+  "edit_pattern": "Change the scrap rate to a specific new percentage.",
+  "cascade_pattern": "Editing the scrap rate re-derives raw units required, waste estimate, and any cost totals that depend on raw demand from the stated formulas. The usable-unit target and per-unit costs stay unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "work_order_id": "WO-47218",
+    "scrap_rate_percent": 4,
+    "usable_unit_target": 12000,
+    "quantity_calculations": {
+      "raw_units_required_formula": "ceil(usable_unit_target / (1 - scrap_rate_percent / 100))",
+      "raw_units_required": 12500,
+      "waste_estimate_formula": "raw_units_required - usable_unit_target",
+      "waste_estimate_units": 500
+    },
+    "costing": {
+      "unit_material_cost": 2.35,
+      "material_total_formula": "raw_units_required * unit_material_cost",
+      "material_total": 29375,
+      "unit_conversion_cost": 0.8,
+      "conversion_total_formula": "raw_units_required * unit_conversion_cost",
+      "conversion_total": 10000,
+      "total_variable_cost_formula": "material_total + conversion_total",
+      "total_variable_cost": 39375
+    },
+    "item": {
+      "sku": "AX-17",
+      "description": "Pump impeller",
+      "revision": "C"
+    },
+    "site": {
+      "plant_code": "PLT-03",
+      "city": "Cleveland",
+      "country": "USA"
+    },
+    "schedule": {
+      "start_date": "2026-05-06",
+      "end_date": "2026-05-08"
+    },
+    "order_customer": {
+      "name": "Acme Fluid Systems",
+      "city": "Dallas",
+      "account_id": "AFS-2041"
+    },
+    "planner": {
+      "name": "Maria Chen",
+      "employee_id": "E-1187",
+      "phone_extension": "4382"
+    },
+    "routing_steps": [
+      {
+        "operation_number": 10,
+        "work_center": "Foundry Cell F1",
+        "activity": "Casting"
+      },
+      {
+        "operation_number": 20,
+        "work_center": "Machining Cell M2",
+        "activity": "CNC machining"
+      },
+      {
+        "operation_number": 30,
+        "work_center": "Finishing Bench B4",
+        "activity": "Deburring"
+      },
+      {
+        "operation_number": 40,
+        "work_center": "Quality Station Q1",
+        "activity": "Final inspection"
+      }
+    ],
+    "bom_components": [
+      {
+        "component_sku": "AL-6061",
+        "component_name": "Aluminum ingot",
+        "unit_of_measure": "kg"
+      },
+      {
+        "component_sku": "SS-12",
+        "component_name": "Stainless shaft insert",
+        "unit_of_measure": "each"
+      },
+      {
+        "component_sku": "COAT-7",
+        "component_name": "Ceramic coating",
+        "unit_of_measure": "L"
+      }
+    ],
+    "approved_suppliers": [
+      {
+        "supplier_id": "SUP-314",
+        "supplier_name": "Great Lakes Metals"
+      },
+      {
+        "supplier_id": "SUP-882",
+        "supplier_name": "North Coast Fasteners"
+      }
+    ],
+    "order_control": {
+      "status": "Released",
+      "priority": "Standard",
+      "release_type": "Firm"
+    },
+    "packaging": {
+      "container_type": "Returnable tote",
+      "container_color": "Blue",
+      "units_per_container": 250
+    },
+    "quality_plan": {
+      "gauge_plan": "GP-AX17",
+      "revision": 5,
+      "sample_percent": 1
+    },
+    "shipping": {
+      "carrier": "Reddaway",
+      "service_level": "LTL",
+      "freight_terms": "Prepaid"
+    },
+    "certifications": [
+      {
+        "standard": "ISO 9001",
+        "certificate_id": "Q-7781"
+      },
+      {
+        "standard": "RoHS",
+        "certificate_id": "R-4490"
+      }
+    ],
+    "material_staging": {
+      "aisle": "C",
+      "rack": "14",
+      "bin": "07"
+    },
+    "tooling": {
+      "die_set": "D-AX17",
+      "fixture": "FX-220",
+      "cutter_kit": "CK-19"
+    },
+    "crew_assignment": {
+      "shift": "B",
+      "lead_operator": "Javier Ortiz",
+      "quality_technician": "Priya Nair"
+    },
+    "maintenance_check": {
+      "equipment_id": "P-14",
+      "checklist_id": "MC-62",
+      "required_before_start": true
+    },
+    "environmental_controls": {
+      "temperature_celsius": 22,
+      "humidity_percent": 45,
+      "ventilation_mode": "Normal"
+    },
+    "safety_requirements": {
+      "eye_protection_required": true,
+      "gloves_required": true,
+      "hearing_protection_required": true
+    },
+    "lot_traceability": [
+      {
+        "material": "Aluminum ingot",
+        "heat_lot": "H-88321",
+        "receipt_ticket": "RC-5510"
+      }
+    ],
+    "document_control": {
+      "version": "1.0",
+      "approved_by": "Lena Patel",
+      "approved_date": "2026-04-18"
+    },
+    "receiving_checks": {
+      "certificate_match_required": true,
+      "packaging_condition_check": true,
+      "nonconforming_quarantine_required": true
+    },
+    "record_notes": {
+      "expedite_review_required": false,
+      "customer_labeling_required": true,
+      "archive_after_completion": true
+    }
+  }
+}

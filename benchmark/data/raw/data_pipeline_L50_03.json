@@ -1,0 +1,265 @@
+{
+  "id": "data_pipeline_L50_03",
+  "domain": "data_pipeline",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a runbook for the daily merchant revenue pipeline."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline\", \"value\": {\"name\": \"daily_merchant_revenue\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "The raw orders source for this pipeline should be warehouse.raw_merchant_orders_v1."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/source_table\", \"value\": \"warehouse.raw_merchant_orders_v1\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first transformation step that builds the daily staging table directly from that raw orders source."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/transform_steps\", \"value\": [{\"step_id\": \"stage_daily_orders\", \"sql\": \"CREATE OR REPLACE TABLE warehouse.stg_daily_merchant_orders AS SELECT order_id, merchant_id, order_total, created_at FROM warehouse.raw_merchant_orders_v1 WHERE created_at >= CURRENT_DATE - INTERVAL '1 day';\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Track the lineage for that staging step so it's clear the raw orders source feeds the staging table."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage\", \"value\": [{\"upstream\": \"warehouse.raw_merchant_orders_v1\", \"downstream\": \"warehouse.stg_daily_merchant_orders\", \"relationship\": \"raw orders feed the daily staging build\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the dashboard dependency that reads from the raw orders source for the freshness tile."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/dashboards\", \"value\": [{\"dashboard_id\": \"merchant_revenue_ops\", \"tile\": \"raw_orders_freshness\", \"source\": \"warehouse.raw_merchant_orders_v1\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a freshness alert that checks whether the raw orders source has received records in the last two hours."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerts\", \"value\": [{\"alert_id\": \"raw_orders_two_hour_freshness\", \"query\": \"SELECT COUNT(*) AS recent_rows FROM warehouse.raw_merchant_orders_v1 WHERE created_at >= CURRENT_TIMESTAMP - INTERVAL '2 hours';\", \"severity\": \"page\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another processing step that calculates the daily order count straight from the raw orders source before the revenue rollup runs."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/transform_steps/-\", \"value\": {\"step_id\": \"count_raw_daily_orders\", \"sql\": \"CREATE OR REPLACE TABLE warehouse.daily_raw_order_counts AS SELECT DATE(created_at) AS order_date, COUNT(*) AS order_count FROM warehouse.raw_merchant_orders_v1 GROUP BY DATE(created_at);\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Capture the lineage for that order-count step too, with the raw orders source feeding the count table."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage/-\", \"value\": {\"upstream\": \"warehouse.raw_merchant_orders_v1\", \"downstream\": \"warehouse.daily_raw_order_counts\", \"relationship\": \"raw orders provide the base rows for daily order counts\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also show the raw orders source on the executive dashboard tile that tracks yesterday’s ingested order volume."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/dashboards/-\", \"value\": {\"dashboard_id\": \"merchant_executive_summary\", \"tile\": \"yesterday_raw_order_volume\", \"source\": \"warehouse.raw_merchant_orders_v1\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a second alert that compares today's raw order count against the trailing weekday average."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/alerts/-\", \"value\": {\"alert_id\": \"raw_orders_weekday_volume_drop\", \"query\": \"SELECT today_count, weekday_avg FROM monitoring.order_volume_baselines WHERE source_table = 'warehouse.raw_merchant_orders_v1' AND today_count < weekday_avg * 0.7;\", \"severity\": \"warn\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a cleanup step that removes duplicate order records from the raw orders source before downstream consumers pick them up."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/transform_steps/-\", \"value\": {\"step_id\": \"dedupe_raw_orders\", \"sql\": \"CREATE OR REPLACE TABLE warehouse.deduped_raw_merchant_orders AS SELECT * FROM warehouse.raw_merchant_orders_v1 QUALIFY ROW_NUMBER() OVER (PARTITION BY order_id ORDER BY updated_at DESC) = 1;\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the dependency for that deduped raw orders table back to the original raw orders source."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/lineage/-\", \"value\": {\"upstream\": \"warehouse.raw_merchant_orders_v1\", \"downstream\": \"warehouse.deduped_raw_merchant_orders\", \"relationship\": \"deduplication reads the raw orders landing table\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the normal daily run timing for this pipeline, including the timezone and whether it should backfill missed days automatically."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/schedule\", \"value\": {\"cron\": \"0 5 * * *\", \"timezone\": \"America/Los_Angeles\", \"catchup\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the standard retry behavior for the daily run so on-call knows what to expect when a task fails."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/retry_policy\", \"value\": {\"max_attempts\": 3, \"delay_minutes\": 15, \"notify_on_failure\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include who owns this runbook operationally, with the team name, Slack room, and escalation email."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/ownership\", \"value\": {\"team\": \"data-platform-revenue\", \"slack_channel\": \"#rev-data-oncall\", \"escalation_email\": \"rev-data-oncall@example.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the expected completion target for the run so incident responders know when it is late."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/service_level\", \"value\": {\"target_completion_time\": \"07:30\", \"timezone\": \"America/Los_Angeles\", \"late_after_minutes\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a data quality check that flags rows from the raw orders source when the order identifier is missing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/data_quality_checks\", \"value\": [{\"check_id\": \"raw_orders_missing_order_id\", \"sql\": \"SELECT COUNT(*) AS missing_order_ids FROM warehouse.raw_merchant_orders_v1 WHERE order_id IS NULL;\", \"fail_threshold\": 0}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one more quality check against the raw orders source to catch negative order totals."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/data_quality_checks/-\", \"value\": {\"check_id\": \"raw_orders_negative_total\", \"sql\": \"SELECT COUNT(*) AS negative_totals FROM warehouse.raw_merchant_orders_v1 WHERE order_total < 0;\", \"fail_threshold\": 0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include the finance reconciliation dashboard tile that reads directly from the raw orders source."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pipeline/dashboards/-\", \"value\": {\"dashboard_id\": \"finance_reconciliation\", \"tile\": \"raw_order_reconciliation\", \"source\": \"warehouse.raw_merchant_orders_v1\"}}]"
+    }
+  ],
+  "edit_instruction": "Update the pipeline’s raw orders source to warehouse.raw_merchant_orders_v2.",
+  "theme": "Renaming an upstream table",
+  "conversation_pattern": "Center the artifact on a data pipeline DAG where one upstream table name is referenced by downstream SQL, lineage entries, dashboard source references, and alert queries as a visible token. Around this core, add the realistic, independent details a data engineering runbook would carry that do not reference that table name, including other table names that must NOT be touched, and vary their number from sample to sample.",
+  "edit_pattern": "Rename the upstream table to a different specific table identifier.",
+  "cascade_pattern": "Changing the table identifier substitutes the new token in every SQL statement, lineage reference, dashboard source, and alert query that references the old name, while preserving surrounding text and leaving every other table reference unchanged. This is determined because each reference embeds the old table name visibly.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "pipeline": {
+      "name": "daily_merchant_revenue",
+      "source_table": "warehouse.raw_merchant_orders_v1",
+      "transform_steps": [
+        {
+          "step_id": "stage_daily_orders",
+          "sql": "CREATE OR REPLACE TABLE warehouse.stg_daily_merchant_orders AS SELECT order_id, merchant_id, order_total, created_at FROM warehouse.raw_merchant_orders_v1 WHERE created_at >= CURRENT_DATE - INTERVAL '1 day';"
+        },
+        {
+          "step_id": "count_raw_daily_orders",
+          "sql": "CREATE OR REPLACE TABLE warehouse.daily_raw_order_counts AS SELECT DATE(created_at) AS order_date, COUNT(*) AS order_count FROM warehouse.raw_merchant_orders_v1 GROUP BY DATE(created_at);"
+        },
+        {
+          "step_id": "dedupe_raw_orders",
+          "sql": "CREATE OR REPLACE TABLE warehouse.deduped_raw_merchant_orders AS SELECT * FROM warehouse.raw_merchant_orders_v1 QUALIFY ROW_NUMBER() OVER (PARTITION BY order_id ORDER BY updated_at DESC) = 1;"
+        }
+      ],
+      "lineage": [
+        {
+          "upstream": "warehouse.raw_merchant_orders_v1",
+          "downstream": "warehouse.stg_daily_merchant_orders",
+          "relationship": "raw orders feed the daily staging build"
+        },
+        {
+          "upstream": "warehouse.raw_merchant_orders_v1",
+          "downstream": "warehouse.daily_raw_order_counts",
+          "relationship": "raw orders provide the base rows for daily order counts"
+        },
+        {
+          "upstream": "warehouse.raw_merchant_orders_v1",
+          "downstream": "warehouse.deduped_raw_merchant_orders",
+          "relationship": "deduplication reads the raw orders landing table"
+        }
+      ],
+      "dashboards": [
+        {
+          "dashboard_id": "merchant_revenue_ops",
+          "tile": "raw_orders_freshness",
+          "source": "warehouse.raw_merchant_orders_v1"
+        },
+        {
+          "dashboard_id": "merchant_executive_summary",
+          "tile": "yesterday_raw_order_volume",
+          "source": "warehouse.raw_merchant_orders_v1"
+        },
+        {
+          "dashboard_id": "finance_reconciliation",
+          "tile": "raw_order_reconciliation",
+          "source": "warehouse.raw_merchant_orders_v1"
+        }
+      ],
+      "alerts": [
+        {
+          "alert_id": "raw_orders_two_hour_freshness",
+          "query": "SELECT COUNT(*) AS recent_rows FROM warehouse.raw_merchant_orders_v1 WHERE created_at >= CURRENT_TIMESTAMP - INTERVAL '2 hours';",
+          "severity": "page"
+        },
+        {
+          "alert_id": "raw_orders_weekday_volume_drop",
+          "query": "SELECT today_count, weekday_avg FROM monitoring.order_volume_baselines WHERE source_table = 'warehouse.raw_merchant_orders_v1' AND today_count < weekday_avg * 0.7;",
+          "severity": "warn"
+        }
+      ],
+      "schedule": {
+        "cron": "0 5 * * *",
+        "timezone": "America/Los_Angeles",
+        "catchup": false
+      },
+      "retry_policy": {
+        "max_attempts": 3,
+        "delay_minutes": 15,
+        "notify_on_failure": true
+      },
+      "ownership": {
+        "team": "data-platform-revenue",
+        "slack_channel": "#rev-data-oncall",
+        "escalation_email": "rev-data-oncall@example.com"
+      },
+      "service_level": {
+        "target_completion_time": "07:30",
+        "timezone": "America/Los_Angeles",
+        "late_after_minutes": 30
+      },
+      "data_quality_checks": [
+        {
+          "check_id": "raw_orders_missing_order_id",
+          "sql": "SELECT COUNT(*) AS missing_order_ids FROM warehouse.raw_merchant_orders_v1 WHERE order_id IS NULL;",
+          "fail_threshold": 0
+        },
+        {
+          "check_id": "raw_orders_negative_total",
+          "sql": "SELECT COUNT(*) AS negative_totals FROM warehouse.raw_merchant_orders_v1 WHERE order_total < 0;",
+          "fail_threshold": 0
+        }
+      ]
+    }
+  }
+}

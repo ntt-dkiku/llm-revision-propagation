@@ -1,0 +1,142 @@
+{
+  "id": "travel_itinerary_L10_06",
+  "domain": "travel_itinerary",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm planning a one-day outing in Kyoto."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/destination_city\", \"value\": \"Kyoto\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's keep a 20-minute buffer between places so the day doesn't feel rushed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transfer_gap_minutes\", \"value\": 20}]"
+    },
+    {
+      "role": "user",
+      "content": "Start the day at Kiyomizu-dera at 9 in the morning and spend an hour and a half there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops\", \"value\": [{\"Kiyomizu-dera\": {\"start_time\": \"09:00\", \"duration_minutes\": 90}}]}]"
+    },
+    {
+      "role": "user",
+      "content": "After that, add Nishiki Market for an hour, using the same buffer before getting there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"Nishiki Market\": {\"start_time\": \"10:50\", \"duration_minutes\": 60}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Then make the last visit Fushimi Inari Shrine for two hours, again leaving that same travel cushion beforehand."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/stops/-\", \"value\": {\"Fushimi Inari Shrine\": {\"start_time\": \"12:10\", \"duration_minutes\": 120}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please finish the plan with a quick overall wrap-up showing how many places we're visiting and what time we'll be done."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/day_summary\", \"value\": {\"stop_count\": 3, \"day_end_time\": \"14:10\"}}]"
+    }
+  ],
+  "edit_instruction": "Please remove Nishiki Market from the day’s schedule.",
+  "theme": "Removing a stop from the day's schedule",
+  "master_data": null,
+  "current_json": {
+    "destination_city": "Kyoto",
+    "transfer_gap_minutes": 20,
+    "stops": [
+      {
+        "Kiyomizu-dera": {
+          "start_time": "09:00",
+          "duration_minutes": 90
+        }
+      },
+      {
+        "Nishiki Market": {
+          "start_time": "10:50",
+          "duration_minutes": 60
+        }
+      },
+      {
+        "Fushimi Inari Shrine": {
+          "start_time": "12:10",
+          "duration_minutes": 120
+        }
+      }
+    ],
+    "day_summary": {
+      "stop_count": 3,
+      "day_end_time": "14:10"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "remove",
+      "path": "/stops/1",
+      "kind": "direct"
+    },
+    {
+      "op": "replace",
+      "path": "/stops/1/Fushimi Inari Shrine/start_time",
+      "kind": "cascade",
+      "value": "10:50"
+    },
+    {
+      "op": "replace",
+      "path": "/day_summary/stop_count",
+      "kind": "cascade",
+      "value": 2
+    },
+    {
+      "op": "replace",
+      "path": "/day_summary/day_end_time",
+      "kind": "cascade",
+      "value": "12:50"
+    }
+  ],
+  "expected_json": {
+    "destination_city": "Kyoto",
+    "transfer_gap_minutes": 20,
+    "stops": [
+      {
+        "Kiyomizu-dera": {
+          "start_time": "09:00",
+          "duration_minutes": 90
+        }
+      },
+      {
+        "Fushimi Inari Shrine": {
+          "start_time": "10:50",
+          "duration_minutes": 120
+        }
+      }
+    ],
+    "day_summary": {
+      "stop_count": 2,
+      "day_end_time": "12:50"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "Remove Nishiki Market. Fushimi (now idx1) shifts: Kiyomizu ends 10:30 +20 -> 10:50. stop_count 3->2; day_end 14:10->12:50 (10:50+120).",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a one-day itinerary built as an ordered list of timed stops, where each stop's time follows from the previous stop's end plus a stated gap and its own stated duration, rolling up to overall counts and a day-end time. Around this core, add the realistic, independent details a planner would record that do not depend on a stop's position in the day, and vary their number and the number of stops from sample to sample.",
+  "edit_pattern": "Remove one specific stop from the day.",
+  "cascade_pattern": "When a stop is removed, every later stop's time shifts earlier by the removed stop's duration plus one gap, the day-end shifts earlier, and the stop count falls by one. Stops before the removed one keep their times. This is determined because the durations and the gap are stated.",
+  "requires_master_data": false
+}

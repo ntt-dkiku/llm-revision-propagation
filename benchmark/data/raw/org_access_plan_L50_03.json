@@ -1,0 +1,281 @@
+{
+  "id": "org_access_plan_L50_03",
+  "domain": "org_access_plan",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start an access plan for Maya Chen."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/identity\", \"value\": {\"employee_name\": \"Maya Chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give Maya access to Workday, and mark that system as medium sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems\", \"value\": [{\"name\": \"Workday\", \"sensitivity_level\": \"medium\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Also include Salesforce for her, with high sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems/-\", \"value\": {\"name\": \"Salesforce\", \"sensitivity_level\": \"high\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Slack too, and treat it as low sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems/-\", \"value\": {\"name\": \"Slack\", \"sensitivity_level\": \"low\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include GitHub Enterprise as well, with medium sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems/-\", \"value\": {\"name\": \"GitHub Enterprise\", \"sensitivity_level\": \"medium\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Zoom to Maya’s access too, with low sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems/-\", \"value\": {\"name\": \"Zoom\", \"sensitivity_level\": \"low\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give her Tableau too, with medium sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/granted_systems/-\", \"value\": {\"name\": \"Tableau\", \"sensitivity_level\": \"medium\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now note the total number of systems Maya can use."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_count\", \"value\": 6}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the rule that says administrative ability is available only when at least one approved system is high sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/capability_rules\", \"value\": {\"can_admin\": \"true iff any granted system has sensitivity_level high\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also record that data export is allowed whenever any approved system is medium or high sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/capability_rules/can_export_data\", \"value\": \"true iff any granted system has sensitivity_level medium or high\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that self-service support access is allowed whenever at least one approved system is low sensitivity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/capability_rules/can_self_service_support\", \"value\": \"true iff any granted system has sensitivity_level low\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Based on those rules and her current approvals, summarize what Maya is allowed to do."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/capability_summary\", \"value\": {\"can_admin\": true, \"can_export_data\": true, \"can_self_service_support\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Maya’s basic work profile details: her employee number, department, and office location."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/identity/employee_id\", \"value\": \"E-48291\"}, {\"op\": \"add\", \"path\": \"/identity/department\", \"value\": \"Revenue Operations\"}, {\"op\": \"add\", \"path\": \"/identity/location\", \"value\": \"Seattle HQ\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add who sponsored this access for Maya, including the sponsor’s name, team, and contact address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/sponsor\", \"value\": {\"name\": \"Iris Patel\", \"team\": \"Sales Systems\", \"email\": \"iris.patel@example.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the approval details for this access request: who approved it, the approval date, and the request ticket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/approval\", \"value\": {\"approved_by\": \"Noah Grant\", \"approved_on\": \"2026-01-14\", \"ticket_id\": \"REQ-774203\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the planned review timing: when it starts, when it expires, and how often it should be checked."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/review_schedule\", \"value\": {\"start_date\": \"2026-01-15\", \"expiration_date\": \"2026-07-15\", \"review_frequency\": \"quarterly\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the business reason for Maya’s access, including the project name, the purpose, and the priority."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/business_justification\", \"value\": {\"project\": \"Q2 Pipeline Hygiene\", \"purpose\": \"Maintain opportunity data quality and revenue reporting workflows\", \"priority\": \"standard\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a basic compliance note: the policy it follows, the requirement status, and the monitoring approach."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance\", \"value\": {\"policy\": \"Least Privilege Access Standard\", \"training_required\": true, \"monitoring\": \"monthly audit sampling\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the sign-in safeguards Maya must use: multifactor login, VPN use, and the session timeout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/security_controls\", \"value\": {\"mfa_required\": true, \"vpn_required\": true, \"session_timeout_minutes\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add how Maya should be notified about access changes: the main channel, backup channel, and whether reminders are enabled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/notifications\", \"value\": {\"primary_channel\": \"email\", \"backup_channel\": \"Slack\", \"reminders_enabled\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the escalation contact for any access issues, including the person’s name, support group, and phone number."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/escalation_contact\", \"value\": {\"name\": \"Lena Ortiz\", \"group\": \"Identity Operations\", \"phone\": \"+1-206-555-0148\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finally, add how access should be handled when Maya no longer needs it: who owns the removal, the standard turnaround, and whether confirmation is required."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deprovisioning\", \"value\": {\"owner\": \"Identity Operations\", \"sla_hours\": 24, \"confirmation_required\": true}}]"
+    }
+  ],
+  "edit_instruction": "Please revoke Maya’s Salesforce access.",
+  "theme": "Revoking a system access",
+  "conversation_pattern": "Center the artifact on an access plan with a list of granted systems (each with a name and a sensitivity level), an access_count, and a capability summary of boolean flags (e.g. can_export_data, can_admin) each derived by a stated rule over the granted systems (e.g. can_admin is true iff any granted system has sensitivity 'high'). Around this core, add the realistic, independent details an access record would carry that do not depend on the grant list, and vary the number of granted systems from sample to sample.",
+  "edit_pattern": "Revoke one specific granted system from the access plan.",
+  "cascade_pattern": "Revoking the system removes it from the grant list, lowers access_count, and re-derives every capability-summary flag from its stated rule over the remaining grants (a flag flips only if the removed system was what satisfied it). Identity and unrelated fields stay unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "identity": {
+      "employee_name": "Maya Chen",
+      "employee_id": "E-48291",
+      "department": "Revenue Operations",
+      "location": "Seattle HQ"
+    },
+    "granted_systems": [
+      {
+        "name": "Workday",
+        "sensitivity_level": "medium"
+      },
+      {
+        "name": "Salesforce",
+        "sensitivity_level": "high"
+      },
+      {
+        "name": "Slack",
+        "sensitivity_level": "low"
+      },
+      {
+        "name": "GitHub Enterprise",
+        "sensitivity_level": "medium"
+      },
+      {
+        "name": "Zoom",
+        "sensitivity_level": "low"
+      },
+      {
+        "name": "Tableau",
+        "sensitivity_level": "medium"
+      }
+    ],
+    "access_count": 6,
+    "capability_rules": {
+      "can_admin": "true iff any granted system has sensitivity_level high",
+      "can_export_data": "true iff any granted system has sensitivity_level medium or high",
+      "can_self_service_support": "true iff any granted system has sensitivity_level low"
+    },
+    "capability_summary": {
+      "can_admin": true,
+      "can_export_data": true,
+      "can_self_service_support": true
+    },
+    "sponsor": {
+      "name": "Iris Patel",
+      "team": "Sales Systems",
+      "email": "iris.patel@example.com"
+    },
+    "approval": {
+      "approved_by": "Noah Grant",
+      "approved_on": "2026-01-14",
+      "ticket_id": "REQ-774203"
+    },
+    "review_schedule": {
+      "start_date": "2026-01-15",
+      "expiration_date": "2026-07-15",
+      "review_frequency": "quarterly"
+    },
+    "business_justification": {
+      "project": "Q2 Pipeline Hygiene",
+      "purpose": "Maintain opportunity data quality and revenue reporting workflows",
+      "priority": "standard"
+    },
+    "compliance": {
+      "policy": "Least Privilege Access Standard",
+      "training_required": true,
+      "monitoring": "monthly audit sampling"
+    },
+    "security_controls": {
+      "mfa_required": true,
+      "vpn_required": true,
+      "session_timeout_minutes": 30
+    },
+    "notifications": {
+      "primary_channel": "email",
+      "backup_channel": "Slack",
+      "reminders_enabled": true
+    },
+    "escalation_contact": {
+      "name": "Lena Ortiz",
+      "group": "Identity Operations",
+      "phone": "+1-206-555-0148"
+    },
+    "deprovisioning": {
+      "owner": "Identity Operations",
+      "sla_hours": 24,
+      "confirmation_required": true
+    }
+  }
+}

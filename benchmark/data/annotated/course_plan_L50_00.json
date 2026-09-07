@@ -1,0 +1,391 @@
+{
+  "id": "course_plan_L50_00",
+  "domain": "course_plan",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start a semester plan with MATH 151, Calculus I, as a 4-credit class."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses\", \"value\": [{\"courseCode\": \"MATH 151\", \"courseTitle\": \"Calculus I\", \"creditHours\": 4}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Put Calculus I down as an A- for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/letterGrade\", \"value\": \"A-\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add ENGL 210, Technical Writing, as a 3-credit course."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseCode\": \"ENGL 210\", \"courseTitle\": \"Technical Writing\", \"creditHours\": 3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark Technical Writing with a B+."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/1/letterGrade\", \"value\": \"B+\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include CS 240, Data Structures, as a 4-credit class too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseCode\": \"CS 240\", \"courseTitle\": \"Data Structures\", \"creditHours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give Data Structures a B."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/2/letterGrade\", \"value\": \"B\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add PHYS 201, General Physics I, for 4 credits."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/-\", \"value\": {\"courseCode\": \"PHYS 201\", \"courseTitle\": \"General Physics I\", \"creditHours\": 4}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record General Physics I as a C+."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/3/letterGrade\", \"value\": \"C+\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the school’s grade scale for these marks: A is 4.0, A- is 3.7, and B+ is 3.3."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/gradePointScale\", \"value\": {\"A\": 4.0, \"A-\": 3.7, \"B+\": 3.3}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish the scale we need here with B worth 3.0 and C+ worth 2.3."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/gradePointScale/B\", \"value\": 3.0}, {\"op\": \"add\", \"path\": \"/gradePointScale/C+\", \"value\": 2.3}]"
+    },
+    {
+      "role": "user",
+      "content": "When you calculate the average, weight it by credits and round the result to two decimals."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/gpaCalculation\", \"value\": {\"weightingBasis\": \"creditHours\", \"roundingDecimalPlaces\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Now attach the matching point values to the first three course grades."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/0/gradePoints\", \"value\": 3.7}, {\"op\": \"add\", \"path\": \"/courses/1/gradePoints\", \"value\": 3.3}, {\"op\": \"add\", \"path\": \"/courses/2/gradePoints\", \"value\": 3.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the matching point value for General Physics I as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/courses/3/gradePoints\", \"value\": 2.3}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the standing cutoffs so 2.0 or higher is good standing, 3.5 or higher qualifies for the dean’s list, and below 2.0 means probation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/standingThresholds\", \"value\": {\"goodStandingMinimumGpa\": 2.0, \"deansListMinimumGpa\": 3.5, \"probationBelowGpa\": 2.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and total the credits and grade points, then calculate the semester average from them."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/semesterSummary\", \"value\": {\"totalCreditHours\": 15, \"totalQualityPoints\": 45.9, \"gpa\": 3.06}}]"
+    },
+    {
+      "role": "user",
+      "content": "Based on those cutoffs, note the student’s current standing outcomes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/standingFlags\", \"value\": {\"isInGoodStanding\": true, \"isOnDeansList\": false, \"isOnAcademicProbation\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the student details: Maya Chen, ID S104582, majoring in Computer Science."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/student\", \"value\": {\"studentName\": \"Maya Chen\", \"studentId\": \"S104582\", \"program\": \"Computer Science\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Label this plan for the Fall 2025 term at North Valley University."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/term\", \"value\": {\"termName\": \"Fall 2025\", \"institution\": \"North Valley University\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Dr. Priya Raman as the advisor, with praman@nvu.edu and office Science Hall 214."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/advisor\", \"value\": {\"advisorName\": \"Dr. Priya Raman\", \"advisorEmail\": \"praman@nvu.edu\", \"advisorOffice\": \"Science Hall 214\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include that the schedule was approved on August 18, 2025, and that the student is registered full time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/registration\", \"value\": {\"approvalDate\": \"2025-08-18\", \"status\": \"full-time\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the basic logistics too: Main Campus, mostly in person, with a note that the science courses include labs."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/logistics\", \"value\": {\"campus\": \"Main Campus\", \"deliveryMode\": \"mostly in person\", \"planningNote\": \"science courses include labs\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note that this follows the 2025 catalog."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/catalogYear\", \"value\": 2025}]"
+    }
+  ],
+  "edit_instruction": "Change General Physics I to an A.",
+  "theme": "Changing a course grade",
+  "master_data": null,
+  "current_json": {
+    "courses": [
+      {
+        "courseCode": "MATH 151",
+        "courseTitle": "Calculus I",
+        "creditHours": 4,
+        "letterGrade": "A-",
+        "gradePoints": 3.7
+      },
+      {
+        "courseCode": "ENGL 210",
+        "courseTitle": "Technical Writing",
+        "creditHours": 3,
+        "letterGrade": "B+",
+        "gradePoints": 3.3
+      },
+      {
+        "courseCode": "CS 240",
+        "courseTitle": "Data Structures",
+        "creditHours": 4,
+        "letterGrade": "B",
+        "gradePoints": 3.0
+      },
+      {
+        "courseCode": "PHYS 201",
+        "courseTitle": "General Physics I",
+        "creditHours": 4,
+        "letterGrade": "C+",
+        "gradePoints": 2.3
+      }
+    ],
+    "gradePointScale": {
+      "A": 4.0,
+      "A-": 3.7,
+      "B+": 3.3,
+      "B": 3.0,
+      "C+": 2.3
+    },
+    "gpaCalculation": {
+      "weightingBasis": "creditHours",
+      "roundingDecimalPlaces": 2
+    },
+    "standingThresholds": {
+      "goodStandingMinimumGpa": 2.0,
+      "deansListMinimumGpa": 3.5,
+      "probationBelowGpa": 2.0
+    },
+    "semesterSummary": {
+      "totalCreditHours": 15,
+      "totalQualityPoints": 45.9,
+      "gpa": 3.06
+    },
+    "standingFlags": {
+      "isInGoodStanding": true,
+      "isOnDeansList": false,
+      "isOnAcademicProbation": false
+    },
+    "student": {
+      "studentName": "Maya Chen",
+      "studentId": "S104582",
+      "program": "Computer Science"
+    },
+    "term": {
+      "termName": "Fall 2025",
+      "institution": "North Valley University"
+    },
+    "advisor": {
+      "advisorName": "Dr. Priya Raman",
+      "advisorEmail": "praman@nvu.edu",
+      "advisorOffice": "Science Hall 214"
+    },
+    "registration": {
+      "approvalDate": "2025-08-18",
+      "status": "full-time"
+    },
+    "logistics": {
+      "campus": "Main Campus",
+      "deliveryMode": "mostly in person",
+      "planningNote": "science courses include labs"
+    },
+    "catalogYear": 2025
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/courses/3/letterGrade",
+      "kind": "direct",
+      "value": "A"
+    },
+    {
+      "op": "replace",
+      "path": "/courses/3/gradePoints",
+      "kind": "cascade",
+      "value": 4.0
+    },
+    {
+      "op": "replace",
+      "path": "/semesterSummary/totalQualityPoints",
+      "kind": "cascade",
+      "value": 52.7
+    },
+    {
+      "op": "replace",
+      "path": "/semesterSummary/gpa",
+      "kind": "cascade",
+      "value": 3.51
+    },
+    {
+      "op": "replace",
+      "path": "/standingFlags/isOnDeansList",
+      "kind": "cascade",
+      "value": true
+    }
+  ],
+  "expected_json": {
+    "courses": [
+      {
+        "courseCode": "MATH 151",
+        "courseTitle": "Calculus I",
+        "creditHours": 4,
+        "letterGrade": "A-",
+        "gradePoints": 3.7
+      },
+      {
+        "courseCode": "ENGL 210",
+        "courseTitle": "Technical Writing",
+        "creditHours": 3,
+        "letterGrade": "B+",
+        "gradePoints": 3.3
+      },
+      {
+        "courseCode": "CS 240",
+        "courseTitle": "Data Structures",
+        "creditHours": 4,
+        "letterGrade": "B",
+        "gradePoints": 3.0
+      },
+      {
+        "courseCode": "PHYS 201",
+        "courseTitle": "General Physics I",
+        "creditHours": 4,
+        "letterGrade": "A",
+        "gradePoints": 4.0
+      }
+    ],
+    "gradePointScale": {
+      "A": 4.0,
+      "A-": 3.7,
+      "B+": 3.3,
+      "B": 3.0,
+      "C+": 2.3
+    },
+    "gpaCalculation": {
+      "weightingBasis": "creditHours",
+      "roundingDecimalPlaces": 2
+    },
+    "standingThresholds": {
+      "goodStandingMinimumGpa": 2.0,
+      "deansListMinimumGpa": 3.5,
+      "probationBelowGpa": 2.0
+    },
+    "semesterSummary": {
+      "totalCreditHours": 15,
+      "totalQualityPoints": 52.7,
+      "gpa": 3.51
+    },
+    "standingFlags": {
+      "isInGoodStanding": true,
+      "isOnDeansList": true,
+      "isOnAcademicProbation": false
+    },
+    "student": {
+      "studentName": "Maya Chen",
+      "studentId": "S104582",
+      "program": "Computer Science"
+    },
+    "term": {
+      "termName": "Fall 2025",
+      "institution": "North Valley University"
+    },
+    "advisor": {
+      "advisorName": "Dr. Priya Raman",
+      "advisorEmail": "praman@nvu.edu",
+      "advisorOffice": "Science Hall 214"
+    },
+    "registration": {
+      "approvalDate": "2025-08-18",
+      "status": "full-time"
+    },
+    "logistics": {
+      "campus": "Main Campus",
+      "deliveryMode": "mostly in person",
+      "planningNote": "science courses include labs"
+    },
+    "catalogYear": 2025
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "General Physics I grade C+ -> A; gradePoints from the stated scale 2.3 -> 4.0. Quality points for that course 4*4.0=16.0; totalQualityPoints 45.9 -> 52.7; gpa = 52.7/15 = 3.51 (credit-weighted, 2 dp). Crossing 3.5 flips isOnDeansList false -> true; good standing and probation flags unchanged. totalCreditHours, other courses, scale, thresholds, and descriptive fields stay.",
+  "conversation_pattern": "Center the artifact on a course list where each course has credit hours and a letter grade, with a stated letter-grade-to-grade-point scale from which each course's grade points derive, a GPA derives as the credit-weighted average of those grade points, and standing flags derive from the GPA against stated thresholds. Around this core, add the realistic, independent details a course plan would carry that do not depend on the grades, and vary their number and the number of courses from sample to sample.",
+  "edit_pattern": "Change one course's letter grade to a specific new letter grade.",
+  "cascade_pattern": "Editing a course's letter grade re-derives that course's grade points from the stated scale, then the GPA re-derives as the credit-weighted average, and the standing flags re-evaluate against the stated thresholds. Other grades and credits stay. This is determined because the grade scale and thresholds are stated.",
+  "requires_master_data": false
+}

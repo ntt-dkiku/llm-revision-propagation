@@ -1,0 +1,811 @@
+{
+  "id": "travel_itinerary_L100_02",
+  "domain": "travel_itinerary",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm planning a trip that starts on June 10, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip\", \"value\": {\"start_date\": \"2026-06-10\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "We'll be there for six nights."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/nights\", \"value\": 6}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's make sure the checkout day is noted based on that."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/end_date\", \"value\": \"2026-06-16\"}]"
+    },
+    {
+      "role": "user",
+      "content": "I found a place to stay: Harborview Inn at $185 per night."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging\", \"value\": {\"hotel_name\": \"Harborview Inn\", \"nightly_rate_usd\": 185}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include what the room will cost for the whole stay."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging/total_cost_usd\", \"value\": 1110}]"
+    },
+    {
+      "role": "user",
+      "content": "We'll also rent a compact car from Coastline Rentals for $48 a day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rental_car\", \"value\": {\"company\": \"Coastline Rentals\", \"daily_rate_usd\": 48}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the full rental cost for the same span as the trip."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rental_car/total_cost_usd\", \"value\": 288}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's budget $62 a day for meals while we're there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/meal_budget\", \"value\": {\"daily_rate_usd\": 62}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the meal estimate for the entire visit too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/meal_budget/total_cost_usd\", \"value\": 372}]"
+    },
+    {
+      "role": "user",
+      "content": "Set aside $14 per day for local transit passes as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/local_transit\", \"value\": {\"daily_rate_usd\": 14}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the total for those passes across the whole stay."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/local_transit/total_cost_usd\", \"value\": 84}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's also allow $9 per day for small sightseeing fees."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/sightseeing_fees\", \"value\": {\"daily_rate_usd\": 9}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate that sightseeing allowance for the full trip."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/sightseeing_fees/total_cost_usd\", \"value\": 54}]"
+    },
+    {
+      "role": "user",
+      "content": "Add travel insurance from SafeTrip at $7 per day for the time we're away."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/travel_insurance\", \"value\": {\"provider\": \"SafeTrip\", \"daily_rate_usd\": 7}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the full insurance cost for the trip."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/travel_insurance/total_cost_usd\", \"value\": 42}]"
+    },
+    {
+      "role": "user",
+      "content": "Now that those estimates are in, include the overall trip cost from those categories."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/budget_summary/estimated_total_usd\", \"value\": 1950}]"
+    },
+    {
+      "role": "user",
+      "content": "The trip is to Portland, Maine, with the Old Port as our main base."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/destination\", \"value\": {\"city\": \"Portland\", \"state\": \"Maine\", \"primary_area\": \"Old Port\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add me as the primary traveler, with my phone number and email for confirmations."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/travelers\", \"value\": [{\"name\": \"Maya Chen\", \"phone\": \"+1-617-555-0194\", \"email\": \"maya.chen@example.com\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "My friend Leo is coming too; include his contact details for shared reservations."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/travelers/-\", \"value\": {\"name\": \"Leo Martinez\", \"phone\": \"+1-617-555-0138\", \"email\": \"leo.martinez@example.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For getting there, note that we're flying up on JetBlue flight B6 412 into Portland's airport."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transportation/arrival_flight\", \"value\": {\"airline\": \"JetBlue\", \"flight_number\": \"B6 412\", \"arrival_airport\": \"PWM\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For coming home, note that we're taking JetBlue flight B6 417 back from Portland's airport."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transportation/departure_flight\", \"value\": {\"airline\": \"JetBlue\", \"flight_number\": \"B6 417\", \"departure_airport\": \"PWM\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also save the inn's street address so I have it handy when we arrive."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging/address\", \"value\": {\"street\": \"72 Commercial Street\", \"city\": \"Portland\", \"postal_code\": \"04101\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the hotel confirmation details, including the booking code, room type, and earliest check-in time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lodging/reservation\", \"value\": {\"confirmation_code\": \"HV-60429\", \"room_type\": \"King harbor-view room\", \"check_in_time\": \"15:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the car pickup, note the airport counter details and the reservation code."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rental_car/pickup\", \"value\": {\"location\": \"PWM airport rental center\", \"time\": \"12:30\", \"reservation_code\": \"CR-8821\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add a couple of restaurant ideas near the Old Port, starting with Fore Street and what we'd go there for."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/restaurant_ideas\", \"value\": [{\"name\": \"Fore Street\", \"neighborhood\": \"Old Port\", \"note\": \"wood-fired seafood dinner\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Eventide Oyster Co. as another nearby food option, with why we'd go there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/restaurant_ideas/-\", \"value\": {\"name\": \"Eventide Oyster Co.\", \"neighborhood\": \"Old Port\", \"note\": \"oysters and brown-butter lobster roll\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's add the Portland Head Light as a must-see stop, with where it is and what we'd do there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activity_ideas\", \"value\": [{\"name\": \"Portland Head Light\", \"area\": \"Cape Elizabeth\", \"note\": \"walk the shoreline paths and take photos\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Peaks Island as another outing idea, including the area and what we'd do there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/activity_ideas/-\", \"value\": {\"name\": \"Peaks Island\", \"area\": \"Casco Bay\", \"note\": \"take the ferry and rent bikes\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add my sister Nina as the emergency contact, with her phone number and relationship to me."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/emergency_contact\", \"value\": {\"name\": \"Nina Chen\", \"phone\": \"+1-781-555-0166\", \"relationship\": \"sister\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please note the kind of weather we should pack for in Portland that week."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packing/weather_expectation\", \"value\": {\"daytime\": \"mild coastal afternoons\", \"evening\": \"cool breezes by the water\", \"rain_plan\": \"pack a light rain jacket\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a few essentials we shouldn't forget for the coastal outings."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packing/essentials\", \"value\": [{\"item\": \"comfortable walking shoes\", \"reason\": \"cobblestone streets and shoreline paths\", \"packed\": false}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add sunscreen to that list too, since we'll be outside near the water."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packing/essentials/-\", \"value\": {\"item\": \"reef-safe sunscreen\", \"reason\": \"boat rides and open-air walking\", \"packed\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a small daypack to the packing list for ferry days and walks around town."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packing/essentials/-\", \"value\": {\"item\": \"small daypack\", \"reason\": \"carry layers, water, and ferry tickets\", \"packed\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please add a note about my seafood allergy so restaurants can be warned ahead of time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/traveler_notes/dietary_needs\", \"value\": [{\"traveler\": \"Maya Chen\", \"restriction\": \"shellfish allergy\", \"severity\": \"serious\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Leo is vegetarian, so add that to the food notes for restaurant planning."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/traveler_notes/dietary_needs/-\", \"value\": {\"traveler\": \"Leo Martinez\", \"restriction\": \"vegetarian\", \"severity\": \"preference\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Tandem Coffee as a morning stop, with the neighborhood and why we'd go."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/coffee_stops\", \"value\": [{\"name\": \"Tandem Coffee\", \"neighborhood\": \"West End\", \"note\": \"pastries and espresso before sightseeing\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Speckled Ax as another coffee option closer to the waterfront."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/coffee_stops/-\", \"value\": {\"name\": \"Speckled Ax\", \"neighborhood\": \"Old Port\", \"note\": \"quick pour-over near the waterfront\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the Portland Museum of Art as a rainy-day option, with where it is and why we'd go."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rainy_day_options\", \"value\": [{\"name\": \"Portland Museum of Art\", \"area\": \"Arts District\", \"note\": \"indoor galleries if the weather turns\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the Maine Historical Society as another backup indoor stop, with the area and what makes it worthwhile."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rainy_day_options/-\", \"value\": {\"name\": \"Maine Historical Society\", \"area\": \"Downtown\", \"note\": \"local history exhibits and the Longfellow house\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a simple reminder about how we want to handle spending money during the trip."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/money_notes\", \"value\": {\"primary_card\": \"Chase Sapphire Preferred\", \"cash_on_hand_usd\": 120, \"split_expenses_app\": \"Splitwise\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a few practical notes about staying connected while we're there."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/connectivity\", \"value\": {\"mobile_carrier\": \"Verizon\", \"hotel_wifi_note\": \"ask front desk for the guest password\", \"backup_map_app\": \"Google Maps offline area\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the car, note where and when we’ll bring it back at the end of the trip."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/rental_car/return\", \"value\": {\"location\": \"PWM airport rental center\", \"date\": \"2026-06-16\", \"time\": \"10:00\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the timing for the flight home so we know when to head to the airport."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/transportation/departure_flight/date\", \"value\": \"2026-06-16\"}, {\"op\": \"add\", \"path\": \"/transportation/departure_flight/departure_time\", \"value\": \"12:45\"}, {\"op\": \"add\", \"path\": \"/transportation/departure_flight/arrival_time\", \"value\": \"14:05\"}]"
+    }
+  ],
+  "edit_instruction": "Actually, we'll stay for 8 nights.",
+  "theme": "Changing the number of nights",
+  "master_data": null,
+  "current_json": {
+    "trip": {
+      "start_date": "2026-06-10",
+      "nights": 6,
+      "end_date": "2026-06-16"
+    },
+    "lodging": {
+      "hotel_name": "Harborview Inn",
+      "nightly_rate_usd": 185,
+      "total_cost_usd": 1110,
+      "address": {
+        "street": "72 Commercial Street",
+        "city": "Portland",
+        "postal_code": "04101"
+      },
+      "reservation": {
+        "confirmation_code": "HV-60429",
+        "room_type": "King harbor-view room",
+        "check_in_time": "15:00"
+      }
+    },
+    "rental_car": {
+      "company": "Coastline Rentals",
+      "daily_rate_usd": 48,
+      "total_cost_usd": 288,
+      "pickup": {
+        "location": "PWM airport rental center",
+        "time": "12:30",
+        "reservation_code": "CR-8821"
+      },
+      "return": {
+        "location": "PWM airport rental center",
+        "date": "2026-06-16",
+        "time": "10:00"
+      }
+    },
+    "meal_budget": {
+      "daily_rate_usd": 62,
+      "total_cost_usd": 372
+    },
+    "local_transit": {
+      "daily_rate_usd": 14,
+      "total_cost_usd": 84
+    },
+    "sightseeing_fees": {
+      "daily_rate_usd": 9,
+      "total_cost_usd": 54
+    },
+    "travel_insurance": {
+      "provider": "SafeTrip",
+      "daily_rate_usd": 7,
+      "total_cost_usd": 42
+    },
+    "budget_summary": {
+      "estimated_total_usd": 1950
+    },
+    "destination": {
+      "city": "Portland",
+      "state": "Maine",
+      "primary_area": "Old Port"
+    },
+    "travelers": [
+      {
+        "name": "Maya Chen",
+        "phone": "+1-617-555-0194",
+        "email": "maya.chen@example.com"
+      },
+      {
+        "name": "Leo Martinez",
+        "phone": "+1-617-555-0138",
+        "email": "leo.martinez@example.com"
+      }
+    ],
+    "transportation": {
+      "arrival_flight": {
+        "airline": "JetBlue",
+        "flight_number": "B6 412",
+        "arrival_airport": "PWM"
+      },
+      "departure_flight": {
+        "airline": "JetBlue",
+        "flight_number": "B6 417",
+        "departure_airport": "PWM",
+        "date": "2026-06-16",
+        "departure_time": "12:45",
+        "arrival_time": "14:05"
+      }
+    },
+    "restaurant_ideas": [
+      {
+        "name": "Fore Street",
+        "neighborhood": "Old Port",
+        "note": "wood-fired seafood dinner"
+      },
+      {
+        "name": "Eventide Oyster Co.",
+        "neighborhood": "Old Port",
+        "note": "oysters and brown-butter lobster roll"
+      }
+    ],
+    "activity_ideas": [
+      {
+        "name": "Portland Head Light",
+        "area": "Cape Elizabeth",
+        "note": "walk the shoreline paths and take photos"
+      },
+      {
+        "name": "Peaks Island",
+        "area": "Casco Bay",
+        "note": "take the ferry and rent bikes"
+      }
+    ],
+    "emergency_contact": {
+      "name": "Nina Chen",
+      "phone": "+1-781-555-0166",
+      "relationship": "sister"
+    },
+    "packing": {
+      "weather_expectation": {
+        "daytime": "mild coastal afternoons",
+        "evening": "cool breezes by the water",
+        "rain_plan": "pack a light rain jacket"
+      },
+      "essentials": [
+        {
+          "item": "comfortable walking shoes",
+          "reason": "cobblestone streets and shoreline paths",
+          "packed": false
+        },
+        {
+          "item": "reef-safe sunscreen",
+          "reason": "boat rides and open-air walking",
+          "packed": false
+        },
+        {
+          "item": "small daypack",
+          "reason": "carry layers, water, and ferry tickets",
+          "packed": false
+        }
+      ]
+    },
+    "traveler_notes": {
+      "dietary_needs": [
+        {
+          "traveler": "Maya Chen",
+          "restriction": "shellfish allergy",
+          "severity": "serious"
+        },
+        {
+          "traveler": "Leo Martinez",
+          "restriction": "vegetarian",
+          "severity": "preference"
+        }
+      ]
+    },
+    "coffee_stops": [
+      {
+        "name": "Tandem Coffee",
+        "neighborhood": "West End",
+        "note": "pastries and espresso before sightseeing"
+      },
+      {
+        "name": "Speckled Ax",
+        "neighborhood": "Old Port",
+        "note": "quick pour-over near the waterfront"
+      }
+    ],
+    "rainy_day_options": [
+      {
+        "name": "Portland Museum of Art",
+        "area": "Arts District",
+        "note": "indoor galleries if the weather turns"
+      },
+      {
+        "name": "Maine Historical Society",
+        "area": "Downtown",
+        "note": "local history exhibits and the Longfellow house"
+      }
+    ],
+    "money_notes": {
+      "primary_card": "Chase Sapphire Preferred",
+      "cash_on_hand_usd": 120,
+      "split_expenses_app": "Splitwise"
+    },
+    "connectivity": {
+      "mobile_carrier": "Verizon",
+      "hotel_wifi_note": "ask front desk for the guest password",
+      "backup_map_app": "Google Maps offline area"
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/trip/nights",
+      "kind": "direct",
+      "value": 8
+    },
+    {
+      "op": "replace",
+      "path": "/trip/end_date",
+      "kind": "cascade",
+      "value": "2026-06-18"
+    },
+    {
+      "op": "replace",
+      "path": "/lodging/total_cost_usd",
+      "kind": "cascade",
+      "value": 1480
+    },
+    {
+      "op": "replace",
+      "path": "/rental_car/total_cost_usd",
+      "kind": "cascade",
+      "value": 384
+    },
+    {
+      "op": "replace",
+      "path": "/rental_car/return/date",
+      "kind": "cascade",
+      "value": "2026-06-18"
+    },
+    {
+      "op": "replace",
+      "path": "/meal_budget/total_cost_usd",
+      "kind": "cascade",
+      "value": 496
+    },
+    {
+      "op": "replace",
+      "path": "/local_transit/total_cost_usd",
+      "kind": "cascade",
+      "value": 112
+    },
+    {
+      "op": "replace",
+      "path": "/sightseeing_fees/total_cost_usd",
+      "kind": "cascade",
+      "value": 72
+    },
+    {
+      "op": "replace",
+      "path": "/travel_insurance/total_cost_usd",
+      "kind": "cascade",
+      "value": 56
+    },
+    {
+      "op": "replace",
+      "path": "/transportation/departure_flight/date",
+      "kind": "cascade",
+      "value": "2026-06-18"
+    },
+    {
+      "op": "replace",
+      "path": "/budget_summary/estimated_total_usd",
+      "kind": "cascade",
+      "value": 2600
+    }
+  ],
+  "expected_json": {
+    "trip": {
+      "start_date": "2026-06-10",
+      "nights": 8,
+      "end_date": "2026-06-18"
+    },
+    "lodging": {
+      "hotel_name": "Harborview Inn",
+      "nightly_rate_usd": 185,
+      "total_cost_usd": 1480,
+      "address": {
+        "street": "72 Commercial Street",
+        "city": "Portland",
+        "postal_code": "04101"
+      },
+      "reservation": {
+        "confirmation_code": "HV-60429",
+        "room_type": "King harbor-view room",
+        "check_in_time": "15:00"
+      }
+    },
+    "rental_car": {
+      "company": "Coastline Rentals",
+      "daily_rate_usd": 48,
+      "total_cost_usd": 384,
+      "pickup": {
+        "location": "PWM airport rental center",
+        "time": "12:30",
+        "reservation_code": "CR-8821"
+      },
+      "return": {
+        "location": "PWM airport rental center",
+        "date": "2026-06-18",
+        "time": "10:00"
+      }
+    },
+    "meal_budget": {
+      "daily_rate_usd": 62,
+      "total_cost_usd": 496
+    },
+    "local_transit": {
+      "daily_rate_usd": 14,
+      "total_cost_usd": 112
+    },
+    "sightseeing_fees": {
+      "daily_rate_usd": 9,
+      "total_cost_usd": 72
+    },
+    "travel_insurance": {
+      "provider": "SafeTrip",
+      "daily_rate_usd": 7,
+      "total_cost_usd": 56
+    },
+    "budget_summary": {
+      "estimated_total_usd": 2600
+    },
+    "destination": {
+      "city": "Portland",
+      "state": "Maine",
+      "primary_area": "Old Port"
+    },
+    "travelers": [
+      {
+        "name": "Maya Chen",
+        "phone": "+1-617-555-0194",
+        "email": "maya.chen@example.com"
+      },
+      {
+        "name": "Leo Martinez",
+        "phone": "+1-617-555-0138",
+        "email": "leo.martinez@example.com"
+      }
+    ],
+    "transportation": {
+      "arrival_flight": {
+        "airline": "JetBlue",
+        "flight_number": "B6 412",
+        "arrival_airport": "PWM"
+      },
+      "departure_flight": {
+        "airline": "JetBlue",
+        "flight_number": "B6 417",
+        "departure_airport": "PWM",
+        "date": "2026-06-18",
+        "departure_time": "12:45",
+        "arrival_time": "14:05"
+      }
+    },
+    "restaurant_ideas": [
+      {
+        "name": "Fore Street",
+        "neighborhood": "Old Port",
+        "note": "wood-fired seafood dinner"
+      },
+      {
+        "name": "Eventide Oyster Co.",
+        "neighborhood": "Old Port",
+        "note": "oysters and brown-butter lobster roll"
+      }
+    ],
+    "activity_ideas": [
+      {
+        "name": "Portland Head Light",
+        "area": "Cape Elizabeth",
+        "note": "walk the shoreline paths and take photos"
+      },
+      {
+        "name": "Peaks Island",
+        "area": "Casco Bay",
+        "note": "take the ferry and rent bikes"
+      }
+    ],
+    "emergency_contact": {
+      "name": "Nina Chen",
+      "phone": "+1-781-555-0166",
+      "relationship": "sister"
+    },
+    "packing": {
+      "weather_expectation": {
+        "daytime": "mild coastal afternoons",
+        "evening": "cool breezes by the water",
+        "rain_plan": "pack a light rain jacket"
+      },
+      "essentials": [
+        {
+          "item": "comfortable walking shoes",
+          "reason": "cobblestone streets and shoreline paths",
+          "packed": false
+        },
+        {
+          "item": "reef-safe sunscreen",
+          "reason": "boat rides and open-air walking",
+          "packed": false
+        },
+        {
+          "item": "small daypack",
+          "reason": "carry layers, water, and ferry tickets",
+          "packed": false
+        }
+      ]
+    },
+    "traveler_notes": {
+      "dietary_needs": [
+        {
+          "traveler": "Maya Chen",
+          "restriction": "shellfish allergy",
+          "severity": "serious"
+        },
+        {
+          "traveler": "Leo Martinez",
+          "restriction": "vegetarian",
+          "severity": "preference"
+        }
+      ]
+    },
+    "coffee_stops": [
+      {
+        "name": "Tandem Coffee",
+        "neighborhood": "West End",
+        "note": "pastries and espresso before sightseeing"
+      },
+      {
+        "name": "Speckled Ax",
+        "neighborhood": "Old Port",
+        "note": "quick pour-over near the waterfront"
+      }
+    ],
+    "rainy_day_options": [
+      {
+        "name": "Portland Museum of Art",
+        "area": "Arts District",
+        "note": "indoor galleries if the weather turns"
+      },
+      {
+        "name": "Maine Historical Society",
+        "area": "Downtown",
+        "note": "local history exhibits and the Longfellow house"
+      }
+    ],
+    "money_notes": {
+      "primary_card": "Chase Sapphire Preferred",
+      "cash_on_hand_usd": 120,
+      "split_expenses_app": "Splitwise"
+    },
+    "connectivity": {
+      "mobile_carrier": "Verizon",
+      "hotel_wifi_note": "ask front desk for the guest password",
+      "backup_map_app": "Google Maps offline area"
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "Nights 6->8. end_date = start(2026-06-10)+8 = 2026-06-18. All per-period totals use the nights count (185*8=1480 lodging, 48*8=384 car, 62*8=496 meals, 14*8=112 transit, 9*8=72 sightseeing, 7*8=56 insurance); budget_summary.estimated_total = sum = 2600. The end-of-trip dates also move to the new last day: rental_car return date and departure_flight date 2026-06-16 -> 2026-06-18. Daily/nightly rates, times, traveler info, and all idea/notes fields stay.",
+  "conversation_pattern": "Center the artifact on a trip with a start date and a stay length, where end dates and cumulative costs all derive from that length by stated rules (dates from the start plus the length, costs as per-unit rates times the length), so the length determines them. Around this core, add the realistic, independent details a traveler would record that do not depend on the stay length, and vary their number from sample to sample.",
+  "edit_pattern": "Change the stay length (nights) to a specific new number.",
+  "cascade_pattern": "End dates re-derive from the start plus the new length, and cumulative costs re-scale as the stated per-unit rate times the new length, so the new length fixes each. The start date and the per-unit rates stay unchanged.",
+  "requires_master_data": false
+}

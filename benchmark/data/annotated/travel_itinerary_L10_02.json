@@ -1,0 +1,181 @@
+{
+  "id": "travel_itinerary_L10_02",
+  "domain": "travel_itinerary",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "The trip will start on September 10, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/start_date\", \"value\": \"2026-09-10\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan it as a 5-night stay."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/nights\", \"value\": 5}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the checkout day based on that stay."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/trip/end_date\", \"value\": \"2026-09-15\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a hotel estimate of $180 for each night."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/lodging/nightly_rate_usd\", \"value\": 180}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the total lodging estimate for the whole stay."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/lodging/total_usd\", \"value\": 900}]"
+    },
+    {
+      "role": "user",
+      "content": "Use $60 a night for meals and snacks."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/meals/per_night_usd\", \"value\": 60}]"
+    },
+    {
+      "role": "user",
+      "content": "Calculate the meal budget for all 5 nights too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/meals/total_usd\", \"value\": 300}]"
+    },
+    {
+      "role": "user",
+      "content": "Budget $25 per night for local transit around town."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/local_transit/per_night_usd\", \"value\": 25}]"
+    },
+    {
+      "role": "user",
+      "content": "Figure out the local transit estimate for the full stay."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/local_transit/total_usd\", \"value\": 125}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the overall trip budget from those estimates."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/costs/total_usd\", \"value\": 1325}]"
+    }
+  ],
+  "edit_instruction": "Change the stay to 7 nights.",
+  "theme": "Changing the number of nights",
+  "master_data": null,
+  "current_json": {
+    "trip": {
+      "start_date": "2026-09-10",
+      "nights": 5,
+      "end_date": "2026-09-15"
+    },
+    "costs": {
+      "lodging": {
+        "nightly_rate_usd": 180,
+        "total_usd": 900
+      },
+      "meals": {
+        "per_night_usd": 60,
+        "total_usd": 300
+      },
+      "local_transit": {
+        "per_night_usd": 25,
+        "total_usd": 125
+      },
+      "total_usd": 1325
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/trip/nights",
+      "kind": "direct",
+      "value": 7
+    },
+    {
+      "op": "replace",
+      "path": "/trip/end_date",
+      "kind": "cascade",
+      "value": "2026-09-17"
+    },
+    {
+      "op": "replace",
+      "path": "/costs/lodging/total_usd",
+      "kind": "cascade",
+      "value": 1260
+    },
+    {
+      "op": "replace",
+      "path": "/costs/meals/total_usd",
+      "kind": "cascade",
+      "value": 420
+    },
+    {
+      "op": "replace",
+      "path": "/costs/local_transit/total_usd",
+      "kind": "cascade",
+      "value": 175
+    },
+    {
+      "op": "replace",
+      "path": "/costs/total_usd",
+      "kind": "cascade",
+      "value": 1855
+    }
+  ],
+  "expected_json": {
+    "trip": {
+      "start_date": "2026-09-10",
+      "nights": 7,
+      "end_date": "2026-09-17"
+    },
+    "costs": {
+      "lodging": {
+        "nightly_rate_usd": 180,
+        "total_usd": 1260
+      },
+      "meals": {
+        "per_night_usd": 60,
+        "total_usd": 420
+      },
+      "local_transit": {
+        "per_night_usd": 25,
+        "total_usd": 175
+      },
+      "total_usd": 1855
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "5->7 nights. end 09-17. lodging 180*7=1260, meals 60*7=420, transit 25*7=175, total 1855.",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a trip with a start date and a stay length, where end dates and cumulative costs all derive from that length by stated rules (dates from the start plus the length, costs as per-unit rates times the length), so the length determines them. Around this core, add the realistic, independent details a traveler would record that do not depend on the stay length, and vary their number from sample to sample.",
+  "edit_pattern": "Change the stay length (nights) to a specific new number.",
+  "cascade_pattern": "End dates re-derive from the start plus the new length, and cumulative costs re-scale as the stated per-unit rate times the new length, so the new length fixes each. The start date and the per-unit rates stay unchanged.",
+  "requires_master_data": false
+}

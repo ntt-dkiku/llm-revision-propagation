@@ -1,0 +1,691 @@
+{
+  "id": "invoice_L100_03",
+  "domain": "invoice",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Start an invoice numbered INV-2026-1048."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice\", \"value\": {\"invoice_number\": \"INV-2026-1048\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "The full charge for this invoice comes to $4,800.00."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/total_amount\", \"value\": 4800.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Record that the customer has paid $1,500.00 so far."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/amount_paid\", \"value\": 1500.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Show the remaining balance after that payment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/outstanding_balance\", \"value\": 3300.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark it as partially settled for now."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/status\", \"value\": \"partially settled\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Also show that the total received to date is $1,500.00."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/paid_to_date\", \"value\": 1500.0}]"
+    },
+    {
+      "role": "user",
+      "content": "Use Northstar Digital Studio as the seller, based in Denver, Colorado."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/seller\", \"value\": {\"name\": \"Northstar Digital Studio\", \"city\": \"Denver\", \"state\": \"CO\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Their office address is 1450 Wynkoop Street, Suite 320, ZIP 80202."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/seller/address\", \"value\": {\"line1\": \"1450 Wynkoop Street\", \"line2\": \"Suite 320\", \"postal_code\": \"80202\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the seller’s main contact as Mara Ellis, reachable at billing@northstardigital.example."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/seller/contact\", \"value\": {\"name\": \"Mara Ellis\", \"email\": \"billing@northstardigital.example\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Bill Brightleaf Interiors in Boulder, Colorado."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/customer\", \"value\": {\"name\": \"Brightleaf Interiors\", \"city\": \"Boulder\", \"state\": \"CO\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use 2100 Pearl Street, Floor 2, ZIP 80302 for their mailing address."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/customer/address\", \"value\": {\"line1\": \"2100 Pearl Street\", \"line2\": \"Floor 2\", \"postal_code\": \"80302\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have Jordan Lee handle questions for Brightleaf, with jordan.lee@brightleaf.example and 303-555-0184 as the ways to reach them."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/customer/contact\", \"value\": {\"name\": \"Jordan Lee\", \"email\": \"jordan.lee@brightleaf.example\", \"phone\": \"303-555-0184\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Date the invoice March 3, 2026, with payment due by April 2, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/dates\", \"value\": {\"issued\": \"2026-03-03\", \"due\": \"2026-04-02\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the payment terms to net 30, with late charges starting 5 days after the deadline at 1.5% per month."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/payment_terms\", \"value\": {\"terms\": \"Net 30\", \"grace_period_days\": 5, \"late_fee_monthly_percent\": 1.5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Tie this to the lobby refresh website work, under contract BF-2026-03, and note the client’s order code as PO-BLI-7781."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/project\", \"value\": {\"title\": \"Lobby Refresh Website\", \"contract_code\": \"BF-2026-03\", \"client_order_code\": \"PO-BLI-7781\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Describe the work as remote design and development support for the Denver office rollout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/service_context\", \"value\": {\"service_mode\": \"Remote\", \"category\": \"Design and development support\", \"business_location\": \"Denver office rollout\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For receiving the rest, note that bank transfer is preferred, using First Mountain Bank and the ending digits 4421."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/remittance\", \"value\": {\"preferred_method\": \"Bank transfer\", \"bank_name\": \"First Mountain Bank\", \"account_last4\": \"4421\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the seller’s tax registration as CO-8842197 and say they’re registered in Colorado as an LLC."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/seller/registration\", \"value\": {\"tax_id\": \"CO-8842197\", \"jurisdiction\": \"Colorado\", \"entity_type\": \"LLC\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add Brightleaf’s billing account details: account BLI-2044, hospitality division, and their vendor profile approved."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/customer/account\", \"value\": {\"account_number\": \"BLI-2044\", \"division\": \"Hospitality\", \"vendor_profile_status\": \"Approved\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the finished materials were delivered through the client portal, with access granted to Jordan, and no physical shipment needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/delivery\", \"value\": {\"method\": \"Client portal\", \"recipient\": \"Jordan Lee\", \"physical_shipment_required\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a first work item for the landing page redesign: 12 hours at $120 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/line_items\", \"value\": [{\"description\": \"Landing page redesign\", \"hours\": 12, \"rate\": 120.0}]}]"
+    },
+    {
+      "role": "user",
+      "content": "For that landing page work, mark it as part of the design phase, a web deliverable, and needing client approval."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/line_items/0/details\", \"value\": {\"phase\": \"Design\", \"deliverable_type\": \"Web\", \"client_approval_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add internal tracking details: prepared by Sonia Patel, reviewed by Calvin Brooks, and filed under March receivables."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/internal_tracking\", \"value\": {\"prepared_by\": \"Sonia Patel\", \"reviewed_by\": \"Calvin Brooks\", \"filing_bucket\": \"March receivables\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add that the invoice was requested by Priya Nair, approved by Elena Morris, and cleared for sending on March 4, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/approval\", \"value\": {\"requested_by\": \"Priya Nair\", \"approved_by\": \"Elena Morris\", \"approved_on\": \"2026-03-04\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a note that supporting files are in the shared project folder, the folder label is BF Lobby Assets, and the access expires June 30, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/supporting_files\", \"value\": {\"location\": \"Shared project folder\", \"folder_label\": \"BF Lobby Assets\", \"access_expires\": \"2026-06-30\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another work item for content migration: 10 hours at $96 per hour."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/line_items/-\", \"value\": {\"description\": \"Content migration\", \"hours\": 10, \"rate\": 96.0}}]"
+    },
+    {
+      "role": "user",
+      "content": "For the content migration work, tag it as the implementation phase, covering CMS updates, with no client approval needed."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/line_items/1/details\", \"value\": {\"phase\": \"Implementation\", \"deliverable_type\": \"CMS updates\", \"client_approval_required\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "For sending it out, note email delivery to Jordan, copy Priya, and use a subject line that mentions the lobby refresh."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/communication\", \"value\": {\"delivery_channel\": \"Email\", \"copy_recipient\": \"Priya Nair\", \"subject\": \"Invoice INV-2026-1048 for Lobby Refresh Website\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add invoice handling notes: use U.S. dollars, keep it on the standard template, and archive it for seven years."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/document_controls\", \"value\": {\"currency\": \"USD\", \"template\": \"Standard services invoice\", \"retention_period\": \"7 years\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "There’s no sales tax on this one because of certificate EX-CO-5572, which was accepted on March 1, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/tax_treatment\", \"value\": {\"sales_tax_applied\": false, \"exemption_certificate\": \"EX-CO-5572\", \"verified_on\": \"2026-03-01\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For compliance, mark it as not confidential, suitable for external sharing, and governed by Colorado law."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/compliance\", \"value\": {\"confidential\": false, \"external_sharing_allowed\": true, \"governing_law\": \"Colorado\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set a reminder three days before the deadline by email, and have billing follow up with Mara if it needs escalation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/collection_preferences\", \"value\": {\"reminder_days_before_due\": 3, \"reminder_channel\": \"Email\", \"escalation_contact\": \"Mara Ellis\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a client reference note saying this is for the spring refresh campaign, requested after the site audit, and linked to workspace BRIGHT-LOBBY."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/client_reference\", \"value\": {\"campaign\": \"Spring refresh campaign\", \"source_request\": \"Post-audit follow-up\", \"workspace\": \"BRIGHT-LOBBY\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a security note that the portal upload passed malware screening, was checked by Theo Grant, and was cleared on March 5, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/security_review\", \"value\": {\"screening_result\": \"Passed malware screening\", \"checked_by\": \"Theo Grant\", \"cleared_on\": \"2026-03-05\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a posting note that it should be entered in QuickBooks, mapped to service income, and assigned to cost center WEB-CO."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/accounting_posting\", \"value\": {\"system\": \"QuickBooks\", \"revenue_account\": \"Service income\", \"cost_center\": \"WEB-CO\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a reconciliation note: match deposits weekly, use the March bank statement, and flag any short payment for review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/reconciliation\", \"value\": {\"deposit_matching_frequency\": \"Weekly\", \"statement_period\": \"March bank statement\", \"short_payment_review_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add dispute instructions: raise any issue within 10 days, send it to the billing inbox, and continue paying any undisputed portion."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/dispute_instructions\", \"value\": {\"notice_period_days\": 10, \"contact\": \"billing@northstardigital.example\", \"undisputed_amount_due\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish it with a memo saying thanks for the partnership, the work was completed on schedule, and questions should go to billing."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/invoice/memo\", \"value\": {\"message\": \"Thank you for the partnership.\", \"completion_note\": \"Work completed on schedule.\", \"question_route\": \"Billing\"}}]"
+    }
+  ],
+  "edit_instruction": "Change the recorded amount paid to $4,800.00.",
+  "theme": "Recording a partial payment",
+  "master_data": null,
+  "current_json": {
+    "invoice": {
+      "invoice_number": "INV-2026-1048",
+      "total_amount": 4800.0,
+      "amount_paid": 1500.0,
+      "outstanding_balance": 3300.0,
+      "status": "partially settled",
+      "paid_to_date": 1500.0,
+      "seller": {
+        "name": "Northstar Digital Studio",
+        "city": "Denver",
+        "state": "CO",
+        "address": {
+          "line1": "1450 Wynkoop Street",
+          "line2": "Suite 320",
+          "postal_code": "80202"
+        },
+        "contact": {
+          "name": "Mara Ellis",
+          "email": "billing@northstardigital.example"
+        },
+        "registration": {
+          "tax_id": "CO-8842197",
+          "jurisdiction": "Colorado",
+          "entity_type": "LLC"
+        }
+      },
+      "customer": {
+        "name": "Brightleaf Interiors",
+        "city": "Boulder",
+        "state": "CO",
+        "address": {
+          "line1": "2100 Pearl Street",
+          "line2": "Floor 2",
+          "postal_code": "80302"
+        },
+        "contact": {
+          "name": "Jordan Lee",
+          "email": "jordan.lee@brightleaf.example",
+          "phone": "303-555-0184"
+        },
+        "account": {
+          "account_number": "BLI-2044",
+          "division": "Hospitality",
+          "vendor_profile_status": "Approved"
+        }
+      },
+      "dates": {
+        "issued": "2026-03-03",
+        "due": "2026-04-02"
+      },
+      "payment_terms": {
+        "terms": "Net 30",
+        "grace_period_days": 5,
+        "late_fee_monthly_percent": 1.5
+      },
+      "project": {
+        "title": "Lobby Refresh Website",
+        "contract_code": "BF-2026-03",
+        "client_order_code": "PO-BLI-7781"
+      },
+      "service_context": {
+        "service_mode": "Remote",
+        "category": "Design and development support",
+        "business_location": "Denver office rollout"
+      },
+      "remittance": {
+        "preferred_method": "Bank transfer",
+        "bank_name": "First Mountain Bank",
+        "account_last4": "4421"
+      },
+      "delivery": {
+        "method": "Client portal",
+        "recipient": "Jordan Lee",
+        "physical_shipment_required": false
+      },
+      "line_items": [
+        {
+          "description": "Landing page redesign",
+          "hours": 12,
+          "rate": 120.0,
+          "details": {
+            "phase": "Design",
+            "deliverable_type": "Web",
+            "client_approval_required": true
+          }
+        },
+        {
+          "description": "Content migration",
+          "hours": 10,
+          "rate": 96.0,
+          "details": {
+            "phase": "Implementation",
+            "deliverable_type": "CMS updates",
+            "client_approval_required": false
+          }
+        }
+      ],
+      "internal_tracking": {
+        "prepared_by": "Sonia Patel",
+        "reviewed_by": "Calvin Brooks",
+        "filing_bucket": "March receivables"
+      },
+      "approval": {
+        "requested_by": "Priya Nair",
+        "approved_by": "Elena Morris",
+        "approved_on": "2026-03-04"
+      },
+      "supporting_files": {
+        "location": "Shared project folder",
+        "folder_label": "BF Lobby Assets",
+        "access_expires": "2026-06-30"
+      },
+      "communication": {
+        "delivery_channel": "Email",
+        "copy_recipient": "Priya Nair",
+        "subject": "Invoice INV-2026-1048 for Lobby Refresh Website"
+      },
+      "document_controls": {
+        "currency": "USD",
+        "template": "Standard services invoice",
+        "retention_period": "7 years"
+      },
+      "tax_treatment": {
+        "sales_tax_applied": false,
+        "exemption_certificate": "EX-CO-5572",
+        "verified_on": "2026-03-01"
+      },
+      "compliance": {
+        "confidential": false,
+        "external_sharing_allowed": true,
+        "governing_law": "Colorado"
+      },
+      "collection_preferences": {
+        "reminder_days_before_due": 3,
+        "reminder_channel": "Email",
+        "escalation_contact": "Mara Ellis"
+      },
+      "client_reference": {
+        "campaign": "Spring refresh campaign",
+        "source_request": "Post-audit follow-up",
+        "workspace": "BRIGHT-LOBBY"
+      },
+      "security_review": {
+        "screening_result": "Passed malware screening",
+        "checked_by": "Theo Grant",
+        "cleared_on": "2026-03-05"
+      },
+      "accounting_posting": {
+        "system": "QuickBooks",
+        "revenue_account": "Service income",
+        "cost_center": "WEB-CO"
+      },
+      "reconciliation": {
+        "deposit_matching_frequency": "Weekly",
+        "statement_period": "March bank statement",
+        "short_payment_review_required": true
+      },
+      "dispute_instructions": {
+        "notice_period_days": 10,
+        "contact": "billing@northstardigital.example",
+        "undisputed_amount_due": true
+      },
+      "memo": {
+        "message": "Thank you for the partnership.",
+        "completion_note": "Work completed on schedule.",
+        "question_route": "Billing"
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/invoice/amount_paid",
+      "kind": "direct",
+      "value": 4800.0
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/outstanding_balance",
+      "kind": "cascade",
+      "value": 0.0
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/paid_to_date",
+      "kind": "cascade",
+      "value": 4800.0
+    },
+    {
+      "op": "replace",
+      "path": "/invoice/status",
+      "kind": "cascade",
+      "value": "paid",
+      "matcher": "regex_match",
+      "pattern": "(?i)^(paid|settled|paid in full|paid_in_full|fully settled|fully_settled|fully paid|complete|completed|closed)$"
+    }
+  ],
+  "expected_json": {
+    "invoice": {
+      "invoice_number": "INV-2026-1048",
+      "total_amount": 4800.0,
+      "amount_paid": 4800.0,
+      "outstanding_balance": 0.0,
+      "status": "paid",
+      "paid_to_date": 4800.0,
+      "seller": {
+        "name": "Northstar Digital Studio",
+        "city": "Denver",
+        "state": "CO",
+        "address": {
+          "line1": "1450 Wynkoop Street",
+          "line2": "Suite 320",
+          "postal_code": "80202"
+        },
+        "contact": {
+          "name": "Mara Ellis",
+          "email": "billing@northstardigital.example"
+        },
+        "registration": {
+          "tax_id": "CO-8842197",
+          "jurisdiction": "Colorado",
+          "entity_type": "LLC"
+        }
+      },
+      "customer": {
+        "name": "Brightleaf Interiors",
+        "city": "Boulder",
+        "state": "CO",
+        "address": {
+          "line1": "2100 Pearl Street",
+          "line2": "Floor 2",
+          "postal_code": "80302"
+        },
+        "contact": {
+          "name": "Jordan Lee",
+          "email": "jordan.lee@brightleaf.example",
+          "phone": "303-555-0184"
+        },
+        "account": {
+          "account_number": "BLI-2044",
+          "division": "Hospitality",
+          "vendor_profile_status": "Approved"
+        }
+      },
+      "dates": {
+        "issued": "2026-03-03",
+        "due": "2026-04-02"
+      },
+      "payment_terms": {
+        "terms": "Net 30",
+        "grace_period_days": 5,
+        "late_fee_monthly_percent": 1.5
+      },
+      "project": {
+        "title": "Lobby Refresh Website",
+        "contract_code": "BF-2026-03",
+        "client_order_code": "PO-BLI-7781"
+      },
+      "service_context": {
+        "service_mode": "Remote",
+        "category": "Design and development support",
+        "business_location": "Denver office rollout"
+      },
+      "remittance": {
+        "preferred_method": "Bank transfer",
+        "bank_name": "First Mountain Bank",
+        "account_last4": "4421"
+      },
+      "delivery": {
+        "method": "Client portal",
+        "recipient": "Jordan Lee",
+        "physical_shipment_required": false
+      },
+      "line_items": [
+        {
+          "description": "Landing page redesign",
+          "hours": 12,
+          "rate": 120.0,
+          "details": {
+            "phase": "Design",
+            "deliverable_type": "Web",
+            "client_approval_required": true
+          }
+        },
+        {
+          "description": "Content migration",
+          "hours": 10,
+          "rate": 96.0,
+          "details": {
+            "phase": "Implementation",
+            "deliverable_type": "CMS updates",
+            "client_approval_required": false
+          }
+        }
+      ],
+      "internal_tracking": {
+        "prepared_by": "Sonia Patel",
+        "reviewed_by": "Calvin Brooks",
+        "filing_bucket": "March receivables"
+      },
+      "approval": {
+        "requested_by": "Priya Nair",
+        "approved_by": "Elena Morris",
+        "approved_on": "2026-03-04"
+      },
+      "supporting_files": {
+        "location": "Shared project folder",
+        "folder_label": "BF Lobby Assets",
+        "access_expires": "2026-06-30"
+      },
+      "communication": {
+        "delivery_channel": "Email",
+        "copy_recipient": "Priya Nair",
+        "subject": "Invoice INV-2026-1048 for Lobby Refresh Website"
+      },
+      "document_controls": {
+        "currency": "USD",
+        "template": "Standard services invoice",
+        "retention_period": "7 years"
+      },
+      "tax_treatment": {
+        "sales_tax_applied": false,
+        "exemption_certificate": "EX-CO-5572",
+        "verified_on": "2026-03-01"
+      },
+      "compliance": {
+        "confidential": false,
+        "external_sharing_allowed": true,
+        "governing_law": "Colorado"
+      },
+      "collection_preferences": {
+        "reminder_days_before_due": 3,
+        "reminder_channel": "Email",
+        "escalation_contact": "Mara Ellis"
+      },
+      "client_reference": {
+        "campaign": "Spring refresh campaign",
+        "source_request": "Post-audit follow-up",
+        "workspace": "BRIGHT-LOBBY"
+      },
+      "security_review": {
+        "screening_result": "Passed malware screening",
+        "checked_by": "Theo Grant",
+        "cleared_on": "2026-03-05"
+      },
+      "accounting_posting": {
+        "system": "QuickBooks",
+        "revenue_account": "Service income",
+        "cost_center": "WEB-CO"
+      },
+      "reconciliation": {
+        "deposit_matching_frequency": "Weekly",
+        "statement_period": "March bank statement",
+        "short_payment_review_required": true
+      },
+      "dispute_instructions": {
+        "notice_period_days": 10,
+        "contact": "billing@northstardigital.example",
+        "undisputed_amount_due": true
+      },
+      "memo": {
+        "message": "Thank you for the partnership.",
+        "completion_note": "Work completed on schedule.",
+        "question_route": "Billing"
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotated": true,
+  "annotation_notes": "amount_paid 1500->4800 (now full). outstanding_balance = total - paid = 4800-4800 = 0; paid_to_date (running cumulative) -> 4800; status moves from \"partially settled\" to a fully-paid label (exact token not stated, regex matcher). total_amount, line items, and all descriptive fields stay.",
+  "conversation_pattern": "Center the artifact on an invoice carrying a total, an amount paid, an outstanding balance that is the total minus the amount paid, a status that follows from whether the balance has reached zero, and a running paid-to-date that totals the payments, so the amount paid determines them. Around this core, add the realistic, independent details an invoice would carry that do not depend on the amount paid, and vary their number from sample to sample.",
+  "edit_pattern": "Change the amount paid to a specific new value.",
+  "cascade_pattern": "Editing the amount paid re-derives the outstanding balance, moves the status to its value for the new balance (settled once the balance reaches zero, otherwise still partially settled), and re-totals the paid-to-date. The total stays. Each new value is fixed because the effect of the amount paid on the balance and status is unambiguous.",
+  "requires_master_data": false
+}

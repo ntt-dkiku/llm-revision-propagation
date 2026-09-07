@@ -1,0 +1,465 @@
+{
+  "id": "manufacturing_bom_L100_04",
+  "domain": "manufacturing_bom",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a BOM for a motor bracket assembly; the assembly number is MB-2407."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/assembly_id\", \"value\": \"MB-2407\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the first item: one formed steel back plate, part BP-18, for each assembly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components\", \"value\": [{\"part_number\": \"BP-18\", \"description\": \"formed steel back plate\", \"quantity_per_assembly\": 1}]}]"
+    },
+    {
+      "role": "user",
+      "content": "For that back plate, note that each one costs 14.20, weighs 1.85 kg, and comes from Northline Metals."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/0/unit_cost_usd\", \"value\": 14.2}, {\"op\": \"add\", \"path\": \"/components/0/unit_weight_kg\", \"value\": 1.85}, {\"op\": \"add\", \"path\": \"/components/0/supplier\", \"value\": \"Northline Metals\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the next item: two M8 weld nuts, part WN-08, used in each assembly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"part_number\": \"WN-08\", \"description\": \"M8 weld nut\", \"quantity_per_assembly\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Those weld nuts are 0.45 each, weigh 0.06 kg apiece, and are supplied by BoltWorks Co."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/1/unit_cost_usd\", \"value\": 0.45}, {\"op\": \"add\", \"path\": \"/components/1/unit_weight_kg\", \"value\": 0.06}, {\"op\": \"add\", \"path\": \"/components/1/supplier\", \"value\": \"BoltWorks Co.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include one rubber isolation pad as part RIP-22 for each bracket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"part_number\": \"RIP-22\", \"description\": \"rubber isolation pad\", \"quantity_per_assembly\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "The rubber pad runs 3.10, weighs 0.28 kg, and is sourced from Elastomer Direct."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/2/unit_cost_usd\", \"value\": 3.1}, {\"op\": \"add\", \"path\": \"/components/2/unit_weight_kg\", \"value\": 0.28}, {\"op\": \"add\", \"path\": \"/components/2/supplier\", \"value\": \"Elastomer Direct\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one zinc-plated spacer sleeve, part SS-14, to each bracket assembly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"part_number\": \"SS-14\", \"description\": \"zinc-plated spacer sleeve\", \"quantity_per_assembly\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "That spacer sleeve costs 1.35, weighs 0.11 kg, and is provided by Precision Tubing Ltd."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/3/unit_cost_usd\", \"value\": 1.35}, {\"op\": \"add\", \"path\": \"/components/3/unit_weight_kg\", \"value\": 0.11}, {\"op\": \"add\", \"path\": \"/components/3/supplier\", \"value\": \"Precision Tubing Ltd.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a pair of M6 hex bolts under part HB-06 for every assembly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"part_number\": \"HB-06\", \"description\": \"M6 hex bolt\", \"quantity_per_assembly\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Each hex bolt is 0.32, weighs 0.035 kg, and comes from BoltWorks Co."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/4/unit_cost_usd\", \"value\": 0.32}, {\"op\": \"add\", \"path\": \"/components/4/unit_weight_kg\", \"value\": 0.035}, {\"op\": \"add\", \"path\": \"/components/4/supplier\", \"value\": \"BoltWorks Co.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add one powder-coated top cover as part PC-31 for each finished bracket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"part_number\": \"PC-31\", \"description\": \"powder-coated top cover\", \"quantity_per_assembly\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "The top cover is 6.75 each, weighs 0.64 kg, and is supplied by FinishPro Coatings."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/5/unit_cost_usd\", \"value\": 6.75}, {\"op\": \"add\", \"path\": \"/components/5/unit_weight_kg\", \"value\": 0.64}, {\"op\": \"add\", \"path\": \"/components/5/supplier\", \"value\": \"FinishPro Coatings\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Include one adhesive-backed label, part AL-09, on every finished unit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/-\", \"value\": {\"part_number\": \"AL-09\", \"description\": \"adhesive-backed identification label\", \"quantity_per_assembly\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "That label costs 0.18, weighs 0.005 kg, and comes from LabelSource Inc."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/components/6/unit_cost_usd\", \"value\": 0.18}, {\"op\": \"add\", \"path\": \"/components/6/unit_weight_kg\", \"value\": 0.005}, {\"op\": \"add\", \"path\": \"/components/6/supplier\", \"value\": \"LabelSource Inc.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Now show that the assembly is made up of seven distinct line items."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/component_count\", \"value\": 7}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the overall material spend for one complete bracket assembly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/total_material_cost_usd\", \"value\": 27.12}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the total assembled material weight before packaging."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/total_weight_kg\", \"value\": 3.075}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the combined supplier rollup for the parts currently in the bracket."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/supplier_list\", \"value\": \"Northline Metals; BoltWorks Co.; Elastomer Direct; Precision Tubing Ltd.; FinishPro Coatings; LabelSource Inc.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a short purchasing rollup based on the parts we’ve listed so far."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/procurement_summary\", \"value\": {\"purchase_line_count\": 7, \"unique_supplier_count\": 6, \"procurement_value_usd\": 27.12}}]"
+    },
+    {
+      "role": "user",
+      "content": "Also record the release details: revision A, preliminary approval, and a release date of 2025-02-14."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/release_info\", \"value\": {\"revision\": \"A\", \"approval_status\": \"preliminary\", \"release_date\": \"2025-02-14\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add where this bracket will be built: plant 4 in Dayton, USA."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturing_site\", \"value\": {\"plant_code\": \"PLT-04\", \"city\": \"Dayton\", \"country\": \"USA\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the normal production routing: press forming first, then hardware insertion, then final cover installation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/production_routing\", \"value\": {\"step_1\": \"press forming\", \"step_2\": \"hardware insertion\", \"step_3\": \"final cover installation\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the default quality checks: hole position, coating thickness, and label readability."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/quality_checks\", \"value\": [\"hole position\", \"coating thickness\", \"label readability\"]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the packaging setup: one unit per carton, cartons are kraft, and the inserts are recycled pulp."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/packaging\", \"value\": {\"units_per_carton\": 1, \"carton_type\": \"kraft carton\", \"insert_material\": \"recycled pulp\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the person responsible for planning this BOM: Maya Chen in industrial engineering, reachable at maya.chen@example.com."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/planning_contact\", \"value\": {\"name\": \"Maya Chen\", \"department\": \"industrial engineering\", \"email\": \"maya.chen@example.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the finished bracket is non-hazardous and meets both RoHS and REACH requirements."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance\", \"value\": {\"hazard_class\": \"non-hazardous\", \"rohs_status\": \"compliant\", \"reach_status\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the drawing references: main drawing DRW-MB-2407 and installation view DRW-MB-2407-INST."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/drawing_references\", \"value\": {\"main_drawing\": \"DRW-MB-2407\", \"installation_view\": \"DRW-MB-2407-INST\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the lifecycle planning details: active for production, reviewed every 12 months, and next review on 2026-02-14."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lifecycle_plan\", \"value\": {\"production_status\": \"active\", \"review_interval_months\": 12, \"next_review_date\": \"2026-02-14\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the tooling setup: press die D-441, insertion fixture FX-118, and torque driver TD-06."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/tooling_setup\", \"value\": {\"press_die\": \"D-441\", \"insertion_fixture\": \"FX-118\", \"torque_driver\": \"TD-06\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the labor planning assumptions: standard build time is 18 minutes, setup time is 45 minutes, and the crew size is two operators."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/labor_plan\", \"value\": {\"standard_build_minutes\": 18, \"setup_minutes\": 45, \"crew_size\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the inventory planning settings: make-to-stock, reorder point of 150 units, and safety stock of 50 units."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/inventory_planning\", \"value\": {\"planning_method\": \"make-to-stock\", \"reorder_point_units\": 150, \"safety_stock_units\": 50}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the shipping profile: ships by ground parcel, uses NMFC class 70, and stacks up to five cartons high."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/shipping_profile\", \"value\": {\"mode\": \"ground parcel\", \"nmfc_class\": \"70\", \"max_stack_cartons\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the customer program details: this is for the Apex Lift project, line AL-200, with an annual forecast of 12,000 units."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/customer_program\", \"value\": {\"program_name\": \"Apex Lift\", \"product_line\": \"AL-200\", \"annual_forecast_units\": 12000}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the environmental targets: 65 percent recycled steel content, water-based coating, and no PVC packaging."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/environmental_targets\", \"value\": {\"recycled_steel_percent\": 65, \"coating_type\": \"water-based\", \"pvc_packaging\": \"none\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the warranty note: covered for 24 months, limited to manufacturing defects, and returns need prior authorization."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/warranty_terms\", \"value\": {\"coverage_months\": 24, \"coverage_scope\": \"manufacturing defects only\", \"return_authorization_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the document-control details: owned by BOM control, stored in vault VLT-9, and retained for 10 years."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/document_control\", \"value\": {\"owner_group\": \"BOM control\", \"archive_location\": \"VLT-9\", \"retention_years\": 10}}]"
+    }
+  ],
+  "edit_instruction": "Remove the line item for part SS-14, the zinc-plated spacer sleeve, from the assembly.",
+  "theme": "Removing a component from the assembly",
+  "conversation_pattern": "Center the artifact on a BOM assembly with several components, where component count, total material cost, total weight, supplier list, and procurement summary aggregate over the included components. Around this core, add the realistic, independent details a BOM record would carry that do not depend on the component list, and vary their number and the number of components from sample to sample.",
+  "edit_pattern": "Remove one specific component from the assembly.",
+  "cascade_pattern": "Removing the component deletes it from the component list, lowers the component count, and re-aggregates material cost, weight, supplier list, and procurement summary over the remaining components. Unrelated assembly metadata stays unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "assembly_id": "MB-2407",
+    "components": [
+      {
+        "part_number": "BP-18",
+        "description": "formed steel back plate",
+        "quantity_per_assembly": 1,
+        "unit_cost_usd": 14.2,
+        "unit_weight_kg": 1.85,
+        "supplier": "Northline Metals"
+      },
+      {
+        "part_number": "WN-08",
+        "description": "M8 weld nut",
+        "quantity_per_assembly": 2,
+        "unit_cost_usd": 0.45,
+        "unit_weight_kg": 0.06,
+        "supplier": "BoltWorks Co."
+      },
+      {
+        "part_number": "RIP-22",
+        "description": "rubber isolation pad",
+        "quantity_per_assembly": 1,
+        "unit_cost_usd": 3.1,
+        "unit_weight_kg": 0.28,
+        "supplier": "Elastomer Direct"
+      },
+      {
+        "part_number": "SS-14",
+        "description": "zinc-plated spacer sleeve",
+        "quantity_per_assembly": 1,
+        "unit_cost_usd": 1.35,
+        "unit_weight_kg": 0.11,
+        "supplier": "Precision Tubing Ltd."
+      },
+      {
+        "part_number": "HB-06",
+        "description": "M6 hex bolt",
+        "quantity_per_assembly": 2,
+        "unit_cost_usd": 0.32,
+        "unit_weight_kg": 0.035,
+        "supplier": "BoltWorks Co."
+      },
+      {
+        "part_number": "PC-31",
+        "description": "powder-coated top cover",
+        "quantity_per_assembly": 1,
+        "unit_cost_usd": 6.75,
+        "unit_weight_kg": 0.64,
+        "supplier": "FinishPro Coatings"
+      },
+      {
+        "part_number": "AL-09",
+        "description": "adhesive-backed identification label",
+        "quantity_per_assembly": 1,
+        "unit_cost_usd": 0.18,
+        "unit_weight_kg": 0.005,
+        "supplier": "LabelSource Inc."
+      }
+    ],
+    "component_count": 7,
+    "total_material_cost_usd": 27.12,
+    "total_weight_kg": 3.075,
+    "supplier_list": "Northline Metals; BoltWorks Co.; Elastomer Direct; Precision Tubing Ltd.; FinishPro Coatings; LabelSource Inc.",
+    "procurement_summary": {
+      "purchase_line_count": 7,
+      "unique_supplier_count": 6,
+      "procurement_value_usd": 27.12
+    },
+    "release_info": {
+      "revision": "A",
+      "approval_status": "preliminary",
+      "release_date": "2025-02-14"
+    },
+    "manufacturing_site": {
+      "plant_code": "PLT-04",
+      "city": "Dayton",
+      "country": "USA"
+    },
+    "production_routing": {
+      "step_1": "press forming",
+      "step_2": "hardware insertion",
+      "step_3": "final cover installation"
+    },
+    "quality_checks": [
+      "hole position",
+      "coating thickness",
+      "label readability"
+    ],
+    "packaging": {
+      "units_per_carton": 1,
+      "carton_type": "kraft carton",
+      "insert_material": "recycled pulp"
+    },
+    "planning_contact": {
+      "name": "Maya Chen",
+      "department": "industrial engineering",
+      "email": "maya.chen@example.com"
+    },
+    "compliance": {
+      "hazard_class": "non-hazardous",
+      "rohs_status": "compliant",
+      "reach_status": "compliant"
+    },
+    "drawing_references": {
+      "main_drawing": "DRW-MB-2407",
+      "installation_view": "DRW-MB-2407-INST"
+    },
+    "lifecycle_plan": {
+      "production_status": "active",
+      "review_interval_months": 12,
+      "next_review_date": "2026-02-14"
+    },
+    "tooling_setup": {
+      "press_die": "D-441",
+      "insertion_fixture": "FX-118",
+      "torque_driver": "TD-06"
+    },
+    "labor_plan": {
+      "standard_build_minutes": 18,
+      "setup_minutes": 45,
+      "crew_size": 2
+    },
+    "inventory_planning": {
+      "planning_method": "make-to-stock",
+      "reorder_point_units": 150,
+      "safety_stock_units": 50
+    },
+    "shipping_profile": {
+      "mode": "ground parcel",
+      "nmfc_class": "70",
+      "max_stack_cartons": 5
+    },
+    "customer_program": {
+      "program_name": "Apex Lift",
+      "product_line": "AL-200",
+      "annual_forecast_units": 12000
+    },
+    "environmental_targets": {
+      "recycled_steel_percent": 65,
+      "coating_type": "water-based",
+      "pvc_packaging": "none"
+    },
+    "warranty_terms": {
+      "coverage_months": 24,
+      "coverage_scope": "manufacturing defects only",
+      "return_authorization_required": true
+    },
+    "document_control": {
+      "owner_group": "BOM control",
+      "archive_location": "VLT-9",
+      "retention_years": 10
+    }
+  }
+}

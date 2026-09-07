@@ -1,0 +1,456 @@
+{
+  "id": "software_deployment_config_L50_03",
+  "domain": "software_deployment_config",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a deployment record for the payments API."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment\", \"value\": {\"app_name\": \"payments-api\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Put the main application into its pod as the first running process."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod\", \"value\": {\"containers\": [{\"name\": \"app\"}]}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give that app a modest CPU reservation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/containers/0/cpu_request\", \"value\": \"500m\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set a reasonable memory reservation for the app too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/containers/0/memory_request\", \"value\": \"512Mi\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Expose the app on its usual web traffic port."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/containers/0/port\", \"value\": 8080}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a log shipping helper alongside the app."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/containers/-\", \"value\": {\"name\": \"log-shipper\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep the log helper lightweight on CPU."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/containers/1/cpu_request\", \"value\": \"100m\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Give the log helper a small memory reservation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/containers/1/memory_request\", \"value\": \"128Mi\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the log helper listen on its internal metrics endpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/containers/1/port\", \"value\": 24224}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a request tracing helper to run alongside the other processes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/containers/-\", \"value\": {\"name\": \"trace-agent\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Reserve a little CPU for the tracing helper."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/containers/2/cpu_request\", \"value\": \"150m\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Give the tracing helper enough memory to buffer spans safely."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/containers/2/memory_request\", \"value\": \"256Mi\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the tracing helper receive spans on the standard collector port."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/containers/2/port\", \"value\": 9411}]"
+    },
+    {
+      "role": "user",
+      "content": "Now note how many processes are running in that pod."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/container_count\", \"value\": 3}]"
+    },
+    {
+      "role": "user",
+      "content": "Add up the CPU reservations across everything in the pod."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/total_cpu\", \"value\": \"750m\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add up the memory reservations across everything in the pod as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/total_memory\", \"value\": \"896Mi\"}]"
+    },
+    {
+      "role": "user",
+      "content": "List the ports that will be reachable from the pod."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/pod/exposed_port_list\", \"value\": [8080, 24224, 9411]}]"
+    },
+    {
+      "role": "user",
+      "content": "Place this deployment in the production payments area."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/namespace\", \"value\": \"prod-payments\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Tag it with the team that owns the service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/owner_team\", \"value\": \"payments-platform\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a cautious rolling rollout for releases, with a little extra capacity and no planned downtime."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/strategy\", \"value\": {\"type\": \"RollingUpdate\", \"max_surge\": \"25%\", \"max_unavailable\": \"0\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record where this production rollout will run: the east coast region, its primary zone, and the shared production cluster."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/placement\", \"value\": {\"region\": \"us-east-1\", \"zone\": \"us-east-1a\", \"cluster\": \"prod-shared-01\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run four copies of this service for normal production traffic."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/replicas\", \"value\": 4}]"
+    },
+    {
+      "role": "user",
+      "content": "Pin the service to the approved release image and only pull it when it isn’t already cached."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/image\", \"value\": {\"repository\": \"registry.example.com/payments/payments-api\", \"tag\": \"2026.06.1\", \"pull_policy\": \"IfNotPresent\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the basic health check routes and give the process half a minute to settle before startup checks matter."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/health_checks\", \"value\": {\"readiness_path\": \"/ready\", \"liveness_path\": \"/live\", \"startup_grace_seconds\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Mark the service as externally reachable over encrypted traffic through the standard public entry point."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/service\", \"value\": {\"type\": \"LoadBalancer\", \"protocol\": \"HTTPS\", \"external_port\": 443}}]"
+    },
+    {
+      "role": "user",
+      "content": "Allow it to scale up during payment spikes, but keep a small floor in place."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/autoscaling\", \"value\": {\"enabled\": true, \"min_replicas\": 4, \"max_replicas\": 10}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the runtime settings for production mode, the card provider, and normal logging verbosity."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/runtime_config\", \"value\": {\"environment\": \"production\", \"payment_provider\": \"stripe\", \"log_level\": \"info\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Lock down the runtime so it uses a non-root account and cannot gain extra privileges."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/security_context\", \"value\": {\"run_as_non_root\": true, \"run_as_user\": 10001, \"allow_privilege_escalation\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have Prometheus collect metrics from this service every 30 seconds."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/monitoring\", \"value\": {\"prometheus_scrape\": true, \"scrape_interval_seconds\": 30}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the on-call contact and the regular Sunday maintenance slot."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/operations\", \"value\": {\"on_call_contact\": \"payments-primary\", \"maintenance_window\": \"Sun 02:00-03:00 UTC\"}}]"
+    }
+  ],
+  "edit_instruction": "Remove the log-shipper sidecar from the pod.",
+  "theme": "Removing a sidecar container",
+  "conversation_pattern": "Center the artifact on a pod with several containers, each with a name, a CPU request, a memory request, and an exposed port, where the pod's container_count, total_cpu, total_memory (stated sums over the containers), and exposed_port_list aggregate over the included containers. Around this core, add the realistic, independent details a deployment record would carry that do not depend on the container list, and vary the number of containers from sample to sample.",
+  "edit_pattern": "Remove one specific sidecar container from the pod.",
+  "cascade_pattern": "Removing the container deletes it from the container list, lowers container_count, removes its port from exposed_port_list, and re-derives total_cpu and total_memory as the stated sums over the remaining containers. Unrelated deployment metadata stays unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "deployment": {
+      "app_name": "payments-api",
+      "pod": {
+        "containers": [
+          {
+            "name": "app",
+            "cpu_request": "500m",
+            "memory_request": "512Mi",
+            "port": 8080
+          },
+          {
+            "name": "log-shipper",
+            "cpu_request": "100m",
+            "memory_request": "128Mi",
+            "port": 24224
+          },
+          {
+            "name": "trace-agent",
+            "cpu_request": "150m",
+            "memory_request": "256Mi",
+            "port": 9411
+          }
+        ],
+        "container_count": 3,
+        "total_cpu": "750m",
+        "total_memory": "896Mi",
+        "exposed_port_list": [
+          8080,
+          24224,
+          9411
+        ]
+      },
+      "namespace": "prod-payments",
+      "owner_team": "payments-platform",
+      "strategy": {
+        "type": "RollingUpdate",
+        "max_surge": "25%",
+        "max_unavailable": "0"
+      },
+      "placement": {
+        "region": "us-east-1",
+        "zone": "us-east-1a",
+        "cluster": "prod-shared-01"
+      },
+      "replicas": 4,
+      "image": {
+        "repository": "registry.example.com/payments/payments-api",
+        "tag": "2026.06.1",
+        "pull_policy": "IfNotPresent"
+      },
+      "health_checks": {
+        "readiness_path": "/ready",
+        "liveness_path": "/live",
+        "startup_grace_seconds": 30
+      },
+      "service": {
+        "type": "LoadBalancer",
+        "protocol": "HTTPS",
+        "external_port": 443
+      },
+      "autoscaling": {
+        "enabled": true,
+        "min_replicas": 4,
+        "max_replicas": 10
+      },
+      "runtime_config": {
+        "environment": "production",
+        "payment_provider": "stripe",
+        "log_level": "info"
+      },
+      "security_context": {
+        "run_as_non_root": true,
+        "run_as_user": 10001,
+        "allow_privilege_escalation": false
+      },
+      "monitoring": {
+        "prometheus_scrape": true,
+        "scrape_interval_seconds": 30
+      },
+      "operations": {
+        "on_call_contact": "payments-primary",
+        "maintenance_window": "Sun 02:00-03:00 UTC"
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "remove",
+      "path": "/deployment/pod/containers/1",
+      "kind": "direct"
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/pod/container_count",
+      "kind": "cascade",
+      "value": 2
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/pod/total_cpu",
+      "kind": "cascade",
+      "value": "650m"
+    },
+    {
+      "op": "replace",
+      "path": "/deployment/pod/total_memory",
+      "kind": "cascade",
+      "value": "768Mi"
+    },
+    {
+      "op": "remove",
+      "path": "/deployment/pod/exposed_port_list/1",
+      "kind": "cascade"
+    }
+  ],
+  "expected_json": {
+    "deployment": {
+      "app_name": "payments-api",
+      "pod": {
+        "containers": [
+          {
+            "name": "app",
+            "cpu_request": "500m",
+            "memory_request": "512Mi",
+            "port": 8080
+          },
+          {
+            "name": "trace-agent",
+            "cpu_request": "150m",
+            "memory_request": "256Mi",
+            "port": 9411
+          }
+        ],
+        "container_count": 2,
+        "total_cpu": "650m",
+        "total_memory": "768Mi",
+        "exposed_port_list": [
+          8080,
+          9411
+        ]
+      },
+      "namespace": "prod-payments",
+      "owner_team": "payments-platform",
+      "strategy": {
+        "type": "RollingUpdate",
+        "max_surge": "25%",
+        "max_unavailable": "0"
+      },
+      "placement": {
+        "region": "us-east-1",
+        "zone": "us-east-1a",
+        "cluster": "prod-shared-01"
+      },
+      "replicas": 4,
+      "image": {
+        "repository": "registry.example.com/payments/payments-api",
+        "tag": "2026.06.1",
+        "pull_policy": "IfNotPresent"
+      },
+      "health_checks": {
+        "readiness_path": "/ready",
+        "liveness_path": "/live",
+        "startup_grace_seconds": 30
+      },
+      "service": {
+        "type": "LoadBalancer",
+        "protocol": "HTTPS",
+        "external_port": 443
+      },
+      "autoscaling": {
+        "enabled": true,
+        "min_replicas": 4,
+        "max_replicas": 10
+      },
+      "runtime_config": {
+        "environment": "production",
+        "payment_provider": "stripe",
+        "log_level": "info"
+      },
+      "security_context": {
+        "run_as_non_root": true,
+        "run_as_user": 10001,
+        "allow_privilege_escalation": false
+      },
+      "monitoring": {
+        "prometheus_scrape": true,
+        "scrape_interval_seconds": 30
+      },
+      "operations": {
+        "on_call_contact": "payments-primary",
+        "maintenance_window": "Sun 02:00-03:00 UTC"
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "remove log-shipper sidecar; container_count 3->2, total_cpu 750m->650m, total_memory 896Mi->768Mi, exposed_port_list drops 24224. | REVIEW EDIT (with author): exposed_port_list re-expressed as a per-element remove op (whole-array replace not expanded by leaf-level scorer -> phantom over+miss even for a perfect model).",
+  "annotated": true,
+  "excluded": false,
+  "review_edited": true
+}

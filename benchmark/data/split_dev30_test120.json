@@ -1,0 +1,969 @@
+{
+  "method": "balanced",
+  "seed": 42,
+  "dev_size": 30,
+  "test_size": 120,
+  "n_dev_scenarios": 10,
+  "imbalance": 0.24,
+  "dev": [
+    "course_plan_L100_03",
+    "course_plan_L10_03",
+    "course_plan_L50_03",
+    "data_pipeline_L100_04",
+    "data_pipeline_L10_04",
+    "data_pipeline_L50_04",
+    "invoice_L100_01",
+    "invoice_L10_01",
+    "invoice_L50_01",
+    "manufacturing_bom_L100_03",
+    "manufacturing_bom_L10_03",
+    "manufacturing_bom_L50_03",
+    "org_access_plan_L100_03",
+    "org_access_plan_L10_03",
+    "org_access_plan_L50_03",
+    "project_schedule_L100_05",
+    "project_schedule_L10_05",
+    "project_schedule_L50_05",
+    "shopping_cart_L100_01",
+    "shopping_cart_L10_01",
+    "shopping_cart_L50_01",
+    "software_deployment_config_L100_04",
+    "software_deployment_config_L10_04",
+    "software_deployment_config_L50_04",
+    "travel_itinerary_L100_02",
+    "travel_itinerary_L100_04",
+    "travel_itinerary_L10_02",
+    "travel_itinerary_L10_04",
+    "travel_itinerary_L50_02",
+    "travel_itinerary_L50_04"
+  ],
+  "test": [
+    "course_plan_L100_00",
+    "course_plan_L100_01",
+    "course_plan_L100_02",
+    "course_plan_L100_04",
+    "course_plan_L100_05",
+    "course_plan_L10_00",
+    "course_plan_L10_01",
+    "course_plan_L10_02",
+    "course_plan_L10_04",
+    "course_plan_L10_05",
+    "course_plan_L50_00",
+    "course_plan_L50_01",
+    "course_plan_L50_02",
+    "course_plan_L50_04",
+    "course_plan_L50_05",
+    "data_pipeline_L100_00",
+    "data_pipeline_L100_01",
+    "data_pipeline_L100_02",
+    "data_pipeline_L100_03",
+    "data_pipeline_L10_00",
+    "data_pipeline_L10_01",
+    "data_pipeline_L10_02",
+    "data_pipeline_L10_03",
+    "data_pipeline_L50_00",
+    "data_pipeline_L50_01",
+    "data_pipeline_L50_02",
+    "data_pipeline_L50_03",
+    "invoice_L100_00",
+    "invoice_L100_02",
+    "invoice_L100_03",
+    "invoice_L100_04",
+    "invoice_L10_00",
+    "invoice_L10_02",
+    "invoice_L10_03",
+    "invoice_L10_04",
+    "invoice_L50_00",
+    "invoice_L50_02",
+    "invoice_L50_03",
+    "invoice_L50_04",
+    "manufacturing_bom_L100_00",
+    "manufacturing_bom_L100_01",
+    "manufacturing_bom_L100_02",
+    "manufacturing_bom_L100_04",
+    "manufacturing_bom_L10_00",
+    "manufacturing_bom_L10_01",
+    "manufacturing_bom_L10_02",
+    "manufacturing_bom_L10_04",
+    "manufacturing_bom_L50_00",
+    "manufacturing_bom_L50_01",
+    "manufacturing_bom_L50_02",
+    "manufacturing_bom_L50_04",
+    "org_access_plan_L100_00",
+    "org_access_plan_L100_01",
+    "org_access_plan_L100_02",
+    "org_access_plan_L100_04",
+    "org_access_plan_L10_00",
+    "org_access_plan_L10_01",
+    "org_access_plan_L10_02",
+    "org_access_plan_L10_04",
+    "org_access_plan_L50_00",
+    "org_access_plan_L50_01",
+    "org_access_plan_L50_02",
+    "org_access_plan_L50_04",
+    "project_schedule_L100_00",
+    "project_schedule_L100_01",
+    "project_schedule_L100_02",
+    "project_schedule_L100_03",
+    "project_schedule_L100_04",
+    "project_schedule_L10_00",
+    "project_schedule_L10_01",
+    "project_schedule_L10_02",
+    "project_schedule_L10_03",
+    "project_schedule_L10_04",
+    "project_schedule_L50_00",
+    "project_schedule_L50_01",
+    "project_schedule_L50_02",
+    "project_schedule_L50_03",
+    "project_schedule_L50_04",
+    "shopping_cart_L100_00",
+    "shopping_cart_L100_02",
+    "shopping_cart_L100_03",
+    "shopping_cart_L100_04",
+    "shopping_cart_L100_05",
+    "shopping_cart_L10_00",
+    "shopping_cart_L10_02",
+    "shopping_cart_L10_03",
+    "shopping_cart_L10_04",
+    "shopping_cart_L10_05",
+    "shopping_cart_L50_00",
+    "shopping_cart_L50_02",
+    "shopping_cart_L50_03",
+    "shopping_cart_L50_04",
+    "shopping_cart_L50_05",
+    "software_deployment_config_L100_00",
+    "software_deployment_config_L100_01",
+    "software_deployment_config_L100_02",
+    "software_deployment_config_L100_03",
+    "software_deployment_config_L10_00",
+    "software_deployment_config_L10_01",
+    "software_deployment_config_L10_02",
+    "software_deployment_config_L10_03",
+    "software_deployment_config_L50_00",
+    "software_deployment_config_L50_01",
+    "software_deployment_config_L50_02",
+    "software_deployment_config_L50_03",
+    "travel_itinerary_L100_00",
+    "travel_itinerary_L100_01",
+    "travel_itinerary_L100_03",
+    "travel_itinerary_L100_05",
+    "travel_itinerary_L100_06",
+    "travel_itinerary_L10_00",
+    "travel_itinerary_L10_01",
+    "travel_itinerary_L10_03",
+    "travel_itinerary_L10_05",
+    "travel_itinerary_L10_06",
+    "travel_itinerary_L50_00",
+    "travel_itinerary_L50_01",
+    "travel_itinerary_L50_03",
+    "travel_itinerary_L50_05",
+    "travel_itinerary_L50_06"
+  ],
+  "factor_distribution": {
+    "domain": {
+      "dev": {
+        "course_plan": 1,
+        "data_pipeline": 1,
+        "invoice": 1,
+        "manufacturing_bom": 1,
+        "org_access_plan": 1,
+        "project_schedule": 1,
+        "shopping_cart": 1,
+        "software_deployment_config": 1,
+        "travel_itinerary": 2
+      },
+      "test": {
+        "course_plan": 5,
+        "data_pipeline": 4,
+        "invoice": 4,
+        "manufacturing_bom": 4,
+        "org_access_plan": 4,
+        "project_schedule": 5,
+        "shopping_cart": 5,
+        "software_deployment_config": 4,
+        "travel_itinerary": 5
+      }
+    },
+    "cascade_size": {
+      "dev": {
+        "large": 3,
+        "medium": 3,
+        "small": 4
+      },
+      "test": {
+        "large": 13,
+        "medium": 12,
+        "small": 15
+      }
+    },
+    "category": {
+      "dev": {
+        "add_remove": 2,
+        "arithmetic": 2,
+        "substitution": 2,
+        "temporal": 2,
+        "threshold": 2
+      },
+      "test": {
+        "add_remove": 8,
+        "arithmetic": 10,
+        "status_flip": 2,
+        "substitution": 9,
+        "temporal": 5,
+        "threshold": 6
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "domain": "course_plan",
+      "theme": "Adding a course",
+      "split": "dev",
+      "category": "add_remove",
+      "cascade_size": "small",
+      "structural": true,
+      "requires_master_data": false,
+      "affected_at_max": 4,
+      "case_ids": [
+        "course_plan_L100_03",
+        "course_plan_L10_03",
+        "course_plan_L50_03"
+      ]
+    },
+    {
+      "domain": "course_plan",
+      "theme": "Changing a course grade",
+      "split": "test",
+      "category": "arithmetic",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 7,
+      "case_ids": [
+        "course_plan_L100_00",
+        "course_plan_L10_00",
+        "course_plan_L50_00"
+      ]
+    },
+    {
+      "domain": "course_plan",
+      "theme": "Changing a course's credit hours",
+      "split": "test",
+      "category": "arithmetic",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 4,
+      "case_ids": [
+        "course_plan_L100_01",
+        "course_plan_L10_01",
+        "course_plan_L50_01"
+      ]
+    },
+    {
+      "domain": "course_plan",
+      "theme": "Changing a course's prerequisite",
+      "split": "test",
+      "category": "substitution",
+      "cascade_size": "small",
+      "structural": true,
+      "requires_master_data": true,
+      "affected_at_max": 3,
+      "case_ids": [
+        "course_plan_L100_04",
+        "course_plan_L10_04",
+        "course_plan_L50_04"
+      ]
+    },
+    {
+      "domain": "course_plan",
+      "theme": "Changing the degree credit requirement",
+      "split": "test",
+      "category": "arithmetic",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 3,
+      "case_ids": [
+        "course_plan_L100_05",
+        "course_plan_L10_05",
+        "course_plan_L50_05"
+      ]
+    },
+    {
+      "domain": "course_plan",
+      "theme": "Dropping a course",
+      "split": "test",
+      "category": "add_remove",
+      "cascade_size": "medium",
+      "structural": true,
+      "requires_master_data": false,
+      "affected_at_max": 11,
+      "case_ids": [
+        "course_plan_L100_02",
+        "course_plan_L10_02",
+        "course_plan_L50_02"
+      ]
+    },
+    {
+      "domain": "data_pipeline",
+      "theme": "Changing the pipeline schedule interval",
+      "split": "test",
+      "category": "arithmetic",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 5,
+      "case_ids": [
+        "data_pipeline_L100_00",
+        "data_pipeline_L10_00",
+        "data_pipeline_L50_00"
+      ]
+    },
+    {
+      "domain": "data_pipeline",
+      "theme": "Crossing a data-volume threshold",
+      "split": "test",
+      "category": "threshold",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 5,
+      "case_ids": [
+        "data_pipeline_L100_02",
+        "data_pipeline_L10_02",
+        "data_pipeline_L50_02"
+      ]
+    },
+    {
+      "domain": "data_pipeline",
+      "theme": "Renaming an upstream table",
+      "split": "test",
+      "category": "substitution",
+      "cascade_size": "large",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 20,
+      "case_ids": [
+        "data_pipeline_L100_03",
+        "data_pipeline_L10_03",
+        "data_pipeline_L50_03"
+      ]
+    },
+    {
+      "domain": "data_pipeline",
+      "theme": "Switching the source connector",
+      "split": "test",
+      "category": "substitution",
+      "cascade_size": "large",
+      "structural": false,
+      "requires_master_data": true,
+      "affected_at_max": 30,
+      "case_ids": [
+        "data_pipeline_L100_01",
+        "data_pipeline_L10_01",
+        "data_pipeline_L50_01"
+      ]
+    },
+    {
+      "domain": "data_pipeline",
+      "theme": "Tightening the freshness-SLA policy",
+      "split": "dev",
+      "category": "threshold",
+      "cascade_size": "large",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 20,
+      "case_ids": [
+        "data_pipeline_L100_04",
+        "data_pipeline_L10_04",
+        "data_pipeline_L50_04"
+      ]
+    },
+    {
+      "domain": "invoice",
+      "theme": "Marking the invoice as paid",
+      "split": "test",
+      "category": "status_flip",
+      "cascade_size": "medium",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 12,
+      "case_ids": [
+        "invoice_L100_02",
+        "invoice_L10_02",
+        "invoice_L50_02"
+      ]
+    },
+    {
+      "domain": "invoice",
+      "theme": "Propagating a changed invoice number",
+      "split": "test",
+      "category": "substitution",
+      "cascade_size": "large",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 100,
+      "case_ids": [
+        "invoice_L100_04",
+        "invoice_L10_04",
+        "invoice_L50_04"
+      ]
+    },
+    {
+      "domain": "invoice",
+      "theme": "Prorating an unused subscription period",
+      "split": "dev",
+      "category": "arithmetic",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 7,
+      "case_ids": [
+        "invoice_L100_01",
+        "invoice_L10_01",
+        "invoice_L50_01"
+      ]
+    },
+    {
+      "domain": "invoice",
+      "theme": "Recomputing the invoice total chain",
+      "split": "test",
+      "category": "arithmetic",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 8,
+      "case_ids": [
+        "invoice_L100_00",
+        "invoice_L10_00",
+        "invoice_L50_00"
+      ]
+    },
+    {
+      "domain": "invoice",
+      "theme": "Recording a partial payment",
+      "split": "test",
+      "category": "arithmetic",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 3,
+      "case_ids": [
+        "invoice_L100_03",
+        "invoice_L10_03",
+        "invoice_L50_03"
+      ]
+    },
+    {
+      "domain": "manufacturing_bom",
+      "theme": "Changing the build quantity",
+      "split": "test",
+      "category": "arithmetic",
+      "cascade_size": "large",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 36,
+      "case_ids": [
+        "manufacturing_bom_L100_00",
+        "manufacturing_bom_L10_00",
+        "manufacturing_bom_L50_00"
+      ]
+    },
+    {
+      "domain": "manufacturing_bom",
+      "theme": "Changing the scrap rate",
+      "split": "dev",
+      "category": "arithmetic",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 6,
+      "case_ids": [
+        "manufacturing_bom_L100_03",
+        "manufacturing_bom_L10_03",
+        "manufacturing_bom_L50_03"
+      ]
+    },
+    {
+      "domain": "manufacturing_bom",
+      "theme": "Crossing the shipping-weight class",
+      "split": "test",
+      "category": "threshold",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 7,
+      "case_ids": [
+        "manufacturing_bom_L100_01",
+        "manufacturing_bom_L10_01",
+        "manufacturing_bom_L50_01"
+      ]
+    },
+    {
+      "domain": "manufacturing_bom",
+      "theme": "Removing a component from the assembly",
+      "split": "test",
+      "category": "add_remove",
+      "cascade_size": "large",
+      "structural": true,
+      "requires_master_data": false,
+      "affected_at_max": 24,
+      "case_ids": [
+        "manufacturing_bom_L100_04",
+        "manufacturing_bom_L10_04",
+        "manufacturing_bom_L50_04"
+      ]
+    },
+    {
+      "domain": "manufacturing_bom",
+      "theme": "Substituting a component supplier",
+      "split": "test",
+      "category": "substitution",
+      "cascade_size": "medium",
+      "structural": false,
+      "requires_master_data": true,
+      "affected_at_max": 11,
+      "case_ids": [
+        "manufacturing_bom_L100_02",
+        "manufacturing_bom_L10_02",
+        "manufacturing_bom_L50_02"
+      ]
+    },
+    {
+      "domain": "org_access_plan",
+      "theme": "Changing an employee role",
+      "split": "test",
+      "category": "substitution",
+      "cascade_size": "medium",
+      "structural": true,
+      "requires_master_data": true,
+      "affected_at_max": 13,
+      "case_ids": [
+        "org_access_plan_L100_00",
+        "org_access_plan_L10_00",
+        "org_access_plan_L50_00"
+      ]
+    },
+    {
+      "domain": "org_access_plan",
+      "theme": "Crossing the elevated-approval threshold",
+      "split": "test",
+      "category": "threshold",
+      "cascade_size": "small",
+      "structural": true,
+      "requires_master_data": false,
+      "affected_at_max": 4,
+      "case_ids": [
+        "org_access_plan_L100_02",
+        "org_access_plan_L10_02",
+        "org_access_plan_L50_02"
+      ]
+    },
+    {
+      "domain": "org_access_plan",
+      "theme": "Reassigning a manager",
+      "split": "test",
+      "category": "substitution",
+      "cascade_size": "medium",
+      "structural": false,
+      "requires_master_data": true,
+      "affected_at_max": 13,
+      "case_ids": [
+        "org_access_plan_L100_01",
+        "org_access_plan_L10_01",
+        "org_access_plan_L50_01"
+      ]
+    },
+    {
+      "domain": "org_access_plan",
+      "theme": "Revoking a system access",
+      "split": "dev",
+      "category": "add_remove",
+      "cascade_size": "medium",
+      "structural": true,
+      "requires_master_data": false,
+      "affected_at_max": 15,
+      "case_ids": [
+        "org_access_plan_L100_03",
+        "org_access_plan_L10_03",
+        "org_access_plan_L50_03"
+      ]
+    },
+    {
+      "domain": "org_access_plan",
+      "theme": "Tightening the session-timeout policy",
+      "split": "test",
+      "category": "threshold",
+      "cascade_size": "medium",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 17,
+      "case_ids": [
+        "org_access_plan_L100_04",
+        "org_access_plan_L10_04",
+        "org_access_plan_L50_04"
+      ]
+    },
+    {
+      "domain": "project_schedule",
+      "theme": "Changing a task's duration",
+      "split": "test",
+      "category": "temporal",
+      "cascade_size": "medium",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 13,
+      "case_ids": [
+        "project_schedule_L100_00",
+        "project_schedule_L10_00",
+        "project_schedule_L50_00"
+      ]
+    },
+    {
+      "domain": "project_schedule",
+      "theme": "Inserting a task into the schedule",
+      "split": "test",
+      "category": "add_remove",
+      "cascade_size": "large",
+      "structural": true,
+      "requires_master_data": false,
+      "affected_at_max": 35,
+      "case_ids": [
+        "project_schedule_L100_01",
+        "project_schedule_L10_01",
+        "project_schedule_L50_01"
+      ]
+    },
+    {
+      "domain": "project_schedule",
+      "theme": "Moving a milestone date",
+      "split": "test",
+      "category": "temporal",
+      "cascade_size": "medium",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 9,
+      "case_ids": [
+        "project_schedule_L100_04",
+        "project_schedule_L10_04",
+        "project_schedule_L50_04"
+      ]
+    },
+    {
+      "domain": "project_schedule",
+      "theme": "Reassigning a task to another owner",
+      "split": "dev",
+      "category": "substitution",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 3,
+      "case_ids": [
+        "project_schedule_L100_05",
+        "project_schedule_L10_05",
+        "project_schedule_L50_05"
+      ]
+    },
+    {
+      "domain": "project_schedule",
+      "theme": "Removing a task from the schedule",
+      "split": "test",
+      "category": "add_remove",
+      "cascade_size": "large",
+      "structural": true,
+      "requires_master_data": false,
+      "affected_at_max": 19,
+      "case_ids": [
+        "project_schedule_L100_02",
+        "project_schedule_L10_02",
+        "project_schedule_L50_02"
+      ]
+    },
+    {
+      "domain": "project_schedule",
+      "theme": "Repointing a task's predecessor",
+      "split": "test",
+      "category": "temporal",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 8,
+      "case_ids": [
+        "project_schedule_L100_03",
+        "project_schedule_L10_03",
+        "project_schedule_L50_03"
+      ]
+    },
+    {
+      "domain": "shopping_cart",
+      "theme": "Crossing the free-shipping threshold",
+      "split": "test",
+      "category": "threshold",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 5,
+      "case_ids": [
+        "shopping_cart_L100_05",
+        "shopping_cart_L10_05",
+        "shopping_cart_L50_05"
+      ]
+    },
+    {
+      "domain": "shopping_cart",
+      "theme": "Removing a product and its bound accessories",
+      "split": "test",
+      "category": "add_remove",
+      "cascade_size": "large",
+      "structural": true,
+      "requires_master_data": false,
+      "affected_at_max": 36,
+      "case_ids": [
+        "shopping_cart_L100_03",
+        "shopping_cart_L10_03",
+        "shopping_cart_L50_03"
+      ]
+    },
+    {
+      "domain": "shopping_cart",
+      "theme": "Scaling a product bundle's components",
+      "split": "test",
+      "category": "arithmetic",
+      "cascade_size": "large",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 23,
+      "case_ids": [
+        "shopping_cart_L100_02",
+        "shopping_cart_L10_02",
+        "shopping_cart_L50_02"
+      ]
+    },
+    {
+      "domain": "shopping_cart",
+      "theme": "Substituting one product for another",
+      "split": "test",
+      "category": "substitution",
+      "cascade_size": "medium",
+      "structural": false,
+      "requires_master_data": true,
+      "affected_at_max": 14,
+      "case_ids": [
+        "shopping_cart_L100_00",
+        "shopping_cart_L10_00",
+        "shopping_cart_L50_00"
+      ]
+    },
+    {
+      "domain": "shopping_cart",
+      "theme": "Swapping the base product and its compatible accessories",
+      "split": "dev",
+      "category": "substitution",
+      "cascade_size": "large",
+      "structural": false,
+      "requires_master_data": true,
+      "affected_at_max": 28,
+      "case_ids": [
+        "shopping_cart_L100_01",
+        "shopping_cart_L10_01",
+        "shopping_cart_L50_01"
+      ]
+    },
+    {
+      "domain": "shopping_cart",
+      "theme": "Switching the order to gift mode",
+      "split": "test",
+      "category": "status_flip",
+      "cascade_size": "medium",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 12,
+      "case_ids": [
+        "shopping_cart_L100_04",
+        "shopping_cart_L10_04",
+        "shopping_cart_L50_04"
+      ]
+    },
+    {
+      "domain": "software_deployment_config",
+      "theme": "Changing the replica count",
+      "split": "test",
+      "category": "arithmetic",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 5,
+      "case_ids": [
+        "software_deployment_config_L100_00",
+        "software_deployment_config_L10_00",
+        "software_deployment_config_L50_00"
+      ]
+    },
+    {
+      "domain": "software_deployment_config",
+      "theme": "Crossing the node memory budget",
+      "split": "test",
+      "category": "threshold",
+      "cascade_size": "small",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 4,
+      "case_ids": [
+        "software_deployment_config_L100_02",
+        "software_deployment_config_L10_02",
+        "software_deployment_config_L50_02"
+      ]
+    },
+    {
+      "domain": "software_deployment_config",
+      "theme": "Removing a sidecar container",
+      "split": "test",
+      "category": "add_remove",
+      "cascade_size": "small",
+      "structural": true,
+      "requires_master_data": false,
+      "affected_at_max": 8,
+      "case_ids": [
+        "software_deployment_config_L100_03",
+        "software_deployment_config_L10_03",
+        "software_deployment_config_L50_03"
+      ]
+    },
+    {
+      "domain": "software_deployment_config",
+      "theme": "Switching the deployment environment",
+      "split": "test",
+      "category": "substitution",
+      "cascade_size": "large",
+      "structural": false,
+      "requires_master_data": true,
+      "affected_at_max": 87,
+      "case_ids": [
+        "software_deployment_config_L100_01",
+        "software_deployment_config_L10_01",
+        "software_deployment_config_L50_01"
+      ]
+    },
+    {
+      "domain": "software_deployment_config",
+      "theme": "Tightening the per-container memory quota",
+      "split": "dev",
+      "category": "threshold",
+      "cascade_size": "medium",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 12,
+      "case_ids": [
+        "software_deployment_config_L100_04",
+        "software_deployment_config_L10_04",
+        "software_deployment_config_L50_04"
+      ]
+    },
+    {
+      "domain": "travel_itinerary",
+      "theme": "Adding a stop to the day's schedule",
+      "split": "test",
+      "category": "add_remove",
+      "cascade_size": "large",
+      "structural": true,
+      "requires_master_data": false,
+      "affected_at_max": 33,
+      "case_ids": [
+        "travel_itinerary_L100_05",
+        "travel_itinerary_L10_05",
+        "travel_itinerary_L50_05"
+      ]
+    },
+    {
+      "domain": "travel_itinerary",
+      "theme": "Changing the number of nights",
+      "split": "dev",
+      "category": "temporal",
+      "cascade_size": "medium",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 11,
+      "case_ids": [
+        "travel_itinerary_L100_02",
+        "travel_itinerary_L10_02",
+        "travel_itinerary_L50_02"
+      ]
+    },
+    {
+      "domain": "travel_itinerary",
+      "theme": "Changing the party size",
+      "split": "test",
+      "category": "arithmetic",
+      "cascade_size": "medium",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 16,
+      "case_ids": [
+        "travel_itinerary_L100_03",
+        "travel_itinerary_L10_03",
+        "travel_itinerary_L50_03"
+      ]
+    },
+    {
+      "domain": "travel_itinerary",
+      "theme": "Removing a stop from the day's schedule",
+      "split": "test",
+      "category": "add_remove",
+      "cascade_size": "medium",
+      "structural": true,
+      "requires_master_data": false,
+      "affected_at_max": 15,
+      "case_ids": [
+        "travel_itinerary_L100_06",
+        "travel_itinerary_L10_06",
+        "travel_itinerary_L50_06"
+      ]
+    },
+    {
+      "domain": "travel_itinerary",
+      "theme": "Shifting the schedule's anchor time",
+      "split": "test",
+      "category": "temporal",
+      "cascade_size": "large",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 29,
+      "case_ids": [
+        "travel_itinerary_L100_01",
+        "travel_itinerary_L10_01",
+        "travel_itinerary_L50_01"
+      ]
+    },
+    {
+      "domain": "travel_itinerary",
+      "theme": "Shifting the trip's anchor date",
+      "split": "test",
+      "category": "temporal",
+      "cascade_size": "large",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 52,
+      "case_ids": [
+        "travel_itinerary_L100_00",
+        "travel_itinerary_L10_00",
+        "travel_itinerary_L50_00"
+      ]
+    },
+    {
+      "domain": "travel_itinerary",
+      "theme": "Swapping the order of two stops",
+      "split": "dev",
+      "category": "temporal",
+      "cascade_size": "large",
+      "structural": false,
+      "requires_master_data": false,
+      "affected_at_max": 23,
+      "case_ids": [
+        "travel_itinerary_L100_04",
+        "travel_itinerary_L10_04",
+        "travel_itinerary_L50_04"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "software_deployment_config_L10_04",
+  "domain": "software_deployment_config",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start a deployment config for the production checkout API and call it checkout-api-prod."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment_name\", \"value\": \"checkout-api-prod\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the per-container memory limit to 1024 MiB, and make it clear that anything asking for more should be reduced to that limit and marked as over the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/policy\", \"value\": {\"per_container_memory_quota_mib\": 1024, \"rule\": \"A container is compliant iff its memory request is at most the quota; a container exceeding the quota must have its request clamped down to the quota and its over_quota flag set true.\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the main application container with a 768 MiB request, and it should not be considered over the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/containers\", \"value\": [{\"name\": \"app\", \"memory_request_mib\": 768, \"over_quota\": false}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a cache sidecar that would have asked for more memory, but keep it within the current limit and mark it as over the limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/containers/-\", \"value\": {\"name\": \"cache\", \"memory_request_mib\": 1024, \"over_quota\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Note that the cache sidecar originally wanted 1536 MiB before being brought down to the current limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/containers/1/original_memory_request_mib\", \"value\": 1536}]"
+    }
+  ],
+  "edit_instruction": "Lower the per-container memory quota to 768 MiB.",
+  "theme": "Tightening the per-container memory quota",
+  "master_data": null,
+  "current_json": {
+    "deployment_name": "checkout-api-prod",
+    "policy": {
+      "per_container_memory_quota_mib": 1024,
+      "rule": "A container is compliant iff its memory request is at most the quota; a container exceeding the quota must have its request clamped down to the quota and its over_quota flag set true."
+    },
+    "containers": [
+      {
+        "name": "app",
+        "memory_request_mib": 768,
+        "over_quota": false
+      },
+      {
+        "name": "cache",
+        "memory_request_mib": 1024,
+        "over_quota": true,
+        "original_memory_request_mib": 1536
+      }
+    ]
+  },
+  "conversation_pattern": "Center the artifact on a deployment with several containers, each carrying a memory_request_mib value and an over_quota flag, governed by a stated policy field 'per_container_memory_quota_mib' with an explicit rule: a container is compliant iff its request is at most the quota; a container exceeding the quota must have its request clamped down to the quota and its over_quota flag set true. Make some containers compliant and some not under the current quota, and ensure every container's initial over_quota flag already matches the stated rule under the current quota (a container within the current quota is not over quota). Around this core, add realistic independent details that do not depend on the quota, and vary the number of containers from sample to sample.",
+  "edit_pattern": "Tighten the per_container_memory_quota_mib to a specific stricter (smaller) value.",
+  "cascade_pattern": "Tightening the quota clamps the memory request of only those containers whose request now exceeds the new quota down to that quota and sets their over_quota flag true; containers already within the new quota and all unrelated fields stay unchanged. The affected set is determined by comparing each container's stated request to the new quota.",
+  "requires_master_data": false
+}

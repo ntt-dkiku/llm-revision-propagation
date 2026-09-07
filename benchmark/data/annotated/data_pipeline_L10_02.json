@@ -1,0 +1,131 @@
+{
+  "id": "data_pipeline_L10_02",
+  "domain": "data_pipeline",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I'm sketching a pipeline for the checkout events dataset."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dataset/name\", \"value\": \"checkout_events\"}]"
+    },
+    {
+      "role": "user",
+      "content": "It currently lands about 4,200,000 rows per day."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dataset/daily_row_volume\", \"value\": 4200000}]"
+    },
+    {
+      "role": "user",
+      "content": "Use 180 bytes per row when estimating how much storage one day of data takes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dataset/storage_estimate/formula\", \"value\": \"daily_storage_gb = daily_row_volume * 180 / 1000000000\"}, {\"op\": \"add\", \"path\": \"/dataset/storage_estimate/daily_storage_gb\", \"value\": 0.756}]"
+    },
+    {
+      "role": "user",
+      "content": "Let's set the sizing rule at 5,000,000 rows a day: above that, use partitioned layout with gold compaction and extended retention; otherwise keep single-file layout with bronze compaction and standard retention."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dataset/volume_policy/threshold_daily_rows\", \"value\": 5000000}, {\"op\": \"add\", \"path\": \"/dataset/volume_policy/above_threshold_targets\", \"value\": \"partition_strategy=partitioned; compaction_tier=gold; retention_class=extended\"}, {\"op\": \"add\", \"path\": \"/dataset/volume_policy/at_or_below_threshold_targets\", \"value\": \"partition_strategy=single_file; compaction_tier=bronze; retention_class=standard\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Since the current volume is under that cutoff, record the resulting setup as single-file layout with bronze compaction and standard retention."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/dataset/current_settings/partition_strategy\", \"value\": \"single_file\"}, {\"op\": \"add\", \"path\": \"/dataset/current_settings/compaction_tier\", \"value\": \"bronze\"}, {\"op\": \"add\", \"path\": \"/dataset/current_settings/retention_class\", \"value\": \"standard\"}]"
+    }
+  ],
+  "edit_instruction": "Update the checkout events dataset to show 6,250,000 rows landing per day.",
+  "current_json": {
+    "dataset": {
+      "name": "checkout_events",
+      "daily_row_volume": 4200000,
+      "storage_estimate": {
+        "formula": "daily_storage_gb = daily_row_volume * 180 / 1000000000",
+        "daily_storage_gb": 0.756
+      },
+      "volume_policy": {
+        "threshold_daily_rows": 5000000,
+        "above_threshold_targets": "partition_strategy=partitioned; compaction_tier=gold; retention_class=extended",
+        "at_or_below_threshold_targets": "partition_strategy=single_file; compaction_tier=bronze; retention_class=standard"
+      },
+      "current_settings": {
+        "partition_strategy": "single_file",
+        "compaction_tier": "bronze",
+        "retention_class": "standard"
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/dataset/daily_row_volume",
+      "kind": "direct",
+      "value": 6250000
+    },
+    {
+      "op": "replace",
+      "path": "/dataset/storage_estimate/daily_storage_gb",
+      "kind": "cascade",
+      "value": 1.125
+    },
+    {
+      "op": "replace",
+      "path": "/dataset/current_settings/partition_strategy",
+      "kind": "cascade",
+      "value": "partitioned"
+    },
+    {
+      "op": "replace",
+      "path": "/dataset/current_settings/compaction_tier",
+      "kind": "cascade",
+      "value": "gold"
+    },
+    {
+      "op": "replace",
+      "path": "/dataset/current_settings/retention_class",
+      "kind": "cascade",
+      "value": "extended"
+    }
+  ],
+  "expected_json": {
+    "dataset": {
+      "name": "checkout_events",
+      "daily_row_volume": 6250000,
+      "storage_estimate": {
+        "formula": "daily_storage_gb = daily_row_volume * 180 / 1000000000",
+        "daily_storage_gb": 1.125
+      },
+      "volume_policy": {
+        "threshold_daily_rows": 5000000,
+        "above_threshold_targets": "partition_strategy=partitioned; compaction_tier=gold; retention_class=extended",
+        "at_or_below_threshold_targets": "partition_strategy=single_file; compaction_tier=bronze; retention_class=standard"
+      },
+      "current_settings": {
+        "partition_strategy": "partitioned",
+        "compaction_tier": "gold",
+        "retention_class": "extended"
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "volume 4.2M->6.25M; storage=6.25M*180/1e9=1.125. 6.25M>5M threshold -> above_threshold branch: partitioned/gold/extended.",
+  "annotated": true,
+  "excluded": false,
+  "theme": "Crossing a data-volume threshold",
+  "conversation_pattern": "Center the artifact on a dataset with a stated daily row-volume figure, a volume-derived storage-size estimate (stated formula), and a STATED volume threshold rule with two explicit branches: if daily volume exceeds the threshold, the partition strategy must be 'partitioned' and the compaction tier and retention class step up to specific stated targets; if it is at or below the threshold, the strategy stays 'single_file' and those tiers stay at their stated baseline. Record the threshold and both branch targets explicitly so the outcome is uniquely determined. Around this core, add realistic independent details that do not depend on volume, and vary their number from sample to sample.",
+  "edit_pattern": "Change the daily row volume to a specific new number.",
+  "cascade_pattern": "Editing the volume re-derives the storage-size estimate from the stated formula, AND — only if the new volume crosses the stated threshold relative to the old value — flips the partition strategy and steps the compaction tier and retention class to the stated branch targets. If the threshold is not crossed, the strategy and tiers stay unchanged. The outcome is determined by the stated threshold and branch targets.",
+  "requires_master_data": false
+}

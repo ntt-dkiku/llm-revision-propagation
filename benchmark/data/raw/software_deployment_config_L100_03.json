@@ -1,0 +1,549 @@
+{
+  "id": "software_deployment_config_L100_03",
+  "domain": "software_deployment_config",
+  "target_leaves": 100,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start this deployment record for the billing API service."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/service_name\", \"value\": \"billing-api\"}]"
+    },
+    {
+      "role": "user",
+      "content": "For the workload, start with the primary container named billing-api."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod\", \"value\": {\"containers\": [{\"name\": \"billing-api\"}]}}]"
+    },
+    {
+      "role": "user",
+      "content": "Give that main container a modest CPU reservation."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/0/cpu_request_millicores\", \"value\": 500}]"
+    },
+    {
+      "role": "user",
+      "content": "Set its memory reservation to one gibibyte."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/0/memory_request_mib\", \"value\": 1024}]"
+    },
+    {
+      "role": "user",
+      "content": "Have it listen on the usual web traffic port."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/0/exposed_port\", \"value\": 8080}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a metrics helper alongside it called metrics-agent."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/-\", \"value\": {\"name\": \"metrics-agent\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Keep that metrics helper lightweight on CPU."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/1/cpu_request_millicores\", \"value\": 100}]"
+    },
+    {
+      "role": "user",
+      "content": "Give the metrics helper a small memory reservation too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/1/memory_request_mib\", \"value\": 128}]"
+    },
+    {
+      "role": "user",
+      "content": "Expose the metrics helper on its scraping endpoint."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/1/exposed_port\", \"value\": 9090}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a log-shipping sidecar called log-forwarder."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/-\", \"value\": {\"name\": \"log-forwarder\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Reserve a small slice of CPU for the log shipper."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/2/cpu_request_millicores\", \"value\": 150}]"
+    },
+    {
+      "role": "user",
+      "content": "Give the log shipper enough memory to buffer bursts."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/2/memory_request_mib\", \"value\": 256}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the log shipper publish its local intake endpoint on port 24224."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/2/exposed_port\", \"value\": 24224}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an authentication proxy sidecar called auth-proxy as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/-\", \"value\": {\"name\": \"auth-proxy\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Allocate a moderate CPU reservation for the auth proxy."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/3/cpu_request_millicores\", \"value\": 250}]"
+    },
+    {
+      "role": "user",
+      "content": "Give the auth proxy half a gibibyte of memory."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/3/memory_request_mib\", \"value\": 512}]"
+    },
+    {
+      "role": "user",
+      "content": "Expose the auth proxy on its local listener."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/containers/3/exposed_port\", \"value\": 4180}]"
+    },
+    {
+      "role": "user",
+      "content": "Now capture that the pod is running four containers altogether."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/container_count\", \"value\": 4}]"
+    },
+    {
+      "role": "user",
+      "content": "Add up the CPU reservations across those containers for the pod summary."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/total_cpu_request_millicores\", \"value\": 1000}]"
+    },
+    {
+      "role": "user",
+      "content": "Do the same total for the memory reservations."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/total_memory_request_mib\", \"value\": 1920}]"
+    },
+    {
+      "role": "user",
+      "content": "List the pod ports together so the deployment summary shows what it exposes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/pod/exposed_port_list\", \"value\": [8080, 9090, 24224, 4180]}]"
+    },
+    {
+      "role": "user",
+      "content": "Place this rollout in production for the payments namespace in the Virginia region."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment\", \"value\": {\"environment\": \"production\", \"namespace\": \"payments\", \"region\": \"us-east-1\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Attach the release tracking details with version 2026.06.0, change ticket CHG-48291, and Mira Chen as the requester."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/release\", \"value\": {\"version\": \"2026.06.0\", \"change_ticket\": \"CHG-48291\", \"requested_by\": \"mira.chen\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Use a rolling rollout with three replicas and allow one extra pod during updates."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/deployment/rollout_strategy\", \"value\": {\"type\": \"RollingUpdate\", \"replicas\": 3, \"max_surge\": 1}}]"
+    },
+    {
+      "role": "user",
+      "content": "Configure the service checks with separate ready and live endpoints, and use a five-second timeout."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/health_checks\", \"value\": {\"readiness_path\": \"/ready\", \"liveness_path\": \"/live\", \"timeout_seconds\": 5}}]"
+    },
+    {
+      "role": "user",
+      "content": "Pin the application image to the internal registry under the billing API repository with the same release tag."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/image\", \"value\": {\"registry\": \"registry.internal.example.com\", \"repository\": \"payments/billing-api\", \"tag\": \"2026.06.0\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the service account and the two standard app labels for this workload."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/identity\", \"value\": {\"service_account\": \"billing-api-sa\", \"app_label\": \"billing-api\", \"tier_label\": \"backend\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Run it on Linux payment nodes with the standard priority and spread pods across zones."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/scheduling\", \"value\": {\"node_pool\": \"payments-linux\", \"priority_class\": \"standard\", \"topology_spread_key\": \"topology.kubernetes.io/zone\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Expose the workload internally through a private cluster service on HTTP with session affinity disabled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/networking\", \"value\": {\"service_type\": \"ClusterIP\", \"protocol\": \"HTTP\", \"session_affinity\": \"None\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the standard traffic policy: keep retries to two, use a thirty-second request cap, and enable mTLS."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/traffic_policy\", \"value\": {\"retry_attempts\": 2, \"request_timeout_seconds\": 30, \"mtls_enabled\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Send application telemetry to Datadog, keep traces sampled at ten percent, and retain logs for two weeks."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/observability\", \"value\": {\"telemetry_backend\": \"datadog\", \"trace_sample_rate\": 0.1, \"log_retention_days\": 14}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add autoscaling guardrails with a floor of three pods, a ceiling of eight, and target CPU at sixty percent."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/autoscaling\", \"value\": {\"min_replicas\": 3, \"max_replicas\": 8, \"target_cpu_utilization_percent\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Harden the pod by running without root, keeping the filesystem read-only, and using the default seccomp profile."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/security_context\", \"value\": {\"run_as_non_root\": true, \"read_only_root_filesystem\": true, \"seccomp_profile\": \"RuntimeDefault\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For configuration, point it at the billing settings bundle, the payment secrets bundle, and UTC time."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/configuration\", \"value\": {\"config_map\": \"billing-api-config\", \"secret_ref\": \"payments-prod-secrets\", \"timezone\": \"UTC\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the production database connection details: use the billing database host, the main database name, and SSL required."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/database\", \"value\": {\"host\": \"billing-prod.cluster.local\", \"name\": \"billing\", \"ssl_required\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the cache to use the Redis endpoint, database zero, and a ten-minute default expiry."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cache\", \"value\": {\"endpoint\": \"redis-payments.prod.svc\", \"database_index\": 0, \"default_ttl_seconds\": 600}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the paging details so incidents route to the payments platform team, with critical severity and PagerDuty as the channel."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/incident_response\", \"value\": {\"owner_team\": \"payments-platform\", \"severity\": \"critical\", \"notification_channel\": \"pagerduty\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the backup plan with nightly snapshots, thirty-day retention, and restore testing enabled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/backup\", \"value\": {\"schedule\": \"nightly\", \"retention_days\": 30, \"restore_test_enabled\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Record the compliance posture as PCI scope, encrypting traffic in transit, and sending audit events to the finance index."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance\", \"value\": {\"pci_scope\": true, \"encryption_in_transit\": true, \"audit_log_index\": \"finance-audit\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the maintenance window for Sunday at 02:00 UTC, with a one-hour duration."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/maintenance_window\", \"value\": {\"day\": \"Sunday\", \"start_time_utc\": \"02:00\", \"duration_minutes\": 60}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the alert thresholds for availability at 99.9 percent, error rate at two percent, and p95 latency at 300 milliseconds."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/alerts\", \"value\": {\"availability_slo_percent\": 99.9, \"error_rate_threshold_percent\": 2, \"p95_latency_threshold_ms\": 300}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add release safety gates that pause automatically on failures, wait ten minutes before promotion, and notify Slack."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/release_safety\", \"value\": {\"auto_pause_on_failure\": true, \"promotion_delay_minutes\": 10, \"notification_sink\": \"slack\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add cost tracking with the finance cost center, the production budget code, and chargeback enabled."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cost_tracking\", \"value\": {\"cost_center\": \"FIN-240\", \"budget_code\": \"PAY-PROD-2026\", \"chargeback_enabled\": true}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include the operator reference links: the runbook page, the Grafana dashboard, and the escalation policy name."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/operator_references\", \"value\": {\"runbook_url\": \"https://wiki.internal.example.com/runbooks/billing-api\", \"dashboard_url\": \"https://grafana.internal.example.com/d/billing-api-prod\", \"escalation_policy\": \"payments-primary\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add lifecycle notes: keep this record active, review it quarterly, and mark the next review for September 1, 2026."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/lifecycle\", \"value\": {\"status\": \"active\", \"review_cadence\": \"quarterly\", \"next_review_date\": \"2026-09-01\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Finish with the retention rules: keep deployment artifacts for 180 days, archive them to Glacier, clear temporary files after one day, and require approval before purging."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/retention_policy\", \"value\": {\"artifact_retention_days\": 180, \"archive_storage_class\": \"Glacier\", \"temp_file_ttl_hours\": 24, \"purge_requires_approval\": true}}]"
+    }
+  ],
+  "edit_instruction": "Remove the log-forwarder sidecar from the pod.",
+  "theme": "Removing a sidecar container",
+  "conversation_pattern": "Center the artifact on a pod with several containers, each with a name, a CPU request, a memory request, and an exposed port, where the pod's container_count, total_cpu, total_memory (stated sums over the containers), and exposed_port_list aggregate over the included containers. Around this core, add the realistic, independent details a deployment record would carry that do not depend on the container list, and vary the number of containers from sample to sample.",
+  "edit_pattern": "Remove one specific sidecar container from the pod.",
+  "cascade_pattern": "Removing the container deletes it from the container list, lowers container_count, removes its port from exposed_port_list, and re-derives total_cpu and total_memory as the stated sums over the remaining containers. Unrelated deployment metadata stays unchanged.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "service_name": "billing-api",
+    "pod": {
+      "containers": [
+        {
+          "name": "billing-api",
+          "cpu_request_millicores": 500,
+          "memory_request_mib": 1024,
+          "exposed_port": 8080
+        },
+        {
+          "name": "metrics-agent",
+          "cpu_request_millicores": 100,
+          "memory_request_mib": 128,
+          "exposed_port": 9090
+        },
+        {
+          "name": "log-forwarder",
+          "cpu_request_millicores": 150,
+          "memory_request_mib": 256,
+          "exposed_port": 24224
+        },
+        {
+          "name": "auth-proxy",
+          "cpu_request_millicores": 250,
+          "memory_request_mib": 512,
+          "exposed_port": 4180
+        }
+      ],
+      "container_count": 4,
+      "total_cpu_request_millicores": 1000,
+      "total_memory_request_mib": 1920,
+      "exposed_port_list": [
+        8080,
+        9090,
+        24224,
+        4180
+      ]
+    },
+    "deployment": {
+      "environment": "production",
+      "namespace": "payments",
+      "region": "us-east-1",
+      "rollout_strategy": {
+        "type": "RollingUpdate",
+        "replicas": 3,
+        "max_surge": 1
+      }
+    },
+    "release": {
+      "version": "2026.06.0",
+      "change_ticket": "CHG-48291",
+      "requested_by": "mira.chen"
+    },
+    "health_checks": {
+      "readiness_path": "/ready",
+      "liveness_path": "/live",
+      "timeout_seconds": 5
+    },
+    "image": {
+      "registry": "registry.internal.example.com",
+      "repository": "payments/billing-api",
+      "tag": "2026.06.0"
+    },
+    "identity": {
+      "service_account": "billing-api-sa",
+      "app_label": "billing-api",
+      "tier_label": "backend"
+    },
+    "scheduling": {
+      "node_pool": "payments-linux",
+      "priority_class": "standard",
+      "topology_spread_key": "topology.kubernetes.io/zone"
+    },
+    "networking": {
+      "service_type": "ClusterIP",
+      "protocol": "HTTP",
+      "session_affinity": "None"
+    },
+    "traffic_policy": {
+      "retry_attempts": 2,
+      "request_timeout_seconds": 30,
+      "mtls_enabled": true
+    },
+    "observability": {
+      "telemetry_backend": "datadog",
+      "trace_sample_rate": 0.1,
+      "log_retention_days": 14
+    },
+    "autoscaling": {
+      "min_replicas": 3,
+      "max_replicas": 8,
+      "target_cpu_utilization_percent": 60
+    },
+    "security_context": {
+      "run_as_non_root": true,
+      "read_only_root_filesystem": true,
+      "seccomp_profile": "RuntimeDefault"
+    },
+    "configuration": {
+      "config_map": "billing-api-config",
+      "secret_ref": "payments-prod-secrets",
+      "timezone": "UTC"
+    },
+    "database": {
+      "host": "billing-prod.cluster.local",
+      "name": "billing",
+      "ssl_required": true
+    },
+    "cache": {
+      "endpoint": "redis-payments.prod.svc",
+      "database_index": 0,
+      "default_ttl_seconds": 600
+    },
+    "incident_response": {
+      "owner_team": "payments-platform",
+      "severity": "critical",
+      "notification_channel": "pagerduty"
+    },
+    "backup": {
+      "schedule": "nightly",
+      "retention_days": 30,
+      "restore_test_enabled": true
+    },
+    "compliance": {
+      "pci_scope": true,
+      "encryption_in_transit": true,
+      "audit_log_index": "finance-audit"
+    },
+    "maintenance_window": {
+      "day": "Sunday",
+      "start_time_utc": "02:00",
+      "duration_minutes": 60
+    },
+    "alerts": {
+      "availability_slo_percent": 99.9,
+      "error_rate_threshold_percent": 2,
+      "p95_latency_threshold_ms": 300
+    },
+    "release_safety": {
+      "auto_pause_on_failure": true,
+      "promotion_delay_minutes": 10,
+      "notification_sink": "slack"
+    },
+    "cost_tracking": {
+      "cost_center": "FIN-240",
+      "budget_code": "PAY-PROD-2026",
+      "chargeback_enabled": true
+    },
+    "operator_references": {
+      "runbook_url": "https://wiki.internal.example.com/runbooks/billing-api",
+      "dashboard_url": "https://grafana.internal.example.com/d/billing-api-prod",
+      "escalation_policy": "payments-primary"
+    },
+    "lifecycle": {
+      "status": "active",
+      "review_cadence": "quarterly",
+      "next_review_date": "2026-09-01"
+    },
+    "retention_policy": {
+      "artifact_retention_days": 180,
+      "archive_storage_class": "Glacier",
+      "temp_file_ttl_hours": 24,
+      "purge_requires_approval": true
+    }
+  }
+}

@@ -1,0 +1,395 @@
+{
+  "id": "org_access_plan_L50_02",
+  "domain": "org_access_plan",
+  "target_leaves": 50,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start an access plan for the Corporate Procurement platform."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan\", \"value\": {\"system_name\": \"Corporate Procurement Platform\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the spending authority for this plan at 45000 dollars."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/approval_limit_usd\", \"value\": 45000}]"
+    },
+    {
+      "role": "user",
+      "content": "Use 50000 dollars as the point where the stricter access controls kick in."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/elevated_approval_rule\", \"value\": {\"threshold_usd\": 50000}}]"
+    },
+    {
+      "role": "user",
+      "content": "For amounts at or below that point, keep it to manager signoff, no multifactor requirement, and quarterly reviews."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/elevated_approval_rule/at_or_below_threshold\", \"value\": {\"approval_steps\": [\"Manager approval\"], \"mfa_required\": false, \"review_cadence\": \"quarterly\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "When the amount goes above that point, add VP co-approval after the manager signoff."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/elevated_approval_rule/above_threshold\", \"value\": {\"extra_approval_step\": \"VP co-approval\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For that stricter situation, require multifactor and move the reviews to monthly."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/elevated_approval_rule/above_threshold/mfa_required\", \"value\": true}, {\"op\": \"add\", \"path\": \"/access_plan/elevated_approval_rule/above_threshold/review_cadence\", \"value\": \"monthly\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Since the current amount is below the stricter point, make the live setup manager signoff only, with no multifactor and quarterly check-ins."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/current_controls\", \"value\": {\"approval_steps\": [\"Manager approval\"], \"mfa_required\": false, \"review_cadence\": \"quarterly\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Make Priya Shah from Procurement Operations responsible for this plan, and use priya.shah@example.com for contact."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/owner\", \"value\": {\"name\": \"Priya Shah\", \"department\": \"Procurement Operations\", \"email\": \"priya.shah@example.com\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Limit this plan to purchase request creators working in North America on the production environment."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/scope\", \"value\": {\"user_group\": \"Purchase request creators\", \"region\": \"North America\", \"environment\": \"production\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Treat the covered purchase data as confidential, with supplier banking details included and no customer personal data involved."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/data_handling\", \"value\": {\"classification\": \"confidential\", \"includes_supplier_banking\": true, \"includes_customer_pii\": false}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a first safety note to watch for unusual supplier changes, with risk rated medium and the control handled through vendor master review."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/risk_controls\", \"value\": [{\"risk\": \"Unusual supplier changes\", \"rating\": \"medium\", \"mitigation\": \"Vendor master review\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Add another safety note for excessive purchase splitting, mark it high risk, and use spend pattern monitoring as the control."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/risk_controls/-\", \"value\": {\"risk\": \"Excessive purchase splitting\", \"rating\": \"high\", \"mitigation\": \"Spend pattern monitoring\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have activity logs retained for 365 days, reviewed by the procurement systems team, and stored in the central SIEM."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/audit_logging\", \"value\": {\"retention_days\": 365, \"review_owner\": \"Procurement Systems Team\", \"destination\": \"central SIEM\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For emergency access, allow a four-hour window, require incident ticket approval, and send alerts to security operations."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/emergency_access\", \"value\": {\"max_duration_hours\": 4, \"approval_source\": \"incident ticket\", \"alert_recipient\": \"Security Operations\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For onboarding, require the procurement access course, a ServiceNow request, and manager attestation before anyone is granted access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/onboarding_requirements\", \"value\": {\"training\": \"Procurement access course\", \"request_channel\": \"ServiceNow request\", \"attestation\": \"manager attestation\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "When someone leaves the role, remove access within one business day, have HR feed trigger it, and make identity governance carry it out."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/offboarding\", \"value\": {\"removal_sla_business_days\": 1, \"trigger\": \"HR feed\", \"executor\": \"Identity Governance\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add an exception process where waivers can last up to 30 days, need the compliance officer to sign off, and must be tracked in the GRC register."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/exception_process\", \"value\": {\"max_waiver_days\": 30, \"approver\": \"Compliance Officer\", \"tracking_location\": \"GRC register\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the rollout for March 15, 2026, make it apply to the North America procurement wave, and mark it as approved for launch."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/rollout\", \"value\": {\"date\": \"2026-03-15\", \"wave\": \"North America procurement\", \"status\": \"approved for launch\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "For support questions, route people to the access help desk, use access-help@example.com, and promise a two-business-day response."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/support\", \"value\": {\"team\": \"Access Help Desk\", \"email\": \"access-help@example.com\", \"response_sla_business_days\": 2}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a final note that this plan maps to SOX control AC-17 and is tested by internal audit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_plan/compliance_mapping\", \"value\": {\"control_id\": \"SOX AC-17\", \"testing_owner\": \"Internal Audit\"}}]"
+    }
+  ],
+  "edit_instruction": "Please raise the spending authority for this plan to 75000 dollars.",
+  "theme": "Crossing the elevated-approval threshold",
+  "conversation_pattern": "Center the artifact on an access plan with an approval_limit_usd and a STATED threshold rule with two explicit branches: if the approval limit exceeds the threshold, an extra approval step (a specific stated approver, e.g. 'VP co-approval') is appended to the approval steps, mfa_required becomes true, and review_cadence shortens to a specific stated stricter value; if the limit is at or below the threshold, the approval steps, mfa, and cadence stay at their stated baseline. Record the threshold and both branch targets explicitly. Around this core, add realistic independent details that do not depend on the limit, and vary their number from sample to sample.",
+  "edit_pattern": "Change the approval_limit_usd to a specific new amount.",
+  "cascade_pattern": "Editing the approval limit updates it, AND — only if the new amount crosses the stated threshold relative to before — appends the stated extra approval step, sets mfa_required true, and shortens review_cadence to the stated value. If the threshold is not crossed, those fields stay unchanged. The outcome is determined by the stated threshold and branch targets.",
+  "requires_master_data": false,
+  "master_data": null,
+  "current_json": {
+    "access_plan": {
+      "system_name": "Corporate Procurement Platform",
+      "approval_limit_usd": 45000,
+      "elevated_approval_rule": {
+        "threshold_usd": 50000,
+        "at_or_below_threshold": {
+          "approval_steps": [
+            "Manager approval"
+          ],
+          "mfa_required": false,
+          "review_cadence": "quarterly"
+        },
+        "above_threshold": {
+          "extra_approval_step": "VP co-approval",
+          "mfa_required": true,
+          "review_cadence": "monthly"
+        }
+      },
+      "current_controls": {
+        "approval_steps": [
+          "Manager approval"
+        ],
+        "mfa_required": false,
+        "review_cadence": "quarterly"
+      },
+      "owner": {
+        "name": "Priya Shah",
+        "department": "Procurement Operations",
+        "email": "priya.shah@example.com"
+      },
+      "scope": {
+        "user_group": "Purchase request creators",
+        "region": "North America",
+        "environment": "production"
+      },
+      "data_handling": {
+        "classification": "confidential",
+        "includes_supplier_banking": true,
+        "includes_customer_pii": false
+      },
+      "risk_controls": [
+        {
+          "risk": "Unusual supplier changes",
+          "rating": "medium",
+          "mitigation": "Vendor master review"
+        },
+        {
+          "risk": "Excessive purchase splitting",
+          "rating": "high",
+          "mitigation": "Spend pattern monitoring"
+        }
+      ],
+      "audit_logging": {
+        "retention_days": 365,
+        "review_owner": "Procurement Systems Team",
+        "destination": "central SIEM"
+      },
+      "emergency_access": {
+        "max_duration_hours": 4,
+        "approval_source": "incident ticket",
+        "alert_recipient": "Security Operations"
+      },
+      "onboarding_requirements": {
+        "training": "Procurement access course",
+        "request_channel": "ServiceNow request",
+        "attestation": "manager attestation"
+      },
+      "offboarding": {
+        "removal_sla_business_days": 1,
+        "trigger": "HR feed",
+        "executor": "Identity Governance"
+      },
+      "exception_process": {
+        "max_waiver_days": 30,
+        "approver": "Compliance Officer",
+        "tracking_location": "GRC register"
+      },
+      "rollout": {
+        "date": "2026-03-15",
+        "wave": "North America procurement",
+        "status": "approved for launch"
+      },
+      "support": {
+        "team": "Access Help Desk",
+        "email": "access-help@example.com",
+        "response_sla_business_days": 2
+      },
+      "compliance_mapping": {
+        "control_id": "SOX AC-17",
+        "testing_owner": "Internal Audit"
+      }
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/access_plan/approval_limit_usd",
+      "kind": "direct",
+      "value": 75000
+    },
+    {
+      "op": "add",
+      "path": "/access_plan/current_controls/approval_steps/-",
+      "kind": "cascade",
+      "value": "VP co-approval"
+    },
+    {
+      "op": "replace",
+      "path": "/access_plan/current_controls/mfa_required",
+      "kind": "cascade",
+      "value": true
+    },
+    {
+      "op": "replace",
+      "path": "/access_plan/current_controls/review_cadence",
+      "kind": "cascade",
+      "value": "monthly"
+    }
+  ],
+  "expected_json": {
+    "access_plan": {
+      "system_name": "Corporate Procurement Platform",
+      "approval_limit_usd": 75000,
+      "elevated_approval_rule": {
+        "threshold_usd": 50000,
+        "at_or_below_threshold": {
+          "approval_steps": [
+            "Manager approval"
+          ],
+          "mfa_required": false,
+          "review_cadence": "quarterly"
+        },
+        "above_threshold": {
+          "extra_approval_step": "VP co-approval",
+          "mfa_required": true,
+          "review_cadence": "monthly"
+        }
+      },
+      "current_controls": {
+        "approval_steps": [
+          "Manager approval",
+          "VP co-approval"
+        ],
+        "mfa_required": true,
+        "review_cadence": "monthly"
+      },
+      "owner": {
+        "name": "Priya Shah",
+        "department": "Procurement Operations",
+        "email": "priya.shah@example.com"
+      },
+      "scope": {
+        "user_group": "Purchase request creators",
+        "region": "North America",
+        "environment": "production"
+      },
+      "data_handling": {
+        "classification": "confidential",
+        "includes_supplier_banking": true,
+        "includes_customer_pii": false
+      },
+      "risk_controls": [
+        {
+          "risk": "Unusual supplier changes",
+          "rating": "medium",
+          "mitigation": "Vendor master review"
+        },
+        {
+          "risk": "Excessive purchase splitting",
+          "rating": "high",
+          "mitigation": "Spend pattern monitoring"
+        }
+      ],
+      "audit_logging": {
+        "retention_days": 365,
+        "review_owner": "Procurement Systems Team",
+        "destination": "central SIEM"
+      },
+      "emergency_access": {
+        "max_duration_hours": 4,
+        "approval_source": "incident ticket",
+        "alert_recipient": "Security Operations"
+      },
+      "onboarding_requirements": {
+        "training": "Procurement access course",
+        "request_channel": "ServiceNow request",
+        "attestation": "manager attestation"
+      },
+      "offboarding": {
+        "removal_sla_business_days": 1,
+        "trigger": "HR feed",
+        "executor": "Identity Governance"
+      },
+      "exception_process": {
+        "max_waiver_days": 30,
+        "approver": "Compliance Officer",
+        "tracking_location": "GRC register"
+      },
+      "rollout": {
+        "date": "2026-03-15",
+        "wave": "North America procurement",
+        "status": "approved for launch"
+      },
+      "support": {
+        "team": "Access Help Desk",
+        "email": "access-help@example.com",
+        "response_sla_business_days": 2
+      },
+      "compliance_mapping": {
+        "control_id": "SOX AC-17",
+        "testing_owner": "Internal Audit"
+      }
+    }
+  },
+  "value_constraints": [],
+  "annotator": "claude-pass1",
+  "annotation_notes": "limit 45000->75000 > 50000 threshold -> elevated branch on current_controls: append VP co-approval, mfa true, monthly.",
+  "annotated": true,
+  "excluded": false
+}

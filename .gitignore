@@ -1,0 +1,44 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+.uv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.hypothesis/
+
+# Node
+node_modules/
+
+# secrets
+docker/.env
+.env
+
+# results & artifacts
+results/*
+!results/paper_runs/
+figures/
+*.log
+nohup.out
+
+# benchmark/ runtime artifacts (LLM samples + human annotations).
+# The 150-case dataset is checked in under `raw/` (sources) and `annotated/`
+# (gold annotations); everything else under benchmark/data/ is
+# intermediate/experimental output and stays ignored.
+benchmark/data/*
+!benchmark/data/raw/
+!benchmark/data/annotated/
+# local scratch archives inside the tracked data dirs
+benchmark/data/raw/old/
+benchmark/data/annotated/old/
+# dev/test split definition (canonical, reproducible via `python -m benchmark.split`);
+# the annotated_dev/ and annotated_test/ copy dirs stay ignored (regenerable).
+!benchmark/data/split_dev30_test120.json
+
+# huggingface caches
+.cache/
+
+# litellm disk response cache
+.litellm_cache/

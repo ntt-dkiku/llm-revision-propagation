@@ -1,0 +1,91 @@
+{
+  "id": "org_access_plan_L10_04",
+  "domain": "org_access_plan",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's start an access plan and call it Support Ops Remote Access."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/plan_name\", \"value\": \"Support Ops Remote Access\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Set the current limit so no access session should run longer than 60 minutes."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/max_session_timeout_minutes\", \"value\": 60}]"
+    },
+    {
+      "role": "user",
+      "content": "Also note the rule reviewers should use: access is okay only when the session length is no more than the plan’s limit; anything over the limit must be reduced to that limit and marked as not okay."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/compliance_rule\", \"value\": \"An entry is compliant iff session_timeout_minutes is at most max_session_timeout_minutes; any entry exceeding the max must be clamped to the max and flagged non_compliant.\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the helpdesk agent access, with a 45-minute session, and mark it as okay under the current limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries\", \"value\": {\"helpdesk_agent\": {\"session_timeout_minutes\": 45, \"compliance_flag\": \"compliant\"}}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include database administrator access too, with a 75-minute session, and mark it as not okay because it’s above the current limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/database_admin\", \"value\": {\"session_timeout_minutes\": 75, \"compliance_flag\": \"non_compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add security auditor access as well, with a 30-minute session, and mark it as okay under the current limit."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/access_entries/security_auditor\", \"value\": {\"session_timeout_minutes\": 30, \"compliance_flag\": \"compliant\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Have the governance team review this plan every 90 days."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/review_interval_days\", \"value\": 90}]"
+    }
+  ],
+  "edit_instruction": "Please tighten the plan’s maximum session length to 40 minutes.",
+  "theme": "Tightening the session-timeout policy",
+  "master_data": null,
+  "current_json": {
+    "plan_name": "Support Ops Remote Access",
+    "max_session_timeout_minutes": 60,
+    "compliance_rule": "An entry is compliant iff session_timeout_minutes is at most max_session_timeout_minutes; any entry exceeding the max must be clamped to the max and flagged non_compliant.",
+    "access_entries": {
+      "helpdesk_agent": {
+        "session_timeout_minutes": 45,
+        "compliance_flag": "compliant"
+      },
+      "database_admin": {
+        "session_timeout_minutes": 75,
+        "compliance_flag": "non_compliant"
+      },
+      "security_auditor": {
+        "session_timeout_minutes": 30,
+        "compliance_flag": "compliant"
+      }
+    },
+    "review_interval_days": 90
+  },
+  "conversation_pattern": "Center the artifact on an access plan listing several access entries, each with a session_timeout_minutes value and a compliance flag, governed by a stated policy field 'max_session_timeout_minutes' with an explicit rule: an entry is compliant iff its timeout is at most the policy max; an entry exceeding it must be clamped down to the max and flagged 'non_compliant'. Make some entries compliant and some not under the current policy, and ensure every entry's initial compliance flag already matches the stated rule under the current policy (an entry within the current max is compliant). Around this core, add realistic independent details that do not depend on the policy, and vary the number of entries from sample to sample.",
+  "edit_pattern": "Tighten the max_session_timeout_minutes to a specific stricter (smaller) value.",
+  "cascade_pattern": "Tightening the policy clamps the timeout of only those entries whose timeout now exceeds the new max down to that max and flips their flag to 'non_compliant'; entries already within the new max and all unrelated fields stay unchanged. The affected set is determined by comparing each entry's stated timeout to the new policy max.",
+  "requires_master_data": false
+}

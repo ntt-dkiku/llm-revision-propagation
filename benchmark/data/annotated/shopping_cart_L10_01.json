@@ -1,0 +1,163 @@
+{
+  "id": "shopping_cart_L10_01",
+  "domain": "shopping_cart",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "I’m putting together a cart for a Samsung Galaxy S24 to start."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart\", \"value\": {\"base_product\": \"Samsung Galaxy S24\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the matching protective case for that phone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories\", \"value\": [{\"category\": \"case\", \"item\": \"Samsung Galaxy S24 Silicone Case\"}]}]"
+    },
+    {
+      "role": "user",
+      "content": "Please include the screen protector that fits this exact model too."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"screen_protector\", \"item\": \"Samsung Galaxy S24 Tempered Glass Screen Protector\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add the wireless charger that goes with this phone as well."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"wireless_charger\", \"item\": \"Samsung 15W Wireless Charger Duo\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Include a camera lens protector made for this same phone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/accessories/-\", \"value\": {\"category\": \"camera_lens_protector\", \"item\": \"Samsung Galaxy S24 Camera Lens Protector\"}}]"
+    },
+    {
+      "role": "user",
+      "content": "Add a quick note confirming that everything picked so far fits this phone."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/cart/compatibility_note\", \"value\": \"All selected accessories fit the Samsung Galaxy S24.\"}]"
+    }
+  ],
+  "edit_instruction": "Switch the phone in the cart to the Google Pixel 9.",
+  "theme": "Swapping the base product and its compatible accessories",
+  "master_data": {
+    "Google Pixel 9": {
+      "accessories": {
+        "case": "Google Pixel 9 Silicone Case",
+        "screen_protector": "Google Pixel 9 Tempered Glass Screen Protector",
+        "wireless_charger": "Google Pixel Stand 2nd Gen",
+        "camera_lens_protector": "Google Pixel 9 Camera Lens Protector"
+      },
+      "compatibility_note": "All selected accessories fit the Google Pixel 9."
+    }
+  },
+  "current_json": {
+    "cart": {
+      "base_product": "Samsung Galaxy S24",
+      "accessories": [
+        {
+          "category": "case",
+          "item": "Samsung Galaxy S24 Silicone Case"
+        },
+        {
+          "category": "screen_protector",
+          "item": "Samsung Galaxy S24 Tempered Glass Screen Protector"
+        },
+        {
+          "category": "wireless_charger",
+          "item": "Samsung 15W Wireless Charger Duo"
+        },
+        {
+          "category": "camera_lens_protector",
+          "item": "Samsung Galaxy S24 Camera Lens Protector"
+        }
+      ],
+      "compatibility_note": "All selected accessories fit the Samsung Galaxy S24."
+    }
+  },
+  "expected_patch": [
+    {
+      "op": "replace",
+      "path": "/cart/base_product",
+      "kind": "direct",
+      "value": "Google Pixel 9"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/0/item",
+      "kind": "cascade",
+      "value": "Google Pixel 9 Silicone Case"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/1/item",
+      "kind": "cascade",
+      "value": "Google Pixel 9 Tempered Glass Screen Protector"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/2/item",
+      "kind": "cascade",
+      "value": "Google Pixel Stand 2nd Gen"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/accessories/3/item",
+      "kind": "cascade",
+      "value": "Google Pixel 9 Camera Lens Protector"
+    },
+    {
+      "op": "replace",
+      "path": "/cart/compatibility_note",
+      "kind": "cascade",
+      "value": "All selected accessories fit the Google Pixel 9."
+    }
+  ],
+  "expected_json": {
+    "cart": {
+      "base_product": "Google Pixel 9",
+      "accessories": [
+        {
+          "category": "case",
+          "item": "Google Pixel 9 Silicone Case"
+        },
+        {
+          "category": "screen_protector",
+          "item": "Google Pixel 9 Tempered Glass Screen Protector"
+        },
+        {
+          "category": "wireless_charger",
+          "item": "Google Pixel Stand 2nd Gen"
+        },
+        {
+          "category": "camera_lens_protector",
+          "item": "Google Pixel 9 Camera Lens Protector"
+        }
+      ],
+      "compatibility_note": "All selected accessories fit the Google Pixel 9."
+    }
+  },
+  "value_constraints": [],
+  "annotator": "Daisuke Kikuta and Claude Opus 4.8",
+  "annotation_notes": "Swap base to Google Pixel 9; each accessory takes the master value; compatibility_note updates.",
+  "annotated": true,
+  "conversation_pattern": "Center the artifact on a cart with one base product and several accessories whose choice depends on that base, each being the one valid for it. Around this core, add the realistic, independent details a cart would carry that do not depend on the base product, and vary their number from sample to sample.",
+  "edit_pattern": "Change the base product (device, platform, or model) to a different specific one.",
+  "cascade_pattern": "Each base-dependent accessory switches to the one valid for the new base (the valid accessories for the new base are supplied with the edit instruction), while accessories and fields that do not depend on the base stay. This is determined because the valid accessories for the new base are provided with the edit.",
+  "requires_master_data": true
+}

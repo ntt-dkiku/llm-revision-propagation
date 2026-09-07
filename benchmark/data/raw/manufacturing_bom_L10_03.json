@@ -1,0 +1,99 @@
+{
+  "id": "manufacturing_bom_L10_03",
+  "domain": "manufacturing_bom",
+  "target_leaves": 10,
+  "generator": "openai/gpt-5.5",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "Let's begin the manufacturing plan with a target of 5,000 usable units."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturing_plan\", \"value\": {\"usable_unit_target\": 5000}}]"
+    },
+    {
+      "role": "user",
+      "content": "Plan around an expected production loss of 8%."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturing_plan/scrap_rate_percent\", \"value\": 8}]"
+    },
+    {
+      "role": "user",
+      "content": "Use the usual gross-up math so the starting quantity is rounded up after allowing for that loss."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturing_plan/raw_unit_requirement_formula\", \"value\": \"ceil(usable_unit_target / (1 - scrap_rate_percent / 100))\"}]"
+    },
+    {
+      "role": "user",
+      "content": "Go ahead and calculate the starting quantity needed from those assumptions."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturing_plan/raw_units_required\", \"value\": 5435}]"
+    },
+    {
+      "role": "user",
+      "content": "Also show how many units we'd expect to lose under that plan."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturing_plan/waste_units_estimate\", \"value\": 435}]"
+    },
+    {
+      "role": "user",
+      "content": "Base the material pricing on $2.75 for each unit we start with."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturing_plan/costing\", \"value\": {\"material_cost_per_raw_unit\": 2.75}}]"
+    },
+    {
+      "role": "user",
+      "content": "Please calculate the material dollars for the full starting quantity, and also show the part of that tied to expected loss."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturing_plan/costing/cost_totals\", \"value\": {\"total_material_cost\": 14946.25, \"estimated_waste_material_cost\": 1196.25}}]"
+    },
+    {
+      "role": "user",
+      "content": "Schedule the run on Line 3 during the day shift."
+    },
+    {
+      "role": "assistant",
+      "content": "[{\"op\": \"add\", \"path\": \"/manufacturing_plan/production_schedule\", \"value\": {\"line\": \"Line 3\", \"shift\": \"Day\"}}]"
+    }
+  ],
+  "edit_instruction": "Update the expected production loss to 12%.",
+  "theme": "Changing the scrap rate",
+  "master_data": null,
+  "current_json": {
+    "manufacturing_plan": {
+      "usable_unit_target": 5000,
+      "scrap_rate_percent": 8,
+      "raw_unit_requirement_formula": "ceil(usable_unit_target / (1 - scrap_rate_percent / 100))",
+      "raw_units_required": 5435,
+      "waste_units_estimate": 435,
+      "costing": {
+        "material_cost_per_raw_unit": 2.75,
+        "cost_totals": {
+          "total_material_cost": 14946.25,
+          "estimated_waste_material_cost": 1196.25
+        }
+      },
+      "production_schedule": {
+        "line": "Line 3",
+        "shift": "Day"
+      }
+    }
+  },
+  "conversation_pattern": "Center the artifact on a manufacturing plan with a stated scrap rate, usable-unit target, raw-unit requirement, waste estimate, and cost totals where raw demand derives from the target and scrap rate by stated formulas. Around this core, add the realistic, independent details a production record would carry that do not depend on scrap rate, and vary their number from sample to sample.",
+  "edit_pattern": "Change the scrap rate to a specific new percentage.",
+  "cascade_pattern": "Editing the scrap rate re-derives raw units required, waste estimate, and any cost totals that depend on raw demand from the stated formulas. The usable-unit target and per-unit costs stay unchanged.",
+  "requires_master_data": false
+}
