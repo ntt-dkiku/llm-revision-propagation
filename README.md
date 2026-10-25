@@ -1,10 +1,10 @@
 # [EMNLP 2026 Industry] What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation
 
 <p align="center">
-  <a href="" target="_blank"><img src="https://img.shields.io/badge/project-page-green"></a>
+  <a href="https://ntt-dkiku.github.io/llm-revision-propagation" target="_blank"><img src="https://img.shields.io/badge/project-page-green"></a>
+  <a href="https://aclanthology.org/2026.emnlp-industry.246/" target="_blank"><img src="https://img.shields.io/badge/emnlp-2026-blue"></a>
   <a href="https://arxiv.org/abs/2609.03254" target="_blank"><img src="https://img.shields.io/badge/arXiv-pdf-red"></a>
   <a href="https://alphaxiv.org/abs/2609.03254" target="_blank"><img src="https://img.shields.io/badge/alphaxiv-pdf-orange"></a>
-  <a href="" target="_blank"><img src="https://img.shields.io/badge/emnlp-2026-blue"></a>
 </p>
 
 This repo is the official implementation of "<a href="https://arxiv.org/abs/2609.03254" target="_blank">What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation</a>" (EMNLP 2026 Industry Track).
@@ -225,13 +225,20 @@ Our code is licensed by NTT. The use of our code is limited to research purposes
 ## 🤝 Citation
 If you find this work useful, please cite our paper as follows:
 ```
-@misc{kikuta2026llmrevprop,
-      title={What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation}, 
-      author={Daisuke Kikuta},
-      year={2026},
-      eprint={2609.03254},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2609.03254}, 
+@inproceedings{kikuta-2026-else,
+    title = "What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation",
+    author = "Kikuta, Daisuke",
+    editor = "Atanasova, Pepa  and
+      Haffari, Gholamreza  and
+      Wang, Minghan",
+    booktitle = "Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing: Industry Track",
+    month = oct,
+    year = "2026",
+    address = "Budapest, Hungary",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.emnlp-industry.246/",
+    pages = "4161--4177",
+    ISBN = "979-8-89176-460-6",
+    abstract = "Large Language Models (LLMs) often help users generate artifacts through iterative cycles of generation and revision in conversation. A challenge here is that, when users specify only a local change during revision, LLMs must instead identify the relevant dependencies and propagate the revision to all affected parts of the artifact. This paper studies this ability of LLMs on conversationally generated artifacts, where the artifact context and its dependencies may be embedded in the conversation history. Toward practical use, we also explore cost-effective test-time compute for this new setting. Specifically, we introduce a new benchmark for this setting, and evaluate nine revision methods, including sequential reflection and parallel sampling variants, using gpt-oss-20b/120b, gpt-5.4-mini, and qwen3.5-9b/27b/122b on the benchmark. The results show that baselines achieve accuracies of 68.3{--}93{\%}, and the most cost-effective method is selecting from three parallel samples using either LLM-based or medoid selection, which improves accuracy by 2.2{--}9.7{\%}. Our code and dataset are available at https://github.com/ntt-dkiku/llm-revision-propagation."
 }
 ```
