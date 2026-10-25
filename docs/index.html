@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>
+document.documentElement.classList.add("js");
+try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+// Reload (Ctrl+R) keeps the reader's position. A "#section" left in the URL would otherwise make some
+// browsers jump to that section on reload, so drop it and restore the saved position ourselves.
+// Opening a shared link such as "#results" (a normal navigation) still jumps to that section.
+try {
+  const nav = performance.getEntriesByType("navigation")[0];
+  if (nav && nav.type === "reload") {
+    if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+    const y = Number(sessionStorage.getItem("revprop-scroll"));
+    if (y > 0) {
+      history.scrollRestoration = "manual";
+      const restore = () => scrollTo(0, y);
+      addEventListener("DOMContentLoaded", restore);
+      addEventListener("load", restore);
+      if (document.fonts) document.fonts.ready.then(restore);
+    }
+  }
+} catch (e) {}
+addEventListener("pagehide", () => { try { sessionStorage.setItem("revprop-scroll", String(Math.round(scrollY))); } catch (e) {} });
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation</title>
+<meta name="description" content="RevPropBench is a benchmark for revision propagation: whether LLMs can update every dependent part of a conversationally generated JSON artifact when a user requests only a local change. We evaluate nine revision methods (baselines, sequential reflection, parallel sampling with rule-based merge, medoid selection, and LLM-based selection) on six LLMs and find that selecting from three parallel samples is the most cost-effective test-time compute strategy. EMNLP 2026 Industry Track.">
+<meta name="keywords" content="revision propagation, RevPropBench, LLM benchmark, large language models, conversational artifact generation, multi-turn conversation, artifact editing, dependency propagation, JSON Patch, test-time compute, test-time scaling, parallel sampling, self-consistency, medoid selection, LLM-as-a-judge, sequential reflection, self-refinement, cost-effective inference, EMNLP 2026">
+<meta name="author" content="Daisuke Kikuta">
+<link rel="canonical" href="https://ntt-dkiku.github.io/llm-revision-propagation/">
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="RevPropBench">
+<meta property="og:url" content="https://ntt-dkiku.github.io/llm-revision-propagation/">
+<meta property="og:title" content="What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation">
+<meta property="og:description" content="RevPropBench is a benchmark for revision propagation: whether LLMs can update every dependent part of a conversationally generated JSON artifact when a user requests only a local change. We evaluate nine revision methods (baselines, sequential reflection, parallel sampling with rule-based merge, medoid selection, and LLM-based selection) on six LLMs and find that selecting from three parallel samples is the most cost-effective test-time compute strategy. EMNLP 2026 Industry Track.">
+<meta property="og:image" content="https://ntt-dkiku.github.io/llm-revision-propagation/static/images/overview.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation">
+<meta name="twitter:description" content="RevPropBench is a benchmark for revision propagation: whether LLMs can update every dependent part of a conversationally generated JSON artifact when a user requests only a local change. We evaluate nine revision methods (baselines, sequential reflection, parallel sampling with rule-based merge, medoid selection, and LLM-based selection) on six LLMs and find that selecting from three parallel samples is the most cost-effective test-time compute strategy. EMNLP 2026 Industry Track.">
+<meta name="twitter:image" content="https://ntt-dkiku.github.io/llm-revision-propagation/static/images/overview.png">
+<!-- Google Scholar (Highwire Press tags) -->
+<meta name="citation_title" content="What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation">
+<meta name="citation_author" content="Kikuta, Daisuke">
+<meta name="citation_publication_date" content="2026/10">
+<meta name="citation_conference_title" content="Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing: Industry Track">
+<meta name="citation_publisher" content="Association for Computational Linguistics">
+<meta name="citation_firstpage" content="4161">
+<meta name="citation_lastpage" content="4177">
+<meta name="citation_isbn" content="979-8-89176-460-6">
+<meta name="citation_abstract_html_url" content="https://aclanthology.org/2026.emnlp-industry.246/">
+<meta name="citation_pdf_url" content="https://aclanthology.org/2026.emnlp-industry.246.pdf">
+<meta name="citation_arxiv_id" content="2609.03254">
+<!-- Structured data (schema.org) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://ntt-dkiku.github.io/llm-revision-propagation/#paper",
+      "headline": "What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation",
+      "name": "What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation",
+      "alternativeHeadline": "RevPropBench: revision propagation benchmark for LLMs",
+      "abstract": "Large Language Models (LLMs) often help users generate artifacts through iterative cycles of generation and revision in conversation. A challenge here is that, when users specify only a local change during revision, LLMs must instead identify the relevant dependencies and propagate the revision to all affected parts of the artifact. This paper studies this ability of LLMs on conversationally generated artifacts, where the artifact context and its dependencies may be embedded in the conversation history. Toward practical use, we also explore cost-effective test-time compute for this new setting. Specifically, we introduce a new benchmark for this setting, and evaluate nine revision methods, including sequential reflection and parallel sampling variants, using gpt-oss-20b/120b, gpt-5.4-mini, and qwen3.5-9b/27b/122b on the benchmark. The results show that baselines achieve accuracies of 68.3–93%, and the most cost-effective method is selecting from three parallel samples using either LLM-based or medoid selection, which improves accuracy by 2.2–9.7%.",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Daisuke Kikuta",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "NTT, Inc."
+          },
+          "sameAs": [
+            "https://scholar.google.com/citations?user=0jYdmCMAAAAJ",
+            "https://www.linkedin.com/in/daisuke-kikuta-b454661a2",
+            "https://twitter.com/oookiku_rd"
+          ]
+        }
+      ],
+      "datePublished": "2026-10",
+      "inLanguage": "en",
+      "keywords": [
+        "revision propagation",
+        "RevPropBench",
+        "LLM benchmark",
+        "large language models",
+        "conversational artifact generation",
+        "multi-turn conversation",
+        "artifact editing",
+        "dependency propagation",
+        "JSON Patch",
+        "test-time compute",
+        "test-time scaling",
+        "parallel sampling",
+        "self-consistency",
+        "medoid selection",
+        "LLM-as-a-judge",
+        "sequential reflection",
+        "self-refinement",
+        "cost-effective inference",
+        "EMNLP 2026"
+      ],
+      "isPartOf": {
+        "@type": "PublicationEvent",
+        "name": "EMNLP 2026 Industry Track",
+        "location": {
+          "@type": "Place",
+          "name": "Budapest, Hungary"
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Association for Computational Linguistics"
+      },
+      "pagination": "4161-4177",
+      "isbn": "979-8-89176-460-6",
+      "url": "https://ntt-dkiku.github.io/llm-revision-propagation/",
+      "sameAs": [
+        "https://aclanthology.org/2026.emnlp-industry.246/",
+        "https://arxiv.org/abs/2609.03254"
+      ],
+      "image": "https://ntt-dkiku.github.io/llm-revision-propagation/static/images/overview.png"
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://ntt-dkiku.github.io/llm-revision-propagation/#dataset",
+      "name": "RevPropBench",
+      "description": "150 human-annotated cases (50 scenarios x 3 artifact sizes of 10/50/100 elements, 9 domains, 6 propagation patterns). Each case has a multi-turn conversation that builds a JSON artifact, a local revision request, and a gold JSON Patch with the direct edit plus every dependent change.",
+      "keywords": [
+        "revision propagation",
+        "RevPropBench",
+        "LLM benchmark",
+        "large language models",
+        "conversational artifact generation",
+        "multi-turn conversation",
+        "artifact editing",
+        "dependency propagation",
+        "JSON Patch",
+        "test-time compute"
+      ],
+      "creator": {
+        "@type": "Person",
+        "name": "Daisuke Kikuta",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "NTT, Inc."
+        },
+        "sameAs": [
+          "https://scholar.google.com/citations?user=0jYdmCMAAAAJ",
+          "https://www.linkedin.com/in/daisuke-kikuta-b454661a2",
+          "https://twitter.com/oookiku_rd"
+        ]
+      },
+      "url": "https://github.com/ntt-dkiku/llm-revision-propagation/tree/main/benchmark/data/annotated",
+      "isBasedOn": "https://ntt-dkiku.github.io/llm-revision-propagation/#paper",
+      "citation": "https://aclanthology.org/2026.emnlp-industry.246/"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://ntt-dkiku.github.io/llm-revision-propagation/#code",
+      "name": "llm-revision-propagation",
+      "description": "Official implementation of RevPropBench: dataset generation, annotation GUI, revision methods, and evaluation.",
+      "codeRepository": "https://github.com/ntt-dkiku/llm-revision-propagation",
+      "programmingLanguage": "Python",
+      "author": {
+        "@type": "Person",
+        "name": "Daisuke Kikuta",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "NTT, Inc."
+        },
+        "sameAs": [
+          "https://scholar.google.com/citations?user=0jYdmCMAAAAJ",
+          "https://www.linkedin.com/in/daisuke-kikuta-b454661a2",
+          "https://twitter.com/oookiku_rd"
+        ]
+      },
+      "citation": "https://aclanthology.org/2026.emnlp-industry.246/"
+    }
+  ]
+}
+</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔁</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --text: #15181d;
+  --text-2: #4a525e;
+  --text-3: #808893;
+  --line: #e6e8ec;
+  --soft: #f5f6f8;
+  --accent: #1f8a3a;
+  --accent-soft: #ebf6ee;
+  --on-accent: #ffffff;
+  --ok: #15803d;
+  --ok-soft: #eff8f2;
+  --ng: #d92d20;
+  --ng-soft: #fef3f2;
+  --btn-bg: #eef0f3;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d0f12;
+    --text: #eceef1;
+    --text-2: #a9b1bc;
+    --text-3: #727a86;
+    --line: #262a31;
+    --soft: #16191e;
+    --accent: #70c970;
+    --accent-soft: #14241a;
+    --on-accent: #0d0f12;
+    --ok: #5fc27a;
+    --ok-soft: #13211a;
+    --ng: #ff7d7d;
+    --ng-soft: #271616;
+    --btn-bg: rgba(255, 255, 255, .1);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d0f12;
+  --text: #eceef1;
+  --text-2: #a9b1bc;
+  --text-3: #727a86;
+  --line: #262a31;
+  --soft: #16191e;
+  --accent: #70c970;
+  --accent-soft: #14241a;
+  --on-accent: #0d0f12;
+  --ok: #5fc27a;
+  --ok-soft: #13211a;
+  --ng: #ff7d7d;
+  --ng-soft: #271616;
+  --btn-bg: rgba(255, 255, 255, .1);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 17px/1.7 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; height: auto; display: block; }
+strong { font-weight: 600; color: var(--text); }
+
+/* One column width for everything, so text, figures and tables share the same edges. */
+.container { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+
+section { padding: 48px 0; }
+h2 { text-align: center; color: var(--accent); font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; margin: 0 0 24px; }
+h3 { font-size: 1.1rem; font-weight: 600; margin: 56px 0 8px; }
+h2 + h3 { margin-top: 0; }
+h3 + .stats, h3 + ul.points { margin-top: 16px; }
+h3 + p + .stats { margin-top: 16px; }
+p { margin: 0 0 16px; color: var(--text-2); }
+
+/* ---------- hero ---------- */
+.hero { padding-top: 104px; padding-bottom: 48px; text-align: center; }
+.venue {
+  display: inline-block; font-size: .82rem; font-weight: 600; color: var(--accent);
+  background: var(--accent-soft); padding: 4px 12px; border-radius: 999px; margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.08;
+  margin: 0 0 16px;
+}
+.hero .subtitle {
+  font-size: clamp(1.05rem, 2.3vw, 1.25rem); font-weight: 700; line-height: 1.45; color: var(--text);
+  max-width: 760px; margin: 0 auto 10px;
+}
+.authors { margin: 0 0 24px; }
+.dev {
+  font: inherit; font-size: 1rem; color: var(--text-2); background: none; border: 0; padding: 2px 6px; cursor: pointer;
+  display: inline-block; transition: color .3s, transform .3s;
+}
+.dev:hover { color: var(--accent); transform: translateY(-1.5px); }
+.dev-name, .dev-affil { display: block; line-height: 1.5; }
+.dev-name { color: var(--text); font-weight: 500; transition: color .3s; }
+.dev:hover .dev-name { color: var(--accent); }
+.dev-affil { font-size: .92rem; }
+.dev .arrow { display: inline-block; font-size: .8rem; margin-left: 5px; transition: transform .3s ease; }
+.dev[aria-expanded="true"] .arrow { transform: rotate(180deg); }
+.social { display: flex; justify-content: center; gap: 1rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height .3s ease-out, opacity .3s ease-out; }
+.social.show { max-height: 50px; opacity: 1; padding-top: 6px; }
+.social a { color: var(--text-2); transition: color .3s, transform .3s; }
+.social a:hover { color: var(--accent); transform: translateY(-3px); }
+.social svg { width: 22px; height: 22px; display: block; }
+.links { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: .5rem 1.1rem; border-radius: 30px;
+  background: var(--btn-bg); color: var(--text);
+  font-weight: 500; font-size: 16px;
+  transition: background-color .3s, color .3s, transform .3s;
+}
+.btn:hover { text-decoration: none; background: var(--accent); color: var(--on-accent); transform: translateY(-3px); }
+.btn svg { width: 22px; height: 22px; fill: currentColor; }
+.hero .tldr { margin: 40px 0 0; text-align: left; }
+
+/* ---------- teaser (recreation of the paper's teaser figure, animated) ---------- */
+.tz-wrap { position: relative; margin-top: 40px; background: var(--soft); border-radius: 16px; padding: 32px 32px 20px; text-align: left; }
+.tz { max-width: 760px; margin: 0 auto; }
+.tz-phase { display: grid; grid-template-columns: 44px 1fr; column-gap: 10px; }
+.tz-phase + .tz-phase { margin-top: 22px; }
+.tz-axis { position: relative; }
+.tz-axis .line { position: absolute; left: 33px; top: 2px; height: calc(100% - 4px); width: 2px; background: var(--text); }
+.tz-axis .line::after {
+  content: ""; position: absolute; left: 50%; bottom: 1px; width: 11px; height: 11px;
+  border-right: 2px solid var(--text); border-bottom: 2px solid var(--text);
+  transform: translateX(-50%) rotate(45deg);
+}
+.tz-axis .lbl {
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl; font-weight: 700; font-size: 1.1rem; line-height: 1;
+}
+.tz-row { display: grid; grid-template-columns: 46px 1fr; gap: 14px; align-items: center; margin-bottom: 12px; }
+.tz-row:last-child { margin-bottom: 0; }
+.tz-icon img { width: 46px; height: 46px; object-fit: contain; display: block; }
+.tz-box {
+  border: 2px solid var(--text); border-radius: 10px; background: var(--bg); color: var(--text);
+  padding: 8px 16px; font-size: 1.05rem; line-height: 1.45; min-height: 46px;
+}
+.tz-dots { padding-left: 60px; text-align: center; font-size: 1.4rem; font-weight: 700; line-height: .9; margin: 0 0 4px; }
+.tz-out { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.tz-res .head { text-align: center; font-weight: 800; font-size: 1.3rem; line-height: 1.2; margin-bottom: 4px; }
+.tz-res.ng .head { color: var(--ng); }
+.tz-res.ok .head { color: var(--ok); }
+.tz-res .tz-box { font-size: 1rem; }
+.tz-res.ng .tz-box { border-color: var(--ng); border-width: 2.5px; }
+.tz-res.ok .tz-box { border-color: var(--ok); border-width: 2.5px; }
+.tz-warn { display: inline-block; color: var(--ng); font-weight: 700; font-size: .98rem; margin-top: 6px; }
+.tz-res.ng { text-align: center; }
+.tz-res.ng .tz-box { text-align: left; }
+.tz-fix { display: inline-block; white-space: nowrap; color: var(--ok); font-weight: 700; border-radius: 6px; }
+.tz-foot { border-top: 1px solid var(--line); margin-top: 26px; padding-top: 16px; }
+.tz-foot p { margin: 0; font-size: .93rem; color: var(--text-2); }
+.tz-replay {
+  position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; padding: 0; border: 0; border-radius: 8px;
+  display: grid; place-items: center; cursor: pointer;
+  background: transparent; color: var(--text-2); transition: opacity .3s ease, color .2s;
+}
+.tz-replay:hover { color: var(--accent); }
+.tz-replay svg { width: 20px; height: 20px; }
+
+/* animation states (only when JS is running; without JS everything is shown) */
+.js .tz .step { opacity: 0; transform-origin: left center; }
+.js .tz .step.on { opacity: 1; animation: tz-pop-in .42s cubic-bezier(.34, 1.56, .64, 1) both; }
+.js .tz .tz-res.step, .js .tz .tz-dots.step { transform-origin: center; }
+.js .tz .tz-axis .line { height: 0; opacity: 0; transition: height var(--dur, 3s) linear, opacity .2s ease; }
+.js .tz .tz-axis.on .line { height: calc(100% - 4px); opacity: 1; }
+.js .tz .tz-axis .lbl { opacity: 0; transition: opacity .5s ease; }
+.js .tz .tz-axis.on .lbl { opacity: 1; }
+.js .tz-replay { opacity: 0; pointer-events: none; }
+.js .tz-replay.show { opacity: 1; pointer-events: auto; }
+.js .tz.no-anim, .js .tz.no-anim * { transition: none !important; animation: none !important; }
+.tz-warn.shake { animation: tz-shake .5s ease; }
+.tz-fix.pop { animation: tz-pop .9s ease; }
+@keyframes tz-pop-in { 0% { opacity: 0; transform: scale(.4); } 55% { opacity: 1; } 100% { opacity: 1; transform: scale(1); } }
+@keyframes tz-shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+@keyframes tz-pop { 0% { transform: scale(1); background: transparent; } 35% { transform: scale(1.08); background: var(--ok-soft); } 100% { transform: scale(1); background: transparent; } }
+@media (prefers-reduced-motion: reduce) {
+  .js .tz .step, .js .tz .tz-axis .line, .js .tz .tz-axis .lbl { transition: none; }
+  .js .tz .step.on { animation: none !important; }
+}
+
+/* ---------- abstract ---------- */
+.tldr { background: var(--accent-soft); border-radius: 12px; padding: 18px 22px; margin-bottom: 28px; color: var(--text); }
+.tldr .k { display: block; font-size: .75rem; font-weight: 700; letter-spacing: .1em; color: var(--accent); margin-bottom: 4px; }
+ul.points { margin: 0 0 24px; padding-left: 1.2em; color: var(--text-2); }
+ul.points li { margin-bottom: 8px; }
+ul.points li::marker { color: var(--accent); }
+.tldr ul.points { margin: 6px 0 0; color: var(--text); }
+.tldr ul.points li:last-child { margin-bottom: 0; }
+
+/* ---------- stats ---------- */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 32px 0 0; }
+.stat { background: var(--soft); border-radius: 12px; padding: 20px 12px; text-align: center; }
+.stat .num { font-size: 1.9rem; font-weight: 700; letter-spacing: -.03em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat .lbl { font-size: .85rem; color: var(--text-3); margin-top: 6px; line-height: 1.4; }
+
+/* ---------- figures ---------- */
+figure { margin: 48px 0 0; }
+.fig { background: #fff; border-radius: 12px; overflow: hidden; }
+figcaption { color: var(--text-2); font-size: .9rem; line-height: 1.6; margin-top: 12px; }
+figcaption b { color: var(--text); font-weight: 600; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .fig { padding: 12px; } }
+:root[data-theme="dark"] .fig { padding: 12px; }
+
+/* ---------- methods ---------- */
+.methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+.mgroup { background: var(--soft); border-radius: 12px; padding: 20px; }
+.mgroup h4 { margin: 0 0 14px; font-size: .95rem; font-weight: 600; }
+#settings h3 { margin-top: 40px; }
+#settings .methods { margin-top: 16px; }
+.mgroup h4 .tag {
+  display: inline-block; vertical-align: 2px; margin-left: 6px; padding: 1px 8px; border-radius: 999px;
+  font-size: .72rem; font-weight: 600; letter-spacing: .02em;
+}
+.tag.local { color: var(--accent); background: var(--accent-soft); }
+.tag.commercial { color: var(--text-2); background: var(--line); }
+.mgroup dl { margin: 0; font-size: .92rem; }
+.mgroup dt { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .85rem; font-weight: 500; color: var(--accent); }
+.mgroup dd { margin: 2px 0 14px; color: var(--text-2); line-height: 1.55; }
+.mgroup dd:last-child { margin-bottom: 0; }
+
+/* ---------- findings ---------- */
+.note { font-size: .85rem; color: var(--text-3); margin: -12px 0 0; }
+
+
+/* ---------- bibtex ---------- */
+.bib { position: relative; }
+pre {
+  background: var(--soft); border-radius: 12px; padding: 20px 22px; overflow-x: auto; margin: 0;
+  font: 400 .84rem/1.65 "JetBrains Mono", ui-monospace, monospace; color: var(--text-2);
+}
+.copy {
+  position: absolute; top: 12px; right: 12px; cursor: pointer;
+  font: 500 .8rem Inter, sans-serif; padding: 6px 12px; border-radius: 8px;
+  background: var(--bg); color: var(--text); border: 1px solid var(--line);
+}
+.copy:hover { border-color: var(--text-3); }
+
+footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--text-3); font-size: .85rem; text-align: center; }
+
+/* ---------- top-right buttons (theme / menu) ---------- */
+.top-btns { position: fixed; top: 16px; right: 16px; z-index: 30; display: flex; gap: 8px; }
+.icon-btn {
+  width: 36px; height: 36px; cursor: pointer; padding: 0; border: 0; border-radius: 8px;
+  display: grid; place-items: center;
+  background: var(--bg); color: var(--text-2);
+  transition: color .2s;
+}
+.icon-btn:hover { color: var(--accent); }
+.icon-btn svg { width: 20px; height: 20px; }
+/* theme icon: moon while light (switch to dark), sun while dark (switch to light) */
+.i-sun { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .i-sun { display: block; }
+  :root:not([data-theme="light"]) .i-moon { display: none; }
+}
+:root[data-theme="dark"] .i-sun { display: block; }
+:root[data-theme="dark"] .i-moon { display: none; }
+/* hamburger -> X */
+.burger { position: relative; width: 18px; height: 14px; }
+.burger span { position: absolute; left: 0; width: 100%; height: 2px; border-radius: 1px; background: currentColor; transition: transform .3s, opacity .2s, top .3s; }
+.burger span:nth-child(1) { top: 0; }
+.burger span:nth-child(2) { top: 6px; }
+.burger span:nth-child(3) { top: 12px; }
+.menu-btn[aria-expanded="true"] .burger span:nth-child(1) { top: 6px; transform: rotate(45deg); }
+.menu-btn[aria-expanded="true"] .burger span:nth-child(2) { opacity: 0; }
+.menu-btn[aria-expanded="true"] .burger span:nth-child(3) { top: 6px; transform: rotate(-45deg); }
+
+/* ---------- table of contents ---------- */
+.toc { position: fixed; z-index: 20; }
+.toc ul { list-style: none; margin: 0; padding: 0; }
+.toc-title { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); margin: 0 0 10px 16px; }
+.toc a {
+  display: block; color: var(--text-3); font-size: .88rem; line-height: 1.4; padding: 6px 0 6px 14px;
+  border-left: 2px solid var(--line); transition: color .2s, border-color .2s;
+}
+.toc a:hover { color: var(--text); text-decoration: none; }
+.toc a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+section, .hero { scroll-margin-top: 8px; }
+@media (min-width: 1240px) {
+  .toc { top: 72px; right: max(16px, calc((100vw - 920px) / 2 - 196px)); width: 170px; }
+  .menu-btn { display: none; }
+}
+@media (max-width: 1239px) {
+  .toc {
+    top: 0; right: 0; height: 100%; width: 270px; padding: 80px 28px 28px;
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border-left: 1px solid var(--line);
+    transform: translateX(100%); visibility: hidden; transition: transform .3s ease, visibility 0s .3s;
+  }
+  .toc.open { transform: none; visibility: visible; transition: transform .3s ease, visibility 0s; }
+  .toc a { font-size: 1rem; padding: 9px 0 9px 14px; }
+}
+
+@media (max-width: 480px) {
+  .tz-out { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  section { padding: 36px 0; }
+  .hero { padding-top: 72px; padding-bottom: 36px; }
+  h2 { font-size: 1.5rem; }
+  h3 { margin-top: 44px; }
+  .tz-wrap { margin-top: 28px; padding: 46px 14px 16px; }
+  .tz-replay { top: 8px; right: 8px; }
+  .tz-phase { grid-template-columns: 30px 1fr; column-gap: 6px; }
+  .tz-axis .line { left: 24px; }
+  .tz-axis .lbl { font-size: .9rem; }
+  .tz-row { grid-template-columns: 36px 1fr; gap: 10px; }
+  .tz-icon img { width: 36px; height: 36px; }
+  .tz-box { font-size: .92rem; padding: 7px 12px; min-height: 0; }
+  .tz-res .tz-box { font-size: .9rem; }
+  .tz-dots { padding-left: 46px; }
+  .tz-res .head { font-size: 1.1rem; }
+  .tz-warn { font-size: .88rem; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .methods { grid-template-columns: 1fr; }
+  figure { margin-top: 36px; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-btns">
+  <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch color theme">
+    <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M1.5 12H4M20 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+  </button>
+  <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Table of contents" aria-expanded="false" aria-controls="toc">
+    <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+  </button>
+</div>
+
+<nav class="toc" id="toc" aria-label="Table of contents">
+  <p class="toc-title">Contents</p>
+  <ul>
+    <li><a href="#top">Top</a></li>
+    <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#benchmark">RevPropBench</a></li>
+    <li><a href="#settings">Evaluation Settings</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#citation">Citation</a></li>
+  </ul>
+</nav>
+
+<header class="hero container" id="top">
+  <div class="venue">EMNLP 2026 Industry Track</div>
+  <h1>What Else Needs Fixing?</h1>
+  <p class="subtitle">Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation</p>
+  <div class="authors">
+    <button class="dev" id="devName" type="button" aria-expanded="false" aria-controls="social"><span class="dev-name">Daisuke Kikuta<span class="arrow" aria-hidden="true">▼</span></span><span class="dev-affil">NTT, Inc.</span></button>
+    <div class="social" id="social">
+      <a href="mailto:daisuke.kikuta@ntt.com" aria-label="Email" tabindex="-1">
+        <svg viewBox="0 0 22 22" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/daisuke-kikuta-b454661a2" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" tabindex="-1">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://twitter.com/oookiku_rd" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" tabindex="-1">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://scholar.google.com/citations?hl=en&amp;user=0jYdmCMAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" tabindex="-1">
+        <svg viewBox="0 0 512 512" fill="currentColor"><path d="M390.9 298.5c0 0 0 .1 .1 .1c9.2 19.4 14.4 41.1 14.4 64C405.3 445.1 338.5 512 256 512s-149.3-66.9-149.3-149.3c0-22.9 5.2-44.6 14.4-64h0c1.7-3.6 3.6-7.2 5.6-10.7c4.4-7.6 9.4-14.7 15-21.3c27.4-32.6 68.5-53.3 114.4-53.3c33.6 0 64.6 11.1 89.6 29.9c9.1 6.9 17.4 14.7 24.8 23.5c5.6 6.6 10.6 13.8 15 21.3c2 3.4 3.8 7 5.5 10.5zm26.4-18.8c-30.1-58.4-91-98.4-161.3-98.4s-131.2 40-161.3 98.4L0 202.7 256 0 512 202.7l-94.7 77.1z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="links">
+    <a class="btn" href="https://aclanthology.org/2026.emnlp-industry.246/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>Paper
+    </a>
+    <a class="btn" href="https://alphaxiv.org/abs/2609.03254" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>alphaXiv
+    </a>
+    <a class="btn" href="https://github.com/ntt-dkiku/llm-revision-propagation/blob/main/resources/emnlp2026_Ind-885_slides_v2.pdf" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M21 3H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8v2H7v2h10v-2h-4v-2h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 12H4V5h16v10z"/></svg>Slides
+    </a>
+    <a class="btn" href="https://github.com/ntt-dkiku/llm-revision-propagation/blob/main/resources/EMNLP2026_Ind-885_poster.pdf" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M19 2H5a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zm-1 18H6V4h12v16zM8 6h8v5H8V6zm0 7h8v1.5H8V13zm0 3h5v1.5H8V16z"/></svg>Poster
+    </a>
+    <a class="btn" href="https://github.com/ntt-dkiku/llm-revision-propagation" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg>Code &amp; Dataset
+    </a>
+  </div>
+
+  <div class="tldr"><span class="k">TL;DR</span>We introduce <strong>RevPropBench</strong>, a benchmark for propagating a local revision to every dependent part of a conversationally generated JSON artifact. Across 6 LLMs and 9 revision methods, selecting from <strong>three parallel samples</strong> with an LLM or a medoid selector is the most cost-effective option.</div>
+
+  <!-- ============ Teaser: recreation of the paper's teaser figure, animated ============ -->
+</header>
+
+<main>
+
+<!-- ============ Abstract (slides: Background / Contributions) ============ -->
+<section id="abstract">
+  <div class="container">
+    <h2>Abstract</h2>
+    <p>Large Language Models (LLMs) often help users generate artifacts through iterative cycles of generation and revision in conversation. A challenge here is that, when users specify only a local change during revision, LLMs must instead identify the relevant dependencies and propagate the revision to all affected parts of the artifact. This paper studies this ability of LLMs on conversationally generated artifacts, where the artifact context and its dependencies may be embedded in the conversation history. Toward practical use, we also explore cost-effective test-time compute for this new setting. Specifically, we introduce a new benchmark for this setting, and evaluate nine revision methods, including sequential reflection and parallel sampling variants, using gpt-oss-20b/120b, gpt-5.4-mini, and qwen3.5-9b/27b/122b on the benchmark. The results show that baselines achieve accuracies of 68.3–93%, and the most cost-effective method is selecting from three parallel samples using either LLM-based or medoid selection, which improves accuracy by 2.2–9.7%.</p>
+    <div class="tz-wrap">
+      <button class="tz-replay" id="tzReplay" type="button" aria-label="Replay animation" title="Replay animation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 3v6h6"/></svg>
+      </button>
+      <div class="tz" id="teaser" role="img" aria-label="Revision propagation example. Generation: the user asks to plan a one-day sightseeing tour in NYC; the LLM answers with destinations A, B, C and a 9:00 to 20:00 schedule. The user says it is 3 people and asks for the budget; the LLM answers $200 times 3. Revision: the user asks to remove destination B. A bad revision (NG) updates destinations and schedule but misses the budget. A good revision (OK) also updates the budget to $180 times 3.">
+        <div class="tz-phase">
+          <div class="tz-axis step-axis" data-kind="axis" style="--dur: 3.6s"><span class="lbl">Generation</span><span class="line"></span></div>
+          <div>
+            <div class="tz-row step" data-kind="user"><div class="tz-icon"><img src="static/images/user_icon.png" alt="" width="46" height="46"></div><div class="tz-box">Plan a one-day sightseeing tour in NYC</div></div>
+            <div class="tz-row step" data-kind="bot"><div class="tz-icon"><img src="static/images/ai_icon.png" alt="" width="46" height="46"></div><div class="tz-box">Destinations: A, B, C, …, Schedule: 9:00&nbsp;–&nbsp;20:00</div></div>
+            <div class="tz-row step" data-kind="user"><div class="tz-icon"><img src="static/images/user_icon.png" alt="" width="46" height="46"></div><div class="tz-box">It’s 3 people. &nbsp;What’s the budget?</div></div>
+            <div class="tz-row step" data-kind="bot"><div class="tz-icon"><img src="static/images/ai_icon.png" alt="" width="46" height="46"></div><div class="tz-box">Members: 3, Budget: $200 x 3</div></div>
+            <div class="tz-dots step" data-kind="plain">⋮</div>
+          </div>
+        </div>
+        <div class="tz-phase">
+          <div class="tz-axis step-axis" data-kind="axis" style="--dur: 3.4s"><span class="lbl">Revision</span><span class="line"></span></div>
+          <div>
+            <div class="tz-row step" data-kind="user"><div class="tz-icon"><img src="static/images/user_icon.png" alt="" width="46" height="46"></div><div class="tz-box">Remove the destination B</div></div>
+            <div class="tz-row">
+              <div class="tz-icon step" data-kind="plain"><img src="static/images/ai_icon.png" alt="" width="46" height="46"></div>
+              <div class="tz-out">
+                <div class="tz-res ng step" data-kind="ng">
+                  <div class="head">NG</div>
+                  <div class="tz-box">Destinations: A, C, …<br>Schedule: 9:00&nbsp;–&nbsp;19:00</div>
+                  <span class="tz-warn">⚠️ Missed budget revision</span>
+                </div>
+                <div class="tz-res ok step" data-kind="ok">
+                  <div class="head">OK</div>
+                  <div class="tz-box">Destinations: A, C, …<br>Schedule: 9:00&nbsp;–&nbsp;19:00<br><span class="tz-fix">Budget: $180 x 3 ✅</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tz-foot">
+        <p><strong>Revision propagation.</strong> The user asks for a <em>local</em> change, but the schedule and budget depend on it. A correct revision must find those dependencies, which may be stated only in the conversation history, and update them too.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Benchmark (slides: Proposed Benchmark) ============ -->
+<section id="benchmark">
+  <div class="container">
+    <h2>RevPropBench</h2>
+    <p>Each sample has a multi-turn conversation that builds a JSON artifact, a revision request that names a single local change, and a human-verified gold JSON Patch. The gold patch holds the direct edit plus every field that must change as a consequence. Conversations are synthesized by an LLM from scenario skeletons. Gold patches are drafted by an LLM and then reviewed and revised by a human annotator.</p>
+    <figure>
+      <div class="fig"><img src="static/images/overview.png" alt="Overview of RevPropBench: data sampling, annotation, benchmark dataset, and evaluation" loading="lazy" width="2400" height="1245"></div>
+      <figcaption><b>Overview of RevPropBench.</b> Top: benchmark construction (LLM-based sampling and human annotation). Bottom: evaluation, where the generated patch is compared against the gold patch.</figcaption>
+    </figure>
+    <h3>Statistics</h3>
+    <p>The benchmark has 150 samples, split into dev (30) and test (120). It covers 9 practical domains, 6 propagation patterns, and 3 artifact sizes (10 / 50 / 100 elements).</p>
+    <div class="stats">
+      <div class="stat"><div class="num">150</div><div class="lbl">annotated cases</div></div>
+      <div class="stat"><div class="num">50</div><div class="lbl">scenarios × 3 artifact sizes</div></div>
+      <div class="stat"><div class="num">9</div><div class="lbl">domains</div></div>
+      <div class="stat"><div class="num">6</div><div class="lbl">propagation patterns</div></div>
+    </div>
+    <figure>
+      <div class="fig"><img src="static/images/benchmark_stats.png" alt="Benchmark statistics: cascade size by artifact size and domain, and propagation pattern distribution" loading="lazy" width="2400" height="682"></div>
+      <figcaption><b>Benchmark statistics.</b> Cascade size grows with artifact size (10 / 50 / 100 elements) and varies by domain. Scenarios cover six characteristic propagation patterns.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ Evaluation settings (slides: Experimental Settings) ============ -->
+<section id="settings">
+  <div class="container">
+    <h2>Evaluation Settings</h2>
+    <p>We evaluate six LLMs with nine revision methods on the 120-case test split, and report the <strong>completion rate</strong>: the exact-match rate between the generated patch and the gold patch.</p>
+
+    <h3>Models</h3>
+    <p>We evaluate six LLMs from three families, all with reasoning enabled: five open-weight models and one commercial model.</p>
+    <div class="methods">
+      <div class="mgroup">
+        <h4>gpt-oss <span class="tag local">Local</span></h4>
+        <dl>
+          <dt>gpt-oss-20b / 120b</dt><dd>reasoning_effort = mid, temperature = 0.6</dd>
+        </dl>
+      </div>
+      <div class="mgroup">
+        <h4>GPT-5.4 mini <span class="tag commercial">Commercial</span></h4>
+        <dl>
+          <dt>gpt-5.4-mini</dt><dd>reasoning_effort = mid</dd>
+        </dl>
+      </div>
+      <div class="mgroup">
+        <h4>Qwen3.5 <span class="tag local">Local</span></h4>
+        <dl>
+          <dt>qwen3.5-9b / 27b / 122b-a10b</dt><dd>reasoning = true, temperature = 0.6</dd>
+        </dl>
+      </div>
+    </div>
+
+    <h3>Revision methods</h3>
+    <p>All methods share the same revision prompt and output a JSON Patch. They differ in the context they see and in how they spend extra LLM calls.</p>
+    <div class="methods">
+      <div class="mgroup">
+        <h4>Single-call baselines</h4>
+        <dl>
+          <dt>J</dt><dd>Current JSON only</dd>
+          <dt>H</dt><dd>Conversation history only</dd>
+          <dt>J+H</dt><dd>History + current JSON</dd>
+        </dl>
+      </div>
+      <div class="mgroup">
+        <h4>Sequential reflection</h4>
+        <dl>
+          <dt>REFLECT</dt><dd>A J+H revision followed by repeated review passes that check and refine the patch</dd>
+        </dl>
+      </div>
+      <div class="mgroup">
+        <h4>Parallel sampling (J+H × k)</h4>
+        <dl>
+          <dt>OR / AND / MAJ</dt><dd>Rule-based merge of the samples: union, unanimity, or strict majority per node</dd>
+          <dt>MED</dt><dd>Pick the medoid sample, i.e. the one closest to the others (no extra LLM call)</dd>
+          <dt>SELECT</dt><dd>One extra LLM call picks the best candidate</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Results (slides: Results → Cost Analysis) ============ -->
+<section id="results">
+  <div class="container">
+    <h2>Results</h2>
+
+    <h3>Benchmark results</h3>
+    <ul class="points">
+      <li>Baselines achieve completion rates of 68.3–93%.</li>
+      <li>Conversation history is critical for capturing conversationally established dependencies and element semantics (i.e., J &lt; H &lt; J+H).</li>
+      <li>1<sup>st</sup>: SELECT improves by 3.3–12.5pp, 2<sup>nd</sup>: MED improves by 1.8–7.5pp over J+H.</li>
+    </ul>
+    <p class="note">*Each test-time compute method uses 5 LLM calls.</p>
+
+    <figure>
+      <div class="fig"><img src="static/images/success_grid.png" alt="Bar charts of completion rate for nine methods on six models" loading="lazy" width="2400" height="1115"></div>
+      <figcaption><b>Completion rate per model.</b> All nine methods on each model. Multi-call methods use 5 LLM calls.</figcaption>
+    </figure>
+
+    <h3>Cost analysis</h3>
+    <ul class="points">
+      <li>We extend the number of samples and measure how performance scales.</li>
+      <li>Performance begins to <strong>saturate at around 4–5 LLM calls</strong>.</li>
+      <li><strong>3 samples are the most cost-effective</strong> for SELECT and MED (+1 selection call for SELECT).</li>
+      <li>SELECT increases latency by 2–6×. <strong>If latency matters, MED offers a better trade-off</strong>, with only ~1.4× latency and ~1.4pp lower performance.</li>
+    </ul>
+    <figure>
+      <div class="fig"><img src="static/images/cost_curves.png" alt="Completion rate versus API cost for each method on six models" loading="lazy" width="2400" height="1114"></div>
+      <figcaption><b>Cost–accuracy curves.</b> Completion rate vs. API cost (US cents per case). The dotted line marks the J+H baseline. Error bars show the standard deviation over 5 seeds.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ Conclusion ============ -->
+<section id="conclusion">
+  <div class="container">
+    <h2>Conclusion</h2>
+    <ul class="points">
+      <li>We proposed a new benchmark for evaluating the ability of LLMs to propagate revisions across dependent elements in conversationally generated JSON artifacts.</li>
+      <li>We evaluated nine revision methods with six LLMs on the benchmark, providing practical guidance for cost-effective method selection.</li>
+    </ul>
+    <div class="tldr">
+      <span class="k">TAKEAWAYS</span>
+      <ul class="points">
+        <li>Conversation history is critical for capturing conversationally established dependencies and element semantics.</li>
+        <li>Test-time compute improves revision propagation accuracy, but performance begins to saturate at around 4–5 LLM calls.</li>
+        <li>SELECT or MED with 3 samples is the most cost-effective.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Citation ============ -->
+<section id="citation">
+  <div class="container">
+    <h2>Citation</h2>
+    <p>If you find this work useful, please cite our paper as follows:</p>
+    <div class="bib">
+      <button class="copy" id="copyBib">Copy</button>
+<pre id="bibText">@inproceedings{kikuta-2026-else,
+    title = "What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation",
+    author = "Kikuta, Daisuke",
+    editor = "Atanasova, Pepa  and
+      Haffari, Gholamreza  and
+      Wang, Minghan",
+    booktitle = "Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing: Industry Track",
+    month = oct,
+    year = "2026",
+    address = "Budapest, Hungary",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.emnlp-industry.246/",
+    pages = "4161--4177",
+    ISBN = "979-8-89176-460-6",
+    abstract = "Large Language Models (LLMs) often help users generate artifacts through iterative cycles of generation and revision in conversation. A challenge here is that, when users specify only a local change during revision, LLMs must instead identify the relevant dependencies and propagate the revision to all affected parts of the artifact. This paper studies this ability of LLMs on conversationally generated artifacts, where the artifact context and its dependencies may be embedded in the conversation history. Toward practical use, we also explore cost-effective test-time compute for this new setting. Specifically, we introduce a new benchmark for this setting, and evaluate nine revision methods, including sequential reflection and parallel sampling variants, using gpt-oss-20b/120b, gpt-5.4-mini, and qwen3.5-9b/27b/122b on the benchmark. The results show that baselines achieve accuracies of 68.3{--}93{\%}, and the most cost-effective method is selecting from three parallel samples using either LLM-based or medoid selection, which improves accuracy by 2.2{--}9.7{\%}. Our code and dataset are available at https://github.com/ntt-dkiku/llm-revision-propagation."
+}</pre>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">© 2026 NTT, Inc.</div>
+</footer>
+
+<script>
+// ---------- statistics: count up when the tiles scroll into view ----------
+(() => {
+  const nums = [...document.querySelectorAll(".stat .num")];
+  if (!nums.length || matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+  const targets = nums.map(el => Number(el.textContent));
+  nums.forEach(el => (el.textContent = "0"));
+  const ease = t => 1 - Math.pow(1 - t, 3);  // ease-out cubic
+  const count = (el, target, delay) => {
+    const dur = 1200;
+    let start;
+    const step = now => {
+      start ??= now + delay;
+      const t = Math.min(Math.max((now - start) / dur, 0), 1);
+      el.textContent = Math.round(target * ease(t));
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver(entries => {
+    if (!entries.some(e => e.isIntersecting)) return;
+    io.disconnect();
+    nums.forEach((el, i) => count(el, targets[i], i * 100));
+  }, { threshold: 0.5 });
+  io.observe(nums[0].closest(".stats"));
+})();
+
+// ---------- author links toggle ----------
+(() => {
+  const dev = document.getElementById("devName");
+  const social = document.getElementById("social");
+  dev.addEventListener("click", () => {
+    const open = social.classList.toggle("show");
+    dev.setAttribute("aria-expanded", open);
+    social.querySelectorAll("a").forEach(a => (a.tabIndex = open ? 0 : -1));
+  });
+})();
+
+// ---------- teaser animation ----------
+(() => {
+  const tz = document.getElementById("teaser");
+  const replay = document.getElementById("tzReplay");
+  const items = [...tz.querySelectorAll(".step, .step-axis")];
+  const warn = tz.querySelector(".tz-warn");
+  const fix = tz.querySelector(".tz-fix");
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let run = 0;
+
+  const showAll = () => {
+    items.forEach(el => el.classList.add("on"));
+    replay.classList.add("show");
+  };
+  async function play() {
+    const id = ++run;
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    const alive = () => id === run;
+    replay.classList.remove("show");
+    // reset instantly (no reverse transitions), then re-enable animations
+    tz.classList.add("no-anim");
+    items.forEach(el => el.classList.remove("on"));
+    warn.classList.remove("shake"); fix.classList.remove("pop");
+    void tz.offsetWidth;
+    tz.classList.remove("no-anim");
+    await wait(300);
+    for (const el of items) {
+      if (!alive()) return;
+      const kind = el.dataset.kind;
+      if (kind === "axis") { el.classList.add("on"); await wait(250); continue; }
+      el.classList.add("on");
+      if (kind === "user" || kind === "bot") await wait(750);
+      else if (kind === "plain") await wait(350);
+      else if (kind === "ng") { await wait(450); warn.classList.add("shake"); await wait(800); }
+      else if (kind === "ok") { await wait(450); fix.classList.add("pop"); await wait(900); }
+    }
+    if (alive()) replay.classList.add("show");
+  }
+
+  replay.addEventListener("click", () => (reduced ? showAll() : play()));
+  if (reduced || !("IntersectionObserver" in window)) { showAll(); return; }
+  const io = new IntersectionObserver(entries => {
+    if (entries.some(e => e.isIntersecting)) { io.disconnect(); play(); }
+  }, { threshold: 0.35 });
+  io.observe(tz);
+})();
+
+document.getElementById("copyBib").addEventListener("click", async e => {
+  try {
+    await navigator.clipboard.writeText(document.getElementById("bibText").textContent);
+    e.target.textContent = "Copied!";
+  } catch { e.target.textContent = "Copy failed"; }
+  setTimeout(() => (e.target.textContent = "Copy"), 1500);
+});
+
+// ---------- theme toggle (moon = switch to dark, sun = switch to light) ----------
+const root = document.documentElement;
+const themeBtn = document.getElementById("themeToggle");
+const isDark = () => root.dataset.theme
+  ? root.dataset.theme === "dark"
+  : matchMedia("(prefers-color-scheme: dark)").matches;
+const syncThemeLabel = () => themeBtn.setAttribute("aria-label", isDark() ? "Switch to light mode" : "Switch to dark mode");
+syncThemeLabel();
+themeBtn.addEventListener("click", () => {
+  root.dataset.theme = isDark() ? "light" : "dark";
+  try { localStorage.setItem("theme", root.dataset.theme); } catch {}
+  syncThemeLabel();
+});
+
+// ---------- table of contents: hamburger menu + current-section highlight ----------
+(() => {
+  const toc = document.getElementById("toc");
+  const btn = document.getElementById("menuBtn");
+  const links = [...toc.querySelectorAll("a")];
+  const setOpen = open => {
+    toc.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", open);
+  };
+  // scroll smoothly without adding "#section" to the URL, so a reload (Ctrl+R) stays where the reader was
+  // instead of jumping to the last clicked section
+  const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  links.forEach(a => a.addEventListener("click", e => {
+    const target = document.querySelector(a.getAttribute("href"));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: smooth ? "smooth" : "auto" });
+    if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  }));
+  // the panel stays open while navigating; it closes via the X button, Esc, or a click outside it
+  btn.addEventListener("click", () => setOpen(!toc.classList.contains("open")));
+  document.addEventListener("click", e => {
+    if (toc.classList.contains("open") && !toc.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") setOpen(false); });
+
+  const targets = links.map(a => document.querySelector(a.getAttribute("href")));
+  const setActive = id => links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  targets.forEach(t => spy.observe(t));
+  setActive("top");
+})();
+</script>
+</body>
+</html>
