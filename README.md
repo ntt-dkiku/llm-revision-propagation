@@ -5,9 +5,11 @@
   <a href="https://aclanthology.org/2026.emnlp-industry.246/" target="_blank"><img src="https://img.shields.io/badge/emnlp-2026-blue"></a>
   <a href="https://arxiv.org/abs/2609.03254" target="_blank"><img src="https://img.shields.io/badge/arXiv-pdf-red"></a>
   <a href="https://alphaxiv.org/abs/2609.03254" target="_blank"><img src="https://img.shields.io/badge/alphaxiv-pdf-orange"></a>
+  <a href="https://github.com/ntt-dkiku/llm-revision-propagation/blob/main/resources/EMNLP2026_Ind-885_poster.pdf" target="_blank"><img src="https://img.shields.io/badge/poster-pdf-yellow"></a>
+  <a href="https://github.com/ntt-dkiku/llm-revision-propagation/blob/main/resources/emnlp2026_Ind-885_slides_v2.pdf" target="_blank"><img src="https://img.shields.io/badge/slides-pdf-pink"></a>
 </p>
 
-This repo is the official implementation of "<a href="https://arxiv.org/abs/2609.03254" target="_blank">What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation</a>" (EMNLP 2026 Industry Track).
+This repo is the official implementation of "<a href="https://aclanthology.org/2026.emnlp-industry.246/" target="_blank">What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation</a>" (EMNLP 2026 Industry Track).
 In this paper, we propose **RevPropBench**, a benchmark for evaluating the ability of LLMs to propagate revisions across dependent elements in conversationally generated JSON artifacts when users specify only a local change.
 We also explore cost-effective test-time compute for this setting.
 
@@ -220,7 +222,7 @@ make bench-eval MODEL=<VLLM_SERVED_NAME value> BENCH_SEED=<seed>
 If you encounter bugs or have any questions, please post issues or discussions in this repo. New feature requests are also welcome.
 
 ## 📄 License
-Our code is licensed by NTT. The use of our code is limited to research purposes. See LICENSE for details.
+Our code is licensed by NTT. The use of our code is limited to research purposes. See [LICENSE](./LICENSE.md) for details.
 
 ## 🤝 Citation
 If you find this work useful, please cite our paper as follows:
